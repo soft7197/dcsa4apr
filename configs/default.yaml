@@ -1,0 +1,49 @@
+max_iterations: 10
+max_hypothesis_pool_size: 10
+knowledge_base_token_limit: 10000
+use_docker: false
+fl_tool: "perfect"
+llm_model: "gpt-4o"
+temperature: 1
+
+# New settings
+parallel_components: false      # Enable for multi-function bugs
+enable_smart_resolution: true   # Smart tool input resolution
+enable_caching: true    
+early_stopping: true
+max_workers: 4
+
+# context_manager: "llm_driven"
+# knowledge_base_token_limit: 6000
+
+# # Token allocation
+# static_context_tokens: 3000   # For buggy method, tests, errors
+# dynamic_context_tokens: 3000 
+
+# # Tool-specific settings
+# tools:
+#   similar_method_search:
+#     top_k: 5
+#     similarity_threshold: 0.8
+  
+#   code_extractor:
+#     max_method_length: 500
+  
+#   call_graph:
+#     max_depth: 2
+
+# # LLM settings
+# llm:
+#   provider: "openai"  # or "anthropic", "local"
+#   model: "gpt-4o"
+#   max_tokens: 2000
+#   temperature: 0.7
+#   retry_attempts: 3
+#   timeout: 30
+
+# # Execution settings
+# execution:
+#   test_timeout: 30
+#   compile_timeout: 60
+#   max_memory: "2g"
+#   use_sandbox: true
