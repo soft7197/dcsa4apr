@@ -1,8 +1,8 @@
 Deployment and Usage Instructions
 Installation
 bash# Clone repository
-git clone https://github.com/your-repo/automated-bug-fixer.git
-cd automated-bug-fixer
+git clone https://github.com/soft7197/dcsa4apr.git
+cd dcsa4apr
 
 # Run setup script
 chmod +x setup.sh
