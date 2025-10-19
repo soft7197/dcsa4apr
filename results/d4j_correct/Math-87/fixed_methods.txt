@@ -1,0 +1,16 @@
+### Fixed Method 1
+private Integer getBasicRow(final int col) {
+    Integer row = null;
+    for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {
+        if (MathUtils.equals(getEntry(i, col), 1.0, epsilon)) {
+            if (row == null) {
+                row = i;
+            } else {
+                return null;
+            }
+        } else if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {
+            return null;
+        }
+    }
+    return row;
+}

@@ -1,0 +1,33 @@
+### Fixed Method 1
+private boolean testValidProtocol(Element el, Attribute attr, Set<Protocol> protocols) {
+    // Initially check if attribute value is null or empty
+    String value = attr.getValue();
+    if (value == null || value.isEmpty()) {
+        return false;
+    }
+    
+    // Check if the protocol is defined within the attribute value
+    for (Protocol protocol : protocols) {
+        String prot = protocol.toString() + ":";
+        if (value.toLowerCase().startsWith(prot)) {
+            return true;
+        }
+    }
+    
+    // If protocol is not found, resolve to absolute URL
+    String absValue = el.absUrl(attr.getKey());
+    // Check again with the absolute URL
+    if (absValue != null && !absValue.isEmpty()) {
+        for (Protocol protocol : protocols) {
+            String prot = protocol.toString() + ":";
+            if (absValue.toLowerCase().startsWith(prot)) {
+                if (!preserveRelativeLinks) {
+                    attr.setValue(absValue);
+                }
+                return true;
+            }
+        }
+    }
+    
+    return false;
+}

@@ -1,0 +1,45 @@
+{
+    "bug_id": "JacksonDatabind-100",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-100_1757171649",
+    "patches": [
+        {
+            "hypothesis": "The method `getBinaryValue` should handle the decoding of Base64 content when the current node is a TextNode. The existing code does not attempt Base64 decoding for TextNode, leading to the error when attempting to decode it directly using the variant.",
+            "fixed_method": "public byte[] getBinaryValue(Base64Variant b64variant) throws IOException, JsonParseException {\n    // Multiple possibilities...\n    JsonNode n = currentNode();\n    if (n != null) {\n        // If it's a TextNode, attempt to decode\n        if (n.isTextual()) {\n            String textValue = n.asText();\n            try {\n                return b64variant.decode(textValue);\n            } catch (IllegalArgumentException e) {\n                throw new JsonParseException(null, \"Cannot access contents of TextNode as binary due to broken Base64 encoding: \" + e.getMessage(), e);\n            }\n        }\n\n        byte[] data = n.binaryValue();\n        if (data != null) {\n            return data;\n        }\n        if (n.isPojo()) {\n            Object ob = ((POJONode) n).getPojo();\n            if (ob instanceof byte[]) {\n                return (byte[]) ob;\n            }\n        }\n    }\n    // otherwise return null to mark we have no binary content\n    return null;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,13 +1,17 @@\n-/**********************************************************\n-*/\n-public byte[] getBinaryValue(Base64Variant b64variant)\n-    throws IOException, JsonParseException\n-{\n+public byte[] getBinaryValue(Base64Variant b64variant) throws IOException, JsonParseException {\n     // Multiple possibilities...\n     JsonNode n = currentNode();\n     if (n != null) {\n-        // [databind#2096]: although `binaryValue()` works for real binary node\n-        // and embedded \"POJO\" node, coercion from TextNode may require variant, so:\n+        // If it's a TextNode, attempt to decode\n+        if (n.isTextual()) {\n+            String textValue = n.asText();\n+            try {\n+                return b64variant.decode(textValue);\n+            } catch (IllegalArgumentException e) {\n+                throw new JsonParseException(null, \"Cannot access contents of TextNode as binary due to broken Base64 encoding: \" + e.getMessage(), e);\n+            }\n+        }\n+\n         byte[] data = n.binaryValue();\n         if (data != null) {\n             return data;\n",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/node/TreeTraversingParser.java",
+            "method_name": "getBinaryValue",
+            "class_name": "TreeTraversingParser",
+            "iteration": 2,
+            "is_multi_method": false,
+            "line_numbers": [
+                355,
+                356,
+                357,
+                358,
+                359,
+                360,
+                361,
+                362,
+                363,
+                364,
+                365,
+                366,
+                367,
+                368,
+                369,
+                370,
+                371,
+                372,
+                373,
+                374,
+                375,
+                376
+            ]
+        }
+    ],
+    "iterations": 2,
+    "monitor_file": "traces/JacksonDatabind-100_trace.json"
+}

@@ -1,0 +1,32 @@
+{
+    "bug_id": "JacksonDatabind-46",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-46_1756844875",
+    "patches": [
+        {
+            "hypothesis": "The bug is caused by an incorrect placement of the semicolon in the generic signature. The semicolon should be placed after the closing angle bracket '>', not before it. This is causing the mismatch between the expected and actual signatures.",
+            "changes": "Moved the semicolon to be appended after the closing angle bracket '>'.",
+            "fixed_method": "public StringBuilder getGenericSignature(StringBuilder sb) {\n    _classSignature(_class, sb, false);\n    sb.append('<');\n    sb = _referencedType.getGenericSignature(sb);\n    sb.append('>');\n    sb.append(';');\n    return sb;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,8 @@\n+public StringBuilder getGenericSignature(StringBuilder sb) {\n+    _classSignature(_class, sb, false);\n+    sb.append('<');\n+    sb = _referencedType.getGenericSignature(sb);\n+    sb.append('>');\n+    sb.append(';');\n+    return sb;\n+}",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/type/ReferenceType.java",
+            "method_name": "getGenericSignature",
+            "class_name": "ReferenceType",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                151,
+                152,
+                153,
+                154,
+                155,
+                156,
+                157,
+                158
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-46_trace.json"
+}

@@ -1,0 +1,42 @@
+{
+    "bug_id": "Cli-35",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Cli-35_1756720060",
+    "patches": [
+        {
+            "hypothesis": "The error occurs because the method only checks if options start with the given prefix and adds all matching options to the list, causing ambiguity when an exact match is expected. Instead, it should first check for exact matches before considering options that merely start with the prefix.",
+            "changes": "- if (longOpt.startsWith(opt))\n+ if (longOpt.equals(opt))\n+ else if (longOpt.startsWith(opt))",
+            "fixed_method": "public List<String> getMatchingOptions(String opt) {\n    opt = Util.stripLeadingHyphens(opt);\n    \n    List<String> matchingOpts = new ArrayList<String>();\n\n    // first check for exact match\n    for (String longOpt : longOpts.keySet()) {\n        if (longOpt.equals(opt)) {\n            matchingOpts.add(longOpt);\n            return matchingOpts; // return immediately on exact match\n        }\n    }\n\n    // no exact match found, check for options that start with opt\n    for (String longOpt : longOpts.keySet()) {\n        if (longOpt.startsWith(opt)) {\n            matchingOpts.add(longOpt);\n        }\n    }\n    \n    return matchingOpts;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,22 @@\n+public List<String> getMatchingOptions(String opt) {\n+    opt = Util.stripLeadingHyphens(opt);\n+    \n+    List<String> matchingOpts = new ArrayList<String>();\n+\n+    // first check for exact match\n+    for (String longOpt : longOpts.keySet()) {\n+        if (longOpt.equals(opt)) {\n+            matchingOpts.add(longOpt);\n+            return matchingOpts; // return immediately on exact match\n+        }\n+    }\n+\n+    // no exact match found, check for options that start with opt\n+    for (String longOpt : longOpts.keySet()) {\n+        if (longOpt.startsWith(opt)) {\n+            matchingOpts.add(longOpt);\n+        }\n+    }\n+    \n+    return matchingOpts;\n+}",
+            "file_path": "src/main/java/org/apache/commons/cli/Options.java",
+            "method_name": "getMatchingOptions",
+            "class_name": "Options",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                233,
+                234,
+                235,
+                236,
+                237,
+                238,
+                239,
+                240,
+                241,
+                242,
+                243,
+                244,
+                245,
+                246,
+                247,
+                248,
+                249,
+                250
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Cli-35_trace.json"
+}

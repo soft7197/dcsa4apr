@@ -1,0 +1,28 @@
+{
+    "bug_id": "Chart-8",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Chart-8_1756719413",
+    "patches": [
+        {
+            "hypothesis": "The constructor is incorrectly defaulting to the system's default time zone and locale, leading to incorrect week calculation. The intended behavior is to use the provided TimeZone.",
+            "changes": "- this(time, RegularTimePeriod.DEFAULT_TIME_ZONE, Locale.getDefault());\n+ this(time, zone, Locale.getDefault());",
+            "fixed_method": "public Week(Date time, TimeZone zone) {\n    // use provided time zone\n    this(time, zone, Locale.getDefault());\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,4 @@\n+public Week(Date time, TimeZone zone) {\n+    // use provided time zone\n+    this(time, zone, Locale.getDefault());\n+}",
+            "file_path": "source/org/jfree/data/time/Week.java",
+            "method_name": "Week",
+            "class_name": "Week",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                173,
+                174,
+                175,
+                176
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Chart-8_trace.json"
+}

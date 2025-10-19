@@ -1,0 +1,16 @@
+### Fixed Method 1
+/**
+* Create a new doctype element.
+* @param name the doctype's name
+* @param publicId the doctype's public ID
+* @param systemId the doctype's system ID
+* @param baseUri the doctype's base URI
+*/
+public DocumentType(String name, String publicId, String systemId, String baseUri) {
+    super(baseUri);
+
+    Validate.notNull(name, "Doctype name must not be null"); // Allow empty but not null
+    attr("name", name);
+    attr("publicId", publicId);
+    attr("systemId", systemId);
+}

@@ -1,0 +1,33 @@
+{
+    "bug_id": "Mockito-34",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Mockito-34_1756721805",
+    "patches": [
+        {
+            "hypothesis": "The ArrayIndexOutOfBoundsException occurs when there are more matchers than there are arguments in the invocation. The code does not handle the case where the number of arguments is less than the number of matchers, leading to an attempt to access an index that doesn't exist.",
+            "changes": "- ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n+ if (k < i.getArguments().length) {\n+     ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n+ }",
+            "fixed_method": "public void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments) {\n            if (k < i.getArguments().length) {\n                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n            }\n        }\n        k++;\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,11 @@\n+public void captureArgumentsFrom(Invocation i) {\n+    int k = 0;\n+    for (Matcher m : matchers) {\n+        if (m instanceof CapturesArguments) {\n+            if (k < i.getArguments().length) {\n+                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n+            }\n+        }\n+        k++;\n+    }\n+}",
+            "file_path": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+            "method_name": "captureArgumentsFrom",
+            "class_name": "InvocationMatcher",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Mockito-34_trace.json"
+}

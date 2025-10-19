@@ -1,0 +1,39 @@
+{
+    "bug_id": "Math-80",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-80_1757235038",
+    "patches": [
+        {
+            "hypothesis": "The issue lies in the flipping logic, which doesn't appropriately reverse the intended subsections of the array within the specified conditions. Specifically, the inner loop should also utilize the 'step' parameter to correctly determine the elements to swap, resulting in an erroneous flip.",
+            "fixed_method": "private boolean flipIfWarranted(final int n, final int step) {\n    if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {\n        // flip array\n        int j = 4 * (n - 1);\n        for (int i = 0; i <= j; i += 4) {\n            for (int k = 0; k < 4; k += step) {\n                if (i + k < j - k) {\n                    final double tmp = work[i + k];\n                    work[i + k] = work[j - k];\n                    work[j - k] = tmp;\n                }\n            }\n            j -= 4;\n        }\n        return true;\n    }\n    return false;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,19 +1,14 @@\n-/**\n-* Flip qd array if warranted.\n-* @param n number of rows in the block\n-* @param step within the array (1 for flipping all elements, 2 for flipping\n-* only every other element)\n-* @return true if qd array was flipped\n-*/\n private boolean flipIfWarranted(final int n, final int step) {\n     if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {\n         // flip array\n-        int j = 4 * n - 1;\n-        for (int i = 0; i < j; i += 4) {\n+        int j = 4 * (n - 1);\n+        for (int i = 0; i <= j; i += 4) {\n             for (int k = 0; k < 4; k += step) {\n-                final double tmp = work[i + k];\n-                work[i + k] = work[j - k];\n-                work[j - k] = tmp;\n+                if (i + k < j - k) {\n+                    final double tmp = work[i + k];\n+                    work[i + k] = work[j - k];\n+                    work[j - k] = tmp;\n+                }\n             }\n             j -= 4;\n         }\n",
+            "file_path": "src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java",
+            "method_name": "flipIfWarranted",
+            "class_name": "EigenDecompositionImpl",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                1132,
+                1133,
+                1134,
+                1135,
+                1136,
+                1137,
+                1138,
+                1139,
+                1140,
+                1141,
+                1142,
+                1143,
+                1144,
+                1145,
+                1146,
+                1147
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-80_trace.json"
+}

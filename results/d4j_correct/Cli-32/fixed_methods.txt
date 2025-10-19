@@ -1,0 +1,42 @@
+### Fixed Method 1
+protected int findWrapPos(String text, int width, int startPos) {
+    // Check for null or empty text
+    if (text == null || text.isEmpty()) {
+        return -1;
+    }
+
+    // If the starting position is beyond the text length, return -1
+    if (startPos >= text.length()) {
+        return -1;
+    }
+
+    int pos;
+
+    // If the starting position plus width exceeds the text length, return -1
+    if (startPos + width >= text.length()) {
+        return -1;
+    }
+
+    // Look for a line break or tab character within the width
+    pos = text.indexOf('\n', startPos);
+    if (pos != -1 && pos <= startPos + width) {
+        return pos + 1;
+    }
+    pos = text.indexOf('\t', startPos);
+    if (pos != -1 && pos <= startPos + width) {
+        return pos + 1;
+    }
+
+    // Look for the last whitespace character before startPos + width
+    pos = startPos + width;
+    while (pos > startPos) {
+        char c = text.charAt(pos);
+        if (Character.isWhitespace(c)) {
+            return pos;
+        }
+        --pos;
+    }
+
+    // If no whitespace is found, return startPos + width
+    return startPos + width;
+}

@@ -1,0 +1,49 @@
+{
+    "bug_id": "Math-93",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-93_1757309451",
+    "patches": [
+        {
+            "hypothesis": "The primary issue with the provided methods is the reliance on approximate methods that lead to precision errors, especially when calculating the factorial values for larger n. Method1 uses precomputed values that need proper initialization and error checking. Method2 uses logarithmic exponentiation which can introduce small errors due to floating-point arithmetic operations. Method3 seems mostly correct but improper. Adjustments are needed to ensure consistency across all calculations.",
+            "methods": [
+                {
+                    "method_name": "factorial",
+                    "fixed_method": "public static long factorial(final int n) {\n    if (n < 0) {\n        throw new IllegalArgumentException(\"must have n >= 0 for n!\");\n    }\n    if (n < factorials.length) {\n        return factorials[n];\n    }\n    long result = 1;\n    for (int i = 2; i <= n; i++) {\n        result *= i;\n        if(result < 0) {\n            throw new ArithmeticException(\"factorial value is too large to fit in a long\");\n        }\n    }\n    return result;\n}",
+                    "diff": "--- original\n+++ fixed\n@@ -1,31 +1,16 @@\n-    /**\n-     * Returns n!. Shorthand for <code>n</code> <a\n-     * href=\"http://mathworld.wolfram.com/Factorial.html\"> Factorial</a>, the\n-     * product of the numbers <code>1,...,n</code>.\n-     * <p>\n-     * <Strong>Preconditions</strong>:\n-     * <ul>\n-     * <li> <code>n >= 0</code> (otherwise\n-     * <code>IllegalArgumentException</code> is thrown)</li>\n-     * <li> The result is small enough to fit into a <code>long</code>. The\n-     * largest value of <code>n</code> for which <code>n!</code> <\n-     * Long.MAX_VALUE</code> is 20. If the computed value exceeds <code>Long.MAX_VALUE</code>\n-     * an <code>ArithMeticException </code> is thrown.</li>\n-     * </ul>\n-     * </p>\n-     * \n-     * @param n argument\n-     * @return <code>n!</code>\n-     * @throws ArithmeticException if the result is too large to be represented\n-     *         by a long integer.\n-     * @throws IllegalArgumentException if n < 0\n-     */\n-\n-    public static long factorial(final int n) {\n-        long result = Math.round(factorialDouble(n));\n-        if (result == Long.MAX_VALUE) {\n-            throw new ArithmeticException(\n-                    \"factorial value is too large to fit in a long\");\n-        }\n+public static long factorial(final int n) {\n+    if (n < 0) {\n+        throw new IllegalArgumentException(\"must have n >= 0 for n!\");\n+    }\n+    if (n < factorials.length) {\n         return factorials[n];\n     }\n+    long result = 1;\n+    for (int i = 2; i <= n; i++) {\n+        result *= i;\n+        if(result < 0) {\n+            throw new ArithmeticException(\"factorial value is too large to fit in a long\");\n+        }\n+    }\n+    return result;\n+}",
+                    "line_numbers": [
+                        344,
+                        352
+                    ],
+                    "file_path": "src/java/org/apache/commons/math/util/MathUtils.java"
+                },
+                {
+                    "method_name": "factorialDouble",
+                    "fixed_method": "public static double factorialDouble(final int n) {\n    if (n < 0) {\n        throw new IllegalArgumentException(\"must have n >= 0 for n!\");\n    }\n    if (n == 0) {\n        return 1.0;\n    }\n    double result = 1.0;\n    for (int i = 2; i <= n; i++) {\n        result *= i;\n        if (Double.isInfinite(result)) {\n            return Double.POSITIVE_INFINITY;\n        }\n    }\n    return result;\n}",
+                    "diff": "--- original\n+++ fixed\n@@ -1,27 +1,16 @@\n-    /**\n-     * Returns n!. Shorthand for <code>n</code> <a\n-     * href=\"http://mathworld.wolfram.com/Factorial.html\"> Factorial</a>, the\n-     * product of the numbers <code>1,...,n</code> as a <code>double</code>.\n-     * <p>\n-     * <Strong>Preconditions</strong>:\n-     * <ul>\n-     * <li> <code>n >= 0</code> (otherwise\n-     * <code>IllegalArgumentException</code> is thrown)</li>\n-     * <li> The result is small enough to fit into a <code>double</code>. The\n-     * largest value of <code>n</code> for which <code>n!</code> <\n-     * Double.MAX_VALUE</code> is 170. If the computed value exceeds\n-     * Double.MAX_VALUE, Double.POSITIVE_INFINITY is returned</li>\n-     * </ul>\n-     * </p>\n-     * \n-     * @param n argument\n-     * @return <code>n!</code>\n-     * @throws IllegalArgumentException if n < 0\n-     */\n-\n-    public static double factorialDouble(final int n) {\n-        if (n < 0) {\n-            throw new IllegalArgumentException(\"must have n >= 0 for n!\");\n+public static double factorialDouble(final int n) {\n+    if (n < 0) {\n+        throw new IllegalArgumentException(\"must have n >= 0 for n!\");\n+    }\n+    if (n == 0) {\n+        return 1.0;\n+    }\n+    double result = 1.0;\n+    for (int i = 2; i <= n; i++) {\n+        result *= i;\n+        if (Double.isInfinite(result)) {\n+            return Double.POSITIVE_INFINITY;\n         }\n-        return Math.floor(Math.exp(factorialLog(n)) + 0.5);\n     }\n+    return result;\n+}",
+                    "line_numbers": [
+                        373,
+                        379
+                    ],
+                    "file_path": "src/java/org/apache/commons/math/util/MathUtils.java"
+                },
+                {
+                    "method_name": "factorialLog",
+                    "fixed_method": "public static double factorialLog(final int n) {\n    if (n < 0) {\n        throw new IllegalArgumentException(\"must have n >= 0 for n!\");\n    }\n    if (n == 0) {\n        return 0.0;\n    }\n    double logSum = 0;\n    for (int i = 2; i <= n; i++) {\n        logSum += Math.log((double)i);\n    }\n    return logSum;\n}",
+                    "diff": "--- original\n+++ fixed\n@@ -1,24 +1,13 @@\n-    /**\n-     * Returns the natural logarithm of n!.\n-     * <p>\n-     * <Strong>Preconditions</strong>:\n-     * <ul>\n-     * <li> <code>n >= 0</code> (otherwise\n-     * <code>IllegalArgumentException</code> is thrown)</li>\n-     * </ul></p>\n-     * \n-     * @param n argument\n-     * @return <code>n!</code>\n-     * @throws IllegalArgumentException if preconditions are not met.\n-     */\n-\n-    public static double factorialLog(final int n) {\n-        if (n < 0) {\n-            throw new IllegalArgumentException(\"must have n > 0 for n!\");\n-        }\n-        double logSum = 0;\n-        for (int i = 2; i <= n; i++) {\n-            logSum += Math.log((double)i);\n-        }\n-        return logSum;\n+public static double factorialLog(final int n) {\n+    if (n < 0) {\n+        throw new IllegalArgumentException(\"must have n >= 0 for n!\");\n     }\n+    if (n == 0) {\n+        return 0.0;\n+    }\n+    double logSum = 0;\n+    for (int i = 2; i <= n; i++) {\n+        logSum += Math.log((double)i);\n+    }\n+    return logSum;\n+}",
+                    "line_numbers": [
+                        393,
+                        403
+                    ],
+                    "file_path": "src/java/org/apache/commons/math/util/MathUtils.java"
+                }
+            ],
+            "is_multi_method": true,
+            "coordination_notes": "",
+            "methods_count": 3
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-93_trace.json"
+}

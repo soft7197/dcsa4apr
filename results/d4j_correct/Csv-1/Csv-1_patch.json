@@ -1,0 +1,32 @@
+{
+    "bug_id": "Csv-1",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Csv-1_1757918923",
+    "patches": [
+        {
+            "hypothesis": "The `read` method is currently incrementing the `lineCounter` only when a newline character ('\\n') is encountered. However, the test uses a Windows-style line separator ('\\r\\n'). The method should be modified to handle both '\\n' and '\\r\\n' line endings to correctly count lines.",
+            "fixed_method": "public int read() throws IOException {\n    int current = super.read();\n    if (current == '\\n' && lastChar != '\\r') {\n        lineCounter++;\n    } else if (current == '\\r') {\n        lineCounter++;\n    }\n    lastChar = current;\n    return lastChar;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,9 +1,8 @@\n-/**\n-* Created extended buffered reader using default buffer-size\n-*/\n public int read() throws IOException {\n     int current = super.read();\n-    if (current == '\\n') {\n+    if (current == '\\n' && lastChar != '\\r') {\n+        lineCounter++;\n+    } else if (current == '\\r') {\n         lineCounter++;\n     }\n     lastChar = current;\n",
+            "file_path": "src/main/java/org/apache/commons/csv/ExtendedBufferedReader.java",
+            "method_name": "read",
+            "class_name": "ExtendedBufferedReader",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63
+            ],
+            "original_code": "/**\n* Created extended buffered reader using default buffer-size\n*/\npublic int read() throws IOException {\n    int current = super.read();\n    if (current == '\\n') {\n        lineCounter++;\n    }\n    lastChar = current;\n    return lastChar;\n}"
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Csv-1_trace.json"
+}

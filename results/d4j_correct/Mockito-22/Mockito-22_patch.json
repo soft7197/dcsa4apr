@@ -1,0 +1,33 @@
+{
+    "bug_id": "Mockito-22",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Mockito-22_1756893383",
+    "patches": [
+        {
+            "hypothesis": "The bug is likely caused by the `equals` method of the `BadEquals` class throwing a `RuntimeException`. The previous attempt to catch exceptions was correct in principle, but returning false is incorrect when comparing the same object instance. Instead, we should return true if both references are the same, even if the `equals` method is faulty.",
+            "changes": "Added a check to return true if both object references are the same before calling equals.",
+            "fixed_method": "//stolen from hamcrest because I didn't want to have more dependency than Matcher class\npublic static boolean areEqual(Object o1, Object o2) {\n    if (o1 == null || o2 == null) {\n        return o1 == null && o2 == null;\n    } else if (o1 == o2) {\n        return true;\n    } else if (isArray(o1)) {\n        return isArray(o2) && areArraysEqual(o1, o2);\n    } else {\n        try {\n            return o1.equals(o2);\n        } catch (RuntimeException e) {\n            return false;\n        }\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,16 @@\n+//stolen from hamcrest because I didn't want to have more dependency than Matcher class\n+public static boolean areEqual(Object o1, Object o2) {\n+    if (o1 == null || o2 == null) {\n+        return o1 == null && o2 == null;\n+    } else if (o1 == o2) {\n+        return true;\n+    } else if (isArray(o1)) {\n+        return isArray(o2) && areArraysEqual(o1, o2);\n+    } else {\n+        try {\n+            return o1.equals(o2);\n+        } catch (RuntimeException e) {\n+            return false;\n+        }\n+    }\n+}",
+            "file_path": "src/org/mockito/internal/matchers/Equality.java",
+            "method_name": "areEqual",
+            "class_name": "Equality",
+            "iteration": 2,
+            "is_multi_method": false,
+            "line_numbers": [
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20
+            ]
+        }
+    ],
+    "iterations": 2,
+    "monitor_file": "traces/Mockito-22_trace.json"
+}

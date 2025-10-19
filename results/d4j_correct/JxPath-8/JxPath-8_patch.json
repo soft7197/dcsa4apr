@@ -1,0 +1,47 @@
+{
+    "bug_id": "JxPath-8",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JxPath-8_1756861856",
+    "patches": [
+        {
+            "hypothesis": "The method does not correctly handle comparisons involving NaN (Not-a-Number) values. In floating-point arithmetic, any comparison involving NaN should return false, except for '!=' which should return true. The current implementation does not account for this behavior, leading to incorrect results when comparing NaN values.",
+            "changes": "Added a check for NaN values before performing the comparison. If either of the values is NaN, the method returns false, as per IEEE 754 standards for floating-point arithmetic.",
+            "fixed_method": "private boolean compute(Object left, Object right) {\n    left = reduce(left);\n    right = reduce(right);\n\n    if (left instanceof InitialContext) {\n        ((InitialContext) left).reset();\n    }\n    if (right instanceof InitialContext) {\n        ((InitialContext) right).reset();\n    }\n    if (left instanceof Iterator && right instanceof Iterator) {\n        return findMatch((Iterator) left, (Iterator) right);\n    }\n    if (left instanceof Iterator) {\n        return containsMatch((Iterator) left, right);\n    }\n    if (right instanceof Iterator) {\n        return containsMatch((Iterator) right, left);\n    }\n    double ld = InfoSetUtil.doubleValue(left);\n    double rd = InfoSetUtil.doubleValue(right);\n    \n    // Check for NaN values\n    if (Double.isNaN(ld) || Double.isNaN(rd)) {\n        return false;\n    }\n    \n    return evaluateCompare(ld == rd ? 0 : ld < rd ? -1 : 1);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,29 @@\n+private boolean compute(Object left, Object right) {\n+    left = reduce(left);\n+    right = reduce(right);\n+\n+    if (left instanceof InitialContext) {\n+        ((InitialContext) left).reset();\n+    }\n+    if (right instanceof InitialContext) {\n+        ((InitialContext) right).reset();\n+    }\n+    if (left instanceof Iterator && right instanceof Iterator) {\n+        return findMatch((Iterator) left, (Iterator) right);\n+    }\n+    if (left instanceof Iterator) {\n+        return containsMatch((Iterator) left, right);\n+    }\n+    if (right instanceof Iterator) {\n+        return containsMatch((Iterator) right, left);\n+    }\n+    double ld = InfoSetUtil.doubleValue(left);\n+    double rd = InfoSetUtil.doubleValue(right);\n+    \n+    // Check for NaN values\n+    if (Double.isNaN(ld) || Double.isNaN(rd)) {\n+        return false;\n+    }\n+    \n+    return evaluateCompare(ld == rd ? 0 : ld < rd ? -1 : 1);\n+}",
+            "file_path": "src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationRelationalExpression.java",
+            "method_name": "compute",
+            "class_name": "CoreOperationRelationalExpression",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JxPath-8_trace.json"
+}

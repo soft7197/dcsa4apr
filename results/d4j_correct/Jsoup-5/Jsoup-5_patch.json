@@ -1,0 +1,53 @@
+{
+    "bug_id": "Jsoup-5",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-5_1757175835",
+    "patches": [
+        {
+            "hypothesis": "The parseAttribute method fails to handle malformed HTML where the key retrieval results in an empty string due to malformed attributes. Referring to the failing test, the code incorrectly reads an equal sign '=' or other unexpected characters, leading to invalid parsing and the StringIndexOutOfBoundsException during unconsumed character calls. The fix involves handling cases where key parsing isn't straightforward and ensuring all characters are consumed if they are deemed invalid attributes.",
+            "fixed_method": "// <base href>: update the base uri\nprivate Attribute parseAttribute() {\n    tq.consumeWhitespace();\n    String key = tq.consumeAttributeKey();\n    String value = \"\";\n    tq.consumeWhitespace();\n    if (!key.isEmpty() && tq.matchChomp(\"=\")) {\n        tq.consumeWhitespace();\n\n        if (tq.matchChomp(SQ)) {\n            value = tq.chompTo(SQ);\n        } else if (tq.matchChomp(DQ)) {\n            value = tq.chompTo(DQ);\n        } else {\n            StringBuilder valueAccum = new StringBuilder();\n            // no ' or \" to look for, so scan to end tag or space (or end of stream)\n            while (!tq.matchesAny(\"<\", \"/>\", \">\") && !tq.matchesWhitespace() && !tq.isEmpty()) {\n                valueAccum.append(tq.consume());\n            }\n            value = valueAccum.toString();\n        }\n        tq.consumeWhitespace();\n    }\n    if (!key.isEmpty())\n        return Attribute.createFromEncoded(key, value);\n    else {\n        while (!tq.isEmpty() && !tq.matchesAny(\"<\", \"/>\", \">\")) {\n            tq.consume(); // Consume garbage until a meaningful character is found or end is reached\n        }\n        return null;\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -4,7 +4,7 @@\n     String key = tq.consumeAttributeKey();\n     String value = \"\";\n     tq.consumeWhitespace();\n-    if (tq.matchChomp(\"=\")) {\n+    if (!key.isEmpty() && tq.matchChomp(\"=\")) {\n         tq.consumeWhitespace();\n \n         if (tq.matchChomp(SQ)) {\n@@ -21,11 +21,12 @@\n         }\n         tq.consumeWhitespace();\n     }\n-    if (key.length() != 0)\n+    if (!key.isEmpty())\n         return Attribute.createFromEncoded(key, value);\n     else {\n-        tq.consume();\n-            \n+        while (!tq.isEmpty() && !tq.matchesAny(\"<\", \"/>\", \">\")) {\n+            tq.consume(); // Consume garbage until a meaningful character is found or end is reached\n+        }\n         return null;\n     }\n }",
+            "file_path": "src/main/java/org/jsoup/parser/Parser.java",
+            "method_name": "parseAttribute",
+            "class_name": "Parser",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                181,
+                182,
+                183,
+                184,
+                185,
+                186,
+                187,
+                188,
+                189,
+                190,
+                191,
+                192,
+                193,
+                194,
+                195,
+                196,
+                197,
+                198,
+                199,
+                200,
+                201,
+                202,
+                203,
+                204,
+                205,
+                206,
+                207,
+                208,
+                209,
+                210
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Jsoup-5_trace.json"
+}

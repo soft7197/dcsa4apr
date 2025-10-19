@@ -1,0 +1,32 @@
+{
+    "bug_id": "JacksonDatabind-99",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-99_1756849719",
+    "patches": [
+        {
+            "hypothesis": "The method `buildCanonicalName` is missing the closing '>' character for the generic type, which causes the canonical name to be incomplete and not match the expected format.",
+            "changes": "Added a closing '>' character to the StringBuilder to properly close the generic type declaration.",
+            "fixed_method": "protected String buildCanonicalName()\n{\n    StringBuilder sb = new StringBuilder();\n    sb.append(_class.getName());\n    sb.append('<');\n    sb.append(_referencedType.toCanonical());\n    sb.append('>');\n    return sb.toString();\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,9 @@\n+protected String buildCanonicalName()\n+{\n+    StringBuilder sb = new StringBuilder();\n+    sb.append(_class.getName());\n+    sb.append('<');\n+    sb.append(_referencedType.toCanonical());\n+    sb.append('>');\n+    return sb.toString();\n+}",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/type/ReferenceType.java",
+            "method_name": "buildCanonicalName",
+            "class_name": "ReferenceType",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                163,
+                164,
+                165,
+                166,
+                167,
+                168,
+                169,
+                170
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-99_trace.json"
+}

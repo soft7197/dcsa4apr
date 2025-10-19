@@ -1,0 +1,40 @@
+{
+    "bug_id": "Jsoup-19",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-19_1757763046",
+    "patches": [
+        {
+            "hypothesis": "The original implementation incorrectly assumed that converting a URL to its absolute form would always result in a valid protocol check, which may not be the case for relative URLs. The incorrect handling of null or empty values in the attribute also posed a risk of unexpected behavior. The refined patch addresses these issues by ensuring a comprehensive protocol check in both the original and absolute representations of the URL, while also handling edge cases for null and empty values.",
+            "fixed_method": "private boolean testValidProtocol(Element el, Attribute attr, Set<Protocol> protocols) {\n    // Initially check if attribute value is null or empty\n    String value = attr.getValue();\n    if (value == null || value.isEmpty()) {\n        return false;\n    }\n    \n    // Check if the protocol is defined within the attribute value\n    for (Protocol protocol : protocols) {\n        String prot = protocol.toString() + \":\";\n        if (value.toLowerCase().startsWith(prot)) {\n            return true;\n        }\n    }\n    \n    // If protocol is not found, resolve to absolute URL\n    String absValue = el.absUrl(attr.getKey());\n    // Check again with the absolute URL\n    if (absValue != null && !absValue.isEmpty()) {\n        for (Protocol protocol : protocols) {\n            String prot = protocol.toString() + \":\";\n            if (absValue.toLowerCase().startsWith(prot)) {\n                if (!preserveRelativeLinks) {\n                    attr.setValue(absValue);\n                }\n                return true;\n            }\n        }\n    }\n    \n    return false;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,17 +1,32 @@\n-// ok if not defined protocol; otherwise test\n private boolean testValidProtocol(Element el, Attribute attr, Set<Protocol> protocols) {\n+    // Initially check if attribute value is null or empty\n+    String value = attr.getValue();\n+    if (value == null || value.isEmpty()) {\n+        return false;\n+    }\n+    \n     // Check if the protocol is defined within the attribute value\n-    String value = attr.getValue();\n     for (Protocol protocol : protocols) {\n         String prot = protocol.toString() + \":\";\n         if (value.toLowerCase().startsWith(prot)) {\n             return true;\n         }\n     }\n-    // If protocol is not found, resolve to absolute URL and update attribute if necessary\n+    \n+    // If protocol is not found, resolve to absolute URL\n     String absValue = el.absUrl(attr.getKey());\n-    if (!preserveRelativeLinks) {\n-        attr.setValue(absValue);\n+    // Check again with the absolute URL\n+    if (absValue != null && !absValue.isEmpty()) {\n+        for (Protocol protocol : protocols) {\n+            String prot = protocol.toString() + \":\";\n+            if (absValue.toLowerCase().startsWith(prot)) {\n+                if (!preserveRelativeLinks) {\n+                    attr.setValue(absValue);\n+                }\n+                return true;\n+            }\n+        }\n     }\n+    \n     return false;\n }",
+            "file_path": "src/main/java/org/jsoup/safety/Whitelist.java",
+            "method_name": "testValidProtocol",
+            "class_name": "Whitelist",
+            "iteration": 1,
+            "is_refinement": true,
+            "refinement_attempt": 1,
+            "original_hypothesis": "The method incorrectly transforms URLs into absolute URLs regardless of whether the protocol is custom. This causes custom protocols like 'cid' and 'data' to be dropped when they should be preserved.",
+            "line_numbers": [
+                338,
+                339,
+                340,
+                341,
+                342,
+                343,
+                344,
+                345,
+                346,
+                347,
+                348,
+                349,
+                350,
+                351,
+                352
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Jsoup-19_trace.json"
+}

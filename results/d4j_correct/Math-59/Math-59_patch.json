@@ -1,0 +1,27 @@
+{
+    "bug_id": "Math-59",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-59_1756721593",
+    "patches": [
+        {
+            "hypothesis": "The current implementation of the max method incorrectly checks for NaN and gives precedence to the second argument regardless of whether it is greater than the first. This leads to incorrect results when the first argument is greater than the second.",
+            "changes": "- return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n+ return (Float.isNaN(a) || Float.isNaN(b)) ? Float.NaN : (a >= b ? a : b);",
+            "fixed_method": "public static float max(final float a, final float b) {\n    return (Float.isNaN(a) || Float.isNaN(b)) ? Float.NaN : (a >= b ? a : b);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,3 @@\n+public static float max(final float a, final float b) {\n+    return (Float.isNaN(a) || Float.isNaN(b)) ? Float.NaN : (a >= b ? a : b);\n+}",
+            "file_path": "src/main/java/org/apache/commons/math/util/FastMath.java",
+            "method_name": "max",
+            "class_name": "FastMath",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                3481,
+                3482,
+                3483
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-59_trace.json"
+}

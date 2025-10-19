@@ -1,0 +1,27 @@
+{
+    "bug_id": "Math-89",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-89_1756721719",
+    "patches": [
+        {
+            "hypothesis": "The method addValue is attempting to cast the input object to a Comparable type without checking if it actually implements the Comparable interface. This causes a ClassCastException when a non-Comparable object is passed.",
+            "changes": "- addValue((Comparable<?>) v);\n+ if (v instanceof Comparable<?>) {\n+     addValue((Comparable<?>) v);\n+ } else {\n+     throw new IllegalArgumentException(\"Object must be an instance of Comparable\");\n+ }",
+            "fixed_method": "public void addValue(Object v) {\n    if (v instanceof Comparable<?>) {\n        addValue((Comparable<?>) v);\n    } else {\n        throw new IllegalArgumentException(\"Object must be an instance of Comparable\");\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,7 @@\n+public void addValue(Object v) {\n+    if (v instanceof Comparable<?>) {\n+        addValue((Comparable<?>) v);\n+    } else {\n+        throw new IllegalArgumentException(\"Object must be an instance of Comparable\");\n+    }\n+}",
+            "file_path": "src/java/org/apache/commons/math/stat/Frequency.java",
+            "method_name": "addValue",
+            "class_name": "Frequency",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                109,
+                110,
+                111
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-89_trace.json"
+}

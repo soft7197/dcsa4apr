@@ -1,0 +1,58 @@
+{
+    "bug_id": "Math-56",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-56_1756721582",
+    "patches": [
+        {
+            "hypothesis": "The bug in the method is due to incorrect handling of the index computation for multidimensional array traversal, specifically in the loop that updates the 'count' variable. The calculation of indices in the first loop overshoots the target index, thus leading to incorrect multidimensional indices.",
+            "changes": [
+                "- while (count <= index) {",
+                "+ while (count + offset <= index) {"
+            ],
+            "fixed_method": "public int[] getCounts(int index) {\n    if (index < 0 ||\n        index >= totalSize) {\n        throw new OutOfRangeException(index, 0, totalSize);\n    }\n\n    final int[] indices = new int[dimension];\n\n    int count = 0;\n    for (int i = 0; i < last; i++) {\n        int idx = 0;\n        final int offset = uniCounterOffset[i];\n        while (count + offset <= index) {\n            count += offset;\n            ++idx;\n        }\n        indices[i] = idx;\n    }\n\n    int idx = 0;\n    while (count < index) {\n        count += 1;\n        ++idx;\n    }\n    indices[last] = idx;\n\n    return indices;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,28 @@\n+public int[] getCounts(int index) {\n+    if (index < 0 ||\n+        index >= totalSize) {\n+        throw new OutOfRangeException(index, 0, totalSize);\n+    }\n+\n+    final int[] indices = new int[dimension];\n+\n+    int count = 0;\n+    for (int i = 0; i < last; i++) {\n+        int idx = 0;\n+        final int offset = uniCounterOffset[i];\n+        while (count + offset <= index) {\n+            count += offset;\n+            ++idx;\n+        }\n+        indices[i] = idx;\n+    }\n+\n+    int idx = 0;\n+    while (count < index) {\n+        count += 1;\n+        ++idx;\n+    }\n+    indices[last] = idx;\n+\n+    return indices;\n+}",
+            "file_path": "src/main/java/org/apache/commons/math/util/MultidimensionalCounter.java",
+            "method_name": "getCounts",
+            "class_name": "MultidimensionalCounter",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                216,
+                217,
+                218,
+                219,
+                220,
+                221,
+                222,
+                223,
+                224,
+                225,
+                226,
+                227,
+                228,
+                229,
+                230,
+                231,
+                232,
+                233,
+                234,
+                235,
+                236,
+                237,
+                238,
+                239,
+                240,
+                241,
+                242,
+                243,
+                244,
+                245,
+                246
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-56_trace.json"
+}

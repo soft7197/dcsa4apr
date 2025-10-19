@@ -1,0 +1,47 @@
+{
+    "bug_id": "JacksonDatabind-110",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-110_1757916466",
+    "patches": [
+        {
+            "hypothesis": "The issue arises because the deserializer is not correctly handling the unmodifiable list type. The test fails because the method doesn't account for the specific implementation of the unmodifiable list that can be created from LinkedList, resulting in an InvalidDefinitionException. To fix this, we need to ensure that the correct converter is used for any unmodifiable list, regardless of the underlying implementation.",
+            "fixed_method": "// for [databind#2265]\npublic static JsonDeserializer<?> findForCollection(DeserializationContext ctxt,\n            JavaType type)\n        throws JsonMappingException\n    {\n        JavaUtilCollectionsConverter conv;\n\n        // 10-Jan-2017, tatu: Some types from `java.util.Collections`/`java.util.Arrays` need bit of help...\n        if (type.hasRawClass(CLASS_AS_ARRAYS_LIST)) {\n            conv = converter(TYPE_AS_LIST, type, List.class);\n        } else if (type.hasRawClass(CLASS_SINGLETON_LIST)) {\n            conv = converter(TYPE_SINGLETON_LIST, type, List.class);\n        } else if (type.hasRawClass(CLASS_SINGLETON_SET)) {\n            conv = converter(TYPE_SINGLETON_SET, type, Set.class);\n        // [databind#2265]: we may have another impl type for unmodifiable Lists, check both\n        } else if (type.hasRawClass(CLASS_UNMODIFIABLE_LIST) || type.getRawClass().getName().equals(\"java.util.Collections$UnmodifiableList\")) {\n            conv = converter(TYPE_UNMODIFIABLE_LIST, type, List.class);\n        } else if (type.hasRawClass(CLASS_UNMODIFIABLE_SET)) {\n            conv = converter(TYPE_UNMODIFIABLE_SET, type, Set.class);\n        } else {\n            return null;\n        }\n        return new StdDelegatingDeserializer<Object>(conv);\n    }",
+            "diff": "--- original\n+++ fixed\n@@ -13,7 +13,7 @@\n         } else if (type.hasRawClass(CLASS_SINGLETON_SET)) {\n             conv = converter(TYPE_SINGLETON_SET, type, Set.class);\n         // [databind#2265]: we may have another impl type for unmodifiable Lists, check both\n-        } else if (type.hasRawClass(CLASS_UNMODIFIABLE_LIST)) {\n+        } else if (type.hasRawClass(CLASS_UNMODIFIABLE_LIST) || type.getRawClass().getName().equals(\"java.util.Collections$UnmodifiableList\")) {\n             conv = converter(TYPE_UNMODIFIABLE_LIST, type, List.class);\n         } else if (type.hasRawClass(CLASS_UNMODIFIABLE_SET)) {\n             conv = converter(TYPE_UNMODIFIABLE_SET, type, Set.class);\n",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/impl/JavaUtilCollectionsDeserializers.java",
+            "method_name": "findForCollection",
+            "class_name": "JavaUtilCollectionsDeserializers",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86
+            ],
+            "original_code": "// for [databind#2265]\npublic static JsonDeserializer<?> findForCollection(DeserializationContext ctxt,\n            JavaType type)\n        throws JsonMappingException\n    {\n        JavaUtilCollectionsConverter conv;\n\n        // 10-Jan-2017, tatu: Some types from `java.util.Collections`/`java.util.Arrays` need bit of help...\n        if (type.hasRawClass(CLASS_AS_ARRAYS_LIST)) {\n            conv = converter(TYPE_AS_LIST, type, List.class);\n        } else if (type.hasRawClass(CLASS_SINGLETON_LIST)) {\n            conv = converter(TYPE_SINGLETON_LIST, type, List.class);\n        } else if (type.hasRawClass(CLASS_SINGLETON_SET)) {\n            conv = converter(TYPE_SINGLETON_SET, type, Set.class);\n        // [databind#2265]: we may have another impl type for unmodifiable Lists, check both\n        } else if (type.hasRawClass(CLASS_UNMODIFIABLE_LIST)) {\n            conv = converter(TYPE_UNMODIFIABLE_LIST, type, List.class);\n        } else if (type.hasRawClass(CLASS_UNMODIFIABLE_SET)) {\n            conv = converter(TYPE_UNMODIFIABLE_SET, type, Set.class);\n        } else {\n            return null;\n        }\n        return new StdDelegatingDeserializer<Object>(conv);\n    }"
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-110_trace.json"
+}

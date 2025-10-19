@@ -1,0 +1,52 @@
+{
+    "bug_id": "Lang-61",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Lang-61_1756721412",
+    "patches": [
+        {
+            "hypothesis": "The bug in the method `indexOf` is due to incorrect loop bounds and logic errors in handling the buffer size. The loop condition does not correctly determine the maximum index for starting the search. The `len` variable is supposed to indicate the maximum starting index for the search but is incorrectly calculated. Also, the condition `strLen > size` should be `strLen > (size - startIndex)` to correctly return -1 if the string can't fit from the starting index.",
+            "changes": "Adjust the loop condition to iterate correctly over the buffer from `i < len` to `i <= (size - strLen)`. Correct the condition to return -1 when `strLen > (size - startIndex)`.",
+            "fixed_method": "public int indexOf(String str, int startIndex) {\n    startIndex = (startIndex < 0 ? 0 : startIndex);\n    if (str == null || startIndex >= size) {\n        return -1;\n    }\n    int strLen = str.length();\n    if (strLen == 1) {\n        return indexOf(str.charAt(0), startIndex);\n    }\n    if (strLen == 0) {\n        return startIndex;\n    }\n    if (strLen > (size - startIndex)) {\n        return -1;\n    }\n    char[] thisBuf = buffer;\n    int max = size - strLen;\n    outer:\n    for (int i = startIndex; i <= max; i++) {\n        for (int j = 0; j < strLen; j++) {\n            if (str.charAt(j) != thisBuf[i + j]) {\n                continue outer;\n            }\n        }\n        return i;\n    }\n    return -1;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,28 @@\n+public int indexOf(String str, int startIndex) {\n+    startIndex = (startIndex < 0 ? 0 : startIndex);\n+    if (str == null || startIndex >= size) {\n+        return -1;\n+    }\n+    int strLen = str.length();\n+    if (strLen == 1) {\n+        return indexOf(str.charAt(0), startIndex);\n+    }\n+    if (strLen == 0) {\n+        return startIndex;\n+    }\n+    if (strLen > (size - startIndex)) {\n+        return -1;\n+    }\n+    char[] thisBuf = buffer;\n+    int max = size - strLen;\n+    outer:\n+    for (int i = startIndex; i <= max; i++) {\n+        for (int j = 0; j < strLen; j++) {\n+            if (str.charAt(j) != thisBuf[i + j]) {\n+                continue outer;\n+            }\n+        }\n+        return i;\n+    }\n+    return -1;\n+}",
+            "file_path": "src/java/org/apache/commons/lang/text/StrBuilder.java",
+            "method_name": "indexOf",
+            "class_name": "StrBuilder",
+            "iteration": 2,
+            "is_multi_method": false,
+            "line_numbers": [
+                1760,
+                1761,
+                1762,
+                1763,
+                1764,
+                1765,
+                1766,
+                1767,
+                1768,
+                1769,
+                1770,
+                1771,
+                1772,
+                1773,
+                1774,
+                1775,
+                1776,
+                1777,
+                1778,
+                1779,
+                1780,
+                1781,
+                1782,
+                1783,
+                1784,
+                1785,
+                1786,
+                1787
+            ]
+        }
+    ],
+    "iterations": 2,
+    "monitor_file": "traces/Lang-61_trace.json"
+}

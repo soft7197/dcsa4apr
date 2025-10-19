@@ -1,0 +1,38 @@
+{
+    "bug_id": "Compress-44",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Compress-44_1756720838",
+    "patches": [
+        {
+            "hypothesis": "The constructor does not currently handle null parameters for 'checksum' and 'in'. The failing tests expect a NullPointerException to be thrown when these parameters are null.",
+            "changes": [
+                "+ if (checksum == null) {",
+                "+     throw new NullPointerException(\"Checksum cannot be null\");",
+                "+ }",
+                "+ if (in == null) {",
+                "+     throw new NullPointerException(\"InputStream cannot be null\");",
+                "+ }"
+            ],
+            "fixed_method": "public ChecksumCalculatingInputStream(final Checksum checksum, final InputStream in) {\n    if (checksum == null) {\n        throw new NullPointerException(\"Checksum cannot be null\");\n    }\n    if (in == null) {\n        throw new NullPointerException(\"InputStream cannot be null\");\n    }\n    this.checksum = checksum;\n    this.in = in;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,10 @@\n+public ChecksumCalculatingInputStream(final Checksum checksum, final InputStream in) {\n+    if (checksum == null) {\n+        throw new NullPointerException(\"Checksum cannot be null\");\n+    }\n+    if (in == null) {\n+        throw new NullPointerException(\"InputStream cannot be null\");\n+    }\n+    this.checksum = checksum;\n+    this.in = in;\n+}",
+            "file_path": "src/main/java/org/apache/commons/compress/utils/ChecksumCalculatingInputStream.java",
+            "method_name": "ChecksumCalculatingInputStream",
+            "class_name": "ChecksumCalculatingInputStream",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Compress-44_trace.json"
+}

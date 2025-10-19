@@ -1,0 +1,45 @@
+### Fixed Method 1
+protected StringBuffer renderWrappedText(StringBuffer sb, int width, 
+                                         int nextLineTabStop, String text)
+{
+    int pos = findWrapPos(text, width, 0);
+
+    if (pos == -1)
+    {
+        sb.append(rtrim(text));
+
+        return sb;
+    }
+    sb.append(rtrim(text.substring(0, pos))).append(defaultNewLine);
+
+    if (nextLineTabStop >= width)
+    {
+        // Adjust the nextLineTabStop to avoid an infinite loop,
+        // Allow a minimum of 1 character width for new line text when nextLineTabStop nearly equals width
+        nextLineTabStop = Math.max(0, width - 1);
+    }
+
+    // all following lines must be padded with nextLineTabStop space 
+    // characters
+    final String padding = createPadding(nextLineTabStop);
+
+    while (true)
+    {
+        text = padding + text.substring(pos).trim();
+        pos = findWrapPos(text, width, 0);
+
+        if (pos == -1)
+        {
+            sb.append(text);
+
+            return sb;
+        }
+        
+        if ( (text.length() > width) && (pos == nextLineTabStop - 1) ) 
+        {
+            pos = width;
+        }
+        
+        sb.append(rtrim(text.substring(0, pos))).append(defaultNewLine);
+    }
+}

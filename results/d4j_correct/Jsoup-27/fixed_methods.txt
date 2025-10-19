@@ -1,0 +1,17 @@
+### Fixed Method 1
+static String getCharsetFromContentType(String contentType) {
+    if (contentType == null) return null;
+    Matcher m = charsetPattern.matcher(contentType);
+    if (m.find()) {
+        String charset = m.group(1).trim();
+        if (charset.startsWith("\"") && charset.endsWith("\"")) {
+            charset = charset.substring(1, charset.length() - 1); // Remove quotes
+        }
+        String upperCaseCharset = charset.toUpperCase(Locale.ENGLISH);
+        // Check if this charset is supported by default Java charsets
+        if (Charset.isSupported(upperCaseCharset)) {
+            return charset;
+        }
+    }
+    return null;
+}

@@ -1,0 +1,49 @@
+{
+    "bug_id": "JxPath-14",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JxPath-14_1757301867",
+    "patches": [
+        {
+            "hypothesis": "The issue arises because the methods functionFloor, functionCeiling, and functionRound do not correctly handle special numeric values like NaN, positive infinity, and negative infinity. The methods directly convert any value, including special cases, to a double and apply floor, ceiling, or round logic without checking for these special cases. As a result, when NaN is passed, it incorrectly returns 0.0 instead of NaN, leading to test failures. The fix involves checking for special cases and returning them accordingly before applying the respective math functions.",
+            "methods": [
+                {
+                    "method_name": "functionFloor",
+                    "fixed_method": "protected Object functionFloor(EvalContext context) {\n    assertArgCount(1);\n    double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n    if (Double.isNaN(v)) return Double.NaN;\n    if (v == Double.POSITIVE_INFINITY) return Double.POSITIVE_INFINITY;\n    if (v == Double.NEGATIVE_INFINITY) return Double.NEGATIVE_INFINITY;\n    return new Double(Math.floor(v));\n}",
+                    "diff": "--- original\n+++ fixed\n@@ -1,6 +1,8 @@\n-\n-    protected Object functionFloor(EvalContext context) {\n-        assertArgCount(1);\n-        double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n-        return new Double(Math.floor(v));\n-    }\n+protected Object functionFloor(EvalContext context) {\n+    assertArgCount(1);\n+    double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n+    if (Double.isNaN(v)) return Double.NaN;\n+    if (v == Double.POSITIVE_INFINITY) return Double.POSITIVE_INFINITY;\n+    if (v == Double.NEGATIVE_INFINITY) return Double.NEGATIVE_INFINITY;\n+    return new Double(Math.floor(v));\n+}",
+                    "line_numbers": [
+                        653,
+                        658
+                    ],
+                    "file_path": "src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java"
+                },
+                {
+                    "method_name": "functionCeiling",
+                    "fixed_method": "protected Object functionCeiling(EvalContext context) {\n    assertArgCount(1);\n    double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n    if (Double.isNaN(v)) return Double.NaN;\n    if (v == Double.POSITIVE_INFINITY) return Double.POSITIVE_INFINITY;\n    if (v == Double.NEGATIVE_INFINITY) return Double.NEGATIVE_INFINITY;\n    return new Double(Math.ceil(v));\n}",
+                    "diff": "--- original\n+++ fixed\n@@ -1,6 +1,8 @@\n-\n-    protected Object functionCeiling(EvalContext context) {\n-        assertArgCount(1);\n-        double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n-        return new Double(Math.ceil(v));\n-    }\n+protected Object functionCeiling(EvalContext context) {\n+    assertArgCount(1);\n+    double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n+    if (Double.isNaN(v)) return Double.NaN;\n+    if (v == Double.POSITIVE_INFINITY) return Double.POSITIVE_INFINITY;\n+    if (v == Double.NEGATIVE_INFINITY) return Double.NEGATIVE_INFINITY;\n+    return new Double(Math.ceil(v));\n+}",
+                    "line_numbers": [
+                        659,
+                        664
+                    ],
+                    "file_path": "src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java"
+                },
+                {
+                    "method_name": "functionRound",
+                    "fixed_method": "protected Object functionRound(EvalContext context) {\n    assertArgCount(1);\n    double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n    if (Double.isNaN(v)) return Double.NaN;\n    if (v == Double.POSITIVE_INFINITY) return Double.POSITIVE_INFINITY;\n    if (v == Double.NEGATIVE_INFINITY) return Double.NEGATIVE_INFINITY;\n    return new Double(Math.round(v));\n}",
+                    "diff": "--- original\n+++ fixed\n@@ -1,6 +1,8 @@\n-\n-    protected Object functionRound(EvalContext context) {\n-        assertArgCount(1);\n-        double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n-        return new Double(Math.round(v));\n-    }\n+protected Object functionRound(EvalContext context) {\n+    assertArgCount(1);\n+    double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n+    if (Double.isNaN(v)) return Double.NaN;\n+    if (v == Double.POSITIVE_INFINITY) return Double.POSITIVE_INFINITY;\n+    if (v == Double.NEGATIVE_INFINITY) return Double.NEGATIVE_INFINITY;\n+    return new Double(Math.round(v));\n+}",
+                    "line_numbers": [
+                        665,
+                        670
+                    ],
+                    "file_path": "src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java"
+                }
+            ],
+            "is_multi_method": true,
+            "coordination_notes": "",
+            "methods_count": 3
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JxPath-14_trace.json"
+}

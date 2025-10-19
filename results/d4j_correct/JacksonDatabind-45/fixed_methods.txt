@@ -1,0 +1,39 @@
+### Fixed Method 1
+/**
+* Specific format to use, if not default format: non null value
+* also indicates that serialization is to be done as JSON String,
+* not numeric timestamp, unless {@link #_useTimestamp} is true.
+*/
+public JsonSerializer<?> createContextual(SerializerProvider serializers,
+        BeanProperty property) throws JsonMappingException
+{
+    if (property != null) {
+        JsonFormat.Value format = serializers.getAnnotationIntrospector().findFormat((Annotated)property.getMember());
+        if (format != null) {
+
+            // Determine if a numeric timestamp is desired
+            JsonFormat.Shape shape = format.getShape();
+            if (shape.isNumeric()) {
+                return withFormat(Boolean.TRUE, null);
+            }
+
+            // Adjust behavior for non-numeric format with specific configurations
+            if (shape == JsonFormat.Shape.STRING || format.hasPattern() || format.hasLocale() || format.hasTimeZone()) {
+                TimeZone tz = format.getTimeZone();
+                final String pattern = format.hasPattern()
+                                ? format.getPattern()
+                                : StdDateFormat.DATE_FORMAT_STR_ISO8601;
+                final Locale loc = format.hasLocale()
+                                ? format.getLocale()
+                                : serializers.getLocale();
+                SimpleDateFormat df = new SimpleDateFormat(pattern, loc);
+                if (tz == null) {
+                    tz = serializers.getTimeZone();
+                }
+                df.setTimeZone(tz);
+                return withFormat(Boolean.FALSE, df);
+            }
+        }
+    }
+    return this;
+}

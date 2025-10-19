@@ -1,0 +1,49 @@
+{
+    "bug_id": "Closure-15",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Closure-15_1757160693",
+    "patches": [
+        {
+            "hypothesis": "The current implementation incorrectly allows function calls that read properties via the 'in' operator to be optimized out, which is demonstrated by the test case 'var a,b,x = a in b; delete a[b]; x'. The method should not identify 'in' operations as having no side-effects, as these could affect further state, especially when followed by operations like 'delete'.",
+            "fixed_method": "// scope.\npublic boolean apply(Node n) {\n  // When the node is null it means, we reached the implicit return\n  // where the function returns (possibly without an return statement)\n  if (n == null) {\n    return false;\n  }\n\n  // We care about calls to functions that\n  // pass one of the dependent variables to a non-side-effect free function.\n  if ((n.isCall() && NodeUtil.functionCallHasSideEffects(n)) ||\n      (n.isNew() && NodeUtil.constructorCallHasSideEffects(n))) {\n    return true;\n  }\n\n  // Identify 'in' and 'delete' operations on property lookups with side-effects\n  if (n.isIn() || n.isDelProp()) {\n    return true;\n  }\n\n  for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n    if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n      return true;\n    }\n  }\n  return false;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -6,17 +6,17 @@\n     return false;\n   }\n \n-  // TODO(user): We only care about calls to functions that\n-  // passes one of the dependent variable to a non-side-effect free\n-  // function.\n-  if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n+  // We care about calls to functions that\n+  // pass one of the dependent variables to a non-side-effect free function.\n+  if ((n.isCall() && NodeUtil.functionCallHasSideEffects(n)) ||\n+      (n.isNew() && NodeUtil.constructorCallHasSideEffects(n))) {\n     return true;\n   }\n \n-  if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n+  // Identify 'in' and 'delete' operations on property lookups with side-effects\n+  if (n.isIn() || n.isDelProp()) {\n     return true;\n   }\n-\n \n   for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n     if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n",
+            "file_path": "src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java",
+            "method_name": "apply",
+            "class_name": "FlowSensitiveInlineVariables",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Closure-15_trace.json"
+}

@@ -1,0 +1,22 @@
+### Fixed Method 1
+private void popStackToClose(Token.EndTag endTag) {
+    String elName = endTag.name().toLowerCase();
+    Element firstFound = null;
+
+    for (int pos = stack.size() - 1; pos >= 0; pos--) {
+        Element next = stack.get(pos);
+        if (next.nodeName().equalsIgnoreCase(elName)) {  // Use equalsIgnoreCase to match tag names ignoring case
+            firstFound = next;
+            break;
+        }
+    }
+    if (firstFound == null)
+        return; // not found, skip
+
+    for (int pos = stack.size() - 1; pos >= 0; pos--) {
+        Element next = stack.get(pos);
+        stack.remove(pos);
+        if (next == firstFound)
+            break;
+    }
+}

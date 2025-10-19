@@ -1,0 +1,28 @@
+{
+    "bug_id": "Math-70",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-70_1756871861",
+    "patches": [
+        {
+            "hypothesis": "The method `solve` is incorrectly calling an overloaded version of itself without passing the required function `f`. This leads to a NullPointerException when the function is accessed. The method should use the function `f` to evaluate the values at `min` and `max`.",
+            "changes": "- return solve(min, max);\n+ return solve(f, min, max);",
+            "fixed_method": "public double solve(final UnivariateRealFunction f, double min, double max, double initial)\n    throws MaxIterationsExceededException, FunctionEvaluationException {\n    return solve(f, min, max);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,4 @@\n+public double solve(final UnivariateRealFunction f, double min, double max, double initial)\n+    throws MaxIterationsExceededException, FunctionEvaluationException {\n+    return solve(f, min, max);\n+}",
+            "file_path": "src/main/java/org/apache/commons/math/analysis/solvers/BisectionSolver.java",
+            "method_name": "solve",
+            "class_name": "BisectionSolver",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                70,
+                71,
+                72,
+                73
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-70_trace.json"
+}

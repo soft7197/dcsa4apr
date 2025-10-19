@@ -1,0 +1,32 @@
+{
+    "bug_id": "JacksonDatabind-42",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-42_1756721018",
+    "patches": [
+        {
+            "hypothesis": "The method `_deserializeFromEmptyString` should return `Locale.ROOT` when `_kind` indicates a Locale, similar to how it handles URIs. The test expects the deserialization of an empty string for a Locale to return `Locale.ROOT`, but the current method implementation delegates to the superclass instead.",
+            "changes": "The fix involves adding a condition to check if `_kind` corresponds to a Locale, and if so, returning `Locale.ROOT`.",
+            "fixed_method": "protected Object _deserializeFromEmptyString() throws IOException {\n    // As per [databind#398], URI requires special handling\n    if (_kind == STD_URI) {\n        return URI.create(\"\");\n    }\n    // As per [databind#1123], Locale too\n    if (_kind == STD_LOCALE) {\n        return Locale.ROOT;\n    }\n    return super._deserializeFromEmptyString();\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,11 @@\n+protected Object _deserializeFromEmptyString() throws IOException {\n+    // As per [databind#398], URI requires special handling\n+    if (_kind == STD_URI) {\n+        return URI.create(\"\");\n+    }\n+    // As per [databind#1123], Locale too\n+    if (_kind == STD_LOCALE) {\n+        return Locale.ROOT;\n+    }\n+    return super._deserializeFromEmptyString();\n+}",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java",
+            "method_name": "_deserializeFromEmptyString",
+            "class_name": "FromStringDeserializer",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                278,
+                279,
+                280,
+                281,
+                282,
+                283,
+                284,
+                285
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-42_trace.json"
+}

@@ -1,0 +1,60 @@
+{
+    "bug_id": "Gson-7",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Gson-7_1756931665",
+    "patches": [
+        {
+            "hypothesis": "The method `nextLong` is incorrectly throwing an IllegalStateException when encountering a STRING token that can be parsed as a long. The method should attempt to parse STRING tokens as long before throwing an exception.",
+            "changes": "Added a condition to handle STRING tokens by attempting to parse them as long before throwing an exception.",
+            "fixed_method": "public long nextLong() throws IOException {\n    int p = peeked;\n    if (p == PEEKED_NONE) {\n      p = doPeek();\n    }\n\n    if (p == PEEKED_LONG) {\n      peeked = PEEKED_NONE;\n      pathIndices[stackSize - 1]++;\n      return peekedLong;\n    }\n\n    if (p == PEEKED_NUMBER) {\n      peekedString = new String(buffer, pos, peekedNumberLength);\n      pos += peekedNumberLength;\n    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED) {\n      peekedString = nextQuotedValue(p == PEEKED_SINGLE_QUOTED ? '\\'' : '\"');\n    } else if (p == PEEKED_UNQUOTED) {\n      peekedString = nextUnquotedValue();\n    } else {\n      throw new IllegalStateException(\"Expected a long but was \" + peek()\n          + \" at line \" + getLineNumber() + \" column \" + getColumnNumber() + \" path \" + getPath());\n    }\n\n    try {\n      long result = Long.parseLong(peekedString);\n      peeked = PEEKED_NONE;\n      pathIndices[stackSize - 1]++;\n      return result;\n    } catch (NumberFormatException ignored) {\n      // Fall back to parse as a double below.\n    }\n\n    peeked = PEEKED_BUFFERED;\n    double asDouble = Double.parseDouble(peekedString); // don't catch this NumberFormatException.\n    long result = (long) asDouble;\n    if (result != asDouble) { // Make sure no precision was lost casting to 'long'.\n      throw new NumberFormatException(\"Expected a long but was \" + peekedString\n          + \" at line \" + getLineNumber() + \" column \" + getColumnNumber() + \" path \" + getPath());\n    }\n    peekedString = null;\n    peeked = PEEKED_NONE;\n    pathIndices[stackSize - 1]++;\n    return result;\n  }",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,45 @@\n+public long nextLong() throws IOException {\n+    int p = peeked;\n+    if (p == PEEKED_NONE) {\n+      p = doPeek();\n+    }\n+\n+    if (p == PEEKED_LONG) {\n+      peeked = PEEKED_NONE;\n+      pathIndices[stackSize - 1]++;\n+      return peekedLong;\n+    }\n+\n+    if (p == PEEKED_NUMBER) {\n+      peekedString = new String(buffer, pos, peekedNumberLength);\n+      pos += peekedNumberLength;\n+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED) {\n+      peekedString = nextQuotedValue(p == PEEKED_SINGLE_QUOTED ? '\\'' : '\"');\n+    } else if (p == PEEKED_UNQUOTED) {\n+      peekedString = nextUnquotedValue();\n+    } else {\n+      throw new IllegalStateException(\"Expected a long but was \" + peek()\n+          + \" at line \" + getLineNumber() + \" column \" + getColumnNumber() + \" path \" + getPath());\n+    }\n+\n+    try {\n+      long result = Long.parseLong(peekedString);\n+      peeked = PEEKED_NONE;\n+      pathIndices[stackSize - 1]++;\n+      return result;\n+    } catch (NumberFormatException ignored) {\n+      // Fall back to parse as a double below.\n+    }\n+\n+    peeked = PEEKED_BUFFERED;\n+    double asDouble = Double.parseDouble(peekedString); // don't catch this NumberFormatException.\n+    long result = (long) asDouble;\n+    if (result != asDouble) { // Make sure no precision was lost casting to 'long'.\n+      throw new NumberFormatException(\"Expected a long but was \" + peekedString\n+          + \" at line \" + getLineNumber() + \" column \" + getColumnNumber() + \" path \" + getPath());\n+    }\n+    peekedString = null;\n+    peeked = PEEKED_NONE;\n+    pathIndices[stackSize - 1]++;\n+    return result;\n+  }",
+            "file_path": "gson/src/main/java/com/google/gson/stream/JsonReader.java",
+            "method_name": "nextLong",
+            "class_name": "JsonReader",
+            "iteration": 2,
+            "is_multi_method": false,
+            "line_numbers": [
+                939,
+                981
+            ]
+        },
+        {
+            "hypothesis": "The method `nextInt` is incorrectly throwing an IllegalStateException when encountering a STRING token, even if the string can be parsed as an integer. The method should attempt to parse the string as an integer before throwing an exception.",
+            "changes": [
+                "  if (p == PEEKED_NUMBER || p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {",
+                "    if (p == PEEKED_NUMBER) {",
+                "      peekedString = new String(buffer, pos, peekedNumberLength);",
+                "      pos += peekedNumberLength;",
+                "    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED) {",
+                "      peekedString = nextQuotedValue(p == PEEKED_SINGLE_QUOTED ? '\\'' : '\"');",
+                "    } else if (p == PEEKED_UNQUOTED) {",
+                "      peekedString = nextUnquotedValue();",
+                "    }",
+                "    try {",
+                "      result = Integer.parseInt(peekedString);",
+                "      peeked = PEEKED_NONE;",
+                "      pathIndices[stackSize - 1]++;",
+                "      return result;",
+                "    } catch (NumberFormatException ignored) {",
+                "      // Fall back to parse as a double below.",
+                "    }",
+                "  }"
+            ],
+            "fixed_method": "public int nextInt() throws IOException {\n    int p = peeked;\n    if (p == PEEKED_NONE) {\n      p = doPeek();\n    }\n\n    int result;\n    if (p == PEEKED_LONG) {\n      result = (int) peekedLong;\n      if (peekedLong != result) { // Make sure no precision was lost casting to 'int'.\n        throw new NumberFormatException(\"Expected an int but was \" + peekedLong\n            + \" at line \" + getLineNumber() + \" column \" + getColumnNumber() + \" path \" + getPath());\n      }\n      peeked = PEEKED_NONE;\n      pathIndices[stackSize - 1]++;\n      return result;\n    }\n\n    if (p == PEEKED_NUMBER || p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {\n      if (p == PEEKED_NUMBER) {\n        peekedString = new String(buffer, pos, peekedNumberLength);\n        pos += peekedNumberLength;\n      } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED) {\n        peekedString = nextQuotedValue(p == PEEKED_SINGLE_QUOTED ? '\\'' : '\"');\n      } else if (p == PEEKED_UNQUOTED) {\n        peekedString = nextUnquotedValue();\n      }\n      try {\n        result = Integer.parseInt(peekedString);\n        peeked = PEEKED_NONE;\n        pathIndices[stackSize - 1]++;\n        return result;\n      } catch (NumberFormatException ignored) {\n        // Fall back to parse as a double below.\n      }\n    } else {\n      throw new IllegalStateException(\"Expected an int but was \" + peek()\n          + \" at line \" + getLineNumber() + \" column \" + getColumnNumber() + \" path \" + getPath());\n    }\n\n    peeked = PEEKED_BUFFERED;\n    double asDouble = Double.parseDouble(peekedString); // don't catch this NumberFormatException.\n    result = (int) asDouble;\n    if (result != asDouble) { // Make sure no precision was lost casting to 'int'.\n      throw new NumberFormatException(\"Expected an int but was \" + peekedString\n          + \" at line \" + getLineNumber() + \" column \" + getColumnNumber() + \" path \" + getPath());\n    }\n    peekedString = null;\n    peeked = PEEKED_NONE;\n    pathIndices[stackSize - 1]++;\n    return result;\n  }",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,52 @@\n+public int nextInt() throws IOException {\n+    int p = peeked;\n+    if (p == PEEKED_NONE) {\n+      p = doPeek();\n+    }\n+\n+    int result;\n+    if (p == PEEKED_LONG) {\n+      result = (int) peekedLong;\n+      if (peekedLong != result) { // Make sure no precision was lost casting to 'int'.\n+        throw new NumberFormatException(\"Expected an int but was \" + peekedLong\n+            + \" at line \" + getLineNumber() + \" column \" + getColumnNumber() + \" path \" + getPath());\n+      }\n+      peeked = PEEKED_NONE;\n+      pathIndices[stackSize - 1]++;\n+      return result;\n+    }\n+\n+    if (p == PEEKED_NUMBER || p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED || p == PEEKED_UNQUOTED) {\n+      if (p == PEEKED_NUMBER) {\n+        peekedString = new String(buffer, pos, peekedNumberLength);\n+        pos += peekedNumberLength;\n+      } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED) {\n+        peekedString = nextQuotedValue(p == PEEKED_SINGLE_QUOTED ? '\\'' : '\"');\n+      } else if (p == PEEKED_UNQUOTED) {\n+        peekedString = nextUnquotedValue();\n+      }\n+      try {\n+        result = Integer.parseInt(peekedString);\n+        peeked = PEEKED_NONE;\n+        pathIndices[stackSize - 1]++;\n+        return result;\n+      } catch (NumberFormatException ignored) {\n+        // Fall back to parse as a double below.\n+      }\n+    } else {\n+      throw new IllegalStateException(\"Expected an int but was \" + peek()\n+          + \" at line \" + getLineNumber() + \" column \" + getColumnNumber() + \" path \" + getPath());\n+    }\n+\n+    peeked = PEEKED_BUFFERED;\n+    double asDouble = Double.parseDouble(peekedString); // don't catch this NumberFormatException.\n+    result = (int) asDouble;\n+    if (result != asDouble) { // Make sure no precision was lost casting to 'int'.\n+      throw new NumberFormatException(\"Expected an int but was \" + peekedString\n+          + \" at line \" + getLineNumber() + \" column \" + getColumnNumber() + \" path \" + getPath());\n+    }\n+    peekedString = null;\n+    peeked = PEEKED_NONE;\n+    pathIndices[stackSize - 1]++;\n+    return result;\n+  }",
+            "file_path": "gson/src/main/java/com/google/gson/stream/JsonReader.java",
+            "method_name": "nextInt",
+            "class_name": "JsonReader",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                1161,
+                1209
+            ]
+        }
+    ],
+    "iterations": 2,
+    "monitor_file": "traces/Gson-7_trace.json"
+}

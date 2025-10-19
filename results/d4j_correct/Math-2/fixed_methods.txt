@@ -1,0 +1,7 @@
+### Fixed Method 1
+public double getNumericalMean() {
+    if (getPopulationSize() <= 0 || getSampleSize() < 0 || getNumberOfSuccesses() < 0) {
+        throw new IllegalArgumentException("Population size, sample size, and number of successes must be non-negative, and population size must be positive.");
+    }
+    return (double) getSampleSize() * getNumberOfSuccesses() / getPopulationSize();
+}

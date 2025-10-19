@@ -1,0 +1,6 @@
+### Fixed Method 1
+public int compareTo(Fraction object) {
+    long thisNumerator = (long) this.numerator * object.denominator;
+    long otherNumerator = (long) object.numerator * this.denominator;
+    return Long.compare(thisNumerator, otherNumerator);
+}

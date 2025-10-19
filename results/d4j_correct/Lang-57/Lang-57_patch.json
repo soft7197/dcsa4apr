@@ -1,0 +1,27 @@
+{
+    "bug_id": "Lang-57",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Lang-57_1756865155",
+    "patches": [
+        {
+            "hypothesis": "The method isAvailableLocale is causing a NullPointerException because the static field cAvailableLocaleSet is not initialized before it is accessed. The initialization of cAvailableLocaleSet should be done in a lazy manner, ensuring it is set up before any access.",
+            "changes": "- return cAvailableLocaleSet.contains(locale);\n+ if (cAvailableLocaleSet == null) {\n+     cAvailableLocaleSet = availableLocaleSet();\n+ }\n+ return cAvailableLocaleSet.contains(locale);",
+            "fixed_method": "public static boolean isAvailableLocale(Locale locale) {\n    if (cAvailableLocaleSet == null) {\n        cAvailableLocaleSet = availableLocaleSet();\n    }\n    return cAvailableLocaleSet.contains(locale);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,6 @@\n+public static boolean isAvailableLocale(Locale locale) {\n+    if (cAvailableLocaleSet == null) {\n+        cAvailableLocaleSet = availableLocaleSet();\n+    }\n+    return cAvailableLocaleSet.contains(locale);\n+}",
+            "file_path": "src/java/org/apache/commons/lang/LocaleUtils.java",
+            "method_name": "isAvailableLocale",
+            "class_name": "LocaleUtils",
+            "iteration": 5,
+            "is_multi_method": false,
+            "line_numbers": [
+                222,
+                223,
+                224
+            ]
+        }
+    ],
+    "iterations": 5,
+    "monitor_file": "traces/Lang-57_trace.json"
+}

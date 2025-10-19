@@ -1,0 +1,74 @@
+### Fixed Method 1
+public static String getShortClassName(String className) {
+    if (className == null || className.length() == 0) {
+        return StringUtils.EMPTY;
+    }
+
+    // Handle array encoding
+    int arrayDepth = 0;
+    while (className.charAt(arrayDepth) == '[') {
+        arrayDepth++;
+    }
+
+    // Strip Object type encoding
+    if (arrayDepth > 0) {
+        if (className.charAt(arrayDepth) == 'L' && className.endsWith(";")) {
+            className = className.substring(arrayDepth + 1, className.length() - 1);
+        } else {
+            className = className.substring(arrayDepth);
+            switch (className.charAt(0)) {
+                case 'Z': className = "boolean"; break;
+                case 'B': className = "byte"; break;
+                case 'C': className = "char"; break;
+                case 'D': className = "double"; break;
+                case 'F': className = "float"; break;
+                case 'I': className = "int"; break;
+                case 'J': className = "long"; break;
+                case 'S': className = "short"; break;
+                default: throw new IllegalArgumentException("Unknown type: " + className);
+            }
+        }
+    }
+
+    int lastDotIdx = className.lastIndexOf(PACKAGE_SEPARATOR_CHAR);
+    int innerIdx = className.indexOf(INNER_CLASS_SEPARATOR_CHAR, lastDotIdx == -1 ? 0 : lastDotIdx + 1);
+    String out = className.substring(lastDotIdx + 1);
+    if (innerIdx != -1) {
+        out = out.replace(INNER_CLASS_SEPARATOR_CHAR, PACKAGE_SEPARATOR_CHAR);
+    }
+
+    // Add array notation back
+    while (arrayDepth-- > 0) {
+        out += "[]";
+    }
+    return out;
+}
+
+
+### Fixed Method 2
+public static String getPackageName(String className) {
+    if (className == null || className.isEmpty()) {
+        return StringUtils.EMPTY;
+    }
+
+    // Handle array class names
+    while (className.startsWith("[")) {
+        className = className.substring(1);
+    }
+    // Handle object type encoding 'L...;' for arrays
+    if (className.startsWith("L") && className.endsWith(";")) {
+        className = className.substring(1, className.length() - 1);
+    }
+
+    // Validate className after stripping
+    if (className.isEmpty() || className.contains("[")) {
+        // Malformed name or still an array type
+        return StringUtils.EMPTY;
+    }
+
+    int i = className.lastIndexOf(PACKAGE_SEPARATOR_CHAR);
+    if (i == -1) {
+        return StringUtils.EMPTY;
+    }
+    return className.substring(0, i);
+}

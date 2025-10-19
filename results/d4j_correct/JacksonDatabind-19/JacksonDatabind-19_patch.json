@@ -1,0 +1,38 @@
+{
+    "bug_id": "JacksonDatabind-19",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-19_1756843517",
+    "patches": [
+        {
+            "hypothesis": "The method _mapType is incorrectly handling the type parameters for Map classes, specifically for java.util.Properties which is a subclass of Hashtable and implements Map<Object, Object>. The method should treat Properties as a special case, where both key and value types should be String, not Object.",
+            "changes": "- if (typeParams == null) {\n+ if (rawClass == Properties.class) {\n+     return MapType.construct(rawClass, _constructType(String.class, null), _constructType(String.class, null));\n+ }\n+ if (typeParams == null) {",
+            "fixed_method": "private JavaType _mapType(Class<?> rawClass) {\n    // 28-May-2015, tatu: Properties are special, as per [databind#810]\n    if (rawClass == Properties.class) {\n        return MapType.construct(rawClass, _constructType(String.class, null), _constructType(String.class, null));\n    }\n    JavaType[] typeParams = findTypeParameters(rawClass, Map.class);\n    // ok to have no types (\"raw\")\n    if (typeParams == null) {\n        return MapType.construct(rawClass, _unknownType(), _unknownType());\n    }\n    // but exactly 2 types if any found\n    if (typeParams.length != 2) {\n        throw new IllegalArgumentException(\"Strange Map type \"+rawClass.getName()+\": can not determine type parameters\");\n    }\n    return MapType.construct(rawClass, typeParams[0], typeParams[1]);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,16 @@\n+private JavaType _mapType(Class<?> rawClass) {\n+    // 28-May-2015, tatu: Properties are special, as per [databind#810]\n+    if (rawClass == Properties.class) {\n+        return MapType.construct(rawClass, _constructType(String.class, null), _constructType(String.class, null));\n+    }\n+    JavaType[] typeParams = findTypeParameters(rawClass, Map.class);\n+    // ok to have no types (\"raw\")\n+    if (typeParams == null) {\n+        return MapType.construct(rawClass, _unknownType(), _unknownType());\n+    }\n+    // but exactly 2 types if any found\n+    if (typeParams.length != 2) {\n+        throw new IllegalArgumentException(\"Strange Map type \"+rawClass.getName()+\": can not determine type parameters\");\n+    }\n+    return MapType.construct(rawClass, typeParams[0], typeParams[1]);\n+}",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java",
+            "method_name": "_mapType",
+            "class_name": "TypeFactory",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                1018,
+                1019,
+                1020,
+                1021,
+                1022,
+                1023,
+                1024,
+                1025,
+                1026,
+                1027,
+                1028,
+                1029,
+                1030,
+                1031
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-19_trace.json"
+}

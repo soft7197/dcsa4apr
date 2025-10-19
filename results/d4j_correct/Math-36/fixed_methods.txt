@@ -1,0 +1,43 @@
+### Fixed Method 1
+@Override
+    public float floatValue() {
+        if (denominator.equals(BigInteger.ZERO)) {
+            throw new ArithmeticException("Division by zero");
+        }
+        BigDecimal numeratorDecimal = new BigDecimal(numerator);
+        BigDecimal denominatorDecimal = new BigDecimal(denominator);
+        try {
+            BigDecimal resultDecimal = numeratorDecimal.divide(denominatorDecimal, 10, BigDecimal.ROUND_HALF_EVEN);
+            return resultDecimal.floatValue();
+        } catch (ArithmeticException e) {
+            throw new ArithmeticException("Error during division: " + e.getMessage());
+        }
+    }
+
+
+### Fixed Method 2
+@Override
+    public double doubleValue() {
+        // Convert numerator and denominator to double
+        double num = numerator.doubleValue();
+        double den = denominator.doubleValue();
+
+        // Check for zero denominator
+        if (den == 0.0) {
+            throw new ArithmeticException("Division by zero");
+        }
+
+        // If either conversion results in Infinity, scale them down
+        if (Double.isInfinite(num) || Double.isInfinite(den)) {
+            int scale = Math.max(numerator.bitLength(), denominator.bitLength()) - Double.MAX_EXPONENT;
+            if (scale > 0) {
+                BigInteger scaledNumerator = numerator.shiftRight(scale);
+                BigInteger scaledDenominator = denominator.shiftRight(scale);
+                num = scaledNumerator.doubleValue();
+                den = scaledDenominator.doubleValue();
+            }
+        }
+
+        // Return the result of division
+        return num / den;
+    }

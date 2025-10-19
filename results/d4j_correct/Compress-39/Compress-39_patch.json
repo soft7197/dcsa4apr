@@ -1,0 +1,40 @@
+{
+    "bug_id": "Compress-39",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Compress-39_1757255955",
+    "patches": [
+        {
+            "hypothesis": "The method does not limit the output string to 255 characters. The logic for trimming the resulting string to a maximum of 255 characters is missing. Adding a check to truncate the StringBuilder output to 255 characters will fix the issue.",
+            "fixed_method": "public static String sanitize(String s) {\n    final char[] chars = s.toCharArray();\n    final int len = chars.length;\n    final StringBuilder sb = new StringBuilder();\n    for (int i = 0; i < len; i++) {\n        final char c = chars[i];\n        if (!Character.isISOControl(c)) {\n            Character.UnicodeBlock block = Character.UnicodeBlock.of(c);\n            if (block != null && block != Character.UnicodeBlock.SPECIALS) {\n                sb.append(c);\n                continue;\n            }\n        }\n        sb.append('?');\n    }\n    if (sb.length() > 255) {\n        sb.setLength(252);\n        sb.append(\"...\");\n    }\n    return sb.toString();\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,32 +1,21 @@\n-/**\n-* Returns a \"sanitized\" version of the string given as arguments,\n-* where sanitized means non-printable characters have been\n-* replaced with a question mark and the outcome is not longer\n-* than 255 chars.\n-*\n-* <p>This method is used to clean up file names when they are\n-* used in exception messages as they may end up in log files or\n-* as console output and may have been read from a corrupted\n-* input.</p>\n-*\n-* @param s the string to sanitize\n-* @return a sanitized version of the argument\n-* @since Compress 1.12\n-*/\n public static String sanitize(String s) {\n-        final char[] chars = s.toCharArray();\n-        final int len = chars.length;\n-        final StringBuilder sb = new StringBuilder();\n-        for (int i = 0; i < len; i++) {\n-            final char c = chars[i];\n-            if (!Character.isISOControl(c)) {\n-                Character.UnicodeBlock block = Character.UnicodeBlock.of(c);\n-                if (block != null && block != Character.UnicodeBlock.SPECIALS) {\n-                    sb.append(c);\n-                    continue;\n-                }\n+    final char[] chars = s.toCharArray();\n+    final int len = chars.length;\n+    final StringBuilder sb = new StringBuilder();\n+    for (int i = 0; i < len; i++) {\n+        final char c = chars[i];\n+        if (!Character.isISOControl(c)) {\n+            Character.UnicodeBlock block = Character.UnicodeBlock.of(c);\n+            if (block != null && block != Character.UnicodeBlock.SPECIALS) {\n+                sb.append(c);\n+                continue;\n             }\n-            sb.append('?');\n         }\n-        return sb.toString();\n-    }+        sb.append('?');\n+    }\n+    if (sb.length() > 255) {\n+        sb.setLength(252);\n+        sb.append(\"...\");\n+    }\n+    return sb.toString();\n+}",
+            "file_path": "src/main/java/org/apache/commons/compress/utils/ArchiveUtils.java",
+            "method_name": "sanitize",
+            "class_name": "ArchiveUtils",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                272,
+                273,
+                274,
+                275,
+                276,
+                277,
+                278,
+                279,
+                280,
+                281,
+                282,
+                283,
+                284,
+                285,
+                286,
+                287,
+                288
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Compress-39_trace.json"
+}

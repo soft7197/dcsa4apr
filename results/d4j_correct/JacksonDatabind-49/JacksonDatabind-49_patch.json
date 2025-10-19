@@ -1,0 +1,31 @@
+{
+    "bug_id": "JacksonDatabind-49",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-49_1756721041",
+    "patches": [
+        {
+            "hypothesis": "The method generateId is missing a check for an existing ID before generating a new one. This can lead to unresolved references, especially when the ID should be reused for objects that are always serialized as references. The bug is likely due to always generating a new ID instead of using an existing one if available.",
+            "changes": "- id = generator.generateId(forPojo);\n+ if (id == null) {\n+     id = generator.generateId(forPojo);\n+ }\n",
+            "fixed_method": "public Object generateId(Object forPojo) {\n    // 04-Jun-2016, tatu: As per [databind#1255], need to consider possibility of\n    //    id being generated for \"alwaysAsId\", but not being written as POJO; regardless,\n    //    need to use existing id if there is one:\n    if (id == null) {\n        id = generator.generateId(forPojo);\n    }\n    return id;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,9 @@\n+public Object generateId(Object forPojo) {\n+    // 04-Jun-2016, tatu: As per [databind#1255], need to consider possibility of\n+    //    id being generated for \"alwaysAsId\", but not being written as POJO; regardless,\n+    //    need to use existing id if there is one:\n+    if (id == null) {\n+        id = generator.generateId(forPojo);\n+    }\n+    return id;\n+}",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/impl/WritableObjectId.java",
+            "method_name": "generateId",
+            "class_name": "WritableObjectId",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                52
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-49_trace.json"
+}

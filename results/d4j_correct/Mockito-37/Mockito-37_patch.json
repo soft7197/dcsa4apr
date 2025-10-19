@@ -1,0 +1,37 @@
+{
+    "bug_id": "Mockito-37",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Mockito-37_1757254868",
+    "patches": [
+        {
+            "hypothesis": "The test failures suggest that the real method call validation on interfaces is not correctly handled in the `validate` method. When the `CallsRealMethods` answer is used on an interface, there should be a validation step to catch this case and throw a MockitoException, as real method calls on interfaces cannot be performed. The current method does not perform this check, leading to unhandled scenarios in the given tests.",
+            "fixed_method": "public void validate(Answer<?> answer, Invocation invocation) {\n    if (answer instanceof ThrowsException) {\n        validateException((ThrowsException) answer, invocation);\n    }\n    \n    if (answer instanceof Returns) {\n        validateReturnValue((Returns) answer, invocation);\n    }\n    \n    if (answer instanceof DoesNothing) {\n        validateDoNothing((DoesNothing) answer, invocation);\n    }\n    \n    // Added validation for CallsRealMethods case\n    if (answer instanceof CallsRealMethods) {\n        if (invocation.getMethod().getDeclaringClass().isInterface()) {\n            reporter.cannotCallRealMethodOnInterface();\n        }\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,18 +1,20 @@\n-/*\n-* Copyright (c) 2007 Mockito contributors\n-* This program is made available under the terms of the MIT License.\n-*/\n public void validate(Answer<?> answer, Invocation invocation) {\n-        if (answer instanceof ThrowsException) {\n-            validateException((ThrowsException) answer, invocation);\n+    if (answer instanceof ThrowsException) {\n+        validateException((ThrowsException) answer, invocation);\n+    }\n+    \n+    if (answer instanceof Returns) {\n+        validateReturnValue((Returns) answer, invocation);\n+    }\n+    \n+    if (answer instanceof DoesNothing) {\n+        validateDoNothing((DoesNothing) answer, invocation);\n+    }\n+    \n+    // Added validation for CallsRealMethods case\n+    if (answer instanceof CallsRealMethods) {\n+        if (invocation.getMethod().getDeclaringClass().isInterface()) {\n+            reporter.cannotCallRealMethodOnInterface();\n         }\n-        \n-        if (answer instanceof Returns) {\n-            validateReturnValue((Returns) answer, invocation);\n-        }\n-        \n-        if (answer instanceof DoesNothing) {\n-            validateDoNothing((DoesNothing) answer, invocation);\n-        }\n-        \n-    }+    }\n+}",
+            "file_path": "src/org/mockito/internal/stubbing/answers/AnswersValidator.java",
+            "method_name": "validate",
+            "class_name": "AnswersValidator",
+            "iteration": 3,
+            "is_multi_method": false,
+            "line_numbers": [
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28
+            ]
+        }
+    ],
+    "iterations": 3,
+    "monitor_file": "traces/Mockito-37_trace.json"
+}

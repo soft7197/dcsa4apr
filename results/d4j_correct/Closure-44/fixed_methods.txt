@@ -1,0 +1,22 @@
+### Fixed Method 1
+// Add a ';' if we need to.
+void add(String newcode) {
+    maybeEndStatement();
+
+    if (newcode.length() == 0) {
+        return;
+    }
+
+    char c = newcode.charAt(0);
+    char lastChar = getLastChar();
+    // Check if we need a space or if we're in a situation with slashes
+    if ((isWordChar(c) || c == '\\') && isWordChar(lastChar)) {
+        // need space to separate. This is not pretty printing.
+        append(" ");
+    } else if (c == '/' && lastChar == '/') {
+        // Append space if it's a REGEXP DIV REGEXP case
+        append(" ");
+    }
+
+    append(newcode);
+}

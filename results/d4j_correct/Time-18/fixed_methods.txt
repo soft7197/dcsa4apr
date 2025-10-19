@@ -1,0 +1,37 @@
+Correct patch indices: 4, 5
+The last correct patch:
+
+
+public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth,
+                              int hourOfDay, int minuteOfHour,
+                              int secondOfMinute, int millisOfSecond)
+    throws IllegalArgumentException
+{
+    Chronology base;
+    if ((base = getBase()) != null) {
+        return base.getDateTimeMillis
+            (year, monthOfYear, dayOfMonth,
+             hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
+    }
+
+    // First, check if the date is in the Julian calendar and valid.
+    long julianInstant = iJulianChronology.getDateTimeMillis
+            (year, monthOfYear, dayOfMonth,
+             hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
+    if (julianInstant < iCutoverMillis) {
+        // Valid Julian date before cutover
+        return julianInstant;
+    }
+
+    // If not valid in Julian, it must be checked as Gregorian.
+    long gregorianInstant = iGregorianChronology.getDateTimeMillis
+            (year, monthOfYear, dayOfMonth,
+             hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);
+    if (gregorianInstant >= iCutoverMillis) {
+        // Valid Gregorian date after or exactly on cutover
+        return gregorianInstant;
+    }
+
+    // If neither, the date is in the illegal gap between the calendars
+    throw new IllegalArgumentException("Specified date does not exist");
+}

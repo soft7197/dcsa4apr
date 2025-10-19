@@ -1,0 +1,32 @@
+{
+    "bug_id": "Jsoup-26",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-26_1756721169",
+    "patches": [
+        {
+            "hypothesis": "The NullPointerException is likely caused by the dirtyDocument body being null, especially when handling framesets which might not have a body element. The method should check if the body exists before trying to copy its nodes.",
+            "changes": "- copySafeNodes(dirtyDocument.body(), clean.body());\n+ if (dirtyDocument.body() != null) {\n+     copySafeNodes(dirtyDocument.body(), clean.body());\n+ }",
+            "fixed_method": "public Document clean(Document dirtyDocument) {\n    Validate.notNull(dirtyDocument);\n\n    Document clean = Document.createShell(dirtyDocument.baseUri());\n    if (dirtyDocument.body() != null) {\n        copySafeNodes(dirtyDocument.body(), clean.body());\n    }\n\n    return clean;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,10 @@\n+public Document clean(Document dirtyDocument) {\n+    Validate.notNull(dirtyDocument);\n+\n+    Document clean = Document.createShell(dirtyDocument.baseUri());\n+    if (dirtyDocument.body() != null) {\n+        copySafeNodes(dirtyDocument.body(), clean.body());\n+    }\n+\n+    return clean;\n+}",
+            "file_path": "src/main/java/org/jsoup/safety/Cleaner.java",
+            "method_name": "clean",
+            "class_name": "Cleaner",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Jsoup-26_trace.json"
+}

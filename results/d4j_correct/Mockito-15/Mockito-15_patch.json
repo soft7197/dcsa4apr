@@ -1,0 +1,46 @@
+{
+    "bug_id": "Mockito-15",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Mockito-15_1757255413",
+    "patches": [
+        {
+            "hypothesis": "The test is likely failing because `filterCandidate` method does not attempt to inject using a property setter before directly setting the field. This suggests that the intended behavior where the property setter should be tried first is not being executed. The fix is to try setting the field using a setter method (if available) before falling back to direct field access when injecting the dependency.",
+            "fixed_method": "public OngoingInjecter filterCandidate(final Collection<Object> mocks, final Field field, final Object fieldInstance) {\n    if (mocks.size() == 1) {\n        final Object matchingMock = mocks.iterator().next();\n\n        return new OngoingInjecter() {\n            public boolean thenInject() {\n                try {\n                    // Attempt to inject using property setter first\n                    String setterName = \"set\" + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1);\n                    try {\n                        fieldInstance.getClass().getMethod(setterName, field.getType()).invoke(fieldInstance, matchingMock);\n                        return true;\n                    } catch (NoSuchMethodException ignored) {\n                        // If no setter found, fall back to field injection\n                    }\n                    new FieldSetter(fieldInstance, field).set(matchingMock);\n                    return true;\n                } catch (Exception e) {\n                    throw new MockitoException(\"Problems injecting dependency in \" + field.getName(), e);\n                }\n            }\n        };\n    }\n\n    return new OngoingInjecter() {\n        public boolean thenInject() {\n            return false;\n        }\n    };\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,31 +1,30 @@\n-/**\n-* This node returns an actual injecter which will be either :\n-*\n-* <ul>\n-* <li>an {@link OngoingInjecter} that do nothing if a candidate couldn't be found</li>\n-* <li>an {@link OngoingInjecter} that will try to inject the candidate trying first the property setter then if not possible try the field access</li>\n-* </ul>\n-*/\n public OngoingInjecter filterCandidate(final Collection<Object> mocks, final Field field, final Object fieldInstance) {\n-        if(mocks.size() == 1) {\n-            final Object matchingMock = mocks.iterator().next();\n-\n-            return new OngoingInjecter() {\n-                public boolean thenInject() {\n-                    try {\n-                            new FieldSetter(fieldInstance, field).set(matchingMock);\n-                    } catch (Exception e) {\n-                        throw new MockitoException(\"Problems injecting dependency in \" + field.getName(), e);\n-                    }\n-                    return true;\n-                }\n-            };\n-        }\n+    if (mocks.size() == 1) {\n+        final Object matchingMock = mocks.iterator().next();\n \n         return new OngoingInjecter() {\n             public boolean thenInject() {\n-                return false;\n+                try {\n+                    // Attempt to inject using property setter first\n+                    String setterName = \"set\" + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1);\n+                    try {\n+                        fieldInstance.getClass().getMethod(setterName, field.getType()).invoke(fieldInstance, matchingMock);\n+                        return true;\n+                    } catch (NoSuchMethodException ignored) {\n+                        // If no setter found, fall back to field injection\n+                    }\n+                    new FieldSetter(fieldInstance, field).set(matchingMock);\n+                    return true;\n+                } catch (Exception e) {\n+                    throw new MockitoException(\"Problems injecting dependency in \" + field.getName(), e);\n+                }\n             }\n         };\n+    }\n \n-    }+    return new OngoingInjecter() {\n+        public boolean thenInject() {\n+            return false;\n+        }\n+    };\n+}",
+            "file_path": "src/org/mockito/internal/configuration/injection/FinalMockCandidateFilter.java",
+            "method_name": "thenInject",
+            "class_name": "FinalMockCandidateFilter",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Mockito-15_trace.json"
+}

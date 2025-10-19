@@ -1,0 +1,19 @@
+Correct patch indices: 1, 2, 3, 7, 8, 9, 10
+The last correct patch:
+
+
+public T[] sample(int sampleSize) throws NotStrictlyPositiveException {
+    if (sampleSize <= 0) {
+        throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,
+                sampleSize);
+    }
+
+    @SuppressWarnings("unchecked")
+    final T[] out = (T[]) new Object[sampleSize];
+
+    for (int i = 0; i < sampleSize; i++) {
+        out[i] = sample();
+    }
+
+    return out;
+}

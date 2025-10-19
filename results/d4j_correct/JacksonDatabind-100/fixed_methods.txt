@@ -1,0 +1,29 @@
+### Fixed Method 1
+public byte[] getBinaryValue(Base64Variant b64variant) throws IOException, JsonParseException {
+    // Multiple possibilities...
+    JsonNode n = currentNode();
+    if (n != null) {
+        // If it's a TextNode, attempt to decode
+        if (n.isTextual()) {
+            String textValue = n.asText();
+            try {
+                return b64variant.decode(textValue);
+            } catch (IllegalArgumentException e) {
+                throw new JsonParseException(null, "Cannot access contents of TextNode as binary due to broken Base64 encoding: " + e.getMessage(), e);
+            }
+        }
+
+        byte[] data = n.binaryValue();
+        if (data != null) {
+            return data;
+        }
+        if (n.isPojo()) {
+            Object ob = ((POJONode) n).getPojo();
+            if (ob instanceof byte[]) {
+                return (byte[]) ob;
+            }
+        }
+    }
+    // otherwise return null to mark we have no binary content
+    return null;
+}

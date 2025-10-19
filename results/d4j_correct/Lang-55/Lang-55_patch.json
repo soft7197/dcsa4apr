@@ -1,0 +1,36 @@
+{
+    "bug_id": "Lang-55",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Lang-55_1756721390",
+    "patches": [
+        {
+            "hypothesis": "The issue is that when the stopwatch is stopped, the stop time is set without checking if the stopwatch was previously in a suspended state. When in a suspended state, the stop time should not be updated as it would incorrectly add the current time to the total elapsed time.",
+            "changes": [
+                "- stopTime = System.currentTimeMillis();",
+                "+ if (this.runningState == STATE_RUNNING) {",
+                "+     stopTime = System.currentTimeMillis();",
+                "+ }"
+            ],
+            "fixed_method": "public void stop() {\n    if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n        throw new IllegalStateException(\"Stopwatch is not running. \");\n    }\n    if (this.runningState == STATE_RUNNING) {\n        stopTime = System.currentTimeMillis();\n    }\n    this.runningState = STATE_STOPPED;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,9 @@\n+public void stop() {\n+    if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n+        throw new IllegalStateException(\"Stopwatch is not running. \");\n+    }\n+    if (this.runningState == STATE_RUNNING) {\n+        stopTime = System.currentTimeMillis();\n+    }\n+    this.runningState = STATE_STOPPED;\n+}",
+            "file_path": "src/java/org/apache/commons/lang/time/StopWatch.java",
+            "method_name": "stop",
+            "class_name": "StopWatch",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                114,
+                115,
+                116,
+                117,
+                118,
+                119,
+                120
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Lang-55_trace.json"
+}

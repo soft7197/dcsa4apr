@@ -1,0 +1,45 @@
+{
+    "bug_id": "Cli-27",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Cli-27_1756806488",
+    "patches": [
+        {
+            "hypothesis": "The bug is due to the fact that the `setSelected` method does not correctly handle the case where an option is selected using its long option name. The method currently only checks the short option name using `option.getOpt()`, which can be null if the option is defined using a long option name. This results in the `selected` variable not being set correctly, leading to the test failures.",
+            "changes": "- if (selected == null || selected.equals(option.getOpt()))\n+ if (selected == null || selected.equals(option.getOpt()) || selected.equals(option.getLongOpt()))",
+            "fixed_method": "public void setSelected(Option option) throws AlreadySelectedException\n{\n    if (option == null)\n    {\n        // reset the option previously selected\n        selected = null;\n        return;\n    }\n    \n    // if no option has already been selected or the \n    // same option is being reselected then set the\n    // selected member variable\n    if (selected == null || selected.equals(option.getOpt()) || selected.equals(option.getLongOpt()))\n    {\n        selected = option.getOpt() != null ? option.getOpt() : option.getLongOpt();\n    }\n    else\n    {\n        throw new AlreadySelectedException(this, option);\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,21 @@\n+public void setSelected(Option option) throws AlreadySelectedException\n+{\n+    if (option == null)\n+    {\n+        // reset the option previously selected\n+        selected = null;\n+        return;\n+    }\n+    \n+    // if no option has already been selected or the \n+    // same option is being reselected then set the\n+    // selected member variable\n+    if (selected == null || selected.equals(option.getOpt()) || selected.equals(option.getLongOpt()))\n+    {\n+        selected = option.getOpt() != null ? option.getOpt() : option.getLongOpt();\n+    }\n+    else\n+    {\n+        throw new AlreadySelectedException(this, option);\n+    }\n+}",
+            "file_path": "src/java/org/apache/commons/cli/OptionGroup.java",
+            "method_name": "setSelected",
+            "class_name": "OptionGroup",
+            "iteration": 3,
+            "is_multi_method": false,
+            "line_numbers": [
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106
+            ]
+        }
+    ],
+    "iterations": 3,
+    "monitor_file": "traces/Cli-27_trace.json"
+}

@@ -1,0 +1,40 @@
+{
+    "bug_id": "Chart-12",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Chart-12_1756719413",
+    "patches": [
+        {
+            "hypothesis": "The test fails because the dataset does not have the plot registered as a listener. When a plot is constructed with a dataset, it should register itself as a listener to the dataset to handle changes appropriately.",
+            "changes": "- this.dataset = dataset;\n+ setDataset(dataset);",
+            "fixed_method": "public MultiplePiePlot(CategoryDataset dataset) {\n    super();\n    setDataset(dataset);\n    PiePlot piePlot = new PiePlot(null);\n    this.pieChart = new JFreeChart(piePlot);\n    this.pieChart.removeLegend();\n    this.dataExtractOrder = TableOrder.BY_COLUMN;\n    this.pieChart.setBackgroundPaint(null);\n    TextTitle seriesTitle = new TextTitle(\"Series Title\",\n            new Font(\"SansSerif\", Font.BOLD, 12));\n    seriesTitle.setPosition(RectangleEdge.BOTTOM);\n    this.pieChart.setTitle(seriesTitle);\n    this.aggregatedItemsKey = \"Other\";\n    this.aggregatedItemsPaint = Color.lightGray;\n    this.sectionPaints = new HashMap();\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,16 @@\n+public MultiplePiePlot(CategoryDataset dataset) {\n+    super();\n+    setDataset(dataset);\n+    PiePlot piePlot = new PiePlot(null);\n+    this.pieChart = new JFreeChart(piePlot);\n+    this.pieChart.removeLegend();\n+    this.dataExtractOrder = TableOrder.BY_COLUMN;\n+    this.pieChart.setBackgroundPaint(null);\n+    TextTitle seriesTitle = new TextTitle(\"Series Title\",\n+            new Font(\"SansSerif\", Font.BOLD, 12));\n+    seriesTitle.setPosition(RectangleEdge.BOTTOM);\n+    this.pieChart.setTitle(seriesTitle);\n+    this.aggregatedItemsKey = \"Other\";\n+    this.aggregatedItemsPaint = Color.lightGray;\n+    this.sectionPaints = new HashMap();\n+}",
+            "file_path": "source/org/jfree/chart/plot/MultiplePiePlot.java",
+            "method_name": "MultiplePiePlot",
+            "class_name": "MultiplePiePlot",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                143,
+                144,
+                145,
+                146,
+                147,
+                148,
+                149,
+                150,
+                151,
+                152,
+                153,
+                154,
+                155,
+                156,
+                157,
+                158
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Chart-12_trace.json"
+}

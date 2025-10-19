@@ -1,0 +1,41 @@
+{
+    "bug_id": "Chart-19",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Chart-19_1756911955",
+    "patches": [
+        {
+            "hypothesis": "The method getRangeAxisIndex does not handle the case where the axis is null, which is not permitted according to the method's documentation. This can lead to unexpected behavior or errors when null is passed as an argument.",
+            "changes": "- if (axis == null) throw new IllegalArgumentException(\"Null 'axis' argument.\");",
+            "fixed_method": "public int getRangeAxisIndex(ValueAxis axis) {\n    if (axis == null) {\n        throw new IllegalArgumentException(\"Null 'axis' argument.\");\n    }\n    int result = this.rangeAxes.indexOf(axis);\n    if (result < 0) { // try the parent plot\n        Plot parent = getParent();\n        if (parent instanceof CategoryPlot) {\n            CategoryPlot p = (CategoryPlot) parent;\n            result = p.getRangeAxisIndex(axis);\n        }\n    }\n    return result;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,14 @@\n+public int getRangeAxisIndex(ValueAxis axis) {\n+    if (axis == null) {\n+        throw new IllegalArgumentException(\"Null 'axis' argument.\");\n+    }\n+    int result = this.rangeAxes.indexOf(axis);\n+    if (result < 0) { // try the parent plot\n+        Plot parent = getParent();\n+        if (parent instanceof CategoryPlot) {\n+            CategoryPlot p = (CategoryPlot) parent;\n+            result = p.getRangeAxisIndex(axis);\n+        }\n+    }\n+    return result;\n+}",
+            "file_path": "source/org/jfree/chart/plot/CategoryPlot.java",
+            "method_name": "getRangeAxisIndex",
+            "class_name": "CategoryPlot",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                972,
+                983
+            ]
+        },
+        {
+            "hypothesis": "The method getDomainAxisIndex is supposed to return the index of the specified axis in the domainAxes list. However, if the axis is not found, it should return -1. The current implementation already uses indexOf, which returns -1 if the element is not found. The issue might be related to the handling of null values or the initialization of the domainAxes list.",
+            "changes": "No changes are needed to the method itself, but ensure that domainAxes is properly initialized and null checks are in place.",
+            "fixed_method": "public int getDomainAxisIndex(CategoryAxis axis) {\n    if (axis == null) {\n        throw new IllegalArgumentException(\"Null 'axis' argument.\");\n    }\n    return this.domainAxes.indexOf(axis);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,6 @@\n+public int getDomainAxisIndex(CategoryAxis axis) {\n+    if (axis == null) {\n+        throw new IllegalArgumentException(\"Null 'axis' argument.\");\n+    }\n+    return this.domainAxes.indexOf(axis);\n+}",
+            "file_path": "source/org/jfree/chart/plot/CategoryPlot.java",
+            "method_name": "getDomainAxisIndex",
+            "class_name": "CategoryPlot",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                697,
+                700
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Chart-19_trace.json"
+}

@@ -1,0 +1,29 @@
+{
+    "bug_id": "Csv-5",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Csv-5_1756838854",
+    "patches": [
+        {
+            "hypothesis": "The bug is caused by the method appending a 'null' string when the record separator is null. This results in an incorrect CSV format where 'null' appears as a record separator. The fix involves checking if the record separator is null and avoiding appending it if it is.",
+            "changes": "- out.append(recordSeparator);\n+ if (recordSeparator != null) {\n+     out.append(recordSeparator);\n+ }",
+            "fixed_method": "public void println() throws IOException {\n    final String recordSeparator = format.getRecordSeparator();\n    if (recordSeparator != null) {\n        out.append(recordSeparator);\n    }\n    newRecord = true;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,7 @@\n+public void println() throws IOException {\n+    final String recordSeparator = format.getRecordSeparator();\n+    if (recordSeparator != null) {\n+        out.append(recordSeparator);\n+    }\n+    newRecord = true;\n+}",
+            "file_path": "src/main/java/org/apache/commons/csv/CSVPrinter.java",
+            "method_name": "println",
+            "class_name": "CSVPrinter",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                323,
+                324,
+                325,
+                326,
+                327
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Csv-5_trace.json"
+}

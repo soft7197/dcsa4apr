@@ -1,0 +1,36 @@
+{
+    "bug_id": "Gson-11",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Gson-11_1756720878",
+    "patches": [
+        {
+            "hypothesis": "The method is failing because it expects a JSON token of type NUMBER, but the test is providing a STRING that represents a number. The method should be able to handle STRING tokens that can be parsed as numbers.",
+            "changes": "- case NUMBER:\n+ case STRING:\n+     try {\n+         return new LazilyParsedNumber(in.nextString());\n+     } catch (NumberFormatException e) {\n+         throw new JsonSyntaxException(\"Expecting number, got: \" + jsonToken, e);\n+     }\n+ case NUMBER:",
+            "fixed_method": "public Number read(JsonReader in) throws IOException {\n  JsonToken jsonToken = in.peek();\n  switch (jsonToken) {\n  case NULL:\n    in.nextNull();\n    return null;\n  case STRING:\n    try {\n        return new LazilyParsedNumber(in.nextString());\n    } catch (NumberFormatException e) {\n        throw new JsonSyntaxException(\"Expecting number, got: \" + jsonToken, e);\n    }\n  case NUMBER:\n    return new LazilyParsedNumber(in.nextString());\n  default:\n    throw new JsonSyntaxException(\"Expecting number, got: \" + jsonToken);\n  }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,18 @@\n+public Number read(JsonReader in) throws IOException {\n+  JsonToken jsonToken = in.peek();\n+  switch (jsonToken) {\n+  case NULL:\n+    in.nextNull();\n+    return null;\n+  case STRING:\n+    try {\n+        return new LazilyParsedNumber(in.nextString());\n+    } catch (NumberFormatException e) {\n+        throw new JsonSyntaxException(\"Expecting number, got: \" + jsonToken, e);\n+    }\n+  case NUMBER:\n+    return new LazilyParsedNumber(in.nextString());\n+  default:\n+    throw new JsonSyntaxException(\"Expecting number, got: \" + jsonToken);\n+  }\n+}",
+            "file_path": "gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java",
+            "method_name": "read",
+            "class_name": "TypeAdapters",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                364,
+                365,
+                366,
+                367,
+                368,
+                369,
+                370,
+                371,
+                372,
+                373,
+                374,
+                375
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Gson-11_trace.json"
+}

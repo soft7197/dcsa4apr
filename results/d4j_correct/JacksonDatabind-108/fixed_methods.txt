@@ -1,0 +1,11 @@
+Correct patch indices: 3, 8
+The last correct patch:
+
+
+@Override
+    public <T extends TreeNode> T readTree(JsonParser p) throws IOException {
+        if (p.isClosed() || p.getCurrentToken() == null && p.nextToken() == null) {
+            return null;
+        }
+        return (T) _bindAsTree(p);
+    }

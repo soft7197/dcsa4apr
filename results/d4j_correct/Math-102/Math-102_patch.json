@@ -1,0 +1,42 @@
+{
+    "bug_id": "Math-102",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-102_1756865643",
+    "patches": [
+        {
+            "hypothesis": "The bug is due to the chi-square test statistic calculation not accounting for the scaling of the expected frequencies to match the total of observed frequencies. The expected frequencies should be scaled to ensure the sum of expected frequencies equals the sum of observed frequencies before calculating the chi-square statistic.",
+            "changes": "Added logic to scale the expected frequencies to match the sum of observed frequencies before computing the chi-square statistic.",
+            "fixed_method": "public double chiSquare(double[] expected, long[] observed) throws IllegalArgumentException {\n    if ((expected.length < 2) || (expected.length != observed.length)) {\n        throw new IllegalArgumentException(\n                \"observed, expected array lengths incorrect\");\n    }\n    if (!isPositive(expected) || !isNonNegative(observed)) {\n        throw new IllegalArgumentException(\n            \"observed counts must be non-negative and expected counts must be postive\");\n    }\n    double sumObserved = 0.0;\n    double sumExpected = 0.0;\n    for (long obs : observed) {\n        sumObserved += obs;\n    }\n    for (double exp : expected) {\n        sumExpected += exp;\n    }\n    double ratio = sumObserved / sumExpected;\n    double sumSq = 0.0d;\n    double dev = 0.0d;\n    for (int i = 0; i < observed.length; i++) {\n        double scaledExpected = expected[i] * ratio;\n        dev = ((double) observed[i] - scaledExpected);\n        sumSq += dev * dev / scaledExpected;\n    }\n    return sumSq;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,27 @@\n+public double chiSquare(double[] expected, long[] observed) throws IllegalArgumentException {\n+    if ((expected.length < 2) || (expected.length != observed.length)) {\n+        throw new IllegalArgumentException(\n+                \"observed, expected array lengths incorrect\");\n+    }\n+    if (!isPositive(expected) || !isNonNegative(observed)) {\n+        throw new IllegalArgumentException(\n+            \"observed counts must be non-negative and expected counts must be postive\");\n+    }\n+    double sumObserved = 0.0;\n+    double sumExpected = 0.0;\n+    for (long obs : observed) {\n+        sumObserved += obs;\n+    }\n+    for (double exp : expected) {\n+        sumExpected += exp;\n+    }\n+    double ratio = sumObserved / sumExpected;\n+    double sumSq = 0.0d;\n+    double dev = 0.0d;\n+    for (int i = 0; i < observed.length; i++) {\n+        double scaledExpected = expected[i] * ratio;\n+        dev = ((double) observed[i] - scaledExpected);\n+        sumSq += dev * dev / scaledExpected;\n+    }\n+    return sumSq;\n+}",
+            "file_path": "src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java",
+            "method_name": "chiSquare",
+            "class_name": "ChiSquareTestImpl",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70,
+                71,
+                72,
+                73,
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-102_trace.json"
+}

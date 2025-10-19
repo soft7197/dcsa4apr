@@ -1,0 +1,44 @@
+{
+    "bug_id": "Jsoup-77",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-77_1757177657",
+    "patches": [
+        {
+            "hypothesis": "The method is not properly handling the case where elements with different tag cases exist in the stack. The pop operation should stop at the first occurrence of the element name regardless of case, but currently, it considers exact matches only. This causes mismatched HTML structure when tag cases don't align.",
+            "fixed_method": "private void popStackToClose(Token.EndTag endTag) {\n    String elName = endTag.name().toLowerCase();\n    Element firstFound = null;\n\n    for (int pos = stack.size() - 1; pos >= 0; pos--) {\n        Element next = stack.get(pos);\n        if (next.nodeName().equalsIgnoreCase(elName)) {  // Use equalsIgnoreCase to match tag names ignoring case\n            firstFound = next;\n            break;\n        }\n    }\n    if (firstFound == null)\n        return; // not found, skip\n\n    for (int pos = stack.size() - 1; pos >= 0; pos--) {\n        Element next = stack.get(pos);\n        stack.remove(pos);\n        if (next == firstFound)\n            break;\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,16 +1,10 @@\n-/**\n-* If the stack contains an element with this tag's name, pop up the stack to remove the first occurrence. If not\n-* found, skips.\n-*\n-* @param endTag tag to close\n-*/\n private void popStackToClose(Token.EndTag endTag) {\n-    String elName = endTag.name();\n+    String elName = endTag.name().toLowerCase();\n     Element firstFound = null;\n \n-    for (int pos = stack.size() -1; pos >= 0; pos--) {\n+    for (int pos = stack.size() - 1; pos >= 0; pos--) {\n         Element next = stack.get(pos);\n-        if (next.nodeName().equals(elName)) {\n+        if (next.nodeName().equalsIgnoreCase(elName)) {  // Use equalsIgnoreCase to match tag names ignoring case\n             firstFound = next;\n             break;\n         }\n@@ -18,7 +12,7 @@\n     if (firstFound == null)\n         return; // not found, skip\n \n-    for (int pos = stack.size() -1; pos >= 0; pos--) {\n+    for (int pos = stack.size() - 1; pos >= 0; pos--) {\n         Element next = stack.get(pos);\n         stack.remove(pos);\n         if (next == firstFound)\n",
+            "file_path": "src/main/java/org/jsoup/parser/XmlTreeBuilder.java",
+            "method_name": "popStackToClose",
+            "class_name": "XmlTreeBuilder",
+            "iteration": 2,
+            "is_multi_method": false,
+            "line_numbers": [
+                116,
+                117,
+                118,
+                119,
+                120,
+                121,
+                122,
+                123,
+                124,
+                125,
+                126,
+                127,
+                128,
+                129,
+                130,
+                131,
+                132,
+                133,
+                134,
+                135,
+                136
+            ]
+        }
+    ],
+    "iterations": 2,
+    "monitor_file": "traces/Jsoup-77_trace.json"
+}

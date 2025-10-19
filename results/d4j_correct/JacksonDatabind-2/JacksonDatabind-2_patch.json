@@ -1,0 +1,39 @@
+{
+    "bug_id": "JacksonDatabind-2",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-2_1757272666",
+    "patches": [
+        {
+            "hypothesis": "The issue arises because both writeObject() and writeTree() methods handle the serialization of objects and trees as embedded objects using JsonToken.VALUE_EMBEDDED_OBJECT, without considering whether they should be serialized as JSON objects. This makes the conversion of POJOs to JSON nodes lose their object structure, which then fails the test that checks for proper JSON serialization. To fix this, we should use the configured ObjectCodec to serialize objects to JSON nodes as expected when available, falling back to embedding the object if the codec is not present.",
+            "methods": [
+                {
+                    "method_name": "writeObject",
+                    "fixed_method": "public void writeObject(Object value) throws IOException {\n    if (value == null) {\n        _append(JsonToken.VALUE_NULL);\n        return;\n    }\n    if (_objectCodec != null) {\n        _objectCodec.writeValue(this, value);\n    } else {\n        _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);\n    }\n}",
+                    "diff": "--- original\n+++ fixed\n@@ -1,10 +1,11 @@\n-\n-    @Override\n-    public void writeObject(Object value) throws IOException\n-    {\n-            _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);\n-            /* 28-May-2014, tatu: Tricky choice here; if no codec, should we\n-             *   err out, or just embed? For now, do latter.\n-             */\n-//          throw new JsonMappingException(\"No ObjectCodec configured for TokenBuffer, writeObject() called\");\n+public void writeObject(Object value) throws IOException {\n+    if (value == null) {\n+        _append(JsonToken.VALUE_NULL);\n+        return;\n     }\n+    if (_objectCodec != null) {\n+        _objectCodec.writeValue(this, value);\n+    } else {\n+        _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);\n+    }\n+}",
+                    "line_numbers": [
+                        780,
+                        789
+                    ],
+                    "file_path": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java"
+                },
+                {
+                    "method_name": "writeTree",
+                    "fixed_method": "public void writeTree(TreeNode node) throws IOException {\n    if (node == null) {\n        _append(JsonToken.VALUE_NULL);\n        return;\n    }\n    if (_objectCodec != null) {\n        _objectCodec.writeTree(this, node);\n    } else {\n        _append(JsonToken.VALUE_EMBEDDED_OBJECT, node);\n    }\n}",
+                    "diff": "--- original\n+++ fixed\n@@ -1,8 +1,11 @@\n-\n-    @Override\n-    public void writeTree(TreeNode node) throws IOException\n-    {\n-\n-            // as with 'writeObject()', is codec optional?\n-            _append(JsonToken.VALUE_EMBEDDED_OBJECT, node);\n+public void writeTree(TreeNode node) throws IOException {\n+    if (node == null) {\n+        _append(JsonToken.VALUE_NULL);\n+        return;\n     }\n+    if (_objectCodec != null) {\n+        _objectCodec.writeTree(this, node);\n+    } else {\n+        _append(JsonToken.VALUE_EMBEDDED_OBJECT, node);\n+    }\n+}",
+                    "line_numbers": [
+                        790,
+                        797
+                    ],
+                    "file_path": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java"
+                }
+            ],
+            "is_multi_method": true,
+            "coordination_notes": "",
+            "methods_count": 2
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-2_trace.json"
+}

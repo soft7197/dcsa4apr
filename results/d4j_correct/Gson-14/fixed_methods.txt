@@ -1,0 +1,20 @@
+### Fixed Method 1
+public static WildcardType subtypeOf(Type bound) {
+    if (bound instanceof WildcardType) {
+        WildcardType wildcardType = (WildcardType) bound;
+        return new WildcardTypeImpl(wildcardType.getUpperBounds(), EMPTY_TYPE_ARRAY);
+    }
+    Type[] upperBounds = new Type[] { bound };
+    return new WildcardTypeImpl(upperBounds, EMPTY_TYPE_ARRAY);
+}
+
+
+### Fixed Method 2
+public static WildcardType supertypeOf(Type bound) {
+    if (bound instanceof WildcardType) {
+        WildcardType wildcardType = (WildcardType) bound;
+        return new WildcardTypeImpl(new Type[] { Object.class }, wildcardType.getLowerBounds());
+    }
+    Type[] lowerBounds = new Type[] { bound };
+    return new WildcardTypeImpl(new Type[] { Object.class }, lowerBounds);
+}

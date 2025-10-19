@@ -1,0 +1,21 @@
+### Fixed Method 1
+public Date read(JsonReader in) throws IOException {
+  JsonToken token = in.peek();
+  if (token == JsonToken.NULL) {
+    in.nextNull();
+    return null; // Properly handle null value
+  }
+  if (token != JsonToken.STRING) {
+    throw new IllegalStateException("Unexpected token: " + token);
+  }
+  Date date = deserializeToDate(in.nextString());
+  if (dateType == Date.class) {
+    return date;
+  } else if (dateType == Timestamp.class) {
+    return new Timestamp(date.getTime());
+  } else if (dateType == java.sql.Date.class) {
+    return new java.sql.Date(date.getTime());
+  } else {
+    throw new AssertionError();
+  }
+}

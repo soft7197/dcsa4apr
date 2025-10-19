@@ -1,0 +1,36 @@
+{
+    "bug_id": "Compress-26",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Compress-26_1756720799",
+    "patches": [
+        {
+            "hypothesis": "The skip method fails to handle cases where InputStream.skip may return 0 without reaching the end of the stream. Also, the method should use read when skip consistently returns 0 to ensure it processes to the end of the stream, especially when skip is not supported or the stream is slow.",
+            "changes": "- while (numToSkip > 0) {\n+ while (numToSkip > 0) {\n+     long skipped = input.skip(numToSkip);\n+     if (skipped == 0) {\n+         if (input.read() == -1) {\n+             break;\n+         } else {\n+             skipped = 1;\n+         }\n+     }\n+     numToSkip -= skipped;\n+ }",
+            "fixed_method": "public static long skip(InputStream input, long numToSkip) throws IOException {\n    long available = numToSkip;\n    while (numToSkip > 0) {\n        long skipped = input.skip(numToSkip);\n        if (skipped == 0) {\n            if (input.read() == -1) {\n                break;\n            } else {\n                skipped = 1;\n            }\n        }\n        numToSkip -= skipped;\n    }\n    \n    return available - numToSkip;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,16 @@\n+public static long skip(InputStream input, long numToSkip) throws IOException {\n+    long available = numToSkip;\n+    while (numToSkip > 0) {\n+        long skipped = input.skip(numToSkip);\n+        if (skipped == 0) {\n+            if (input.read() == -1) {\n+                break;\n+            } else {\n+                skipped = 1;\n+            }\n+        }\n+        numToSkip -= skipped;\n+    }\n+    \n+    return available - numToSkip;\n+}",
+            "file_path": "src/main/java/org/apache/commons/compress/utils/IOUtils.java",
+            "method_name": "skip",
+            "class_name": "IOUtils",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                94,
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Compress-26_trace.json"
+}

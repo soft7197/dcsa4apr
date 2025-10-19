@@ -1,0 +1,31 @@
+{
+    "bug_id": "Compress-46",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Compress-46_1756720847",
+    "patches": [
+        {
+            "hypothesis": "The method checks if the input time `l` is greater than or equal to 2^32, but it should instead check if it fits within a signed 32-bit integer range, i.e., between -2^31 and 2^31-1. The exception message is correct, but the condition needs to be fixed.",
+            "changes": "- if (l >= TWO_TO_32) {\n+ if (l < Integer.MIN_VALUE || l > Integer.MAX_VALUE) {",
+            "fixed_method": "private static ZipLong unixTimeToZipLong(long l) {\n    if (l < Integer.MIN_VALUE || l > Integer.MAX_VALUE) {\n        throw new IllegalArgumentException(\"X5455 timestamps must fit in a signed 32 bit integer: \" + l);\n    }\n    return new ZipLong(l);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,6 @@\n+private static ZipLong unixTimeToZipLong(long l) {\n+    if (l < Integer.MIN_VALUE || l > Integer.MAX_VALUE) {\n+        throw new IllegalArgumentException(\"X5455 timestamps must fit in a signed 32 bit integer: \" + l);\n+    }\n+    return new ZipLong(l);\n+}",
+            "file_path": "src/main/java/org/apache/commons/compress/archivers/zip/X5455_ExtendedTimestamp.java",
+            "method_name": "unixTimeToZipLong",
+            "class_name": "X5455_ExtendedTimestamp",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                528,
+                529,
+                530,
+                531,
+                532,
+                533,
+                534
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Compress-46_trace.json"
+}

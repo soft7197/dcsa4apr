@@ -1,0 +1,27 @@
+{
+    "bug_id": "Jsoup-88",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-88_1757919377",
+    "patches": [
+        {
+            "hypothesis": "The method getValue() is returning null instead of an empty string for boolean attributes. In HTML, boolean attributes, when present, have the same name as their value or are represented as an empty string. The method should return an empty string when the attribute is a boolean attribute.",
+            "fixed_method": "public String getValue() {\n    return val != null ? val : \"\";\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,7 +1,3 @@\n-/**\n-Get the attribute value.\n-@return the attribute value\n-*/\n public String getValue() {\n-    return val;\n+    return val != null ? val : \"\";\n }",
+            "file_path": "src/main/java/org/jsoup/nodes/Attribute.java",
+            "method_name": "getValue",
+            "class_name": "Attribute",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                79,
+                80,
+                81
+            ],
+            "original_code": "/**\nGet the attribute value.\n@return the attribute value\n*/\npublic String getValue() {\n    return val;\n}"
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Jsoup-88_trace.json"
+}

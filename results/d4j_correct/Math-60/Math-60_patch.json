@@ -1,0 +1,38 @@
+{
+    "bug_id": "Math-60",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-60_1757233910",
+    "patches": [
+        {
+            "hypothesis": "The cumulativeProbability method fails for extreme values due to the potential for ConvergenceException in the Erf function. We should handle these edge cases explicitly as mentioned in the documentation, by directly returning 0 or 1 as appropriate for values far from the mean.",
+            "fixed_method": "public double cumulativeProbability(double x) throws MathException {\n    final double dev = x - mean;\n    // Handle edge cases explicitly to avoid ConvergenceException\n    if (dev > 40 * standardDeviation) {\n        return 1.0;\n    } else if (dev < -40 * standardDeviation) {\n        return 0.0;\n    }\n    try {\n        return 0.5 * (1.0 + Erf.erf(dev / (standardDeviation * FastMath.sqrt(2.0))));\n    } catch (MaxIterationsExceededException ex) {\n        throw new MathException(\"Erf calculation failed to converge\", ex);\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,24 +1,14 @@\n-/**\n-* For this distribution, {@code X}, this method returns {@code P(X < x)}.\n-* If {@code x}is more than 40 standard deviations from the mean, 0 or 1 is returned,\n-* as in these cases the actual value is within {@code Double.MIN_VALUE} of 0 or 1.\n-*\n-* @param x Value at which the CDF is evaluated.\n-* @return CDF evaluated at {@code x}.\n-* @throws MathException if the algorithm fails to converge\n-*/\n public double cumulativeProbability(double x) throws MathException {\n     final double dev = x - mean;\n+    // Handle edge cases explicitly to avoid ConvergenceException\n+    if (dev > 40 * standardDeviation) {\n+        return 1.0;\n+    } else if (dev < -40 * standardDeviation) {\n+        return 0.0;\n+    }\n     try {\n-    return 0.5 * (1.0 + Erf.erf((dev) /\n-                (standardDeviation * FastMath.sqrt(2.0))));\n+        return 0.5 * (1.0 + Erf.erf(dev / (standardDeviation * FastMath.sqrt(2.0))));\n     } catch (MaxIterationsExceededException ex) {\n-        if (x < (mean - 20 * standardDeviation)) { // JDK 1.5 blows at 38\n-            return 0;\n-        } else if (x > (mean + 20 * standardDeviation)) {\n-            return 1;\n-        } else {\n-            throw ex;\n-        }\n+        throw new MathException(\"Erf calculation failed to converge\", ex);\n     }\n }",
+            "file_path": "src/main/java/org/apache/commons/math/distribution/NormalDistributionImpl.java",
+            "method_name": "cumulativeProbability",
+            "class_name": "NormalDistributionImpl",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                124,
+                125,
+                126,
+                127,
+                128,
+                129,
+                130,
+                131,
+                132,
+                133,
+                134,
+                135,
+                136,
+                137,
+                138
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-60_trace.json"
+}

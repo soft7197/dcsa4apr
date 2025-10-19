@@ -1,0 +1,37 @@
+{
+    "bug_id": "Math-87",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-87_1756872860",
+    "patches": [
+        {
+            "hypothesis": "The method getBasicRow is supposed to identify a basic variable in a column by checking if there is exactly one non-zero entry in that column. The issue arises when the method incorrectly identifies a column as basic if it contains more than one non-zero entry. This happens because the method does not correctly handle the scenario where multiple non-zero entries exist in the column, leading to an incorrect return value of null.",
+            "changes": "- if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n+ if (MathUtils.equals(getEntry(i, col), 1.0, epsilon)) {",
+            "fixed_method": "private Integer getBasicRow(final int col) {\n    Integer row = null;\n    for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n        if (MathUtils.equals(getEntry(i, col), 1.0, epsilon)) {\n            if (row == null) {\n                row = i;\n            } else {\n                return null;\n            }\n        } else if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n            return null;\n        }\n    }\n    return row;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,15 @@\n+private Integer getBasicRow(final int col) {\n+    Integer row = null;\n+    for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n+        if (MathUtils.equals(getEntry(i, col), 1.0, epsilon)) {\n+            if (row == null) {\n+                row = i;\n+            } else {\n+                return null;\n+            }\n+        } else if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n+            return null;\n+        }\n+    }\n+    return row;\n+}",
+            "file_path": "src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java",
+            "method_name": "getBasicRow",
+            "class_name": "SimplexTableau",
+            "iteration": 2,
+            "is_multi_method": false,
+            "line_numbers": [
+                272,
+                273,
+                274,
+                275,
+                276,
+                277,
+                278,
+                279,
+                280,
+                281,
+                282,
+                283,
+                284
+            ]
+        }
+    ],
+    "iterations": 2,
+    "monitor_file": "traces/Math-87_trace.json"
+}

@@ -1,0 +1,37 @@
+{
+    "bug_id": "Cli-5",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Cli-5_1756719477",
+    "patches": [
+        {
+            "hypothesis": "The method stripLeadingHyphens does not handle null input, leading to a NullPointerException when str is null. The method should check for null before attempting string operations.",
+            "changes": "- if (str.startsWith(\"--\"))\n- else if (str.startsWith(\"-\"))\n+ if (str != null && str.startsWith(\"--\"))\n+ else if (str != null && str.startsWith(\"-\"))\n+ if (str == null) return null;",
+            "fixed_method": "static String stripLeadingHyphens(String str)\n{\n    if (str == null) {\n        return null;\n    }\n    if (str.startsWith(\"--\"))\n    {\n        return str.substring(2, str.length());\n    }\n    else if (str.startsWith(\"-\"))\n    {\n        return str.substring(1, str.length());\n    }\n\n    return str;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,16 @@\n+static String stripLeadingHyphens(String str)\n+{\n+    if (str == null) {\n+        return null;\n+    }\n+    if (str.startsWith(\"--\"))\n+    {\n+        return str.substring(2, str.length());\n+    }\n+    else if (str.startsWith(\"-\"))\n+    {\n+        return str.substring(1, str.length());\n+    }\n+\n+    return str;\n+}",
+            "file_path": "src/java/org/apache/commons/cli/Util.java",
+            "method_name": "stripLeadingHyphens",
+            "class_name": "Util",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40,
+                41,
+                42,
+                43,
+                44,
+                45,
+                46
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Cli-5_trace.json"
+}

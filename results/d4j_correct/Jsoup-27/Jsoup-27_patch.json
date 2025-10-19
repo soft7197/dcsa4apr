@@ -1,0 +1,33 @@
+{
+    "bug_id": "Jsoup-27",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-27_1757174447",
+    "patches": [
+        {
+            "hypothesis": "The bug is due to how the charset is being transformed to uppercase regardless of its original uppercase or lowercase state. However, one of the tests expects the returned charset to preserve the original casing, such as 'utf-8' rather than 'UTF-8'. To fix this, the method should return the charset in its original form as long as it matches the expected pattern and only convert to uppercase for validation if necessary. Additionally, the code should handle quoted charset values by removing the quotes before trimming and processing.",
+            "fixed_method": "static String getCharsetFromContentType(String contentType) {\n    if (contentType == null) return null;\n    Matcher m = charsetPattern.matcher(contentType);\n    if (m.find()) {\n        String charset = m.group(1).trim();\n        if (charset.startsWith(\"\\\"\") && charset.endsWith(\"\\\"\")) {\n            charset = charset.substring(1, charset.length() - 1); // Remove quotes\n        }\n        String upperCaseCharset = charset.toUpperCase(Locale.ENGLISH);\n        // Check if this charset is supported by default Java charsets\n        if (Charset.isSupported(upperCaseCharset)) {\n            return charset;\n        }\n    }\n    return null;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,16 +1,16 @@\n-/**\n-* Parse out a charset from a content type header. If the charset is not supported, returns null (so the default\n-* will kick in.)\n-* @param contentType e.g. \"text/html; charset=EUC-JP\"\n-* @return \"EUC-JP\", or null if not found. Charset is trimmed and uppercased.\n-*/\n static String getCharsetFromContentType(String contentType) {\n     if (contentType == null) return null;\n     Matcher m = charsetPattern.matcher(contentType);\n     if (m.find()) {\n         String charset = m.group(1).trim();\n-        charset = charset.toUpperCase(Locale.ENGLISH);\n-        return charset;\n+        if (charset.startsWith(\"\\\"\") && charset.endsWith(\"\\\"\")) {\n+            charset = charset.substring(1, charset.length() - 1); // Remove quotes\n+        }\n+        String upperCaseCharset = charset.toUpperCase(Locale.ENGLISH);\n+        // Check if this charset is supported by default Java charsets\n+        if (Charset.isSupported(upperCaseCharset)) {\n+            return charset;\n+        }\n     }\n     return null;\n }",
+            "file_path": "src/main/java/org/jsoup/helper/DataUtil.java",
+            "method_name": "getCharsetFromContentType",
+            "class_name": "DataUtil",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                127,
+                128,
+                129,
+                130,
+                131,
+                132,
+                133,
+                134,
+                135,
+                136
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Jsoup-27_trace.json"
+}

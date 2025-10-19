@@ -1,0 +1,49 @@
+{
+    "bug_id": "Closure-104",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Closure-104_1757155222",
+    "patches": [
+        {
+            "hypothesis": "The `meet` method is intended to find the greatest common subtype of two types. The method currently incorrectly returns `NO_TYPE` when a non-null `result` is not constructed, even when both `this` and `that` are object types. Instead, it should return `NO_OBJECT_TYPE` when both are object types and no specific shared subtype is found.",
+            "fixed_method": "JSType meet(JSType that) {\n  UnionTypeBuilder builder = new UnionTypeBuilder(registry);\n  for (JSType alternate : alternates) {\n    if (alternate.isSubtype(that)) {\n      builder.addAlternate(alternate);\n    }\n  }\n\n  if (that instanceof UnionType) {\n    for (JSType otherAlternate : ((UnionType) that).alternates) {\n      if (otherAlternate.isSubtype(this)) {\n        builder.addAlternate(otherAlternate);\n      }\n    }\n  } else if (that.isSubtype(this)) {\n    builder.addAlternate(that);\n  }\n  JSType result = builder.build();\n  if (result != null && !result.isNoType()) {\n    return result;\n  } else if (this.isObject() && that.isObject()) {\n    return getNativeType(JSTypeNative.NO_OBJECT_TYPE);\n  } else {\n    return getNativeType(JSTypeNative.NO_TYPE);\n  }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,11 +1,3 @@\n-/**\n-* This predicate determines whether objects of this type can have the\n-* {@code null} value, and therefore can appear in contexts where\n-* {@code null} is expected.\n-*\n-* @return {@code true} for everything but {@code Number} and\n-*         {@code Boolean} types.\n-*/\n JSType meet(JSType that) {\n   UnionTypeBuilder builder = new UnionTypeBuilder(registry);\n   for (JSType alternate : alternates) {\n@@ -24,7 +16,7 @@\n     builder.addAlternate(that);\n   }\n   JSType result = builder.build();\n-  if (result != null) {\n+  if (result != null && !result.isNoType()) {\n     return result;\n   } else if (this.isObject() && that.isObject()) {\n     return getNativeType(JSTypeNative.NO_OBJECT_TYPE);\n",
+            "file_path": "src/com/google/javascript/rhino/jstype/UnionType.java",
+            "method_name": "meet",
+            "class_name": "UnionType",
+            "iteration": 2,
+            "is_multi_method": false,
+            "line_numbers": [
+                273,
+                274,
+                275,
+                276,
+                277,
+                278,
+                279,
+                280,
+                281,
+                282,
+                283,
+                284,
+                285,
+                286,
+                287,
+                288,
+                289,
+                290,
+                291,
+                292,
+                293,
+                294,
+                295,
+                296,
+                297,
+                298
+            ]
+        }
+    ],
+    "iterations": 2,
+    "monitor_file": "traces/Closure-104_trace.json"
+}

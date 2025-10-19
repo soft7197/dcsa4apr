@@ -1,0 +1,13 @@
+### Fixed Method 1
+public void printWrapped(PrintWriter pw, int width, int nextLineTabStop, String text) {
+    String[] lines = text.split("\\n");
+    StringBuffer sb = new StringBuffer(text.length());
+
+    for (String line : lines) {
+        StringBuffer wrappedLine = new StringBuffer(line.length());
+        renderWrappedText(wrappedLine, width, nextLineTabStop, line);
+        sb.append(wrappedLine.toString()).append(System.lineSeparator());
+    }
+
+    pw.print(sb.toString());
+}

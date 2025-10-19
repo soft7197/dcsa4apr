@@ -1,0 +1,17 @@
+### Fixed Method 1
+public static long skip(InputStream input, long numToSkip) throws IOException {
+    long available = numToSkip;
+    while (numToSkip > 0) {
+        long skipped = input.skip(numToSkip);
+        if (skipped == 0) {
+            if (input.read() == -1) {
+                break;
+            } else {
+                skipped = 1;
+            }
+        }
+        numToSkip -= skipped;
+    }
+    
+    return available - numToSkip;
+}

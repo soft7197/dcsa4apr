@@ -1,0 +1,43 @@
+{
+    "bug_id": "Jsoup-62",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-62_1757176899",
+    "patches": [
+        {
+            "hypothesis": "The bug occurs because the 'anyOtherEndTag' function does not handle tag names case-sensitively. The parser's settings allow for preserving the case, but this function compares tag names in a case-insensitive manner, which causes incorrect tag closures. To fix this, we need to ensure the names of tags are compared exactly as they appear, respecting the case.",
+            "fixed_method": "boolean anyOtherEndTag(Token t, HtmlTreeBuilder tb) {\n    String name = t.asEndTag().name(); // Use 'name()' to preserve case\n    ArrayList<Element> stack = tb.getStack();\n    for (int pos = stack.size() - 1; pos >= 0; pos--) {\n        Element node = stack.get(pos);\n        if (node.nodeName().equals(name)) {\n            tb.generateImpliedEndTags(name);\n            if (!name.equals(tb.currentElement().nodeName()))\n                tb.error(this);\n            tb.popStackToClose(name);\n            break;\n        } else {\n            if (tb.isSpecial(node)) {\n                tb.error(this);\n                return false;\n            }\n        }\n    }\n    return true;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,8 +1,7 @@\n-// stop parsing\n boolean anyOtherEndTag(Token t, HtmlTreeBuilder tb) {\n-    String name = t.asEndTag().normalName();\n+    String name = t.asEndTag().name(); // Use 'name()' to preserve case\n     ArrayList<Element> stack = tb.getStack();\n-    for (int pos = stack.size() -1; pos >= 0; pos--) {\n+    for (int pos = stack.size() - 1; pos >= 0; pos--) {\n         Element node = stack.get(pos);\n         if (node.nodeName().equals(name)) {\n             tb.generateImpliedEndTags(name);\n",
+            "file_path": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java",
+            "method_name": "anyOtherEndTag",
+            "class_name": "HtmlTreeBuilderState",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                763,
+                764,
+                765,
+                766,
+                767,
+                768,
+                769,
+                770,
+                771,
+                772,
+                773,
+                774,
+                775,
+                776,
+                777,
+                778,
+                779,
+                780,
+                781,
+                782
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Jsoup-62_trace.json"
+}

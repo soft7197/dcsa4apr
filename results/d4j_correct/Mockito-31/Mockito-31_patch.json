@@ -1,0 +1,27 @@
+{
+    "bug_id": "Mockito-31",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Mockito-31_1756722042",
+    "patches": [
+        {
+            "hypothesis": "The `formatMethodCall` method currently does not include the method's arguments in the formatted string. This leads to the test failing because it expects the parameter list to be shown in the output. To fix this, the method should format and include the arguments passed to the method in the output string.",
+            "changes": "- return invocation.getMethod().getName() + \"()\";\n+ return invocation.getMethod().getName() + formatArguments(invocation.getArguments());",
+            "fixed_method": "private String formatMethodCall() {\n    return invocation.getMethod().getName() + formatArguments(invocation.getArguments());\n}\n\nprivate String formatArguments(Object[] args) {\n    if (args == null || args.length == 0) {\n        return \"()\";\n    }\n    StringBuilder sb = new StringBuilder(\"(\");\n    for (int i = 0; i < args.length; i++) {\n        sb.append(args[i]);\n        if (i < args.length - 1) {\n            sb.append(\", \");\n        }\n    }\n    sb.append(\")\");\n    return sb.toString();\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,18 @@\n+private String formatMethodCall() {\n+    return invocation.getMethod().getName() + formatArguments(invocation.getArguments());\n+}\n+\n+private String formatArguments(Object[] args) {\n+    if (args == null || args.length == 0) {\n+        return \"()\";\n+    }\n+    StringBuilder sb = new StringBuilder(\"(\");\n+    for (int i = 0; i < args.length; i++) {\n+        sb.append(args[i]);\n+        if (i < args.length - 1) {\n+            sb.append(\", \");\n+        }\n+    }\n+    sb.append(\")\");\n+    return sb.toString();\n+}",
+            "file_path": "src/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNulls.java",
+            "method_name": "formatMethodCall",
+            "class_name": "ReturnsSmartNulls",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                59,
+                60,
+                61
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Mockito-31_trace.json"
+}

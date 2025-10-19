@@ -1,0 +1,38 @@
+{
+    "bug_id": "JacksonDatabind-34",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-34_1756843781",
+    "patches": [
+        {
+            "hypothesis": "The bug is due to the incorrect number type being used for BigDecimal. The method currently uses JsonParser.NumberType.BIG_INTEGER for BigDecimal, which is incorrect. It should use JsonParser.NumberType.BIG_DECIMAL instead.",
+            "changes": "- visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n+ visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_DECIMAL);",
+            "fixed_method": "// We'll have to use fallback \"untyped\" number write method\npublic void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException\n{\n    if (_isInt) {\n        visitIntFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n    } else {\n        Class<?> h = handledType();\n        if (h == BigDecimal.class) {\n            visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_DECIMAL);\n        } else {\n            // otherwise bit unclear what to call... but let's try:\n            /*JsonNumberFormatVisitor v2 =*/ visitor.expectNumberFormat(typeHint);\n        }\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,15 @@\n+// We'll have to use fallback \"untyped\" number write method\n+public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException\n+{\n+    if (_isInt) {\n+        visitIntFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n+    } else {\n+        Class<?> h = handledType();\n+        if (h == BigDecimal.class) {\n+            visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_DECIMAL);\n+        } else {\n+            // otherwise bit unclear what to call... but let's try:\n+            /*JsonNumberFormatVisitor v2 =*/ visitor.expectNumberFormat(typeHint);\n+        }\n+    }\n+}",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+            "method_name": "acceptJsonFormatVisitor",
+            "class_name": "NumberSerializer",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                74,
+                75,
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-34_trace.json"
+}

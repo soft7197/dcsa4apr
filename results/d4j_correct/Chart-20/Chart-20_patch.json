@@ -1,0 +1,29 @@
+{
+    "bug_id": "Chart-20",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Chart-20_1756719413",
+    "patches": [
+        {
+            "hypothesis": "The constructor of the ValueMarker class is incorrectly setting the outlinePaint to the same value as the main paint. The test expects a specific color for the outlinePaint, but the current constructor logic sets it to the main paint color, which is incorrect.",
+            "changes": "- super(paint, stroke, paint, stroke, alpha);\n+ super(paint, stroke, outlinePaint, outlineStroke, alpha);",
+            "fixed_method": "public ValueMarker(double value, Paint paint, Stroke stroke, \n                   Paint outlinePaint, Stroke outlineStroke, float alpha) {\n    super(paint, stroke, outlinePaint, outlineStroke, alpha);\n    this.value = value;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,5 @@\n+public ValueMarker(double value, Paint paint, Stroke stroke, \n+                   Paint outlinePaint, Stroke outlineStroke, float alpha) {\n+    super(paint, stroke, outlinePaint, outlineStroke, alpha);\n+    this.value = value;\n+}",
+            "file_path": "source/org/jfree/chart/plot/ValueMarker.java",
+            "method_name": "ValueMarker",
+            "class_name": "ValueMarker",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                93,
+                94,
+                95,
+                96,
+                97
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Chart-20_trace.json"
+}

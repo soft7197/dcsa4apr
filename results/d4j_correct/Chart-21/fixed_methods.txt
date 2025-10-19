@@ -1,0 +1,55 @@
+### Fixed Method 1
+public void add(BoxAndWhiskerItem item, Comparable rowKey, Comparable columnKey) {
+    this.data.addObject(item, rowKey, columnKey);
+
+    // update cached min and max values by recalculating bounds
+    updateBounds();
+
+    double minval = Double.NaN;
+    if (item.getMinOutlier() != null) {
+        minval = item.getMinOutlier().doubleValue();
+    }
+    double maxval = Double.NaN;
+    if (item.getMaxOutlier() != null) {
+        maxval = item.getMaxOutlier().doubleValue();
+    }
+
+    if (!Double.isNaN(maxval) && (Double.isNaN(this.maximumRangeValue) || maxval > this.maximumRangeValue)) {
+        this.maximumRangeValue = maxval;
+    }
+
+    if (!Double.isNaN(minval) && (Double.isNaN(this.minimumRangeValue) || minval < this.minimumRangeValue)) {
+        this.minimumRangeValue = minval;
+    }
+
+    this.rangeBounds = new Range(this.minimumRangeValue, this.maximumRangeValue);
+    fireDatasetChanged();
+}
+
+
+### Fixed Method 2
+private void updateBounds() {
+    this.minimumRangeValue = Double.NaN;
+    this.maximumRangeValue = Double.NaN;
+    for (int row = 0; row < data.getRowCount(); row++) {
+        for (int col = 0; col < data.getColumnCount(); col++) {
+            BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(row, col);
+            if (item != null) {
+                Number minOutlier = item.getMinOutlier();
+                Number maxOutlier = item.getMaxOutlier();
+                if (minOutlier != null) {
+                    double min = minOutlier.doubleValue();
+                    if (Double.isNaN(this.minimumRangeValue) || min < this.minimumRangeValue) {
+                        this.minimumRangeValue = min;
+                    }
+                }
+                if (maxOutlier != null) {
+                    double max = maxOutlier.doubleValue();
+                    if (Double.isNaN(this.maximumRangeValue) || max > this.maximumRangeValue) {
+                        this.maximumRangeValue = max;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,13 @@
+### Fixed Method 1
+private boolean isShortOption(String token) {
+    if (token == null || !token.startsWith("-") || token.length() < 2) {
+        return false;
+    }
+    // Find the end of the short option part, which is the first non-alphanumeric character after the '-'
+    int endIndex = 1;
+    while (endIndex < token.length() && Character.isLetterOrDigit(token.charAt(endIndex))) {
+        endIndex++;
+    }
+    String shortOption = token.substring(1, endIndex);
+    return options.hasShortOption(shortOption);
+}

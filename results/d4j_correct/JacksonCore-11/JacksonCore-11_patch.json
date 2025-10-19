@@ -1,0 +1,36 @@
+{
+    "bug_id": "JacksonCore-11",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonCore-11_1757171050",
+    "patches": [
+        {
+            "hypothesis": "The bug in the _verifySharing method comes from not recalculating the necessary size for the _hashArea array when _hashShared is true, leading to potential ArrayIndexOutOfBoundsException when trying to add new names. Copying the array without rehashing could result in an array that lacks sufficient space to accommodate new entries, particularly when rehashing is needed immediately. We'll apply the need for rehash logic when _hashShared is true, forcing rehashing to ensure proper space is allocated.",
+            "fixed_method": "private void _verifySharing() {\n    if (_hashShared) {\n        _hashArea = Arrays.copyOf(_hashArea, _hashArea.length);\n        _names = Arrays.copyOf(_names, _names.length);\n        _hashShared = false;\n        // Force rehashing to ensure correct size and flags\n        _needRehash = true;\n    }\n    if (_needRehash) {\n        rehash();\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,12 +1,10 @@\n-// Yes if above 80%, or above 50% AND have ~1% spill-overs\n-private void _verifySharing()\n-{\n+private void _verifySharing() {\n     if (_hashShared) {\n         _hashArea = Arrays.copyOf(_hashArea, _hashArea.length);\n         _names = Arrays.copyOf(_names, _names.length);\n         _hashShared = false;\n-        // 09-Sep-2015, tatu: As per [jackson-core#216], also need to ensure\n-        //    we rehash as needed, as need-rehash flag is not copied from parent\n+        // Force rehashing to ensure correct size and flags\n+        _needRehash = true;\n     }\n     if (_needRehash) {\n         rehash();\n",
+            "file_path": "src/main/java/com/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer.java",
+            "method_name": "_verifySharing",
+            "class_name": "ByteQuadsCanonicalizer",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                874,
+                875,
+                876,
+                877,
+                878,
+                879,
+                880,
+                881,
+                882,
+                883,
+                884,
+                885,
+                886
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonCore-11_trace.json"
+}

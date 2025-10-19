@@ -1,0 +1,32 @@
+{
+    "bug_id": "Csv-2",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Csv-2_1757918954",
+    "patches": [
+        {
+            "hypothesis": "The method is accessing an index in the 'values' array without checking if the index is within bounds. This leads to an ArrayIndexOutOfBoundsException when an index specified in 'mapping' is beyond the length of the 'values' array. To fix this, we need to check if the index is valid before accessing the 'values' array and throw an IllegalArgumentException if the record is inconsistent.",
+            "fixed_method": "public String get(final String name) {\n    if (mapping == null) {\n        throw new IllegalStateException(\n                \"No header mapping was specified, the record values can't be accessed by name\");\n    }\n    final Integer index = mapping.get(name);\n    if (index != null) {\n        if (index >= 0 && index < values.length) {\n            return values[index];\n        } else {\n            throw new IllegalArgumentException(\"The record is inconsistent: index out of bounds\");\n        }\n    }\n    return null;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,20 +1,15 @@\n-/**\n-* Returns a value by name.\n-*\n-* @param name\n-*            the name of the column to be retrieved.\n-* @return the column value, or {@code null} if the column name is not found\n-* @throws IllegalStateException\n-*             if no header mapping was provided\n-* @throws IllegalArgumentException\n-*             if the record is inconsistent\n-* @see #isConsistent()\n-*/\n public String get(final String name) {\n     if (mapping == null) {\n         throw new IllegalStateException(\n                 \"No header mapping was specified, the record values can't be accessed by name\");\n     }\n     final Integer index = mapping.get(name);\n-        return index != null ? values[index.intValue()] : null;\n+    if (index != null) {\n+        if (index >= 0 && index < values.length) {\n+            return values[index];\n+        } else {\n+            throw new IllegalArgumentException(\"The record is inconsistent: index out of bounds\");\n+        }\n+    }\n+    return null;\n }",
+            "file_path": "src/main/java/org/apache/commons/csv/CSVRecord.java",
+            "method_name": "get",
+            "class_name": "CSVRecord",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86
+            ],
+            "original_code": "/**\n* Returns a value by name.\n*\n* @param name\n*            the name of the column to be retrieved.\n* @return the column value, or {@code null} if the column name is not found\n* @throws IllegalStateException\n*             if no header mapping was provided\n* @throws IllegalArgumentException\n*             if the record is inconsistent\n* @see #isConsistent()\n*/\npublic String get(final String name) {\n    if (mapping == null) {\n        throw new IllegalStateException(\n                \"No header mapping was specified, the record values can't be accessed by name\");\n    }\n    final Integer index = mapping.get(name);\n        return index != null ? values[index.intValue()] : null;\n}"
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Csv-2_trace.json"
+}

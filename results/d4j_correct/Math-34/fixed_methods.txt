@@ -1,0 +1,4 @@
+### Fixed Method 1
+public Iterator<Chromosome> iterator() {
+    return Collections.unmodifiableList(chromosomes).iterator();
+}

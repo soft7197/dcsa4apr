@@ -1,0 +1,33 @@
+{
+    "bug_id": "JacksonDatabind-57",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-57_1756845622",
+    "patches": [
+        {
+            "hypothesis": "The error occurs because the method `readValues` is not correctly handling the offset and length parameters when creating the parser. The parser is being created with the entire byte array instead of the specified subarray, which leads to incorrect parsing and subsequent errors.",
+            "changes": "- return _bindAndReadValues(_considerFilter(_parserFactory.createParser(src), true));\n+ return _bindAndReadValues(_considerFilter(_parserFactory.createParser(src, offset, length), true));",
+            "fixed_method": "public <T> MappingIterator<T> readValues(byte[] src, int offset, int length)\n    throws IOException, JsonProcessingException\n{\n    if (_dataFormatReaders != null) {\n        return _detectBindAndReadValues(_dataFormatReaders.findFormat(src, offset, length), false);\n    }\n    return _bindAndReadValues(_considerFilter(_parserFactory.createParser(src, offset, length), \n            true));\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,9 @@\n+public <T> MappingIterator<T> readValues(byte[] src, int offset, int length)\n+    throws IOException, JsonProcessingException\n+{\n+    if (_dataFormatReaders != null) {\n+        return _detectBindAndReadValues(_dataFormatReaders.findFormat(src, offset, length), false);\n+    }\n+    return _bindAndReadValues(_considerFilter(_parserFactory.createParser(src, offset, length), \n+            true));\n+}",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/ObjectReader.java",
+            "method_name": "readValues",
+            "class_name": "ObjectReader",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                1435,
+                1436,
+                1437,
+                1438,
+                1439,
+                1440,
+                1441,
+                1442,
+                1443
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-57_trace.json"
+}

@@ -1,0 +1,39 @@
+{
+    "bug_id": "Gson-14",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Gson-14_1757271841",
+    "patches": [
+        {
+            "hypothesis": "The bug in the code arises from the recursive nature of creating WildcardType objects. When forming subtypes and supertypes, the current implementations incorrectly produce nested wildcard types upon themselves (e.g., `? extends ? extends ...`) leading to incorrect behaviors and StackOverflowErrors due to endless recursive type resolution. The solution is to identify when the bound is already a WildcardType and correctly propagate its bounds instead of nesting another WildcardType.",
+            "methods": [
+                {
+                    "method_name": "subtypeOf",
+                    "fixed_method": "public static WildcardType subtypeOf(Type bound) {\n    if (bound instanceof WildcardType) {\n        WildcardType wildcardType = (WildcardType) bound;\n        return new WildcardTypeImpl(wildcardType.getUpperBounds(), EMPTY_TYPE_ARRAY);\n    }\n    Type[] upperBounds = new Type[] { bound };\n    return new WildcardTypeImpl(upperBounds, EMPTY_TYPE_ARRAY);\n}",
+                    "diff": "--- original\n+++ fixed\n@@ -1,12 +1,8 @@\n-  /**\n-   * Returns a type that represents an unknown type that extends {@code bound}.\n-   * For example, if {@code bound} is {@code CharSequence.class}, this returns\n-   * {@code ? extends CharSequence}. If {@code bound} is {@code Object.class},\n-   * this returns {@code ?}, which is shorthand for {@code ? extends Object}.\n-   */\n-\n-  public static WildcardType subtypeOf(Type bound) {\n-    Type[] upperBounds;\n-      upperBounds = new Type[] { bound };\n+public static WildcardType subtypeOf(Type bound) {\n+    if (bound instanceof WildcardType) {\n+        WildcardType wildcardType = (WildcardType) bound;\n+        return new WildcardTypeImpl(wildcardType.getUpperBounds(), EMPTY_TYPE_ARRAY);\n+    }\n+    Type[] upperBounds = new Type[] { bound };\n     return new WildcardTypeImpl(upperBounds, EMPTY_TYPE_ARRAY);\n-  }\n+}",
+                    "line_numbers": [
+                        77,
+                        82
+                    ],
+                    "file_path": "gson/src/main/java/com/google/gson/internal/$Gson$Types.java"
+                },
+                {
+                    "method_name": "supertypeOf",
+                    "fixed_method": "public static WildcardType supertypeOf(Type bound) {\n    if (bound instanceof WildcardType) {\n        WildcardType wildcardType = (WildcardType) bound;\n        return new WildcardTypeImpl(new Type[] { Object.class }, wildcardType.getLowerBounds());\n    }\n    Type[] lowerBounds = new Type[] { bound };\n    return new WildcardTypeImpl(new Type[] { Object.class }, lowerBounds);\n}",
+                    "diff": "--- original\n+++ fixed\n@@ -1,11 +1,8 @@\n-  /**\n-   * Returns a type that represents an unknown supertype of {@code bound}. For\n-   * example, if {@code bound} is {@code String.class}, this returns {@code ?\n-   * super String}.\n-   */\n-\n-  public static WildcardType supertypeOf(Type bound) {\n-    Type[] lowerBounds;\n-      lowerBounds = new Type[] { bound };\n+public static WildcardType supertypeOf(Type bound) {\n+    if (bound instanceof WildcardType) {\n+        WildcardType wildcardType = (WildcardType) bound;\n+        return new WildcardTypeImpl(new Type[] { Object.class }, wildcardType.getLowerBounds());\n+    }\n+    Type[] lowerBounds = new Type[] { bound };\n     return new WildcardTypeImpl(new Type[] { Object.class }, lowerBounds);\n-  }\n+}",
+                    "line_numbers": [
+                        88,
+                        93
+                    ],
+                    "file_path": "gson/src/main/java/com/google/gson/internal/$Gson$Types.java"
+                }
+            ],
+            "is_multi_method": true,
+            "coordination_notes": "",
+            "methods_count": 2
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Gson-14_trace.json"
+}

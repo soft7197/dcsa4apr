@@ -1,0 +1,40 @@
+{
+    "bug_id": "Compress-21",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Compress-21_1756720786",
+    "patches": [
+        {
+            "hypothesis": "The method 'writeBits' is incorrectly handling the shift logic, causing incorrect bit patterns in the output. Specifically, the shift variable is reset prematurely before writing all bits, which leads to incorrect headers being written as seen in the error messages. The main issue is that the shift should reset when it reaches -1 instead of 0, ensuring all bits are written correctly before resetting.",
+            "changes": "- if (shift == 0) {\n+ if (shift == -1) {",
+            "fixed_method": "private void writeBits(final DataOutput header, final BitSet bits, final int length) throws IOException {\n    int cache = 0;\n    int shift = 7;\n    for (int i = 0; i < length; i++) {\n        cache |= ((bits.get(i) ? 1 : 0) << shift);\n        --shift;\n        if (shift == -1) {\n            header.write(cache);\n            shift = 7;\n            cache = 0;\n        }\n    }\n    if (length > 0 && shift != 7) {\n        header.write(cache);\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,16 @@\n+private void writeBits(final DataOutput header, final BitSet bits, final int length) throws IOException {\n+    int cache = 0;\n+    int shift = 7;\n+    for (int i = 0; i < length; i++) {\n+        cache |= ((bits.get(i) ? 1 : 0) << shift);\n+        --shift;\n+        if (shift == -1) {\n+            header.write(cache);\n+            shift = 7;\n+            cache = 0;\n+        }\n+    }\n+    if (length > 0 && shift != 7) {\n+        header.write(cache);\n+    }\n+}",
+            "file_path": "src/main/java/org/apache/commons/compress/archivers/sevenz/SevenZOutputFile.java",
+            "method_name": "writeBits",
+            "class_name": "SevenZOutputFile",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                634,
+                635,
+                636,
+                637,
+                638,
+                639,
+                640,
+                641,
+                642,
+                643,
+                644,
+                645,
+                646,
+                647,
+                648,
+                649
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Compress-21_trace.json"
+}

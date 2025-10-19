@@ -1,0 +1,32 @@
+{
+    "bug_id": "JacksonDatabind-24",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-24_1757172165",
+    "patches": [
+        {
+            "hypothesis": "The bug is caused by the method using the timezone of the provided DateFormat object when the DateFormat is not null, overriding the existing timezone setting in BaseSettings. This causes the timezone to change unexpectedly, failing the test. The intended behavior is to keep the existing timezone setting if the DateFormat is not null.",
+            "fixed_method": "/**********************************************************\n*/\npublic BaseSettings withDateFormat(DateFormat df) {\n    if (_dateFormat == df) {\n        return this;\n    }\n    // Do not use df.getTimeZone(), always keep the existing timezone\n    return new BaseSettings(_classIntrospector, _annotationIntrospector, _visibilityChecker, _propertyNamingStrategy, _typeFactory,\n            _typeResolverBuilder, df, _handlerInstantiator, _locale,\n            _timeZone, _defaultBase64);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -4,8 +4,8 @@\n     if (_dateFormat == df) {\n         return this;\n     }\n-    TimeZone tz = (df == null) ? _timeZone : df.getTimeZone();\n+    // Do not use df.getTimeZone(), always keep the existing timezone\n     return new BaseSettings(_classIntrospector, _annotationIntrospector, _visibilityChecker, _propertyNamingStrategy, _typeFactory,\n             _typeResolverBuilder, df, _handlerInstantiator, _locale,\n-            tz, _defaultBase64);\n+            _timeZone, _defaultBase64);\n }",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/cfg/BaseSettings.java",
+            "method_name": "withDateFormat",
+            "class_name": "BaseSettings",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                230,
+                231,
+                232,
+                233,
+                234,
+                235,
+                236,
+                237,
+                238
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-24_trace.json"
+}

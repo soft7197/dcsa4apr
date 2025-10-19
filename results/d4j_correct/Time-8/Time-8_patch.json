@@ -1,0 +1,47 @@
+{
+    "bug_id": "Time-8",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Time-8_1757241237",
+    "patches": [
+        {
+            "hypothesis": "The method throws an IllegalArgumentException if 'minutesOffset' is negative, even when it is valid for some hour and minute combinations. The condition for minutesOffset being in the range -59 to +59 is incorrect for scenarios where hoursOffset is negative or zero. The method needs to support negative minutesOffset based on the given conditions in the comment.",
+            "fixed_method": "public static DateTimeZone forOffsetHoursMinutes(int hoursOffset, int minutesOffset) throws IllegalArgumentException {\n    if (hoursOffset == 0 && minutesOffset == 0) {\n        return DateTimeZone.UTC;\n    }\n    if (hoursOffset < -23 || hoursOffset > 23) {\n        throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n    }\n    if (minutesOffset < -59 || minutesOffset > 59) {\n        throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n    }\n    if (hoursOffset > 0 && minutesOffset < 0) {\n        throw new IllegalArgumentException(\"Invalid minutes: negative minutes not allowed when hour is positive\");\n    }\n    int totalMinutes;\n    if (hoursOffset < 0) {\n        totalMinutes = hoursOffset * 60 - Math.abs(minutesOffset);\n    } else {\n        totalMinutes = hoursOffset * 60 + minutesOffset;\n    }\n    int offset = 0;\n    try {\n        offset = FieldUtils.safeMultiply(totalMinutes, DateTimeConstants.MILLIS_PER_MINUTE);\n    } catch (ArithmeticException ex) {\n        throw new IllegalArgumentException(\"Offset is too large\");\n    }\n    return forOffsetMillis(offset);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,34 +1,3 @@\n-/**\n-* Gets a time zone instance for the specified offset to UTC in hours and minutes.\n-* This method assumes 60 minutes in an hour, and standard length minutes.\n-* <p>\n-* This factory is a convenient way of constructing zones with a fixed offset.\n-* The hours value must be in the range -23 to +23.\n-* The minutes value must be in the range -59 to +59.\n-* The following combinations of sign for the hour and minute are possible:\n-* <pre>\n-*  Hour    Minute    Example    Result\n-*\n-*  +ve     +ve       (2, 15)    +02:15\n-*  +ve     zero      (2, 0)     +02:00\n-*  +ve     -ve       (2, -15)   IllegalArgumentException\n-*\n-*  zero    +ve       (0, 15)    +00:15\n-*  zero    zero      (0, 0)     +00:00\n-*  zero    -ve       (0, -15)   -00:15\n-*\n-*  -ve     +ve       (-2, 15)   -02:15\n-*  -ve     zero      (-2, 0)    -02:00\n-*  -ve     -ve       (-2, -15)  -02:15\n-* </pre>\n-* Note that in versions before 2.3, the minutes had to be zero or positive.\n-*\n-* @param hoursOffset  the offset in hours from UTC, from -23 to +23\n-* @param minutesOffset  the offset in minutes from UTC, from -59 to +59\n-* @return the DateTimeZone object for the offset\n-* @throws IllegalArgumentException if any value is out of range, the minutes are negative\n-*  when the hours are positive, or the resulting offset exceeds +/- 23:59:59.000\n-*/\n public static DateTimeZone forOffsetHoursMinutes(int hoursOffset, int minutesOffset) throws IllegalArgumentException {\n     if (hoursOffset == 0 && minutesOffset == 0) {\n         return DateTimeZone.UTC;\n@@ -36,18 +5,21 @@\n     if (hoursOffset < -23 || hoursOffset > 23) {\n         throw new IllegalArgumentException(\"Hours out of range: \" + hoursOffset);\n     }\n-    if (minutesOffset < 0 || minutesOffset > 59) {\n+    if (minutesOffset < -59 || minutesOffset > 59) {\n         throw new IllegalArgumentException(\"Minutes out of range: \" + minutesOffset);\n+    }\n+    if (hoursOffset > 0 && minutesOffset < 0) {\n+        throw new IllegalArgumentException(\"Invalid minutes: negative minutes not allowed when hour is positive\");\n+    }\n+    int totalMinutes;\n+    if (hoursOffset < 0) {\n+        totalMinutes = hoursOffset * 60 - Math.abs(minutesOffset);\n+    } else {\n+        totalMinutes = hoursOffset * 60 + minutesOffset;\n     }\n     int offset = 0;\n     try {\n-        int hoursInMinutes = hoursOffset * 60;\n-        if (hoursInMinutes < 0) {\n-            minutesOffset = hoursInMinutes - minutesOffset;\n-        } else {\n-            minutesOffset = hoursInMinutes + minutesOffset;\n-        }\n-        offset = FieldUtils.safeMultiply(minutesOffset, DateTimeConstants.MILLIS_PER_MINUTE);\n+        offset = FieldUtils.safeMultiply(totalMinutes, DateTimeConstants.MILLIS_PER_MINUTE);\n     } catch (ArithmeticException ex) {\n         throw new IllegalArgumentException(\"Offset is too large\");\n     }\n",
+            "file_path": "src/main/java/org/joda/time/DateTimeZone.java",
+            "method_name": "forOffsetHoursMinutes",
+            "class_name": "DateTimeZone",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                272,
+                273,
+                274,
+                275,
+                276,
+                277,
+                278,
+                279,
+                280,
+                281,
+                282,
+                283,
+                284,
+                285,
+                286,
+                287,
+                288,
+                289,
+                290,
+                291,
+                292,
+                293,
+                294,
+                295
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Time-8_trace.json"
+}

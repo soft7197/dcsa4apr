@@ -1,0 +1,44 @@
+{
+    "bug_id": "Lang-42",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Lang-42_1756721359",
+    "patches": [
+        {
+            "hypothesis": "The issue arises because the method escape processes surrogate pairs incorrectly. Surrogate pairs are used to represent characters outside the Basic Multilingual Plane (BMP) in UTF-16 encoding, which involves two 16-bit code units. The current implementation treats each code unit as a separate character, leading to incorrect escaping of high Unicode characters.",
+            "changes": "Modified the loop to handle surrogate pairs correctly by checking if a character is a high surrogate and correctly calculating the Unicode code point.",
+            "fixed_method": "public void escape(Writer writer, String str) throws IOException {\n    int len = str.length();\n    for (int i = 0; i < len; i++) {\n        char c = str.charAt(i);\n        if (Character.isHighSurrogate(c) && i + 1 < len && Character.isLowSurrogate(str.charAt(i + 1))) {\n            int codePoint = Character.toCodePoint(c, str.charAt(i + 1));\n            i++; // increment to skip the low surrogate\n            String entityName = this.entityName(codePoint);\n            if (entityName == null) {\n                writer.write(\"&#\");\n                writer.write(Integer.toString(codePoint, 10));\n                writer.write(';');\n            } else {\n                writer.write('&');\n                writer.write(entityName);\n                writer.write(';');\n            }\n        } else {\n            String entityName = this.entityName(c);\n            if (entityName == null) {\n                if (c > 0x7F) {\n                    writer.write(\"&#\");\n                    writer.write(Integer.toString(c, 10));\n                    writer.write(';');\n                } else {\n                    writer.write(c);\n                }\n            } else {\n                writer.write('&');\n                writer.write(entityName);\n                writer.write(';');\n            }\n        }\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,35 @@\n+public void escape(Writer writer, String str) throws IOException {\n+    int len = str.length();\n+    for (int i = 0; i < len; i++) {\n+        char c = str.charAt(i);\n+        if (Character.isHighSurrogate(c) && i + 1 < len && Character.isLowSurrogate(str.charAt(i + 1))) {\n+            int codePoint = Character.toCodePoint(c, str.charAt(i + 1));\n+            i++; // increment to skip the low surrogate\n+            String entityName = this.entityName(codePoint);\n+            if (entityName == null) {\n+                writer.write(\"&#\");\n+                writer.write(Integer.toString(codePoint, 10));\n+                writer.write(';');\n+            } else {\n+                writer.write('&');\n+                writer.write(entityName);\n+                writer.write(';');\n+            }\n+        } else {\n+            String entityName = this.entityName(c);\n+            if (entityName == null) {\n+                if (c > 0x7F) {\n+                    writer.write(\"&#\");\n+                    writer.write(Integer.toString(c, 10));\n+                    writer.write(';');\n+                } else {\n+                    writer.write(c);\n+                }\n+            } else {\n+                writer.write('&');\n+                writer.write(entityName);\n+                writer.write(';');\n+            }\n+        }\n+    }\n+}",
+            "file_path": "src/java/org/apache/commons/lang/Entities.java",
+            "method_name": "escape",
+            "class_name": "Entities",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                825,
+                826,
+                827,
+                828,
+                829,
+                830,
+                831,
+                832,
+                833,
+                834,
+                835,
+                836,
+                837,
+                838,
+                839,
+                840,
+                841,
+                842,
+                843,
+                844
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Lang-42_trace.json"
+}

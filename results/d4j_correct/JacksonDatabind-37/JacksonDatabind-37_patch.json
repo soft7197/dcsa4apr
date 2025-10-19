@@ -1,0 +1,41 @@
+{
+    "bug_id": "JacksonDatabind-37",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-37_1757172215",
+    "patches": [
+        {
+            "hypothesis": "The error message suggests that there is an issue with type handling related to the 'name' field within the serialized JSON. The `_narrow` method in the `JavaType` is responsible for narrowing the type using subclasses. The problem likely lies in the incorrect handling of resolved types, where the type resolution doesn't address subclasses correctly, potentially ignoring properties of subclassed types due to unresolved bindings or missing type information. The fix involves ensuring that type narrowing re-resolves the necessary information correctly when a subclass is involved.",
+            "fixed_method": "protected JavaType _narrow(Class<?> subclass) {\n    if (_class == subclass) {\n        return this;\n    }\n    // Re-resolve if a subclass is provided for proper type narrowing\n    TypeFactory typeFactory = TypeFactory.defaultInstance();\n    JavaType resolvedType = typeFactory.constructSpecializedType(this, subclass);\n    return resolvedType;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,19 +1,9 @@\n-// ... and while we are at it, not array types either\n-protected JavaType _narrow(Class<?> subclass)\n-{\n+protected JavaType _narrow(Class<?> subclass) {\n     if (_class == subclass) {\n         return this;\n     }\n-    // Should we check that there is a sub-class relationship?\n-    // 15-Jan-2016, tatu: Almost yes, but there are some complications with\n-    //    placeholder values, so no.\n-    /*\n-    if (!_class.isAssignableFrom(subclass)) {\n-        throw new IllegalArgumentException(\"Class \"+subclass.getName()+\" not sub-type of \"\n-                +_class.getName());\n-    }\n-    */\n-    // 15-Jan-2015, tatu: Not correct; should really re-resolve...\n-    return new SimpleType(subclass, _bindings, _superClass, _superInterfaces,\n-            _valueHandler, _typeHandler, _asStatic);\n+    // Re-resolve if a subclass is provided for proper type narrowing\n+    TypeFactory typeFactory = TypeFactory.defaultInstance();\n+    JavaType resolvedType = typeFactory.constructSpecializedType(this, subclass);\n+    return resolvedType;\n }",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/type/SimpleType.java",
+            "method_name": "_narrow",
+            "class_name": "SimpleType",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                120,
+                121,
+                122,
+                123,
+                124,
+                125,
+                126,
+                127,
+                128,
+                129,
+                130,
+                131,
+                132,
+                133,
+                134,
+                135,
+                136,
+                137
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-37_trace.json"
+}

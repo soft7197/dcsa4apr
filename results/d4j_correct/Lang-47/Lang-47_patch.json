@@ -1,0 +1,39 @@
+{
+    "bug_id": "Lang-47",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Lang-47_1757303370",
+    "patches": [
+        {
+            "hypothesis": "The method throws a NullPointerException when `obj` is null because `getNullText()` likely returns null, and calling `length()` on a null string causes the exception. To fix this, we should check if the resulting string from `getNullText()` or `obj.toString()` is null, and handle it accordingly.",
+            "fixed_method": "public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {\n    if (width > 0) {\n        ensureCapacity(size + width);\n        String str = (obj == null ? getNullText() : obj.toString());\n        str = (str == null) ? \"\" : str; // Ensure str is not null\n        int strLen = str.length();\n        if (strLen >= width) {\n            str.getChars(strLen - width, strLen, buffer, size);\n        } else {\n            int padLen = width - strLen;\n            for (int i = 0; i < padLen; i++) {\n                buffer[size + i] = padChar;\n            }\n            str.getChars(0, strLen, buffer, size + padLen);\n        }\n        size += width;\n    }\n    return this;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,31 +1,19 @@\n-    //-----------------------------------------------------------------------\n-    /**\n-     * Appends an object to the builder padding on the left to a fixed width.\n-     * The <code>toString</code> of the object is used.\n-     * If the object is larger than the length, the left hand side is lost.\n-     * If the object is null, the null text value is used.\n-     * \n-     * @param obj  the object to append, null uses null text\n-     * @param width  the fixed field width, zero or negative has no effect\n-     * @param padChar  the pad character to use\n-     * @return this, to enable chaining\n-     */\n-\n-    public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {\n-        if (width > 0) {\n-            ensureCapacity(size + width);\n-            String str = (obj == null ? getNullText() : obj.toString());\n-            int strLen = str.length();\n-            if (strLen >= width) {\n-                str.getChars(strLen - width, strLen, buffer, size);\n-            } else {\n-                int padLen = width - strLen;\n-                for (int i = 0; i < padLen; i++) {\n-                    buffer[size + i] = padChar;\n-                }\n-                str.getChars(0, strLen, buffer, size + padLen);\n+public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {\n+    if (width > 0) {\n+        ensureCapacity(size + width);\n+        String str = (obj == null ? getNullText() : obj.toString());\n+        str = (str == null) ? \"\" : str; // Ensure str is not null\n+        int strLen = str.length();\n+        if (strLen >= width) {\n+            str.getChars(strLen - width, strLen, buffer, size);\n+        } else {\n+            int padLen = width - strLen;\n+            for (int i = 0; i < padLen; i++) {\n+                buffer[size + i] = padChar;\n             }\n-            size += width;\n+            str.getChars(0, strLen, buffer, size + padLen);\n         }\n-        return this;\n+        size += width;\n     }\n+    return this;\n+}",
+            "file_path": "src/java/org/apache/commons/lang/text/StrBuilder.java",
+            "method_name": "appendFixedWidthPadLeft",
+            "class_name": "StrBuilder",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                1182,
+                1200
+            ]
+        },
+        {
+            "hypothesis": "The method `appendFixedWidthPadRight` is supposed to handle null objects by using the 'null text' value. It appears that the method `getNullText()` is not defined in the snippet, leading to a `NullPointerException` when attempting to get the length of the null `str`. The solution is to handle the case where 'null text' is either not defined or is null.",
+            "fixed_method": "public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {\n    if (width > 0) {\n        ensureCapacity(size + width);\n        String str = (obj == null ? getNullText() : obj.toString());\n        str = (str == null ? \"\" : str); // Added this line to handle null from getNullText\n        int strLen = str.length();\n        if (strLen >= width) {\n            str.getChars(0, width, buffer, size);\n        } else {\n            int padLen = width - strLen;\n            str.getChars(0, strLen, buffer, size);\n            for (int i = 0; i < padLen; i++) {\n                buffer[size + strLen + i] = padChar;\n            }\n        }\n        size += width;\n    }\n    return this;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,30 +1,19 @@\n-    /**\n-     * Appends an object to the builder padding on the right to a fixed length.\n-     * The <code>toString</code> of the object is used.\n-     * If the object is larger than the length, the right hand side is lost.\n-     * If the object is null, null text value is used.\n-     * \n-     * @param obj  the object to append, null uses null text\n-     * @param width  the fixed field width, zero or negative has no effect\n-     * @param padChar  the pad character to use\n-     * @return this, to enable chaining\n-     */\n-\n-    public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {\n-        if (width > 0) {\n-            ensureCapacity(size + width);\n-            String str = (obj == null ? getNullText() : obj.toString());\n-            int strLen = str.length();\n-            if (strLen >= width) {\n-                str.getChars(0, width, buffer, size);\n-            } else {\n-                int padLen = width - strLen;\n-                str.getChars(0, strLen, buffer, size);\n-                for (int i = 0; i < padLen; i++) {\n-                    buffer[size + strLen + i] = padChar;\n-                }\n+public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {\n+    if (width > 0) {\n+        ensureCapacity(size + width);\n+        String str = (obj == null ? getNullText() : obj.toString());\n+        str = (str == null ? \"\" : str); // Added this line to handle null from getNullText\n+        int strLen = str.length();\n+        if (strLen >= width) {\n+            str.getChars(0, width, buffer, size);\n+        } else {\n+            int padLen = width - strLen;\n+            str.getChars(0, strLen, buffer, size);\n+            for (int i = 0; i < padLen; i++) {\n+                buffer[size + strLen + i] = padChar;\n             }\n-            size += width;\n         }\n-        return this;\n+        size += width;\n     }\n+    return this;\n+}",
+            "file_path": "src/java/org/apache/commons/lang/text/StrBuilder.java",
+            "method_name": "appendFixedWidthPadRight",
+            "class_name": "StrBuilder",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                1226,
+                1244
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Lang-47_trace.json"
+}

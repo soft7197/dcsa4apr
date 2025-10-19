@@ -1,0 +1,41 @@
+{
+    "bug_id": "Closure-57",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Closure-57_1756720601",
+    "patches": [
+        {
+            "hypothesis": "The method incorrectly returns a non-null className when the function name matches but the next node does not represent a valid class name. The test expects the return value to be null in such cases.",
+            "changes": "Added a condition to check if the target node is of the correct type (Token.STRING) before getting its string value.",
+            "fixed_method": "private static String extractClassNameIfGoog(Node node, Node parent, String functionName){\n  String className = null;\n  if (NodeUtil.isExprCall(parent)) {\n    Node callee = node.getFirstChild();\n    if (callee != null && callee.getType() == Token.GETPROP) {\n      String qualifiedName = callee.getQualifiedName();\n      if (functionName.equals(qualifiedName)) {\n        Node target = callee.getNext();\n        if (target != null && target.getType() == Token.STRING) {\n          className = target.getString();\n        }\n      }\n    }\n  }\n  return className;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,16 @@\n+private static String extractClassNameIfGoog(Node node, Node parent, String functionName){\n+  String className = null;\n+  if (NodeUtil.isExprCall(parent)) {\n+    Node callee = node.getFirstChild();\n+    if (callee != null && callee.getType() == Token.GETPROP) {\n+      String qualifiedName = callee.getQualifiedName();\n+      if (functionName.equals(qualifiedName)) {\n+        Node target = callee.getNext();\n+        if (target != null && target.getType() == Token.STRING) {\n+          className = target.getString();\n+        }\n+      }\n+    }\n+  }\n+  return className;\n+}",
+            "file_path": "src/com/google/javascript/jscomp/ClosureCodingConvention.java",
+            "method_name": "extractClassNameIfGoog",
+            "class_name": "ClosureCodingConvention",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                188,
+                189,
+                190,
+                191,
+                192,
+                193,
+                194,
+                195,
+                196,
+                197,
+                198,
+                199,
+                200,
+                201,
+                202,
+                203,
+                204
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Closure-57_trace.json"
+}

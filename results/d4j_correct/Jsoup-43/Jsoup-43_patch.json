@@ -1,0 +1,35 @@
+{
+    "bug_id": "Jsoup-43",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-43_1756721198",
+    "patches": [
+        {
+            "hypothesis": "The method indexInList checks for equality using the equals method, which may not be overridden in the Element class to handle element identity correctly. This can cause failure in tests where elements with the same content but different identities are considered. We need to check for object identity using '==' instead of 'equals'.",
+            "changes": "- if (element.equals(search))\n+ if (element == search)",
+            "fixed_method": "private static <E extends Element> Integer indexInList(Element search, List<E> elements) {\n    Validate.notNull(search);\n    Validate.notNull(elements);\n\n    for (int i = 0; i < elements.size(); i++) {\n        E element = elements.get(i);\n        if (element == search) // Use identity comparison\n            return i;\n    }\n    return null;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,11 @@\n+private static <E extends Element> Integer indexInList(Element search, List<E> elements) {\n+    Validate.notNull(search);\n+    Validate.notNull(elements);\n+\n+    for (int i = 0; i < elements.size(); i++) {\n+        E element = elements.get(i);\n+        if (element == search) // Use identity comparison\n+            return i;\n+    }\n+    return null;\n+}",
+            "file_path": "src/main/java/org/jsoup/nodes/Element.java",
+            "method_name": "indexInList",
+            "class_name": "Element",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                568,
+                569,
+                570,
+                571,
+                572,
+                573,
+                574,
+                575,
+                576,
+                577,
+                578
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Jsoup-43_trace.json"
+}
