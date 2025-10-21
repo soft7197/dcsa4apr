@@ -1,0 +1,37 @@
+{
+    "bug_id": "JacksonDatabind-28",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-28_1756721001",
+    "patches": [
+        {
+            "hypothesis": "The deserialize method does not handle the END_OBJECT token properly. When the parser is at an END_OBJECT token, it should not attempt to deserialize further. Instead, it should return an empty ObjectNode, as this represents an empty JSON object.",
+            "changes": "- if (p.getCurrentToken() == JsonToken.FIELD_NAME) {\n+ if (p.getCurrentToken() == JsonToken.FIELD_NAME || p.getCurrentToken() == JsonToken.END_OBJECT) {",
+            "fixed_method": "public ObjectNode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException\n{\n    if (p.getCurrentToken() == JsonToken.START_OBJECT) {\n        p.nextToken();\n        return deserializeObject(p, ctxt, ctxt.getNodeFactory());\n    }\n    // 23-Sep-2015, tatu: Ugh. We may also be given END_OBJECT (similar to FIELD_NAME),\n    //    if caller has advanced to the first token of Object, but for empty Object\n    if (p.getCurrentToken() == JsonToken.FIELD_NAME || p.getCurrentToken() == JsonToken.END_OBJECT) {\n        return deserializeObject(p, ctxt, ctxt.getNodeFactory());\n    }\n    throw ctxt.mappingException(ObjectNode.class);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,13 @@\n+public ObjectNode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException\n+{\n+    if (p.getCurrentToken() == JsonToken.START_OBJECT) {\n+        p.nextToken();\n+        return deserializeObject(p, ctxt, ctxt.getNodeFactory());\n+    }\n+    // 23-Sep-2015, tatu: Ugh. We may also be given END_OBJECT (similar to FIELD_NAME),\n+    //    if caller has advanced to the first token of Object, but for empty Object\n+    if (p.getCurrentToken() == JsonToken.FIELD_NAME || p.getCurrentToken() == JsonToken.END_OBJECT) {\n+        return deserializeObject(p, ctxt, ctxt.getNodeFactory());\n+    }\n+    throw ctxt.mappingException(ObjectNode.class);\n+}",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/std/JsonNodeDeserializer.java",
+            "method_name": "deserialize",
+            "class_name": "JsonNodeDeserializer",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                95,
+                96,
+                97,
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-28_trace.json"
+}

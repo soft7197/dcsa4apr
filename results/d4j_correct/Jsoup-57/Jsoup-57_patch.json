@@ -1,0 +1,34 @@
+{
+    "bug_id": "Jsoup-57",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-57_1756721221",
+    "patches": [
+        {
+            "hypothesis": "The ConcurrentModificationException is caused by modifying the attributes map while iterating over it using an iterator. When an element is removed from the map using the map's `remove` method, it concurrently modifies the map, leading to this exception. The correct approach is to use the iterator's `remove` method to safely remove elements during iteration.",
+            "changes": "- attributes.remove(attrKey);\n+ it.remove();",
+            "fixed_method": "public void removeIgnoreCase(String key) {\n    Validate.notEmpty(key);\n    if (attributes == null)\n        return;\n    for (Iterator<String> it = attributes.keySet().iterator(); it.hasNext(); ) {\n        String attrKey = it.next();\n        if (attrKey.equalsIgnoreCase(key))\n            it.remove();\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,10 @@\n+public void removeIgnoreCase(String key) {\n+    Validate.notEmpty(key);\n+    if (attributes == null)\n+        return;\n+    for (Iterator<String> it = attributes.keySet().iterator(); it.hasNext(); ) {\n+        String attrKey = it.next();\n+        if (attrKey.equalsIgnoreCase(key))\n+            it.remove();\n+    }\n+}",
+            "file_path": "src/main/java/org/jsoup/nodes/Attributes.java",
+            "method_name": "removeIgnoreCase",
+            "class_name": "Attributes",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                118,
+                119,
+                120,
+                121,
+                122,
+                123,
+                124,
+                125,
+                126,
+                127
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Jsoup-57_trace.json"
+}

@@ -1,0 +1,52 @@
+### Fixed Method 1
+public static long factorial(final int n) {
+    if (n < 0) {
+        throw new IllegalArgumentException("must have n >= 0 for n!");
+    }
+    if (n < factorials.length) {
+        return factorials[n];
+    }
+    long result = 1;
+    for (int i = 2; i <= n; i++) {
+        result *= i;
+        if(result < 0) {
+            throw new ArithmeticException("factorial value is too large to fit in a long");
+        }
+    }
+    return result;
+}
+
+
+### Fixed Method 2
+public static double factorialDouble(final int n) {
+    if (n < 0) {
+        throw new IllegalArgumentException("must have n >= 0 for n!");
+    }
+    if (n == 0) {
+        return 1.0;
+    }
+    double result = 1.0;
+    for (int i = 2; i <= n; i++) {
+        result *= i;
+        if (Double.isInfinite(result)) {
+            return Double.POSITIVE_INFINITY;
+        }
+    }
+    return result;
+}
+
+
+### Fixed Method 3
+public static double factorialLog(final int n) {
+    if (n < 0) {
+        throw new IllegalArgumentException("must have n >= 0 for n!");
+    }
+    if (n == 0) {
+        return 0.0;
+    }
+    double logSum = 0;
+    for (int i = 2; i <= n; i++) {
+        logSum += Math.log((double)i);
+    }
+    return logSum;
+}

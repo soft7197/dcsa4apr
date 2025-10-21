@@ -1,0 +1,7 @@
+### Fixed Method 1
+public static boolean isAvailableLocale(Locale locale) {
+    if (cAvailableLocaleSet == null) {
+        cAvailableLocaleSet = availableLocaleSet();
+    }
+    return cAvailableLocaleSet.contains(locale);
+}

@@ -1,0 +1,37 @@
+{
+    "bug_id": "Lang-21",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Lang-21_1756721318",
+    "patches": [
+        {
+            "hypothesis": "The original method incorrectly compares the HOUR field using Calendar.HOUR, which represents the hour in 12-hour format, instead of Calendar.HOUR_OF_DAY, which represents the hour in 24-hour format. This can lead to incorrect results when comparing times that differ only in AM/PM status.",
+            "changes": "- cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR)\n+ cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY)",
+            "fixed_method": "public static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n    if (cal1 == null || cal2 == null) {\n        throw new IllegalArgumentException(\"The date must not be null\");\n    }\n    return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n            cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n            cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n            cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) &&\n            cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n            cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n            cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n            cal1.getClass() == cal2.getClass());\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,13 @@\n+public static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n+    if (cal1 == null || cal2 == null) {\n+        throw new IllegalArgumentException(\"The date must not be null\");\n+    }\n+    return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n+            cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n+            cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n+            cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) &&\n+            cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n+            cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n+            cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n+            cal1.getClass() == cal2.getClass());\n+}",
+            "file_path": "src/main/java/org/apache/commons/lang3/time/DateUtils.java",
+            "method_name": "isSameLocalTime",
+            "class_name": "DateUtils",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                258,
+                259,
+                260,
+                261,
+                262,
+                263,
+                264,
+                265,
+                266,
+                267,
+                268,
+                269,
+                270
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Lang-21_trace.json"
+}

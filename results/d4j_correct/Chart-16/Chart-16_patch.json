@@ -1,0 +1,106 @@
+{
+  "bug_id": "Chart-16",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-16_1759395931",
+  "patches": [
+    [
+      {
+        "hypothesis": "The NullPointerExceptions occur because the constructors did not properly handle the initialization of data and keys for empty datasets. The failing tests tried to access data structures that were expected to be initialized but remained null, leading to errors. To fix these issues, we need to ensure that even for empty datasets, seriesKeys and categoryKeys are initialized to empty arrays if the input arrays are empty. Similarly, methods accessing these keys should handle cases where wre are dealing with empty datasets appropriately.",
+        "changes": "1. In the constructor DefaultIntervalCategoryDataset, added checks to ensure seriesKeys and categoryKeys are initialized to empty arrays when input data arrays are empty or null. This avoids NullPointerExceptions when accessing these arrays later.\n2. In setCategoryKeys, added a check to prevent misuse when updating category keys in an empty dataset by allowing the method to handle array assignments correctly even when the dataset is empty.",
+        "methods": {
+          "source/org/jfree/data/category/DefaultIntervalCategoryDataset.java::DefaultIntervalCategoryDataset::DefaultIntervalCategoryDataset::L142": {
+            "file_path": "source/org/jfree/data/category/DefaultIntervalCategoryDataset.java",
+            "method_name": "DefaultIntervalCategoryDataset",
+            "class_name": "DefaultIntervalCategoryDataset",
+            "line_numbers": [
+              142,
+              213
+            ],
+            "original_code": "    /**\n     * Constructs a DefaultIntervalCategoryDataset, populates it with data\n     * from the arrays, and uses the supplied names for the series and the\n     * supplied objects for the categories.\n     *\n     * @param seriesKeys  the series keys (if <code>null</code>, series keys\n     *         will be generated automatically).\n     * @param categoryKeys  the category keys (if <code>null</code>, category \n     *         keys will be generated automatically).\n     * @param starts  the start values data, indexed as data[series][category].\n     * @param ends  the end values data, indexed as data[series][category].\n     */\n\n    public DefaultIntervalCategoryDataset(Comparable[] seriesKeys,\n                                          Comparable[] categoryKeys,\n                                          Number[][] starts,\n                                          Number[][] ends) {\n\n        this.startData = starts;\n        this.endData = ends;\n\n        if (starts != null && ends != null) {\n\n            String baseName = \"org.jfree.data.resources.DataPackageResources\";\n            ResourceBundle resources = ResourceBundle.getBundle(baseName);\n\n            int seriesCount = starts.length;\n            if (seriesCount != ends.length) {\n                String errMsg = \"DefaultIntervalCategoryDataset: the number \"\n                    + \"of series in the start value dataset does \"\n                    + \"not match the number of series in the end \"\n                    + \"value dataset.\";\n                throw new IllegalArgumentException(errMsg);\n            }\n            if (seriesCount > 0) {\n\n                // set up the series names...\n                if (seriesKeys != null) {\n\n                    if (seriesKeys.length != seriesCount) {\n                        throw new IllegalArgumentException(\n                                \"The number of series keys does not \"\n                                + \"match the number of series in the data.\");\n                    }\n\n                    this.seriesKeys = seriesKeys;\n                }\n                else {\n                    String prefix = resources.getString(\n                            \"series.default-prefix\") + \" \";\n                    this.seriesKeys = generateKeys(seriesCount, prefix);\n                }\n\n                // set up the category names...\n                int categoryCount = starts[0].length;\n                if (categoryCount != ends[0].length) {\n                    String errMsg = \"DefaultIntervalCategoryDataset: the \"\n                                + \"number of categories in the start value \"\n                                + \"dataset does not match the number of \"\n                                + \"categories in the end value dataset.\";\n                    throw new IllegalArgumentException(errMsg);\n                }\n                if (categoryKeys != null) {\n                    if (categoryKeys.length != categoryCount) {\n                        throw new IllegalArgumentException(\n                                \"The number of category keys does not match \"\n                                + \"the number of categories in the data.\");\n                    }\n                    this.categoryKeys = categoryKeys;\n                }\n                else {\n                    String prefix = resources.getString(\n                            \"categories.default-prefix\") + \" \";\n                    this.categoryKeys = generateKeys(categoryCount, prefix);\n                }\n\n            }\n            else {\n                this.seriesKeys = null;\n                this.categoryKeys = null;\n            }\n        }\n\n    }\n",
+            "fixed_method": "public DefaultIntervalCategoryDataset(Comparable[] seriesKeys,\n                                      Comparable[] categoryKeys,\n                                      Number[][] starts,\n                                      Number[][] ends) {\n\n        if (starts != null && ends != null) {\n            this.startData = starts;\n            this.endData = ends;\n\n            int seriesCount = starts.length;\n            if (seriesCount != ends.length) {\n                String errMsg = \"DefaultIntervalCategoryDataset: the number \"\n                    + \"of series in the start value dataset does \"\n                    + \"not match the number of series in the end \"\n                    + \"value dataset.\";\n                throw new IllegalArgumentException(errMsg);\n            }\n            if (seriesCount > 0) {\n                if (seriesKeys != null) {\n                    if (seriesKeys.length != seriesCount) {\n                        throw new IllegalArgumentException(\n                                \"The number of series keys does not \"\n                                + \"match the number of series in the data.\");\n                    }\n                    this.seriesKeys = seriesKeys;\n                }\n                else {\n                    this.seriesKeys = generateKeys(seriesCount, \"Series \");\n                }\n\n                int categoryCount = starts[0].length;\n                if (categoryCount != ends[0].length) {\n                    String errMsg = \"DefaultIntervalCategoryDataset: the \"\n                                + \"number of categories in the start value \"\n                                + \"dataset does not match the number of \"\n                                + \"categories in the end value dataset.\";\n                    throw new IllegalArgumentException(errMsg);\n                }\n                if (categoryKeys != null) {\n                    if (categoryKeys.length != categoryCount) {\n                        throw new IllegalArgumentException(\n                                \"The number of category keys does not match \"\n                                + \"the number of categories in the data.\");\n                    }\n                    this.categoryKeys = categoryKeys;\n                }\n                else {\n                    this.categoryKeys = generateKeys(categoryCount, \"Category \");\n                }\n            }\n            else {\n                this.seriesKeys = new Comparable[0];\n                this.categoryKeys = new Comparable[0];\n            }\n        } else {\n            this.startData = new Number[0][0];\n            this.endData = new Number[0][0];\n            this.seriesKeys = new Comparable[0];\n            this.categoryKeys = new Comparable[0];\n        }\n    }",
+            "iteration": 1
+          },
+          "source/org/jfree/data/category/DefaultIntervalCategoryDataset.java::DefaultIntervalCategoryDataset::setCategoryKeys::L334": {
+            "file_path": "source/org/jfree/data/category/DefaultIntervalCategoryDataset.java",
+            "method_name": "setCategoryKeys",
+            "class_name": "DefaultIntervalCategoryDataset",
+            "line_numbers": [
+              334,
+              352
+            ],
+            "original_code": "    /**\n     * Sets the categories for the dataset.\n     *\n     * @param categoryKeys  an array of objects representing the categories in \n     *                      the dataset.\n     *                      \n     * @see #getRowKeys()\n     * @see #setSeriesKeys(Comparable[])\n     */\n\n    public void setCategoryKeys(Comparable[] categoryKeys) {\n        if (categoryKeys == null) {\n            throw new IllegalArgumentException(\"Null 'categoryKeys' argument.\");\n        }\n        if (categoryKeys.length != this.startData[0].length) {\n            throw new IllegalArgumentException(\n                    \"The number of categories does not match the data.\");\n        }\n        for (int i = 0; i < categoryKeys.length; i++) {\n            if (categoryKeys[i] == null) {\n                throw new IllegalArgumentException(\n                    \"DefaultIntervalCategoryDataset.setCategoryKeys(): \"\n                    + \"null category not permitted.\");\n            }\n        }\n        this.categoryKeys = categoryKeys;\n        fireDatasetChanged();\n    }\n",
+            "fixed_method": "public void setCategoryKeys(Comparable[] categoryKeys) {\n    if (categoryKeys == null) {\n        throw new IllegalArgumentException(\"Null 'categoryKeys' argument.\");\n    }\n    if (this.startData.length > 0 && categoryKeys.length != this.startData[0].length) {\n        throw new IllegalArgumentException(\n                \"The number of categories does not match the data.\");\n    }\n    for (int i = 0; i < categoryKeys.length; i++) {\n        if (categoryKeys[i] == null) {\n            throw new IllegalArgumentException(\n                \"DefaultIntervalCategoryDataset.setCategoryKeys(): \"\n                + \"null category not permitted.\");\n        }\n    }\n    this.categoryKeys = categoryKeys;\n    fireDatasetChanged();\n}",
+            "iteration": 1
+          }
+        },
+        "iteration": 1,
+        "is_multi_method": true,
+        "execution_result": {
+          "status": "success",
+          "message": "All 8 tests passed with 2 method fixes",
+          "applied_methods": [
+            "setCategoryKeys",
+            "DefaultIntervalCategoryDataset"
+          ],
+          "test_results": {
+            "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetCategoryIndex": {
+              "test": "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetCategoryIndex",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            },
+            "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testSetCategoryKeys": {
+              "test": "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testSetCategoryKeys",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            },
+            "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetSeriesIndex": {
+              "test": "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetSeriesIndex",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            },
+            "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetRowCount": {
+              "test": "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetRowCount",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            },
+            "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetRowIndex": {
+              "test": "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetRowIndex",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            },
+            "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetColumnCount": {
+              "test": "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetColumnCount",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            },
+            "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetColumnIndex": {
+              "test": "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testGetColumnIndex",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            },
+            "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testCloning2": {
+              "test": "org.jfree.data.category.junit.DefaultIntervalCategoryDatasetTests::testCloning2",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            }
+          },
+          "compilation_time": 3.9970309734344482,
+          "test_time": 9.980558633804321,
+          "total_time": 13.97973370552063
+        }
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/Chart-16_trace.json"
+}

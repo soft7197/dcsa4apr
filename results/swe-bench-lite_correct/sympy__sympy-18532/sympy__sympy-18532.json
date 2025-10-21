@@ -1,0 +1,11 @@
+{
+    "bug_id": "sympy__sympy-18532",
+    "problem_statement": "expr.atoms() should return objects with no args instead of subclasses of Atom\n`expr.atoms()` with no arguments returns subclasses of `Atom` in `expr`. But the correct definition of a leaf node should be that it has no `.args`. \n\nThis should be easy to fix, but one needs to check that this doesn't affect the performance. \n\n",
+    "dev_patch": "diff --git a/sympy/core/basic.py b/sympy/core/basic.py\n--- a/sympy/core/basic.py\n+++ b/sympy/core/basic.py\n@@ -503,12 +503,11 @@ def atoms(self, *types):\n         if types:\n             types = tuple(\n                 [t if isinstance(t, type) else type(t) for t in types])\n+        nodes = preorder_traversal(self)\n+        if types:\n+            result = {node for node in nodes if isinstance(node, types)}\n         else:\n-            types = (Atom,)\n-        result = set()\n-        for expr in preorder_traversal(self):\n-            if isinstance(expr, types):\n-                result.add(expr)\n+            result = {node for node in nodes if not node.args}\n         return result\n \n     @property\n",
+    "our_patch": "diff --git a/sympy/core/basic.py b/sympy/core/basic.py\n--- a/sympy/core/basic.py\n+++ b/sympy/core/basic.py\n@@ -503,13 +503,12 @@\n         if types:\n             types = tuple(\n                 [t if isinstance(t, type) else type(t) for t in types])\n-        else:\n-            types = (Atom,)\n         result = set()\n         for expr in preorder_traversal(self):\n-            if isinstance(expr, types):\n+            if (not expr.args and (not types or isinstance(expr, types))):\n                 result.add(expr)\n         return result\n+\n \n     @property\n     def free_symbols(self):\n",
+    "final_iteration": 1,
+    "buggy_methods": [
+        "sympy/core/basic.py::atoms"
+    ],
+    "num_buggy_methods": 1
+}

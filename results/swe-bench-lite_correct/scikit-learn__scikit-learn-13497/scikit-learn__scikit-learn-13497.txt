@@ -1,0 +1,31 @@
+diff --git a/sklearn/feature_selection/mutual_info_.py b/sklearn/feature_selection/mutual_info_.py
+--- a/sklearn/feature_selection/mutual_info_.py
++++ b/sklearn/feature_selection/mutual_info_.py
+@@ -250,16 +250,15 @@
+     if discrete_features == 'auto':
+         discrete_features = issparse(X)
+ 
+-    if isinstance(discrete_features, bool):
+-        discrete_mask = np.empty(n_features, dtype=bool)
+-        discrete_mask.fill(discrete_features)
+-    else:
++    if isinstance(discrete_features, (list, np.ndarray)):
+         discrete_features = np.asarray(discrete_features)
+         if discrete_features.dtype != 'bool':
+             discrete_mask = np.zeros(n_features, dtype=bool)
+             discrete_mask[discrete_features] = True
+         else:
+             discrete_mask = discrete_features
++    else:
++        discrete_mask = np.full(n_features, discrete_features, dtype=bool)
+ 
+     continuous_mask = ~discrete_mask
+     if np.any(continuous_mask) and issparse(X):
+@@ -288,6 +287,7 @@
+           x, discrete_feature in zip(_iterate_columns(X), discrete_mask)]
+ 
+     return np.array(mi)
++
+ 
+ 
+ def mutual_info_regression(X, y, discrete_features='auto', n_neighbors=3,

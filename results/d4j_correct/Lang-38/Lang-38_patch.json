@@ -1,0 +1,31 @@
+{
+    "bug_id": "Lang-38",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Lang-38_1756864128",
+    "patches": [
+        {
+            "hypothesis": "The bug is caused by the incorrect handling of time zones when formatting the calendar object. The method should adjust the calendar's time to the specified time zone before formatting, but it currently only sets the time zone without adjusting the time accordingly.",
+            "changes": "- calendar.setTimeZone(mTimeZone);\n+ calendar.setTimeInMillis(calendar.getTimeInMillis() + mTimeZone.getOffset(calendar.getTimeInMillis()) - calendar.getTimeZone().getOffset(calendar.getTimeInMillis()));",
+            "fixed_method": "public StringBuffer format(Calendar calendar, StringBuffer buf) {\n    if (mTimeZoneForced) {\n        calendar = (Calendar) calendar.clone();\n        long originalTimeInMillis = calendar.getTimeInMillis();\n        calendar.setTimeZone(mTimeZone);\n        long offsetDifference = mTimeZone.getOffset(originalTimeInMillis) - calendar.getTimeZone().getOffset(originalTimeInMillis);\n        calendar.setTimeInMillis(originalTimeInMillis + offsetDifference);\n    }\n    return applyRules(calendar, buf);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,10 @@\n+public StringBuffer format(Calendar calendar, StringBuffer buf) {\n+    if (mTimeZoneForced) {\n+        calendar = (Calendar) calendar.clone();\n+        long originalTimeInMillis = calendar.getTimeInMillis();\n+        calendar.setTimeZone(mTimeZone);\n+        long offsetDifference = mTimeZone.getOffset(originalTimeInMillis) - calendar.getTimeZone().getOffset(originalTimeInMillis);\n+        calendar.setTimeInMillis(originalTimeInMillis + offsetDifference);\n+    }\n+    return applyRules(calendar, buf);\n+}",
+            "file_path": "src/java/org/apache/commons/lang3/time/FastDateFormat.java",
+            "method_name": "format",
+            "class_name": "FastDateFormat",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                870,
+                871,
+                872,
+                873,
+                874,
+                875,
+                876
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Lang-38_trace.json"
+}

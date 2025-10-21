@@ -1,0 +1,27 @@
+{
+    "bug_id": "Math-75",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-75_1756721657",
+    "patches": [
+        {
+            "hypothesis": "The getPct method incorrectly uses getCumPct instead of calculating the percentage of the individual frequency of the object v. getCumPct returns the cumulative percentage, which causes the expected and actual values to differ when the test expects the percentage of a single item.",
+            "changes": "- return getCumPct((Comparable<?>) v);\n+ if (getSumFreq() == 0) {\n+     return Double.NaN;\n+ }\n+ long freq = getCount(v);\n+ return (double) freq / (double) getSumFreq();",
+            "fixed_method": "public double getPct(Object v) {\n    if (getSumFreq() == 0) {\n        return Double.NaN;\n    }\n    long freq = getCount(v);\n    return (double) freq / (double) getSumFreq();\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,7 @@\n+public double getPct(Object v) {\n+    if (getSumFreq() == 0) {\n+        return Double.NaN;\n+    }\n+    long freq = getCount(v);\n+    return (double) freq / (double) getSumFreq();\n+}",
+            "file_path": "src/main/java/org/apache/commons/math/stat/Frequency.java",
+            "method_name": "getPct",
+            "class_name": "Frequency",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                302,
+                303,
+                304
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-75_trace.json"
+}

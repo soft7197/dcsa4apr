@@ -1,0 +1,29 @@
+{
+    "bug_id": "Math-91",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-91_1757919654",
+    "patches": [
+        {
+            "hypothesis": "The issue arises from comparing floating-point approximations of the fractions, which can lead to precision errors as shown with the pi1 and pi2 fractions. Instead of converting to double, we should compare the cross products of the numerators and denominators directly to avoid precision issues.",
+            "fixed_method": "public int compareTo(Fraction object) {\n    long thisNumerator = (long) this.numerator * object.denominator;\n    long otherNumerator = (long) object.numerator * this.denominator;\n    return Long.compare(thisNumerator, otherNumerator);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,11 +1,5 @@\n-/**\n-* Compares this object to another based on size.\n-* @param object the object to compare to\n-* @return -1 if this is less than <tt>object</tt>, +1 if this is greater\n-*         than <tt>object</tt>, 0 if they are equal.\n-*/\n public int compareTo(Fraction object) {\n-    double nOd = doubleValue();\n-    double dOn = object.doubleValue();\n-    return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);\n+    long thisNumerator = (long) this.numerator * object.denominator;\n+    long otherNumerator = (long) object.numerator * this.denominator;\n+    return Long.compare(thisNumerator, otherNumerator);\n }",
+            "file_path": "src/java/org/apache/commons/math/fraction/Fraction.java",
+            "method_name": "compareTo",
+            "class_name": "Fraction",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                258,
+                259,
+                260,
+                261,
+                262
+            ],
+            "original_code": "/**\n* Compares this object to another based on size.\n* @param object the object to compare to\n* @return -1 if this is less than <tt>object</tt>, +1 if this is greater\n*         than <tt>object</tt>, 0 if they are equal.\n*/\npublic int compareTo(Fraction object) {\n    double nOd = doubleValue();\n    double dOn = object.doubleValue();\n    return (nOd < dOn) ? -1 : ((nOd > dOn) ? +1 : 0);\n}"
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-91_trace.json"
+}

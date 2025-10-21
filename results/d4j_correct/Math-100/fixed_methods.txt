@@ -1,0 +1,42 @@
+### Fixed Method 1
+public double[][] getCovariances(EstimationProblem problem) throws EstimationException {
+    updateJacobian();
+    
+    final int rows = problem.getMeasurements().length;
+    final int cols = problem.getUnboundParameters().length; // Only use unbound parameters
+    double[][] jTj = new double[cols][cols];
+
+    for (int i = 0; i < cols; ++i) {
+        for (int j = i; j < cols; ++j) {
+            double sum = 0;
+            for (int k = 0; k < rows; ++k) {
+                sum += jacobian[k * cols + i] * jacobian[k * cols + j];
+            }
+            jTj[i][j] = sum;
+            jTj[j][i] = sum;
+        }
+    }
+
+    try {
+        return new RealMatrixImpl(jTj).inverse().getData();
+    } catch (InvalidMatrixException ime) {
+        throw new EstimationException("unable to compute covariances: singular problem", new Object[0]);
+    }
+}
+
+
+### Fixed Method 2
+public double[] guessParametersErrors(EstimationProblem problem) throws EstimationException {
+    int m = problem.getMeasurements().length;
+    int p = problem.getUnboundParameters().length; // Only use unbound parameters
+    if (m <= p) {
+        throw new EstimationException("no degrees of freedom ({0} measurements, {1} parameters)", new Object[] { new Integer(m), new Integer(p)});
+    }
+    double[] errors = new double[p];
+    final double c = Math.sqrt(getChiSquare(problem) / (m - p));
+    double[][] covar = getCovariances(problem);
+    for (int i = 0; i < errors.length; ++i) {
+        errors[i] = Math.sqrt(covar[i][i]) * c;
+    }
+    return errors;
+}

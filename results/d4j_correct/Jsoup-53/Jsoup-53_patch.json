@@ -1,0 +1,49 @@
+{
+  "bug_id": "Jsoup-53",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-53_1756719413",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "public String chompBalanced(char open, char close) {\n    int start = -1;\n    int end = -1;\n    int depth = 0;\n    char last = 0;\n    boolean inQuote = false;\n\n    do {\n        if (isEmpty()) break;\n        Character c = consume();\n        if (last == 0 || last != ESC) {\n            if (c.equals('\\'') || c.equals('\"') && c != open)\n                inQuote = !inQuote;\n            if (inQuote)\n                continue;\n            if (c.equals(open)) {\n                depth++;\n                if (start == -1)\n                    start = pos;\n            }\n            else if (c.equals(close))\n                depth--;\n        }\n\n        if (depth > 0 && last != 0)\n            end = pos;\n        last = c;\n    } while (depth > 0);\n    return (end >= 0) ? queue.substring(start, end) : \"\";\n}",
+      "diff": "",
+      "file_path": "src/main/java/org/jsoup/parser/TokenQueue.java",
+      "method_name": "chompBalanced",
+      "class_name": "TokenQueue",
+      "iteration": 1,
+      "is_multi_method": false,
+      "line_numbers": [
+        260,
+        261,
+        262,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        279,
+        280,
+        281,
+        282,
+        283,
+        284
+      ]
+    }
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/Jsoup-53_trace.json"
+}

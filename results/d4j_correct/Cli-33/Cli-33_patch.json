@@ -1,0 +1,30 @@
+{
+    "bug_id": "Cli-33",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Cli-33_1757254053",
+    "patches": [
+        {
+            "hypothesis": "The method `printWrapped` uses a utility method `renderWrappedText` which is assumed to handle text wrapping properly, but it seems to strip leading spaces on new lines. For the test to pass, the method should ensure that indents in multiline texts like headers and footers are preserved.",
+            "fixed_method": "public void printWrapped(PrintWriter pw, int width, int nextLineTabStop, String text) {\n    String[] lines = text.split(\"\\\\n\");\n    StringBuffer sb = new StringBuffer(text.length());\n\n    for (String line : lines) {\n        StringBuffer wrappedLine = new StringBuffer(line.length());\n        renderWrappedText(wrappedLine, width, nextLineTabStop, line);\n        sb.append(wrappedLine.toString()).append(System.lineSeparator());\n    }\n\n    pw.print(sb.toString());\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,15 +1,12 @@\n-/**\n-* Print the specified text to the specified PrintWriter.\n-*\n-* @param pw The printWriter to write the help to\n-* @param width The number of characters to display per line\n-* @param nextLineTabStop The position on the next line for the first tab.\n-* @param text The text to be written to the PrintWriter\n-*/\n-public void printWrapped(PrintWriter pw, int width, int nextLineTabStop, String text)\n-    {\n-        StringBuffer sb = new StringBuffer(text.length());\n+public void printWrapped(PrintWriter pw, int width, int nextLineTabStop, String text) {\n+    String[] lines = text.split(\"\\\\n\");\n+    StringBuffer sb = new StringBuffer(text.length());\n \n-        renderWrappedText(sb, width, nextLineTabStop, text);\n-        pw.println(sb.toString());\n-    }+    for (String line : lines) {\n+        StringBuffer wrappedLine = new StringBuffer(line.length());\n+        renderWrappedText(wrappedLine, width, nextLineTabStop, line);\n+        sb.append(wrappedLine.toString()).append(System.lineSeparator());\n+    }\n+\n+    pw.print(sb.toString());\n+}",
+            "file_path": "src/main/java/org/apache/commons/cli/HelpFormatter.java",
+            "method_name": "printWrapped",
+            "class_name": "HelpFormatter",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                726,
+                727,
+                728,
+                729,
+                730,
+                731,
+                732
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Cli-33_trace.json"
+}

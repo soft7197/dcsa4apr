@@ -1,0 +1,14 @@
+diff --git a/sympy/tensor/array/ndim_array.py b/sympy/tensor/array/ndim_array.py
+--- a/sympy/tensor/array/ndim_array.py
++++ b/sympy/tensor/array/ndim_array.py
+@@ -195,6 +195,10 @@
+                 return [pointer], ()
+ 
+             result = []
++            # Handle empty iterable case
++            if not pointer:
++                return result, (0,)
++
+             elems, shapes = zip(*[f(i) for i in pointer])
+             if len(set(shapes)) != 1:
+                 raise ValueError("could not determine shape unambiguously")

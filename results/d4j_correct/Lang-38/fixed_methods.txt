@@ -1,0 +1,11 @@
+### Fixed Method 1
+public StringBuffer format(Calendar calendar, StringBuffer buf) {
+    if (mTimeZoneForced) {
+        calendar = (Calendar) calendar.clone();
+        long originalTimeInMillis = calendar.getTimeInMillis();
+        calendar.setTimeZone(mTimeZone);
+        long offsetDifference = mTimeZone.getOffset(originalTimeInMillis) - calendar.getTimeZone().getOffset(originalTimeInMillis);
+        calendar.setTimeInMillis(originalTimeInMillis + offsetDifference);
+    }
+    return applyRules(calendar, buf);
+}

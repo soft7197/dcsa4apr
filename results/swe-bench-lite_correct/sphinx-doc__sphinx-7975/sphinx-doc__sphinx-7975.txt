@@ -1,0 +1,18 @@
+diff --git a/sphinx/environment/adapters/indexentries.py b/sphinx/environment/adapters/indexentries.py
+--- a/sphinx/environment/adapters/indexentries.py
++++ b/sphinx/environment/adapters/indexentries.py
+@@ -108,9 +108,11 @@
+             lckey = unicodedata.normalize('NFD', key.lower())
+             if lckey.startswith('\N{RIGHT-TO-LEFT MARK}'):
+                 lckey = lckey[1:]
+-            if lckey[0:1].isalpha() or lckey.startswith('_'):
+-                lckey = chr(127) + lckey
+-            # ensure a determinstic order *within* letters by also sorting on
++            # Change the condition to put all symbols, not just those starting with '_',
++            # at the front
++            if not lckey[0:1].isalpha():
++                lckey = chr(31) + lckey  # Use a prefix that ensures symbols come first
++            # ensure a deterministic order *within* letters by also sorting on
+             # the entry itself
+             return (lckey, entry[0])
+         newlist = sorted(new.items(), key=keyfunc)

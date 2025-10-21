@@ -1,0 +1,11 @@
+### Fixed Method 1
+public void close() throws IOException {
+    if (!this.closed) {
+        // Assuming we have some finish method available to finalize the CPIO output properly
+        if (this instanceof CpioArchiveOutputStream) {
+            ((CpioArchiveOutputStream) this).finish();
+        }
+        super.close();
+        this.closed = true;
+    }
+}

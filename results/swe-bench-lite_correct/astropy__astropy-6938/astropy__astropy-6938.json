@@ -1,0 +1,11 @@
+{
+    "bug_id": "astropy__astropy-6938",
+    "problem_statement": "Possible bug in io.fits related to D exponents\nI came across the following code in ``fitsrec.py``:\r\n\r\n```python\r\n        # Replace exponent separator in floating point numbers\r\n        if 'D' in format:\r\n            output_field.replace(encode_ascii('E'), encode_ascii('D'))\r\n```\r\n\r\nI think this may be incorrect because as far as I can tell ``replace`` is not an in-place operation for ``chararray`` (it returns a copy). Commenting out this code doesn't cause any tests to fail so I think this code isn't being tested anyway.\n",
+    "dev_patch": "diff --git a/astropy/io/fits/fitsrec.py b/astropy/io/fits/fitsrec.py\n--- a/astropy/io/fits/fitsrec.py\n+++ b/astropy/io/fits/fitsrec.py\n@@ -1261,7 +1261,7 @@ def _scale_back_ascii(self, col_idx, input_field, output_field):\n \n         # Replace exponent separator in floating point numbers\n         if 'D' in format:\n-            output_field.replace(encode_ascii('E'), encode_ascii('D'))\n+            output_field[:] = output_field.replace(b'E', b'D')\n \n \n def _get_recarray_field(array, key):\n",
+    "our_patch": "diff --git a/astropy/io/fits/fitsrec.py b/astropy/io/fits/fitsrec.py\n--- a/astropy/io/fits/fitsrec.py\n+++ b/astropy/io/fits/fitsrec.py\n@@ -1261,7 +1261,7 @@\n \n         # Replace exponent separator in floating point numbers\n         if 'D' in format:\n-            output_field.replace(encode_ascii('E'), encode_ascii('D'))\n+            output_field[:] = output_field.replace(encode_ascii('E'), encode_ascii('D'))\n \n \n def _get_recarray_field(array, key):\n",
+    "final_iteration": 1,
+    "buggy_methods": [
+        "astropy/io/fits/fitsrec.py::_scale_back_ascii"
+    ],
+    "num_buggy_methods": 1
+}

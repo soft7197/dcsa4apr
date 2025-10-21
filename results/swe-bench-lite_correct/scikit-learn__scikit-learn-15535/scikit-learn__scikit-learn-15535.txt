@@ -1,0 +1,31 @@
+diff --git a/sklearn/metrics/cluster/_supervised.py b/sklearn/metrics/cluster/_supervised.py
+--- a/sklearn/metrics/cluster/_supervised.py
++++ b/sklearn/metrics/cluster/_supervised.py
+@@ -43,11 +43,17 @@
+         The predicted labels.
+     """
+     labels_true = check_array(
+-        labels_true, ensure_2d=False, ensure_min_samples=0
++        labels_true, ensure_2d=False, ensure_min_samples=0, dtype=None
+     )
+     labels_pred = check_array(
+-        labels_pred, ensure_2d=False, ensure_min_samples=0
++        labels_pred, ensure_2d=False, ensure_min_samples=0, dtype=None
+     )
++
++    # Ensure labels are converted to string type if they are object dtype
++    if labels_true.dtype == object:
++        labels_true = labels_true.astype(str)
++    if labels_pred.dtype == object:
++        labels_pred = labels_pred.astype(str)
+ 
+     # input checks
+     if labels_true.ndim != 1:
+@@ -59,6 +65,7 @@
+     check_consistent_length(labels_true, labels_pred)
+ 
+     return labels_true, labels_pred
++
+ 
+ 
+ def _generalized_average(U, V, average_method):

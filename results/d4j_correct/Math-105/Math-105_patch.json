@@ -1,0 +1,27 @@
+{
+    "bug_id": "Math-105",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-105_1756721439",
+    "patches": [
+        {
+            "hypothesis": "The method calculation can result in a negative value due to the division and subtraction operations. As the sum of squared errors should always be non-negative, the formula needs to be adjusted to ensure this invariant holds.",
+            "changes": "- return sumYY - sumXY * sumXY / sumXX;\n+ double sse = sumYY - sumXY * sumXY / sumXX;\n+ return Math.max(sse, 0.0);",
+            "fixed_method": "public double getSumSquaredErrors() {\n    double sse = sumYY - sumXY * sumXY / sumXX;\n    return Math.max(sse, 0.0);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,4 @@\n+public double getSumSquaredErrors() {\n+    double sse = sumYY - sumXY * sumXY / sumXX;\n+    return Math.max(sse, 0.0);\n+}",
+            "file_path": "src/java/org/apache/commons/math/stat/regression/SimpleRegression.java",
+            "method_name": "getSumSquaredErrors",
+            "class_name": "SimpleRegression",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                263,
+                264,
+                265
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-105_trace.json"
+}

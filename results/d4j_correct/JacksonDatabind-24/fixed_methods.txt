@@ -1,0 +1,12 @@
+### Fixed Method 1
+/**********************************************************
+*/
+public BaseSettings withDateFormat(DateFormat df) {
+    if (_dateFormat == df) {
+        return this;
+    }
+    // Do not use df.getTimeZone(), always keep the existing timezone
+    return new BaseSettings(_classIntrospector, _annotationIntrospector, _visibilityChecker, _propertyNamingStrategy, _typeFactory,
+            _typeResolverBuilder, df, _handlerInstantiator, _locale,
+            _timeZone, _defaultBase64);
+}

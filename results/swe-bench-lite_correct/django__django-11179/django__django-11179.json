@@ -1,0 +1,11 @@
+{
+    "bug_id": "django__django-11179",
+    "problem_statement": "delete() on instances of models without any dependencies doesn't clear PKs.\nDescription\n\t\nDeleting any model with no dependencies not updates the PK on the model. It should be set to None after .delete() call.\nSee Django.db.models.deletion:276-281. Should update the model line 280.\n",
+    "dev_patch": "diff --git a/django/db/models/deletion.py b/django/db/models/deletion.py\n--- a/django/db/models/deletion.py\n+++ b/django/db/models/deletion.py\n@@ -277,6 +277,7 @@ def delete(self):\n             if self.can_fast_delete(instance):\n                 with transaction.mark_for_rollback_on_error():\n                     count = sql.DeleteQuery(model).delete_batch([instance.pk], self.using)\n+                setattr(instance, model._meta.pk.attname, None)\n                 return count, {model._meta.label: count}\n \n         with transaction.atomic(using=self.using, savepoint=False):\n",
+    "our_patch": "diff --git a/django/db/models/deletion.py b/django/db/models/deletion.py\n--- a/django/db/models/deletion.py\n+++ b/django/db/models/deletion.py\n@@ -277,6 +277,8 @@\n             if self.can_fast_delete(instance):\n                 with transaction.mark_for_rollback_on_error():\n                     count = sql.DeleteQuery(model).delete_batch([instance.pk], self.using)\n+                # Set the PK to None after deletion\n+                setattr(instance, model._meta.pk.attname, None)\n                 return count, {model._meta.label: count}\n \n         with transaction.atomic(using=self.using, savepoint=False):\n",
+    "final_iteration": 1,
+    "buggy_methods": [
+        "django/db/models/deletion.py::delete"
+    ],
+    "num_buggy_methods": 1
+}

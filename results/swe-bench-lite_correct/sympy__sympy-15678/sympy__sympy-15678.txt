@@ -1,0 +1,47 @@
+diff --git a/sympy/geometry/util.py b/sympy/geometry/util.py
+--- a/sympy/geometry/util.py
++++ b/sympy/geometry/util.py
+@@ -565,26 +565,40 @@
+     sympy.core.function.diff: explicitly differentiates wrt symbols
+ 
+     """
++    from sympy import Eq
++
++    if isinstance(eq, Eq):
++        eq = eq.lhs - eq.rhs
++
+     if is_sequence(y):
+         dep = set(y)
+         y = y[0]
+-    elif isinstance(y, Symbol):
++    elif isinstance(y, (Symbol, Function)):
+         dep = {y}
+     else:
+         raise ValueError("expecting x-dependent symbol(s) but got: %s" % y)
+ 
++    if isinstance(y, Function):
++        y_func = y
++    else:
++        y_func = Function(y.name)(x)
++
+     f = dict([(s, Function(
+         s.name)(x)) for s in eq.free_symbols if s != x and s in dep])
+-    dydx = Function(y.name)(x).diff(x)
++    dydx = y_func.diff(x)
+     eq = eq.subs(f)
+     derivs = {}
+     for i in range(n):
+-        yp = solve(eq.diff(x), dydx)[0].subs(derivs)
++        solutions = solve(eq.diff(x), dydx)
++        if not solutions:
++            raise ValueError("No solution found for derivative.")
++        yp = solutions[0].subs(derivs)
+         if i == n - 1:
+             return yp.subs([(v, k) for k, v in f.items()])
+         derivs[dydx] = yp
+         eq = dydx - yp
+         dydx = dydx.diff(x)
++
+ 
+ 
+ def intersection(*entities, **kwargs):

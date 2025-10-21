@@ -1,0 +1,39 @@
+{
+    "bug_id": "JacksonDatabind-29",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-29_1757273273",
+    "patches": [
+        {
+            "hypothesis": "The issue arises when trying to deserialize a null value from a JSON object, as the deserialization process incorrectly tries to interpret a null value as a non-null structure. Both methods need to address this by checking if the token is JsonToken.VALUE_NULL and handling it appropriately by deserializing it as null instead. This prevents attempts to deserialize a null structure as a non-null object, which is causing the JsonMappingException.",
+            "methods": [
+                {
+                    "method_name": "_deserialize",
+                    "fixed_method": "protected final Object _deserialize(JsonParser p, DeserializationContext ctxt, int index, String typeId) throws IOException {\n    JsonParser p2 = _tokens[index].asParser(p);\n    JsonToken t = p2.nextToken();\n    // Special handling for nulls\n    if (t == JsonToken.VALUE_NULL) {\n        return null;\n    }\n    TokenBuffer merged = new TokenBuffer(p);\n    merged.writeStartArray();\n    merged.writeString(typeId);\n    merged.copyCurrentStructure(p2);\n    merged.writeEndArray();\n\n    // needs to point to START_OBJECT (or whatever first token is)\n    JsonParser mp = merged.asParser(p);\n    mp.nextToken();\n    return _properties[index].getProperty().deserialize(mp, ctxt);\n}",
+                    "diff": "--- original\n+++ fixed\n@@ -1,20 +1,18 @@\n+protected final Object _deserialize(JsonParser p, DeserializationContext ctxt, int index, String typeId) throws IOException {\n+    JsonParser p2 = _tokens[index].asParser(p);\n+    JsonToken t = p2.nextToken();\n+    // Special handling for nulls\n+    if (t == JsonToken.VALUE_NULL) {\n+        return null;\n+    }\n+    TokenBuffer merged = new TokenBuffer(p);\n+    merged.writeStartArray();\n+    merged.writeString(typeId);\n+    merged.copyCurrentStructure(p2);\n+    merged.writeEndArray();\n \n-    @SuppressWarnings(\"resource\")\n-    protected final Object _deserialize(JsonParser p, DeserializationContext ctxt,\n-            int index, String typeId) throws IOException\n-    {\n-        JsonParser p2 = _tokens[index].asParser(p);\n-        JsonToken t = p2.nextToken();\n-        // 29-Sep-2015, tatu: As per [databind#942], nulls need special support\n-\n-        TokenBuffer merged = new TokenBuffer(p);\n-        merged.writeStartArray();\n-        merged.writeString(typeId);\n-        merged.copyCurrentStructure(p2);\n-        merged.writeEndArray();\n-\n-        // needs to point to START_OBJECT (or whatever first token is)\n-        JsonParser mp = merged.asParser(p);\n-        mp.nextToken();\n-        return _properties[index].getProperty().deserialize(mp, ctxt);\n-    }\n+    // needs to point to START_OBJECT (or whatever first token is)\n+    JsonParser mp = merged.asParser(p);\n+    mp.nextToken();\n+    return _properties[index].getProperty().deserialize(mp, ctxt);\n+}",
+                    "line_numbers": [
+                        221,
+                        240
+                    ],
+                    "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/impl/ExternalTypeHandler.java"
+                },
+                {
+                    "method_name": "_deserializeAndSet",
+                    "fixed_method": "protected final void _deserializeAndSet(JsonParser p, DeserializationContext ctxt, Object bean, int index, String typeId) throws IOException {\n    JsonParser p2 = _tokens[index].asParser(p);\n    JsonToken t = p2.nextToken();\n    // Special handling for nulls\n    if (t == JsonToken.VALUE_NULL) {\n        _properties[index].getProperty().set(bean, null);\n        return;\n    }\n    TokenBuffer merged = new TokenBuffer(p);\n    merged.writeStartArray();\n    merged.writeString(typeId);\n    merged.copyCurrentStructure(p2);\n    merged.writeEndArray();\n    // needs to point to START_OBJECT (or whatever first token is)\n    JsonParser mp = merged.asParser(p);\n    mp.nextToken();\n    _properties[index].getProperty().deserializeAndSet(mp, ctxt, bean);\n}",
+                    "diff": "--- original\n+++ fixed\n@@ -1,22 +1,18 @@\n-\n-    @SuppressWarnings(\"resource\")\n-    protected final void _deserializeAndSet(JsonParser p, DeserializationContext ctxt,\n-            Object bean, int index, String typeId) throws IOException\n-    {\n-        /* Ok: time to mix type id, value; and we will actually use \"wrapper-array\"\n-         * style to ensure we can handle all kinds of JSON constructs.\n-         */\n-        JsonParser p2 = _tokens[index].asParser(p);\n-        JsonToken t = p2.nextToken();\n-        // 29-Sep-2015, tatu: As per [databind#942], nulls need special support\n-        TokenBuffer merged = new TokenBuffer(p);\n-        merged.writeStartArray();\n-        merged.writeString(typeId);\n-        \n-        merged.copyCurrentStructure(p2);\n-        merged.writeEndArray();\n-        // needs to point to START_OBJECT (or whatever first token is)\n-        JsonParser mp = merged.asParser(p);\n-        mp.nextToken();\n-        _properties[index].getProperty().deserializeAndSet(mp, ctxt, bean);\n+protected final void _deserializeAndSet(JsonParser p, DeserializationContext ctxt, Object bean, int index, String typeId) throws IOException {\n+    JsonParser p2 = _tokens[index].asParser(p);\n+    JsonToken t = p2.nextToken();\n+    // Special handling for nulls\n+    if (t == JsonToken.VALUE_NULL) {\n+        _properties[index].getProperty().set(bean, null);\n+        return;\n     }\n+    TokenBuffer merged = new TokenBuffer(p);\n+    merged.writeStartArray();\n+    merged.writeString(typeId);\n+    merged.copyCurrentStructure(p2);\n+    merged.writeEndArray();\n+    // needs to point to START_OBJECT (or whatever first token is)\n+    JsonParser mp = merged.asParser(p);\n+    mp.nextToken();\n+    _properties[index].getProperty().deserializeAndSet(mp, ctxt, bean);\n+}",
+                    "line_numbers": [
+                        241,
+                        262
+                    ],
+                    "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/impl/ExternalTypeHandler.java"
+                }
+            ],
+            "is_multi_method": true,
+            "coordination_notes": "",
+            "methods_count": 2
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-29_trace.json"
+}

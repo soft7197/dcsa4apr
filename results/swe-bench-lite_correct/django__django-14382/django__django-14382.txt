@@ -1,0 +1,20 @@
+diff --git a/django/core/management/templates.py b/django/core/management/templates.py
+--- a/django/core/management/templates.py
++++ b/django/core/management/templates.py
+@@ -73,6 +73,8 @@
+             except OSError as e:
+                 raise CommandError(e)
+         else:
++            # Remove trailing slashes from target
++            target = target.rstrip(os.sep)
+             if app_or_project == 'app':
+                 self.validate_name(os.path.basename(target), 'directory')
+             top_dir = os.path.abspath(os.path.expanduser(target))
+@@ -181,6 +183,7 @@
+                     os.remove(path_to_remove)
+                 else:
+                     shutil.rmtree(path_to_remove)
++
+ 
+     def handle_template(self, template, subdir):
+         """

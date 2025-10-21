@@ -1,0 +1,11 @@
+{
+    "bug_id": "sympy__sympy-20212",
+    "problem_statement": "0**-oo produces 0, the documentation says it should produce zoo\nUsing SymPy 1.5.1, evaluate `0**-oo` produces `0`.\r\n\r\nThe documentation for the Pow class states that it should return `ComplexInfinity`, aka `zoo`\r\n\r\n| expr | value | reason |\r\n| :-- | :-- | :--|\r\n| `0**-oo` | `zoo` | This is not strictly true, as 0**oo may be oscillating between positive and negative values or rotating in the complex plane. It is convenient, however, when the base is positive.|\r\n\n",
+    "dev_patch": "diff --git a/sympy/core/power.py b/sympy/core/power.py\n--- a/sympy/core/power.py\n+++ b/sympy/core/power.py\n@@ -291,6 +291,8 @@ def __new__(cls, b, e, evaluate=None):\n             ).warn()\n \n         if evaluate:\n+            if b is S.Zero and e is S.NegativeInfinity:\n+                return S.ComplexInfinity\n             if e is S.ComplexInfinity:\n                 return S.NaN\n             if e is S.Zero:\n",
+    "our_patch": "diff --git a/sympy/core/power.py b/sympy/core/power.py\n--- a/sympy/core/power.py\n+++ b/sympy/core/power.py\n@@ -299,6 +299,8 @@\n                 return b\n             elif e == -1 and not b:\n                 return S.ComplexInfinity\n+            elif b is S.Zero and e is S.NegativeInfinity:\n+                return S.ComplexInfinity\n             # Only perform autosimplification if exponent or base is a Symbol or number\n             elif (b.is_Symbol or b.is_number) and (e.is_Symbol or e.is_number) and\\\n                 e.is_integer and _coeff_isneg(b):\n@@ -335,6 +337,7 @@\n             return obj\n         obj.is_commutative = (b.is_commutative and e.is_commutative)\n         return obj\n+\n \n     @property\n     def base(self):\n",
+    "final_iteration": 1,
+    "buggy_methods": [
+        "sympy/core/power.py::__new__"
+    ],
+    "num_buggy_methods": 1
+}

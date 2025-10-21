@@ -1,0 +1,27 @@
+{
+    "bug_id": "Codec-17",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Codec-17_1756720742",
+    "patches": [
+        {
+            "hypothesis": "The method newStringIso8859_1 does not handle the case where the input byte array is null, which results in a NullPointerException. To fix this, we need to check if the input byte array is null and handle it appropriately.",
+            "changes": "- return new String(bytes, Charsets.ISO_8859_1);\n+ if (bytes == null) {\n+     return null;\n+ }\n+ return new String(bytes, Charsets.ISO_8859_1);",
+            "fixed_method": "public static String newStringIso8859_1(final byte[] bytes) {\n    if (bytes == null) {\n        return null;\n    }\n    return new String(bytes, Charsets.ISO_8859_1);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,6 @@\n+public static String newStringIso8859_1(final byte[] bytes) {\n+    if (bytes == null) {\n+        return null;\n+    }\n+    return new String(bytes, Charsets.ISO_8859_1);\n+}",
+            "file_path": "src/main/java/org/apache/commons/codec/binary/StringUtils.java",
+            "method_name": "newStringIso8859_1",
+            "class_name": "StringUtils",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                338,
+                339,
+                340
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Codec-17_trace.json"
+}

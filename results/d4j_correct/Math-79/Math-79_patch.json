@@ -1,0 +1,32 @@
+{
+  "bug_id": "Math-79",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-79_1756719413",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "public static double distance(int[] p1, int[] p2) {\n  double sum = 0;\n  for (int i = 0; i < p1.length; i++) {\n      final double dp = p1[i] - p2[i];\n      sum += dp * dp;\n  }\n  return Math.sqrt(sum);\n}",
+      "diff": "",
+      "file_path": "src/main/java/org/apache/commons/math/util/MathUtils.java",
+      "method_name": "distance",
+      "class_name": "MathUtils",
+      "iteration": 1,
+      "is_multi_method": false,
+      "line_numbers": [
+        1623,
+        1624,
+        1625,
+        1626,
+        1627,
+        1628,
+        1629,
+        1630
+      ]
+    }
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/Math-79_trace.json"
+}

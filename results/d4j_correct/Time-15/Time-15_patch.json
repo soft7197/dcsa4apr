@@ -1,0 +1,39 @@
+{
+    "bug_id": "Time-15",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Time-15_1756895497",
+    "patches": [
+        {
+            "hypothesis": "The method fails to correctly handle overflow cases when multiplying a long by an int. The check `total / val2 != val1` is not sufficient to detect overflow in all cases, especially when `val2` is negative.",
+            "changes": "- if (total / val2 != val1) {\n+ if ((val2 != 0 && total / val2 != val1) || (val1 == Long.MIN_VALUE && val2 == -1)) {",
+            "fixed_method": "public static long safeMultiply(long val1, int val2) {\n    switch (val2) {\n        case -1:\n            if (val1 == Long.MIN_VALUE) {\n                throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n            }\n            return -val1;\n        case 0:\n            return 0L;\n        case 1:\n            return val1;\n    }\n    long total = val1 * val2;\n    if ((val2 != 0 && total / val2 != val1) || (val1 == Long.MIN_VALUE && val2 == -1)) {\n        throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n    }\n    return total;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,18 @@\n+public static long safeMultiply(long val1, int val2) {\n+    switch (val2) {\n+        case -1:\n+            if (val1 == Long.MIN_VALUE) {\n+                throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n+            }\n+            return -val1;\n+        case 0:\n+            return 0L;\n+        case 1:\n+            return val1;\n+    }\n+    long total = val1 * val2;\n+    if ((val2 != 0 && total / val2 != val1) || (val1 == Long.MIN_VALUE && val2 == -1)) {\n+        throw new ArithmeticException(\"Multiplication overflows a long: \" + val1 + \" * \" + val2);\n+    }\n+    return total;\n+}",
+            "file_path": "src/main/java/org/joda/time/field/FieldUtils.java",
+            "method_name": "safeMultiply",
+            "class_name": "FieldUtils",
+            "iteration": 2,
+            "is_multi_method": false,
+            "line_numbers": [
+                135,
+                136,
+                137,
+                138,
+                139,
+                140,
+                141,
+                142,
+                143,
+                144,
+                145,
+                146,
+                147,
+                148,
+                149
+            ]
+        }
+    ],
+    "iterations": 2,
+    "monitor_file": "traces/Time-15_trace.json"
+}

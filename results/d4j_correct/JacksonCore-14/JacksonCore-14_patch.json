@@ -1,0 +1,62 @@
+{
+  "bug_id": "JacksonCore-14",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonCore-14_1756719413",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "    protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(); }\n    }\n",
+      "diff": "",
+      "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+      "method_name": "_verifyRelease",
+      "class_name": "IOContext",
+      "iteration": 1,
+      "is_multi_method": true,
+      "line_numbers": [
+        272,
+        273,
+        274,
+        275
+      ]
+    },
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "    protected final void _verifyRelease(char[] toRelease, char[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(); }\n    }\n",
+      "diff": "",
+      "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+      "method_name": "_verifyRelease",
+      "class_name": "IOContext",
+      "iteration": 1,
+      "is_multi_method": true,
+      "line_numbers": [
+        277,
+        278,
+        279,
+        280
+      ]
+    },
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "    private IllegalArgumentException wrongBuf() {\n        // sanity check failed; trying to return different, smaller buffer.\n        return new IllegalArgumentException(\"Trying to release buffer smaller than original\");\n    }\n",
+      "diff": "",
+      "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+      "method_name": "wrongBuf",
+      "class_name": "IOContext",
+      "iteration": 1,
+      "is_multi_method": true,
+      "line_numbers": [
+        282,
+        283,
+        284,
+        285
+      ]
+    }
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/JacksonCore-14_trace.json"
+}

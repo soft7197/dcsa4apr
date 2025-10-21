@@ -1,0 +1,18 @@
+diff --git a/sympy/geometry/point.py b/sympy/geometry/point.py
+--- a/sympy/geometry/point.py
++++ b/sympy/geometry/point.py
+@@ -275,8 +275,13 @@
+         sympy.geometry.point.Point.scale
+         """
+         factor = sympify(factor)
+-        coords = [simplify(x*factor) for x in self.args]
++        if isinstance(factor, Point):
++            raise TypeError("Cannot multiply a Point by a Point")
++        coords = [simplify(x * factor) for x in self.args]
+         return Point(coords, evaluate=False)
++
++    def __rmul__(self, factor):
++        return self.__mul__(factor)
+ 
+     def __neg__(self):
+         """Negate the point."""

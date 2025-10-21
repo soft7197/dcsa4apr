@@ -1,0 +1,43 @@
+{
+  "bug_id": "Closure-11",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-11_1756719413",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "private void visitGetProp(NodeTraversal t, Node n, Node parent) {\n\n  Node property = n.getLastChild();\n  Node objNode = n.getFirstChild();\n  JSType childType = getJSType(objNode);\n\n  if (childType.isDict()) {\n    report(t, property, TypeValidator.ILLEGAL_PROPERTY_ACCESS, \"'.'\", \"dict\");\n  } else if (validator.expectNotNullOrUndefined(t, n, childType,\n      \"No properties on this expression\", getNativeType(OBJECT_TYPE))) {\n    checkPropertyAccess(childType, property.getString(), t, n);\n  }\n  ensureTyped(t, n);\n}",
+      "diff": "",
+      "file_path": "src/com/google/javascript/jscomp/TypeCheck.java",
+      "method_name": "visitGetProp",
+      "class_name": "TypeCheck",
+      "iteration": 1,
+      "is_multi_method": false,
+      "line_numbers": [
+        1303,
+        1304,
+        1305,
+        1306,
+        1307,
+        1308,
+        1309,
+        1310,
+        1311,
+        1312,
+        1313,
+        1314,
+        1315,
+        1316,
+        1317,
+        1318,
+        1319,
+        1320,
+        1321
+      ]
+    }
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/Closure-11_trace.json"
+}

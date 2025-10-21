@@ -1,0 +1,35 @@
+{
+    "bug_id": "Jsoup-70",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-70_1756721245",
+    "patches": [
+        {
+            "hypothesis": "The method `preserveWhitespace` does not adequately check all necessary levels up the hierarchy to determine if whitespace should be preserved, stopping prematurely at the parent level. The logic should allow checking up to five levels, as indicated in the comment, but currently it only checks one level up.",
+            "changes": "- return el.parent() != null && el.parent().tag.preserveWhitespace();\n+ Node parent = el.parent();\n+ int level = 0;\n+ while (parent != null && level < 5) {\n+     if (parent instanceof Element && ((Element) parent).tag.preserveWhitespace()) {\n+         return true;\n+     }\n+     parent = parent.parent();\n+     level++;\n+ }\n+ return false;",
+            "fixed_method": "static boolean preserveWhitespace(Node node) {\n    // looks only at this element and five levels up, to prevent recursion & needless stack searches\n    if (node != null && node instanceof Element) {\n        Element el = (Element) node;\n        if (el.tag.preserveWhitespace())\n            return true;\n        else {\n            Node parent = el.parent();\n            int level = 0;\n            while (parent != null && level < 5) {\n                if (parent instanceof Element && ((Element) parent).tag.preserveWhitespace()) {\n                    return true;\n                }\n                parent = parent.parent();\n                level++;\n            }\n        }\n    }\n    return false;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,20 @@\n+static boolean preserveWhitespace(Node node) {\n+    // looks only at this element and five levels up, to prevent recursion & needless stack searches\n+    if (node != null && node instanceof Element) {\n+        Element el = (Element) node;\n+        if (el.tag.preserveWhitespace())\n+            return true;\n+        else {\n+            Node parent = el.parent();\n+            int level = 0;\n+            while (parent != null && level < 5) {\n+                if (parent instanceof Element && ((Element) parent).tag.preserveWhitespace()) {\n+                    return true;\n+                }\n+                parent = parent.parent();\n+                level++;\n+            }\n+        }\n+    }\n+    return false;\n+}",
+            "file_path": "src/main/java/org/jsoup/nodes/Element.java",
+            "method_name": "preserveWhitespace",
+            "class_name": "Element",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                1087,
+                1088,
+                1089,
+                1090,
+                1091,
+                1092,
+                1093,
+                1094,
+                1095,
+                1096,
+                1097
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Jsoup-70_trace.json"
+}

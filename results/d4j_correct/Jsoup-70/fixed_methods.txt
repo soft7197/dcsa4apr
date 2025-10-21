@@ -1,0 +1,21 @@
+### Fixed Method 1
+static boolean preserveWhitespace(Node node) {
+    // looks only at this element and five levels up, to prevent recursion & needless stack searches
+    if (node != null && node instanceof Element) {
+        Element el = (Element) node;
+        if (el.tag.preserveWhitespace())
+            return true;
+        else {
+            Node parent = el.parent();
+            int level = 0;
+            while (parent != null && level < 5) {
+                if (parent instanceof Element && ((Element) parent).tag.preserveWhitespace()) {
+                    return true;
+                }
+                parent = parent.parent();
+                level++;
+            }
+        }
+    }
+    return false;
+}

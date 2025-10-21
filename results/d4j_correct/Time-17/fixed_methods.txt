@@ -1,0 +1,18 @@
+### Fixed Method 1
+public long adjustOffset(long instant, boolean earlierOrLater) {
+    // Calculate the local time of the given instant
+    long localTime = convertUTCToLocal(instant);
+
+    // Determine the UTC instant for both the earlier and later offsets
+    long earlierInstant = convertLocalToUTC(localTime, false, instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);
+    long laterInstant = convertLocalToUTC(localTime, false, instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);
+
+    // Determine if there is an overlap
+    if (earlierInstant != laterInstant) {
+        // Choose between earlier or later based on the flag
+        return earlierOrLater ? laterInstant : earlierInstant;
+    }
+
+    // Not in an overlap, return the original instant
+    return instant;
+}

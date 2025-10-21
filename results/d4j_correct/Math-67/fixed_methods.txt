@@ -1,0 +1,16 @@
+### Fixed Method 1
+public double getFunctionValue() {
+    if (optima == null || optima.length == 0) {
+        throw new IllegalStateException("No optimization has been performed or all optimizations failed.");
+    }
+    return optimaValues[0]; // Assuming optima is sorted with the best solution first.
+}
+
+
+### Fixed Method 2
+public double getResult() {
+    if (optima == null || optima.length == 0) {
+        throw new IllegalStateException("No optimization has been performed or all optimizations failed.");
+    }
+    return optima[0]; // Assuming optima is sorted with the best solution first.
+}

@@ -1,0 +1,11 @@
+{
+    "bug_id": "sympy__sympy-15609",
+    "problem_statement": "Indexed matrix-expression LaTeX printer is not compilable\n```python\r\ni, j, k = symbols(\"i j k\")\r\nM = MatrixSymbol(\"M\", k, k)\r\nN = MatrixSymbol(\"N\", k, k)\r\nlatex((M*N)[i, j])\r\n```\r\n\r\nThe LaTeX string produced by the last command is:\r\n```\r\n\\sum_{i_{1}=0}^{k - 1} M_{i, _i_1} N_{_i_1, j}\r\n```\r\nLaTeX complains about a double subscript `_`. This expression won't render in MathJax either.\n",
+    "dev_patch": "diff --git a/sympy/printing/latex.py b/sympy/printing/latex.py\n--- a/sympy/printing/latex.py\n+++ b/sympy/printing/latex.py\n@@ -1438,7 +1438,10 @@ def _print_MatrixBase(self, expr):\n \n     def _print_MatrixElement(self, expr):\n         return self.parenthesize(expr.parent, PRECEDENCE[\"Atom\"], strict=True) \\\n-            + '_{%s, %s}' % (expr.i, expr.j)\n+            + '_{%s, %s}' % (\n+            self._print(expr.i),\n+            self._print(expr.j)\n+        )\n \n     def _print_MatrixSlice(self, expr):\n         def latexslice(x):\n",
+    "our_patch": "diff --git a/sympy/printing/latex.py b/sympy/printing/latex.py\n--- a/sympy/printing/latex.py\n+++ b/sympy/printing/latex.py\n@@ -1437,8 +1437,8 @@\n                            = _print_MatrixBase\n \n     def _print_MatrixElement(self, expr):\n-        return self.parenthesize(expr.parent, PRECEDENCE[\"Atom\"], strict=True) \\\n-            + '_{%s, %s}' % (expr.i, expr.j)\n+        i, j = expr.i, expr.j\n+        return self.parenthesize(expr.parent, PRECEDENCE['Atom'], strict=True) + '_{%s, %s}' % (self._print(i), self._print(j))\n \n     def _print_MatrixSlice(self, expr):\n         def latexslice(x):\n",
+    "final_iteration": 1,
+    "buggy_methods": [
+        "sympy/printing/latex.py::_print_MatrixBase"
+    ],
+    "num_buggy_methods": 1
+}

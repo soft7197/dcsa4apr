@@ -1,0 +1,45 @@
+{
+  "bug_id": "JacksonDatabind-41",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-41_1756719413",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "    @Deprecated\n    public JavaType constructType(Type type, Class<?> contextClass) {\n        TypeBindings bindings = (contextClass == null)\n                ? TypeBindings.emptyBindings() : constructType(contextClass).getBindings();\n        return _fromAny(null, type, bindings);\n    }\n",
+      "diff": "",
+      "file_path": "src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java",
+      "method_name": "@Deprecated",
+      "class_name": "TypeFactory",
+      "iteration": 1,
+      "is_multi_method": true,
+      "line_numbers": [
+        600,
+        601,
+        602,
+        603
+      ]
+    },
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "    @Deprecated\n    public JavaType constructType(Type type, JavaType contextType) {\n        TypeBindings bindings = (contextType == null)\n                ? TypeBindings.emptyBindings() : contextType.getBindings();\n        return _fromAny(null, type, bindings);\n    }\n",
+      "diff": "",
+      "file_path": "src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java",
+      "method_name": "@Deprecated",
+      "class_name": "TypeFactory",
+      "iteration": 1,
+      "is_multi_method": true,
+      "line_numbers": [
+        608,
+        609,
+        610,
+        611
+      ]
+    }
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/JacksonDatabind-41_trace.json"
+}

@@ -1,0 +1,31 @@
+{
+    "bug_id": "Mockito-29",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Mockito-29_1756721777",
+    "patches": [
+        {
+            "hypothesis": "The NullPointerException occurs because the 'wanted' object is likely null, and calling 'toString()' on a null object results in a NullPointerException. The code should handle the null case gracefully by appending 'null' instead of calling 'toString()' when 'wanted' is null.",
+            "changes": "- description.appendText(wanted.toString());\n+ description.appendText(wanted == null ? \"null\" : wanted.toString());",
+            "fixed_method": "public void describeTo(Description description) {\n    description.appendText(\"same(\");\n    appendQuoting(description);\n    description.appendText(wanted == null ? \"null\" : wanted.toString());\n    appendQuoting(description);\n    description.appendText(\")\");\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,7 @@\n+public void describeTo(Description description) {\n+    description.appendText(\"same(\");\n+    appendQuoting(description);\n+    description.appendText(wanted == null ? \"null\" : wanted.toString());\n+    appendQuoting(description);\n+    description.appendText(\")\");\n+}",
+            "file_path": "src/org/mockito/internal/matchers/Same.java",
+            "method_name": "describeTo",
+            "class_name": "Same",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Mockito-29_trace.json"
+}

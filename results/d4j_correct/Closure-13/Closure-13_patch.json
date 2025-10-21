@@ -1,0 +1,50 @@
+{
+  "bug_id": "Closure-13",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-13_1756719413",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "private void traverse(Node node) {\n\n  if (!shouldVisit(node)) {\n    return;\n  }\n\n  int visits = 0;\n  do {\n    Node c = node.getFirstChild();\n    while(c != null) {\n      Node next = c.getNext();\n      traverse(c);\n      c = next;\n    }\n\n    visit(node);\n    visits++;\n\n    Preconditions.checkState(visits < 10000, \"too many interations\");\n  } while (shouldRetraverse(node));\n\n  exitNode(node);\n}",
+      "diff": "",
+      "file_path": "src/com/google/javascript/jscomp/PeepholeOptimizationsPass.java",
+      "method_name": "traverse",
+      "class_name": "PeepholeOptimizationsPass",
+      "iteration": 1,
+      "is_multi_method": false,
+      "line_numbers": [
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138
+      ]
+    }
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/Closure-13_trace.json"
+}

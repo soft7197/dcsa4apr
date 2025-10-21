@@ -1,0 +1,42 @@
+{
+    "bug_id": "Closure-166",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Closure-166_1757161050",
+    "patches": [
+        {
+            "hypothesis": "The method fails to match constraints and update the object type properly. It only matches constraints when the input constraint is a record type but does not handle scenarios when the constraint is a union of record types. This results in the output object having no matched properties, leading to failed test expectations.",
+            "fixed_method": "// to avoid guessing.\npublic void matchConstraint(JSType constraint) {\n  // We only want to match constraints on anonymous types.\n  if (hasReferenceName()) {\n    return;\n  }\n\n  // Unwrap the union type into individual record types.\n  if (constraint.isUnionType()) {\n    for (JSType alt : constraint.toMaybeUnionType().getAlternates()) {\n      matchConstraint(alt);\n    }\n    return;\n  }\n\n  // Handle the case where the constraint object is a record type.\n  //\n  // param constraint {{prop: (number|undefined)}}\n  // function f(constraint) {}\n  // f({});\n  //\n  // We want to modify the object literal to match the constraint, by\n  // taking any each property on the record and trying to match\n  // properties on this object.\n  if (constraint.isRecordType()) {\n    matchRecordTypeConstraint(constraint.toObjectType());\n  }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -2,6 +2,14 @@\n public void matchConstraint(JSType constraint) {\n   // We only want to match constraints on anonymous types.\n   if (hasReferenceName()) {\n+    return;\n+  }\n+\n+  // Unwrap the union type into individual record types.\n+  if (constraint.isUnionType()) {\n+    for (JSType alt : constraint.toMaybeUnionType().getAlternates()) {\n+      matchConstraint(alt);\n+    }\n     return;\n   }\n \n",
+            "file_path": "src/com/google/javascript/rhino/jstype/PrototypeObjectType.java",
+            "method_name": "matchConstraint",
+            "class_name": "PrototypeObjectType",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                556,
+                557,
+                558,
+                559,
+                560,
+                561,
+                562,
+                563,
+                564,
+                565,
+                566,
+                567,
+                568,
+                569,
+                570,
+                571,
+                572,
+                573,
+                574
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Closure-166_trace.json"
+}

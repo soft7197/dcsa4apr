@@ -1,0 +1,52 @@
+{
+    "bug_id": "Lang-43",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Lang-43_1756864236",
+    "patches": [
+        {
+            "hypothesis": "The method is causing an infinite loop due to incorrect handling of the parse position when processing escaped quotes. The position is not being updated correctly, leading to repeated processing of the same characters and eventually causing an OutOfMemoryError.",
+            "changes": "Correct the update of the parse position when an escaped quote is detected, and ensure the loop progresses correctly.",
+            "fixed_method": "private StringBuffer appendQuotedString(String pattern, ParsePosition pos, StringBuffer appendTo, boolean escapingOn) {\n    int start = pos.getIndex();\n    char[] c = pattern.toCharArray();\n    if (escapingOn && c[start] == QUOTE) {\n        pos.setIndex(start + 1); // Move past the initial quote\n        return appendTo == null ? null : appendTo.append(QUOTE);\n    }\n    int lastHold = start;\n    for (int i = pos.getIndex(); i < pattern.length(); i++) {\n        if (escapingOn && pattern.substring(i).startsWith(ESCAPED_QUOTE)) {\n            appendTo.append(c, lastHold, i - lastHold).append(QUOTE);\n            i += ESCAPED_QUOTE.length() - 1; // Move past the escaped quote\n            pos.setIndex(i + 1);\n            lastHold = pos.getIndex();\n            continue;\n        }\n        switch (c[i]) {\n        case QUOTE:\n            pos.setIndex(i + 1); // Move past the closing quote\n            return appendTo == null ? null : appendTo.append(c, lastHold, i - lastHold);\n        default:\n            pos.setIndex(i + 1);\n        }\n    }\n    throw new IllegalArgumentException(\n            \"Unterminated quoted string at position \" + start);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,27 @@\n+private StringBuffer appendQuotedString(String pattern, ParsePosition pos, StringBuffer appendTo, boolean escapingOn) {\n+    int start = pos.getIndex();\n+    char[] c = pattern.toCharArray();\n+    if (escapingOn && c[start] == QUOTE) {\n+        pos.setIndex(start + 1); // Move past the initial quote\n+        return appendTo == null ? null : appendTo.append(QUOTE);\n+    }\n+    int lastHold = start;\n+    for (int i = pos.getIndex(); i < pattern.length(); i++) {\n+        if (escapingOn && pattern.substring(i).startsWith(ESCAPED_QUOTE)) {\n+            appendTo.append(c, lastHold, i - lastHold).append(QUOTE);\n+            i += ESCAPED_QUOTE.length() - 1; // Move past the escaped quote\n+            pos.setIndex(i + 1);\n+            lastHold = pos.getIndex();\n+            continue;\n+        }\n+        switch (c[i]) {\n+        case QUOTE:\n+            pos.setIndex(i + 1); // Move past the closing quote\n+            return appendTo == null ? null : appendTo.append(c, lastHold, i - lastHold);\n+        default:\n+            pos.setIndex(i + 1);\n+        }\n+    }\n+    throw new IllegalArgumentException(\n+            \"Unterminated quoted string at position \" + start);\n+}",
+            "file_path": "src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java",
+            "method_name": "appendQuotedString",
+            "class_name": "ExtendedMessageFormat",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                417,
+                418,
+                419,
+                420,
+                421,
+                422,
+                423,
+                424,
+                425,
+                426,
+                427,
+                428,
+                429,
+                430,
+                431,
+                432,
+                433,
+                434,
+                435,
+                436,
+                437,
+                438,
+                439,
+                440,
+                441,
+                442,
+                443,
+                444
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Lang-43_trace.json"
+}

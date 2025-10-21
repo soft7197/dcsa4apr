@@ -1,0 +1,49 @@
+### Fixed patch 
+    @Override
+    public OpenMapRealVector ebeDivide(RealVector v) {
+        checkVectorDimensions(v.getDimension());
+        OpenMapRealVector res = new OpenMapRealVector(this);
+        for (int i = 0; i < getDimension(); i++) {
+            double value = getEntry(i) / v.getEntry(i);
+            res.setEntry(i, value);
+        }
+        return res;
+    }
+    /** {@inheritDoc} */
+
+    @Override
+    public OpenMapRealVector ebeMultiply(RealVector v) {
+        checkVectorDimensions(v.getDimension());
+        OpenMapRealVector res = new OpenMapRealVector(this);
+        Iterator iter = entries.iterator();
+        while (iter.hasNext()) {
+            iter.advance();
+            double thisValue = iter.value();
+            double vValue = v.getEntry(iter.key());
+            double resultValue;
+
+            // If either is NaN, the result should be NaN
+            if (Double.isNaN(thisValue) || Double.isNaN(vValue)) {
+                resultValue = Double.NaN;
+            } else if ((thisValue == 0.0 && (Double.isInfinite(vValue))) || 
+                       (vValue == 0.0 && (Double.isInfinite(thisValue)))) {
+                // Handle the case where one is zero and the other is infinite
+                resultValue = Double.NaN;
+            } else {
+                // Regular multiplication
+                resultValue = thisValue * vValue;
+            }
+
+            res.setEntry(iter.key(), resultValue);
+        }
+
+        // Handle any remaining entries in 'v' that might be NaN/Infinity
+        for (int i = 0; i < v.getDimension(); i++) {
+            if (!entries.containsKey(i) && (Double.isNaN(v.getEntry(i)) || Double.isInfinite(v.getEntry(i)))) {
+                // If 'this' has a zero entry, set NaN for NaN or Infinity in 'v'
+                res.setEntry(i, Double.NaN);
+            }
+        }
+
+        return res;
+    }

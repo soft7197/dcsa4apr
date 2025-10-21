@@ -1,0 +1,11 @@
+{
+    "bug_id": "django__django-13447",
+    "problem_statement": "Added model class to app_list context\nDescription\n\t \n\t\t(last modified by Raffaele Salmaso)\n\t \nI need to manipulate the app_list in my custom admin view, and the easiest way to get the result is to have access to the model class (currently the dictionary is a serialized model).\nIn addition I would make the _build_app_dict method public, as it is used by the two views index and app_index.\n",
+    "dev_patch": "diff --git a/django/contrib/admin/sites.py b/django/contrib/admin/sites.py\n--- a/django/contrib/admin/sites.py\n+++ b/django/contrib/admin/sites.py\n@@ -461,6 +461,7 @@ def _build_app_dict(self, request, label=None):\n \n             info = (app_label, model._meta.model_name)\n             model_dict = {\n+                'model': model,\n                 'name': capfirst(model._meta.verbose_name_plural),\n                 'object_name': model._meta.object_name,\n                 'perms': perms,\n",
+    "our_patch": "diff --git a/django/contrib/admin/sites.py b/django/contrib/admin/sites.py\n--- a/django/contrib/admin/sites.py\n+++ b/django/contrib/admin/sites.py\n@@ -466,6 +466,7 @@\n                 'perms': perms,\n                 'admin_url': None,\n                 'add_url': None,\n+                'model': model,  # Include the model class here\n             }\n             if perms.get('change') or perms.get('view'):\n                 model_dict['view_only'] = not perms.get('change')\n@@ -498,6 +499,7 @@\n             return app_dict.get(label)\n         return app_dict\n \n+\n     def get_app_list(self, request):\n         \"\"\"\n         Return a sorted list of all the installed apps that have been\n",
+    "final_iteration": 1,
+    "buggy_methods": [
+        "django/contrib/admin/sites.py::_build_app_dict"
+    ],
+    "num_buggy_methods": 1
+}

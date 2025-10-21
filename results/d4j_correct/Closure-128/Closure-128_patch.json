@@ -1,0 +1,34 @@
+{
+    "bug_id": "Closure-128",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Closure-128_1756719509",
+    "patches": [
+        {
+            "hypothesis": "The method is not correctly identifying numbers with leading zeros as non-simple numbers. It should return false for strings like '0', '00', '01', etc., but currently it incorrectly returns true for '0'.",
+            "changes": "- return len > 0 && s.charAt(0) != '0';\n+ return len > 0 && (len == 1 || s.charAt(0) != '0');",
+            "fixed_method": "static boolean isSimpleNumber(String s) {\n  int len = s.length();\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (c < '0' || c > '9') {\n      return false;\n    }\n  }\n  return len > 0 && (len == 1 || s.charAt(0) != '0');\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,10 @@\n+static boolean isSimpleNumber(String s) {\n+  int len = s.length();\n+  for (int index = 0; index < len; index++) {\n+    char c = s.charAt(index);\n+    if (c < '0' || c > '9') {\n+      return false;\n+    }\n+  }\n+  return len > 0 && (len == 1 || s.charAt(0) != '0');\n+}",
+            "file_path": "src/com/google/javascript/jscomp/CodeGenerator.java",
+            "method_name": "isSimpleNumber",
+            "class_name": "CodeGenerator",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                783,
+                784,
+                785,
+                786,
+                787,
+                788,
+                789,
+                790,
+                791,
+                792
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Closure-128_trace.json"
+}

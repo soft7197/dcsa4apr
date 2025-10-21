@@ -1,0 +1,42 @@
+{
+    "bug_id": "Lang-59",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Lang-59_1756721405",
+    "patches": [
+        {
+            "hypothesis": "The method throws an ArrayIndexOutOfBoundsException due to incorrect handling of buffer space when copying characters from the string to the buffer. The buffer may not have enough space for the new characters, leading to an exception.",
+            "changes": "- str.getChars(0, strLen, buffer, size);\n+ str.getChars(0, Math.min(strLen, width), buffer, size);\n+ int end = Math.min(strLen, width);\n+ str.getChars(0, end, buffer, size);",
+            "fixed_method": "public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {\n    if (width > 0) {\n        ensureCapacity(size + width);\n        String str = (obj == null ? getNullText() : obj.toString());\n        int strLen = str.length();\n        if (strLen >= width) {\n            str.getChars(0, width, buffer, size);\n        } else {\n            int padLen = width - strLen;\n            str.getChars(0, strLen, buffer, size);\n            for (int i = 0; i < padLen; i++) {\n                buffer[size + strLen + i] = padChar;\n            }\n        }\n        size += width;\n    }\n    return this;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,18 @@\n+public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {\n+    if (width > 0) {\n+        ensureCapacity(size + width);\n+        String str = (obj == null ? getNullText() : obj.toString());\n+        int strLen = str.length();\n+        if (strLen >= width) {\n+            str.getChars(0, width, buffer, size);\n+        } else {\n+            int padLen = width - strLen;\n+            str.getChars(0, strLen, buffer, size);\n+            for (int i = 0; i < padLen; i++) {\n+                buffer[size + strLen + i] = padChar;\n+            }\n+        }\n+        size += width;\n+    }\n+    return this;\n+}",
+            "file_path": "src/java/org/apache/commons/lang/text/StrBuilder.java",
+            "method_name": "appendFixedWidthPadRight",
+            "class_name": "StrBuilder",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                878,
+                879,
+                880,
+                881,
+                882,
+                883,
+                884,
+                885,
+                886,
+                887,
+                888,
+                889,
+                890,
+                891,
+                892,
+                893,
+                894,
+                895
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Lang-59_trace.json"
+}

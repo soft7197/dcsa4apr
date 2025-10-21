@@ -1,0 +1,19 @@
+### Fixed Method 1
+public Number read(JsonReader in) throws IOException {
+  JsonToken jsonToken = in.peek();
+  switch (jsonToken) {
+  case NULL:
+    in.nextNull();
+    return null;
+  case STRING:
+    try {
+        return new LazilyParsedNumber(in.nextString());
+    } catch (NumberFormatException e) {
+        throw new JsonSyntaxException("Expecting number, got: " + jsonToken, e);
+    }
+  case NUMBER:
+    return new LazilyParsedNumber(in.nextString());
+  default:
+    throw new JsonSyntaxException("Expecting number, got: " + jsonToken);
+  }
+}

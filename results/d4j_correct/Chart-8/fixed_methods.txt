@@ -1,0 +1,5 @@
+### Fixed Method 1
+public Week(Date time, TimeZone zone) {
+    // use provided time zone
+    this(time, zone, Locale.getDefault());
+}

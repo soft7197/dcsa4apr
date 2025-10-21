@@ -1,0 +1,13 @@
+diff --git a/django/utils/autoreload.py b/django/utils/autoreload.py
+--- a/django/utils/autoreload.py
++++ b/django/utils/autoreload.py
+@@ -136,6 +136,9 @@
+     for filename in itertools.chain(sys_file_paths, extra_files):
+         if not filename:
+             continue
++        # Check for null bytes in the filename
++        if '\x00' in filename:
++            continue
+         path = Path(filename)
+         try:
+             resolved_path = path.resolve(strict=True).absolute()

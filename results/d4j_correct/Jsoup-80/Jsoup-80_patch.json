@@ -1,0 +1,39 @@
+{
+    "bug_id": "Jsoup-80",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-80_1756721256",
+    "patches": [
+        {
+            "hypothesis": "The IndexOutOfBoundsException occurs because the 'doc.child(0)' call assumes that the parsed document always contains at least one element. This assumption is incorrect when the data does not form a valid element, resulting in an empty document and thus the exception. The fix involves checking if the document has any children before accessing them.",
+            "changes": "- Element el = doc.child(0);\n+ if (!doc.children().isEmpty()) {\n+     Element el = doc.child(0);\n+     insert = new XmlDeclaration(settings.normalizeTag(el.tagName()), data.startsWith('!'));\n+     insert.attributes().addAll(el.attributes());\n+ }",
+            "fixed_method": "void insert(Token.Comment commentToken) {\n    Comment comment = new Comment(commentToken.getData());\n    Node insert = comment;\n    if (commentToken.bogus) { // xml declarations are emitted as bogus comments (which is right for html, but not xml)\n        // so we do a bit of a hack and parse the data as an element to pull the attributes out\n        String data = comment.getData();\n        if (data.length() > 1 && (data.startsWith(\"!\") || data.startsWith(\"?\"))) {\n            Document doc = Jsoup.parse(\"<\" + data.substring(1, data.length() -1) + \">\", baseUri, Parser.xmlParser());\n            if (!doc.children().isEmpty()) {\n                Element el = doc.child(0);\n                insert = new XmlDeclaration(settings.normalizeTag(el.tagName()), data.startsWith(\"!\"));\n                insert.attributes().addAll(el.attributes());\n            }\n        }\n    }\n    insertNode(insert);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,17 @@\n+void insert(Token.Comment commentToken) {\n+    Comment comment = new Comment(commentToken.getData());\n+    Node insert = comment;\n+    if (commentToken.bogus) { // xml declarations are emitted as bogus comments (which is right for html, but not xml)\n+        // so we do a bit of a hack and parse the data as an element to pull the attributes out\n+        String data = comment.getData();\n+        if (data.length() > 1 && (data.startsWith(\"!\") || data.startsWith(\"?\"))) {\n+            Document doc = Jsoup.parse(\"<\" + data.substring(1, data.length() -1) + \">\", baseUri, Parser.xmlParser());\n+            if (!doc.children().isEmpty()) {\n+                Element el = doc.child(0);\n+                insert = new XmlDeclaration(settings.normalizeTag(el.tagName()), data.startsWith(\"!\"));\n+                insert.attributes().addAll(el.attributes());\n+            }\n+        }\n+    }\n+    insertNode(insert);\n+}",
+            "file_path": "src/main/java/org/jsoup/parser/XmlTreeBuilder.java",
+            "method_name": "insert",
+            "class_name": "XmlTreeBuilder",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Jsoup-80_trace.json"
+}

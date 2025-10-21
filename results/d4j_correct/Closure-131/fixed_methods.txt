@@ -1,0 +1,36 @@
+Correct patch indices: 2, 3, 4, 5, 7, 8, 9
+The last correct patch:
+
+
+public static boolean isJSIdentifier(String s) {
+  if (s == null || s.isEmpty()) {
+    return false;
+  }
+
+  int length = s.length();
+  char firstChar = s.charAt(0);
+
+  // The first character must be a valid identifier start character
+  if (!isJSIdentifierStart(firstChar)) {
+    return false;
+  }
+
+  // The subsequent characters must be valid identifier parts
+  for (int i = 1; i < length; i++) {
+    if (!isJSIdentifierPart(s.charAt(i))) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+private static boolean isJSIdentifierStart(char c) {
+  // JavaScript allows letters, $, and _ as valid start characters
+  return Character.isLetter(c) || c == '$' || c == '_';
+}
+
+private static boolean isJSIdentifierPart(char c) {
+  // JavaScript allows letters, digits, $, and _ as valid identifier parts
+  return Character.isLetterOrDigit(c) || c == '$' || c == '_';
+}

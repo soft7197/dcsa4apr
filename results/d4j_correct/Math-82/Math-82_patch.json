@@ -1,0 +1,40 @@
+{
+    "bug_id": "Math-82",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-82_1756721680",
+    "patches": [
+        {
+            "hypothesis": "The bug is due to the inequality check in the condition `MathUtils.compareTo(entry, 0, epsilon) >= 0`. This condition allows entries that are zero or positive, but according to the simplex method, we should only consider positive entries. Thus, the correct condition should be `MathUtils.compareTo(entry, 0, epsilon) > 0` to exclude zero entries from consideration.",
+            "changes": "- if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n+ if (MathUtils.compareTo(entry, 0, epsilon) > 0) {",
+            "fixed_method": "private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n    double minRatio = Double.MAX_VALUE;\n    Integer minRatioPos = null;\n    for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n        final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n        final double entry = tableau.getEntry(i, col);\n        if (MathUtils.compareTo(entry, 0, epsilon) > 0) {\n            final double ratio = rhs / entry;\n            if (ratio < minRatio) {\n                minRatio = ratio;\n                minRatioPos = i; \n            }\n        }\n    }\n    return minRatioPos;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,16 @@\n+private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n+    double minRatio = Double.MAX_VALUE;\n+    Integer minRatioPos = null;\n+    for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n+        final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n+        final double entry = tableau.getEntry(i, col);\n+        if (MathUtils.compareTo(entry, 0, epsilon) > 0) {\n+            final double ratio = rhs / entry;\n+            if (ratio < minRatio) {\n+                minRatio = ratio;\n+                minRatioPos = i; \n+            }\n+        }\n+    }\n+    return minRatioPos;\n+}",
+            "file_path": "src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java",
+            "method_name": "getPivotRow",
+            "class_name": "SimplexSolver",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                76,
+                77,
+                78,
+                79,
+                80,
+                81,
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-82_trace.json"
+}

@@ -1,0 +1,19 @@
+diff --git a/sympy/core/basic.py b/sympy/core/basic.py
+--- a/sympy/core/basic.py
++++ b/sympy/core/basic.py
+@@ -503,13 +503,12 @@
+         if types:
+             types = tuple(
+                 [t if isinstance(t, type) else type(t) for t in types])
+-        else:
+-            types = (Atom,)
+         result = set()
+         for expr in preorder_traversal(self):
+-            if isinstance(expr, types):
++            if (not expr.args and (not types or isinstance(expr, types))):
+                 result.add(expr)
+         return result
++
+ 
+     @property
+     def free_symbols(self):

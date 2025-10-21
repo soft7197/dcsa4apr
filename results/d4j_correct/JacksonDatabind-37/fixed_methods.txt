@@ -1,0 +1,10 @@
+### Fixed Method 1
+protected JavaType _narrow(Class<?> subclass) {
+    if (_class == subclass) {
+        return this;
+    }
+    // Re-resolve if a subclass is provided for proper type narrowing
+    TypeFactory typeFactory = TypeFactory.defaultInstance();
+    JavaType resolvedType = typeFactory.constructSpecializedType(this, subclass);
+    return resolvedType;
+}

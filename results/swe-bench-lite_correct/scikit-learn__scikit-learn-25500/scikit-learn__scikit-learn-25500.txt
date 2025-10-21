@@ -1,0 +1,23 @@
+diff --git a/sklearn/isotonic.py b/sklearn/isotonic.py
+--- a/sklearn/isotonic.py
++++ b/sklearn/isotonic.py
+@@ -395,7 +395,8 @@
+         # on scipy 0.17, interp1d up-casts to float64, so we cast back
+         res = res.astype(T.dtype)
+ 
+-        return res
++        # Ensure the result is always a NumPy array
++        return np.asarray(res)
+ 
+     def predict(self, T):
+         """Predict new data by linear interpolation.
+@@ -410,7 +411,8 @@
+         y_pred : ndarray of shape (n_samples,)
+             Transformed data.
+         """
+-        return self.transform(T)
++        # Ensure the output is a NumPy array
++        return np.asarray(self.transform(T))
+ 
+     # We implement get_feature_names_out here instead of using
+     # `ClassNamePrefixFeaturesOutMixin`` because `input_features` are ignored.

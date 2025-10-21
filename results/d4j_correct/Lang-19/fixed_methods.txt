@@ -1,0 +1,55 @@
+### Fixed Method 1
+public int translate(CharSequence input, int index, Writer out) throws IOException {
+    int seqEnd = input.length();
+    if (input.charAt(index) == '&' && index < seqEnd - 1 && input.charAt(index + 1) == '#') {
+        int start = index + 2;
+        boolean isHex = false;
+
+        if (start < seqEnd) {
+            char firstChar = input.charAt(start);
+            if (firstChar == 'x' || firstChar == 'X') {
+                start++;
+                isHex = true;
+                if (start >= seqEnd || !isValidHexChar(input.charAt(start))) {
+                    return 0; // No valid hex after 'x'
+                }
+            } else if (!Character.isDigit(firstChar)) {
+                return 0; // No valid digit after '#'
+            }
+        } else {
+            return 0;
+        }
+
+        int end = start;
+        while (end < seqEnd && (isHex ? isValidHexChar(input.charAt(end)) : Character.isDigit(input.charAt(end)))) {
+            end++;
+        }
+
+        if (end == start) { // No digits found
+            return 0;
+        }
+
+        int entityValue;
+        try {
+            String numberStr = input.subSequence(start, end).toString();
+            entityValue = Integer.parseInt(numberStr, isHex ? 16 : 10);
+        } catch (NumberFormatException nfe) {
+            return 0; // Invalid number format
+        }
+
+        if (entityValue > 0xFFFF) {
+            char[] chrs = Character.toChars(entityValue);
+            out.write(chrs[0]);
+            out.write(chrs[1]);
+        } else {
+            out.write(entityValue);
+        }
+
+        return 2 + (end - start) + (isHex ? 1 : 0) + (end < seqEnd && input.charAt(end) == ';' ? 1 : 0);
+    }
+    return 0;
+}
+
+private boolean isValidHexChar(char c) {
+    return Character.isDigit(c) || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F');
+}

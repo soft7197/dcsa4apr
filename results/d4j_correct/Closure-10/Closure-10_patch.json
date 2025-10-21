@@ -1,0 +1,31 @@
+{
+  "bug_id": "Closure-10",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-10_1756719413",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "static boolean mayBeString(Node n, boolean recurse) {\n  if (recurse) {\n    return anyResultsMatch(n, MAY_BE_STRING_PREDICATE);\n  } else {\n    return mayBeStringHelper(n);\n  }\n}",
+      "diff": "",
+      "file_path": "src/com/google/javascript/jscomp/NodeUtil.java",
+      "method_name": "mayBeString",
+      "class_name": "NodeUtil",
+      "iteration": 1,
+      "is_multi_method": false,
+      "line_numbers": [
+        1415,
+        1416,
+        1417,
+        1418,
+        1419,
+        1420,
+        1421
+      ]
+    }
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/Closure-10_trace.json"
+}

@@ -1,0 +1,14 @@
+Correct patch indices: 1, 5
+The last correct patch:
+
+
+public final void serialize(JsonGenerator gen, SerializerProvider ctxt) throws IOException {
+    if (_value == null) {
+        ctxt.defaultSerializeNull(gen);
+    } else if (_value instanceof JsonSerializable) {
+        ((JsonSerializable) _value).serialize(gen, ctxt);
+    } else {
+        // Use context to serialize the object to ensure custom serializers are respected
+        ctxt.findTypedValueSerializer(_value.getClass(), true, null).serialize(_value, gen, ctxt);
+    }
+}

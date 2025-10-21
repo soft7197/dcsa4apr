@@ -1,0 +1,41 @@
+{
+    "bug_id": "Jsoup-34",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-34_1756721178",
+    "patches": [
+        {
+            "hypothesis": "The method `nextIndexOf` is accessing characters beyond the bounds of the input or the sequence, leading to an ArrayIndexOutOfBoundsException. Specifically, the loop that checks for matching characters does not ensure that the length of the remaining input is sufficient to contain the entire sequence before performing character comparisons. We need to add a check to ensure that there are enough characters remaining in the input to potentially match the sequence.",
+            "changes": "- int last = i + seq.length()-1;\n+ int last = offset + seq.length();\n+ if (last > length) break;",
+            "fixed_method": "int nextIndexOf(CharSequence seq) {\n    // doesn't handle scanning for surrogates\n    char startChar = seq.charAt(0);\n    for (int offset = pos; offset < length; offset++) {\n        // scan to first instance of startchar:\n        if (startChar != input[offset])\n            while(++offset < length && startChar != input[offset]);\n        int i = offset + 1;\n        int last = offset + seq.length();\n        if (last > length) break; // Ensure enough characters remain\n        if (offset < length) {\n            for (int j = 1; i < last && seq.charAt(j) == input[i]; i++, j++);\n            if (i == last) // found full sequence\n                return offset - pos;\n        }\n    }\n    return -1;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,18 @@\n+int nextIndexOf(CharSequence seq) {\n+    // doesn't handle scanning for surrogates\n+    char startChar = seq.charAt(0);\n+    for (int offset = pos; offset < length; offset++) {\n+        // scan to first instance of startchar:\n+        if (startChar != input[offset])\n+            while(++offset < length && startChar != input[offset]);\n+        int i = offset + 1;\n+        int last = offset + seq.length();\n+        if (last > length) break; // Ensure enough characters remain\n+        if (offset < length) {\n+            for (int j = 1; i < last && seq.charAt(j) == input[i]; i++, j++);\n+            if (i == last) // found full sequence\n+                return offset - pos;\n+        }\n+    }\n+    return -1;\n+}",
+            "file_path": "src/main/java/org/jsoup/parser/CharacterReader.java",
+            "method_name": "nextIndexOf",
+            "class_name": "CharacterReader",
+            "iteration": 2,
+            "is_multi_method": false,
+            "line_numbers": [
+                82,
+                83,
+                84,
+                85,
+                86,
+                87,
+                88,
+                89,
+                90,
+                91,
+                92,
+                93,
+                94,
+                95,
+                96,
+                97,
+                98
+            ]
+        }
+    ],
+    "iterations": 2,
+    "monitor_file": "traces/Jsoup-34_trace.json"
+}

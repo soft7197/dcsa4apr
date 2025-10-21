@@ -1,0 +1,47 @@
+diff --git a/sympy/matrices/sparse.py b/sympy/matrices/sparse.py
+--- a/sympy/matrices/sparse.py
++++ b/sympy/matrices/sparse.py
+@@ -985,8 +985,12 @@
+         >>> C == A.row_insert(A.rows, Matrix(B))
+         True
+         """
+-        if not self:
++        # Handle the case where one of the matrices is zero-sized
++        if self.rows == 0:
+             return type(self)(other)
++        if other.rows == 0:
++            return self.copy()
++
+         A, B = self, other
+         if not A.cols == B.cols:
+             raise ShapeError()
+@@ -1005,6 +1009,7 @@
+                 A._smat[i + A.rows, j] = v
+         A.rows += B.rows
+         return A
++
+ 
+     def col_op(self, j, f):
+         """In-place operation on col j using two-arg functor whose args are
+@@ -1191,8 +1196,12 @@
+         >>> C == A.col_insert(A.cols, B)
+         True
+         """
+-        if not self:
++        # Handle the case where one of the matrices is zero-sized
++        if self.cols == 0:
+             return type(self)(other)
++        if other.cols == 0:
++            return self.copy()
++
+         A, B = self, other
+         if not A.rows == B.rows:
+             raise ShapeError()
+@@ -1212,6 +1221,7 @@
+         A.cols += B.cols
+         return A
+ 
++
+     def row_op(self, i, f):
+         """In-place operation on row ``i`` using two-arg functor whose args are
+         interpreted as ``(self[i, j], j)``.

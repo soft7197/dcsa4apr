@@ -1,0 +1,39 @@
+{
+    "bug_id": "Gson-17",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Gson-17_1757170933",
+    "patches": [
+        {
+            "hypothesis": "The method does not handle JSON tokens other than STRING or NULL properly, which causes exceptions during parsing. The 'testUnexpectedToken' test wants to receive an IllegalStateException for unexpected tokens, and the 'testNullValue' expects the adapter to handle the 'null' value properly. The fix involves handling these cases correctly in the code.",
+            "fixed_method": "public Date read(JsonReader in) throws IOException {\n  JsonToken token = in.peek();\n  if (token == JsonToken.NULL) {\n    in.nextNull();\n    return null; // Properly handle null value\n  }\n  if (token != JsonToken.STRING) {\n    throw new IllegalStateException(\"Unexpected token: \" + token);\n  }\n  Date date = deserializeToDate(in.nextString());\n  if (dateType == Date.class) {\n    return date;\n  } else if (dateType == Timestamp.class) {\n    return new Timestamp(date.getTime());\n  } else if (dateType == java.sql.Date.class) {\n    return new java.sql.Date(date.getTime());\n  } else {\n    throw new AssertionError();\n  }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,7 +1,11 @@\n-// See issue 162\n public Date read(JsonReader in) throws IOException {\n-  if (in.peek() != JsonToken.STRING) {\n-    throw new JsonParseException(\"The date should be a string value\");\n+  JsonToken token = in.peek();\n+  if (token == JsonToken.NULL) {\n+    in.nextNull();\n+    return null; // Properly handle null value\n+  }\n+  if (token != JsonToken.STRING) {\n+    throw new IllegalStateException(\"Unexpected token: \" + token);\n   }\n   Date date = deserializeToDate(in.nextString());\n   if (dateType == Date.class) {\n@@ -11,7 +15,6 @@\n   } else if (dateType == java.sql.Date.class) {\n     return new java.sql.Date(date.getTime());\n   } else {\n-    // This must never happen: dateType is guarded in the primary constructor\n     throw new AssertionError();\n   }\n }",
+            "file_path": "gson/src/main/java/com/google/gson/DefaultDateTypeAdapter.java",
+            "method_name": "read",
+            "class_name": "DefaultDateTypeAdapter",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                98,
+                99,
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+                113
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Gson-17_trace.json"
+}

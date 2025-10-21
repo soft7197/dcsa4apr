@@ -1,0 +1,26 @@
+### Fixed Method 1
+public void writeObject(Object value) throws IOException {
+    if (value == null) {
+        _append(JsonToken.VALUE_NULL);
+        return;
+    }
+    if (_objectCodec != null) {
+        _objectCodec.writeValue(this, value);
+    } else {
+        _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);
+    }
+}
+
+
+### Fixed Method 2
+public void writeTree(TreeNode node) throws IOException {
+    if (node == null) {
+        _append(JsonToken.VALUE_NULL);
+        return;
+    }
+    if (_objectCodec != null) {
+        _objectCodec.writeTree(this, node);
+    } else {
+        _append(JsonToken.VALUE_EMBEDDED_OBJECT, node);
+    }
+}

@@ -1,0 +1,39 @@
+{
+  "bug_id": "JacksonCore-3",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonCore-3_1756719413",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "public UTF8StreamJsonParser(IOContext ctxt, int features, InputStream in,\n        ObjectCodec codec, BytesToNameCanonicalizer sym,\n        byte[] inputBuffer, int start, int end,\n        boolean bufferRecyclable)\n{\n    super(ctxt, features);\n    _inputStream = in;\n    _objectCodec = codec;\n    _symbols = sym;\n    _inputBuffer = inputBuffer;\n    _inputPtr = start;\n    _inputEnd = end;\n    _currInputRowStart = start;\n\n    _currInputProcessed = -start;\n    _bufferRecyclable = bufferRecyclable;\n}",
+      "diff": "",
+      "file_path": "src/main/java/com/fasterxml/jackson/core/json/UTF8StreamJsonParser.java",
+      "method_name": "UTF8StreamJsonParser",
+      "class_name": "UTF8StreamJsonParser",
+      "iteration": 1,
+      "is_multi_method": false,
+      "line_numbers": [
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127
+      ]
+    }
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/JacksonCore-3_trace.json"
+}

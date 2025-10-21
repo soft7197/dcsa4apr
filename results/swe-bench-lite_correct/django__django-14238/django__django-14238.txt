@@ -1,0 +1,18 @@
+diff --git a/django/db/models/fields/__init__.py b/django/db/models/fields/__init__.py
+--- a/django/db/models/fields/__init__.py
++++ b/django/db/models/fields/__init__.py
+@@ -2521,10 +2521,12 @@
+         return (BigAutoField, SmallAutoField)
+ 
+     def __instancecheck__(self, instance):
+-        return isinstance(instance, self._subclasses) or super().__instancecheck__(instance)
++        # Check if the instance is an instance of any registered subclass
++        return any(isinstance(instance, subclass) for subclass in self._subclasses) or super().__instancecheck__(instance)
+ 
+     def __subclasscheck__(self, subclass):
+-        return subclass in self._subclasses or super().__subclasscheck__(subclass)
++        # Check if the subclass is a subclass of any registered subclass
++        return any(issubclass(subclass, registered_subclass) for registered_subclass in self._subclasses) or super().__subclasscheck__(subclass)
+ 
+ 
+ class AutoField(AutoFieldMixin, IntegerField, metaclass=AutoFieldMeta):

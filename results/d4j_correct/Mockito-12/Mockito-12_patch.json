@@ -1,0 +1,41 @@
+{
+    "bug_id": "Mockito-12",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Mockito-12_1756721748",
+    "patches": [
+        {
+            "hypothesis": "The bug occurs because the method attempts to cast a `Type` directly to `Class`, which fails when the `Type` is a `ParameterizedType`. The correct approach is to handle both `ParameterizedType` and `Class` types separately to obtain the actual `Class` object.",
+            "changes": [
+                "- return (Class) actual;",
+                "+ if (actual instanceof Class) {",
+                "+     return (Class) actual;",
+                "+ } else if (actual instanceof ParameterizedType) {",
+                "+     return (Class) ((ParameterizedType) actual).getRawType();",
+                "+ }"
+            ],
+            "fixed_method": "public Class getGenericType(Field field) {        \n    Type generic = field.getGenericType();\n    if (generic != null && generic instanceof ParameterizedType) {\n        Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n        if (actual instanceof Class) {\n            return (Class) actual;\n        } else if (actual instanceof ParameterizedType) {\n            return (Class) ((ParameterizedType) actual).getRawType();\n        }\n    }\n    \n    return Object.class;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,13 @@\n+public Class getGenericType(Field field) {        \n+    Type generic = field.getGenericType();\n+    if (generic != null && generic instanceof ParameterizedType) {\n+        Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n+        if (actual instanceof Class) {\n+            return (Class) actual;\n+        } else if (actual instanceof ParameterizedType) {\n+            return (Class) ((ParameterizedType) actual).getRawType();\n+        }\n+    }\n+    \n+    return Object.class;\n+}",
+            "file_path": "src/org/mockito/internal/util/reflection/GenericMaster.java",
+            "method_name": "getGenericType",
+            "class_name": "GenericMaster",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Mockito-12_trace.json"
+}

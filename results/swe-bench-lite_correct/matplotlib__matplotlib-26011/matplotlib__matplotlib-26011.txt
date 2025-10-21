@@ -1,0 +1,19 @@
+diff --git a/lib/matplotlib/axis.py b/lib/matplotlib/axis.py
+--- a/lib/matplotlib/axis.py
++++ b/lib/matplotlib/axis.py
+@@ -1238,12 +1238,15 @@
+             self._set_autoscale_on(bool(auto))
+ 
+         if emit:
++            # Emit the callback for this axis
+             self.axes.callbacks.process(f"{name}lim_changed", self.axes)
+-            # Call all of the other axes that are shared with this one
++            # For all shared axes, also emit the callback
+             for other in self._get_shared_axes():
+                 if other is not self.axes:
+                     other._axis_map[name]._set_lim(
+                         v0, v1, emit=False, auto=auto)
++                    # Emit the callback for the shared axis
++                    other.callbacks.process(f"{name}lim_changed", other)
+                     if other.figure != self.figure:
+                         other.figure.canvas.draw_idle()

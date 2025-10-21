@@ -1,0 +1,27 @@
+{
+    "bug_id": "Csv-4",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Csv-4_1756838843",
+    "patches": [
+        {
+            "hypothesis": "The NullPointerException occurs because the 'headerMap' field is null when 'getHeaderMap' is called. This happens when the CSVParser is initialized without headers. The method should handle the case where 'headerMap' is null by returning null instead of attempting to create a new LinkedHashMap from a null reference.",
+            "changes": "- return new LinkedHashMap<String, Integer>(this.headerMap);\n+ return this.headerMap == null ? null : new LinkedHashMap<String, Integer>(this.headerMap);",
+            "fixed_method": "public Map<String, Integer> getHeaderMap() {\n    return this.headerMap == null ? null : new LinkedHashMap<String, Integer>(this.headerMap);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,3 @@\n+public Map<String, Integer> getHeaderMap() {\n+    return this.headerMap == null ? null : new LinkedHashMap<String, Integer>(this.headerMap);\n+}",
+            "file_path": "src/main/java/org/apache/commons/csv/CSVParser.java",
+            "method_name": "getHeaderMap",
+            "class_name": "CSVParser",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                287,
+                288,
+                289
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Csv-4_trace.json"
+}

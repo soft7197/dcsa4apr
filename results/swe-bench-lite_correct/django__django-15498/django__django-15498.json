@@ -1,0 +1,11 @@
+{
+    "bug_id": "django__django-15498",
+    "problem_statement": "Fix handling empty string for If-Modified-Since header\nDescription\n\t\nEmpty string used to be ignored for If-Modified-Since header, but now raises exception since d6aff369ad3.\nFix handling empty string for If-Modified-Since header\nDescription\n\t\nEmpty string used to be ignored for If-Modified-Since header, but now raises exception since d6aff369ad3.\n",
+    "dev_patch": "diff --git a/django/views/static.py b/django/views/static.py\n--- a/django/views/static.py\n+++ b/django/views/static.py\n@@ -129,12 +129,14 @@ def was_modified_since(header=None, mtime=0, size=0):\n         if header is None:\n             raise ValueError\n         matches = re.match(r\"^([^;]+)(; length=([0-9]+))?$\", header, re.IGNORECASE)\n+        if matches is None:\n+            raise ValueError\n         header_mtime = parse_http_date(matches[1])\n         header_len = matches[3]\n         if header_len and int(header_len) != size:\n             raise ValueError\n         if int(mtime) > header_mtime:\n             raise ValueError\n-    except (AttributeError, ValueError, OverflowError):\n+    except (ValueError, OverflowError):\n         return True\n     return False\n",
+    "our_patch": "diff --git a/django/views/static.py b/django/views/static.py\n--- a/django/views/static.py\n+++ b/django/views/static.py\n@@ -126,7 +126,7 @@\n       This is the size of the item we're talking about.\n     \"\"\"\n     try:\n-        if header is None:\n+        if header is None or header == '':\n             raise ValueError\n         matches = re.match(r\"^([^;]+)(; length=([0-9]+))?$\", header, re.IGNORECASE)\n         header_mtime = parse_http_date(matches[1])\n@@ -138,3 +138,4 @@\n     except (AttributeError, ValueError, OverflowError):\n         return True\n     return False\n+\n",
+    "final_iteration": 1,
+    "buggy_methods": [
+        "django/views/static.py::was_modified_since"
+    ],
+    "num_buggy_methods": 1
+}

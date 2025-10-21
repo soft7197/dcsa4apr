@@ -1,0 +1,8 @@
+### Fixed Method 1
+public double getPct(Object v) {
+    if (getSumFreq() == 0) {
+        return Double.NaN;
+    }
+    long freq = getCount(v);
+    return (double) freq / (double) getSumFreq();
+}

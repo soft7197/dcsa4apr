@@ -1,0 +1,36 @@
+{
+    "bug_id": "Lang-33",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Lang-33_1756721350",
+    "patches": [
+        {
+            "hypothesis": "The method throws a NullPointerException when an element in the input array is null. This occurs because the method attempts to call getClass() on a null object. To fix this, we need to handle null elements in the array by assigning null to the corresponding index in the classes array.",
+            "changes": "Added a null check inside the for loop to handle null elements and avoid calling getClass() on them.",
+            "fixed_method": "public static Class<?>[] toClass(Object[] array) {\n    if (array == null) {\n        return null;\n    } else if (array.length == 0) {\n        return ArrayUtils.EMPTY_CLASS_ARRAY;\n    }\n    Class<?>[] classes = new Class[array.length];\n    for (int i = 0; i < array.length; i++) {\n        if (array[i] != null) {\n            classes[i] = array[i].getClass();\n        } else {\n            classes[i] = null;\n        }\n    }\n    return classes;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,16 @@\n+public static Class<?>[] toClass(Object[] array) {\n+    if (array == null) {\n+        return null;\n+    } else if (array.length == 0) {\n+        return ArrayUtils.EMPTY_CLASS_ARRAY;\n+    }\n+    Class<?>[] classes = new Class[array.length];\n+    for (int i = 0; i < array.length; i++) {\n+        if (array[i] != null) {\n+            classes[i] = array[i].getClass();\n+        } else {\n+            classes[i] = null;\n+        }\n+    }\n+    return classes;\n+}",
+            "file_path": "src/main/java/org/apache/commons/lang3/ClassUtils.java",
+            "method_name": "toClass",
+            "class_name": "ClassUtils",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                902,
+                903,
+                904,
+                905,
+                906,
+                907,
+                908,
+                909,
+                910,
+                911,
+                912,
+                913
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Lang-33_trace.json"
+}

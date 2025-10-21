@@ -1,0 +1,31 @@
+{
+    "bug_id": "JacksonDatabind-12",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-12_1756720957",
+    "patches": [
+        {
+            "hypothesis": "The method `isCachable()` is intended to determine whether a Map deserializer can be cached. The current implementation only checks if `_valueTypeDeserializer` and `_ignorableProperties` are null, but it should also consider `_valueDeserializer` and `_keyDeserializer`. If either of these is non-null, the deserializer is likely customized and should not be cached.",
+            "changes": "- return (_valueTypeDeserializer == null) && (_ignorableProperties == null);\n+ return (_valueTypeDeserializer == null) && (_ignorableProperties == null) && (_valueDeserializer == null) && (_keyDeserializer == null);",
+            "fixed_method": "public boolean isCachable() {\n    /* As per [databind#735], existence of value or key deserializer (only passed\n     * if annotated to use non-standard one) should also prevent caching.\n     */\n    return (_valueTypeDeserializer == null)\n            && (_ignorableProperties == null)\n            && (_valueDeserializer == null)\n            && (_keyDeserializer == null);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,9 @@\n+public boolean isCachable() {\n+    /* As per [databind#735], existence of value or key deserializer (only passed\n+     * if annotated to use non-standard one) should also prevent caching.\n+     */\n+    return (_valueTypeDeserializer == null)\n+            && (_ignorableProperties == null)\n+            && (_valueDeserializer == null)\n+            && (_keyDeserializer == null);\n+}",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/std/MapDeserializer.java",
+            "method_name": "isCachable",
+            "class_name": "MapDeserializer",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                299,
+                300,
+                301,
+                302,
+                303,
+                304,
+                305
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-12_trace.json"
+}

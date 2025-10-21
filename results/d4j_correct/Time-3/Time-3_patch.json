@@ -1,0 +1,192 @@
+{
+  "bug_id": "Time-3",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Time-3_1759396180",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bugs in these methods are related to handling changes in daylight saving time (DST) or when no alteration of the time is intended, specifically when the amount parameter is zero. Each method should handle the scenario where a date-time component is added as zero to ensure the timezone offset remains unchanged. The fix involves checking if the amount is zero and making no changes to the date-time value when it's true.",
+        "changes": "Each method was updated to include a conditional check where the addition operation is only performed if the specified amount is not zero. This ensures no unnecessary updates or resets of the millisecond value occur when the amount is zero, allowing the time zone offset to remain consistent, particularly in scenarios involving DST.",
+        "methods": {
+          "src/main/java/org/joda/time/MutableDateTime.java::MutableDateTime::add::L635": {
+            "file_path": "src/main/java/org/joda/time/MutableDateTime.java",
+            "method_name": "add",
+            "class_name": "MutableDateTime",
+            "line_numbers": [
+              635,
+              641
+            ],
+            "original_code": "    /**\n     * Adds to the instant specifying the duration and multiple to add.\n     *\n     * @param type  a field type, usually obtained from DateTimeFieldType, not null\n     * @param amount  the amount to add of this duration\n     * @throws IllegalArgumentException if the value is null or invalid\n     * @throws ArithmeticException if the result exceeds the capacity of the instant\n     */\n\n    public void add(DurationFieldType type, int amount) {\n        if (type == null) {\n            throw new IllegalArgumentException(\"Field must not be null\");\n        }\n            setMillis(type.getField(getChronology()).add(getMillis(), amount));\n    }\n",
+            "fixed_method": "public void add(DurationFieldType type, int amount) {\n   if (type == null) {\n       throw new IllegalArgumentException(\"Field must not be null\");\n   }\n   if (amount != 0) { // to handle cases where zero is added\n       setMillis(type.getField(getChronology()).add(getMillis(), amount));\n   }\n}",
+            "iteration": 1
+          },
+          "src/main/java/org/joda/time/MutableDateTime.java::MutableDateTime::addYears::L659": {
+            "file_path": "src/main/java/org/joda/time/MutableDateTime.java",
+            "method_name": "addYears",
+            "class_name": "MutableDateTime",
+            "line_numbers": [
+              659,
+              662
+            ],
+            "original_code": "    /**\n     * Add a number of years to the date.\n     *\n     * @param years  the years to add\n     * @throws IllegalArgumentException if the value is invalid\n     */\n\n    public void addYears(final int years) {\n            setMillis(getChronology().years().add(getMillis(), years));\n    }\n",
+            "fixed_method": "public void addYears(final int years) {\n   if (years != 0) { // to handle cases where zero is added\n       setMillis(getChronology().years().add(getMillis(), years));\n   }\n}",
+            "iteration": 1
+          },
+          "src/main/java/org/joda/time/MutableDateTime.java::MutableDateTime::addMonths::L701": {
+            "file_path": "src/main/java/org/joda/time/MutableDateTime.java",
+            "method_name": "addMonths",
+            "class_name": "MutableDateTime",
+            "line_numbers": [
+              701,
+              704
+            ],
+            "original_code": "    /**\n     * Add a number of months to the date.\n     *\n     * @param months  the months to add\n     * @throws IllegalArgumentException if the value is invalid\n     */\n\n    public void addMonths(final int months) {\n            setMillis(getChronology().months().add(getMillis(), months));\n    }\n",
+            "fixed_method": "public void addMonths(final int months) {\n   if (months != 0) { // to handle cases where zero is added\n       setMillis(getChronology().months().add(getMillis(), months));\n   }\n}",
+            "iteration": 1
+          },
+          "src/main/java/org/joda/time/MutableDateTime.java::MutableDateTime::addWeeks::L722": {
+            "file_path": "src/main/java/org/joda/time/MutableDateTime.java",
+            "method_name": "addWeeks",
+            "class_name": "MutableDateTime",
+            "line_numbers": [
+              722,
+              725
+            ],
+            "original_code": "    /**\n     * Add a number of weeks to the date.\n     *\n     * @param weeks  the weeks to add\n     * @throws IllegalArgumentException if the value is invalid\n     */\n\n    public void addWeeks(final int weeks) {\n            setMillis(getChronology().weeks().add(getMillis(), weeks));\n    }\n",
+            "fixed_method": "public void addWeeks(final int weeks) {\n   if (weeks != 0) { // to handle cases where zero is added\n       setMillis(getChronology().weeks().add(getMillis(), weeks));\n   }\n}",
+            "iteration": 1
+          },
+          "src/main/java/org/joda/time/MutableDateTime.java::MutableDateTime::addDays::L763": {
+            "file_path": "src/main/java/org/joda/time/MutableDateTime.java",
+            "method_name": "addDays",
+            "class_name": "MutableDateTime",
+            "line_numbers": [
+              763,
+              766
+            ],
+            "original_code": "    /**\n     * Add a number of days to the date.\n     *\n     * @param days  the days to add\n     * @throws IllegalArgumentException if the value is invalid\n     */\n\n    public void addDays(final int days) {\n            setMillis(getChronology().days().add(getMillis(), days));\n    }\n",
+            "fixed_method": "public void addDays(final int days) {\n   if (days != 0) { // to handle cases where zero is added\n       setMillis(getChronology().days().add(getMillis(), days));\n   }\n}",
+            "iteration": 1
+          },
+          "src/main/java/org/joda/time/MutableDateTime.java::MutableDateTime::addHours::L784": {
+            "file_path": "src/main/java/org/joda/time/MutableDateTime.java",
+            "method_name": "addHours",
+            "class_name": "MutableDateTime",
+            "line_numbers": [
+              784,
+              787
+            ],
+            "original_code": "    /**\n     * Add a number of hours to the date.\n     *\n     * @param hours  the hours to add\n     * @throws IllegalArgumentException if the value is invalid\n     */\n\n    public void addHours(final int hours) {\n            setMillis(getChronology().hours().add(getMillis(), hours));\n    }\n",
+            "fixed_method": "public void addHours(final int hours) {\n   if (hours != 0) { // to handle cases where zero is added\n       setMillis(getChronology().hours().add(getMillis(), hours));\n   }\n}",
+            "iteration": 2
+          },
+          "src/main/java/org/joda/time/MutableDateTime.java::MutableDateTime::addWeekyears::L680": {
+            "file_path": "src/main/java/org/joda/time/MutableDateTime.java",
+            "method_name": "addWeekyears",
+            "class_name": "MutableDateTime",
+            "line_numbers": [
+              680,
+              683
+            ],
+            "original_code": "    /**\n     * Add a number of weekyears to the date.\n     *\n     * @param weekyears  the weekyears to add\n     * @throws IllegalArgumentException if the value is invalid\n     */\n\n    public void addWeekyears(final int weekyears) {\n            setMillis(getChronology().weekyears().add(getMillis(), weekyears));\n    }\n",
+            "fixed_method": "public void addWeekyears(final int weekyears) {\n   if (weekyears != 0) { // to handle cases where zero is added\n       setMillis(getChronology().weekyears().add(getMillis(), weekyears));\n   }\n}",
+            "iteration": 2
+          },
+          "src/main/java/org/joda/time/MutableDateTime.java::MutableDateTime::addMinutes::L815": {
+            "file_path": "src/main/java/org/joda/time/MutableDateTime.java",
+            "method_name": "addMinutes",
+            "class_name": "MutableDateTime",
+            "line_numbers": [
+              815,
+              818
+            ],
+            "original_code": "    /**\n     * Add a number of minutes to the date.\n     *\n     * @param minutes  the minutes to add\n     * @throws IllegalArgumentException if the value is invalid\n     */\n\n    public void addMinutes(final int minutes) {\n            setMillis(getChronology().minutes().add(getMillis(), minutes));\n    }\n",
+            "fixed_method": "public void addMinutes(final int minutes) {\n   if (minutes != 0) { // to handle cases where zero is added\n       setMillis(getChronology().minutes().add(getMillis(), minutes));\n   }\n}",
+            "iteration": 2
+          },
+          "src/main/java/org/joda/time/MutableDateTime.java::MutableDateTime::addSeconds::L846": {
+            "file_path": "src/main/java/org/joda/time/MutableDateTime.java",
+            "method_name": "addSeconds",
+            "class_name": "MutableDateTime",
+            "line_numbers": [
+              846,
+              849
+            ],
+            "original_code": "    /**\n     * Add a number of seconds to the date.\n     *\n     * @param seconds  the seconds to add\n     * @throws IllegalArgumentException if the value is invalid\n     */\n\n    public void addSeconds(final int seconds) {\n            setMillis(getChronology().seconds().add(getMillis(), seconds));\n    }\n",
+            "fixed_method": "public void addSeconds(final int seconds) {\n   if (seconds != 0) { // to handle cases where zero is added\n       setMillis(getChronology().seconds().add(getMillis(), seconds));\n   }\n}",
+            "iteration": 2
+          },
+          "src/main/java/org/joda/time/MutableDateTime.java::MutableDateTime::addMillis::L879": {
+            "file_path": "src/main/java/org/joda/time/MutableDateTime.java",
+            "method_name": "addMillis",
+            "class_name": "MutableDateTime",
+            "line_numbers": [
+              879,
+              882
+            ],
+            "original_code": "    /**\n     * Add a number of milliseconds to the date. The implementation of this\n     * method differs from the {@link #add(long)} method in that a\n     * DateTimeField performs the addition.\n     *\n     * @param millis  the milliseconds to add\n     * @throws IllegalArgumentException if the value is invalid\n     */\n\n    public void addMillis(final int millis) {\n            setMillis(getChronology().millis().add(getMillis(), millis));\n    }\n",
+            "fixed_method": "public void addMillis(final int millis) {\n   if (millis != 0) { // to handle cases where zero is added\n       setMillis(getChronology().millis().add(getMillis(), millis));\n   }\n}",
+            "iteration": 2
+          }
+        },
+        "iteration": 2,
+        "is_multi_method": true,
+        "execution_result": {
+          "status": "success",
+          "message": "All 5 tests passed with 10 method fixes",
+          "applied_methods": [
+            "addMillis",
+            "addSeconds",
+            "addMinutes",
+            "addHours",
+            "addDays",
+            "addWeeks",
+            "addMonths",
+            "addWeekyears",
+            "addYears",
+            "add"
+          ],
+          "test_results": {
+            "org.joda.time.TestMutableDateTime_Adds::testAddYears_int_dstOverlapWinter_addZero": {
+              "test": "org.joda.time.TestMutableDateTime_Adds::testAddYears_int_dstOverlapWinter_addZero",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            },
+            "org.joda.time.TestMutableDateTime_Adds::testAddDays_int_dstOverlapWinter_addZero": {
+              "test": "org.joda.time.TestMutableDateTime_Adds::testAddDays_int_dstOverlapWinter_addZero",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            },
+            "org.joda.time.TestMutableDateTime_Adds::testAddWeeks_int_dstOverlapWinter_addZero": {
+              "test": "org.joda.time.TestMutableDateTime_Adds::testAddWeeks_int_dstOverlapWinter_addZero",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            },
+            "org.joda.time.TestMutableDateTime_Adds::testAdd_DurationFieldType_int_dstOverlapWinter_addZero": {
+              "test": "org.joda.time.TestMutableDateTime_Adds::testAdd_DurationFieldType_int_dstOverlapWinter_addZero",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            },
+            "org.joda.time.TestMutableDateTime_Adds::testAddMonths_int_dstOverlapWinter_addZero": {
+              "test": "org.joda.time.TestMutableDateTime_Adds::testAddMonths_int_dstOverlapWinter_addZero",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            }
+          },
+          "compilation_time": 5.2345592975616455,
+          "test_time": 13.786015748977661,
+          "total_time": 19.02608847618103
+        }
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_file": "traces/Time-3_trace.json"
+}

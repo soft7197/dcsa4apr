@@ -1,0 +1,50 @@
+{
+    "bug_id": "JacksonDatabind-17",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-17_1757172142",
+    "patches": [
+        {
+            "hypothesis": "The bug arises because arrays needing default typing are not being properly handled and the typing information isn't being applied. Specifically, when arrays are encountered, the method needs to select the appropriate conditions to ensure typing is enforced on them. The current code structure and its fallbacks do not correctly handle cases where array elements need typing, particularly for objects and non-concrete types. The fix requires correctly placing logic for checking array types under the case where this applies, ensuring the method adheres to intended default typing policies.",
+            "fixed_method": "public boolean useForType(JavaType t) {\n    switch (_appliesFor) {\n        case NON_CONCRETE_AND_ARRAYS:\n            while (t.isArrayType()) {\n                t = t.getContentType();\n            }\n            // Fall through is intended\n        case OBJECT_AND_NON_CONCRETE:\n            return (t.getRawClass() == Object.class)\n                    || (!t.isConcrete()\n                        // Should not apply to JSON tree models\n                        && !TreeNode.class.isAssignableFrom(t.getRawClass()));\n        case NON_FINAL:\n            while (t.isArrayType()) {\n                t = t.getContentType();\n            }\n            // Exclude JSON tree models from application\n            return !t.isFinal() && !TreeNode.class.isAssignableFrom(t.getRawClass());\n        default:\n            return (t.getRawClass() == Object.class);\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,35 +1,22 @@\n-/**\n-* Method called to check if the default type handler should be\n-* used for given type.\n-* Note: \"natural types\" (String, Boolean, Integer, Double) will never\n-* use typing; that is both due to them being concrete and final,\n-* and since actual serializers and deserializers will also ignore any\n-* attempts to enforce typing.\n-*/\n-        public boolean useForType(JavaType t)\n-        {\n-            switch (_appliesFor) {\n-            case NON_CONCRETE_AND_ARRAYS:\n-                while (t.isArrayType()) {\n-                    t = t.getContentType();\n-                }\n-                // fall through\n-            case OBJECT_AND_NON_CONCRETE:\n-//                return t.isJavaLangObject() || \n-                return (t.getRawClass() == Object.class)\n-                        || (!t.isConcrete()\n-                                // [databind#88] Should not apply to JSON tree models:\n-                        || TreeNode.class.isAssignableFrom(t.getRawClass()));\n-\n-            case NON_FINAL:\n-                while (t.isArrayType()) {\n-                    t = t.getContentType();\n-                }\n-                // [Issue#88] Should not apply to JSON tree models:\n-                return !t.isFinal() && !TreeNode.class.isAssignableFrom(t.getRawClass());\n-            default:\n-            //case JAVA_LANG_OBJECT:\n-//                return t.isJavaLangObject();\n-                return (t.getRawClass() == Object.class);\n+public boolean useForType(JavaType t) {\n+    switch (_appliesFor) {\n+        case NON_CONCRETE_AND_ARRAYS:\n+            while (t.isArrayType()) {\n+                t = t.getContentType();\n             }\n-        }+            // Fall through is intended\n+        case OBJECT_AND_NON_CONCRETE:\n+            return (t.getRawClass() == Object.class)\n+                    || (!t.isConcrete()\n+                        // Should not apply to JSON tree models\n+                        && !TreeNode.class.isAssignableFrom(t.getRawClass()));\n+        case NON_FINAL:\n+            while (t.isArrayType()) {\n+                t = t.getContentType();\n+            }\n+            // Exclude JSON tree models from application\n+            return !t.isFinal() && !TreeNode.class.isAssignableFrom(t.getRawClass());\n+        default:\n+            return (t.getRawClass() == Object.class);\n+    }\n+}",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/ObjectMapper.java",
+            "method_name": "useForType",
+            "class_name": "ObjectMapper",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                167,
+                168,
+                169,
+                170,
+                171,
+                172,
+                173,
+                174,
+                175,
+                176,
+                177,
+                178,
+                179,
+                180,
+                181,
+                182,
+                183,
+                184,
+                185,
+                186,
+                187,
+                188,
+                189,
+                190,
+                191,
+                192,
+                193
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-17_trace.json"
+}

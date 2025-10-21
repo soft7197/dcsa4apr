@@ -1,0 +1,72 @@
+{
+  "bug_id": "Chart-18",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-18_1756719413",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "    public void removeValue(int index) {\n        this.keys.remove(index);\n        this.values.remove(index);\n        rebuildIndex();\n    }\n",
+      "diff": "",
+      "file_path": "source/org/jfree/data/DefaultKeyedValues.java",
+      "method_name": "removeValue",
+      "class_name": "DefaultKeyedValues",
+      "iteration": 1,
+      "is_multi_method": true,
+      "line_numbers": [
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321
+      ]
+    },
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "    public void removeValue(Comparable key) {\n        int index = getIndex(key);\n        if (index < 0) {\n            throw new UnknownKeyException(\"The key (\" + key \n                    + \") is not recognised.\");\n        }\n        removeValue(index);\n    }\n",
+      "diff": "",
+      "file_path": "source/org/jfree/data/DefaultKeyedValues.java",
+      "method_name": "removeValue",
+      "class_name": "DefaultKeyedValues",
+      "iteration": 1,
+      "is_multi_method": true,
+      "line_numbers": [
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338
+      ]
+    },
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "    public void removeColumn(Comparable columnKey) {\n    \tif (columnKey == null) {\n    \t\tthrow new IllegalArgumentException(\"Null 'columnKey' argument.\");\n    \t}\n    \tif (!this.columnKeys.contains(columnKey)) {\n    \t\tthrow new UnknownKeyException(\"Unknown key: \" + columnKey);\n    \t}\n        Iterator iterator = this.rows.iterator();\n        while (iterator.hasNext()) {\n            DefaultKeyedValues rowData = (DefaultKeyedValues) iterator.next();\n            int index = rowData.getIndex(columnKey);\n            if (index >= 0) {\n                rowData.removeValue(columnKey);\n            }\n        }\n        this.columnKeys.remove(columnKey);\n    }\n",
+      "diff": "",
+      "file_path": "source/org/jfree/data/DefaultKeyedValues2D.java",
+      "method_name": "removeColumn",
+      "class_name": "DefaultKeyedValues2D",
+      "iteration": 2,
+      "is_multi_method": true,
+      "line_numbers": [
+        454,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461
+      ]
+    }
+  ],
+  "iterations": 2,
+  "monitor_file": "traces/Chart-18_trace.json"
+}

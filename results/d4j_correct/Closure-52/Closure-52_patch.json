@@ -1,0 +1,34 @@
+{
+  "bug_id": "Closure-52",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-52_1756719413",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "static boolean isSimpleNumber(String s) {\n  int len = s.length();\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (c < '0' || c > '9') {\n      return false;\n    }\n  }\n  return len > 0 && s.charAt(0) != '0';\n}",
+      "diff": "",
+      "file_path": "src/com/google/javascript/jscomp/CodeGenerator.java",
+      "method_name": "isSimpleNumber",
+      "class_name": "CodeGenerator",
+      "iteration": 1,
+      "is_multi_method": false,
+      "line_numbers": [
+        737,
+        738,
+        739,
+        740,
+        741,
+        742,
+        743,
+        744,
+        745,
+        746
+      ]
+    }
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/Closure-52_trace.json"
+}

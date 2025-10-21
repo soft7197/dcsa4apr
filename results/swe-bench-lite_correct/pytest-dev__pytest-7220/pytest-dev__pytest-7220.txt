@@ -1,0 +1,91 @@
+diff --git a/src/_pytest/nodes.py b/src/_pytest/nodes.py
+--- a/src/_pytest/nodes.py
++++ b/src/_pytest/nodes.py
+@@ -331,50 +331,47 @@
+         pass
+ 
+     def _repr_failure_py(
+-        self, excinfo: ExceptionInfo[BaseException], style=None,
+-    ) -> Union[str, ReprExceptionInfo, ExceptionChainRepr, FixtureLookupErrorRepr]:
+-        if isinstance(excinfo.value, ConftestImportFailure):
+-            excinfo = ExceptionInfo(excinfo.value.excinfo)
+-        if isinstance(excinfo.value, fail.Exception):
+-            if not excinfo.value.pytrace:
+-                style = "value"
+-        if isinstance(excinfo.value, FixtureLookupError):
+-            return excinfo.value.formatrepr()
+-        if self.config.getoption("fulltrace", False):
+-            style = "long"
+-        else:
+-            tb = _pytest._code.Traceback([excinfo.traceback[-1]])
+-            self._prunetraceback(excinfo)
+-            if len(excinfo.traceback) == 0:
+-                excinfo.traceback = tb
+-            if style == "auto":
++            self, excinfo: ExceptionInfo[BaseException], style=None,
++        ) -> Union[str, ReprExceptionInfo, ExceptionChainRepr, FixtureLookupErrorRepr]:
++            if isinstance(excinfo.value, ConftestImportFailure):
++                excinfo = ExceptionInfo(excinfo.value.excinfo)
++            if isinstance(excinfo.value, fail.Exception):
++                if not excinfo.value.pytrace:
++                    style = "value"
++            if isinstance(excinfo.value, FixtureLookupError):
++                return excinfo.value.formatrepr()
++            if self.config.getoption("fulltrace", False):
+                 style = "long"
+-        # XXX should excinfo.getrepr record all data and toterminal() process it?
+-        if style is None:
+-            if self.config.getoption("tbstyle", "auto") == "short":
+-                style = "short"
+             else:
+-                style = "long"
+-
+-        if self.config.getoption("verbose", 0) > 1:
+-            truncate_locals = False
+-        else:
+-            truncate_locals = True
+-
+-        try:
+-            os.getcwd()
+-            abspath = False
+-        except OSError:
++                tb = _pytest._code.Traceback([excinfo.traceback[-1]])
++                self._prunetraceback(excinfo)
++                if len(excinfo.traceback) == 0:
++                    excinfo.traceback = tb
++                if style == "auto":
++                    style = "long"
++            # XXX should excinfo.getrepr record all data and toterminal() process it?
++            if style is None:
++                if self.config.getoption("tbstyle", "auto") == "short":
++                    style = "short"
++                else:
++                    style = "long"
++
++            if self.config.getoption("verbose", 0) > 1:
++                truncate_locals = False
++            else:
++                truncate_locals = True
++
++            # Use the absolute path based on the original working directory
+             abspath = True
+ 
+-        return excinfo.getrepr(
+-            funcargs=True,
+-            abspath=abspath,
+-            showlocals=self.config.getoption("showlocals", False),
+-            style=style,
+-            tbfilter=False,  # pruned already, or in --fulltrace mode.
+-            truncate_locals=truncate_locals,
+-        )
++            return excinfo.getrepr(
++                funcargs=True,
++                abspath=abspath,
++                showlocals=self.config.getoption("showlocals", False),
++                style=style,
++                tbfilter=False,  # pruned already, or in --fulltrace mode.
++                truncate_locals=truncate_locals,
++            )
+ 
+     def repr_failure(
+         self, excinfo, style=None

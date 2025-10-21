@@ -1,0 +1,49 @@
+{
+    "bug_id": "Jsoup-48",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-48_1756721207",
+    "patches": [
+        {
+            "hypothesis": "The issue is with the handling of headers that have multiple values. The current implementation only takes the first value of a header and ignores the rest, which is why the test fails when expecting combined header values (e.g., 'no-cache, no-store'). The method should join all header values with a comma for headers other than 'Set-Cookie'.",
+            "changes": "- header(name, values.get(0));\n+ header(name, String.join(\", \", values));",
+            "fixed_method": "void processResponseHeaders(Map<String, List<String>> resHeaders) {\n    for (Map.Entry<String, List<String>> entry : resHeaders.entrySet()) {\n        String name = entry.getKey();\n        if (name == null)\n            continue; // http/1.1 line\n\n        List<String> values = entry.getValue();\n        if (name.equalsIgnoreCase(\"Set-Cookie\")) {\n            for (String value : values) {\n                if (value == null)\n                    continue;\n                TokenQueue cd = new TokenQueue(value);\n                String cookieName = cd.chompTo(\"=\").trim();\n                String cookieVal = cd.consumeTo(\";\").trim();\n                // ignores path, date, domain, validateTLSCertificates et al. req'd?\n                // name not blank, value not null\n                if (cookieName.length() > 0)\n                    cookie(cookieName, cookieVal);\n            }\n        } else { // combine same header names with comma: http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2\n            if (!values.isEmpty())\n                header(name, String.join(\", \", values));\n        }\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,25 @@\n+void processResponseHeaders(Map<String, List<String>> resHeaders) {\n+    for (Map.Entry<String, List<String>> entry : resHeaders.entrySet()) {\n+        String name = entry.getKey();\n+        if (name == null)\n+            continue; // http/1.1 line\n+\n+        List<String> values = entry.getValue();\n+        if (name.equalsIgnoreCase(\"Set-Cookie\")) {\n+            for (String value : values) {\n+                if (value == null)\n+                    continue;\n+                TokenQueue cd = new TokenQueue(value);\n+                String cookieName = cd.chompTo(\"=\").trim();\n+                String cookieVal = cd.consumeTo(\";\").trim();\n+                // ignores path, date, domain, validateTLSCertificates et al. req'd?\n+                // name not blank, value not null\n+                if (cookieName.length() > 0)\n+                    cookie(cookieName, cookieVal);\n+            }\n+        } else { // combine same header names with comma: http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2\n+            if (!values.isEmpty())\n+                header(name, String.join(\", \", values));\n+        }\n+    }\n+}",
+            "file_path": "src/main/java/org/jsoup/helper/HttpConnection.java",
+            "method_name": "processResponseHeaders",
+            "class_name": "HttpConnection",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                753,
+                754,
+                755,
+                756,
+                757,
+                758,
+                759,
+                760,
+                761,
+                762,
+                763,
+                764,
+                765,
+                766,
+                767,
+                768,
+                769,
+                770,
+                771,
+                772,
+                773,
+                774,
+                775,
+                776,
+                777
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Jsoup-48_trace.json"
+}

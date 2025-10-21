@@ -1,0 +1,11 @@
+diff --git a/seaborn/_stats/regression.py b/seaborn/_stats/regression.py
+--- a/seaborn/_stats/regression.py
++++ b/seaborn/_stats/regression.py
+@@ -37,7 +37,8 @@
+     # and then only define __call__ on a base-class of stats with this pattern
+ 
+     def __call__(self, data, groupby, orient, scales):
+-
++        # Filter out rows with missing data
++        data = data.dropna()
+         return groupby.apply(data, self._fit_predict)

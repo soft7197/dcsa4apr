@@ -1,0 +1,31 @@
+{
+    "bug_id": "Chart-24",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Chart-24_1756719413",
+    "patches": [
+        {
+            "hypothesis": "The method calculates a gray scale value 'g' incorrectly by using the original 'value' instead of the clamped 'v'. This can lead to 'g' being out of the valid range (0-255) for Color, causing an IllegalArgumentException. The 'value' should be clamped to 'v' before calculating 'g'.",
+            "changes": "- int g = (int) ((value - this.lowerBound) / (this.upperBound - this.lowerBound) * 255.0);\n+ int g = (int) ((v - this.lowerBound) / (this.upperBound - this.lowerBound) * 255.0);",
+            "fixed_method": "public Paint getPaint(double value) {\n    double v = Math.max(value, this.lowerBound);\n    v = Math.min(v, this.upperBound);\n    int g = (int) ((v - this.lowerBound) / (this.upperBound - this.lowerBound) * 255.0);\n    return new Color(g, g, g);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,6 @@\n+public Paint getPaint(double value) {\n+    double v = Math.max(value, this.lowerBound);\n+    v = Math.min(v, this.upperBound);\n+    int g = (int) ((v - this.lowerBound) / (this.upperBound - this.lowerBound) * 255.0);\n+    return new Color(g, g, g);\n+}",
+            "file_path": "source/org/jfree/chart/renderer/GrayPaintScale.java",
+            "method_name": "getPaint",
+            "class_name": "GrayPaintScale",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                123,
+                124,
+                125,
+                126,
+                127,
+                128,
+                129
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Chart-24_trace.json"
+}

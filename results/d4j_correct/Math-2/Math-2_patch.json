@@ -1,0 +1,27 @@
+{
+    "bug_id": "Math-2",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-2_1756866209",
+    "patches": [
+        {
+            "hypothesis": "The method getNumericalMean is calculating the mean correctly, but the issue might be related to the handling of edge cases where the sample size, number of successes, or population size are negative or zero, leading to invalid calculations.",
+            "changes": "- return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n+ if (getPopulationSize() <= 0 || getSampleSize() < 0 || getNumberOfSuccesses() < 0) {\n+     throw new IllegalArgumentException(\"Population size, sample size, and number of successes must be non-negative, and population size must be positive.\");\n+ }\n+ return (double) getSampleSize() * getNumberOfSuccesses() / getPopulationSize();",
+            "fixed_method": "public double getNumericalMean() {\n    if (getPopulationSize() <= 0 || getSampleSize() < 0 || getNumberOfSuccesses() < 0) {\n        throw new IllegalArgumentException(\"Population size, sample size, and number of successes must be non-negative, and population size must be positive.\");\n    }\n    return (double) getSampleSize() * getNumberOfSuccesses() / getPopulationSize();\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,6 @@\n+public double getNumericalMean() {\n+    if (getPopulationSize() <= 0 || getSampleSize() < 0 || getNumberOfSuccesses() < 0) {\n+        throw new IllegalArgumentException(\"Population size, sample size, and number of successes must be non-negative, and population size must be positive.\");\n+    }\n+    return (double) getSampleSize() * getNumberOfSuccesses() / getPopulationSize();\n+}",
+            "file_path": "src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java",
+            "method_name": "getNumericalMean",
+            "class_name": "HypergeometricDistribution",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                267,
+                268,
+                269
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-2_trace.json"
+}

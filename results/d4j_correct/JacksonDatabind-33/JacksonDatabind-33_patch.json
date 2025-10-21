@@ -1,0 +1,49 @@
+{
+    "bug_id": "JacksonDatabind-33",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonDatabind-33_1757762571",
+    "patches": [
+        {
+            "hypothesis": "The method findNameForSerialization does not account for the @JsonUnwrapped annotation, which is used in the test to indicate that the properties of the 'Inner' class should be serialized directly as properties of the 'Outer' class. As a result, the serialization process fails because it doesn't treat those properties correctly.",
+            "fixed_method": "public PropertyName findNameForSerialization(Annotated a) {\n    String name = null;\n\n    JsonGetter jg = _findAnnotation(a, JsonGetter.class);\n    if (jg != null) {\n        name = jg.value();\n    } else {\n        JsonProperty pann = _findAnnotation(a, JsonProperty.class);\n        if (pann != null) {\n            name = pann.value();\n        } else if (_hasAnnotation(a, JsonSerialize.class)\n                || _hasAnnotation(a, JsonView.class)\n                || _hasAnnotation(a, JsonRawValue.class)\n                || _hasAnnotation(a, JsonUnwrapped.class)) {\n            // Added check for JsonUnwrapped\n            name = \"\";\n        } else {\n            return null;\n        }\n    }\n    return PropertyName.construct(name);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,7 +1,4 @@\n-/**********************************************************\n-*/\n-public PropertyName findNameForSerialization(Annotated a)\n-{\n+public PropertyName findNameForSerialization(Annotated a) {\n     String name = null;\n \n     JsonGetter jg = _findAnnotation(a, JsonGetter.class);\n@@ -11,13 +8,11 @@\n         JsonProperty pann = _findAnnotation(a, JsonProperty.class);\n         if (pann != null) {\n             name = pann.value();\n-            /* 22-Apr-2014, tatu: Should figure out a better way to do this, but\n-             *   it's actually bit tricky to do it more efficiently (meta-annotations\n-             *   add more lookups; AnnotationMap costs etc)\n-             */\n         } else if (_hasAnnotation(a, JsonSerialize.class)\n                 || _hasAnnotation(a, JsonView.class)\n-                || _hasAnnotation(a, JsonRawValue.class)) {\n+                || _hasAnnotation(a, JsonRawValue.class)\n+                || _hasAnnotation(a, JsonUnwrapped.class)) {\n+            // Added check for JsonUnwrapped\n             name = \"\";\n         } else {\n             return null;\n",
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java",
+            "method_name": "findNameForSerialization",
+            "class_name": "JacksonAnnotationIntrospector",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                731,
+                732,
+                733,
+                734,
+                735,
+                736,
+                737,
+                738,
+                739,
+                740,
+                741,
+                742,
+                743,
+                744,
+                745,
+                746,
+                747,
+                748,
+                749,
+                750,
+                751,
+                752,
+                753,
+                754,
+                755
+            ],
+            "original_code": "/**********************************************************\n*/\npublic PropertyName findNameForSerialization(Annotated a)\n{\n    String name = null;\n\n    JsonGetter jg = _findAnnotation(a, JsonGetter.class);\n    if (jg != null) {\n        name = jg.value();\n    } else {\n        JsonProperty pann = _findAnnotation(a, JsonProperty.class);\n        if (pann != null) {\n            name = pann.value();\n            /* 22-Apr-2014, tatu: Should figure out a better way to do this, but\n             *   it's actually bit tricky to do it more efficiently (meta-annotations\n             *   add more lookups; AnnotationMap costs etc)\n             */\n        } else if (_hasAnnotation(a, JsonSerialize.class)\n                || _hasAnnotation(a, JsonView.class)\n                || _hasAnnotation(a, JsonRawValue.class)) {\n            name = \"\";\n        } else {\n            return null;\n        }\n    }\n    return PropertyName.construct(name);\n}"
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonDatabind-33_trace.json"
+}

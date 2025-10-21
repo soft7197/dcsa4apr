@@ -1,0 +1,35 @@
+{
+  "bug_id": "Closure-102",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-102_1756719413",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "public void process(Node externs, Node root) {\n  NodeTraversal.traverse(compiler, root, this);\n  removeDuplicateDeclarations(root);\n  if (MAKE_LOCAL_NAMES_UNIQUE) {\n    MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n    NodeTraversal t = new NodeTraversal(compiler, renamer);\n    t.traverseRoots(externs, root);\n  }\n  new PropogateConstantAnnotations(compiler, assertOnChange)\n      .process(externs, root);\n}",
+      "diff": "",
+      "file_path": "src/com/google/javascript/jscomp/Normalize.java",
+      "method_name": "process",
+      "class_name": "Normalize",
+      "iteration": 1,
+      "is_multi_method": false,
+      "line_numbers": [
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97
+      ]
+    }
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/Closure-102_trace.json"
+}

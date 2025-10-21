@@ -1,0 +1,14 @@
+diff --git a/sympy/printing/latex.py b/sympy/printing/latex.py
+--- a/sympy/printing/latex.py
++++ b/sympy/printing/latex.py
+@@ -1437,8 +1437,8 @@
+                            = _print_MatrixBase
+ 
+     def _print_MatrixElement(self, expr):
+-        return self.parenthesize(expr.parent, PRECEDENCE["Atom"], strict=True) \
+-            + '_{%s, %s}' % (expr.i, expr.j)
++        i, j = expr.i, expr.j
++        return self.parenthesize(expr.parent, PRECEDENCE['Atom'], strict=True) + '_{%s, %s}' % (self._print(i), self._print(j))
+ 
+     def _print_MatrixSlice(self, expr):
+         def latexslice(x):

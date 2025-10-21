@@ -1,0 +1,30 @@
+{
+  "bug_id": "JacksonXml-5",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonXml-5_1756719413",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "protected XmlSerializerProvider(XmlSerializerProvider src) {\n    super(src);\n\n    _rootNameLookup = new XmlRootNameLookup();\n}",
+      "diff": "",
+      "file_path": "src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java",
+      "method_name": "XmlSerializerProvider",
+      "class_name": "XmlSerializerProvider",
+      "iteration": 1,
+      "is_multi_method": false,
+      "line_numbers": [
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ]
+    }
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/JacksonXml-5_trace.json"
+}

@@ -1,0 +1,15 @@
+max_iterations: 5
+max_hypothesis_pool_size: 10
+use_docker: false
+fl_tool: "perfect"
+llm_model: "gpt-4o"
+temperature: 1 # by default
+
+# New settings
+parallel_components: false      # Enable for multi-function bugs
+enable_smart_resolution: true   # Smart tool input resolution
+enable_caching: true    
+early_stopping: true
+max_workers: 4
+
+context_manager: "llm_driven"

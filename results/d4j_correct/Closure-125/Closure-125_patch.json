@@ -1,0 +1,40 @@
+{
+    "bug_id": "Closure-125",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Closure-125_1756720253",
+    "patches": [
+        {
+            "hypothesis": "The bug occurs because `fnType.getInstanceType()` is called without checking if the function type actually has an instance type. This can lead to an IllegalStateException if the function type is not a constructor. The fix involves checking whether the function type has an instance type before calling `getInstanceType()`.",
+            "changes": "- if (fnType != null) {\n+ if (fnType != null && fnType.hasInstanceType()) {",
+            "fixed_method": "private void visitNew(NodeTraversal t, Node n) {\n  Node constructor = n.getFirstChild();\n  JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n  if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n    FunctionType fnType = type.toMaybeFunctionType();\n    if (fnType != null && fnType.hasInstanceType()) {\n      visitParameterList(t, n, fnType);\n      ensureTyped(t, n, fnType.getInstanceType());\n    } else {\n      ensureTyped(t, n);\n    }\n  } else {\n    report(t, n, NOT_A_CONSTRUCTOR);\n    ensureTyped(t, n);\n  }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,16 @@\n+private void visitNew(NodeTraversal t, Node n) {\n+  Node constructor = n.getFirstChild();\n+  JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n+  if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n+    FunctionType fnType = type.toMaybeFunctionType();\n+    if (fnType != null && fnType.hasInstanceType()) {\n+      visitParameterList(t, n, fnType);\n+      ensureTyped(t, n, fnType.getInstanceType());\n+    } else {\n+      ensureTyped(t, n);\n+    }\n+  } else {\n+    report(t, n, NOT_A_CONSTRUCTOR);\n+    ensureTyped(t, n);\n+  }\n+}",
+            "file_path": "src/com/google/javascript/jscomp/TypeCheck.java",
+            "method_name": "visitNew",
+            "class_name": "TypeCheck",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                1656,
+                1657,
+                1658,
+                1659,
+                1660,
+                1661,
+                1662,
+                1663,
+                1664,
+                1665,
+                1666,
+                1667,
+                1668,
+                1669,
+                1670,
+                1671
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Closure-125_trace.json"
+}

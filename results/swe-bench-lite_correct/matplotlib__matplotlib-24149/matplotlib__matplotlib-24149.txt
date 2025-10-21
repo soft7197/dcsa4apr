@@ -1,0 +1,14 @@
+diff --git a/lib/matplotlib/axes/_axes.py b/lib/matplotlib/axes/_axes.py
+--- a/lib/matplotlib/axes/_axes.py
++++ b/lib/matplotlib/axes/_axes.py
+@@ -2163,8 +2163,8 @@
+         # x should be an array...
+         assert type(xconv) is np.ndarray
+ 
+-        if xconv.size == 0:
+-            # xconv has already been converted, but maybe empty...
++        if xconv.size == 0 or np.all(np.isnan(xconv)):
++            # xconv has already been converted, but maybe empty or all NaN...
+             return convert(dx)
+ 
+         try:

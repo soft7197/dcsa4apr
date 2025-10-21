@@ -1,0 +1,18 @@
+### Fixed Method 1
+protected final void _verifyRelease(byte[] toRelease, byte[] src) {
+
+        if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(); }
+    }
+
+### Fixed Method 2
+protected final void _verifyRelease(char[] toRelease, char[] src) {
+
+        if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(); }
+    }
+
+### Fixed Method 3
+private IllegalArgumentException wrongBuf() {
+
+        return new IllegalArgumentException("Trying to release buffer smaller than original");
+    }
+

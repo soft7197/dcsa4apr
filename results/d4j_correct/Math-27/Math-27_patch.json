@@ -1,0 +1,27 @@
+{
+    "bug_id": "Math-27",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-27_1756721486",
+    "patches": [
+        {
+            "hypothesis": "The method `percentageValue()` is using the `multiply(100)` method incorrectly, resulting in an unexpected negative value due to integer overflow in multiplication. This method should return the fraction's value as a percentage by dividing the numerator by the denominator and then multiplying by 100.",
+            "changes": "- return multiply(100).doubleValue();\n+ return (double) numerator / denominator * 100;",
+            "fixed_method": "public double percentageValue() {\n    return (double) numerator / denominator * 100;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,3 @@\n+public double percentageValue() {\n+    return (double) numerator / denominator * 100;\n+}",
+            "file_path": "src/main/java/org/apache/commons/math3/fraction/Fraction.java",
+            "method_name": "percentageValue",
+            "class_name": "Fraction",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                596,
+                597,
+                598
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-27_trace.json"
+}

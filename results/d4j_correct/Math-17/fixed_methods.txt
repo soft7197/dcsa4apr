@@ -1,0 +1,7 @@
+### Fixed Method 1
+public Dfp multiply(final int x) {
+    // Create a Dfp for the integer multiplicand
+    Dfp multiplicand = this.field.newDfp(x);
+    // Call the multiply method that accepts a Dfp argument instead of an int
+    return this.multiply(multiplicand);
+}

@@ -1,0 +1,82 @@
+{
+  "bug_id": "Math-35",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-35_1759396180",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue is that the constructors of the ElitisticListPopulation class do not validate the elitismRate parameter to ensure it is within the specified range of [0, 1]. This results in no OutOfRangeException being thrown when invalid values are provided. The fixes will involve adding these boundary checks to both constructors.",
+        "changes": "Added a check for the elitismRate parameter to ensure it is within the range [0, 1] in both constructors of the ElitisticListPopulation class. If the rate is out of this range, an OutOfRangeException is thrown.",
+        "methods": {
+          "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java::ElitisticListPopulation::ElitisticListPopulation::L47": {
+            "file_path": "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java",
+            "method_name": "ElitisticListPopulation",
+            "class_name": "ElitisticListPopulation",
+            "line_numbers": [
+              47,
+              53
+            ],
+            "original_code": "    /**\n     * Creates a new ElitisticListPopulation instance.\n     *\n     * @param chromosomes list of chromosomes in the population\n     * @param populationLimit maximal size of the population\n     * @param elitismRate how many best chromosomes will be directly transferred to the\n     *                    next generation [in %]\n     * @throws OutOfRangeException if the elitism rate is outside the [0, 1] range\n     */\n\n    public ElitisticListPopulation(final List<Chromosome> chromosomes,\n                                   final int populationLimit,\n                                   final double elitismRate) {\n        super(chromosomes, populationLimit);\n        this.elitismRate = elitismRate;\n    }\n",
+            "fixed_method": "public ElitisticListPopulation(final List<Chromosome> chromosomes, final int populationLimit, final double elitismRate) {\n    super(chromosomes, populationLimit);\n    if (elitismRate < 0.0 || elitismRate > 1.0) {\n        throw new OutOfRangeException(elitismRate, 0, 1);\n    }\n    this.elitismRate = elitismRate;\n}",
+            "iteration": 1
+          },
+          "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java::ElitisticListPopulation::ElitisticListPopulation::L63": {
+            "file_path": "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java",
+            "method_name": "ElitisticListPopulation",
+            "class_name": "ElitisticListPopulation",
+            "line_numbers": [
+              63,
+              67
+            ],
+            "original_code": "    /**\n     * Creates a new ListPopulation instance and initializes its inner\n     * chromosome list.\n     *\n     * @param populationLimit maximal size of the population\n     * @param elitismRate how many best chromosomes will be directly transferred to the\n     *                    next generation [in %]\n     * @throws OutOfRangeException if the elitism rate is outside the [0, 1] range\n     */\n\n    public ElitisticListPopulation(final int populationLimit, final double elitismRate) {\n        super(populationLimit);\n        this.elitismRate = elitismRate;\n    }\n",
+            "fixed_method": "public ElitisticListPopulation(final int populationLimit, final double elitismRate) {\n    super(populationLimit);\n    if (elitismRate < 0.0 || elitismRate > 1.0) {\n        throw new OutOfRangeException(elitismRate, 0, 1);\n    }\n    this.elitismRate = elitismRate;\n}",
+            "iteration": 1
+          }
+        },
+        "iteration": 1,
+        "is_multi_method": true,
+        "execution_result": {
+          "status": "success",
+          "message": "All 4 tests passed with 2 method fixes",
+          "applied_methods": [
+            "ElitisticListPopulation",
+            "ElitisticListPopulation"
+          ],
+          "test_results": {
+            "org.apache.commons.math3.genetics.ElitisticListPopulationTest::testChromosomeListConstructorTooLow": {
+              "test": "org.apache.commons.math3.genetics.ElitisticListPopulationTest::testChromosomeListConstructorTooLow",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            },
+            "org.apache.commons.math3.genetics.ElitisticListPopulationTest::testConstructorTooHigh": {
+              "test": "org.apache.commons.math3.genetics.ElitisticListPopulationTest::testConstructorTooHigh",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            },
+            "org.apache.commons.math3.genetics.ElitisticListPopulationTest::testConstructorTooLow": {
+              "test": "org.apache.commons.math3.genetics.ElitisticListPopulationTest::testConstructorTooLow",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            },
+            "org.apache.commons.math3.genetics.ElitisticListPopulationTest::testChromosomeListConstructorTooHigh": {
+              "test": "org.apache.commons.math3.genetics.ElitisticListPopulationTest::testChromosomeListConstructorTooHigh",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            }
+          },
+          "compilation_time": 7.132659673690796,
+          "test_time": 10.495086908340454,
+          "total_time": 17.628982067108154
+        }
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/Math-35_trace.json"
+}

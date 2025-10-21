@@ -1,0 +1,4 @@
+### Fixed Method 1
+public static float max(final float a, final float b) {
+    return (Float.isNaN(a) || Float.isNaN(b)) ? Float.NaN : (a >= b ? a : b);
+}

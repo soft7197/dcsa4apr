@@ -1,0 +1,13 @@
+### Fixed Method 1
+static Map<Object, Object> getRegistry() {
+    // Return the registry only if it is already initialized, else null
+    return REGISTRY.get();
+}
+
+
+### Fixed Method 2
+static boolean isRegistered(Object value) {
+    Map<Object, Object> m = getRegistry();
+    // If the registry is null, the value cannot be registered
+    return m != null && m.containsKey(value);
+}

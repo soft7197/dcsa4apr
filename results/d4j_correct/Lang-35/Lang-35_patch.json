@@ -1,0 +1,64 @@
+{
+  "bug_id": "Lang-35",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-35_1759396180",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug in both methods is due to the handling of null array and null element cases when determining the array type. If both the array and element are null, the methods should throw an IllegalArgumentException instead of returning an array of Objects. Additionally, the handling of array types in copyArrayGrow1 and add methods is incorrect when the array is null, resulting in ClassCastException.",
+        "changes": "1. Added check for both array and element being null, raising IllegalArgumentException. 2. Correctly determined the array component type using java.lang.reflect.Array to create new arrays. 3. Corrected type assignment to avoid ClassCastException by directly using the expected type when handling null arrays.",
+        "methods": {
+          "src/main/java/org/apache/commons/lang3/ArrayUtils.java::ArrayUtils::add::L3288": {
+            "file_path": "src/main/java/org/apache/commons/lang3/ArrayUtils.java",
+            "method_name": "add",
+            "class_name": "ArrayUtils",
+            "line_numbers": [
+              3288,
+              3302
+            ],
+            "original_code": "    /**\n     * <p>Copies the given array and adds the given element at the end of the new array.</p>\n     *\n     * <p>The new array contains the same elements of the input\n     * array plus the given element in the last position. The component type of\n     * the new array is the same as that of the input array.</p>\n     *\n     * <p>If the input array is <code>null</code>, a new one element array is returned\n     *  whose component type is the same as the element, unless the element itself is null,\n     *  in which case the return type is Object[]</p>\n     *\n     * <pre>\n     * ArrayUtils.add(null, null)      = [null]\n     * ArrayUtils.add(null, \"a\")       = [\"a\"]\n     * ArrayUtils.add([\"a\"], null)     = [\"a\", null]\n     * ArrayUtils.add([\"a\"], \"b\")      = [\"a\", \"b\"]\n     * ArrayUtils.add([\"a\", \"b\"], \"c\") = [\"a\", \"b\", \"c\"]\n     * </pre>\n     *\n     * @param array  the array to \"add\" the element to, may be <code>null</code>\n     * @param element  the object to add, may be <code>null</code>\n     * @return A new array containing the existing elements plus the new element\n     * The returned array type will be that of the input array (unless null),\n     * in which case it will have the same type as the element.\n     * If both are null, an IllegalArgumentException is thrown\n     * @since 2.1\n     * @throws IllegalArgumentException if both arguments are null\n     */\n\n    public static <T> T[] add(T[] array, T element) {\n        Class<?> type;\n        if (array != null){\n            type = array.getClass();\n        } else if (element != null) {\n            type = element.getClass();\n        } else {\n            type = Object.class;\n        }\n        @SuppressWarnings(\"unchecked\") // type must be T\n        T[] newArray = (T[]) copyArrayGrow1(array, type);\n        newArray[newArray.length - 1] = element;\n        return newArray;\n    }\n",
+            "fixed_method": "public static <T> T[] add(T[] array, T element) {\n    if (array == null && element == null) {\n        throw new IllegalArgumentException(\"Both array and element cannot be null\");\n    }\n    Class<?> type = (array != null) ? array.getClass().getComponentType() : element.getClass();\n    T[] newArray = (T[]) java.lang.reflect.Array.newInstance(type, (array != null ? array.length : 0) + 1);\n    if (array != null) {\n        System.arraycopy(array, 0, newArray, 0, array.length);\n    }\n    newArray[newArray.length - 1] = element;\n    return newArray;\n}",
+            "iteration": 1
+          },
+          "src/main/java/org/apache/commons/lang3/ArrayUtils.java::ArrayUtils::add::L3567": {
+            "file_path": "src/main/java/org/apache/commons/lang3/ArrayUtils.java",
+            "method_name": "add",
+            "class_name": "ArrayUtils",
+            "line_numbers": [
+              3567,
+              3580
+            ],
+            "original_code": "    /**\n     * <p>Inserts the specified element at the specified position in the array.\n     * Shifts the element currently at that position (if any) and any subsequent\n     * elements to the right (adds one to their indices).</p>\n     *\n     * <p>This method returns a new array with the same elements of the input\n     * array plus the given element on the specified position. The component\n     * type of the returned array is always the same as that of the input\n     * array.</p>\n     *\n     * <p>If the input array is <code>null</code>, a new one element array is returned\n     *  whose component type is the same as the element.</p>\n     *\n     * <pre>\n     * ArrayUtils.add(null, 0, null)      = [null]\n     * ArrayUtils.add(null, 0, \"a\")       = [\"a\"]\n     * ArrayUtils.add([\"a\"], 1, null)     = [\"a\", null]\n     * ArrayUtils.add([\"a\"], 1, \"b\")      = [\"a\", \"b\"]\n     * ArrayUtils.add([\"a\", \"b\"], 3, \"c\") = [\"a\", \"b\", \"c\"]\n     * </pre>\n     *\n     * @param array  the array to add the element to, may be <code>null</code>\n     * @param index  the position of the new object\n     * @param element  the object to add\n     * @return A new array containing the existing elements and the new element\n     * @throws IndexOutOfBoundsException if the index is out of range\n     * (index < 0 || index > array.length).\n     * @throws IllegalArgumentException if both array and element are null\n     */\n\n    public static <T> T[] add(T[] array, int index, T element) {\n        Class<?> clss = null;\n        if (array != null) {\n            clss = array.getClass().getComponentType();\n        } else if (element != null) {\n            clss = element.getClass();\n        } else {\n            return (T[]) new Object[] { null };\n        }\n        @SuppressWarnings(\"unchecked\") // the add method creates an array of type clss, which is type T\n        final T[] newArray = (T[]) add(array, index, element, clss);\n        return newArray;\n    }\n",
+            "fixed_method": "public static <T> T[] add(T[] array, int index, T element) {\n    if (array == null && element == null) {\n        throw new IllegalArgumentException(\"Both array and element cannot be null\");\n    }\n    if (index < 0 || (array != null && index > array.length)) {\n        throw new IndexOutOfBoundsException(\"Index: \" + index + \", Length: \" + (array != null ? array.length : 0));\n    }\n    Class<?> type = (array != null) ? array.getClass().getComponentType() : element.getClass();\n    T[] newArray = (T[]) java.lang.reflect.Array.newInstance(type, (array != null ? array.length : 0) + 1);\n    if (array != null) {\n        System.arraycopy(array, 0, newArray, 0, index);\n        System.arraycopy(array, index, newArray, index + 1, array.length - index);\n    }\n    newArray[index] = element;\n    return newArray;\n}",
+            "iteration": 1
+          }
+        },
+        "iteration": 1,
+        "is_multi_method": true,
+        "execution_result": {
+          "status": "success",
+          "message": "All 1 tests passed with 2 method fixes",
+          "applied_methods": [
+            "add",
+            "add"
+          ],
+          "test_results": {
+            "org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571": {
+              "test": "org.apache.commons.lang3.ArrayUtilsAddTest::testLANG571",
+              "passed": true,
+              "output": "Failing tests: 0\n",
+              "error": ""
+            }
+          },
+          "compilation_time": 5.043587923049927,
+          "test_time": 1.7277331352233887,
+          "total_time": 6.774796724319458
+        }
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/Lang-35_trace.json"
+}

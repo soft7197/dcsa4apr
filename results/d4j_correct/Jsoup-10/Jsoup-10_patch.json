@@ -1,0 +1,48 @@
+{
+    "bug_id": "Jsoup-10",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-10_1756850317",
+    "patches": [
+        {
+            "hypothesis": "The issue arises because when the relative URL is just a query string (e.g., '?foo'), the Java URL constructor resolves it incorrectly by stripping the path from the base URL. This results in an incorrect absolute URL. The fix involves checking if the relative URL starts with a '?' and if so, appending it directly to the base path to form the correct absolute URL.",
+            "changes": "- URL abs = new URL(base, relUrl);\n+ if (relUrl.startsWith(\"?\")) {\n+     abs = new URL(base.getProtocol(), base.getHost(), base.getPort(), base.getPath() + relUrl);\n+ } else {\n+     abs = new URL(base, relUrl);\n+ }",
+            "fixed_method": "public String absUrl(String attributeKey) {\n    Validate.notEmpty(attributeKey);\n\n    String relUrl = attr(attributeKey);\n    if (!hasAttr(attributeKey)) {\n        return \"\"; // nothing to make absolute with\n    } else {\n        URL base;\n        try {\n            try {\n                base = new URL(baseUri);\n            } catch (MalformedURLException e) {\n                // the base is unsuitable, but the attribute may be abs on its own, so try that\n                URL abs = new URL(relUrl);\n                return abs.toExternalForm();\n            }\n            // workaround: java resolves '//path/file + ?foo' to '//path/?foo', not '//path/file?foo' as desired\n            URL abs;\n            if (relUrl.startsWith(\"?\")) {\n                abs = new URL(base.getProtocol(), base.getHost(), base.getPort(), base.getPath() + relUrl);\n            } else {\n                abs = new URL(base, relUrl);\n            }\n            return abs.toExternalForm();\n        } catch (MalformedURLException e) {\n            return \"\";\n        }\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,29 @@\n+public String absUrl(String attributeKey) {\n+    Validate.notEmpty(attributeKey);\n+\n+    String relUrl = attr(attributeKey);\n+    if (!hasAttr(attributeKey)) {\n+        return \"\"; // nothing to make absolute with\n+    } else {\n+        URL base;\n+        try {\n+            try {\n+                base = new URL(baseUri);\n+            } catch (MalformedURLException e) {\n+                // the base is unsuitable, but the attribute may be abs on its own, so try that\n+                URL abs = new URL(relUrl);\n+                return abs.toExternalForm();\n+            }\n+            // workaround: java resolves '//path/file + ?foo' to '//path/?foo', not '//path/file?foo' as desired\n+            URL abs;\n+            if (relUrl.startsWith(\"?\")) {\n+                abs = new URL(base.getProtocol(), base.getHost(), base.getPort(), base.getPath() + relUrl);\n+            } else {\n+                abs = new URL(base, relUrl);\n+            }\n+            return abs.toExternalForm();\n+        } catch (MalformedURLException e) {\n+            return \"\";\n+        }\n+    }\n+}",
+            "file_path": "src/main/java/org/jsoup/nodes/Node.java",
+            "method_name": "absUrl",
+            "class_name": "Node",
+            "iteration": 2,
+            "is_multi_method": false,
+            "line_numbers": [
+                156,
+                157,
+                158,
+                159,
+                160,
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167,
+                168,
+                169,
+                170,
+                171,
+                172,
+                173,
+                174,
+                175,
+                176,
+                177,
+                178,
+                179
+            ]
+        }
+    ],
+    "iterations": 2,
+    "monitor_file": "traces/Jsoup-10_trace.json"
+}

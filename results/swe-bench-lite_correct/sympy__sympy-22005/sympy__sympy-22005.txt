@@ -1,0 +1,14 @@
+diff --git a/sympy/solvers/polysys.py b/sympy/solvers/polysys.py
+--- a/sympy/solvers/polysys.py
++++ b/sympy/solvers/polysys.py
+@@ -281,6 +281,10 @@
+                 '''))
+         return solutions
+ 
++    # Check for zero-dimensional systems
++    if len(opt.gens) > len(polys):
++        raise NotImplementedError("only zero-dimensional systems supported (finite number of solutions)")
++
+     try:
+         result = _solve_reduced_system(polys, opt.gens, entry=True)
+     except CoercionFailed:

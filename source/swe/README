@@ -1,0 +1,401 @@
+# Agent-Based Automated Program Repair System
+
+Complete implementation of the agent-based APR system for SWE-bench Lite evaluation.
+
+## 🚀 Quick Start (One Day Setup)
+
+### Prerequisites
+- Python 3.8+
+- OpenAI API key
+- Git
+- 16GB+ RAM recommended
+- Internet connection for dataset download
+
+### Installation (5 minutes)
+
+```bash
+# 1. Clone/create project directory
+mkdir apr_system && cd apr_system
+
+# 2. Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Set API key
+export OPENAI_API_KEY='your-openai-api-key-here'
+
+# 5. Download dataset (automatic on first run)
+# Dataset will be downloaded automatically when you run the system
+```
+
+### Run System (immediate)
+
+```bash
+# Process first 10 bugs (recommended for testing)
+python integrated_main.py --num-bugs 10
+
+# Process all bugs in SWE-bench Lite
+python integrated_main.py
+
+# Custom configuration
+python integrated_main.py --num-bugs 20 --max-iterations 7 --model gpt-4o
+```
+
+## 📁 Project Structure
+
+```
+apr_system/
+├── main.py                  # Core APR system components
+├── dataset_loader.py        # Dataset and repository management
+├── integrated_main.py       # Main execution script
+├── requirements.txt         # Python dependencies
+├── setup_and_run.sh        # Automated setup script
+├── README.md               # This file
+├── datasets/               # SWE-bench Lite dataset
+│   └── swebench_lite.json
+├── workspace/              # Bug repositories
+│   └── {instance_id}/
+│       └── repo/
+├── results/                # Evaluation results
+│   └── results_*.json
+└── faiss_index/           # Vector database cache
+```
+
+## 🏗️ System Architecture
+
+### Three-Agent Architecture
+
+1. **Context Updater Agent** (Temperature: 0.2)
+   - Analyzes failed repairs
+   - Decides what additional information to retrieve
+   - Executes tools to gather context
+
+2. **Generator Agent** (Temperature: 0.7)
+   - Synthesizes repair context
+   - Generates diverse patch hypotheses
+   - Creates complete fixed code
+
+3. **Overfitting Detector Agent** (Temperature: 0.3)
+   - Analyzes patches for overfitting patterns
+   - Prevents test-specific fixes
+   - Guides toward general solutions
+
+### Tool Suite
+
+- **Coverage Runner**: Execute tests with coverage analysis
+- **Similar Method Search**: Find semantically similar code using CodeBERT
+- **Code Extractor**: Retrieve code at various granularities
+- **Call Graph Builder**: Analyze function dependencies
+- **Field Dependency Analyzer**: Track data flow
+- **API Usage Finder**: Find API usage examples
+
+## 💻 Usage Examples
+
+### Basic Usage
+
+```bash
+# Test with 5 bugs
+python integrated_main.py -n 5
+
+# Full evaluation
+python integrated_main.py
+```
+
+### Advanced Configuration
+
+```bash
+python integrated_main.py \
+  --num-bugs 50 \
+  --model gpt-4o \
+  --max-iterations 7 \
+  --timeout 5400 \
+  --workspace ./my_workspace \
+  --results ./my_results
+```
+
+### Using the Setup Script
+
+```bash
+# Automated setup and run
+chmod +x setup_and_run.sh
+./setup_and_run.sh
+```
+
+## 📊 Output and Results
+
+### Console Output
+
+The system provides real-time feedback:
+- Repository setup progress
+- Test execution results
+- Agent decision making
+- Patch generation and validation
+- Success/failure status
+
+### Results Files
+
+Results are saved in `results/` directory:
+
+```json
+{
+  "timestamp": "2025-10-08T10:30:00",
+  "total_bugs": 10,
+  "fixed": 7,
+  "failed": 3,
+  "results": [
+    {
+      "bug_id": "django__django-12345",
+      "success": true,
+      "iteration": 2,
+      "hypothesis": "Fix null pointer by adding validation",
+      "time_elapsed": 45.2
+    }
+  ]
+}
+```
+
+## 🔧 Configuration Options
+
+### Command Line Arguments
+
+| Argument | Default | Description |
+|----------|---------|-------------|
+| `--num-bugs, -n` | All | Number of bugs to process |
+| `--model` | gpt-4o | OpenAI model to use |
+| `--max-iterations` | 5 | Max iterations per bug |
+| `--timeout` | 3600 | Timeout per bug (seconds) |
+| `--workspace` | ./workspace | Workspace directory |
+| `--results` | ./results | Results directory |
+
+### Environment Variables
+
+```bash
+# Required
+export OPENAI_API_KEY='sk-...'
+
+# Optional
+export FAISS_INDEX_PATH='./faiss_index'
+```
+
+## 📈 Expected Performance
+
+Based on the paper's results on Defects4J:
+
+- **Total Bugs Fixed**: 348 bugs expected
+- **First Iteration Success**: ~83.6% of fixes
+- **Multi-Function Bugs**: 39 bugs spanning 2-10 functions
+- **Average Time**: 30-60 seconds per bug
+
+For SWE-bench Lite (300 instances):
+- Expected fix rate: 20-30% (state-of-the-art range)
+- Processing time: 4-8 hours for full dataset
+- High-quality fixes with low overfitting
+
+## 🐛 Troubleshooting
+
+### API Key Issues
+```bash
+# Check if key is set
+echo $OPENAI_API_KEY
+
+# Set temporarily
+export OPENAI_API_KEY='your-key'
+
+# Set permanently (Linux/Mac)
+echo 'export OPENAI_API_KEY="your-key"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Dataset Download Issues
+```bash
+# Manual download
+cd datasets
+python -c "
+from datasets import load_dataset
+import json
+
+dataset = load_dataset('princeton-nlp/SWE-bench_Lite', split='test')
+data = [dict(item) for item in dataset]
+
+with open('swebench_lite.json', 'w') as f:
+    json.dump(data, f, indent=2)
+"
+```
+
+### Memory Issues
+```bash
+# Process fewer bugs at once
+python integrated_main.py --num-bugs 5
+
+# Clear workspace between runs
+rm -rf workspace/*
+```
+
+### Repository Clone Issues
+- Ensure git is installed: `git --version`
+- Check internet connection
+- Try manual clone: `git clone https://github.com/{repo}.git`
+
+## 🔬 System Components Detail
+
+### Context Pool Structure
+
+**Static Component:**
+- Original buggy code
+- Problem statement
+- Failing test cases
+- Error messages
+
+**Dynamic Component:**
+- Tool execution results
+- Retrieved similar code
+- Coverage information
+- API usage examples
+
+**History Component:**
+- All tried hypotheses
+- Test results for each attempt
+- Tool extraction records
+- Semantic hashes for deduplication
+
+### Vector Database
+
+- **Model**: CodeBERT (microsoft/codebert-base)
+- **Dimensions**: 768
+- **Index**: FAISS with cosine similarity
+- **Purpose**: Semantic code search for similar methods
+
+## 📝 File Descriptions
+
+### main.py (1000+ lines)
+Core system implementation:
+- Configuration classes
+- Data structures (BugInstance, Hypothesis, ContextPool)
+- VectorDatabase for semantic search
+- ToolSuite with 6 specialized tools
+- Three LLM agents (Context Updater, Generator, Overfitting Detector)
+- RepairPipeline orchestration
+
+### dataset_loader.py (400+ lines)
+Dataset and repository management:
+- SWEBenchLoader for dataset handling
+- RepositoryManager for git operations
+- TestRunner for pytest execution
+- PatchApplicator for safe patch application
+- Utility functions for parsing and formatting
+
+### integrated_main.py (300+ lines)
+Main execution script:
+- IntegratedRepairSystem for full evaluation
+- EnhancedRepairPipeline with testing integration
+- Command-line argument parsing
+- Results aggregation and reporting
+- Error handling and recovery
+
+## 🎯 One-Day Execution Plan
+
+### Morning (4 hours)
+1. **Setup** (30 min): Install dependencies, configure API key
+2. **Test Run** (30 min): Process 5 bugs to verify system
+3. **Analysis** (1 hour): Review test results, debug issues
+4. **Optimization** (2 hours): Adjust parameters, run 20 bugs
+
+### Afternoon (4 hours)
+1. **Full Run** (3 hours): Process all 300 bugs
+2. **Analysis** (1 hour): Analyze results, generate report
+
+### Expected Timeline
+- Setup: 30 minutes
+- 10 bugs: 20-30 minutes
+- 50 bugs: 1-2 hours
+- 300 bugs (full): 4-6 hours
+
+## 📊 Monitoring Progress
+
+### Real-Time Monitoring
+
+```bash
+# Watch results file update
+watch -n 10 'tail -20 results/results_*.json'
+
+# Monitor system resources
+htop  # or top
+
+# Check log output
+tail -f system.log  # if logging enabled
+```
+
+### Interrupt and Resume
+
+The system saves intermediate results, so you can:
+1. Press Ctrl+C to interrupt
+2. Results are automatically saved
+3. Resume by restarting (it will process remaining bugs)
+
+## 🤝 Contributing
+
+This is a research implementation. For improvements:
+1. Optimize tool execution performance
+2. Add more sophisticated AST analysis
+3. Implement better fault localization
+4. Add support for more programming languages
+5. Improve agent prompts based on results
+
+## 📚 References
+
+Based on the paper: "Utilizing Static Analysis and Dynamic Context for Agent-based Automated Program Repair"
+
+Key features:
+- Multi-agent architecture with specialized roles
+- Dynamic context management with history tracking
+- Comprehensive tool suite with validation
+- Overfitting detection and prevention
+- Component-level repair with intelligent mapping
+
+## 🔐 Security Notes
+
+- API keys are never logged or saved
+- Code execution happens in isolated workspace
+- Original repositories are not modified
+- All changes are applied to temporary copies
+
+## ⚡ Performance Tips
+
+1. **Use faster model for testing**: `--model gpt-3.5-turbo`
+2. **Limit iterations**: `--max-iterations 3` for quick runs
+3. **Process in batches**: Run 20-50 bugs at a time
+4. **Cache vector database**: Reuse `faiss_index/` directory
+5. **Parallel processing**: Modify code to process multiple bugs simultaneously
+
+## 📧 Support
+
+For issues:
+1. Check troubleshooting section
+2. Review error messages in console
+3. Check results files for detailed information
+4. Verify API key and dependencies
+
+## ✅ Checklist for One-Day Execution
+
+- [ ] Python 3.8+ installed
+- [ ] Virtual environment created
+- [ ] Dependencies installed (`pip install -r requirements.txt`)
+- [ ] OpenAI API key configured
+- [ ] Dataset downloaded (automatic on first run)
+- [ ] Test run completed (5-10 bugs)
+- [ ] Full evaluation running
+- [ ] Results analyzed and saved
+
+## 🎉 Success Criteria
+
+By end of day, you should have:
+- ✅ System fully operational
+- ✅ Results for 300 SWE-bench Lite instances
+- ✅ JSON results file with detailed metrics
+- ✅ Success rate and iteration analysis
+- ✅ Comparison data ready for paper
+
+Good luck with your one-day evaluation! 🚀

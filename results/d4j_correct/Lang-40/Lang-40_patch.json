@@ -1,0 +1,29 @@
+{
+    "bug_id": "Lang-40",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Lang-40_1757179217",
+    "patches": [
+        {
+            "hypothesis": "The original implementation uses toUpperCase() to handle case insensitivity, relying on locale-specific transformations. This results in incorrect behavior for locale-dependent characters like 'ß', which is incorrectly transformed in some locales. The method should explicitly check for case-insensitive presence without relying on toUpperCase(), which can be locale-dependent.",
+            "fixed_method": "public static boolean containsIgnoreCase(String str, String searchStr) {\n    if (str == null || searchStr == null) {\n        return false;\n    }\n    final int length = searchStr.length();\n    for (int i = 0; i <= str.length() - length; i++) {\n        if (str.regionMatches(true, i, searchStr, 0, length)) {\n            return true;\n        }\n    }\n    return false;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,29 +1,12 @@\n-/**\n-* <p>Checks if String contains a search String irrespective of case,\n-* handling <code>null</code>. Case-insensitivity is defined as by\n-* {@link String#equalsIgnoreCase(String)}.\n-*\n-* <p>A <code>null</code> String will return <code>false</code>.</p>\n-*\n-* <pre>\n-* StringUtils.contains(null, *) = false\n-* StringUtils.contains(*, null) = false\n-* StringUtils.contains(\"\", \"\") = true\n-* StringUtils.contains(\"abc\", \"\") = true\n-* StringUtils.contains(\"abc\", \"a\") = true\n-* StringUtils.contains(\"abc\", \"z\") = false\n-* StringUtils.contains(\"abc\", \"A\") = true\n-* StringUtils.contains(\"abc\", \"Z\") = false\n-* </pre>\n-*\n-* @param str  the String to check, may be null\n-* @param searchStr  the String to find, may be null\n-* @return true if the String contains the search String irrespective of\n-* case or false if not or <code>null</code> string input\n-*/\n public static boolean containsIgnoreCase(String str, String searchStr) {\n     if (str == null || searchStr == null) {\n         return false;\n     }\n-    return contains(str.toUpperCase(), searchStr.toUpperCase());\n+    final int length = searchStr.length();\n+    for (int i = 0; i <= str.length() - length; i++) {\n+        if (str.regionMatches(true, i, searchStr, 0, length)) {\n+            return true;\n+        }\n+    }\n+    return false;\n }",
+            "file_path": "src/java/org/apache/commons/lang/StringUtils.java",
+            "method_name": "containsIgnoreCase",
+            "class_name": "StringUtils",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                1044,
+                1045,
+                1046,
+                1047,
+                1048,
+                1049
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Lang-40_trace.json"
+}

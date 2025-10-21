@@ -1,0 +1,14 @@
+Correct patch indices: 3, 6, 7, 9
+The last correct patch:
+
+
+public OpenMapRealMatrix(int rowDimension, int columnDimension) {
+    super(rowDimension, columnDimension);
+    long totalElements = (long) rowDimension * columnDimension;
+    if (totalElements > Integer.MAX_VALUE) {
+        throw new NumberIsTooLargeException(totalElements, Integer.MAX_VALUE, true);
+    }
+    this.rows = rowDimension;
+    this.columns = columnDimension;
+    this.entries = new OpenIntToDoubleHashMap(0.0);
+}

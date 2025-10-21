@@ -1,0 +1,16 @@
+diff --git a/sphinx/ext/viewcode.py b/sphinx/ext/viewcode.py
+--- a/sphinx/ext/viewcode.py
++++ b/sphinx/ext/viewcode.py
+@@ -186,6 +186,12 @@
+     urito = app.builder.get_relative_uri
+ 
+     modnames = set(env._viewcode_modules)  # type: ignore
++
++    # Check if viewcode pages should be generated for EPUB
++    is_epub_builder = app.builder.name == 'epub'
++    viewcode_enable_epub = getattr(env.config, 'viewcode_enable_epub', False)
++    if is_epub_builder and not viewcode_enable_epub:
++        return
+ 
+     for modname, entry in status_iterator(
+             sorted(env._viewcode_modules.items()),  # type: ignore

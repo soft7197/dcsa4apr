@@ -1,0 +1,12 @@
+diff --git a/sklearn/compose/_column_transformer.py b/sklearn/compose/_column_transformer.py
+--- a/sklearn/compose/_column_transformer.py
++++ b/sklearn/compose/_column_transformer.py
+@@ -852,6 +852,8 @@
+             config = _get_output_config("transform", self)
+             if config["dense"] == "pandas" and all(hasattr(X, "iloc") for X in Xs):
+                 pd = check_pandas_support("transform")
++                # Filter out any empty DataFrames
++                Xs = [X for X in Xs if not X.empty]
+                 output = pd.concat(Xs, axis=1)
+ 
+                 # If all transformers define `get_feature_names_out`, then transform

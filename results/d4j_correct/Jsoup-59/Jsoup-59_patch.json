@@ -1,0 +1,47 @@
+{
+    "bug_id": "Jsoup-59",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-59_1756721228",
+    "patches": [
+        {
+            "hypothesis": "The bug is caused by the method attempting to add an attribute with an empty name, which violates the requirement that attribute names must not be empty. This happens when 'pendingAttributeName' is trimmed to an empty string. The fix is to ensure that 'pendingAttributeName' is not empty before creating and adding an attribute.",
+            "changes": "- if (!pendingAttributeName.isEmpty()) { // Check if 'pendingAttributeName' is not empty before proceeding\n+ if (pendingAttributeName != null && !pendingAttributeName.isEmpty()) { // Check if 'pendingAttributeName' is not null and not empty",
+            "fixed_method": "final void newAttribute() {\n    if (attributes == null)\n        attributes = new Attributes();\n\n    if (pendingAttributeName != null) {\n        // the tokeniser has skipped whitespace control chars, but trimming could collapse to empty for other control codes, so verify here\n        pendingAttributeName = pendingAttributeName.trim();\n        if (!pendingAttributeName.isEmpty()) { // Ensure the attribute name is not empty\n            Attribute attribute;\n            if (hasPendingAttributeValue)\n                attribute = new Attribute(pendingAttributeName,\n                    pendingAttributeValue.length() > 0 ? pendingAttributeValue.toString() : pendingAttributeValueS);\n            else if (hasEmptyAttributeValue)\n                attribute = new Attribute(pendingAttributeName, \"\");\n            else\n                attribute = new BooleanAttribute(pendingAttributeName);\n            attributes.put(attribute);\n        }\n    }\n    pendingAttributeName = null;\n    hasEmptyAttributeValue = false;\n    hasPendingAttributeValue = false;\n    reset(pendingAttributeValue);\n    pendingAttributeValueS = null;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,25 @@\n+final void newAttribute() {\n+    if (attributes == null)\n+        attributes = new Attributes();\n+\n+    if (pendingAttributeName != null) {\n+        // the tokeniser has skipped whitespace control chars, but trimming could collapse to empty for other control codes, so verify here\n+        pendingAttributeName = pendingAttributeName.trim();\n+        if (!pendingAttributeName.isEmpty()) { // Ensure the attribute name is not empty\n+            Attribute attribute;\n+            if (hasPendingAttributeValue)\n+                attribute = new Attribute(pendingAttributeName,\n+                    pendingAttributeValue.length() > 0 ? pendingAttributeValue.toString() : pendingAttributeValueS);\n+            else if (hasEmptyAttributeValue)\n+                attribute = new Attribute(pendingAttributeName, \"\");\n+            else\n+                attribute = new BooleanAttribute(pendingAttributeName);\n+            attributes.put(attribute);\n+        }\n+    }\n+    pendingAttributeName = null;\n+    hasEmptyAttributeValue = false;\n+    hasPendingAttributeValue = false;\n+    reset(pendingAttributeValue);\n+    pendingAttributeValueS = null;\n+}",
+            "file_path": "src/main/java/org/jsoup/parser/Token.java",
+            "method_name": "newAttribute",
+            "class_name": "Token",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                100,
+                101,
+                102,
+                103,
+                104,
+                105,
+                106,
+                107,
+                108,
+                109,
+                110,
+                111,
+                112,
+                113,
+                114,
+                115,
+                116,
+                117,
+                118,
+                119,
+                120,
+                121,
+                122
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Jsoup-59_trace.json"
+}

@@ -1,0 +1,32 @@
+{
+  "bug_id": "Math-65",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-65_1756719413",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "fixed_method": "    public double getChiSquare() {\n        double chiSquare = 0;\n        for (int i = 0; i < rows; ++i) {\n            final double residual = residuals[i];\n            chiSquare += residual * residual * residualsWeights[i];\n        }\n        return chiSquare;\n    }\n",
+      "diff": "",
+      "file_path": "src/main/java/org/apache/commons/math/optimization/general/AbstractLeastSquaresOptimizer.java",
+      "method_name": "getChiSquare",
+      "class_name": "AbstractLeastSquaresOptimizer",
+      "iteration": 1,
+      "is_multi_method": true,
+      "line_numbers": [
+        254,
+        255,
+        256,
+        257,
+        258,
+        259,
+        260,
+        261
+      ]
+    }
+  ],
+  "iterations": 1,
+  "monitor_file": "traces/Math-65_trace.json"
+}

@@ -1,0 +1,55 @@
+{
+    "bug_id": "Compress-30",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Compress-30_1756720807",
+    "patches": [
+        {
+            "hypothesis": "The method should return 0 when the requested length to read is 0, but it currently returns -1. This behavior is incorrect as per the test expectation. The method needs to handle the case when len is 0 by returning 0 immediately, without performing any read operations.",
+            "changes": [
+                "+    if (len == 0) {",
+                "+        return 0;",
+                "+    }"
+            ],
+            "fixed_method": "public int read(final byte[] dest, final int offs, final int len) throws IOException {\n    if (offs < 0) {\n        throw new IndexOutOfBoundsException(\"offs(\" + offs + \") < 0.\");\n    }\n    if (len < 0) {\n        throw new IndexOutOfBoundsException(\"len(\" + len + \") < 0.\");\n    }\n    if (offs + len > dest.length) {\n        throw new IndexOutOfBoundsException(\"offs(\" + offs + \") + len(\" + len + \") > dest.length(\" + dest.length + \").\");\n    }\n    if (this.in == null) {\n        throw new IOException(\"stream closed\");\n    }\n\n    if (len == 0) {\n        return 0;\n    }\n\n    final int hi = offs + len;\n    int destOffs = offs;\n    int b;\n    while (destOffs < hi && ((b = read0()) >= 0)) {\n        dest[destOffs++] = (byte) b;\n        count(1);\n    }\n\n    int c = (destOffs == offs) ? -1 : (destOffs - offs);\n    return c;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,29 @@\n+public int read(final byte[] dest, final int offs, final int len) throws IOException {\n+    if (offs < 0) {\n+        throw new IndexOutOfBoundsException(\"offs(\" + offs + \") < 0.\");\n+    }\n+    if (len < 0) {\n+        throw new IndexOutOfBoundsException(\"len(\" + len + \") < 0.\");\n+    }\n+    if (offs + len > dest.length) {\n+        throw new IndexOutOfBoundsException(\"offs(\" + offs + \") + len(\" + len + \") > dest.length(\" + dest.length + \").\");\n+    }\n+    if (this.in == null) {\n+        throw new IOException(\"stream closed\");\n+    }\n+\n+    if (len == 0) {\n+        return 0;\n+    }\n+\n+    final int hi = offs + len;\n+    int destOffs = offs;\n+    int b;\n+    while (destOffs < hi && ((b = read0()) >= 0)) {\n+        dest[destOffs++] = (byte) b;\n+        count(1);\n+    }\n+\n+    int c = (destOffs == offs) ? -1 : (destOffs - offs);\n+    return c;\n+}",
+            "file_path": "src/main/java/org/apache/commons/compress/compressors/bzip2/BZip2CompressorInputStream.java",
+            "method_name": "read",
+            "class_name": "BZip2CompressorInputStream",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                153,
+                154,
+                155,
+                156,
+                157,
+                158,
+                159,
+                160,
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167,
+                168,
+                169,
+                170,
+                171,
+                172,
+                173,
+                174,
+                175,
+                176,
+                177,
+                178,
+                179
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Compress-30_trace.json"
+}

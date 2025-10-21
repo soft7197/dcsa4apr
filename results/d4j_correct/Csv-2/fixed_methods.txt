@@ -1,0 +1,16 @@
+### Fixed Method 1
+public String get(final String name) {
+    if (mapping == null) {
+        throw new IllegalStateException(
+                "No header mapping was specified, the record values can't be accessed by name");
+    }
+    final Integer index = mapping.get(name);
+    if (index != null) {
+        if (index >= 0 && index < values.length) {
+            return values[index];
+        } else {
+            throw new IllegalArgumentException("The record is inconsistent: index out of bounds");
+        }
+    }
+    return null;
+}

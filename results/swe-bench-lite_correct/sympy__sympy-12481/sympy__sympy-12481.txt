@@ -1,0 +1,34 @@
+diff --git a/sympy/combinatorics/permutations.py b/sympy/combinatorics/permutations.py
+--- a/sympy/combinatorics/permutations.py
++++ b/sympy/combinatorics/permutations.py
+@@ -878,7 +878,6 @@
+             raise ValueError("Permutation argument must be a list of ints, "
+                              "a list of lists, Permutation or Cycle.")
+ 
+-
+         # safe to assume args are valid; this also makes a copy
+         # of the args
+         args = list(args[0])
+@@ -895,12 +894,8 @@
+         # counting starts from 1.
+ 
+         temp = flatten(args)
+-        if has_dups(temp):
+-            if is_cycle:
+-                raise ValueError('there were repeated elements; to resolve '
+-                'cycles use Cycle%s.' % ''.join([str(tuple(c)) for c in args]))
+-            else:
+-                raise ValueError('there were repeated elements.')
++        if not is_cycle and has_dups(temp):
++            raise ValueError('there were repeated elements.')
+         temp = set(temp)
+ 
+         if not is_cycle and \
+@@ -927,6 +922,7 @@
+         obj._array_form = aform
+         obj._size = size
+         return obj
++
+ 
+     @staticmethod
+     def _af_new(perm):

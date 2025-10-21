@@ -1,0 +1,18 @@
+### Fixed Method 1
+public Object answer(InvocationOnMock invocation) {
+    if (methodsGuru.isToString(invocation.getMethod())) {
+        Object mock = invocation.getMock();
+        MockName name = mockUtil.getMockName(mock);
+        if (name.isDefault()) {
+            return "Mock for " + mockUtil.getMockSettings(mock).getTypeToMock().getSimpleName() + ", hashCode: " + mock.hashCode();
+        } else {
+            return name.toString();
+        }
+    } else if (methodsGuru.isCompareToMethod(invocation.getMethod())) {
+        // Return 0 if the mock is compared to itself, otherwise return 1
+        return invocation.getMock() == invocation.getArguments()[0] ? 0 : 1;
+    }
+    
+    Class<?> returnType = invocation.getMethod().getReturnType();
+    return returnValueFor(returnType);
+}

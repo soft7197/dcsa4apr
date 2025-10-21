@@ -1,0 +1,44 @@
+{
+    "bug_id": "Jsoup-68",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Jsoup-68_1757176985",
+    "patches": [
+        {
+            "hypothesis": "The StackOverflowError is likely occurring due to an incorrect calculation of the iterations in the loop. The `top` variable logic is misconstrued. It checks the same condition twice, leading to a possible scenario of negative loop bounds or unnecessary deep traversals, causing a stack overflow in recursion. The error arises because the loop potentially does not cover the whole desired range or goes beyond permissible recursion depth.",
+            "fixed_method": "private boolean inSpecificScope(String[] targetNames, String[] baseTypes, String[] extraTypes) {\n    // Ensures we only iterate to the max depth or less if stack is smaller\n    int bottom = stack.size() - 1;\n    int top = Math.max(0, bottom - MaxScopeSearchDepth);\n\n    for (int pos = bottom; pos >= top; pos--) {\n        final String elName = stack.get(pos).nodeName();\n        if (inSorted(elName, targetNames))\n            return true;\n        if (inSorted(elName, baseTypes))\n            return false;\n        if (extraTypes != null && inSorted(elName, extraTypes))\n            return false;\n    }\n    return false;\n}",
+            "diff": "--- original\n+++ fixed\n@@ -1,12 +1,7 @@\n-// todo: tidy up in specific scope methods\n private boolean inSpecificScope(String[] targetNames, String[] baseTypes, String[] extraTypes) {\n-    // https://html.spec.whatwg.org/multipage/parsing.html#has-an-element-in-the-specific-scope\n-    int bottom = stack.size() -1;\n-    if (bottom > MaxScopeSearchDepth) {\n-        bottom = MaxScopeSearchDepth;\n-    }\n-    final int top = bottom > MaxScopeSearchDepth ? bottom - MaxScopeSearchDepth : 0;\n-    // don't walk too far up the tree\n+    // Ensures we only iterate to the max depth or less if stack is smaller\n+    int bottom = stack.size() - 1;\n+    int top = Math.max(0, bottom - MaxScopeSearchDepth);\n \n     for (int pos = bottom; pos >= top; pos--) {\n         final String elName = stack.get(pos).nodeName();\n@@ -17,6 +12,5 @@\n         if (extraTypes != null && inSorted(elName, extraTypes))\n             return false;\n     }\n-    //Validate.fail(\"Should not be reachable\"); // would end up false because hitting 'html' at root (basetypes)\n     return false;\n }",
+            "file_path": "src/main/java/org/jsoup/parser/HtmlTreeBuilder.java",
+            "method_name": "inSpecificScope",
+            "class_name": "HtmlTreeBuilder",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                466,
+                467,
+                468,
+                469,
+                470,
+                471,
+                472,
+                473,
+                474,
+                475,
+                476,
+                477,
+                478,
+                479,
+                480,
+                481,
+                482,
+                483,
+                484,
+                485,
+                486
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Jsoup-68_trace.json"
+}

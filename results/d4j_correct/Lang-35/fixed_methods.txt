@@ -1,0 +1,28 @@
+### Fixed patch 1
+public static <T> T[] add(T[] array, T element) {
+    if (array == null && element == null) {
+        throw new IllegalArgumentException("Both array and element cannot be null");
+    }
+    Class<?> type = (array != null) ? array.getClass().getComponentType() : element.getClass();
+    T[] newArray = (T[]) java.lang.reflect.Array.newInstance(type, (array != null ? array.length : 0) + 1);
+    if (array != null) {
+        System.arraycopy(array, 0, newArray, 0, array.length);
+    }
+    newArray[newArray.length - 1] = element;
+    return newArray;
+}
+public static <T> T[] add(T[] array, int index, T element) {
+    if (array == null && element == null) {
+        throw new IllegalArgumentException("Both array and element cannot be null");
+    }
+    if (index < 0 || (array != null && index > array.length)) {
+        throw new IndexOutOfBoundsException("Index: " + index + ", Length: " + (array != null ? array.length : 0));
+    }
+    Class<?> type = (array != null) ? array.getClass().getComponentType() : element.getClass();
+    T[] newArray = (T[]) java.lang.reflect.Array.newInstance(type, (array != null ? array.length : 0) + 1);
+    if (array != null) {
+        System.arraycopy(array, 0, newArray, 0, index);
+        System.arraycopy(array, index, newArray, index + 1, array.length - index);
+    }
+    newArray[index] = element;
+    return newArray;

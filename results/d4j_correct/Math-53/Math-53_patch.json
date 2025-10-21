@@ -1,0 +1,30 @@
+{
+    "bug_id": "Math-53",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Math-53_1756721573",
+    "patches": [
+        {
+            "hypothesis": "The bug is that the current 'add' method does not handle NaN values correctly. In complex arithmetic, if either the real or imaginary part of a complex number is NaN, the result should also be NaN. The test 'testAddNaN' is likely checking that adding any complex number to a complex number with NaN results in a complex number with NaN components.",
+            "changes": "- if (Double.isNaN(real) || Double.isNaN(imaginary) || Double.isNaN(rhs.getReal()) || Double.isNaN(rhs.getImaginary())) {\n+ return createComplex(Double.NaN, Double.NaN);\n+ }",
+            "fixed_method": "public Complex add(Complex rhs) throws NullArgumentException {\n    MathUtils.checkNotNull(rhs);\n    if (Double.isNaN(real) || Double.isNaN(imaginary) || Double.isNaN(rhs.getReal()) || Double.isNaN(rhs.getImaginary())) {\n        return createComplex(Double.NaN, Double.NaN);\n    }\n    return createComplex(real + rhs.getReal(), imaginary + rhs.getImaginary());\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,7 @@\n+public Complex add(Complex rhs) throws NullArgumentException {\n+    MathUtils.checkNotNull(rhs);\n+    if (Double.isNaN(real) || Double.isNaN(imaginary) || Double.isNaN(rhs.getReal()) || Double.isNaN(rhs.getImaginary())) {\n+        return createComplex(Double.NaN, Double.NaN);\n+    }\n+    return createComplex(real + rhs.getReal(), imaginary + rhs.getImaginary());\n+}",
+            "file_path": "src/main/java/org/apache/commons/math/complex/Complex.java",
+            "method_name": "add",
+            "class_name": "Complex",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                150,
+                151,
+                152,
+                153,
+                154,
+                155
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Math-53_trace.json"
+}

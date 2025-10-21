@@ -1,0 +1,22 @@
+diff --git a/django/db/models/sql/query.py b/django/db/models/sql/query.py
+--- a/django/db/models/sql/query.py
++++ b/django/db/models/sql/query.py
+@@ -749,6 +749,10 @@
+                 else:
+                     cur_model = source.remote_field.model
+                 opts = cur_model._meta
++                # Handle proxy models by using their concrete model
++                if opts.proxy:
++                    cur_model = opts.concrete_model
++                    opts = cur_model._meta
+                 # Even if we're "just passing through" this model, we must add
+                 # both the current model's pk and the related reference field
+                 # (if it's not a reverse relation) to the things we select.
+@@ -800,6 +804,7 @@
+                 seen.setdefault(model, set())
+             for model, fields in seen.items():
+                 target[model] = {f.attname for f in fields}
++
+ 
+     def table_alias(self, table_name, create=False, filtered_relation=None):
+         """

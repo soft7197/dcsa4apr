@@ -1,0 +1,46 @@
+{
+    "bug_id": "JacksonCore-6",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_JacksonCore-6_1756720930",
+    "patches": [
+        {
+            "hypothesis": "The method `_parseIndex` is expected to return -1 when the input string represents a number with leading zeroes. Currently, it does not handle this condition and returns 0 for the string '0'. This violates the specification that no leading zeroes are allowed, which explains the test failure where -1 was expected.",
+            "changes": "Added a condition to check for leading zeroes and return -1 if found, except for the string '0'.",
+            "fixed_method": "private final static int _parseIndex(String str) {\n    final int len = str.length();\n    // [core#133]: beware of super long indexes; assume we never\n    // have arrays over 2 billion entries so ints are fine.\n    if (len == 0 || len > 10) {\n        return -1;\n    }\n    // [core#176]: no leading zeroes allowed\n    if (str.charAt(0) == '0' && len > 1) {\n        return -1;\n    }\n    for (int i = 0; i < len; ++i) {\n        char c = str.charAt(i);\n        if (c > '9' || c < '0') {\n            return -1;\n        }\n    }\n    if (len == 10) {\n        long l = NumberInput.parseLong(str);\n        if (l > Integer.MAX_VALUE) {\n            return -1;\n        }\n    }\n    return NumberInput.parseInt(str);\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,25 @@\n+private final static int _parseIndex(String str) {\n+    final int len = str.length();\n+    // [core#133]: beware of super long indexes; assume we never\n+    // have arrays over 2 billion entries so ints are fine.\n+    if (len == 0 || len > 10) {\n+        return -1;\n+    }\n+    // [core#176]: no leading zeroes allowed\n+    if (str.charAt(0) == '0' && len > 1) {\n+        return -1;\n+    }\n+    for (int i = 0; i < len; ++i) {\n+        char c = str.charAt(i);\n+        if (c > '9' || c < '0') {\n+            return -1;\n+        }\n+    }\n+    if (len == 10) {\n+        long l = NumberInput.parseLong(str);\n+        if (l > Integer.MAX_VALUE) {\n+            return -1;\n+        }\n+    }\n+    return NumberInput.parseInt(str);\n+}",
+            "file_path": "src/main/java/com/fasterxml/jackson/core/JsonPointer.java",
+            "method_name": "_parseIndex",
+            "class_name": "JsonPointer",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                185,
+                186,
+                187,
+                188,
+                189,
+                190,
+                191,
+                192,
+                193,
+                194,
+                195,
+                196,
+                197,
+                198,
+                199,
+                200,
+                201,
+                202,
+                203,
+                204,
+                205,
+                206
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/JacksonCore-6_trace.json"
+}

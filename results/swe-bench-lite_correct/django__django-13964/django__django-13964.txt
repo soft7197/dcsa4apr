@@ -1,0 +1,15 @@
+diff --git a/django/db/models/base.py b/django/db/models/base.py
+--- a/django/db/models/base.py
++++ b/django/db/models/base.py
+@@ -939,8 +939,10 @@
+                     setattr(self, field.attname, obj.pk)
+                 # If the relationship's pk/to_field was changed, clear the
+                 # cached relationship.
+-                if getattr(obj, field.target_field.attname) != getattr(self, field.attname):
++                elif getattr(obj, field.target_field.attname) != getattr(self, field.attname):
++                    # Update the cached value if the pk has changed
+                     field.delete_cached_value(self)
++                    setattr(self, field.attname, getattr(obj, field.target_field.attname))
+ 
+     def delete(self, using=None, keep_parents=False):
+         using = using or router.db_for_write(self.__class__, instance=self)

@@ -1,0 +1,27 @@
+{
+    "bug_id": "Lang-29",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Lang-29_1756721341",
+    "patches": [
+        {
+            "hypothesis": "The method `toJavaVersionInt` is returning a float, but the test expects an integer value. The discrepancy arises from the method's return type not matching the expected type in the test. The test expects an integer value, but a float value is being returned, causing a mismatch in the assertion.",
+            "changes": "- static float toJavaVersionInt(String version) {\n+ static int toJavaVersionInt(String version) {",
+            "fixed_method": "static int toJavaVersionInt(String version) {\n    return (int) toVersionInt(toJavaVersionIntArray(version, JAVA_VERSION_TRIM_SIZE));\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,3 @@\n+static int toJavaVersionInt(String version) {\n+    return (int) toVersionInt(toJavaVersionIntArray(version, JAVA_VERSION_TRIM_SIZE));\n+}",
+            "file_path": "src/main/java/org/apache/commons/lang3/SystemUtils.java",
+            "method_name": "toJavaVersionInt",
+            "class_name": "SystemUtils",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                1672,
+                1673,
+                1674
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Lang-29_trace.json"
+}

@@ -1,0 +1,34 @@
+{
+    "bug_id": "Csv-10",
+    "success": true,
+    "error": null,
+    "patch": null,
+    "project_path": "/tmp/d4j_Csv-10_1756838254",
+    "patches": [
+        {
+            "hypothesis": "The constructor of CSVPrinter is supposed to print the header immediately upon creation if the CSVFormat specifies a header. The test failure indicates that the header is not being printed, which suggests that the code responsible for printing the header is missing or not being executed.",
+            "changes": "Added code to print the header immediately after validating the format if the format specifies a header.",
+            "fixed_method": "public CSVPrinter(final Appendable out, final CSVFormat format) throws IOException {\n    Assertions.notNull(out, \"out\");\n    Assertions.notNull(format, \"format\");\n\n    this.out = out;\n    this.format = format;\n    this.format.validate();\n    \n    // Print the header if the format specifies one\n    if (format.getHeader() != null) {\n        printRecord((Object[]) format.getHeader());\n    }\n}",
+            "diff": "--- original\n+++ fixed\n@@ -0,0 +1,13 @@\n+public CSVPrinter(final Appendable out, final CSVFormat format) throws IOException {\n+    Assertions.notNull(out, \"out\");\n+    Assertions.notNull(format, \"format\");\n+\n+    this.out = out;\n+    this.format = format;\n+    this.format.validate();\n+    \n+    // Print the header if the format specifies one\n+    if (format.getHeader() != null) {\n+        printRecord((Object[]) format.getHeader());\n+    }\n+}",
+            "file_path": "src/main/java/org/apache/commons/csv/CSVPrinter.java",
+            "method_name": "CSVPrinter",
+            "class_name": "CSVPrinter",
+            "iteration": 1,
+            "is_multi_method": false,
+            "line_numbers": [
+                61,
+                62,
+                63,
+                64,
+                65,
+                66,
+                67,
+                68,
+                69,
+                70
+            ]
+        }
+    ],
+    "iterations": 1,
+    "monitor_file": "traces/Csv-10_trace.json"
+}
