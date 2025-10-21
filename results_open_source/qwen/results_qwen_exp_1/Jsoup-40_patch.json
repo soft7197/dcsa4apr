@@ -1,0 +1,189 @@
+{
+  "bug_id": "Jsoup-40",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-40_1771866482",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the validation check for the 'name' parameter which does not allow empty strings. To fix this, we should modify the validation to allow blank names as per the failing test requirements.",
+        "changes": "- Validate.notEmpty(name);\n+ if (name != null && !name.trim().isEmpty()) attr(\"name\", name);",
+        "fixed_method": "public DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    if (name != null && !name.trim().isEmpty()) attr(\"name\", name);\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}",
+        "diff": "- Validate.notEmpty(name);\n+ if (name != null && !name.trim().isEmpty()) attr(\"name\", name);",
+        "file_path": "src/main/java/org/jsoup/nodes/DocumentType.java",
+        "method_name": "DocumentType",
+        "class_name": "DocumentType",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "original_code": "/**\n* Create a new doctype element.\n* @param name the doctype's name\n* @param publicId the doctype's public ID\n* @param systemId the doctype's system ID\n* @param baseUri the doctype's base URI\n*/\npublic DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    Validate.notEmpty(name);\n    attr(\"name\", name);\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by the Validate.notEmpty(name) check which throws an exception if the name is empty. We need to modify the validation to allow empty names.",
+        "changes": "- Validate.notEmpty(name);\n+ if (!name.isEmpty()) attr(\"name\", name);",
+        "fixed_method": "public DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    if (!name.isEmpty()) attr(\"name\", name);\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}",
+        "diff": "- Validate.notEmpty(name);\n+ if (!name.isEmpty()) attr(\"name\", name);",
+        "file_path": "src/main/java/org/jsoup/nodes/DocumentType.java",
+        "method_name": "DocumentType",
+        "class_name": "DocumentType",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "original_code": "/**\n* Create a new doctype element.\n* @param name the doctype's name\n* @param publicId the doctype's public ID\n* @param systemId the doctype's system ID\n* @param baseUri the doctype's base URI\n*/\npublic DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    Validate.notEmpty(name);\n    attr(\"name\", name);\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by the validation check that does not allow an empty string for the 'name' parameter. To fix this, we should modify the validation to allow blank names while still ensuring other parameters are valid when provided.",
+        "changes": "- Validate.notEmpty(name);\n+ if (!name.isEmpty()) { attr(\"name\", name); }\n+ if (publicId != null && !publicId.isEmpty()) { attr(\"publicId\", publicId); }\n+ if (systemId != null && !systemId.isEmpty()) { attr(\"systemId\", systemId); }",
+        "fixed_method": "public DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    if (!name.isEmpty()) { attr(\"name\", name); }\n    if (publicId != null && !publicId.isEmpty()) { attr(\"publicId\", publicId); }\n    if (systemId != null && !systemId.isEmpty()) { attr(\"systemId\", systemId); }\n}",
+        "diff": "- Validate.notEmpty(name);\n+ if (!name.isEmpty()) { attr(\"name\", name); }\n+ if (publicId != null && !publicId.isEmpty()) { attr(\"publicId\", publicId); }\n+ if (systemId != null && !systemId.isEmpty()) { attr(\"systemId\", systemId); }",
+        "file_path": "src/main/java/org/jsoup/nodes/DocumentType.java",
+        "method_name": "DocumentType",
+        "class_name": "DocumentType",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "original_code": "/**\n* Create a new doctype element.\n* @param name the doctype's name\n* @param publicId the doctype's public ID\n* @param systemId the doctype's system ID\n* @param baseUri the doctype's base URI\n*/\npublic DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    Validate.notEmpty(name);\n    attr(\"name\", name);\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by the validation check that does not allow the name to be an empty string. The fix involves modifying the validation to allow for empty names, which aligns with how invalid or empty doctypes are handled in the parser tests.",
+        "changes": "- Validate.notEmpty(name);\n+ if (name != null && !name.isEmpty()) attr(\"name\", name);",
+        "fixed_method": "public DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    if (name != null && !name.isEmpty()) attr(\"name\", name);\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}",
+        "diff": "- Validate.notEmpty(name);\n+ if (name != null && !name.isEmpty()) attr(\"name\", name);",
+        "file_path": "src/main/java/org/jsoup/nodes/DocumentType.java",
+        "method_name": "DocumentType",
+        "class_name": "DocumentType",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "original_code": "/**\n* Create a new doctype element.\n* @param name the doctype's name\n* @param publicId the doctype's public ID\n* @param systemId the doctype's system ID\n* @param baseUri the doctype's base URI\n*/\npublic DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    Validate.notEmpty(name);\n    attr(\"name\", name);\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by the validation check that does not allow an empty string for the 'name' parameter. To fix this, we should replace the 'notEmpty' check with an 'notNull' check and handle empty strings appropriately.",
+        "changes": "- Validate.notEmpty(name);\n+ if (name == null) { throw new IllegalArgumentException(\"String must not be null\"); }",
+        "fixed_method": "public DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    if (name == null) {\n        throw new IllegalArgumentException(\"String must not be null\");\n    }\n    attr(\"name\", name);\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}",
+        "diff": "- Validate.notEmpty(name);\n+ if (name == null) { throw new IllegalArgumentException(\"String must not be null\"); }",
+        "file_path": "src/main/java/org/jsoup/nodes/DocumentType.java",
+        "method_name": "DocumentType",
+        "class_name": "DocumentType",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "original_code": "/**\n* Create a new doctype element.\n* @param name the doctype's name\n* @param publicId the doctype's public ID\n* @param systemId the doctype's system ID\n* @param baseUri the doctype's base URI\n*/\npublic DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    Validate.notEmpty(name);\n    attr(\"name\", name);\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}"
+      },
+      {
+        "hypothesis": "The constructor is throwing an IllegalArgumentException when the 'name' parameter is empty or blank. The tests expect the constructor to handle empty or blank names without throwing exceptions.",
+        "changes": "- Validate.notEmpty(name);\n+ if (!name.isEmpty()) { attr(\"name\", name); }",
+        "fixed_method": "public DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    if (!name.isEmpty()) {\n        attr(\"name\", name);\n    }\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}",
+        "diff": "- Validate.notEmpty(name);\n+ if (!name.isEmpty()) { attr(\"name\", name); }",
+        "file_path": "src/main/java/org/jsoup/nodes/DocumentType.java",
+        "method_name": "DocumentType",
+        "class_name": "DocumentType",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "original_code": "/**\n* Create a new doctype element.\n* @param name the doctype's name\n* @param publicId the doctype's public ID\n* @param systemId the doctype's system ID\n* @param baseUri the doctype's base URI\n*/\npublic DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    Validate.notEmpty(name);\n    attr(\"name\", name);\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by the Validate.notEmpty(name) check which throws an exception when the name is empty. To fix this, we should allow the name to be empty or null.",
+        "changes": "- Validate.notEmpty(name);\n+ if (name != null && !name.isEmpty()) {\n+     attr(\"name\", name);\n+ }",
+        "fixed_method": "public DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    if (name != null && !name.isEmpty()) {\n        attr(\"name\", name);\n    }\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}",
+        "diff": "- Validate.notEmpty(name);\n+ if (name != null && !name.isEmpty()) {\n+     attr(\"name\", name);\n+ }",
+        "file_path": "src/main/java/org/jsoup/nodes/DocumentType.java",
+        "method_name": "DocumentType",
+        "class_name": "DocumentType",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "original_code": "/**\n* Create a new doctype element.\n* @param name the doctype's name\n* @param publicId the doctype's public ID\n* @param systemId the doctype's system ID\n* @param baseUri the doctype's base URI\n*/\npublic DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    Validate.notEmpty(name);\n    attr(\"name\", name);\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by the Validate.notEmpty(name) call which throws an exception when the name is an empty string. The fix is to remove or modify this validation to allow empty names.",
+        "changes": "- Validate.notEmpty(name);",
+        "fixed_method": "public DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    attr(\"name\", name);\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}",
+        "diff": "- Validate.notEmpty(name);",
+        "file_path": "src/main/java/org/jsoup/nodes/DocumentType.java",
+        "method_name": "DocumentType",
+        "class_name": "DocumentType",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "original_code": "/**\n* Create a new doctype element.\n* @param name the doctype's name\n* @param publicId the doctype's public ID\n* @param systemId the doctype's system ID\n* @param baseUri the doctype's base URI\n*/\npublic DocumentType(String name, String publicId, String systemId, String baseUri) {\n    super(baseUri);\n\n    Validate.notEmpty(name);\n    attr(\"name\", name);\n    attr(\"publicId\", publicId);\n    attr(\"systemId\", systemId);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-40/"
+}

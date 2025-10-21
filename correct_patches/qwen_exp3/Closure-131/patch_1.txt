@@ -1,0 +1,24 @@
+File: src/com/google/javascript/rhino/TokenStream.java
+Method: TokenStream.isJSIdentifier
+
+public static boolean isJSIdentifier(String s) {
+    if (s == null || s.length() == 0 || !isJSIdentifierStart(s.charAt(0))) {
+        return false;
+    }
+
+    for (int i = 1; i < s.length(); i++) {
+        if (!isJSIdentifierPart(s.charAt(i))) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+private static boolean isJSIdentifierStart(char ch) {
+    return Character.isLetter(ch) || ch == '$' || ch == '_' || Character.getType(ch) == Character.LETTER_NUMBER;
+}
+
+private static boolean isJSIdentifierPart(char ch) {
+    return isJSIdentifierStart(ch) || Character.isDigit(ch);
+}

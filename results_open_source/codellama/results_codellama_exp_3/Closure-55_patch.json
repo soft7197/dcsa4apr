@@ -1,0 +1,30 @@
+{
+  "bug_id": "Closure-55",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-55_1772895616",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the incorrect usage of NodeUtil.isFunctionExpression() method, which is not suitable for this situation. Instead, we should use the NodeUtil.isCall() method to check if a node is a call node.",
+        "changes": "+ NodeUtil.isCall() - NodeUtil.isFunctionExpression()",
+        "fixed_method": "private static boolean isReduceableFunctionExpression(Node n) {\n  return NodeUtil.isCall(n);\n}",
+        "diff": "+ NodeUtil.isCall() - NodeUtil.isFunctionExpression()",
+        "file_path": "src/com/google/javascript/jscomp/FunctionRewriter.java",
+        "method_name": "isReduceableFunctionExpression",
+        "class_name": "FunctionRewriter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          116,
+          117,
+          118
+        ],
+        "original_code": "/**\n* Parse helper code needed by a reducer.\n*\n* @return Helper code root.  If parse fails, return null.\n*/\nprivate static boolean isReduceableFunctionExpression(Node n) {\n  return NodeUtil.isFunctionExpression(n);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-55/"
+}

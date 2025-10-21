@@ -1,0 +1,33 @@
+{
+  "bug_id": "Jsoup-51",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-51_1772008357",
+  "patches": [
+    [
+      {
+        "hypothesis": "The current implementation of matchesLetter() only checks for ASCII letters. The failing test indicates that the parser does not recognize non-ASCII characters as valid tag names. We need to update the method to allow non-ASCII letters.",
+        "changes": "- return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');\n+ return Character.isLetter(c);",
+        "fixed_method": "boolean matchesLetter() {\n    if (isEmpty())\n        return false;\n    char c = input[pos];\n    return Character.isLetter(c);\n}",
+        "diff": "- return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');\n+ return Character.isLetter(c);",
+        "file_path": "src/main/java/org/jsoup/parser/CharacterReader.java",
+        "method_name": "matchesLetter",
+        "class_name": "CharacterReader",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          296,
+          297,
+          298,
+          299,
+          300,
+          301
+        ],
+        "original_code": "// '\\t', '\\n', '\\r', '\\f', ' ', '/', '>', nullChar\nboolean matchesLetter() {\n    if (isEmpty())\n        return false;\n    char c = input[pos];\n    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-51/"
+}

@@ -1,0 +1,6 @@
+File: src/main/java/org/apache/commons/math/util/FastMath.java
+Method: FastMath.max
+
+public static float max(final float a, final float b) {
+    return (Float.isNaN(a) || Float.isNaN(b)) ? Float.NaN : (a <= b ? b : a);
+}

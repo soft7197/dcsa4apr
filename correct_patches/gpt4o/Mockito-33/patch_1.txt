@@ -1,0 +1,21 @@
+File: src/org/mockito/internal/invocation/InvocationMatcher.java
+Method: InvocationMatcher.hasSameMethod
+
+public boolean hasSameMethod(Invocation candidate) {
+    Method m1 = invocation.getMethod();
+    Method m2 = candidate.getMethod();
+    if (!m1.getName().equals(m2.getName())) {
+        return false;
+    }
+    Class<?>[] m1Params = m1.getParameterTypes();
+    Class<?>[] m2Params = m2.getParameterTypes();
+    if (m1Params.length != m2Params.length) {
+        return false;
+    }
+    for (int i = 0; i < m1Params.length; i++) {
+        if (!m1Params[i].equals(m2Params[i])) {
+            return false;
+        }
+    }
+    return true;
+}

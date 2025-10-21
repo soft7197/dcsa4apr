@@ -1,0 +1,32 @@
+File: src/main/java/org/apache/commons/cli/TypeHandler.java
+Method: TypeHandler.createValue
+
+public static <T> T createValue(String str, Class<T> clazz) throws ParseException {
+
+    if (clazz == null || str == null) {
+        throw new ParseException("Invalid class type or input string");
+    }
+
+    if (PatternOptionBuilder.STRING_VALUE == clazz) {
+        return (T) str;
+    } else if (PatternOptionBuilder.OBJECT_VALUE == clazz) {
+        return (T) createObject(str);
+    } else if (PatternOptionBuilder.NUMBER_VALUE == clazz) {
+        return (T) createNumber(str);
+    } else if (PatternOptionBuilder.DATE_VALUE == clazz) {
+        return (T) createDate(str);
+    } else if (PatternOptionBuilder.CLASS_VALUE == clazz) {
+        return (T) createClass(str);
+    } else if (PatternOptionBuilder.FILE_VALUE == clazz) {
+        return (T) createFile(str);
+    } else if (PatternOptionBuilder.EXISTING_FILE_VALUE == clazz) {
+        return (T) openFile(str);
+    } else if (PatternOptionBuilder.FILES_VALUE == clazz) {
+        return (T) createFiles(str);
+    } else if (PatternOptionBuilder.URL_VALUE == clazz) {
+        return (T) createURL(str);
+    } else {
+        throw new ParseException("Invalid class type: " + clazz.getName());
+    }
+
+}

@@ -1,0 +1,64 @@
+{
+  "bug_id": "JacksonCore-23",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonCore-23_1772001277",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is that the createInstance method does not prevent the creation of a new instance when called on a subclass that does not override it. We need to add a check to throw an IllegalStateException if the class of 'this' is not DefaultPrettyPrinter.",
+        "changes": "- return new DefaultPrettyPrinter(this);\n+ if (getClass() != DefaultPrettyPrinter.class) { throw new IllegalStateException(\"Subclass does not override createInstance\"); }\n+ return new DefaultPrettyPrinter(this);",
+        "fixed_method": "public DefaultPrettyPrinter createInstance() {\n    if (getClass() != DefaultPrettyPrinter.class) {\n        throw new IllegalStateException(\"Subclass does not override createInstance\");\n    }\n    return new DefaultPrettyPrinter(this);\n}",
+        "diff": "- return new DefaultPrettyPrinter(this);\n+ if (getClass() != DefaultPrettyPrinter.class) { throw new IllegalStateException(\"Subclass does not override createInstance\"); }\n+ return new DefaultPrettyPrinter(this);",
+        "file_path": "src/main/java/com/fasterxml/jackson/core/util/DefaultPrettyPrinter.java",
+        "method_name": "createInstance",
+        "class_name": "DefaultPrettyPrinter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          254,
+          255,
+          256
+        ],
+        "original_code": "/**********************************************************\n*/\npublic DefaultPrettyPrinter createInstance() {\n    return new DefaultPrettyPrinter(this);\n}"
+      },
+      {
+        "hypothesis": "The bug occurs because the createInstance method does not check if it is being called on a subclass that overrides it. To fix this, we need to add a check to ensure that the instance being created is of the same class as the current instance.",
+        "changes": "- return new DefaultPrettyPrinter(this);\n+ if (this.getClass() != DefaultPrettyPrinter.class) { throw new IllegalStateException(\"Subclass does not override createInstance\"); }\n+ return new DefaultPrettyPrinter(this);",
+        "fixed_method": "public DefaultPrettyPrinter createInstance() {\n    if (this.getClass() != DefaultPrettyPrinter.class) { throw new IllegalStateException(\"Subclass does not override createInstance\"); }\n    return new DefaultPrettyPrinter(this);\n}",
+        "diff": "- return new DefaultPrettyPrinter(this);\n+ if (this.getClass() != DefaultPrettyPrinter.class) { throw new IllegalStateException(\"Subclass does not override createInstance\"); }\n+ return new DefaultPrettyPrinter(this);",
+        "file_path": "src/main/java/com/fasterxml/jackson/core/util/DefaultPrettyPrinter.java",
+        "method_name": "createInstance",
+        "class_name": "DefaultPrettyPrinter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          254,
+          255,
+          256
+        ],
+        "original_code": "/**********************************************************\n*/\npublic DefaultPrettyPrinter createInstance() {\n    return new DefaultPrettyPrinter(this);\n}"
+      },
+      {
+        "hypothesis": "The refined fix should check if the method is being called on an instance of a subclass that has not overridden the createInstance method. If it has not been overridden, it should throw an exception. Otherwise, it should proceed with the default behavior. This ensures that the method behaves correctly for subclasses that either override or do not override the method.",
+        "fixed_method": "public DefaultPrettyPrinter createInstance() {\n    if (this.getClass() == DefaultPrettyPrinter.class) {\n        return new DefaultPrettyPrinter(this);\n    } else {\n        throw new IllegalStateException(\"Subclass does not override createInstance\");\n    }\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/core/util/DefaultPrettyPrinter.java",
+        "method_name": "createInstance",
+        "class_name": "DefaultPrettyPrinter",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is that the createInstance method does not prevent subclasses from creating a new instance without overriding it, which causes the test to fail as it expects an IllegalStateException.",
+        "line_numbers": [
+          254,
+          255,
+          256
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonCore-23/"
+}

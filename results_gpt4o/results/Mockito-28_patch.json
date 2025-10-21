@@ -1,0 +1,32 @@
+{
+  "bug_id": "Mockito-28",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-28_1773120404",
+  "patches": [
+    [
+      {
+        "hypothesis": "The existing method incorrectly assumes that filterCandidate will handle both filtering and injecting, but injection should occur only if filtering identifies a suitable candidate.",
+        "changes": "- mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject() \n+ if (mockCandidateFilter.filterCandidate(mocks, field, fieldInstance)) { field.setAccessible(true); field.set(fieldInstance, mock); }",
+        "fixed_method": "private void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n    for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n        Object mock = mockCandidateFilter.filterCandidate(mocks, field, fieldInstance);\n        if (mock != null) {\n            try {\n                field.setAccessible(true);\n                field.set(fieldInstance, mock);\n            } catch (IllegalAccessException e) {\n                throw new RuntimeException(\"Failed to inject mock into field: \" + field, e);\n            }\n        }\n    }\n}",
+        "diff": "- mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject() \n+ if (mockCandidateFilter.filterCandidate(mocks, field, fieldInstance)) { field.setAccessible(true); field.set(fieldInstance, mock); }",
+        "file_path": "src/org/mockito/internal/configuration/DefaultInjectionEngine.java",
+        "method_name": "injectMockCandidate",
+        "class_name": "DefaultInjectionEngine",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          91,
+          92,
+          93,
+          94,
+          95
+        ],
+        "original_code": "// for each field in the class hierarchy\nprivate void injectMockCandidate(Class<?> awaitingInjectionClazz, Set<Object> mocks, Object fieldInstance) {\n    for(Field field : orderedInstanceFieldsFrom(awaitingInjectionClazz)) {\n        mockCandidateFilter.filterCandidate(mocks, field, fieldInstance).thenInject();\n    }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Mockito-28/"
+}

@@ -1,0 +1,24 @@
+File: src/main/java/org/apache/commons/lang3/StringUtils.java
+Method: StringUtils.join
+
+public static String join(Object[] array, char separator, int startIndex, int endIndex) {
+    if (array == null) {
+        return null;
+    }
+    int noOfItems = (endIndex - startIndex);
+    if (noOfItems <= 0) {
+        return "";
+    }
+    
+    StringBuilder buf = new StringBuilder();
+
+    for (int i = startIndex; i < endIndex; i++) {
+        if (i > startIndex) {
+            buf.append(separator);
+        }
+        if (array[i] != null) {
+            buf.append(array[i]);
+        }
+    }
+    return buf.toString();
+}

@@ -1,0 +1,59 @@
+{
+  "bug_id": "Closure-7",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-7_1771928804",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch incorrectly modifies the behavior when `resultEqualsValue` is false, affecting non-function types. The refined fix ensures that the method only changes behavior for function types when `resultEqualsValue` is true, otherwise it relies on `matchesExpectation` for other types.",
+        "fixed_method": "public JSType caseObjectType(ObjectType type) {\n  if (value.equals(\"function\")) {\n    JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n    if (resultEqualsValue) {\n      return ctorType.isSubtype(type) ? ctorType : null;\n    }\n  }\n  return matchesExpectation(\"object\") ? type : null;\n}",
+        "diff": " ",
+        "file_path": "src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java",
+        "method_name": "caseObjectType",
+        "class_name": "ChainableReverseAbstractInterpreter",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug arises because when the value is 'function', the method incorrectly filters out types that are not subtypes of U2U_CONSTRUCTOR_TYPE, even though the expectation is to keep the original type if it does not match the 'function' type.",
+        "line_numbers": [
+          610,
+          611,
+          612,
+          613,
+          614,
+          615,
+          616,
+          617,
+          618
+        ]
+      },
+      {
+        "hypothesis": "The bug arises because the method incorrectly filters out non-function types when the expected value is 'function'. It should return the original type if it's not a function, rather than null, to preserve the union type.",
+        "changes": "- return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n+ return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : type;",
+        "fixed_method": "public JSType caseObjectType(ObjectType type) {\n  if (value.equals(\"function\")) {\n    JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n    return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : type;\n      // Objects are restricted to \"Function\", subtypes are left\n      // Only filter out subtypes of \"function\"\n  }\n  return matchesExpectation(\"object\") ? type : null;\n}",
+        "diff": "- return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n+ return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : type;",
+        "file_path": "src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java",
+        "method_name": "caseObjectType",
+        "class_name": "ChainableReverseAbstractInterpreter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          610,
+          611,
+          612,
+          613,
+          614,
+          615,
+          616,
+          617,
+          618
+        ],
+        "original_code": "/**\n* Computes whether the given result of a {@code typeof} operator matches\n* expectations, i.e. whether a type that gives such a result should be\n* kept.\n*/\npublic JSType caseObjectType(ObjectType type) {\n  if (value.equals(\"function\")) {\n    JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n    return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n      // Objects are restricted to \"Function\", subtypes are left\n      // Only filter out subtypes of \"function\"\n  }\n  return matchesExpectation(\"object\") ? type : null;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-7/"
+}

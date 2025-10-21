@@ -1,0 +1,13 @@
+File: src/main/java/org/jsoup/nodes/Attribute.java
+Method: Attribute.setValue
+
+public String setValue(String val) {
+    String oldVal = this.val; // Capture old value of this attribute
+    if (parent != null) {
+        int i = parent.indexOfKey(this.key);
+        if (i != Attributes.NotFound)
+            parent.vals[i] = val;
+    }
+    this.val = val;
+    return oldVal;
+}

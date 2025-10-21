@@ -1,0 +1,51 @@
+{
+  "bug_id": "Closure-118",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-118_1773115519",
+  "patches": [
+    [
+      {
+        "hypothesis": "The problem arises because properties are getting renamed incorrectly for string and quoted keys in OBJECTLIT nodes.",
+        "changes": "Check if the child node is quoted, and handle quoted and unquoted strings separately to prevent renaming quoted keys.",
+        "fixed_method": "private void handleObjectLit(NodeTraversal t, Node n) {\n  for (Node child = n.getFirstChild();\n      child != null;\n      child = child.getNext()) {\n    // Handle properties based on whether they are quoted or not\n    if (child.isQuotedString()) {\n      continue; // Skip renaming for quoted properties\n    }\n\n    String name = child.getString();\n    T type = typeSystem.getType(getScope(), n, name);\n\n    Property prop = getProperty(name);\n    if (!prop.scheduleRenaming(child, \n                               processProperty(t, prop, type, null))) {\n      if (propertiesToErrorFor.containsKey(name)) {\n        compiler.report(JSError.make(\n            t.getSourceName(), child, propertiesToErrorFor.get(name),\n            Warnings.INVALIDATION, name,\n            (type == null ? \"null\" : type.toString()), n.toString(), \"\"));\n      }\n    }\n  }\n}",
+        "diff": "Check if the child node is quoted, and handle quoted and unquoted strings separately to prevent renaming quoted keys.",
+        "file_path": "src/com/google/javascript/jscomp/DisambiguateProperties.java",
+        "method_name": "handleObjectLit",
+        "class_name": "DisambiguateProperties",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          490,
+          491,
+          492,
+          493,
+          494,
+          495,
+          496,
+          497,
+          498,
+          499,
+          500,
+          501,
+          502,
+          503,
+          504,
+          505,
+          506,
+          507,
+          508,
+          509,
+          510,
+          511,
+          512,
+          513
+        ],
+        "original_code": "/**\n* Processes a OBJECTLIT node.\n*/\nprivate void handleObjectLit(NodeTraversal t, Node n) {\n  for (Node child = n.getFirstChild();\n      child != null;\n      child = child.getNext()) {\n    // Maybe STRING, GET, SET\n\n    // We should never see a mix of numbers and strings.\n    String name = child.getString();\n    T type = typeSystem.getType(getScope(), n, name);\n\n    Property prop = getProperty(name);\n    if (!prop.scheduleRenaming(child,\n                               processProperty(t, prop, type, null))) {\n      // TODO(user): It doesn't look like the user can do much in this\n      // case right now.\n      if (propertiesToErrorFor.containsKey(name)) {\n        compiler.report(JSError.make(\n            t.getSourceName(), child, propertiesToErrorFor.get(name),\n            Warnings.INVALIDATION, name,\n            (type == null ? \"null\" : type.toString()), n.toString(), \"\"));\n      }\n    }\n  }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-118/"
+}

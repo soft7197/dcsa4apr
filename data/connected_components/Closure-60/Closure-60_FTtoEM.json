@@ -1,0 +1,637 @@
+{
+  "com.google.javascript.jscomp.CommandLineRunnerTest::testIssue504": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        48,
+        56,
+        904,
+        907,
+        909,
+        911,
+        1206,
+        1258,
+        1319,
+        2633
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "checkForStateChangeHelper",
+      "signature": "(Lcom/google/javascript/rhino/Node;ZLcom/google/javascript/jscomp/AbstractCompiler;)Z",
+      "executed_lines": [
+        731,
+        750,
+        803,
+        808,
+        811,
+        812,
+        815,
+        860,
+        863,
+        864,
+        865
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "functionCallHasSideEffects",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/jscomp/AbstractCompiler;)Z",
+      "executed_lines": [
+        932,
+        937,
+        941,
+        944,
+        945,
+        946,
+        949,
+        986
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getFunctionJSDocInfo",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/JSDocInfo;",
+      "executed_lines": [
+        2859,
+        2860,
+        2861,
+        2863,
+        2864,
+        2866,
+        2867,
+        2872
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getInfoForNameNode",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/JSDocInfo;",
+      "executed_lines": [
+        2840,
+        2841,
+        2842,
+        2843,
+        2844,
+        2847,
+        2850,
+        2852
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getPureBooleanValue",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/jstype/TernaryValue;",
+      "executed_lines": [
+        121,
+        136,
+        162
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isAssign",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1535
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isAssignmentOp",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1382,
+        1395,
+        1397
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isCall",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1838
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isConstantByConvention",
+      "signature": "(Lcom/google/javascript/jscomp/CodingConvention;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        2824,
+        2825,
+        2827,
+        2828,
+        2831
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isControlStructure",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1610,
+        1624
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isEmptyFunctionExpression",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1940
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isExprAssign",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1527
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isExprCall",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1546
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isExpressionNode",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1429
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isForIn",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1554
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isFunction",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1853
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isFunctionDeclaration",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1892
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isFunctionExpression",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1930
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isGet",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1452
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isGetProp",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1460
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isHoistedFunctionDeclaration",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1901
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isImmutableValue",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        479,
+        500
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isLatin",
+      "signature": "(Ljava/lang/String;)Z",
+      "executed_lines": [
+        2455,
+        2456,
+        2457,
+        2458,
+        2459,
+        2463
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isName",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1467
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isNew",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1474
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isObjectLitKey",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        2072,
+        2074,
+        2079
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isPrototypePropertyDeclaration",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        2515,
+        2516
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isReferenceName",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1723
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isSimpleOperatorType",
+      "signature": "(I)Z",
+      "executed_lines": [
+        647,
+        677,
+        680
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isStatement",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1695
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isStatementBlock",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1688
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isStatementParent",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1702,
+        1703,
+        1707,
+        1709
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isUndefined",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1296,
+        1300
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isVar",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1481
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isVarDeclaration",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1493
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isVarOrSimpleAssignLhs",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        2031
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "mayHaveSideEffects",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/jscomp/AbstractCompiler;)Z",
+      "executed_lines": [
+        718
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "newFunctionNode",
+      "signature": "(Ljava/lang/String;Ljava/util/List;Lcom/google/javascript/rhino/Node;II)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        2296,
+        2297,
+        2298,
+        2299,
+        2300,
+        2301,
+        2303,
+        2304,
+        2305
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "nodeTypeMayHaveSideEffects",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1013
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "nodeTypeMayHaveSideEffects",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/jscomp/AbstractCompiler;)Z",
+      "executed_lines": [
+        1017,
+        1021,
+        1028,
+        1033,
+        1035
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "opToStr",
+      "signature": "(I)Ljava/lang/String;",
+      "executed_lines": [
+        2153,
+        2195
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "precedence",
+      "signature": "(I)I",
+      "executed_lines": [
+        1106,
+        1121,
+        1122,
+        1153,
+        1171
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "tryMergeBlock",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1816,
+        1817,
+        1820,
+        1830
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$BooleanResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1252
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$MatchNotFunction",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        2627
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$MayBeStringResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1313
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$NumbericResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1200
+      ]
+    }
+  ],
+  "com.google.javascript.jscomp.NodeUtilTest::testGetBooleanValue": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        48,
+        56,
+        904,
+        907,
+        909,
+        911,
+        1206,
+        1258,
+        1319,
+        2633
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "checkForStateChangeHelper",
+      "signature": "(Lcom/google/javascript/rhino/Node;ZLcom/google/javascript/jscomp/AbstractCompiler;)Z",
+      "executed_lines": [
+        731,
+        757,
+        760,
+        766,
+        770,
+        863,
+        869
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getPureBooleanValue",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/jstype/TernaryValue;",
+      "executed_lines": [
+        121,
+        123,
+        126,
+        133,
+        136,
+        139,
+        140,
+        144,
+        152,
+        156,
+        157
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isGet",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1452
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "mayHaveSideEffects",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        714
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "mayHaveSideEffects",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/jscomp/AbstractCompiler;)Z",
+      "executed_lines": [
+        718
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$BooleanResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1252
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$MatchNotFunction",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        2627
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$MayBeStringResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1313
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$NumbericResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1200
+      ]
+    }
+  ]
+}

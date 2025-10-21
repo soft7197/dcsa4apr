@@ -1,0 +1,451 @@
+{
+  "com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes": [
+    {
+      "package": "com.fasterxml.jackson.core.base",
+      "class": "com.fasterxml.jackson.core.base.ParserMinimalBase",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        73
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.base",
+      "class": "com.fasterxml.jackson.core.base.ParserMinimalBase",
+      "method": "getValueAsString",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        397,
+        400,
+        401
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        27,
+        31
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser",
+      "method": "<init>",
+      "signature": "(Lcom/fasterxml/jackson/core/io/IOContext;ILjava/io/InputStream;Lcom/fasterxml/jackson/core/ObjectCodec;Lcom/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer;[BIIZ)V",
+      "executed_lines": [
+        60,
+        67,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        124,
+        125,
+        126
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser",
+      "method": "_getText2",
+      "signature": "(Lcom/fasterxml/jackson/core/JsonToken;)Ljava/lang/String;",
+      "executed_lines": [
+        364,
+        367,
+        369
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser",
+      "method": "_nextTokenNotInObject",
+      "signature": "(I)Lcom/fasterxml/jackson/core/JsonToken;",
+      "executed_lines": [
+        797,
+        801,
+        806,
+        807
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser",
+      "method": "_parseName",
+      "signature": "(I)Ljava/lang/String;",
+      "executed_lines": [
+        1645,
+        1649,
+        1659,
+        1660,
+        1662,
+        1664,
+        1665,
+        1666,
+        1694,
+        1695
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser",
+      "method": "_parsePosNumber",
+      "signature": "(I)Lcom/fasterxml/jackson/core/JsonToken;",
+      "executed_lines": [
+        1341,
+        1343,
+        1347,
+        1348,
+        1349,
+        1352,
+        1353,
+        1354,
+        1358,
+        1361,
+        1362,
+        1368,
+        1371,
+        1372,
+        1374,
+        1378
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser",
+      "method": "_skipColon",
+      "signature": "()I",
+      "executed_lines": [
+        2930,
+        2934,
+        2935,
+        2936,
+        2937,
+        2938,
+        2941,
+        2942
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser",
+      "method": "_skipWSOrEnd",
+      "signature": "()I",
+      "executed_lines": [
+        2851,
+        2856,
+        2857,
+        2858,
+        2862
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser",
+      "method": "addName",
+      "signature": "([III)Ljava/lang/String;",
+      "executed_lines": [
+        2241,
+        2250,
+        2251,
+        2253,
+        2259,
+        2260,
+        2262,
+        2263,
+        2264,
+        2265,
+        2266,
+        2268,
+        2327,
+        2330,
+        2331,
+        2334,
+        2336,
+        2337,
+        2339
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser",
+      "method": "findName",
+      "signature": "(II)Ljava/lang/String;",
+      "executed_lines": [
+        2176,
+        2178,
+        2179,
+        2183,
+        2184
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser",
+      "method": "getText",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        282,
+        289
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser",
+      "method": "getValueAsString",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        298,
+        305
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser",
+      "method": "nextToken",
+      "signature": "()Lcom/fasterxml/jackson/core/JsonToken;",
+      "executed_lines": [
+        675,
+        680,
+        683,
+        686,
+        687,
+        695,
+        696,
+        697,
+        700,
+        703,
+        710,
+        719,
+        730,
+        731,
+        734,
+        735,
+        736,
+        738,
+        741,
+        748,
+        767,
+        768,
+        791,
+        792
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser",
+      "method": "pad",
+      "signature": "(II)I",
+      "executed_lines": [
+        3615
+      ]
+    }
+  ],
+  "com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars": [
+    {
+      "package": "com.fasterxml.jackson.core.base",
+      "class": "com.fasterxml.jackson.core.base.ParserMinimalBase",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        73
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.base",
+      "class": "com.fasterxml.jackson.core.base.ParserMinimalBase",
+      "method": "getValueAsString",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        397,
+        400,
+        401
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        24
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser",
+      "method": "<init>",
+      "signature": "(Lcom/fasterxml/jackson/core/io/IOContext;ILjava/io/Reader;Lcom/fasterxml/jackson/core/ObjectCodec;Lcom/fasterxml/jackson/core/sym/CharsToNameCanonicalizer;)V",
+      "executed_lines": [
+        77
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser",
+      "method": "<init>",
+      "signature": "(Lcom/fasterxml/jackson/core/io/IOContext;ILjava/io/Reader;Lcom/fasterxml/jackson/core/ObjectCodec;Lcom/fasterxml/jackson/core/sym/CharsToNameCanonicalizer;[CIIZ)V",
+      "executed_lines": [
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser",
+      "method": "_getText2",
+      "signature": "(Lcom/fasterxml/jackson/core/JsonToken;)Ljava/lang/String;",
+      "executed_lines": [
+        270,
+        273,
+        275
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser",
+      "method": "_parseName",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        1249,
+        1250,
+        1251,
+        1253,
+        1254,
+        1255,
+        1256,
+        1257,
+        1258,
+        1259,
+        1263,
+        1264,
+        1265
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser",
+      "method": "_parsePosNumber",
+      "signature": "(I)Lcom/fasterxml/jackson/core/JsonToken;",
+      "executed_lines": [
+        847,
+        848,
+        849,
+        852,
+        862,
+        867,
+        871,
+        872,
+        877,
+        882,
+        883,
+        885,
+        888,
+        889,
+        890
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser",
+      "method": "_skipColon",
+      "signature": "()I",
+      "executed_lines": [
+        1697,
+        1700,
+        1701,
+        1702,
+        1703,
+        1704,
+        1707,
+        1708
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser",
+      "method": "_skipWSOrEnd",
+      "signature": "()I",
+      "executed_lines": [
+        1854,
+        1859,
+        1860,
+        1861,
+        1865
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser",
+      "method": "getText",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        229,
+        230,
+        237
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser",
+      "method": "getValueAsString",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        246,
+        253
+      ]
+    },
+    {
+      "package": "com.fasterxml.jackson.core.json",
+      "class": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser",
+      "method": "nextToken",
+      "signature": "()Lcom/fasterxml/jackson/core/JsonToken;",
+      "executed_lines": [
+        559,
+        565,
+        568,
+        571,
+        572,
+        583,
+        584,
+        585,
+        588,
+        591,
+        598,
+        607,
+        615,
+        616,
+        618,
+        619,
+        620,
+        621,
+        628,
+        640,
+        641,
+        643,
+        644,
+        680,
+        681,
+        687,
+        688,
+        689,
+        691,
+        692
+      ]
+    }
+  ]
+}

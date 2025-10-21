@@ -1,0 +1,487 @@
+{
+  "org.apache.commons.math.linear.ArrayRealVectorTest::testBasicFunctions": [
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.AbstractRealVector",
+      "method": "copy",
+      "signature": "()Lorg/apache/commons/math/linear/RealVector;",
+      "executed_lines": [
+        34
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.ArrayRealVector",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        41,
+        42
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.ArrayRealVector",
+      "method": "<init>",
+      "signature": "([D)V",
+      "executed_lines": [
+        82,
+        83,
+        84
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.ArrayRealVector",
+      "method": "getL1Norm",
+      "signature": "()D",
+      "executed_lines": [
+        709,
+        710,
+        711,
+        713
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.ArrayRealVector",
+      "method": "getLInfNorm",
+      "signature": "()D",
+      "executed_lines": [
+        719,
+        720,
+        721,
+        723
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.ArrayRealVector",
+      "method": "getNorm",
+      "signature": "()D",
+      "executed_lines": [
+        699,
+        700,
+        701,
+        703
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.RealVectorFormat",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/text/NumberFormat;)V",
+      "executed_lines": [
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.RealVectorFormat",
+      "method": "<init>",
+      "signature": "(Ljava/text/NumberFormat;)V",
+      "executed_lines": [
+        94,
+        95
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.RealVectorFormat",
+      "method": "getInstance",
+      "signature": "()Lorg/apache/commons/math/linear/RealVectorFormat;",
+      "executed_lines": [
+        173
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.RealVectorFormat",
+      "method": "getInstance",
+      "signature": "(Ljava/util/Locale;)Lorg/apache/commons/math/linear/RealVectorFormat;",
+      "executed_lines": [
+        182
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.CompositeFormat",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        30
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.CompositeFormat",
+      "method": "getDefaultNumberFormat",
+      "signature": "(Ljava/util/Locale;)Ljava/text/NumberFormat;",
+      "executed_lines": [
+        53,
+        54,
+        55
+      ]
+    }
+  ],
+  "org.apache.commons.math.linear.SparseRealVectorTest::testBasicFunctions": [
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.AbstractRealVector",
+      "method": "copy",
+      "signature": "()Lorg/apache/commons/math/linear/RealVector;",
+      "executed_lines": [
+        34
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.AbstractRealVector",
+      "method": "getL1Norm",
+      "signature": "()D",
+      "executed_lines": [
+        222,
+        223,
+        225,
+        226,
+        228
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.AbstractRealVector",
+      "method": "getNorm",
+      "signature": "()D",
+      "executed_lines": [
+        210,
+        211,
+        213,
+        214,
+        215,
+        216,
+        217
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.OpenMapRealVector",
+      "method": "<init>",
+      "signature": "([D)V",
+      "executed_lines": [
+        117,
+        118
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.OpenMapRealVector",
+      "method": "<init>",
+      "signature": "([DD)V",
+      "executed_lines": [
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        136
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.OpenMapRealVector",
+      "method": "access$000",
+      "signature": "(Lorg/apache/commons/math/linear/OpenMapRealVector;)Lorg/apache/commons/math/util/OpenIntToDoubleHashMap;",
+      "executed_lines": [
+        30
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.OpenMapRealVector",
+      "method": "getLInfNorm",
+      "signature": "()D",
+      "executed_lines": [
+        499,
+        500,
+        501,
+        502,
+        503,
+        505
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.OpenMapRealVector",
+      "method": "isDefaultValue",
+      "signature": "(D)Z",
+      "executed_lines": [
+        205
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.OpenMapRealVector",
+      "method": "sparseIterator",
+      "signature": "()Ljava/util/Iterator;",
+      "executed_lines": [
+        809
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.OpenMapRealVector$OpenMapEntry",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math/linear/OpenMapRealVector;Lorg/apache/commons/math/util/OpenIntToDoubleHashMap$Iterator;)V",
+      "executed_lines": [
+        825,
+        826,
+        827
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.OpenMapRealVector$OpenMapEntry",
+      "method": "getValue",
+      "signature": "()D",
+      "executed_lines": [
+        832
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.OpenMapRealVector$OpenMapSparseIterator",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math/linear/OpenMapRealVector;)V",
+      "executed_lines": [
+        863,
+        864,
+        865,
+        866
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.OpenMapRealVector$OpenMapSparseIterator",
+      "method": "hasNext",
+      "signature": "()Z",
+      "executed_lines": [
+        870
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.OpenMapRealVector$OpenMapSparseIterator",
+      "method": "next",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        854
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.OpenMapRealVector$OpenMapSparseIterator",
+      "method": "next",
+      "signature": "()Lorg/apache/commons/math/linear/RealVector$Entry;",
+      "executed_lines": [
+        875,
+        876
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.linear",
+      "class": "org.apache.commons.math.linear.RealVector$Entry",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        72
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap",
+      "method": "<init>",
+      "signature": "(D)V",
+      "executed_lines": [
+        110,
+        111
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap",
+      "method": "<init>",
+      "signature": "(ID)V",
+      "executed_lines": [
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap",
+      "method": "access$400",
+      "signature": "(Lorg/apache/commons/math/util/OpenIntToDoubleHashMap;)[B",
+      "executed_lines": [
+        39
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap",
+      "method": "computeCapacity",
+      "signature": "(I)I",
+      "executed_lines": [
+        160,
+        163,
+        164,
+        165,
+        166
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap",
+      "method": "findInsertionIndex",
+      "signature": "(I)I",
+      "executed_lines": [
+        266
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap",
+      "method": "findInsertionIndex",
+      "signature": "([I[BII)I",
+      "executed_lines": [
+        279,
+        280,
+        281,
+        282
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap",
+      "method": "hashOf",
+      "signature": "(I)I",
+      "executed_lines": [
+        485,
+        486
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap",
+      "method": "iterator",
+      "signature": "()Lorg/apache/commons/math/util/OpenIntToDoubleHashMap$Iterator;",
+      "executed_lines": [
+        248
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap",
+      "method": "put",
+      "signature": "(ID)D",
+      "executed_lines": [
+        417,
+        418,
+        419,
+        420,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        433,
+        435
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap",
+      "method": "shouldGrowTable",
+      "signature": "()Z",
+      "executed_lines": [
+        476
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap$Iterator",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math/util/OpenIntToDoubleHashMap;)V",
+      "executed_lines": [
+        505,
+        508,
+        511,
+        513,
+        516,
+        518
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap$Iterator",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math/util/OpenIntToDoubleHashMap;Lorg/apache/commons/math/util/OpenIntToDoubleHashMap$1;)V",
+      "executed_lines": [
+        491
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap$Iterator",
+      "method": "advance",
+      "signature": "()V",
+      "executed_lines": [
+        572,
+        578,
+        582,
+        585,
+        586,
+        587,
+        590,
+        592
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap$Iterator",
+      "method": "hasNext",
+      "signature": "()Z",
+      "executed_lines": [
+        525
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.util",
+      "class": "org.apache.commons.math.util.OpenIntToDoubleHashMap$Iterator",
+      "method": "value",
+      "signature": "()D",
+      "executed_lines": [
+        554,
+        558,
+        561
+      ]
+    }
+  ]
+}

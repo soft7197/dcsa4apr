@@ -1,0 +1,30 @@
+{
+  "bug_id": "Compress-34",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Compress-34_1772930082",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the method returning the wrong value, which is a result of the method's logic being flawed.",
+        "changes": "- return getLocalFileDataLength();\n+ return new ZipShort(0);",
+        "fixed_method": "public ZipShort getCentralDirectoryLength() {\n        return new ZipShort(0);\n    }",
+        "diff": "- return getLocalFileDataLength();\n+ return new ZipShort(0);",
+        "file_path": "src/main/java/org/apache/commons/compress/archivers/zip/X7875_NewUnix.java",
+        "method_name": "getCentralDirectoryLength",
+        "class_name": "X7875_NewUnix",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          145,
+          146,
+          147
+        ],
+        "original_code": "/**\n* Length of the extra field in the central directory data - without\n* Header-ID or length specifier.\n*\n* @return a <code>ZipShort</code> for the length of the data of this extra field\n*/\npublic ZipShort getCentralDirectoryLength() {\n        return getLocalFileDataLength();\n    }"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Compress-34/"
+}

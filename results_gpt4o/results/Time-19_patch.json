@@ -1,0 +1,59 @@
+{
+  "bug_id": "Time-19",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Time-19_1773120581",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original code had issues with handling DST transitions, particularly missing handling for negative offsets in a DST boundary case. This patch refines the logic by ensuring that the decision to return 'offsetLocal' or 'offsetAdjusted' is based on consistent handling of both positive and negative offsets, along with accurate boundary checking by using transitions. It avoids overfitting by eliminating arbitrary condition checks that were present in the previous patch.",
+        "fixed_method": "public int getOffsetFromLocal(long instantLocal) {\n    final int initialOffset = getOffset(instantLocal);\n    final long adjustedInstant = instantLocal - initialOffset;\n    final int adjustedOffset = getOffset(adjustedInstant);\n\n    if (initialOffset != adjustedOffset) {\n        if ((initialOffset > adjustedOffset && initialOffset > 0) || (initialOffset < adjustedOffset && initialOffset < 0)) {\n            long nextLocalTransition = nextTransition(adjustedInstant);\n            if (nextLocalTransition < instantLocal) {\n                return adjustedOffset;\n            }\n        }\n        return initialOffset;\n    }\n\n    long previousTransitionInstant = previousTransition(adjustedInstant);\n    if (previousTransitionInstant < adjustedInstant) {\n        int prevOffset = getOffset(previousTransitionInstant);\n        if (adjustedInstant - previousTransitionInstant <= prevOffset - initialOffset) {\n            return prevOffset;\n        }\n    }\n\n    return adjustedOffset;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/joda/time/DateTimeZone.java",
+        "method_name": "getOffsetFromLocal",
+        "class_name": "DateTimeZone",
+        "iteration": 2,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by incorrect handling of DST transitions, specifically when the transition involves positive offsets and reverting from DST. The logic should account for such transitions and favor daylight time over standard time explicitly.",
+        "line_numbers": [
+          880,
+          881,
+          882,
+          883,
+          884,
+          885,
+          886,
+          887,
+          888,
+          889,
+          890,
+          891,
+          892,
+          893,
+          894,
+          895,
+          896,
+          897,
+          898,
+          899,
+          900,
+          901,
+          902,
+          903,
+          904,
+          905,
+          906,
+          907,
+          908,
+          909,
+          910,
+          911
+        ]
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Time-19/"
+}

@@ -1,0 +1,58 @@
+{
+  "bug_id": "Jsoup-26",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-26_1772699025",
+  "patches": [
+    [
+      {
+        "hypothesis": "Addressed the overfitting issues by handling null objects and adding more test cases to cover edge cases.",
+        "fixed_method": "public Document clean(Document dirtyDocument) {\n    Validate.notNull(dirtyDocument);\n    Document clean = Document.createShell(dirtyDocument.baseUri());\n    if (dirtyDocument.body() != null && clean.body() != null) {\n        copySafeNodes(dirtyDocument.body(), clean.body());\n    }\n    return clean;\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/safety/Cleaner.java",
+        "method_name": "clean",
+        "class_name": "Cleaner",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The `copySafeNodes()` method was trying to access the `childNodes()` of a null object.",
+        "line_numbers": [
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46
+        ]
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public Document clean(Document dirtyDocument) {\n    Validate.notNull(dirtyDocument);\n\n    Document clean = Document.createShell(dirtyDocument.baseUri());\n    if (dirtyDocument.body() != null) {\n        copySafeNodes(dirtyDocument.body(), clean.body());\n    }\n\n    return clean;\n}",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/safety/Cleaner.java",
+        "method_name": "clean",
+        "class_name": "Cleaner",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "original_code": "/**\nCreates a new, clean document, from the original dirty document, containing only elements allowed by the whitelist.\nThe original document is not modified. Only elements from the dirt document's <code>body</code> are used.\n@param dirtyDocument Untrusted base document to clean.\n@return cleaned document.\n*/\npublic Document clean(Document dirtyDocument) {\n    Validate.notNull(dirtyDocument);\n\n    Document clean = Document.createShell(dirtyDocument.baseUri());\n        copySafeNodes(dirtyDocument.body(), clean.body());\n\n    return clean;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-26/"
+}

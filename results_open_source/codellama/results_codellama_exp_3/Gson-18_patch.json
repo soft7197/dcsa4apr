@@ -1,0 +1,34 @@
+{
+  "bug_id": "Gson-18",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Gson-18_1772902653",
+  "patches": [
+    [
+      {
+        "hypothesis": "Refined the fix to avoid hardcoding and cover edge cases",
+        "fixed_method": "static Type getSupertype(Type context, Class<?> contextRawType, Class<?> supertype) {\n  checkArgument(supertype.isAssignableFrom(contextRawType));\n  if (supertype.isAssignableFrom(contextRawType)) {\n    return context;\n  }\n  else {\n    return resolve(context, contextRawType, $Gson$Types.getGenericSupertype(context, contextRawType, supertype));\n  }\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "gson/src/main/java/com/google/gson/internal/$Gson$Types.java",
+        "method_name": "getSupertype",
+        "class_name": "$Gson$Types",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the method not handling the case where the input type is a subclass of the expected type. The method should check if the input type is a subclass of the expected type and handle it accordingly.",
+        "line_numbers": [
+          277,
+          278,
+          279,
+          280,
+          281,
+          282
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Gson-18/"
+}

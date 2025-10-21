@@ -1,0 +1,58 @@
+{
+  "bug_id": "Cli-2",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Cli-2_1773121147",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug occurs because the handler doesn't properly manage cases where unrecognized characters are encountered in tokens and `stopAtNonOption` is not set. Instead of handling options correctly, the method currently treats each remaining character as a separate option, resulting in unexpected behavior when a valid option has an associated argument starting with an unrecognized character. The fix should ensure processing continues after identifying a valid option that can have an argument, capturing the rest of the token as an argument without confusing it with independent options.",
+        "changes": "- Check for valid option, if valid capture all remaining characters as arg.\n+ Add logic to handle non-option characters after recognized option properly",
+        "fixed_method": "protected void burstToken(String token, boolean stopAtNonOption)\n    {\n        int tokenLength = token.length();\n\n        for (int i = 1; i < tokenLength; i++)\n        {\n            String ch = String.valueOf(token.charAt(i));\n            boolean hasOption = options.hasOption(ch);\n\n            if (hasOption)\n            {\n                tokens.add(\"-\" + ch);\n                currentOption = options.getOption(ch);\n\n                if (currentOption.hasArg() && (token.length() > i + 1))\n                {\n                    tokens.add(token.substring(i + 1));\n                    break;\n                }\n            }\n            else if (stopAtNonOption)\n            {\n                process(\"--\" + token.substring(i));\n                break;\n            }\n            else\n            {\n                tokens.add(\"-\" + token.substring(i));\n                break;\n            }\n        }\n    }",
+        "diff": "- Check for valid option, if valid capture all remaining characters as arg.\n+ Add logic to handle non-option characters after recognized option properly",
+        "file_path": "src/java/org/apache/commons/cli/PosixParser.java",
+        "method_name": "burstToken",
+        "class_name": "PosixParser",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          278,
+          279,
+          280,
+          281,
+          282,
+          283,
+          284,
+          285,
+          286,
+          287,
+          288,
+          289,
+          290,
+          291,
+          292,
+          293,
+          294,
+          295,
+          296,
+          297,
+          298,
+          299,
+          300,
+          301,
+          302,
+          303,
+          304,
+          305,
+          306,
+          307,
+          308
+        ],
+        "original_code": "/**\n* <p>Breaks <code>token</code> into its constituent parts\n* using the following algorithm.\n* <ul>\n*  <li>ignore the first character (\"<b>-</b>\")</li>\n*  <li>foreach remaining character check if an {@link Option}\n*  exists with that id.</li>\n*  <li>if an {@link Option} does exist then add that character\n*  prepended with \"<b>-</b>\" to the list of processed tokens.</li>\n*  <li>if the {@link Option} can have an argument value and there\n*  are remaining characters in the token then add the remaining\n*  characters as a token to the list of processed tokens.</li>\n*  <li>if an {@link Option} does <b>NOT</b> exist <b>AND</b>\n*  <code>stopAtNonOption</code> <b>IS</b> set then add the special token\n*  \"<b>--</b>\" followed by the remaining characters and also\n*  the remaining tokens directly to the processed tokens list.</li>\n*  <li>if an {@link Option} does <b>NOT</b> exist <b>AND</b>\n*  <code>stopAtNonOption</code> <b>IS NOT</b> set then add that\n*  character prepended with \"<b>-</b>\".</li>\n* </ul>\n* </p>\n*\n* @param token The current token to be <b>burst</b>\n* @param stopAtNonOption Specifies whether to stop processing\n* at the first non-Option encountered.\n*/\nprotected void burstToken(String token, boolean stopAtNonOption)\n    {\n        int tokenLength = token.length();\n\n        for (int i = 1; i < tokenLength; i++)\n        {\n            String ch = String.valueOf(token.charAt(i));\n            boolean hasOption = options.hasOption(ch);\n\n            if (hasOption)\n            {\n                tokens.add(\"-\" + ch);\n                currentOption = options.getOption(ch);\n\n                if (currentOption.hasArg() && (token.length() != (i + 1)))\n                {\n                    tokens.add(token.substring(i + 1));\n\n                    break;\n                }\n            }\n            else if (stopAtNonOption)\n            {\n                process(token.substring(i));\n            }\n            else\n            {\n                tokens.add(\"-\" + ch);\n            }\n        }\n    }"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Cli-2/"
+}

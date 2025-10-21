@@ -1,0 +1,63 @@
+{
+  "bug_id": "Closure-80",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-80_1771889330",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is that the 'delete' operator is not correctly identified as returning a boolean. The case for 'delete' is missing in the switch statement.",
+        "changes": "+      case Token.DELPROP:\n+        return true;",
+        "fixed_method": "  static boolean isBooleanResultHelper(Node n) {\n    switch (n.getType()) {\n      // Primitives\n      case Token.TRUE:\n      case Token.FALSE:\n      // Comparisons\n      case Token.EQ:\n      case Token.NE:\n      case Token.SHEQ:\n      case Token.SHNE:\n      case Token.LT:\n      case Token.GT:\n      case Token.LE:\n      case Token.GE:\n      // Queryies\n      case Token.IN:\n      case Token.INSTANCEOF:\n      // Inversion\n      case Token.NOT:\n      // delete operator returns a boolean.\n      case Token.DELPROP:\n        return true;\n      default:\n        return false;\n    }\n  }",
+        "diff": "+      case Token.DELPROP:\n+        return true;",
+        "file_path": "src/com/google/javascript/jscomp/NodeUtil.java",
+        "method_name": "isBooleanResultHelper",
+        "class_name": "NodeUtil",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1242,
+          1266
+        ],
+        "original_code": "\n  static boolean isBooleanResultHelper(Node n) {\n    switch (n.getType()) {\n      // Primitives\n      case Token.TRUE:\n      case Token.FALSE:\n      // Comparisons\n      case Token.EQ:\n      case Token.NE:\n      case Token.SHEQ:\n      case Token.SHNE:\n      case Token.LT:\n      case Token.GT:\n      case Token.LE:\n      case Token.GE:\n      // Queryies\n      case Token.IN:\n      case Token.INSTANCEOF:\n      // Inversion\n      case Token.NOT:\n      // delete operator returns a boolean.\n        return true;\n      default:\n        return false;\n    }\n  }\n"
+      },
+      {
+        "hypothesis": "The bug is that the 'delete' operator case is commented out in the switch statement, so it does not return true for delete operations.",
+        "changes": "-// delete operator returns a boolean.\n+case Token.DELPROP:\n+  return true;",
+        "fixed_method": "  static boolean isBooleanResultHelper(Node n) {\n    switch (n.getType()) {\n      // Primitives\n      case Token.TRUE:\n      case Token.FALSE:\n      // Comparisons\n      case Token.EQ:\n      case Token.NE:\n      case Token.SHEQ:\n      case Token.SHNE:\n      case Token.LT:\n      case Token.GT:\n      case Token.LE:\n      case Token.GE:\n      // Queries\n      case Token.IN:\n      case Token.INSTANCEOF:\n      // Inversion\n      case Token.NOT:\n      // delete operator returns a boolean.\n      case Token.DELPROP:\n        return true;\n      default:\n        return false;\n    }\n  }",
+        "diff": "-// delete operator returns a boolean.\n+case Token.DELPROP:\n+  return true;",
+        "file_path": "src/com/google/javascript/jscomp/NodeUtil.java",
+        "method_name": "isBooleanResultHelper",
+        "class_name": "NodeUtil",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1242,
+          1266
+        ],
+        "original_code": "\n  static boolean isBooleanResultHelper(Node n) {\n    switch (n.getType()) {\n      // Primitives\n      case Token.TRUE:\n      case Token.FALSE:\n      // Comparisons\n      case Token.EQ:\n      case Token.NE:\n      case Token.SHEQ:\n      case Token.SHNE:\n      case Token.LT:\n      case Token.GT:\n      case Token.LE:\n      case Token.GE:\n      // Queryies\n      case Token.IN:\n      case Token.INSTANCEOF:\n      // Inversion\n      case Token.NOT:\n      // delete operator returns a boolean.\n        return true;\n      default:\n        return false;\n    }\n  }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "The error is due to the method not handling the DELPROP token type, which is encountered when evaluating 'delete a.b'. This token type should be handled similarly to other operators that force a local value.",
+        "changes": "+      case Token.DELPROP:\n+        return true;",
+        "fixed_method": "  static boolean evaluatesToLocalValue(Node value, Predicate<Node> locals) {\n    switch (value.getType()) {\n      case Token.ASSIGN:\n        // A result that is aliased by a non-local name, is the effectively the\n        // same as returning a non-local name, but this doesn't matter if the\n        // value is immutable.\n        return NodeUtil.isImmutableValue(value.getLastChild())\n            || (locals.apply(value)\n                && evaluatesToLocalValue(value.getLastChild(), locals));\n      case Token.COMMA:\n        return evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.AND:\n      case Token.OR:\n        return evaluatesToLocalValue(value.getFirstChild(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.HOOK:\n        return evaluatesToLocalValue(value.getFirstChild().getNext(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.INC:\n      case Token.DEC:\n        if (value.getBooleanProp(Node.INCRDECR_PROP)) {\n          return evaluatesToLocalValue(value.getFirstChild(), locals);\n        } else {\n          return true;\n        }\n      case Token.THIS:\n        return locals.apply(value);\n      case Token.NAME:\n        return isImmutableValue(value) || locals.apply(value);\n      case Token.GETELEM:\n      case Token.GETPROP:\n        // There is no information about the locality of object properties.\n        return locals.apply(value);\n      case Token.CALL:\n        return callHasLocalResult(value)\n            || isToStringMethodCall(value)\n            || locals.apply(value);\n      case Token.NEW:\n        return newHasLocalResult(value)\n               || locals.apply(value);\n      case Token.FUNCTION:\n      case Token.REGEXP:\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        // Literals objects with non-literal children are allowed.\n        return true;\n      case Token.IN:\n        // TODO(johnlenz): should IN operator be included in #isSimpleOperator?\n        return true;\n      case Token.DELPROP:\n        return true;\n      default:\n        // Other op force a local value:\n        //  x = '' + g (x is now an local string)\n        //  x -= g (x is now an local number)\n        if (isAssignmentOp(value)\n            || isSimpleOperator(value)\n            || isImmutableValue(value)) {\n          return true;\n        }\n\n        throw new IllegalStateException(\n            \"Unexpected expression node\" + value +\n            \"\\n parent:\" + value.getParent());\n    }\n  }",
+        "diff": "+      case Token.DELPROP:\n+        return true;",
+        "file_path": "src/com/google/javascript/jscomp/NodeUtil.java",
+        "method_name": "evaluatesToLocalValue",
+        "class_name": "NodeUtil",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          2864,
+          2927
+        ],
+        "original_code": "  /**\n   * @param locals A predicate to apply to unknown local values.\n   * @return Whether the node is known to be a value that is not a reference\n   *     outside the expression scope.\n   */\n\n  static boolean evaluatesToLocalValue(Node value, Predicate<Node> locals) {\n    switch (value.getType()) {\n      case Token.ASSIGN:\n        // A result that is aliased by a non-local name, is the effectively the\n        // same as returning a non-local name, but this doesn't matter if the\n        // value is immutable.\n        return NodeUtil.isImmutableValue(value.getLastChild())\n            || (locals.apply(value)\n                && evaluatesToLocalValue(value.getLastChild(), locals));\n      case Token.COMMA:\n        return evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.AND:\n      case Token.OR:\n        return evaluatesToLocalValue(value.getFirstChild(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.HOOK:\n        return evaluatesToLocalValue(value.getFirstChild().getNext(), locals)\n           && evaluatesToLocalValue(value.getLastChild(), locals);\n      case Token.INC:\n      case Token.DEC:\n        if (value.getBooleanProp(Node.INCRDECR_PROP)) {\n          return evaluatesToLocalValue(value.getFirstChild(), locals);\n        } else {\n          return true;\n        }\n      case Token.THIS:\n        return locals.apply(value);\n      case Token.NAME:\n        return isImmutableValue(value) || locals.apply(value);\n      case Token.GETELEM:\n      case Token.GETPROP:\n        // There is no information about the locality of object properties.\n        return locals.apply(value);\n      case Token.CALL:\n        return callHasLocalResult(value)\n            || isToStringMethodCall(value)\n            || locals.apply(value);\n      case Token.NEW:\n        return newHasLocalResult(value)\n               || locals.apply(value);\n      case Token.FUNCTION:\n      case Token.REGEXP:\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        // Literals objects with non-literal children are allowed.\n        return true;\n      case Token.IN:\n        // TODO(johnlenz): should IN operator be included in #isSimpleOperator?\n        return true;\n      default:\n        // Other op force a local value:\n        //  x = '' + g (x is now an local string)\n        //  x -= g (x is now an local number)\n        if (isAssignmentOp(value)\n            || isSimpleOperator(value)\n            || isImmutableValue(value)) {\n          return true;\n        }\n\n        throw new IllegalStateException(\n            \"Unexpected expression node\" + value +\n            \"\\n parent:\" + value.getParent());\n    }\n  }\n"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-80/"
+}

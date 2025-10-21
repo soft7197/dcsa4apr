@@ -1,0 +1,26 @@
+File: src/main/java/org/apache/commons/cli/DefaultParser.java
+Method: DefaultParser.isShortOption
+
+private boolean isShortOption(String token)
+{
+    // short options (-S, -SV, -S=V, -SV1=V2, -S1S2)
+    if (!token.startsWith("-") || token.length() == 1)
+    {
+        return false;
+    }
+
+    int i = 1;
+    while (i < token.length()) {
+        char c = token.charAt(i);
+        if (c == '=') {
+            // If we encounter '=', the rest of the string is the value, so we stop checking further
+            break;
+        }
+        if (options.hasShortOption(String.valueOf(c))) {
+            i++;
+        } else {
+            break;
+        }
+    }
+    return i > 1;
+}

@@ -1,0 +1,43 @@
+{
+  "bug_id": "JacksonDatabind-41",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-41_1772942394",
+  "patches": [
+    {
+      "hypothesis": "The issue is caused by the missing null check in the `constructType` method. The method should check if the `contextClass` parameter is null before calling the `_fromAny` method.",
+      "changes": "+ if (contextClass == null) return constructType(type);\n+ if (contextType == null) return constructType(type);\n",
+      "methods": {
+        "src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java::TypeFactory::constructType::L600": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java",
+          "method_name": "constructType",
+          "class_name": "TypeFactory",
+          "line_numbers": [
+            600,
+            603
+          ],
+          "original_code": "    /**\n     * @deprecated Since 2.7 (accidentally removed in 2.7.0; added back in 2.7.1)\n     */\n\n    @Deprecated\n    public JavaType constructType(Type type, Class<?> contextClass) {\n        return constructType(type, constructType(contextClass));\n    }\n",
+          "fixed_method": "public JavaType constructType(Type type, Class<?> contextClass) {\n  if (contextClass == null) return constructType(type);\n  return _fromAny(null, type, constructType(contextClass).getBindings());\n}",
+          "iteration": 1
+        },
+        "src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java::TypeFactory::constructType::L608": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java",
+          "method_name": "constructType",
+          "class_name": "TypeFactory",
+          "line_numbers": [
+            608,
+            611
+          ],
+          "original_code": "    /**\n     * @deprecated Since 2.7 (accidentally removed in 2.7.0; added back in 2.7.1)\n     */\n\n    @Deprecated\n    public JavaType constructType(Type type, JavaType contextType) {\n        return _fromAny(null, type, contextType.getBindings());\n    }\n",
+          "fixed_method": "public JavaType constructType(Type type, JavaType contextType) {\n  if (contextType == null) return constructType(type);\n  return _fromAny(null, type, contextType.getBindings());\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-41/"
+}

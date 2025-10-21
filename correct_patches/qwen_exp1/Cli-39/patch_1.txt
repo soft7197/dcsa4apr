@@ -1,0 +1,59 @@
+File: src/main/java/org/apache/commons/cli/TypeHandler.java
+Method: TypeHandler.createValue
+
+public static Object createValue(final String str, final Class<?> clazz) throws ParseException
+    {
+        if (PatternOptionBuilder.STRING_VALUE == clazz)
+        {
+            return str;
+        }
+        else if (PatternOptionBuilder.OBJECT_VALUE == clazz)
+        {
+            return createObject(str);
+        }
+        else if (PatternOptionBuilder.NUMBER_VALUE == clazz)
+        {
+            return createNumber(str);
+        }
+        else if (PatternOptionBuilder.DATE_VALUE == clazz)
+        {
+            return createDate(str);
+        }
+        else if (PatternOptionBuilder.CLASS_VALUE == clazz)
+        {
+            return createClass(str);
+        }
+        else if (PatternOptionBuilder.FILE_VALUE == clazz)
+        {
+            return createFile(str);
+        }
+        else if (PatternOptionBuilder.EXISTING_FILE_VALUE == clazz)
+        {
+            File file = new File(str);
+            if (!file.exists()) {
+                throw new ParseException("File does not exist: " + str);
+            }
+            if (!file.isFile()) {
+                throw new ParseException("Path is not a file: " + str);
+            }
+            try {
+                return new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                throw new ParseException("File not found: " + str);
+            } catch (SecurityException e) {
+                throw new ParseException("Access denied for file: " + str);
+            }
+        }
+        else if (PatternOptionBuilder.FILES_VALUE == clazz)
+        {
+            return createFiles(str);
+        }
+        else if (PatternOptionBuilder.URL_VALUE == clazz)
+        {
+            return createURL(str);
+        }
+        else
+        {
+            return null;
+        }
+    }

@@ -1,0 +1,51 @@
+File: src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java
+Method: BrentSolver.solve
+
+public double solve(final UnivariateRealFunction f,
+                    final double min, final double max, final double initial)
+    throws MaxIterationsExceededException, FunctionEvaluationException {
+
+    clearResult();
+    verifySequence(min, initial, max);
+
+    // Evaluate function at initial guess, min, and max
+    double yInitial = f.value(initial);
+    double yMin = f.value(min);
+    double yMax = f.value(max);
+
+    // Check if initial guess is a root
+    if (Math.abs(yInitial) <= functionValueAccuracy) {
+        setResult(initial, 0);
+        return result;
+    }
+
+    // Check if min is a root
+    if (Math.abs(yMin) <= functionValueAccuracy) {
+        setResult(min, 0);
+        return result;
+    }
+
+    // Check if max is a root
+    if (Math.abs(yMax) <= functionValueAccuracy) {
+        setResult(max, 0);
+        return result;
+    }
+
+    // Check if the function values at min and initial bracket a root
+    if (yInitial * yMin < 0) {
+        return solve(f, min, yMin, initial, yInitial, min, yMin);
+    }
+
+    // Check if the function values at initial and max bracket a root
+    if (yInitial * yMax < 0) {
+        return solve(f, initial, yInitial, max, yMax, initial, yInitial);
+    }
+
+    // Check if the function values at min and max bracket a root
+    if (yMin * yMax < 0) {
+        return solve(f, min, yMin, max, yMax, min, yMin);
+    }
+
+    // If no bracketing is found, throw an exception
+    throw new IllegalArgumentException("Function values at endpoints do not bracket a root");
+}

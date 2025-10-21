@@ -1,0 +1,45 @@
+{
+  "bug_id": "Chart-22",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-22_1773111768",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method does not check for null columnKey and attempts to remove a value even if it's not present, causing an UnknownKeyException. It should handle null and only remove column keys that exist.",
+        "changes": "+ Check for null columnKey and throw IllegalArgumentException\n+ Modify rowData.removeValue to remove only if columnKey exists",
+        "fixed_method": "public void removeColumn(Comparable columnKey) {\n    if (columnKey == null) {\n        throw new IllegalArgumentException(\"Column key cannot be null.\");\n    }\n    int index = getColumnIndex(columnKey);\n    if (index < 0) {\n        throw new UnknownKeyException(\"Column key (\" + columnKey + \") not recognised.\");\n    }\n    Iterator iterator = this.rows.iterator();\n    while (iterator.hasNext()) {\n        KeyedObjects rowData = (KeyedObjects) iterator.next();\n        if (rowData.getKeys().contains(columnKey)) {\n            rowData.removeValue(columnKey);\n        }\n    }\n    this.columnKeys.remove(columnKey);\n}",
+        "diff": "+ Check for null columnKey and throw IllegalArgumentException\n+ Modify rowData.removeValue to remove only if columnKey exists",
+        "file_path": "source/org/jfree/data/KeyedObjects2D.java",
+        "method_name": "removeColumn",
+        "class_name": "KeyedObjects2D",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          369,
+          381
+        ],
+        "original_code": "    /**\n     * Removes an entire column from the table.\n     *\n     * @param columnKey  the column key (<code>null</code> not permitted).\n     * \n     * @throws UnknownKeyException if <code>rowKey</code> is not recognised.\n     * \n     * @see #removeRow(Comparable)\n     */\n\n    public void removeColumn(Comparable columnKey) {\n        int index = getColumnIndex(columnKey);\n        if (index < 0) {\n            throw new UnknownKeyException(\"Column key (\" + columnKey \n                    + \") not recognised.\");\n        }\n        Iterator iterator = this.rows.iterator();\n        while (iterator.hasNext()) {\n            KeyedObjects rowData = (KeyedObjects) iterator.next();\n                rowData.removeValue(columnKey);\n        }\n        this.columnKeys.remove(columnKey);\n    }\n"
+      },
+      {
+        "hypothesis": "The method does not handle null or unrecognized column key inputs correctly, and a KeyedObjects exception is thrown when the key is not found. Additionally, there is no handling for null columnKey inputs.",
+        "changes": "+ Added check for null columnKey\n+ Fixed handling and error message for unrecognized keys",
+        "fixed_method": "public void removeColumn(Comparable columnKey) {\n    if (columnKey == null) {\n        throw new IllegalArgumentException(\"Null 'columnKey' argument.\");\n    }\n    int index = getColumnIndex(columnKey);\n    if (index < 0) {\n        throw new UnknownKeyException(\"Column key (\" + columnKey + \") not recognised.\");\n    }\n    Iterator iterator = this.rows.iterator();\n    while (iterator.hasNext()) {\n        KeyedObjects rowData = (KeyedObjects) iterator.next();\n        try {\n            rowData.removeValue(columnKey);\n        } catch (UnknownKeyException e) {\n            // Ignore exception as this means the key is not in that particular row\n        }\n    }\n    this.columnKeys.remove(columnKey);\n}",
+        "diff": "+ Added check for null columnKey\n+ Fixed handling and error message for unrecognized keys",
+        "file_path": "source/org/jfree/data/KeyedObjects2D.java",
+        "method_name": "removeColumn",
+        "class_name": "KeyedObjects2D",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          369,
+          381
+        ],
+        "original_code": "    /**\n     * Removes an entire column from the table.\n     *\n     * @param columnKey  the column key (<code>null</code> not permitted).\n     * \n     * @throws UnknownKeyException if <code>rowKey</code> is not recognised.\n     * \n     * @see #removeRow(Comparable)\n     */\n\n    public void removeColumn(Comparable columnKey) {\n        int index = getColumnIndex(columnKey);\n        if (index < 0) {\n            throw new UnknownKeyException(\"Column key (\" + columnKey \n                    + \") not recognised.\");\n        }\n        Iterator iterator = this.rows.iterator();\n        while (iterator.hasNext()) {\n            KeyedObjects rowData = (KeyedObjects) iterator.next();\n                rowData.removeValue(columnKey);\n        }\n        this.columnKeys.remove(columnKey);\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Chart-22/"
+}

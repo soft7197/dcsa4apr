@@ -1,0 +1,9 @@
+File: src/main/java/org/jsoup/nodes/Element.java
+Method: Element.html
+
+public String html() {
+    StringBuilder accum = new StringBuilder();
+    html(accum);
+    String result = accum.toString();
+    return getOutputSettings().prettyPrint() ? result.trim() : result;
+}

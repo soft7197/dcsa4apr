@@ -1,0 +1,34 @@
+{
+  "bug_id": "JacksonDatabind-12",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-12_1773118778",
+  "patches": [
+    [
+      {
+        "hypothesis": "The isCachable method is allowing caching when only _ignorableProperties is null, but it should also consider _valueDeserializer. The caching logic needs to strictly check both fields to disable caching if a custom deserializer exists.",
+        "changes": "- return (_valueDeserializer == null) and (_valueTypeDeserializer == null) && (_ignorableProperties == null);",
+        "fixed_method": "public boolean isCachable() {\n    return (_valueTypeDeserializer == null)\n            && (_valueDeserializer == null) \n            && (_ignorableProperties == null);\n}",
+        "diff": "- return (_valueDeserializer == null) and (_valueTypeDeserializer == null) && (_ignorableProperties == null);",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/std/MapDeserializer.java",
+        "method_name": "isCachable",
+        "class_name": "MapDeserializer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          299,
+          300,
+          301,
+          302,
+          303,
+          304,
+          305
+        ],
+        "original_code": "/**\n* Turns out that these are expensive enough to create so that caching\n* does make sense.\n*<p>\n* IMPORTANT: but, note, that instances CAN NOT BE CACHED if there is\n* a value type deserializer; this caused an issue with 2.4.4 of\n* JAXB Annotations (failing a test).\n* It is also possible that some other settings could make deserializers\n* un-cacheable; but on the other hand, caching can make a big positive\n* difference with performance... so it's a hard choice.\n*\n* @since 2.4.4\n*/\npublic boolean isCachable() {\n    /* As per [databind#735], existence of value or key deserializer (only passed\n     * if annotated to use non-standard one) should also prevent caching.\n     */\n    return (_valueTypeDeserializer == null)\n            && (_ignorableProperties == null);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-12/"
+}

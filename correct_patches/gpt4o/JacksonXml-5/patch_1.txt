@@ -1,0 +1,7 @@
+File: src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java
+Method: XmlSerializerProvider.XmlSerializerProvider
+
+protected XmlSerializerProvider(XmlSerializerProvider src) {
+    super(src);
+    _rootNameLookup = new XmlRootNameLookup();
+}

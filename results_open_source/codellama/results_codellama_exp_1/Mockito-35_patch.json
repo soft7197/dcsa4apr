@@ -1,0 +1,45 @@
+{
+  "bug_id": "Mockito-35",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-35_1772736287",
+  "patches": [
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public static <T> T eq(T value) {\n    return value;\n}",
+        "diff": "",
+        "file_path": "src/org/mockito/Matchers.java",
+        "method_name": "eq",
+        "class_name": "Matchers",
+        "iteration": 3,
+        "is_multi_method": false,
+        "line_numbers": [
+          478,
+          480
+        ],
+        "original_code": "    /**\n     * Object argument that is equal to the given value.\n     * <p>\n     * See examples in javadoc for {@link Matchers} class\n     * \n     * @param value\n     *            the given value.\n     * @return <code>null</code>.\n     */\n\n    public static <T> T eq(T value) {\n        return reportMatcher(new Equals(value)).<T>returnNull();\n    }  \n"
+      },
+      {
+        "hypothesis": "The bug is caused by the method returning `null` when the `value` parameter is not `null`, which is causing a `NullPointerException` in the calling code.",
+        "changes": "- return reportMatcher(new Equals(value)).<T>returnNull(); + return value;",
+        "fixed_method": "public static <T> T eq(T value) { if (value == null) return null; return value; }",
+        "diff": "- return reportMatcher(new Equals(value)).<T>returnNull(); + return value;",
+        "file_path": "src/org/mockito/Matchers.java",
+        "method_name": "eq",
+        "class_name": "Matchers",
+        "iteration": 3,
+        "is_multi_method": false,
+        "line_numbers": [
+          478,
+          480
+        ],
+        "original_code": "    /**\n     * Object argument that is equal to the given value.\n     * <p>\n     * See examples in javadoc for {@link Matchers} class\n     * \n     * @param value\n     *            the given value.\n     * @return <code>null</code>.\n     */\n\n    public static <T> T eq(T value) {\n        return reportMatcher(new Equals(value)).<T>returnNull();\n    }  \n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Mockito-35/"
+}

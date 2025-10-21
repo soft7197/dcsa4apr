@@ -1,0 +1,17 @@
+File: src/main/java/com/fasterxml/jackson/databind/deser/DeserializerCache.java
+Method: DeserializerCache._hasCustomHandlers
+
+private boolean _hasCustomHandlers(JavaType t) {
+    if (t.isContainerType()) {
+        // Check for custom key deserializer in map-like types
+        if (t.isMapLikeType() && t.getKeyType() != null && t.getKeyType().getValueHandler() != null) {
+            return true;
+        }
+        // Check for custom value and type handlers in content types
+        JavaType ct = t.getContentType();
+        if (ct != null && ((ct.getValueHandler() != null) || (ct.getTypeHandler() != null))) {
+            return true;
+        }
+    }
+    return false;
+}

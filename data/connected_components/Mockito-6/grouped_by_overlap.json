@@ -1,0 +1,35 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "anyBoolean_org.mockito.Matchers",
+      "anyByte_org.mockito.Matchers",
+      "anyChar_org.mockito.Matchers",
+      "anyDouble_org.mockito.Matchers",
+      "anyFloat_org.mockito.Matchers",
+      "anyInt_org.mockito.Matchers",
+      "anyLong_org.mockito.Matchers",
+      "anyShort_org.mockito.Matchers"
+    ],
+    "tests": [
+      "org.mockitousage.matchers.AnyXMatchersAcceptNullsTest::shouldNotAcceptNullInAllAnyPrimitiveWrapperMatchers"
+    ]
+  },
+  "Group_2": {
+    "buggy_methods": [
+      "anyCollection_org.mockito.Matchers",
+      "anyList_org.mockito.Matchers",
+      "anyMap_org.mockito.Matchers",
+      "anyObject_org.mockito.Matchers",
+      "anySet_org.mockito.Matchers",
+      "anyString_org.mockito.Matchers"
+    ],
+    "tests": [
+      "org.mockitousage.matchers.AnyXMatchersAcceptNullsTest::shouldNotAcceptNullInAnyXMatchers",
+      "org.mockitousage.matchers.MatchersTest::anyStringMatcher",
+      "org.mockitousage.matchers.NewMatchersTest::shouldAllowAnyCollection",
+      "org.mockitousage.matchers.NewMatchersTest::shouldAllowAnyList",
+      "org.mockitousage.matchers.NewMatchersTest::shouldAllowAnyMap",
+      "org.mockitousage.matchers.NewMatchersTest::shouldAllowAnySet"
+    ]
+  }
+}

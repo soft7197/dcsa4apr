@@ -1,0 +1,9 @@
+File: src/main/java/org/jsoup/nodes/Element.java
+Method: Element.html
+
+public String html() {
+        StringBuilder accum = new StringBuilder();
+        html(accum);
+        if (accum.length() == 0) return "";
+        return accum.toString();
+    }

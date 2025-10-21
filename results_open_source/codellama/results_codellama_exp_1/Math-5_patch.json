@@ -1,0 +1,51 @@
+{
+  "bug_id": "Math-5",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-5_1772707256",
+  "patches": [
+    [
+      {
+        "hypothesis": "The fix should address the obvious flaw in handling 0,0, not just a specific set of test inputs.",
+        "fixed_method": "public Complex reciprocal() {\n    if (isNaN) {\n        return NaN;\n    }\n\n    if (real == 0 && imaginary == 0) {\n        return Complex.INF;\n    }\n\n    if (isInfinite) {\n        return Complex.ZERO;\n    }\n\n    if (FastMath.abs(real) < FastMath.abs(imaginary)) {\n        double q = real / imaginary;\n        double scale = 1. / (real * q + imaginary);\n        return createComplex(scale * q, -scale);\n    }\n    else {\n        double q = imaginary / real;\n        double scale = 1. / (imaginary * q + real);\n        return createComplex(scale, -scale * q);\n    }\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/apache/commons/math3/complex/Complex.java",
+        "method_name": "reciprocal",
+        "class_name": "Complex",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The reciprocal method was not handling the case where the real and imaginary parts of the Complex number are both 0.0, leading to a divide-by-zero error.",
+        "line_numbers": [
+          299,
+          300,
+          301,
+          302,
+          303,
+          304,
+          305,
+          306,
+          307,
+          308,
+          309,
+          310,
+          311,
+          312,
+          313,
+          314,
+          315,
+          316,
+          317,
+          318,
+          319,
+          320,
+          321
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-5/"
+}

@@ -1,0 +1,42 @@
+File: src/java/org/apache/commons/lang/Entities.java
+Method: Entities.escape
+
+public void escape(Writer writer, String str) throws IOException {
+    if (writer == null || str == null) {
+        throw new IllegalArgumentException("Writer and String must not be null");
+    }
+    int len = str.length();
+    for (int i = 0; i < len; ) {
+        char c = str.charAt(i);
+        if (Character.isHighSurrogate(c) && i + 1 < len && Character.isLowSurrogate(str.charAt(i + 1))) {
+            int cp = Character.toCodePoint(c, str.charAt(i + 1));
+            String entityName = this.entityName(cp);
+            if (entityName == null) {
+                writer.write("&#");
+                writer.write(Integer.toString(cp, 10));
+                writer.write(';');
+            } else {
+                writer.write('&');
+                writer.write(entityName);
+                writer.write(';');
+            }
+            i += 2;
+        } else {
+            String entityName = this.entityName(c);
+            if (entityName == null) {
+                if (c > 0x7F) {
+                    writer.write("&#");
+                    writer.write(Integer.toString(c, 10));
+                    writer.write(';');
+                } else {
+                    writer.write(c);
+                }
+            } else {
+                writer.write('&');
+                writer.write(entityName);
+                writer.write(';');
+            }
+            i++;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+{
+  "bug_id": "Lang-34",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-34_1772731000",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "methods": {
+        "src/main/java/org/apache/commons/lang3/builder/ToStringStyle.java::ToStringStyle::getRegistry::L147": {
+          "file_path": "src/main/java/org/apache/commons/lang3/builder/ToStringStyle.java",
+          "method_name": "getRegistry",
+          "class_name": "ToStringStyle",
+          "line_numbers": [
+            147,
+            149
+          ],
+          "original_code": "    /**\n     * <p>\n     * Returns the registry of objects being traversed by the <code>reflectionToString</code>\n     * methods in the current thread.\n     * </p>\n     *\n     * @return Set the registry of objects being traversed\n     */\n\n    static Map<Object, Object> getRegistry() {\n        return REGISTRY.get() != null ? REGISTRY.get() : Collections.<Object, Object>emptyMap();\n    }\n",
+          "fixed_method": "static Map<Object, Object> getRegistry() {\n    return REGISTRY.get() != null ? REGISTRY.get() : null;\n}",
+          "iteration": 1
+        },
+        "src/main/java/org/apache/commons/lang3/builder/ToStringStyle.java::ToStringStyle::isRegistered::L162": {
+          "file_path": "src/main/java/org/apache/commons/lang3/builder/ToStringStyle.java",
+          "method_name": "isRegistered",
+          "class_name": "ToStringStyle",
+          "line_numbers": [
+            162,
+            165
+          ],
+          "original_code": "    /**\n     * <p>\n     * Returns <code>true</code> if the registry contains the given object.\n     * Used by the reflection methods to avoid infinite loops.\n     * </p>\n     *\n     * @param value\n     *                  The object to lookup in the registry.\n     * @return boolean <code>true</code> if the registry contains the given\n     *             object.\n     */\n\n    static boolean isRegistered(Object value) {\n        Map<Object, Object> m = getRegistry();\n        return m.containsKey(value);\n    }\n",
+          "fixed_method": "static boolean isRegistered(Object value) {\n    Map<Object, Object> m = getRegistry();\n    return m != null && m.containsKey(value);\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Lang-34/"
+}

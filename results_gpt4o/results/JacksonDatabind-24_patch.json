@@ -1,0 +1,59 @@
+{
+  "bug_id": "JacksonDatabind-24",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-24_1773118820",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method inadvertently changes the TimeZone to GMT when a DateFormat with a different TimeZone is passed.",
+        "changes": "-    TimeZone tz = (df == null) ? _timeZone : df.getTimeZone();\n+    TimeZone tz = _timeZone;",
+        "fixed_method": "public BaseSettings withDateFormat(DateFormat df) {\n    if (_dateFormat == df) {\n        return this;\n    }\n    TimeZone tz = _timeZone;\n    return new BaseSettings(_classIntrospector, _annotationIntrospector, _visibilityChecker, _propertyNamingStrategy, _typeFactory,\n            _typeResolverBuilder, df, _handlerInstantiator, _locale,\n            tz, _defaultBase64);\n}",
+        "diff": "-    TimeZone tz = (df == null) ? _timeZone : df.getTimeZone();\n+    TimeZone tz = _timeZone;",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/cfg/BaseSettings.java",
+        "method_name": "withDateFormat",
+        "class_name": "BaseSettings",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238
+        ],
+        "original_code": "/**********************************************************\n*/\npublic BaseSettings withDateFormat(DateFormat df) {\n    if (_dateFormat == df) {\n        return this;\n    }\n    TimeZone tz = (df == null) ? _timeZone : df.getTimeZone();\n    return new BaseSettings(_classIntrospector, _annotationIntrospector, _visibilityChecker, _propertyNamingStrategy, _typeFactory,\n            _typeResolverBuilder, df, _handlerInstantiator, _locale,\n            tz, _defaultBase64);\n}"
+      },
+      {
+        "hypothesis": "The bug is due to setting the timezone of the DateFormat without updating the BaseSettings timezone properly. We should decouple the timezone setting from DateFormat and use the existing timezone when not null.",
+        "changes": "- TimeZone set to correctly use existing _timeZone if df's timezone is not to be used.",
+        "fixed_method": "public BaseSettings withDateFormat(DateFormat df) {\n    if (_dateFormat == df) {\n        return this;\n    }\n    return new BaseSettings(_classIntrospector, _annotationIntrospector, _visibilityChecker, _propertyNamingStrategy, _typeFactory,\n            _typeResolverBuilder, df, _handlerInstantiator, _locale,\n            _timeZone, _defaultBase64);\n}",
+        "diff": "- TimeZone set to correctly use existing _timeZone if df's timezone is not to be used.",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/cfg/BaseSettings.java",
+        "method_name": "withDateFormat",
+        "class_name": "BaseSettings",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238
+        ],
+        "original_code": "/**********************************************************\n*/\npublic BaseSettings withDateFormat(DateFormat df) {\n    if (_dateFormat == df) {\n        return this;\n    }\n    TimeZone tz = (df == null) ? _timeZone : df.getTimeZone();\n    return new BaseSettings(_classIntrospector, _annotationIntrospector, _visibilityChecker, _propertyNamingStrategy, _typeFactory,\n            _typeResolverBuilder, df, _handlerInstantiator, _locale,\n            tz, _defaultBase64);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-24/"
+}

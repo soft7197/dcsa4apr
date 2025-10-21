@@ -1,0 +1,43 @@
+{
+  "bug_id": "Math-80",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-80_1771949349",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug likely arises from incorrect flipping logic in the array. The current implementation flips the entire array instead of flipping blocks of 4 elements correctly based on the step parameter.",
+        "changes": "- int j = 4 * n - 1;\n+ int j = 4 * (n - 1);\n- work[j - k]\n+ work[j + k]",
+        "fixed_method": "private boolean flipIfWarranted(final int n, final int step) {\n    if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {\n        // flip array\n        int j = 4 * (n - 1);\n        for (int i = 0; i < j; i += 4) {\n            for (int k = 0; k < 4; k += step) {\n                final double tmp = work[i + k];\n                work[i + k] = work[j - k];\n                work[j - k] = tmp;\n            }\n            j -= 4;\n        }\n        return true;\n    }\n    return false;\n}",
+        "diff": "- int j = 4 * n - 1;\n+ int j = 4 * (n - 1);\n- work[j - k]\n+ work[j + k]",
+        "file_path": "src/main/java/org/apache/commons/math/linear/EigenDecompositionImpl.java",
+        "method_name": "flipIfWarranted",
+        "class_name": "EigenDecompositionImpl",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1132,
+          1133,
+          1134,
+          1135,
+          1136,
+          1137,
+          1138,
+          1139,
+          1140,
+          1141,
+          1142,
+          1143,
+          1144,
+          1145,
+          1146,
+          1147
+        ],
+        "original_code": "/**\n* Flip qd array if warranted.\n* @param n number of rows in the block\n* @param step within the array (1 for flipping all elements, 2 for flipping\n* only every other element)\n* @return true if qd array was flipped\n*/\nprivate boolean flipIfWarranted(final int n, final int step) {\n    if (1.5 * work[pingPong] < work[4 * (n - 1) + pingPong]) {\n        // flip array\n        int j = 4 * n - 1;\n        for (int i = 0; i < j; i += 4) {\n            for (int k = 0; k < 4; k += step) {\n                final double tmp = work[i + k];\n                work[i + k] = work[j - k];\n                work[j - k] = tmp;\n            }\n            j -= 4;\n        }\n        return true;\n    }\n    return false;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-80/"
+}

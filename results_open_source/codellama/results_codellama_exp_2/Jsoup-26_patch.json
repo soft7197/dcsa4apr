@@ -1,0 +1,36 @@
+{
+  "bug_id": "Jsoup-26",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-26_1772783514",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined patch incorporates more robust null checks and optimization for general cases, while addressing the identified overfitting patterns.",
+        "fixed_method": "public Document clean(Document dirtyDocument) {\n    Validate.notNull(dirtyDocument);\n\n    Document clean = Document.createShell(dirtyDocument.baseUri());\n    if (dirtyDocument.body() != null) {\n        copySafeNodes(dirtyDocument.body(), clean.body());\n    } else {\n        return clean;\n    }\n\n    return clean;\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/safety/Cleaner.java",
+        "method_name": "clean",
+        "class_name": "Cleaner",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by a NullPointerException in the `copySafeNodes` method, specifically in the line `List<Node> sourceChildren = source.childNodes();` which is trying to access the child nodes of a null object.",
+        "line_numbers": [
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-26/"
+}

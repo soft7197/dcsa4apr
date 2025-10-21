@@ -1,0 +1,43 @@
+{
+  "bug_id": "Codec-8",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Codec-8_1772726335",
+  "patches": [
+    {
+      "hypothesis": "The error is caused by the buffer being null, which is not handled by the code. The fix is to add a null check for the buffer before using it.",
+      "changes": "+ if (buffer == null) return;",
+      "methods": {
+        "src/java/org/apache/commons/codec/binary/Base64.java::Base64::setInitialBuffer::L419": {
+          "file_path": "src/java/org/apache/commons/codec/binary/Base64.java",
+          "method_name": "setInitialBuffer",
+          "class_name": "Base64",
+          "line_numbers": [
+            419,
+            425
+          ],
+          "original_code": "\n    void setInitialBuffer(byte[] out, int outPos, int outAvail) {\n        if (out != null && out.length == outAvail) {\n            buffer = out;\n            pos = outPos;\n            readPos = outPos;\n        }\n    }\n",
+          "fixed_method": "void setInitialBuffer(byte[] out, int outPos, int outAvail) {\n if (buffer == null) return;\n if (out != null && out.length == outAvail) {\n buffer = out;\n pos = outPos;\n readPos = outPos;\n }\n}",
+          "iteration": 1
+        },
+        "src/java/org/apache/commons/codec/binary/Base64InputStream.java::Base64InputStream::read::L138": {
+          "file_path": "src/java/org/apache/commons/codec/binary/Base64InputStream.java",
+          "method_name": "read",
+          "class_name": "Base64InputStream",
+          "line_numbers": [
+            138,
+            182
+          ],
+          "original_code": "    /**\n     * Attempts to read <code>len</code> bytes into the specified <code>b</code> array starting at <code>offset</code>\n     * from this InputStream.\n     * \n     * @param b\n     *            destination byte array\n     * @param offset\n     *            where to start writing the bytes\n     * @param len\n     *            maximum number of bytes to read\n     * \n     * @return number of bytes read\n     * @throws IOException\n     *             if an I/O error occurs.\n     * @throws NullPointerException\n     *             if the byte array parameter is null\n     * @throws IndexOutOfBoundsException\n     *             if offset, len or buffer size are invalid\n     */\n\n    public int read(byte b[], int offset, int len) throws IOException {\n        if (b == null) {\n            throw new NullPointerException();\n        } else if (offset < 0 || len < 0) {\n            throw new IndexOutOfBoundsException();\n        } else if (offset > b.length || offset + len > b.length) {\n            throw new IndexOutOfBoundsException();\n        } else if (len == 0) {\n            return 0;\n        } else {\n            int readLen = 0;\n            /*\n             Rationale for while-loop on (readLen == 0):\n             -----\n             Base64.readResults() usually returns > 0 or EOF (-1).  In the\n             rare case where it returns 0, we just keep trying.\n\n             This is essentially an undocumented contract for InputStream\n             implementors that want their code to work properly with\n             java.io.InputStreamReader, since the latter hates it when\n             InputStream.read(byte[]) returns a zero.  Unfortunately our\n             readResults() call must return 0 if a large amount of the data\n             being decoded was non-base64, so this while-loop enables proper\n             interop with InputStreamReader for that scenario.\n             -----\n             This is a fix for CODEC-101\n            */\n            while (readLen == 0) {\n                if (!base64.hasData()) {\n                    byte[] buf = new byte[doEncode ? 4096 : 8192];\n                    int c = in.read(buf);\n                    if (c > 0 && b.length == len) {\n                        base64.setInitialBuffer(b, offset, len);\n                    }\n                    if (doEncode) {\n                        base64.encode(buf, 0, c);\n                    } else {\n                        base64.decode(buf, 0, c);\n                    }\n                }\n                readLen = base64.readResults(b, offset, len);\n            }\n            return readLen;\n        }\n    }\n",
+          "fixed_method": "public int read(byte b[], int offset, int len) throws IOException {\n if (b == null) {\n throw new NullPointerException();\n }\n else if (offset < 0 || len < 0) {\n throw new IndexOutOfBoundsException();\n }\n else if (offset > b.length || offset + len > b.length) {\n throw new IndexOutOfBoundsException();\n }\n else if (len == 0) {\n return 0;\n }\n else {\n int readLen = 0;\n while (readLen == 0) {\n if (!base64.hasData()) {\n byte[] buf = new byte[doEncode ? 4096 : 8192];\n int c = in.read(buf);\n if (c > 0 && b.length == len) {\n base64.setInitialBuffer(b, offset, len);\n }\n if (doEncode) {\n base64.encode(buf, 0, c);\n }\n else {\n base64.decode(buf, 0, c);\n }\n }\n readLen = base64.readResults(b, offset, len);\n }\n return readLen;\n }\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Codec-8/"
+}

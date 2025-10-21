@@ -1,0 +1,15 @@
+File: src/main/java/org/apache/commons/lang3/StringUtils.java
+Method: StringUtils.equals
+
+public static boolean equals(CharSequence cs1, CharSequence cs2) {
+    if (cs1 == cs2) {
+        return true;
+    }
+    if (cs1 == null || cs2 == null) {
+        return false;
+    }
+    int len1 = cs1.length();
+    int len2 = cs2.length();
+    int minLength = Math.min(len1, len2);
+    return len1 == len2 && CharSequenceUtils.regionMatches(cs1, false, 0, cs2, 0, minLength);
+}

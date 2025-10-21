@@ -1,0 +1,10 @@
+File: src/main/java/org/apache/commons/compress/archivers/zip/X7875_NewUnix.java
+Method: X7875_NewUnix.getCentralDirectoryLength
+
+public ZipShort getCentralDirectoryLength() {
+    byte[] data = getCentralDirectoryData();
+    if (data == null) {
+        return new ZipShort(0);
+    }
+    return new ZipShort(data.length);
+}

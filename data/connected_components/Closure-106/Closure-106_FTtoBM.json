@@ -1,0 +1,26 @@
+{
+  "com.google.javascript.jscomp.CheckSideEffectsTest::testJSDocComments": [
+    {
+      "buggy_method": "recordBlockDescription",
+      "class": "com.google.javascript.rhino.JSDocInfoBuilder"
+    }
+  ],
+  "com.google.javascript.jscomp.CollapsePropertiesTest::testTwinReferenceCancelsChildCollapsing": [
+    {
+      "buggy_method": "canCollapseUnannotatedChildNames",
+      "class": "com.google.javascript.jscomp.GlobalNamespace"
+    }
+  ],
+  "com.google.javascript.jscomp.CollapsePropertiesTest::testCrashInNestedAssign": [
+    {
+      "buggy_method": "canCollapseUnannotatedChildNames",
+      "class": "com.google.javascript.jscomp.GlobalNamespace"
+    }
+  ],
+  "com.google.javascript.jscomp.CollapsePropertiesTest::testCrashInCommaOperator": [
+    {
+      "buggy_method": "canCollapseUnannotatedChildNames",
+      "class": "com.google.javascript.jscomp.GlobalNamespace"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "bug_id": "Mockito-4",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-4_1772821907",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method was missing a null check for the cause of the exception, which caused a NullPointerException when the cause was null.",
+        "changes": "+ if (cause == null) return null;",
+        "fixed_method": "private String exceptionCauseMessageIfAvailable(Exception details) {\n        Throwable cause = details.getCause();\n        if (cause == null) return null;\n        return cause.getMessage();\n    }",
+        "diff": "+ if (cause == null) return null;",
+        "file_path": "src/org/mockito/exceptions/Reporter.java",
+        "method_name": "exceptionCauseMessageIfAvailable",
+        "class_name": "Reporter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          676,
+          678
+        ],
+        "original_code": "\n    private String exceptionCauseMessageIfAvailable(Exception details) {\n        return details.getCause().getMessage();\n    }\n"
+      },
+      {
+        "hypothesis": "The cause of the bug is a NullPointerException in the exceptionCauseMessageIfAvailable method. The method attempts to call getMessage() on the cause of the exception, but the cause is null. To fix the bug, we need to add a null check to ensure that the cause is not null before calling getMessage().",
+        "changes": "+ if (details.getCause() == null) return null;",
+        "fixed_method": "private String exceptionCauseMessageIfAvailable(Exception details) {\n   if (details.getCause() == null) return null;\n   return details.getCause().getMessage();\n}",
+        "diff": "+ if (details.getCause() == null) return null;",
+        "file_path": "src/org/mockito/exceptions/Reporter.java",
+        "method_name": "exceptionCauseMessageIfAvailable",
+        "class_name": "Reporter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          676,
+          678
+        ],
+        "original_code": "\n    private String exceptionCauseMessageIfAvailable(Exception details) {\n        return details.getCause().getMessage();\n    }\n"
+      },
+      {
+        "hypothesis": "The exception cause is null causing a NullPointerException",
+        "changes": "- return details.getCause().getMessage();\n+ return details.getCause() == null ? null : details.getCause().getMessage();",
+        "fixed_method": "private String exceptionCauseMessageIfAvailable(Exception details) {\n  return details.getCause() == null ? null : details.getCause().getMessage();\n}",
+        "diff": "- return details.getCause().getMessage();\n+ return details.getCause() == null ? null : details.getCause().getMessage();",
+        "file_path": "src/org/mockito/exceptions/Reporter.java",
+        "method_name": "exceptionCauseMessageIfAvailable",
+        "class_name": "Reporter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          676,
+          678
+        ],
+        "original_code": "\n    private String exceptionCauseMessageIfAvailable(Exception details) {\n        return details.getCause().getMessage();\n    }\n"
+      },
+      {
+        "hypothesis": "The cause of the bug is that the exception object passed to the method is sometimes null, which causes a NullPointerException when trying to access its cause.",
+        "changes": "- return details.getCause().getMessage();\n+ if (details != null && details.getCause() != null) {\n+ return details.getCause().getMessage();\n+ }\n+ return null;",
+        "fixed_method": "private String exceptionCauseMessageIfAvailable(Exception details) {\nif (details != null && details.getCause() != null) {\nreturn details.getCause().getMessage();\n}\nreturn null;\n}",
+        "diff": "- return details.getCause().getMessage();\n+ if (details != null && details.getCause() != null) {\n+ return details.getCause().getMessage();\n+ }\n+ return null;",
+        "file_path": "src/org/mockito/exceptions/Reporter.java",
+        "method_name": "exceptionCauseMessageIfAvailable",
+        "class_name": "Reporter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          676,
+          678
+        ],
+        "original_code": "\n    private String exceptionCauseMessageIfAvailable(Exception details) {\n        return details.getCause().getMessage();\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public void noMoreInteractionsWanted(Invocation undesired, List<VerificationAwareInvocation> invocations) {\n        ScenarioPrinter scenarioPrinter = new ScenarioPrinter();\n        String scenario = scenarioPrinter.print(invocations);\n\n        throw new NoInteractionsWanted(join(\n                \"No interactions wanted here:\",\n                new LocationImpl(),\n                \"But found this interaction on mock '\" + (undesired.getMock() == null ? \"\" : undesired.getMock().getClass().getSimpleName()) + \"':\",\n                undesired.getLocation(),\n                scenario\n        ));\n    }",
+        "diff": "",
+        "file_path": "src/org/mockito/exceptions/Reporter.java",
+        "method_name": "noMoreInteractionsWanted",
+        "class_name": "Reporter",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          417,
+          428
+        ],
+        "original_code": "\n    public void noMoreInteractionsWanted(Invocation undesired, List<VerificationAwareInvocation> invocations) {\n        ScenarioPrinter scenarioPrinter = new ScenarioPrinter();\n        String scenario = scenarioPrinter.print(invocations);\n\n        throw new NoInteractionsWanted(join(\n                \"No interactions wanted here:\",\n                new LocationImpl(),\n                \"But found this interaction on mock '\" + undesired.getMock() + \"':\",\n                undesired.getLocation(),\n                scenario\n        ));\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Mockito-4/"
+}

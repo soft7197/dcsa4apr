@@ -1,0 +1,67 @@
+{
+  "bug_id": "Math-103",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-103_1772913612",
+  "patches": [
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public double cumulativeProbability(double x) throws MathException {\n        if (x < -20 * standardDeviation || x > 20 * standardDeviation) {\n            return x < mean ? 0.0 : 1.0;\n        }\n        return 0.5 * (1.0 + Erf.erf((x - mean) /\n                (standardDeviation * Math.sqrt(2.0))));\n}",
+        "diff": "",
+        "file_path": "src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java",
+        "method_name": "cumulativeProbability",
+        "class_name": "NormalDistributionImpl",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          108,
+          109,
+          110,
+          111
+        ],
+        "original_code": "/**\n* For this disbution, X, this method returns P(X &lt; <code>x</code>).\n* @param x the value at which the CDF is evaluated.\n* @return CDF evaluted at <code>x</code>.\n* @throws MathException if the algorithm fails to converge; unless\n* x is more than 20 standard deviations from the mean, in which case the\n* convergence exception is caught and 0 or 1 is returned.\n*/\npublic double cumulativeProbability(double x) throws MathException {\n        return 0.5 * (1.0 + Erf.erf((x - mean) /\n                (standardDeviation * Math.sqrt(2.0))));\n}"
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public double cumulativeProbability(double x) throws MathException {\n                try {\n                    return 0.5 * (1.0 + Erf.erf((x - mean) /\n                            (standardDeviation * Math.sqrt(2.0))));\n                } catch (MathException e) {\n                    if (x < 0) {\n                        return 0.0d;\n                    } else {\n                        return 1.0d;\n                    }\n                }\n            }",
+        "diff": "",
+        "file_path": "src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java",
+        "method_name": "cumulativeProbability",
+        "class_name": "NormalDistributionImpl",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          108,
+          109,
+          110,
+          111
+        ],
+        "original_code": "/**\n* For this disbution, X, this method returns P(X &lt; <code>x</code>).\n* @param x the value at which the CDF is evaluated.\n* @return CDF evaluted at <code>x</code>.\n* @throws MathException if the algorithm fails to converge; unless\n* x is more than 20 standard deviations from the mean, in which case the\n* convergence exception is caught and 0 or 1 is returned.\n*/\npublic double cumulativeProbability(double x) throws MathException {\n        return 0.5 * (1.0 + Erf.erf((x - mean) /\n                (standardDeviation * Math.sqrt(2.0))));\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by a wrong implementation of the cumulative probability function, specifically in the way the error function is computed. The Erf.erf() method is used to compute the error function, but the input value is not properly handled. The implementation is missing a check for extreme values, which leads to an infinite loop.",
+        "changes": "-0.5 * (1.0 + Erf.erf((x - mean) / (standardDeviation * Math.sqrt(2.0)))); + 0.5 * (1.0 + Erf.erf((x - mean) / (standardDeviation * Math.sqrt(2.0))));\n\n+ if (Math.abs(x - mean) > 10 * standardDeviation) {\n\treturn x < mean ? 0.0 : 1.0;\n}",
+        "fixed_method": "public double cumulativeProbability(double x) throws MathException {\n\tif (Math.abs(x - mean) > 10 * standardDeviation) {\n\t\treturn x < mean ? 0.0 : 1.0;\n\t}\n\n\treturn 0.5 * (1.0 + Erf.erf((x - mean) / (standardDeviation * Math.sqrt(2.0))));\n}",
+        "diff": "-0.5 * (1.0 + Erf.erf((x - mean) / (standardDeviation * Math.sqrt(2.0)))); + 0.5 * (1.0 + Erf.erf((x - mean) / (standardDeviation * Math.sqrt(2.0))));\n\n+ if (Math.abs(x - mean) > 10 * standardDeviation) {\n\treturn x < mean ? 0.0 : 1.0;\n}",
+        "file_path": "src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java",
+        "method_name": "cumulativeProbability",
+        "class_name": "NormalDistributionImpl",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          108,
+          109,
+          110,
+          111
+        ],
+        "original_code": "/**\n* For this disbution, X, this method returns P(X &lt; <code>x</code>).\n* @param x the value at which the CDF is evaluated.\n* @return CDF evaluted at <code>x</code>.\n* @throws MathException if the algorithm fails to converge; unless\n* x is more than 20 standard deviations from the mean, in which case the\n* convergence exception is caught and 0 or 1 is returned.\n*/\npublic double cumulativeProbability(double x) throws MathException {\n        return 0.5 * (1.0 + Erf.erf((x - mean) /\n                (standardDeviation * Math.sqrt(2.0))));\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-103/"
+}

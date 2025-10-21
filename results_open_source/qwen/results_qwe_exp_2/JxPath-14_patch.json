@@ -1,0 +1,55 @@
+{
+  "bug_id": "JxPath-14",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JxPath-14_1771967161",
+  "patches": [
+    {
+      "hypothesis": "The issue arises because Math.round returns a long value, which is then cast to a Double. When rounding NaN or infinite values, Math.round returns 0, which is incorrect. We need to handle NaN and infinite values explicitly before applying Math.round.",
+      "changes": "- return new Double(Math.floor(v));\n+ if (Double.isNaN(v) || Double.isInfinite(v)) {\n+     return new Double(v);\n+ }\n+ return new Double(Math.floor(v));\n\n- return new Double(Math.ceil(v));\n+ if (Double.isNaN(v) || Double.isInfinite(v)) {\n+     return new Double(v);\n+ }\n+ return new Double(Math.ceil(v));\n\n- return new Double(Math.round(v));\n+ if (Double.isNaN(v) || Double.isInfinite(v)) {\n+     return new Double(v);\n+ }\n+ return new Double(Math.round(v));",
+      "methods": {
+        "src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java::CoreFunction::functionFloor::L653": {
+          "file_path": "src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java",
+          "method_name": "functionFloor",
+          "class_name": "CoreFunction",
+          "line_numbers": [
+            653,
+            657
+          ],
+          "original_code": "\n    protected Object functionFloor(EvalContext context) {\n        assertArgCount(1);\n        double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n        return new Double(Math.floor(v));\n    }\n",
+          "fixed_method": "protected Object functionFloor(EvalContext context) {\n    assertArgCount(1);\n    double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n    if (Double.isNaN(v) || Double.isInfinite(v)) {\n        return new Double(v);\n    }\n    return new Double(Math.floor(v));\n}",
+          "iteration": 1
+        },
+        "src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java::CoreFunction::functionCeiling::L659": {
+          "file_path": "src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java",
+          "method_name": "functionCeiling",
+          "class_name": "CoreFunction",
+          "line_numbers": [
+            659,
+            663
+          ],
+          "original_code": "\n    protected Object functionCeiling(EvalContext context) {\n        assertArgCount(1);\n        double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n        return new Double(Math.ceil(v));\n    }\n",
+          "fixed_method": "protected Object functionCeiling(EvalContext context) {\n    assertArgCount(1);\n    double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n    if (Double.isNaN(v) || Double.isInfinite(v)) {\n        return new Double(v);\n    }\n    return new Double(Math.ceil(v));\n}",
+          "iteration": 1
+        },
+        "src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java::CoreFunction::functionRound::L665": {
+          "file_path": "src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java",
+          "method_name": "functionRound",
+          "class_name": "CoreFunction",
+          "line_numbers": [
+            665,
+            669
+          ],
+          "original_code": "\n    protected Object functionRound(EvalContext context) {\n        assertArgCount(1);\n        double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n        return new Double(Math.round(v));\n    }\n",
+          "fixed_method": "protected Object functionRound(EvalContext context) {\n    assertArgCount(1);\n    double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));\n    if (Double.isNaN(v) || Double.isInfinite(v)) {\n        return new Double(v);\n    }\n    return new Double(Math.round(v));\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JxPath-14/"
+}

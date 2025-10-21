@@ -1,0 +1,33 @@
+{
+  "bug_id": "Jsoup-64",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-64_1771940158",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue arises because the method is incorrectly transitioning to a rawtext state for <style> and <noframes> tags, which should not be treated as rawtext elements. This causes the parser to misinterpret the content following these tags.",
+        "changes": "- tb.tokeniser.transition(TokeniserState.Rawtext);\n+ if (!\"style\".equalsIgnoreCase(startTag.name()) && !\"noframes\".equalsIgnoreCase(startTag.name())) {\n+     tb.tokeniser.transition(TokeniserState.Rawtext);\n+ }",
+        "fixed_method": "private static void handleRawtext(Token.StartTag startTag, HtmlTreeBuilder tb) {\n    tb.insert(startTag);\n    if (!\"style\".equalsIgnoreCase(startTag.name()) && !\"noframes\".equalsIgnoreCase(startTag.name())) {\n        tb.tokeniser.transition(TokeniserState.Rawtext);\n    }\n    tb.markInsertionMode();\n    tb.transition(Text);\n}",
+        "diff": "- tb.tokeniser.transition(TokeniserState.Rawtext);\n+ if (!\"style\".equalsIgnoreCase(startTag.name()) && !\"noframes\".equalsIgnoreCase(startTag.name())) {\n+     tb.tokeniser.transition(TokeniserState.Rawtext);\n+ }",
+        "file_path": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java",
+        "method_name": "handleRawtext",
+        "class_name": "HtmlTreeBuilderState",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1488,
+          1489,
+          1490,
+          1491,
+          1492,
+          1493
+        ],
+        "original_code": "// todo: this checks more than spec - \"\\t\", \"\\n\", \"\\f\", \"\\r\", \" \"\nprivate static void handleRawtext(Token.StartTag startTag, HtmlTreeBuilder tb) {\n    tb.insert(startTag);\n    tb.tokeniser.transition(TokeniserState.Rawtext);\n    tb.markInsertionMode();\n    tb.transition(Text);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-64/"
+}

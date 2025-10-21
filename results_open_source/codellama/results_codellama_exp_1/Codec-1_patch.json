@@ -1,0 +1,29 @@
+{
+  "bug_id": "Codec-1",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Codec-1_1772726273",
+  "patches": [
+    [
+      {
+        "hypothesis": "The null check was missing and the method did not handle uppercase properly",
+        "changes": "+ if (str == null) return null; // add null check\n- return str.toUpperCase();\n+ return new String(str).toUpperCase(java.util.Locale.ENGLISH); // handle uppercase properly",
+        "fixed_method": "static String clean(String str) {\n if (str == null) return null; // add null check\n int len = str.length();\n char[] chars = new char[len];\n int count = 0;\n for (int i = 0; i < len; i++) {\n if (Character.isLetter(str.charAt(i))) {\n chars[count++] = str.charAt(i);\n }\n }\n if (count == len) {\n return new String(chars, 0, count).toUpperCase(java.util.Locale.ENGLISH); // handle uppercase properly\n }\n return new String(chars, 0, count);\n}",
+        "diff": "+ if (str == null) return null; // add null check\n- return str.toUpperCase();\n+ return new String(str).toUpperCase(java.util.Locale.ENGLISH); // handle uppercase properly",
+        "file_path": "src/java/org/apache/commons/codec/language/SoundexUtils.java",
+        "method_name": "clean",
+        "class_name": "SoundexUtils",
+        "iteration": 5,
+        "is_multi_method": false,
+        "line_numbers": [
+          40,
+          56
+        ],
+        "original_code": "    /**\n\t * Cleans up the input string before Soundex processing by only returning\n\t * upper case letters.\n\t * \n\t * @param str\n\t *                  The String to clean.\n\t * @return A clean String.\n\t */\n\n    static String clean(String str) {\n        if (str == null || str.length() == 0) {\n            return str;\n        }\n        int len = str.length();\n        char[] chars = new char[len];\n        int count = 0;\n        for (int i = 0; i < len; i++) {\n            if (Character.isLetter(str.charAt(i))) {\n                chars[count++] = str.charAt(i);\n            }\n        }\n        if (count == len) {\n            return str.toUpperCase();\n        }\n        return new String(chars, 0, count).toUpperCase(java.util.Locale.ENGLISH);\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Codec-1/"
+}

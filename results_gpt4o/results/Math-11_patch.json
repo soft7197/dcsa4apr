@@ -1,0 +1,37 @@
+{
+  "bug_id": "Math-11",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-11_1773119771",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue is likely caused by integer division when calculating '-dim / 2'. If 'dim' is 1, the division results in 0 instead of 0.5, affecting the density computation.",
+        "changes": "Change -dim / 2 to -dim / 2.0 to ensure floating-point division.",
+        "fixed_method": "public double density(final double[] vals) throws DimensionMismatchException {\n    final int dim = getDimension();\n    if (vals.length != dim) {\n        throw new DimensionMismatchException(vals.length, dim);\n    }\n\n    return FastMath.pow(2 * FastMath.PI, -dim / 2.0) *\n        FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n        getExponentTerm(vals);\n}",
+        "diff": "Change -dim / 2 to -dim / 2.0 to ensure floating-point division.",
+        "file_path": "src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java",
+        "method_name": "density",
+        "class_name": "MultivariateNormalDistribution",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186
+        ],
+        "original_code": "/**\n* Gets the covariance matrix.\n*\n* @return the covariance matrix.\n*/\npublic double density(final double[] vals) throws DimensionMismatchException {\n    final int dim = getDimension();\n    if (vals.length != dim) {\n        throw new DimensionMismatchException(vals.length, dim);\n    }\n\n    return FastMath.pow(2 * FastMath.PI, -dim / 2) *\n        FastMath.pow(covarianceMatrixDeterminant, -0.5) *\n        getExponentTerm(vals);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-11/"
+}

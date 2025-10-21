@@ -1,0 +1,11 @@
+File: src/java/org/apache/commons/cli/Parser.java
+Method: Parser.setOptions
+
+protected void setOptions(final Options options) {
+    this.options = options;
+    if (options != null) {
+        this.requiredOptions = new java.util.ArrayList<>(options.getRequiredOptions());
+    } else {
+        this.requiredOptions = new java.util.ArrayList<>();
+    }
+}

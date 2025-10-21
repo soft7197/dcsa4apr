@@ -1,0 +1,109 @@
+{
+  "bug_id": "Jsoup-57",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-57_1773119324",
+  "patches": [
+    [
+      {
+        "hypothesis": "The code uses an iterator to traverse the key set and simultaneously attempts to remove elements from the map, causing a ConcurrentModificationException.",
+        "changes": "- if (attrKey.equalsIgnoreCase(key)) attributes.remove(attrKey);\n+ it.remove();",
+        "fixed_method": "public void removeIgnoreCase(String key) {\n    Validate.notEmpty(key);\n    if (attributes == null)\n        return;\n    for (Iterator<String> it = attributes.keySet().iterator(); it.hasNext(); ) {\n        String attrKey = it.next();\n        if (attrKey.equalsIgnoreCase(key))\n            it.remove();\n    }\n}",
+        "diff": "- if (attrKey.equalsIgnoreCase(key)) attributes.remove(attrKey);\n+ it.remove();",
+        "file_path": "src/main/java/org/jsoup/nodes/Attributes.java",
+        "method_name": "removeIgnoreCase",
+        "class_name": "Attributes",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127
+        ],
+        "original_code": "/**\nRemove an attribute by key. <b>Case insensitive.</b>\n@param key attribute key to remove\n*/\npublic void removeIgnoreCase(String key) {\n    Validate.notEmpty(key);\n    if (attributes == null)\n        return;\n    for (Iterator<String> it = attributes.keySet().iterator(); it.hasNext(); ) {\n        String attrKey = it.next();\n        if (attrKey.equalsIgnoreCase(key))\n            attributes.remove(attrKey);\n    }\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by modifying the collection while iterating over it, which leads to a ConcurrentModificationException.",
+        "changes": "- attributes.remove(attrKey) changed to it.remove() to avoid ConcurrentModificationException",
+        "fixed_method": "public void removeIgnoreCase(String key) {\n    Validate.notEmpty(key);\n    if (attributes == null)\n        return;\n    for (Iterator<String> it = attributes.keySet().iterator(); it.hasNext(); ) {\n        String attrKey = it.next();\n        if (attrKey.equalsIgnoreCase(key))\n            it.remove(); // Use iterator's remove method to avoid ConcurrentModificationException\n    }\n}",
+        "diff": "- attributes.remove(attrKey) changed to it.remove() to avoid ConcurrentModificationException",
+        "file_path": "src/main/java/org/jsoup/nodes/Attributes.java",
+        "method_name": "removeIgnoreCase",
+        "class_name": "Attributes",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127
+        ],
+        "original_code": "/**\nRemove an attribute by key. <b>Case insensitive.</b>\n@param key attribute key to remove\n*/\npublic void removeIgnoreCase(String key) {\n    Validate.notEmpty(key);\n    if (attributes == null)\n        return;\n    for (Iterator<String> it = attributes.keySet().iterator(); it.hasNext(); ) {\n        String attrKey = it.next();\n        if (attrKey.equalsIgnoreCase(key))\n            attributes.remove(attrKey);\n    }\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by modifying the map while iterating over it, leading to ConcurrentModificationException. Using the iterator's remove method will fix this.",
+        "changes": "-            attributes.remove(attrKey);\n+            it.remove();",
+        "fixed_method": "public void removeIgnoreCase(String key) {\n    Validate.notEmpty(key);\n    if (attributes == null)\n        return;\n    for (Iterator<String> it = attributes.keySet().iterator(); it.hasNext();) {\n        String attrKey = it.next();\n        if (attrKey.equalsIgnoreCase(key))\n            it.remove();\n    }\n}",
+        "diff": "-            attributes.remove(attrKey);\n+            it.remove();",
+        "file_path": "src/main/java/org/jsoup/nodes/Attributes.java",
+        "method_name": "removeIgnoreCase",
+        "class_name": "Attributes",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127
+        ],
+        "original_code": "/**\nRemove an attribute by key. <b>Case insensitive.</b>\n@param key attribute key to remove\n*/\npublic void removeIgnoreCase(String key) {\n    Validate.notEmpty(key);\n    if (attributes == null)\n        return;\n    for (Iterator<String> it = attributes.keySet().iterator(); it.hasNext(); ) {\n        String attrKey = it.next();\n        if (attrKey.equalsIgnoreCase(key))\n            attributes.remove(attrKey);\n    }\n}"
+      },
+      {
+        "hypothesis": "The ConcurrentModificationException is caused by modifying the collection directly while iterating over it. The method attempts to remove an entry from the 'attributes' map while still iterating over its keys, which is not allowed in Java.",
+        "changes": "-if (attrKey.equalsIgnoreCase(key))\n-    attributes.remove(attrKey);\n+if (attrKey.equalsIgnoreCase(key)) {\n+    it.remove();\n+}",
+        "fixed_method": "public void removeIgnoreCase(String key) {\n    Validate.notEmpty(key);\n    if (attributes == null)\n        return;\n    for (Iterator<String> it = attributes.keySet().iterator(); it.hasNext(); ) {\n        String attrKey = it.next();\n        if (attrKey.equalsIgnoreCase(key)) {\n            it.remove();\n        }\n    }\n}",
+        "diff": "-if (attrKey.equalsIgnoreCase(key))\n-    attributes.remove(attrKey);\n+if (attrKey.equalsIgnoreCase(key)) {\n+    it.remove();\n+}",
+        "file_path": "src/main/java/org/jsoup/nodes/Attributes.java",
+        "method_name": "removeIgnoreCase",
+        "class_name": "Attributes",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127
+        ],
+        "original_code": "/**\nRemove an attribute by key. <b>Case insensitive.</b>\n@param key attribute key to remove\n*/\npublic void removeIgnoreCase(String key) {\n    Validate.notEmpty(key);\n    if (attributes == null)\n        return;\n    for (Iterator<String> it = attributes.keySet().iterator(); it.hasNext(); ) {\n        String attrKey = it.next();\n        if (attrKey.equalsIgnoreCase(key))\n            attributes.remove(attrKey);\n    }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-57/"
+}

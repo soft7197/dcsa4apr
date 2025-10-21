@@ -1,0 +1,31 @@
+File: src/main/java/org/apache/commons/math/complex/Complex.java
+Method: Complex.tan
+
+public Complex tan() {
+    if (isNaN) {
+        return NaN;
+    }
+
+    double real2 = 2.0 * real;
+    double imaginary2 = 2.0 * imaginary;
+    double cosReal2 = FastMath.cos(real2);
+    double coshImaginary2 = FastMath.cosh(imaginary2);
+    double d = cosReal2 + coshImaginary2;
+
+    // Handle cases where the denominator is infinite
+    if (Double.isInfinite(d)) {
+        if (FastMath.abs(cosReal2) < Double.MAX_VALUE && FastMath.abs(coshImaginary2) == Double.POSITIVE_INFINITY) {
+            return createComplex(0, FastMath.signum(imaginary) * 1);
+        } else {
+            return NaN;
+        }
+    }
+
+    // Handle cases where the real part is ±π/2
+    if (FastMath.abs(real) == FastMath.PI / 2 && imaginary == 0) {
+        return createComplex(FastMath.signum(real) * Double.POSITIVE_INFINITY, Double.NaN);
+    }
+
+    return createComplex(FastMath.sin(real2) / d,
+                         FastMath.sinh(imaginary2) / d);
+}

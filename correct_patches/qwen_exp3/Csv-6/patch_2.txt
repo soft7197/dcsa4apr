@@ -1,0 +1,18 @@
+File: src/main/java/org/apache/commons/csv/CSVRecord.java
+Method: CSVRecord.putIn
+
+<M extends Map<String, String>> M putIn(final M map) {
+    if (map == null || values == null || mapping == null) {
+        throw new IllegalArgumentException("Input map, values array, or mapping cannot be null");
+    }
+    for (final Entry<String, Integer> entry : mapping.entrySet()) {
+        if (entry.getKey() == null || entry.getValue() == null) {
+            continue; // Skip entries with null keys or values
+        }
+        final int col = entry.getValue().intValue();
+        if (col >= 0 && col < values.length) {
+            map.put(entry.getKey(), values[col]);
+        }
+    }
+    return map;
+}

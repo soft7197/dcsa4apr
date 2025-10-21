@@ -1,0 +1,29 @@
+File: src/main/java/org/jsoup/nodes/Node.java
+Method: Node.absUrl
+
+public String absUrl(String attributeKey) {
+    Validate.notEmpty(attributeKey);
+
+    String relUrl = attr(attributeKey);
+    if (!hasAttr(attributeKey)) {
+        return ""; // nothing to make absolute with
+    } else {
+        URL base;
+        try {
+            try {
+                base = new URL(baseUri);
+            } catch (MalformedURLException e) {
+                // the base is unsuitable, but the attribute may be abs on its own, so try that
+                URL abs = new URL(relUrl);
+                return abs.toExternalForm();
+            }
+            // workaround to handle relative path with query
+            URL abs = relUrl.startsWith("?") 
+                ? new URL(base.getProtocol(), base.getHost(), base.getPort(), base.getPath() + relUrl) 
+                : new URL(base, relUrl);
+            return abs.toExternalForm();
+        } catch (MalformedURLException e) {
+            return "";
+        }
+    }
+}

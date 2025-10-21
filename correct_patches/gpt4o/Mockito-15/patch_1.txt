@@ -1,0 +1,44 @@
+File: src/org/mockito/internal/configuration/injection/FinalMockCandidateFilter.java
+Method: FinalMockCandidateFilter.thenInject
+
+public OngoingInjecter filterCandidate(final Collection<Object> mocks, final Field field, final Object fieldInstance) {
+    if (mocks.size() == 1) {
+        final Object matchingMock = mocks.iterator().next();
+
+        return new OngoingInjecter() {
+            public boolean thenInject() {
+                try {
+                    String setterName = "set" + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1);
+                    java.lang.reflect.Method setterMethod = null;
+
+                    // Attempt to find a compatible public setter method
+                    for (java.lang.reflect.Method method : fieldInstance.getClass().getMethods()) {
+                        if (method.getName().equals(setterName)
+                                && method.getParameterCount() == 1
+                                && method.getParameterTypes()[0].isAssignableFrom(field.getType())
+                                && java.lang.reflect.Modifier.isPublic(method.getModifiers())) {
+                            setterMethod = method;
+                            break;
+                        }
+                    }
+                    
+                    if (setterMethod != null) {
+                        setterMethod.invoke(fieldInstance, matchingMock);
+                    } else {
+                        // Fallback to field injection
+                        new FieldSetter(fieldInstance, field).set(matchingMock);
+                    }
+                } catch (Exception e) {
+                    throw new MockitoException("Problems injecting dependency in " + field.getName(), e);
+                }
+                return true;
+            }
+        };
+    }
+
+    return new OngoingInjecter() {
+        public boolean thenInject() {
+            return false;
+        }
+    };
+}

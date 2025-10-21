@@ -1,0 +1,43 @@
+{
+  "bug_id": "JacksonDatabind-13",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-13_1772728631",
+  "patches": [
+    {
+      "hypothesis": "The error is caused by a missing null check in the `findObjectId` method, which results in a NullPointerException when `id` is null. The `deserializeSetAndReturn` method is also affected by this bug, as it calls `findObjectId` with a null `id` when the `id` property in the input JSON is null.",
+      "changes": "+ null check in `findObjectId` method\n+ null check in `deserializeSetAndReturn` method",
+      "methods": {
+        "src/main/java/com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java::DefaultDeserializationContext::findObjectId::L81": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java",
+          "method_name": "findObjectId",
+          "class_name": "DefaultDeserializationContext",
+          "line_numbers": [
+            81,
+            131
+          ],
+          "original_code": "\n    @Override\n    public ReadableObjectId findObjectId(Object id, ObjectIdGenerator<?> gen, ObjectIdResolver resolverType)\n    {\n        /* 02-Apr-2015, tatu: As per [databind#742] should allow 'null', similar to how\n         *   missing id already works.\n         */\n\n        final ObjectIdGenerator.IdKey key = gen.key(id);\n\n        if (_objectIds == null) {\n            _objectIds = new LinkedHashMap<ObjectIdGenerator.IdKey,ReadableObjectId>();\n        } else {\n            ReadableObjectId entry = _objectIds.get(key);\n            if (entry != null) {\n                return entry;\n            }\n        }\n\n        // Not seen yet, must create entry and configure resolver.\n        ObjectIdResolver resolver = null;\n\n        if (_objectIdResolvers == null) {\n            _objectIdResolvers = new ArrayList<ObjectIdResolver>(8);\n        } else {\n            for (ObjectIdResolver res : _objectIdResolvers) {\n                if (res.canUseFor(resolverType)) {\n                    resolver = res;\n                    break;\n                }\n            }\n        }\n\n        if (resolver == null) {\n            resolver = resolverType.newForDeserialization(this);\n            // 19-Dec-2014, tatu: For final 2.5.0, remove temporary (2.4.x) work-around\n            //   needed to clear state between calls.\n            // !!! 18-Jun-2014, pgelinas: Temporary fix for [#490] until real\n            //    fix (for jackson-annotations, SimpleObjectIdResolver) can be added.\n            /*\n            if (resolverType.getClass() == SimpleObjectIdResolver.class) {\n                resolver = new SimpleObjectIdResolver();\n            }\n            */\n            _objectIdResolvers.add(resolver);\n        }\n\n        ReadableObjectId entry = new ReadableObjectId(key);\n        entry.setResolver(resolver);\n        _objectIds.put(key, entry);\n        return entry;\n    }\n",
+          "fixed_method": "public ReadableObjectId findObjectId(Object id, ObjectIdGenerator<?> gen, ObjectIdResolver resolverType) {\n\tif (id == null) return null;\n\t/* 02-Apr-2015, tatu: As per [databind#742] should allow 'null', similar to how\n\t *   missing id already works. */\n\n\tfinal ObjectIdGenerator.IdKey key = gen.key(id);\n\n\tif (_objectIds == null) {\n\t\t_objectIds = new LinkedHashMap<ObjectIdGenerator.IdKey,ReadableObjectId>();\n\t} else {\n\t\tReadableObjectId entry = _objectIds.get(key);\n\t\tif (entry != null) {\n\t\t\treturn entry;\n\t\t}\n\t}\n\n\t// Not seen yet, must create entry and configure resolver.\n\tObjectIdResolver resolver = null;\n\n\tif (_objectIdResolvers == null) {\n\t\t_objectIdResolvers = new ArrayList<ObjectIdResolver>(8);\n\t} else {\n\t\tfor (ObjectIdResolver res : _objectIdResolvers) {\n\t\t\tif (res.canUseFor(resolverType)) {\n\t\t\t\tresolver = res;\n\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\t}\n\n\tif (resolver == null) {\n\t\tresolver = resolverType.newForDeserialization(this);\n\t\t// 19-Dec-2014, tatu: For final 2.5.0, remove temporary (2.4.x) work-around\n\t\t//   needed to clear state between calls.\n\t\t// !!! 18-Jun-2014, pgelinas: Temporary fix for [#490] until real\n\t\t//    fix (for jackson-annotations, SimpleObjectIdResolver) can be added.\n\t\t/*\n\t\tif (resolverType.getClass() == SimpleObjectIdResolver.class) {\n\t\t\tresolver = new SimpleObjectIdResolver();\n\t\t}\n\t\t*/\n\t\t_objectIdResolvers.add(resolver);\n\t}\n\n\tReadableObjectId entry = new ReadableObjectId(key);\n\tentry.setResolver(resolver);\n\t_objectIds.put(key, entry);\n\treturn entry;\n}",
+          "iteration": 1
+        },
+        "src/main/java/com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java::ObjectIdValueProperty::deserializeSetAndReturn::L80": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java",
+          "method_name": "deserializeSetAndReturn",
+          "class_name": "ObjectIdValueProperty",
+          "line_numbers": [
+            80,
+            101
+          ],
+          "original_code": "\n    @Override\n    public Object deserializeSetAndReturn(JsonParser jp,\n    \t\tDeserializationContext ctxt, Object instance) throws IOException\n    {\n        // note: no null checks (unlike usually); deserializer should fail if one found\n        Object id = _valueDeserializer.deserialize(jp, ctxt);\n\n        /* 02-Apr-2015, tatu: Actually, as per [databind#742], let it be;\n         *  missing or null id is needed for some cases, such as cases where id\n         *  will be generated externally, at a later point, and is not available\n         *  quite yet. Typical use case is with DB inserts.\n         */\n        \n        ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);\n        roid.bindItem(instance);\n        // also: may need to set a property value as well\n        SettableBeanProperty idProp = _objectIdReader.idProperty;\n        if (idProp != null) {\n            return idProp.setAndReturn(instance, id);\n        }\n        return instance;\n    }\n",
+          "fixed_method": "@Override\npublic Object deserializeSetAndReturn(JsonParser jp, DeserializationContext ctxt, Object instance) throws IOException {\n\t// note: no null checks (unlike usually); deserializer should fail if one found\n\tObject id = _valueDeserializer.deserialize(jp, ctxt);\n\n\t/* 02-Apr-2015, tatu: Actually, as per [databind#742], let it be;\n\t *  missing or null id is needed for some cases, such as cases where id\n\t *  will be generated externally, at a later point, and is not available\n\t *  quite yet. Typical use case is with DB inserts. */\n\n\tif (id == null) return null;\n\tReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);\n\troid.bindItem(instance);\n\t// also: may need to set a property value as well\n\tSettableBeanProperty idProp = _objectIdReader.idProperty;\n\tif (idProp != null) {\n\t\treturn idProp.setAndReturn(instance, id);\n\t}\n\treturn instance;\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-13/"
+}

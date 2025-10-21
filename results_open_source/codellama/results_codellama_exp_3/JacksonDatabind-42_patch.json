@@ -1,0 +1,58 @@
+{
+  "bug_id": "JacksonDatabind-42",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-42_1772904765",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch overfitted by bypassing null checks and hardcoding locale and URI values.",
+        "fixed_method": "protected Object _deserializeFromEmptyString() throws IOException {\n\t\t\tif (super._deserializeFromEmptyString() == null) {\n\t\t\t\tif (_kind == STD_URI) {\n\t\t\t\t\treturn URI.create(\"\");\n\t\t\t\t} else if (_kind == STD_LOCALE) {\n\t\t\t\t\treturn Locale.ROOT;\n\t\t\t\t} else {\n\t\t\t\t\treturn super._deserializeFromEmptyString();\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\treturn super._deserializeFromEmptyString();\n\t\t\t}\n\t\t}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java",
+        "method_name": "_deserializeFromEmptyString",
+        "class_name": "FromStringDeserializer",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the `URI` class not being handled correctly in the `_deserializeFromEmptyString` method. The method should return `Locale.ROOT` instead of `null` when the input is an empty string.",
+        "line_numbers": [
+          278,
+          279,
+          280,
+          281,
+          282,
+          283,
+          284,
+          285
+        ]
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "protected Object _deserializeFromEmptyString() throws IOException {\n      // As per [databind#398], URI requires special handling\n      if (_kind == STD_URI) {\n          return URI.create(\"\");\n      }\n      // As per [databind#1123], Locale too\n      return Locale.ROOT;\n  }",
+        "diff": "",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java",
+        "method_name": "_deserializeFromEmptyString",
+        "class_name": "FromStringDeserializer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          278,
+          279,
+          280,
+          281,
+          282,
+          283,
+          284,
+          285
+        ],
+        "original_code": "// host or unbracketed IPv6, without port number\nprotected Object _deserializeFromEmptyString() throws IOException {\n    // As per [databind#398], URI requires special handling\n    if (_kind == STD_URI) {\n        return URI.create(\"\");\n    }\n    // As per [databind#1123], Locale too\n    return super._deserializeFromEmptyString();\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-42/"
+}

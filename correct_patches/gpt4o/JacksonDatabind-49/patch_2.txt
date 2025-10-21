@@ -1,0 +1,12 @@
+File: src/main/java/com/fasterxml/jackson/databind/ser/impl/WritableObjectId.java
+Method: WritableObjectId.generateId
+
+public Object generateId(Object forPojo) {
+    // Use existing ID if one was previously generated
+    if (id != null) {
+        return id;
+    }
+    // Generate new ID if necessary
+    id = generator.generateId(forPojo);
+    return id;
+}

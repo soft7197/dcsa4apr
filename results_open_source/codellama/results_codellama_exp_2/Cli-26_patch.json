@@ -1,0 +1,46 @@
+{
+  "bug_id": "Cli-26",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Cli-26_1772762881",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the OptionBuilder.reset() method not being called in the correct place, resulting in the description being inherited from the previous Option instance created.",
+        "changes": "- OptionBuilder.reset() was called at the end of the method, but it should be called at the beginning to properly reset the properties.",
+        "fixed_method": "public static Option create(String opt) throws IllegalArgumentException {\n        OptionBuilder.reset();\n        Option option = new Option(opt, description);\n        option.setLongOpt(longopt);\n        option.setRequired(required);\n        option.setOptionalArg(optionalArg);\n        option.setArgs(numberOfArgs);\n        option.setType(type);\n        option.setValueSeparator(valuesep);\n        option.setArgName(argName);\n        OptionBuilder.reset();\n        return option;\n    }",
+        "diff": "- OptionBuilder.reset() was called at the end of the method, but it should be called at the beginning to properly reset the properties.",
+        "file_path": "src/java/org/apache/commons/cli/OptionBuilder.java",
+        "method_name": "create",
+        "class_name": "OptionBuilder",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          346,
+          347,
+          348,
+          349,
+          350,
+          351,
+          352,
+          353,
+          354,
+          355,
+          356,
+          357,
+          358,
+          359,
+          360,
+          361,
+          362,
+          363,
+          364
+        ],
+        "original_code": "/**\n* Create an Option using the current settings and with\n* the specified Option <code>char</code>.\n*\n* @param opt the <code>java.lang.String</code> representation\n* of the Option\n* @return the Option instance\n* @throws IllegalArgumentException if <code>opt</code> is not\n* a valid character.  See Option.\n*/\npublic static Option create(String opt) throws IllegalArgumentException\n{\n        // create the option\n    Option option = new Option(opt, description);\n\n        // set the option properties\n        option.setLongOpt(longopt);\n        option.setRequired(required);\n        option.setOptionalArg(optionalArg);\n        option.setArgs(numberOfArgs);\n        option.setType(type);\n        option.setValueSeparator(valuesep);\n        option.setArgName(argName);\n        // reset the OptionBuilder properties\n        OptionBuilder.reset();\n\n    // return the Option instance\n    return option;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Cli-26/"
+}

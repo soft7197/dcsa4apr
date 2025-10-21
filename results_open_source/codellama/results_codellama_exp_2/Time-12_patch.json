@@ -1,0 +1,145 @@
+{
+  "bug_id": "Time-12",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Time-12_1772823602",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the wrong assumption that the year 0 exists, which is not the case in the ISO calendar system. The method needs to be adjusted to handle the year 0 correctly.",
+        "changes": "The `fromDateFields` method is modified to handle the year 0 correctly by using the `LocalDateTime(int year, int monthOfYear, int dayOfMonth, int hourOfDay, int minuteOfHour, int secondOfMinute, int millisOfSecond)` constructor, which takes the year as an integer instead of a String, and by adjusting the year value to be 1 greater than the year from the input Date object.",
+        "fixed_method": "public static LocalDateTime fromDateFields(Date date) {\n        if (date == null) {\n            throw new IllegalArgumentException(\"The date must not be null\");\n        }\n        GregorianCalendar cal = new GregorianCalendar();\n        cal.setTime(date);\n        int year = cal.get(Calendar.YEAR);\n        if (cal.get(Calendar.ERA) == GregorianCalendar.BC) {\n            year = 1 - year;\n        }\n        return new LocalDateTime(year, cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), cal.get(Calendar.SECOND), cal.get(Calendar.MILLISECOND));\n    }",
+        "diff": "The `fromDateFields` method is modified to handle the year 0 correctly by using the `LocalDateTime(int year, int monthOfYear, int dayOfMonth, int hourOfDay, int minuteOfHour, int secondOfMinute, int millisOfSecond)` constructor, which takes the year as an integer instead of a String, and by adjusting the year value to be 1 greater than the year from the input Date object.",
+        "file_path": "src/main/java/org/joda/time/LocalDateTime.java",
+        "method_name": "fromDateFields",
+        "class_name": "LocalDateTime",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          231,
+          246
+        ],
+        "original_code": "    /**\n     * Constructs a LocalDateTime from a <code>java.util.Date</code>\n     * using exactly the same field values.\n     * <p>\n     * Each field is queried from the Date and assigned to the LocalDateTime.\n     * This is useful if you have been using the Date as a local date,\n     * ignoring the zone.\n     * <p>\n     * One advantage of this method is that this method is unaffected if the\n     * version of the time zone data differs between the JDK and Joda-Time.\n     * That is because the local field values are transferred, calculated using\n     * the JDK time zone data and without using the Joda-Time time zone data.\n     * <p>\n     * This factory method always creates a LocalDateTime with ISO chronology.\n     *\n     * @param date  the Date to extract fields from, not null\n     * @return the created local date-time, not null\n     * @throws IllegalArgumentException if the calendar is null\n     * @throws IllegalArgumentException if the date is invalid for the ISO chronology\n     */\n\n    @SuppressWarnings(\"deprecation\")\n    public static LocalDateTime fromDateFields(Date date) {\n        if (date == null) {\n            throw new IllegalArgumentException(\"The date must not be null\");\n        }\n            // handle years in era BC\n        return new LocalDateTime(\n            date.getYear() + 1900,\n            date.getMonth() + 1,\n            date.getDate(),\n            date.getHours(),\n            date.getMinutes(),\n            date.getSeconds(),\n            (((int) (date.getTime() % 1000)) + 1000) % 1000\n        );\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "The method was not properly handling the case where the input calendar has an era of BC.",
+        "changes": "+ if (calendar.get(Calendar.ERA) == GregorianCalendar.BC) {yearOfEra = 1 - yearOfEra;}",
+        "fixed_method": "public static LocalDateTime fromCalendarFields(Calendar calendar) {\n        if (calendar == null) {\n            throw new IllegalArgumentException(\"The calendar must not be null\");\n        }\n        int yearOfEra = calendar.get(Calendar.YEAR);\n        if (calendar.get(Calendar.ERA) == GregorianCalendar.BC) {\n            yearOfEra = 1 - yearOfEra;\n        }\n        return new LocalDateTime(\n                yearOfEra,\n                calendar.get(Calendar.MONTH) + 1,\n                calendar.get(Calendar.DAY_OF_MONTH),\n                calendar.get(Calendar.HOUR_OF_DAY),\n                calendar.get(Calendar.MINUTE),\n                calendar.get(Calendar.SECOND),\n                calendar.get(Calendar.MILLISECOND)\n        );\n    }",
+        "diff": "+ if (calendar.get(Calendar.ERA) == GregorianCalendar.BC) {yearOfEra = 1 - yearOfEra;}",
+        "file_path": "src/main/java/org/joda/time/LocalDateTime.java",
+        "method_name": "fromCalendarFields",
+        "class_name": "LocalDateTime",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          195,
+          209
+        ],
+        "original_code": "    //-----------------------------------------------------------------------\n    /**\n     * Constructs a LocalDateTime from a <code>java.util.Calendar</code>\n     * using exactly the same field values.\n     * <p>\n     * Each field is queried from the Calendar and assigned to the LocalDateTime.\n     * This is useful if you have been using the Calendar as a local date,\n     * ignoring the zone.\n     * <p>\n     * One advantage of this method is that this method is unaffected if the\n     * version of the time zone data differs between the JDK and Joda-Time.\n     * That is because the local field values are transferred, calculated using\n     * the JDK time zone data and without using the Joda-Time time zone data.\n     * <p>\n     * This factory method ignores the type of the calendar and always\n     * creates a LocalDateTime with ISO chronology. It is expected that you\n     * will only pass in instances of <code>GregorianCalendar</code> however\n     * this is not validated.\n     *\n     * @param calendar  the Calendar to extract fields from, not null\n     * @return the created local date-time, not null\n     * @throws IllegalArgumentException if the calendar is null\n     * @throws IllegalArgumentException if the date is invalid for the ISO chronology\n     */\n\n    public static LocalDateTime fromCalendarFields(Calendar calendar) {\n        if (calendar == null) {\n            throw new IllegalArgumentException(\"The calendar must not be null\");\n        }\n        int yearOfEra = calendar.get(Calendar.YEAR);\n        return new LocalDateTime(\n            yearOfEra,\n            calendar.get(Calendar.MONTH) + 1,\n            calendar.get(Calendar.DAY_OF_MONTH),\n            calendar.get(Calendar.HOUR_OF_DAY),\n            calendar.get(Calendar.MINUTE),\n            calendar.get(Calendar.SECOND),\n            calendar.get(Calendar.MILLISECOND)\n        );\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "The method was incorrectly calculating the year of era for dates before the year 1.",
+        "changes": "- yearOfEra = calendar.get(Calendar.YEAR);\n+ yearOfEra = calendar.get(Calendar.ERA) == GregorianCalendar.BC ? 1 - calendar.get(Calendar.YEAR) : calendar.get(Calendar.YEAR);",
+        "fixed_method": "public static LocalDate fromCalendarFields(Calendar calendar) {\n    if (calendar == null) {\n        throw new IllegalArgumentException(\"The calendar must not be null\");\n    }\n    int yearOfEra = calendar.get(Calendar.ERA) == GregorianCalendar.BC ? 1 - calendar.get(Calendar.YEAR) : calendar.get(Calendar.YEAR);\n    return new LocalDate(yearOfEra, calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));\n}",
+        "diff": "- yearOfEra = calendar.get(Calendar.YEAR);\n+ yearOfEra = calendar.get(Calendar.ERA) == GregorianCalendar.BC ? 1 - calendar.get(Calendar.YEAR) : calendar.get(Calendar.YEAR);",
+        "file_path": "src/main/java/org/joda/time/LocalDate.java",
+        "method_name": "fromCalendarFields",
+        "class_name": "LocalDate",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          206,
+          216
+        ],
+        "original_code": "    //-----------------------------------------------------------------------\n    /**\n     * Constructs a LocalDate from a <code>java.util.Calendar</code>\n     * using exactly the same field values.\n     * <p>\n     * Each field is queried from the Calendar and assigned to the LocalDate.\n     * This is useful if you have been using the Calendar as a local date,\n     * ignoring the zone.\n     * <p>\n     * One advantage of this method is that this method is unaffected if the\n     * version of the time zone data differs between the JDK and Joda-Time.\n     * That is because the local field values are transferred, calculated using\n     * the JDK time zone data and without using the Joda-Time time zone data.\n     * <p>\n     * This factory method ignores the type of the calendar and always\n     * creates a LocalDate with ISO chronology. It is expected that you\n     * will only pass in instances of <code>GregorianCalendar</code> however\n     * this is not validated.\n     *\n     * @param calendar  the Calendar to extract fields from, not null\n     * @return the created local date, not null\n     * @throws IllegalArgumentException if the calendar is null\n     * @throws IllegalArgumentException if the date is invalid for the ISO chronology\n     */\n\n    public static LocalDate fromCalendarFields(Calendar calendar) {\n        if (calendar == null) {\n            throw new IllegalArgumentException(\"The calendar must not be null\");\n        }\n        int yearOfEra = calendar.get(Calendar.YEAR);\n        return new LocalDate(\n            yearOfEra,\n            calendar.get(Calendar.MONTH) + 1,\n            calendar.get(Calendar.DAY_OF_MONTH)\n        );\n    }\n"
+      },
+      {
+        "hypothesis": "The method was not correctly handling the calendar's era and year.",
+        "changes": "+ Use the calendar's era to determine the correct year value.",
+        "fixed_method": "public static LocalDate fromCalendarFields(Calendar calendar) {\n  if (calendar == null) {\n    throw new IllegalArgumentException(\"The calendar must not be null\");\n  }\n  int yearOfEra = calendar.get(Calendar.YEAR);\n  int era = calendar.get(Calendar.ERA);\n  int year = yearOfEra; // For BC, year = 1 - yearOfEra.\n  if (era == GregorianCalendar.BC) {\n    year = 1 - yearOfEra;\n  }\n  return new LocalDate(year, calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));\n}",
+        "diff": "+ Use the calendar's era to determine the correct year value.",
+        "file_path": "src/main/java/org/joda/time/LocalDate.java",
+        "method_name": "fromCalendarFields",
+        "class_name": "LocalDate",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          206,
+          216
+        ],
+        "original_code": "    //-----------------------------------------------------------------------\n    /**\n     * Constructs a LocalDate from a <code>java.util.Calendar</code>\n     * using exactly the same field values.\n     * <p>\n     * Each field is queried from the Calendar and assigned to the LocalDate.\n     * This is useful if you have been using the Calendar as a local date,\n     * ignoring the zone.\n     * <p>\n     * One advantage of this method is that this method is unaffected if the\n     * version of the time zone data differs between the JDK and Joda-Time.\n     * That is because the local field values are transferred, calculated using\n     * the JDK time zone data and without using the Joda-Time time zone data.\n     * <p>\n     * This factory method ignores the type of the calendar and always\n     * creates a LocalDate with ISO chronology. It is expected that you\n     * will only pass in instances of <code>GregorianCalendar</code> however\n     * this is not validated.\n     *\n     * @param calendar  the Calendar to extract fields from, not null\n     * @return the created local date, not null\n     * @throws IllegalArgumentException if the calendar is null\n     * @throws IllegalArgumentException if the date is invalid for the ISO chronology\n     */\n\n    public static LocalDate fromCalendarFields(Calendar calendar) {\n        if (calendar == null) {\n            throw new IllegalArgumentException(\"The calendar must not be null\");\n        }\n        int yearOfEra = calendar.get(Calendar.YEAR);\n        return new LocalDate(\n            yearOfEra,\n            calendar.get(Calendar.MONTH) + 1,\n            calendar.get(Calendar.DAY_OF_MONTH)\n        );\n    }\n"
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public static LocalDate fromCalendarFields(Calendar calendar) {\n    if (calendar == null) {\n        throw new IllegalArgumentException(\"The calendar must not be null\");\n    }\n    int yearOfEra = calendar.get(Calendar.YEAR);\n    int year = yearOfEra;\n    if (calendar.get(Calendar.ERA) == GregorianCalendar.BC) {\n        year = -yearOfEra + 1;\n    }\n    return new LocalDate(\n        year,\n        calendar.get(Calendar.MONTH) + 1,\n        calendar.get(Calendar.DAY_OF_MONTH)\n    );\n}",
+        "diff": "",
+        "file_path": "src/main/java/org/joda/time/LocalDate.java",
+        "method_name": "fromCalendarFields",
+        "class_name": "LocalDate",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          206,
+          216
+        ],
+        "original_code": "    //-----------------------------------------------------------------------\n    /**\n     * Constructs a LocalDate from a <code>java.util.Calendar</code>\n     * using exactly the same field values.\n     * <p>\n     * Each field is queried from the Calendar and assigned to the LocalDate.\n     * This is useful if you have been using the Calendar as a local date,\n     * ignoring the zone.\n     * <p>\n     * One advantage of this method is that this method is unaffected if the\n     * version of the time zone data differs between the JDK and Joda-Time.\n     * That is because the local field values are transferred, calculated using\n     * the JDK time zone data and without using the Joda-Time time zone data.\n     * <p>\n     * This factory method ignores the type of the calendar and always\n     * creates a LocalDate with ISO chronology. It is expected that you\n     * will only pass in instances of <code>GregorianCalendar</code> however\n     * this is not validated.\n     *\n     * @param calendar  the Calendar to extract fields from, not null\n     * @return the created local date, not null\n     * @throws IllegalArgumentException if the calendar is null\n     * @throws IllegalArgumentException if the date is invalid for the ISO chronology\n     */\n\n    public static LocalDate fromCalendarFields(Calendar calendar) {\n        if (calendar == null) {\n            throw new IllegalArgumentException(\"The calendar must not be null\");\n        }\n        int yearOfEra = calendar.get(Calendar.YEAR);\n        return new LocalDate(\n            yearOfEra,\n            calendar.get(Calendar.MONTH) + 1,\n            calendar.get(Calendar.DAY_OF_MONTH)\n        );\n    }\n"
+      },
+      {
+        "hypothesis": "The method was not properly handling the year before year zero.",
+        "changes": "+ yearOfEra should be positive if the calendar is in BC.",
+        "fixed_method": "public static LocalDate fromCalendarFields(Calendar calendar) {\n  if (calendar == null) {\n    throw new IllegalArgumentException(\"The calendar must not be null\");\n  }\n  int yearOfEra = calendar.get(Calendar.YEAR);\n  if (calendar.get(Calendar.ERA) == GregorianCalendar.BC) {\n    yearOfEra = -yearOfEra + 1;\n  }\n  return new LocalDate(yearOfEra, calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));\n}",
+        "diff": "+ yearOfEra should be positive if the calendar is in BC.",
+        "file_path": "src/main/java/org/joda/time/LocalDate.java",
+        "method_name": "fromCalendarFields",
+        "class_name": "LocalDate",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          206,
+          216
+        ],
+        "original_code": "    //-----------------------------------------------------------------------\n    /**\n     * Constructs a LocalDate from a <code>java.util.Calendar</code>\n     * using exactly the same field values.\n     * <p>\n     * Each field is queried from the Calendar and assigned to the LocalDate.\n     * This is useful if you have been using the Calendar as a local date,\n     * ignoring the zone.\n     * <p>\n     * One advantage of this method is that this method is unaffected if the\n     * version of the time zone data differs between the JDK and Joda-Time.\n     * That is because the local field values are transferred, calculated using\n     * the JDK time zone data and without using the Joda-Time time zone data.\n     * <p>\n     * This factory method ignores the type of the calendar and always\n     * creates a LocalDate with ISO chronology. It is expected that you\n     * will only pass in instances of <code>GregorianCalendar</code> however\n     * this is not validated.\n     *\n     * @param calendar  the Calendar to extract fields from, not null\n     * @return the created local date, not null\n     * @throws IllegalArgumentException if the calendar is null\n     * @throws IllegalArgumentException if the date is invalid for the ISO chronology\n     */\n\n    public static LocalDate fromCalendarFields(Calendar calendar) {\n        if (calendar == null) {\n            throw new IllegalArgumentException(\"The calendar must not be null\");\n        }\n        int yearOfEra = calendar.get(Calendar.YEAR);\n        return new LocalDate(\n            yearOfEra,\n            calendar.get(Calendar.MONTH) + 1,\n            calendar.get(Calendar.DAY_OF_MONTH)\n        );\n    }\n"
+      },
+      {
+        "hypothesis": "The method was not taking into account the era of the calendar, resulting in incorrect dates being created for years before 1 AD.",
+        "changes": "+ if (calendar.get(Calendar.ERA) == GregorianCalendar.BC) {\n+ yearOfEra = 1 - yearOfEra;\n+ }\n",
+        "fixed_method": "public static LocalDate fromCalendarFields(Calendar calendar) {\n if (calendar == null) {\n throw new IllegalArgumentException(\"The calendar must not be null\");\n }\n int yearOfEra = calendar.get(Calendar.YEAR);\n if (calendar.get(Calendar.ERA) == GregorianCalendar.BC) {\n yearOfEra = 1 - yearOfEra;\n }\n return new LocalDate(yearOfEra, calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));\n}",
+        "diff": "+ if (calendar.get(Calendar.ERA) == GregorianCalendar.BC) {\n+ yearOfEra = 1 - yearOfEra;\n+ }\n",
+        "file_path": "src/main/java/org/joda/time/LocalDate.java",
+        "method_name": "fromCalendarFields",
+        "class_name": "LocalDate",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          206,
+          216
+        ],
+        "original_code": "    //-----------------------------------------------------------------------\n    /**\n     * Constructs a LocalDate from a <code>java.util.Calendar</code>\n     * using exactly the same field values.\n     * <p>\n     * Each field is queried from the Calendar and assigned to the LocalDate.\n     * This is useful if you have been using the Calendar as a local date,\n     * ignoring the zone.\n     * <p>\n     * One advantage of this method is that this method is unaffected if the\n     * version of the time zone data differs between the JDK and Joda-Time.\n     * That is because the local field values are transferred, calculated using\n     * the JDK time zone data and without using the Joda-Time time zone data.\n     * <p>\n     * This factory method ignores the type of the calendar and always\n     * creates a LocalDate with ISO chronology. It is expected that you\n     * will only pass in instances of <code>GregorianCalendar</code> however\n     * this is not validated.\n     *\n     * @param calendar  the Calendar to extract fields from, not null\n     * @return the created local date, not null\n     * @throws IllegalArgumentException if the calendar is null\n     * @throws IllegalArgumentException if the date is invalid for the ISO chronology\n     */\n\n    public static LocalDate fromCalendarFields(Calendar calendar) {\n        if (calendar == null) {\n            throw new IllegalArgumentException(\"The calendar must not be null\");\n        }\n        int yearOfEra = calendar.get(Calendar.YEAR);\n        return new LocalDate(\n            yearOfEra,\n            calendar.get(Calendar.MONTH) + 1,\n            calendar.get(Calendar.DAY_OF_MONTH)\n        );\n    }\n"
+      },
+      {
+        "hypothesis": "The method was not properly handling the year field when the era was BC",
+        "changes": "+ if (calendar.get(Calendar.ERA) == GregorianCalendar.BC) yearOfEra = 1 - yearOfEra;",
+        "fixed_method": "public static LocalDate fromCalendarFields(Calendar calendar) {\n  if (calendar == null) {\n    throw new IllegalArgumentException(\"The calendar must not be null\");\n  }\n  int yearOfEra = calendar.get(Calendar.YEAR);\n  if (calendar.get(Calendar.ERA) == GregorianCalendar.BC) yearOfEra = 1 - yearOfEra;\n  return new LocalDate(\n    yearOfEra,\n    calendar.get(Calendar.MONTH) + 1,\n    calendar.get(Calendar.DAY_OF_MONTH)\n  );\n}",
+        "diff": "+ if (calendar.get(Calendar.ERA) == GregorianCalendar.BC) yearOfEra = 1 - yearOfEra;",
+        "file_path": "src/main/java/org/joda/time/LocalDate.java",
+        "method_name": "fromCalendarFields",
+        "class_name": "LocalDate",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          206,
+          216
+        ],
+        "original_code": "    //-----------------------------------------------------------------------\n    /**\n     * Constructs a LocalDate from a <code>java.util.Calendar</code>\n     * using exactly the same field values.\n     * <p>\n     * Each field is queried from the Calendar and assigned to the LocalDate.\n     * This is useful if you have been using the Calendar as a local date,\n     * ignoring the zone.\n     * <p>\n     * One advantage of this method is that this method is unaffected if the\n     * version of the time zone data differs between the JDK and Joda-Time.\n     * That is because the local field values are transferred, calculated using\n     * the JDK time zone data and without using the Joda-Time time zone data.\n     * <p>\n     * This factory method ignores the type of the calendar and always\n     * creates a LocalDate with ISO chronology. It is expected that you\n     * will only pass in instances of <code>GregorianCalendar</code> however\n     * this is not validated.\n     *\n     * @param calendar  the Calendar to extract fields from, not null\n     * @return the created local date, not null\n     * @throws IllegalArgumentException if the calendar is null\n     * @throws IllegalArgumentException if the date is invalid for the ISO chronology\n     */\n\n    public static LocalDate fromCalendarFields(Calendar calendar) {\n        if (calendar == null) {\n            throw new IllegalArgumentException(\"The calendar must not be null\");\n        }\n        int yearOfEra = calendar.get(Calendar.YEAR);\n        return new LocalDate(\n            yearOfEra,\n            calendar.get(Calendar.MONTH) + 1,\n            calendar.get(Calendar.DAY_OF_MONTH)\n        );\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Time-12/"
+}

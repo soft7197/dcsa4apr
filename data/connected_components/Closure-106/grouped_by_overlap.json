@@ -1,0 +1,20 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "recordBlockDescription_com.google.javascript.rhino.JSDocInfoBuilder"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.CheckSideEffectsTest::testJSDocComments"
+    ]
+  },
+  "Group_2": {
+    "buggy_methods": [
+      "canCollapseUnannotatedChildNames_com.google.javascript.jscomp.GlobalNamespace"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.CollapsePropertiesTest::testCrashInCommaOperator",
+      "com.google.javascript.jscomp.CollapsePropertiesTest::testCrashInNestedAssign",
+      "com.google.javascript.jscomp.CollapsePropertiesTest::testTwinReferenceCancelsChildCollapsing"
+    ]
+  }
+}

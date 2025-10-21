@@ -1,0 +1,64 @@
+{
+  "bug_id": "Csv-4",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Csv-4_1771932409",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug occurs because the method returns a new LinkedHashMap initialized with 'this.headerMap', which can be null if no headers are present. The fix is to check if 'this.headerMap' is null and return null instead of throwing a NullPointerException.",
+        "changes": "- return new LinkedHashMap<String, Integer>(this.headerMap);\n+ return this.headerMap != null ? new LinkedHashMap<String, Integer>(this.headerMap) : null;",
+        "fixed_method": "public Map<String, Integer> getHeaderMap() {\n    return this.headerMap != null ? new LinkedHashMap<String, Integer>(this.headerMap) : null;\n}",
+        "diff": "- return new LinkedHashMap<String, Integer>(this.headerMap);\n+ return this.headerMap != null ? new LinkedHashMap<String, Integer>(this.headerMap) : null;",
+        "file_path": "src/main/java/org/apache/commons/csv/CSVParser.java",
+        "method_name": "getHeaderMap",
+        "class_name": "CSVParser",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          287,
+          288,
+          289
+        ],
+        "original_code": "/**\n* Returns a copy of the header map that iterates in column order.\n* <p>\n* The map keys are column names. The map values are 0-based indices.\n* </p>\n* @return a copy of the header map that iterates in column order.\n*/\npublic Map<String, Integer> getHeaderMap() {\n    return new LinkedHashMap<String, Integer>(this.headerMap);\n}"
+      },
+      {
+        "hypothesis": "The bug occurs because the method returns a new LinkedHashMap initialized with this.headerMap, which can be null if no headers are present. We need to check if this.headerMap is null and return null in that case.",
+        "changes": "- return new LinkedHashMap<String, Integer>(this.headerMap);\n+ return this.headerMap == null ? null : new LinkedHashMap<String, Integer>(this.headerMap);",
+        "fixed_method": "public Map<String, Integer> getHeaderMap() {\n    return this.headerMap == null ? null : new LinkedHashMap<String, Integer>(this.headerMap);\n}",
+        "diff": "- return new LinkedHashMap<String, Integer>(this.headerMap);\n+ return this.headerMap == null ? null : new LinkedHashMap<String, Integer>(this.headerMap);",
+        "file_path": "src/main/java/org/apache/commons/csv/CSVParser.java",
+        "method_name": "getHeaderMap",
+        "class_name": "CSVParser",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          287,
+          288,
+          289
+        ],
+        "original_code": "/**\n* Returns a copy of the header map that iterates in column order.\n* <p>\n* The map keys are column names. The map values are 0-based indices.\n* </p>\n* @return a copy of the header map that iterates in column order.\n*/\npublic Map<String, Integer> getHeaderMap() {\n    return new LinkedHashMap<String, Integer>(this.headerMap);\n}"
+      },
+      {
+        "hypothesis": "The bug occurs because when there are no headers, the headerMap is null, and trying to create a LinkedHashMap from a null reference results in a NullPointerException. The fix is to check if headerMap is null and return null in that case.",
+        "changes": "- return new LinkedHashMap<String, Integer>(this.headerMap);\n+ if (this.headerMap == null) return null;\n+ return new LinkedHashMap<String, Integer>(this.headerMap);",
+        "fixed_method": "public Map<String, Integer> getHeaderMap() {\n    if (this.headerMap == null) return null;\n    return new LinkedHashMap<String, Integer>(this.headerMap);\n}",
+        "diff": "- return new LinkedHashMap<String, Integer>(this.headerMap);\n+ if (this.headerMap == null) return null;\n+ return new LinkedHashMap<String, Integer>(this.headerMap);",
+        "file_path": "src/main/java/org/apache/commons/csv/CSVParser.java",
+        "method_name": "getHeaderMap",
+        "class_name": "CSVParser",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          287,
+          288,
+          289
+        ],
+        "original_code": "/**\n* Returns a copy of the header map that iterates in column order.\n* <p>\n* The map keys are column names. The map values are 0-based indices.\n* </p>\n* @return a copy of the header map that iterates in column order.\n*/\npublic Map<String, Integer> getHeaderMap() {\n    return new LinkedHashMap<String, Integer>(this.headerMap);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Csv-4/"
+}

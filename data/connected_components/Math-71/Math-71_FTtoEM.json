@@ -1,0 +1,1820 @@
+{
+  "org.apache.commons.math.ode.nonstiff.ClassicalRungeKuttaIntegratorTest::testMissedEndEvent": [
+    {
+      "package": "org.apache.commons.math",
+      "class": "org.apache.commons.math.ConvergingAlgorithmImpl",
+      "method": "<init>",
+      "signature": "(ID)V",
+      "executed_lines": [
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69
+      ]
+    },
+    {
+      "package": "org.apache.commons.math",
+      "class": "org.apache.commons.math.ConvergingAlgorithmImpl",
+      "method": "setAbsoluteAccuracy",
+      "signature": "(D)V",
+      "executed_lines": [
+        78,
+        79
+      ]
+    },
+    {
+      "package": "org.apache.commons.math",
+      "class": "org.apache.commons.math.ConvergingAlgorithmImpl",
+      "method": "setMaximalIterationCount",
+      "signature": "(I)V",
+      "executed_lines": [
+        93,
+        94
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.analysis.solvers",
+      "class": "org.apache.commons.math.analysis.solvers.BrentSolver",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        72,
+        73
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.analysis.solvers",
+      "class": "org.apache.commons.math.analysis.solvers.BrentSolver",
+      "method": "solve",
+      "signature": "(Lorg/apache/commons/math/analysis/UnivariateRealFunction;DD)D",
+      "executed_lines": [
+        199,
+        200,
+        202,
+        204,
+        205,
+        208,
+        209,
+        222,
+        224,
+        234
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.analysis.solvers",
+      "class": "org.apache.commons.math.analysis.solvers.BrentSolver",
+      "method": "solve",
+      "signature": "(Lorg/apache/commons/math/analysis/UnivariateRealFunction;DDDDDD)D",
+      "executed_lines": [
+        260,
+        261,
+        263,
+        264,
+        265,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        274,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        288,
+        289,
+        294,
+        300,
+        302,
+        303,
+        311,
+        312,
+        314,
+        316,
+        317,
+        324,
+        325,
+        329,
+        330,
+        332,
+        334,
+        335,
+        336,
+        337,
+        339,
+        340,
+        341,
+        342,
+        343,
+        344,
+        346,
+        347
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.analysis.solvers",
+      "class": "org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl",
+      "method": "<init>",
+      "signature": "(ID)V",
+      "executed_lines": [
+        41,
+        93,
+        94,
+        95,
+        96
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.analysis.solvers",
+      "class": "org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl",
+      "method": "clearResult",
+      "signature": "()V",
+      "executed_lines": [
+        165,
+        166,
+        167
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.analysis.solvers",
+      "class": "org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl",
+      "method": "setResult",
+      "signature": "(DI)V",
+      "executed_lines": [
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.analysis.solvers",
+      "class": "org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl",
+      "method": "verifyInterval",
+      "signature": "(DD)V",
+      "executed_lines": [
+        208,
+        213
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "addEndTimeChecker",
+      "signature": "(DDLorg/apache/commons/math/ode/events/CombinedEventsManager;)Lorg/apache/commons/math/ode/events/CombinedEventsManager;",
+      "executed_lines": [
+        233,
+        234,
+        240,
+        242,
+        244
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "computeDerivatives",
+      "signature": "(D[D[D)V",
+      "executed_lines": [
+        179,
+        182,
+        183
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "requiresDenseOutput",
+      "signature": "()Z",
+      "executed_lines": [
+        123,
+        128
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "resetEvaluations",
+      "signature": "()V",
+      "executed_lines": [
+        159,
+        160
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "sanityChecks",
+      "signature": "(Lorg/apache/commons/math/ode/FirstOrderDifferentialEquations;D[DD[D)V",
+      "executed_lines": [
+        198,
+        205,
+        212,
+        218
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "setEquations",
+      "signature": "(Lorg/apache/commons/math/ode/FirstOrderDifferentialEquations;)V",
+      "executed_lines": [
+        167,
+        168
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "setMaxEvaluations",
+      "signature": "(I)V",
+      "executed_lines": [
+        143,
+        144
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator$EndTimeChecker",
+      "method": "<init>",
+      "signature": "(D)V",
+      "executed_lines": [
+        256,
+        257,
+        258
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator$EndTimeChecker",
+      "method": "eventOccurred",
+      "signature": "(D[DZ)I",
+      "executed_lines": [
+        262
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator$EndTimeChecker",
+      "method": "g",
+      "signature": "(D[D)D",
+      "executed_lines": [
+        267
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        52,
+        53,
+        54,
+        55,
+        56
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "addEventHandler",
+      "signature": "(Lorg/apache/commons/math/ode/events/EventHandler;DDI)V",
+      "executed_lines": [
+        71,
+        73
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "evaluateStep",
+      "signature": "(Lorg/apache/commons/math/ode/sampling/StepInterpolator;)Z",
+      "executed_lines": [
+        127,
+        128,
+        135,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        145,
+        150,
+        152,
+        153,
+        154,
+        168,
+        170
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "getEventTime",
+      "signature": "()D",
+      "executed_lines": [
+        187
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "getEventsStates",
+      "signature": "()Ljava/util/Collection;",
+      "executed_lines": [
+        102
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "isEmpty",
+      "signature": "()Z",
+      "executed_lines": [
+        109
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "reset",
+      "signature": "(D[D)Z",
+      "executed_lines": [
+        235,
+        236,
+        237,
+        240,
+        241
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "stepAccepted",
+      "signature": "(D[D)V",
+      "executed_lines": [
+        202,
+        203,
+        204,
+        207,
+        208
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "stop",
+      "signature": "()Z",
+      "executed_lines": [
+        215,
+        216,
+        217,
+        219,
+        220
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math/ode/events/EventHandler;DDI)V",
+      "executed_lines": [
+        95,
+        96,
+        97,
+        98,
+        99,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        111
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "access$000",
+      "signature": "(Lorg/apache/commons/math/ode/events/EventState;)Lorg/apache/commons/math/ode/events/EventHandler;",
+      "executed_lines": [
+        42
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "evaluateStep",
+      "signature": "(Lorg/apache/commons/math/ode/sampling/StepInterpolator;)Z",
+      "executed_lines": [
+        172,
+        173,
+        174,
+        175,
+        177,
+        178,
+        179,
+        180,
+        183,
+        184,
+        185,
+        188,
+        191,
+        212,
+        214,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        235,
+        237,
+        238,
+        247,
+        248,
+        253,
+        254,
+        260,
+        261,
+        262
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "getEventTime",
+      "signature": "()D",
+      "executed_lines": [
+        282
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "reinitializeBegin",
+      "signature": "(D[D)V",
+      "executed_lines": [
+        151,
+        152,
+        153,
+        154
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "reset",
+      "signature": "(D[D)Z",
+      "executed_lines": [
+        330,
+        331,
+        334,
+        337,
+        338,
+        340
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "stepAccepted",
+      "signature": "(D[D)V",
+      "executed_lines": [
+        296,
+        297,
+        299,
+        301,
+        302,
+        303,
+        305,
+        306,
+        308
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "stop",
+      "signature": "()Z",
+      "executed_lines": [
+        315
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState$1",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math/ode/events/EventState;Lorg/apache/commons/math/ode/sampling/StepInterpolator;)V",
+      "executed_lines": [
+        214
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState$1",
+      "method": "value",
+      "signature": "(D)D",
+      "executed_lines": [
+        217,
+        218
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.ClassicalRungeKuttaIntegrator",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        49,
+        54,
+        61
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.ClassicalRungeKuttaIntegrator",
+      "method": "<init>",
+      "signature": "(D)V",
+      "executed_lines": [
+        71,
+        73
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.ClassicalRungeKuttaStepInterpolator",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        64,
+        65
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.RungeKuttaIntegrator",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;[D[[D[DLorg/apache/commons/math/ode/nonstiff/RungeKuttaStepInterpolator;D)V",
+      "executed_lines": [
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.RungeKuttaIntegrator",
+      "method": "integrate",
+      "signature": "(Lorg/apache/commons/math/ode/FirstOrderDifferentialEquations;D[DD[D)D",
+      "executed_lines": [
+        100,
+        101,
+        102,
+        103,
+        106,
+        107,
+        108,
+        110,
+        111,
+        112,
+        114,
+        118,
+        123,
+        125,
+        128,
+        129,
+        130,
+        133,
+        134,
+        137,
+        139,
+        141,
+        144,
+        147,
+        149,
+        150,
+        151,
+        152,
+        154,
+        157,
+        162,
+        163,
+        164,
+        165,
+        167,
+        171,
+        172,
+        173,
+        174,
+        180,
+        183,
+        185,
+        186,
+        192,
+        193,
+        194,
+        195,
+        198,
+        199,
+        202,
+        204,
+        211,
+        213,
+        215,
+        216,
+        217,
+        218
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.RungeKuttaStepInterpolator",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        57,
+        58,
+        59,
+        60
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "<init>",
+      "signature": "([DZ)V",
+      "executed_lines": [
+        107,
+        109,
+        110,
+        111,
+        112,
+        114,
+        115,
+        116,
+        118,
+        119,
+        120,
+        122
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "getCurrentTime",
+      "signature": "()D",
+      "executed_lines": [
+        235
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "getInterpolatedState",
+      "signature": "()[D",
+      "executed_lines": [
+        272,
+        273,
+        274,
+        275,
+        276,
+        279
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "getPreviousTime",
+      "signature": "()D",
+      "executed_lines": [
+        230
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "isForward",
+      "signature": "()Z",
+      "executed_lines": [
+        251
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "setInterpolatedTime",
+      "signature": "(D)V",
+      "executed_lines": [
+        245,
+        246,
+        247
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "shift",
+      "signature": "()V",
+      "executed_lines": [
+        211,
+        212
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "storeTime",
+      "signature": "(D)V",
+      "executed_lines": [
+        219,
+        220,
+        221,
+        224,
+        226
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.DummyStepInterpolator",
+      "method": "<init>",
+      "signature": "([D[DZ)V",
+      "executed_lines": [
+        72,
+        73,
+        74
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.DummyStepInterpolator",
+      "method": "computeInterpolatedStateAndDerivatives",
+      "signature": "(DD)V",
+      "executed_lines": [
+        107,
+        108,
+        109
+      ]
+    }
+  ],
+  "org.apache.commons.math.ode.nonstiff.DormandPrince853IntegratorTest::testMissedEndEvent": [
+    {
+      "package": "org.apache.commons.math",
+      "class": "org.apache.commons.math.ConvergingAlgorithmImpl",
+      "method": "<init>",
+      "signature": "(ID)V",
+      "executed_lines": [
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69
+      ]
+    },
+    {
+      "package": "org.apache.commons.math",
+      "class": "org.apache.commons.math.ConvergingAlgorithmImpl",
+      "method": "setAbsoluteAccuracy",
+      "signature": "(D)V",
+      "executed_lines": [
+        78,
+        79
+      ]
+    },
+    {
+      "package": "org.apache.commons.math",
+      "class": "org.apache.commons.math.ConvergingAlgorithmImpl",
+      "method": "setMaximalIterationCount",
+      "signature": "(I)V",
+      "executed_lines": [
+        93,
+        94
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.analysis.solvers",
+      "class": "org.apache.commons.math.analysis.solvers.BrentSolver",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        72,
+        73
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.analysis.solvers",
+      "class": "org.apache.commons.math.analysis.solvers.BrentSolver",
+      "method": "solve",
+      "signature": "(Lorg/apache/commons/math/analysis/UnivariateRealFunction;DD)D",
+      "executed_lines": [
+        199,
+        200,
+        202,
+        204,
+        205,
+        208,
+        209,
+        222,
+        224,
+        234
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.analysis.solvers",
+      "class": "org.apache.commons.math.analysis.solvers.BrentSolver",
+      "method": "solve",
+      "signature": "(Lorg/apache/commons/math/analysis/UnivariateRealFunction;DDDDDD)D",
+      "executed_lines": [
+        260,
+        261,
+        263,
+        264,
+        265,
+        267,
+        268,
+        269,
+        270,
+        271,
+        272,
+        274,
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        288,
+        289,
+        294,
+        300,
+        302,
+        303,
+        311,
+        312,
+        314,
+        316,
+        317,
+        324,
+        325,
+        329,
+        330,
+        332,
+        334,
+        335,
+        336,
+        337,
+        339,
+        340,
+        341,
+        342,
+        343,
+        344,
+        346,
+        347
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.analysis.solvers",
+      "class": "org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl",
+      "method": "<init>",
+      "signature": "(ID)V",
+      "executed_lines": [
+        41,
+        93,
+        94,
+        95,
+        96
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.analysis.solvers",
+      "class": "org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl",
+      "method": "clearResult",
+      "signature": "()V",
+      "executed_lines": [
+        165,
+        166,
+        167
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.analysis.solvers",
+      "class": "org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl",
+      "method": "setResult",
+      "signature": "(DI)V",
+      "executed_lines": [
+        141,
+        142,
+        143,
+        144
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.analysis.solvers",
+      "class": "org.apache.commons.math.analysis.solvers.UnivariateRealSolverImpl",
+      "method": "verifyInterval",
+      "signature": "(DD)V",
+      "executed_lines": [
+        208,
+        213
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "addEndTimeChecker",
+      "signature": "(DDLorg/apache/commons/math/ode/events/CombinedEventsManager;)Lorg/apache/commons/math/ode/events/CombinedEventsManager;",
+      "executed_lines": [
+        233,
+        234,
+        240,
+        242,
+        244
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "computeDerivatives",
+      "signature": "(D[D[D)V",
+      "executed_lines": [
+        179,
+        182,
+        183
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "requiresDenseOutput",
+      "signature": "()Z",
+      "executed_lines": [
+        123,
+        128
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "resetEvaluations",
+      "signature": "()V",
+      "executed_lines": [
+        159,
+        160
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "sanityChecks",
+      "signature": "(Lorg/apache/commons/math/ode/FirstOrderDifferentialEquations;D[DD[D)V",
+      "executed_lines": [
+        198,
+        205,
+        212,
+        218
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "setEquations",
+      "signature": "(Lorg/apache/commons/math/ode/FirstOrderDifferentialEquations;)V",
+      "executed_lines": [
+        167,
+        168
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator",
+      "method": "setMaxEvaluations",
+      "signature": "(I)V",
+      "executed_lines": [
+        143,
+        144
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator$EndTimeChecker",
+      "method": "<init>",
+      "signature": "(D)V",
+      "executed_lines": [
+        256,
+        257,
+        258
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator$EndTimeChecker",
+      "method": "eventOccurred",
+      "signature": "(D[DZ)I",
+      "executed_lines": [
+        262
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode",
+      "class": "org.apache.commons.math.ode.AbstractIntegrator$EndTimeChecker",
+      "method": "g",
+      "signature": "(D[D)D",
+      "executed_lines": [
+        267
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        52,
+        53,
+        54,
+        55,
+        56
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "addEventHandler",
+      "signature": "(Lorg/apache/commons/math/ode/events/EventHandler;DDI)V",
+      "executed_lines": [
+        71,
+        73
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "evaluateStep",
+      "signature": "(Lorg/apache/commons/math/ode/sampling/StepInterpolator;)Z",
+      "executed_lines": [
+        127,
+        128,
+        135,
+        138,
+        139,
+        140,
+        141,
+        142,
+        143,
+        145,
+        150,
+        152,
+        153,
+        154,
+        168,
+        170
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "getEventTime",
+      "signature": "()D",
+      "executed_lines": [
+        187
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "getEventsStates",
+      "signature": "()Ljava/util/Collection;",
+      "executed_lines": [
+        102
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "isEmpty",
+      "signature": "()Z",
+      "executed_lines": [
+        109
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "reset",
+      "signature": "(D[D)Z",
+      "executed_lines": [
+        235,
+        236,
+        237,
+        240,
+        241
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "stepAccepted",
+      "signature": "(D[D)V",
+      "executed_lines": [
+        202,
+        203,
+        204,
+        207,
+        208
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.CombinedEventsManager",
+      "method": "stop",
+      "signature": "()Z",
+      "executed_lines": [
+        215,
+        216,
+        217,
+        219,
+        220
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math/ode/events/EventHandler;DDI)V",
+      "executed_lines": [
+        95,
+        96,
+        97,
+        98,
+        99,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        111
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "access$000",
+      "signature": "(Lorg/apache/commons/math/ode/events/EventState;)Lorg/apache/commons/math/ode/events/EventHandler;",
+      "executed_lines": [
+        42
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "evaluateStep",
+      "signature": "(Lorg/apache/commons/math/ode/sampling/StepInterpolator;)Z",
+      "executed_lines": [
+        172,
+        173,
+        174,
+        175,
+        177,
+        178,
+        179,
+        180,
+        183,
+        184,
+        185,
+        188,
+        191,
+        212,
+        214,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        235,
+        237,
+        238,
+        247,
+        248,
+        253,
+        254,
+        260,
+        261,
+        262
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "getEventTime",
+      "signature": "()D",
+      "executed_lines": [
+        282
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "reinitializeBegin",
+      "signature": "(D[D)V",
+      "executed_lines": [
+        151,
+        152,
+        153,
+        154
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "reset",
+      "signature": "(D[D)Z",
+      "executed_lines": [
+        330,
+        331,
+        334,
+        337,
+        338,
+        340
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "stepAccepted",
+      "signature": "(D[D)V",
+      "executed_lines": [
+        296,
+        297,
+        299,
+        301,
+        302,
+        303,
+        305,
+        306,
+        308
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState",
+      "method": "stop",
+      "signature": "()Z",
+      "executed_lines": [
+        315
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState$1",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math/ode/events/EventState;Lorg/apache/commons/math/ode/sampling/StepInterpolator;)V",
+      "executed_lines": [
+        214
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.events",
+      "class": "org.apache.commons.math.ode.events.EventState$1",
+      "method": "value",
+      "signature": "(D)D",
+      "executed_lines": [
+        217,
+        218
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.AdaptiveStepsizeIntegrator",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;DDDD)V",
+      "executed_lines": [
+        93,
+        95,
+        96,
+        97,
+        99,
+        100,
+        101,
+        102,
+        104,
+        106
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.AdaptiveStepsizeIntegrator",
+      "method": "filterStep",
+      "signature": "(DZZ)D",
+      "executed_lines": [
+        280,
+        281,
+        291,
+        292,
+        293,
+        297
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.AdaptiveStepsizeIntegrator",
+      "method": "initializeStep",
+      "signature": "(Lorg/apache/commons/math/ode/FirstOrderDifferentialEquations;ZI[DD[D[D[D[D)D",
+      "executed_lines": [
+        209,
+        211
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.AdaptiveStepsizeIntegrator",
+      "method": "resetInternalState",
+      "signature": "()V",
+      "executed_lines": [
+        315,
+        316,
+        317
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.AdaptiveStepsizeIntegrator",
+      "method": "sanityChecks",
+      "signature": "(Lorg/apache/commons/math/ode/FirstOrderDifferentialEquations;D[DD[D)V",
+      "executed_lines": [
+        171,
+        173,
+        180,
+        187
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.AdaptiveStepsizeIntegrator",
+      "method": "setInitialStepSize",
+      "signature": "(D)V",
+      "executed_lines": [
+        150,
+        153,
+        155
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.DormandPrince853Integrator",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        61,
+        62,
+        63,
+        68,
+        71,
+        74,
+        77,
+        80,
+        81,
+        84,
+        87,
+        88,
+        91,
+        92,
+        96,
+        97,
+        103,
+        104,
+        110,
+        111,
+        118,
+        119,
+        135
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.DormandPrince853Integrator",
+      "method": "<init>",
+      "signature": "(DDDD)V",
+      "executed_lines": [
+        216,
+        219
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.DormandPrince853Integrator",
+      "method": "estimateError",
+      "signature": "([[D[D[DD)D",
+      "executed_lines": [
+        249,
+        250,
+        252,
+        253,
+        257,
+        262,
+        263,
+        264,
+        266,
+        267,
+        268,
+        269,
+        272,
+        273,
+        277
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.DormandPrince853Integrator",
+      "method": "getOrder",
+      "signature": "()I",
+      "executed_lines": [
+        241
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.DormandPrince853StepInterpolator",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        181
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.DormandPrince853StepInterpolator",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        232,
+        233,
+        234,
+        235,
+        236
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.EmbeddedRungeKuttaIntegrator",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;Z[D[[D[DLorg/apache/commons/math/ode/nonstiff/RungeKuttaStepInterpolator;DDDD)V",
+      "executed_lines": [
+        116,
+        118,
+        119,
+        120,
+        121,
+        122,
+        124,
+        127,
+        128,
+        129,
+        131
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.EmbeddedRungeKuttaIntegrator",
+      "method": "integrate",
+      "signature": "(Lorg/apache/commons/math/ode/FirstOrderDifferentialEquations;D[DD[D)D",
+      "executed_lines": [
+        197,
+        198,
+        199,
+        200,
+        203,
+        204,
+        205,
+        207,
+        208,
+        212,
+        217,
+        219,
+        222,
+        223,
+        224,
+        225,
+        228,
+        229,
+        232,
+        234,
+        236,
+        237,
+        239,
+        241,
+        244,
+        245,
+        246,
+        247,
+        248,
+        255,
+        257,
+        260,
+        263,
+        265,
+        266,
+        267,
+        268,
+        270,
+        273,
+        278,
+        279,
+        280,
+        281,
+        283,
+        287,
+        288,
+        291,
+        292,
+        293,
+        294,
+        300,
+        303,
+        305,
+        307,
+        321,
+        322,
+        323,
+        324,
+        327,
+        328,
+        331,
+        333,
+        335,
+        338,
+        344,
+        348,
+        351,
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        360,
+        362,
+        363,
+        364
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.EmbeddedRungeKuttaIntegrator",
+      "method": "setMaxGrowth",
+      "signature": "(D)V",
+      "executed_lines": [
+        393,
+        394
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.EmbeddedRungeKuttaIntegrator",
+      "method": "setMinReduction",
+      "signature": "(D)V",
+      "executed_lines": [
+        379,
+        380
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.EmbeddedRungeKuttaIntegrator",
+      "method": "setSafety",
+      "signature": "(D)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.nonstiff",
+      "class": "org.apache.commons.math.ode.nonstiff.RungeKuttaStepInterpolator",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        57,
+        58,
+        59,
+        60
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "<init>",
+      "signature": "([DZ)V",
+      "executed_lines": [
+        107,
+        109,
+        110,
+        111,
+        112,
+        114,
+        115,
+        116,
+        118,
+        119,
+        120,
+        122
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "getCurrentTime",
+      "signature": "()D",
+      "executed_lines": [
+        235
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "getInterpolatedState",
+      "signature": "()[D",
+      "executed_lines": [
+        272,
+        273,
+        274,
+        275,
+        276,
+        279
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "getPreviousTime",
+      "signature": "()D",
+      "executed_lines": [
+        230
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "isForward",
+      "signature": "()Z",
+      "executed_lines": [
+        251
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "setInterpolatedTime",
+      "signature": "(D)V",
+      "executed_lines": [
+        245,
+        246,
+        247
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "shift",
+      "signature": "()V",
+      "executed_lines": [
+        211,
+        212
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.AbstractStepInterpolator",
+      "method": "storeTime",
+      "signature": "(D)V",
+      "executed_lines": [
+        219,
+        220,
+        221,
+        224,
+        226
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.DummyStepInterpolator",
+      "method": "<init>",
+      "signature": "([D[DZ)V",
+      "executed_lines": [
+        72,
+        73,
+        74
+      ]
+    },
+    {
+      "package": "org.apache.commons.math.ode.sampling",
+      "class": "org.apache.commons.math.ode.sampling.DummyStepInterpolator",
+      "method": "computeInterpolatedStateAndDerivatives",
+      "signature": "(DD)V",
+      "executed_lines": [
+        107,
+        108,
+        109
+      ]
+    }
+  ]
+}

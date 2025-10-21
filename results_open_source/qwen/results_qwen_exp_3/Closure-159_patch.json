@@ -1,0 +1,42 @@
+{
+  "bug_id": "Closure-159",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-159_1771990933",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the method incorrectly adding function calls to the 'changed' set, even when they are not top-level function calls that should be inlined. The fix involves ensuring that only top-level function calls are considered for inlining.",
+        "changes": "- if (node.getType() == Token.CALL) {\n-   Node child = node.getFirstChild();\n-   if (child.getType() == Token.NAME) {\n-     changed.add(child.getString());\n-   }\n- }",
+        "fixed_method": "private void findCalledFunctions(\n    Node node, Set<String> changed) {\n  Preconditions.checkArgument(changed != null);\n\n  for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {\n    findCalledFunctions(c, changed);\n  }\n}",
+        "diff": "- if (node.getType() == Token.CALL) {\n-   Node child = node.getFirstChild();\n-   if (child.getType() == Token.NAME) {\n-     changed.add(child.getString());\n-   }\n- }",
+        "file_path": "src/com/google/javascript/jscomp/InlineFunctions.java",
+        "method_name": "findCalledFunctions",
+        "class_name": "InlineFunctions",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          773,
+          774,
+          775,
+          776,
+          777,
+          778,
+          779,
+          780,
+          781,
+          782,
+          783,
+          784,
+          785,
+          786,
+          787
+        ],
+        "original_code": "/**\n* @see #findCalledFunctions(Node)\n*/\nprivate void findCalledFunctions(\n    Node node, Set<String> changed) {\n  Preconditions.checkArgument(changed != null);\n  // For each referenced function, add a new reference\n  if (node.getType() == Token.CALL) {\n    Node child = node.getFirstChild();\n    if (child.getType() == Token.NAME) {\n      changed.add(child.getString());\n    }\n  }\n\n  for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {\n    findCalledFunctions(c, changed);\n  }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-159/"
+}

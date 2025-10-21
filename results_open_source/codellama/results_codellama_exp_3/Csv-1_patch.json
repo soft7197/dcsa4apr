@@ -1,0 +1,35 @@
+{
+  "bug_id": "Csv-1",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Csv-1_1772901798",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the incorrect use of the line counter variable.",
+        "changes": "- lineCounter++; + lineCounter++;",
+        "fixed_method": "public int read() throws IOException {\n  int current = super.read();\n  if (current == '\\r') {\n    lineCounter++;\n  }\n  lastChar = current;\n  return lastChar;\n}",
+        "diff": "- lineCounter++; + lineCounter++;",
+        "file_path": "src/main/java/org/apache/commons/csv/ExtendedBufferedReader.java",
+        "method_name": "read",
+        "class_name": "ExtendedBufferedReader",
+        "iteration": 3,
+        "is_multi_method": false,
+        "line_numbers": [
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63
+        ],
+        "original_code": "/**\n* Created extended buffered reader using default buffer-size\n*/\npublic int read() throws IOException {\n    int current = super.read();\n    if (current == '\\n') {\n        lineCounter++;\n    }\n    lastChar = current;\n    return lastChar;\n}"
+      }
+    ]
+  ],
+  "iterations": 3,
+  "monitor_dir": "traces/Csv-1/"
+}

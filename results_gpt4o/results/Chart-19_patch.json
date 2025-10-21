@@ -1,0 +1,95 @@
+{
+  "bug_id": "Chart-19",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-19_1773111768",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method does not handle null input properly, causing an error when checking if axis is null. The test expects an IllegalArgumentException to be thrown if the axis is null.",
+        "changes": "+ Added a null check at the beginning to throw IllegalArgumentException if axis is null.",
+        "fixed_method": "public int getRangeAxisIndex(ValueAxis axis) {\n    if (axis == null) {\n        throw new IllegalArgumentException(\"Null 'axis' argument\");\n    }\n    int result = this.rangeAxes.indexOf(axis);\n    if (result < 0) { // try the parent plot\n        Plot parent = getParent();\n        if (parent instanceof CategoryPlot) {\n            CategoryPlot p = (CategoryPlot) parent;\n            result = p.getRangeAxisIndex(axis);\n        }\n    }\n    return result;\n}",
+        "diff": "+ Added a null check at the beginning to throw IllegalArgumentException if axis is null.",
+        "file_path": "source/org/jfree/chart/plot/CategoryPlot.java",
+        "method_name": "getRangeAxisIndex",
+        "class_name": "CategoryPlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          972,
+          982
+        ],
+        "original_code": "    /**\n     * Returns the index of the specified axis, or <code>-1</code> if the axis\n     * is not assigned to the plot.\n     *\n     * @param axis  the axis (<code>null</code> not permitted).\n     *\n     * @return The axis index.\n     * \n     * @see #getRangeAxis(int)\n     * @see #getDomainAxisIndex(CategoryAxis)\n     * \n     * @since 1.0.7\n     */\n\n    public int getRangeAxisIndex(ValueAxis axis) {\n        int result = this.rangeAxes.indexOf(axis);\n        if (result < 0) { // try the parent plot\n            Plot parent = getParent();\n            if (parent instanceof CategoryPlot) {\n                CategoryPlot p = (CategoryPlot) parent;\n                result = p.getRangeAxisIndex(axis);\n            }\n        }\n        return result;\n    }\n"
+      },
+      {
+        "hypothesis": "The method does not handle a null axis parameter correctly, potentially causing it to enter paths that should strictly require non-null values.",
+        "changes": "+ Added a null check at the beginning of the method to throw IllegalArgumentException if the axis is null.",
+        "fixed_method": "public int getRangeAxisIndex(ValueAxis axis) {\n    if (axis == null) {\n        throw new IllegalArgumentException(\"Null 'axis' argument.\");\n    }\n    int result = this.rangeAxes.indexOf(axis);\n    if (result < 0) { // try the parent plot\n        Plot parent = getParent();\n        if (parent instanceof CategoryPlot) {\n            CategoryPlot p = (CategoryPlot) parent;\n            result = p.getRangeAxisIndex(axis);\n        }\n    }\n    return result;\n}",
+        "diff": "+ Added a null check at the beginning of the method to throw IllegalArgumentException if the axis is null.",
+        "file_path": "source/org/jfree/chart/plot/CategoryPlot.java",
+        "method_name": "getRangeAxisIndex",
+        "class_name": "CategoryPlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          972,
+          982
+        ],
+        "original_code": "    /**\n     * Returns the index of the specified axis, or <code>-1</code> if the axis\n     * is not assigned to the plot.\n     *\n     * @param axis  the axis (<code>null</code> not permitted).\n     *\n     * @return The axis index.\n     * \n     * @see #getRangeAxis(int)\n     * @see #getDomainAxisIndex(CategoryAxis)\n     * \n     * @since 1.0.7\n     */\n\n    public int getRangeAxisIndex(ValueAxis axis) {\n        int result = this.rangeAxes.indexOf(axis);\n        if (result < 0) { // try the parent plot\n            Plot parent = getParent();\n            if (parent instanceof CategoryPlot) {\n                CategoryPlot p = (CategoryPlot) parent;\n                result = p.getRangeAxisIndex(axis);\n            }\n        }\n        return result;\n    }\n"
+      },
+      {
+        "hypothesis": "The method does not handle the case when the axis parameter is null, which results in an IllegalArgumentException. An explicit null check is needed to throw the exception.",
+        "changes": "+ if (axis == null) throw new IllegalArgumentException(\"Axis cannot be null\");",
+        "fixed_method": "public int getRangeAxisIndex(ValueAxis axis) {\n    if (axis == null) {\n        throw new IllegalArgumentException(\"Axis cannot be null\");\n    }\n    int result = this.rangeAxes.indexOf(axis);\n    if (result < 0) { // try the parent plot\n        Plot parent = getParent();\n        if (parent instanceof CategoryPlot) {\n            CategoryPlot p = (CategoryPlot) parent;\n            result = p.getRangeAxisIndex(axis);\n        }\n    }\n    return result;\n}",
+        "diff": "+ if (axis == null) throw new IllegalArgumentException(\"Axis cannot be null\");",
+        "file_path": "source/org/jfree/chart/plot/CategoryPlot.java",
+        "method_name": "getRangeAxisIndex",
+        "class_name": "CategoryPlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          972,
+          982
+        ],
+        "original_code": "    /**\n     * Returns the index of the specified axis, or <code>-1</code> if the axis\n     * is not assigned to the plot.\n     *\n     * @param axis  the axis (<code>null</code> not permitted).\n     *\n     * @return The axis index.\n     * \n     * @see #getRangeAxis(int)\n     * @see #getDomainAxisIndex(CategoryAxis)\n     * \n     * @since 1.0.7\n     */\n\n    public int getRangeAxisIndex(ValueAxis axis) {\n        int result = this.rangeAxes.indexOf(axis);\n        if (result < 0) { // try the parent plot\n            Plot parent = getParent();\n            if (parent instanceof CategoryPlot) {\n                CategoryPlot p = (CategoryPlot) parent;\n                result = p.getRangeAxisIndex(axis);\n            }\n        }\n        return result;\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "The method `getDomainAxisIndex` does not handle null inputs and might not check if the axis exists beyond indexOf behavior, which causes issues as indexOf returns -1. Moreover, input validation is missing which is crucial since the test checks for IllegalArgumentException.",
+        "changes": "+ Add null check for axis parameter\n+ Throw IllegalArgumentException if axis is null\n+ Ensure correct instance type handling with the list",
+        "fixed_method": "public int getDomainAxisIndex(CategoryAxis axis) {\n    if (axis == null) {\n        throw new IllegalArgumentException(\"Null 'axis' argument.\");\n    }\n    return this.domainAxes.indexOf(axis);\n}",
+        "diff": "+ Add null check for axis parameter\n+ Throw IllegalArgumentException if axis is null\n+ Ensure correct instance type handling with the list",
+        "file_path": "source/org/jfree/chart/plot/CategoryPlot.java",
+        "method_name": "getDomainAxisIndex",
+        "class_name": "CategoryPlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          697,
+          699
+        ],
+        "original_code": "    /**\n     * Returns the index of the specified axis, or <code>-1</code> if the axis\n     * is not assigned to the plot.\n     * \n     * @param axis  the axis (<code>null</code> not permitted).\n     * \n     * @return The axis index.\n     * \n     * @see #getDomainAxis(int)\n     * @see #getRangeAxisIndex(ValueAxis)\n     * \n     * @since 1.0.3\n     */\n\n    public int getDomainAxisIndex(CategoryAxis axis) {\n        return this.domainAxes.indexOf(axis);\n    }\n"
+      },
+      {
+        "hypothesis": "The method does not handle the null axis parameter as expected by the test case, leading to an assertion failure. We need to add a null check and throw an IllegalArgumentException if the axis is null.",
+        "changes": "+ Add null check for the axis parameter and throw IllegalArgumentException",
+        "fixed_method": "public int getDomainAxisIndex(CategoryAxis axis) {\n    if (axis == null) {\n        throw new IllegalArgumentException(\"Axis must not be null.\");\n    }\n    return this.domainAxes.indexOf(axis);\n}",
+        "diff": "+ Add null check for the axis parameter and throw IllegalArgumentException",
+        "file_path": "source/org/jfree/chart/plot/CategoryPlot.java",
+        "method_name": "getDomainAxisIndex",
+        "class_name": "CategoryPlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          697,
+          699
+        ],
+        "original_code": "    /**\n     * Returns the index of the specified axis, or <code>-1</code> if the axis\n     * is not assigned to the plot.\n     * \n     * @param axis  the axis (<code>null</code> not permitted).\n     * \n     * @return The axis index.\n     * \n     * @see #getDomainAxis(int)\n     * @see #getRangeAxisIndex(ValueAxis)\n     * \n     * @since 1.0.3\n     */\n\n    public int getDomainAxisIndex(CategoryAxis axis) {\n        return this.domainAxes.indexOf(axis);\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Chart-19/"
+}

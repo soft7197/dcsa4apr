@@ -1,0 +1,43 @@
+{
+  "bug_id": "JacksonDatabind-48",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-48_1772815359",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "methods": {
+        "src/main/java/com/fasterxml/jackson/databind/DeserializationConfig.java::DeserializationConfig::getDefaultVisibilityChecker::L770": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/DeserializationConfig.java",
+          "method_name": "getDefaultVisibilityChecker",
+          "class_name": "DeserializationConfig",
+          "line_numbers": [
+            770,
+            784
+          ],
+          "original_code": "\n    @Override\n    public VisibilityChecker<?> getDefaultVisibilityChecker()\n    {\n        VisibilityChecker<?> vchecker = super.getDefaultVisibilityChecker();\n        if (!isEnabled(MapperFeature.AUTO_DETECT_SETTERS)) {\n            vchecker = vchecker.withSetterVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_CREATORS)) {\n            vchecker = vchecker.withCreatorVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_FIELDS)) {\n            vchecker = vchecker.withFieldVisibility(Visibility.NONE);\n        }\n        return vchecker;\n    }\n",
+          "fixed_method": "@Override\npublic VisibilityChecker<?> getDefaultVisibilityChecker() {\nVisibilityChecker<?> vchecker = super.getDefaultVisibilityChecker();\nif (!isEnabled(MapperFeature.AUTO_DETECT_SETTERS)) {\nvchecker = vchecker.withSetterVisibility(Visibility.NONE);\n}\nif (!isEnabled(MapperFeature.AUTO_DETECT_CREATORS)) {\nvchecker = vchecker.withCreatorVisibility(Visibility.NONE);\n}\nif (!isEnabled(MapperFeature.AUTO_DETECT_FIELDS)) {\nvchecker = vchecker.withFieldVisibility(Visibility.NONE);\n}\nif (!isEnabled(MapperFeature.AUTO_DETECT_GETTERS)) {\nvchecker = vchecker.withGetterVisibility(Visibility.NONE);\n}\nif (!isEnabled(MapperFeature.AUTO_DETECT_IS_GETTERS)) {\nvchecker = vchecker.withIsGetterVisibility(Visibility.NONE);\n}\nreturn vchecker;\n}",
+          "iteration": 2
+        },
+        "src/main/java/com/fasterxml/jackson/databind/SerializationConfig.java::SerializationConfig::getDefaultVisibilityChecker::L860": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/SerializationConfig.java",
+          "method_name": "getDefaultVisibilityChecker",
+          "class_name": "SerializationConfig",
+          "line_numbers": [
+            860,
+            875
+          ],
+          "original_code": "\n    @Override\n    public VisibilityChecker<?> getDefaultVisibilityChecker()\n    {\n        VisibilityChecker<?> vchecker = super.getDefaultVisibilityChecker();\n        // then global overrides (disabling)\n        if (!isEnabled(MapperFeature.AUTO_DETECT_GETTERS)) {\n            vchecker = vchecker.withGetterVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_IS_GETTERS)) {\n            vchecker = vchecker.withIsGetterVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_FIELDS)) {\n            vchecker = vchecker.withFieldVisibility(Visibility.NONE);\n        }\n        return vchecker;\n    }\n",
+          "fixed_method": "@Override\npublic VisibilityChecker<?> getDefaultVisibilityChecker() {\nVisibilityChecker<?> vchecker = super.getDefaultVisibilityChecker();\nif (!isEnabled(MapperFeature.AUTO_DETECT_SETTERS)) {\nvchecker = vchecker.withSetterVisibility(Visibility.NONE);\n}\nif (!isEnabled(MapperFeature.AUTO_DETECT_CREATORS)) {\nvchecker = vchecker.withCreatorVisibility(Visibility.NONE);\n}\nif (!isEnabled(MapperFeature.AUTO_DETECT_FIELDS)) {\nvchecker = vchecker.withFieldVisibility(Visibility.NONE);\n}\nif (!isEnabled(MapperFeature.AUTO_DETECT_GETTERS)) {\nvchecker = vchecker.withGetterVisibility(Visibility.NONE);\n}\nif (!isEnabled(MapperFeature.AUTO_DETECT_IS_GETTERS)) {\nvchecker = vchecker.withIsGetterVisibility(Visibility.NONE);\n}\nreturn vchecker;\n}",
+          "iteration": 2
+        }
+      },
+      "iteration": 2,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/JacksonDatabind-48/"
+}

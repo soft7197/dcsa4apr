@@ -1,0 +1,47 @@
+{
+  "bug_id": "Math-63",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-63_1773120039",
+  "patches": [
+    [
+      {
+        "hypothesis": "The current equals method for single doubles does not handle NaNs correctly as the test expects NaNs in arrays to not be considered equal, unlike IEEE 754 equality.",
+        "changes": "Added condition to differentiate NaN equality handling in the equals method",
+        "fixed_method": "public static boolean equals(double x, double y) {\n    if (Double.isNaN(x) || Double.isNaN(y)) {\n        return false;\n    }\n    return x == y;\n}",
+        "diff": "Added condition to differentiate NaN equality handling in the equals method",
+        "file_path": "src/main/java/org/apache/commons/math/util/MathUtils.java",
+        "method_name": "equals",
+        "class_name": "MathUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          416,
+          417,
+          418
+        ],
+        "original_code": "/**\n* Returns true iff they are equal as defined by\n* {@link #equals(double,double,int) equals(x, y, 1)}.\n*\n* @param x first value\n* @param y second value\n* @return {@code true} if the values are equal.\n*/\npublic static boolean equals(double x, double y) {\n    return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n}"
+      },
+      {
+        "hypothesis": "The method is intended for comparing two single double values, but it incorrectly treats NaN comparisons as equal due to the direct usage of Double.isNaN. It should only consider two NaNs as equal when they are part of arrays and explicitly handled in a dedicated method.",
+        "changes": "- Removed handling for NaN in equals(double x, double y) as arrays should be explicitly managed elsewhere",
+        "fixed_method": "public static boolean equals(double x, double y) {\n    return x == y;\n}",
+        "diff": "- Removed handling for NaN in equals(double x, double y) as arrays should be explicitly managed elsewhere",
+        "file_path": "src/main/java/org/apache/commons/math/util/MathUtils.java",
+        "method_name": "equals",
+        "class_name": "MathUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          416,
+          417,
+          418
+        ],
+        "original_code": "/**\n* Returns true iff they are equal as defined by\n* {@link #equals(double,double,int) equals(x, y, 1)}.\n*\n* @param x first value\n* @param y second value\n* @return {@code true} if the values are equal.\n*/\npublic static boolean equals(double x, double y) {\n    return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-63/"
+}

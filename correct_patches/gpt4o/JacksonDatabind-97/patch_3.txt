@@ -1,0 +1,13 @@
+File: src/main/java/com/fasterxml/jackson/databind/node/POJONode.java
+Method: POJONode.serialize
+
+public final void serialize(JsonGenerator gen, SerializerProvider ctxt) throws IOException {
+    if (_value == null) {
+        ctxt.defaultSerializeNull(gen);
+    } else if (_value instanceof JsonSerializable) {
+        ((JsonSerializable) _value).serialize(gen, ctxt);
+    } else {
+        // Use context to serialize non-JsonSerializable objects to preserve attributes
+        ctxt.findValueSerializer(_value.getClass()).serialize(_value, gen, ctxt);
+    }
+}

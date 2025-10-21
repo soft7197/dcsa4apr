@@ -1,0 +1,47 @@
+{
+  "bug_id": "Math-98",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-98_1771971538",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by initializing the output array 'out' with the length of the input vector 'v' instead of the number of rows in the matrix. This leads to an ArrayIndexOutOfBoundsException when trying to assign a value to out[row] for row indices equal to or greater than the length of 'v'. The fix is to initialize 'out' with the number of rows in the matrix.",
+        "changes": "- final BigDecimal[] out = new BigDecimal[v.length];\n+ final BigDecimal[] out = new BigDecimal[nRows];",
+        "fixed_method": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[nRows];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}",
+        "diff": "- final BigDecimal[] out = new BigDecimal[v.length];\n+ final BigDecimal[] out = new BigDecimal[nRows];",
+        "file_path": "src/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "method_name": "operate",
+        "class_name": "BigMatrixImpl",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          985,
+          1000
+        ],
+        "original_code": "    /**\n     * Returns the result of multiplying this by the vector <code>v</code>.\n     *\n     * @param v the vector to operate on\n     * @return this*v\n     * @throws IllegalArgumentException if columnDimension != v.size()\n     */\n\n    public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n        if (v.length != this.getColumnDimension()) {\n            throw new IllegalArgumentException(\"vector has wrong length\");\n        }\n        final int nRows = this.getRowDimension();\n        final int nCols = this.getColumnDimension();\n        final BigDecimal[] out = new BigDecimal[v.length];\n        for (int row = 0; row < nRows; row++) {\n            BigDecimal sum = ZERO;\n            for (int i = 0; i < nCols; i++) {\n                sum = sum.add(data[row][i].multiply(v[i]));\n            }\n            out[row] = sum;\n        }\n        return out;\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "The bug is due to an incorrect initialization of the output array 'out'. The output array should have the same length as the number of rows, not the input vector length.",
+        "changes": "- final double[] out = new double[v.length];\n+ final double[] out = new double[nRows];",
+        "fixed_method": "    public double[] operate(double[] v) throws IllegalArgumentException {\n        final int nRows = this.getRowDimension();\n        final int nCols = this.getColumnDimension();\n        if (v.length != nCols) {\n            throw new IllegalArgumentException(\"vector has wrong length\");\n        }\n        final double[] out = new double[nRows];\n        for (int row = 0; row < nRows; row++) {\n            final double[] dataRow = data[row];\n            double sum = 0;\n            for (int i = 0; i < nCols; i++) {\n                sum += dataRow[i] * v[i];\n            }\n            out[row] = sum;\n        }\n        return out;\n    }",
+        "diff": "- final double[] out = new double[v.length];\n+ final double[] out = new double[nRows];",
+        "file_path": "src/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "method_name": "operate",
+        "class_name": "RealMatrixImpl",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          773,
+          789
+        ],
+        "original_code": "    /**\n     * @param v vector to operate on\n     * @throws IllegalArgumentException if columnDimension != v.length\n     * @return resulting vector\n     */\n\n    public double[] operate(double[] v) throws IllegalArgumentException {\n        final int nRows = this.getRowDimension();\n        final int nCols = this.getColumnDimension();\n        if (v.length != nCols) {\n            throw new IllegalArgumentException(\"vector has wrong length\");\n        }\n        final double[] out = new double[v.length];\n        for (int row = 0; row < nRows; row++) {\n            final double[] dataRow = data[row];\n            double sum = 0;\n            for (int i = 0; i < nCols; i++) {\n                sum += dataRow[i] * v[i];\n            }\n            out[row] = sum;\n        }\n        return out;\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-98/"
+}

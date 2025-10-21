@@ -1,0 +1,58 @@
+{
+  "bug_id": "Math-42",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-42_1772706319",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined patch avoids overfitting by using a more robust approach to identify the negative variable column and handling general cases, while including proper edge case handling.",
+        "fixed_method": "protected RealPointValuePair getSolution() {\n  int negativeVarColumn = columnLabels.indexOf(NEGATIVE_VAR_COLUMN_LABEL);\n  if (negativeVarColumn < 0) {\n    return new RealPointValuePair(new double[getOriginalNumDecisionVariables()], 0);\n  }\n  Integer negativeVarBasicRow = negativeVarColumn > 0 ? getBasicRow(negativeVarColumn) : null;\n  double mostNegative = negativeVarBasicRow == null ? 0 : getEntry(negativeVarBasicRow, getRhsOffset());\n\n  Set<Integer> basicRows = new HashSet<Integer>();\n  double[] coefficients = new double[getOriginalNumDecisionVariables()];\n  for (int i = 0; i < coefficients.length; i++) {\n      int colIndex = columnLabels.indexOf(\"x\" + i);\n      if (colIndex < 0) {\n        coefficients[i] = 0;\n        continue;\n      }\n      Integer basicRow = getBasicRow(colIndex);\n      if (basicRows.contains(basicRow)) {\n          coefficients[i] = 0 - (restrictToNonNegative ? 0 : mostNegative);\n      } else {\n          basicRows.add(basicRow);\n          coefficients[i] = (basicRow == null ? 0 : getEntry(basicRow, getRhsOffset())) - (restrictToNonNegative ? 0 : mostNegative);\n      }\n  }\n  return new RealPointValuePair(coefficients, f.getValue(coefficients));\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/apache/commons/math/optimization/linear/SimplexTableau.java",
+        "method_name": "getSolution",
+        "class_name": "SimplexTableau",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue is due to the negative variable column not being correctly identified, leading to an incorrect solution being returned.",
+        "line_numbers": [
+          396,
+          397,
+          398,
+          399,
+          400,
+          401,
+          402,
+          403,
+          404,
+          405,
+          406,
+          407,
+          408,
+          409,
+          410,
+          411,
+          412,
+          413,
+          414,
+          415,
+          416,
+          417,
+          418,
+          419,
+          420,
+          421,
+          422,
+          423,
+          424,
+          425
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-42/"
+}

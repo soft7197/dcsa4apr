@@ -1,0 +1,23 @@
+File: src/main/java/org/jsoup/nodes/Attributes.java
+Method: Attributes.html
+
+final void html(final Appendable accum, final Document.OutputSettings out) throws IOException {
+    final int sz = size;
+    for (int i = 0; i < sz; i++) {
+        final String key = keys[i];
+        final String val = vals[i];
+        accum.append(' ').append(key);
+
+        // Correct conditions to handle different attribute value scenarios
+        boolean isHtmlSyntax = out.syntax() == Document.OutputSettings.Syntax.html;
+        boolean isBooleanAttribute = Attribute.isBooleanAttribute(key);
+        boolean isEmptyOrBoolean = val == null || val.equals(key) || val.isEmpty();
+
+        if (!(isHtmlSyntax && isEmptyOrBoolean && isBooleanAttribute)) {
+            accum.append('=');
+            accum.append('"');
+            Entities.escape(accum, val == null ? "" : val, out, true, false, false);
+            accum.append('"');
+        }
+    }
+}

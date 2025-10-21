@@ -1,0 +1,95 @@
+{
+  "bug_id": "Math-77",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-77_1773123589",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method getLInfNorm is supposed to return the largest absolute value (the L-Infinity norm), but is currently accumulating sums of Math.abs results, causing it to produce incorrect large values.",
+        "changes": "- Change accumulation `max += Math.max(max, Math.abs(a));` to correct logic `max = Math.max(max, Math.abs(a));`.",
+        "fixed_method": "public double getLInfNorm() {\n    double max = 0;\n    for (double a : data) {\n        max = Math.max(max, Math.abs(a));\n    }\n    return max;\n}",
+        "diff": "- Change accumulation `max += Math.max(max, Math.abs(a));` to correct logic `max = Math.max(max, Math.abs(a));`.",
+        "file_path": "src/main/java/org/apache/commons/math/linear/ArrayRealVector.java",
+        "method_name": "getLInfNorm",
+        "class_name": "ArrayRealVector",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          717,
+          724
+        ],
+        "original_code": "    /** {@inheritDoc} */\n\n    @Override\n    public double getLInfNorm() {\n        double max = 0;\n        for (double a : data) {\n            max += Math.max(max, Math.abs(a));\n        }\n        return max;\n    }\n"
+      },
+      {
+        "hypothesis": "The getLInfNorm method is incorrectly accumulating the maximum values, rather than finding the single maximum absolute value in the array.",
+        "changes": "-            max += Math.max(max, Math.abs(a));\n+            max = Math.max(max, Math.abs(a));",
+        "fixed_method": "    @Override\n    public double getLInfNorm() {\n        double max = 0;\n        for (double a : data) {\n            max = Math.max(max, Math.abs(a));\n        }\n        return max;\n    }",
+        "diff": "-            max += Math.max(max, Math.abs(a));\n+            max = Math.max(max, Math.abs(a));",
+        "file_path": "src/main/java/org/apache/commons/math/linear/ArrayRealVector.java",
+        "method_name": "getLInfNorm",
+        "class_name": "ArrayRealVector",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          717,
+          724
+        ],
+        "original_code": "    /** {@inheritDoc} */\n\n    @Override\n    public double getLInfNorm() {\n        double max = 0;\n        for (double a : data) {\n            max += Math.max(max, Math.abs(a));\n        }\n        return max;\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "The method computes the sum of values instead of the maximum absolute value, causing wrong results.",
+        "changes": "- max += iter.value(); \n+ max = Math.max(max, Math.abs(iter.value()));",
+        "fixed_method": "public double getLInfNorm() {\n    double max = 0;\n    Iterator iter = entries.iterator();\n    while (iter.hasNext()) {\n        iter.advance();\n        max = Math.max(max, Math.abs(iter.value()));\n    }\n    return max;\n}",
+        "diff": "- max += iter.value(); \n+ max = Math.max(max, Math.abs(iter.value()));",
+        "file_path": "src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java",
+        "method_name": "getLInfNorm",
+        "class_name": "OpenMapRealVector",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          498,
+          506
+        ],
+        "original_code": "\n    public double getLInfNorm() {\n        double max = 0;\n        Iterator iter = entries.iterator();\n        while (iter.hasNext()) {\n            iter.advance();\n            max += iter.value();\n        }\n        return max;\n    }\n"
+      },
+      {
+        "hypothesis": "The bug is due to incorrectly summing up all values instead of finding the maximum absolute value.",
+        "changes": "- max += iter.value();\n+ double absValue = Math.abs(iter.value());\n+ if (absValue > max) {\n+   max = absValue;\n+ }",
+        "fixed_method": "public double getLInfNorm() {\n    double max = 0;\n    Iterator iter = entries.iterator();\n    while (iter.hasNext()) {\n        iter.advance();\n        double absValue = Math.abs(iter.value());\n        if (absValue > max) {\n            max = absValue;\n        }\n    }\n    return max;\n}",
+        "diff": "- max += iter.value();\n+ double absValue = Math.abs(iter.value());\n+ if (absValue > max) {\n+   max = absValue;\n+ }",
+        "file_path": "src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java",
+        "method_name": "getLInfNorm",
+        "class_name": "OpenMapRealVector",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          498,
+          506
+        ],
+        "original_code": "\n    public double getLInfNorm() {\n        double max = 0;\n        Iterator iter = entries.iterator();\n        while (iter.hasNext()) {\n            iter.advance();\n            max += iter.value();\n        }\n        return max;\n    }\n"
+      },
+      {
+        "hypothesis": "The buggy method is calculating the LInfinity norm incorrectly by summing values instead of finding the maximum absolute value.",
+        "changes": "+ Initialized max to negative infinity\n+ Iterating through values and updating max to the absolute value if it's larger",
+        "fixed_method": "public double getLInfNorm() {\n        double max = Double.NEGATIVE_INFINITY;\n        Iterator iter = entries.iterator();\n        while (iter.hasNext()) {\n            iter.advance();\n            double value = Math.abs(iter.value());\n            if (value > max) {\n                max = value;\n            }\n        }\n        return max;\n    }\n",
+        "diff": "+ Initialized max to negative infinity\n+ Iterating through values and updating max to the absolute value if it's larger",
+        "file_path": "src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java",
+        "method_name": "getLInfNorm",
+        "class_name": "OpenMapRealVector",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          498,
+          506
+        ],
+        "original_code": "\n    public double getLInfNorm() {\n        double max = 0;\n        Iterator iter = entries.iterator();\n        while (iter.hasNext()) {\n            iter.advance();\n            max += iter.value();\n        }\n        return max;\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-77/"
+}

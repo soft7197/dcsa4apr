@@ -1,0 +1,10 @@
+File: src/main/java/org/apache/commons/math/stat/Frequency.java
+Method: Frequency.getPct
+
+public double getPct(Object v) {
+    if (v instanceof Comparable) {
+        return getPct((Comparable<?>) v);
+    } else {
+        return 0.0;
+    }
+}

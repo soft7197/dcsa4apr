@@ -1,0 +1,815 @@
+{
+  "org.apache.commons.lang.time.FastDateFormatTest::test_changeDefault_Locale_DateInstance": [
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        110,
+        111,
+        112,
+        113,
+        114
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;Ljava/util/TimeZone;Ljava/util/Locale;)V",
+      "executed_lines": [
+        538,
+        539,
+        542,
+        544,
+        545,
+        546,
+        548,
+        550,
+        551,
+        554,
+        555
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "getDateInstance",
+      "signature": "(I)Lorg/apache/commons/lang/time/FastDateFormat;",
+      "executed_lines": [
+        234
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "getDateInstance",
+      "signature": "(ILjava/util/Locale;)Lorg/apache/commons/lang/time/FastDateFormat;",
+      "executed_lines": [
+        249
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "getDateInstance",
+      "signature": "(ILjava/util/TimeZone;Ljava/util/Locale;)Lorg/apache/commons/lang/time/FastDateFormat;",
+      "executed_lines": [
+        280,
+        281,
+        285,
+        286,
+        290,
+        291,
+        292,
+        293,
+        296,
+        297,
+        298,
+        299,
+        303,
+        305
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "getInstance",
+      "signature": "(Ljava/lang/String;Ljava/util/TimeZone;Ljava/util/Locale;)Lorg/apache/commons/lang/time/FastDateFormat;",
+      "executed_lines": [
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        219
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "getLocale",
+      "signature": "()Ljava/util/Locale;",
+      "executed_lines": [
+        954
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "hashCode",
+      "signature": "()I",
+      "executed_lines": [
+        1001,
+        1002,
+        1003,
+        1004,
+        1005,
+        1006,
+        1007
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "init",
+      "signature": "()V",
+      "executed_lines": [
+        561,
+        562,
+        564,
+        565,
+        566,
+        569,
+        570
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "parsePattern",
+      "signature": "()Ljava/util/List;",
+      "executed_lines": [
+        581,
+        582,
+        584,
+        585,
+        586,
+        587,
+        588,
+        589,
+        591,
+        592,
+        594,
+        595,
+        596,
+        597,
+        599,
+        600,
+        605,
+        607,
+        612,
+        615,
+        617,
+        619,
+        620,
+        630,
+        631,
+        648,
+        649,
+        686,
+        687,
+        688,
+        690,
+        692,
+        697,
+        700
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "parseToken",
+      "signature": "(Ljava/lang/String;[I)Ljava/lang/String;",
+      "executed_lines": [
+        711,
+        713,
+        714,
+        716,
+        717,
+        720,
+        722,
+        723,
+        724,
+        725,
+        726,
+        730,
+        733,
+        735,
+        737,
+        738,
+        740,
+        748,
+        750,
+        751,
+        753,
+        758,
+        759
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "selectNumberRule",
+      "signature": "(II)Lorg/apache/commons/lang/time/FastDateFormat$NumberRule;",
+      "executed_lines": [
+        770,
+        772
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$CharacterLiteral",
+      "method": "<init>",
+      "signature": "(C)V",
+      "executed_lines": [
+        1081,
+        1082,
+        1083
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$CharacterLiteral",
+      "method": "estimateLength",
+      "signature": "()I",
+      "executed_lines": [
+        1089
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$Pair",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Ljava/lang/Object;)V",
+      "executed_lines": [
+        1708,
+        1709,
+        1710,
+        1711
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$Pair",
+      "method": "hashCode",
+      "signature": "()I",
+      "executed_lines": [
+        1738,
+        1739,
+        1740
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$StringLiteral",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        1112,
+        1113,
+        1114
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$StringLiteral",
+      "method": "estimateLength",
+      "signature": "()I",
+      "executed_lines": [
+        1120
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TextField",
+      "method": "<init>",
+      "signature": "(I[Ljava/lang/String;)V",
+      "executed_lines": [
+        1145,
+        1146,
+        1147,
+        1148
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TextField",
+      "method": "estimateLength",
+      "signature": "()I",
+      "executed_lines": [
+        1154,
+        1155,
+        1156,
+        1157,
+        1158,
+        1160,
+        1161
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TwoDigitYearField",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        1367
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TwoDigitYearField",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        1373,
+        1374
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TwoDigitYearField",
+      "method": "estimateLength",
+      "signature": "()I",
+      "executed_lines": [
+        1380
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$UnpaddedNumberField",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        1176
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$UnpaddedNumberField",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        1185,
+        1186,
+        1187
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$UnpaddedNumberField",
+      "method": "estimateLength",
+      "signature": "()I",
+      "executed_lines": [
+        1193
+      ]
+    }
+  ],
+  "org.apache.commons.lang.time.FastDateFormatTest::test_changeDefault_Locale_DateTimeInstance": [
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        110,
+        111,
+        112,
+        113,
+        114
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;Ljava/util/TimeZone;Ljava/util/Locale;)V",
+      "executed_lines": [
+        538,
+        539,
+        542,
+        544,
+        545,
+        546,
+        548,
+        550,
+        551,
+        554,
+        555
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "getDateTimeInstance",
+      "signature": "(II)Lorg/apache/commons/lang/time/FastDateFormat;",
+      "executed_lines": [
+        408
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "getDateTimeInstance",
+      "signature": "(IILjava/util/Locale;)Lorg/apache/commons/lang/time/FastDateFormat;",
+      "executed_lines": [
+        425
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "getDateTimeInstance",
+      "signature": "(IILjava/util/TimeZone;Ljava/util/Locale;)Lorg/apache/commons/lang/time/FastDateFormat;",
+      "executed_lines": [
+        461,
+        462,
+        465,
+        466,
+        469,
+        470,
+        471,
+        472,
+        475,
+        477,
+        478,
+        479,
+        483,
+        485
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "getInstance",
+      "signature": "(Ljava/lang/String;Ljava/util/TimeZone;Ljava/util/Locale;)Lorg/apache/commons/lang/time/FastDateFormat;",
+      "executed_lines": [
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        219
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "getLocale",
+      "signature": "()Ljava/util/Locale;",
+      "executed_lines": [
+        954
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "hashCode",
+      "signature": "()I",
+      "executed_lines": [
+        1001,
+        1002,
+        1003,
+        1004,
+        1005,
+        1006,
+        1007
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "init",
+      "signature": "()V",
+      "executed_lines": [
+        561,
+        562,
+        564,
+        565,
+        566,
+        569,
+        570
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "parsePattern",
+      "signature": "()Ljava/util/List;",
+      "executed_lines": [
+        581,
+        582,
+        584,
+        585,
+        586,
+        587,
+        588,
+        589,
+        591,
+        592,
+        594,
+        595,
+        596,
+        597,
+        599,
+        600,
+        605,
+        607,
+        612,
+        615,
+        617,
+        619,
+        620,
+        630,
+        631,
+        633,
+        634,
+        636,
+        637,
+        639,
+        640,
+        642,
+        643,
+        648,
+        649,
+        663,
+        664,
+        672,
+        673,
+        686,
+        687,
+        688,
+        690,
+        692,
+        697,
+        700
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "parseToken",
+      "signature": "(Ljava/lang/String;[I)Ljava/lang/String;",
+      "executed_lines": [
+        711,
+        713,
+        714,
+        716,
+        717,
+        720,
+        722,
+        723,
+        724,
+        725,
+        726,
+        730,
+        733,
+        735,
+        737,
+        738,
+        740,
+        741,
+        746,
+        748,
+        750,
+        751,
+        753,
+        758,
+        759
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat",
+      "method": "selectNumberRule",
+      "signature": "(II)Lorg/apache/commons/lang/time/FastDateFormat$NumberRule;",
+      "executed_lines": [
+        770,
+        772,
+        774
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$CharacterLiteral",
+      "method": "<init>",
+      "signature": "(C)V",
+      "executed_lines": [
+        1081,
+        1082,
+        1083
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$CharacterLiteral",
+      "method": "estimateLength",
+      "signature": "()I",
+      "executed_lines": [
+        1089
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$Pair",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Ljava/lang/Object;)V",
+      "executed_lines": [
+        1708,
+        1709,
+        1710,
+        1711
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$Pair",
+      "method": "equals",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1717,
+        1721,
+        1725,
+        1727,
+        1729,
+        1731
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$Pair",
+      "method": "hashCode",
+      "signature": "()I",
+      "executed_lines": [
+        1738,
+        1739,
+        1740
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$StringLiteral",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        1112,
+        1113,
+        1114
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$StringLiteral",
+      "method": "estimateLength",
+      "signature": "()I",
+      "executed_lines": [
+        1120
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TextField",
+      "method": "<init>",
+      "signature": "(I[Ljava/lang/String;)V",
+      "executed_lines": [
+        1145,
+        1146,
+        1147,
+        1148
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TextField",
+      "method": "estimateLength",
+      "signature": "()I",
+      "executed_lines": [
+        1154,
+        1155,
+        1156,
+        1157,
+        1158,
+        1160,
+        1161
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TimeZoneNameRule",
+      "method": "<init>",
+      "signature": "(Ljava/util/TimeZone;ZLjava/util/Locale;I)V",
+      "executed_lines": [
+        1538,
+        1539,
+        1540,
+        1541,
+        1542,
+        1544,
+        1548,
+        1549,
+        1551
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TimeZoneNameRule",
+      "method": "estimateLength",
+      "signature": "()I",
+      "executed_lines": [
+        1557,
+        1559,
+        1562
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TwelveHourField",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/lang/time/FastDateFormat$NumberRule;)V",
+      "executed_lines": [
+        1447,
+        1448,
+        1449
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TwelveHourField",
+      "method": "estimateLength",
+      "signature": "()I",
+      "executed_lines": [
+        1455
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TwoDigitNumberField",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        1332,
+        1333,
+        1334
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TwoDigitNumberField",
+      "method": "estimateLength",
+      "signature": "()I",
+      "executed_lines": [
+        1340
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TwoDigitYearField",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        1367
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TwoDigitYearField",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        1373,
+        1374
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$TwoDigitYearField",
+      "method": "estimateLength",
+      "signature": "()I",
+      "executed_lines": [
+        1380
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$UnpaddedNumberField",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        1176
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$UnpaddedNumberField",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        1185,
+        1186,
+        1187
+      ]
+    },
+    {
+      "package": "org.apache.commons.lang.time",
+      "class": "org.apache.commons.lang.time.FastDateFormat$UnpaddedNumberField",
+      "method": "estimateLength",
+      "signature": "()I",
+      "executed_lines": [
+        1193
+      ]
+    }
+  ]
+}

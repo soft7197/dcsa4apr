@@ -1,0 +1,12 @@
+File: src/main/java/org/apache/commons/math3/fraction/Fraction.java
+Method: Fraction.percentageValue
+
+public double percentageValue() {
+  double numerator = (double) getNumerator();
+  double denominator = (double) getDenominator();
+  if (denominator == 0) {
+    return Double.NaN;
+  }
+  double percentage = (numerator / denominator) * 100;
+  return percentage;
+}

@@ -1,0 +1,12 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "computeFollowing_com.google.javascript.jscomp.UnreachableCodeElimination",
+      "tryRemoveUnconditionalBranching_com.google.javascript.jscomp.UnreachableCodeElimination"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testCascadedRemovalOfUnlessUnconditonalJumps",
+      "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue311"
+    ]
+  }
+}

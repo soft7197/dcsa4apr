@@ -1,0 +1,51 @@
+File: src/main/java/org/jsoup/helper/DataUtil.java
+Method: DataUtil.parseByteData
+
+static Document parseByteData(ByteBuffer byteData, String charsetName, String baseUri, Parser parser) {
+    String docData;
+    Document doc = null;
+    // UTF-8 BOM indicator: takes precedence, rarely used
+    if (byteData.hasRemaining() && byteData.get(0) == (byte) 0xEF && byteData.get(1) == (byte) 0xBB && byteData.get(2) == (byte) 0xBF) {
+        byteData.position(3);  // Skip BOM
+    }
+    if (charsetName == null) { // Determine from meta. Safe parse as UTF-8
+        docData = Charset.forName(defaultCharset).decode(byteData).toString();
+        doc = parser.parseInput(docData, baseUri);
+        Element meta = doc.select("meta[http-equiv=content-type], meta[charset]").first();
+        if (meta != null) { // If not found, will keep utf-8 as best attempt
+            String foundCharset;
+            if (meta.hasAttr("http-equiv")) {
+                foundCharset = getCharsetFromContentType(meta.attr("content"));
+                if (foundCharset == null && meta.hasAttr("charset")) {
+                    try {
+                        if (Charset.isSupported(meta.attr("charset"))) {
+                            foundCharset = meta.attr("charset");
+                        }
+                    } catch (IllegalCharsetNameException e) {
+                        foundCharset = null;
+                    }
+                }
+            } else {
+                foundCharset = meta.attr("charset");
+            }
+            if (foundCharset != null && foundCharset.length() != 0 && !foundCharset.equals(defaultCharset)) { // Need to re-decode
+                foundCharset = foundCharset.trim().replaceAll("[\"']", "");
+                charsetName = foundCharset;
+                byteData.rewind();
+                if (byteData.hasRemaining() && byteData.get(0) == (byte) 0xEF && byteData.get(1) == (byte) 0xBB && byteData.get(2) == (byte) 0xBF) {
+                    byteData.position(3);  // Skip BOM again if rewound
+                }
+                docData = Charset.forName(foundCharset).decode(byteData).toString();
+                doc = null;
+            }
+        }
+    } else { // Specified by content type header (or by user on file load)
+        Validate.notEmpty(charsetName, "Must set charset arg to character set of file to parse. Set to null to attempt to detect from HTML");
+        docData = Charset.forName(charsetName).decode(byteData).toString();
+    }
+    if (doc == null) {
+        doc = parser.parseInput(docData, baseUri);
+        doc.outputSettings().charset(charsetName);
+    }
+    return doc;
+}

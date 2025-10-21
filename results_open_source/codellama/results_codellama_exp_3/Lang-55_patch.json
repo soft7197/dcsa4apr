@@ -1,0 +1,34 @@
+{
+  "bug_id": "Lang-55",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-55_1772912805",
+  "patches": [
+    [
+      {
+        "hypothesis": "The `stopTime` variable was not being updated properly when the stopwatch was suspended.",
+        "changes": "- stopTime = System.currentTimeMillis();\n+ stopTime = this.stopTime;",
+        "fixed_method": "public void stop() {\n  if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n    throw new IllegalStateException(\"Stopwatch is not running.\");\n  }\n  this.stopTime = this.stopTime;\n  this.runningState = STATE_STOPPED;\n}",
+        "diff": "- stopTime = System.currentTimeMillis();\n+ stopTime = this.stopTime;",
+        "file_path": "src/java/org/apache/commons/lang/time/StopWatch.java",
+        "method_name": "stop",
+        "class_name": "StopWatch",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120
+        ],
+        "original_code": "/**\n* <p>Stop the stopwatch.</p>\n*\n* <p>This method ends a new timing session, allowing the time to be retrieved.</p>\n*\n* @throws IllegalStateException if the StopWatch is not running.\n*/\npublic void stop() {\n    if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n        throw new IllegalStateException(\"Stopwatch is not running. \");\n    }\n        stopTime = System.currentTimeMillis();\n    this.runningState = STATE_STOPPED;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Lang-55/"
+}

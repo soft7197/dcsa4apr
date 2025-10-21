@@ -1,0 +1,55 @@
+{
+  "bug_id": "JacksonDatabind-61",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-61_1773123113",
+  "patches": [
+    {
+      "hypothesis": "The methods are not correctly handling primitive types, leading to serialization and deserialization issues for primitive long values.",
+      "changes": "- Added checks for primitive types in both serializer and deserializer build functions to prevent incorrect handling. \n- Updated 'useForType' to allow primitives in the NON_FINAL case by checking `t.isPrimitive()`.",
+      "methods": {
+        "src/main/java/com/fasterxml/jackson/databind/ObjectMapper.java::ObjectMapper::useForType::L228": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/ObjectMapper.java",
+          "method_name": "useForType",
+          "class_name": "ObjectMapper",
+          "line_numbers": [
+            228,
+            263
+          ],
+          "original_code": "        /**\n         * Method called to check if the default type handler should be\n         * used for given type.\n         * Note: \"natural types\" (String, Boolean, Integer, Double) will never\n         * use typing; that is both due to them being concrete and final,\n         * and since actual serializers and deserializers will also ignore any\n         * attempts to enforce typing.\n         */\n\n        public boolean useForType(JavaType t)\n        {\n            // 03-Oct-2016, tatu: As per [databind#1395], need to skip\n            //  primitive types too, regardless\n\n            switch (_appliesFor) {\n            case NON_CONCRETE_AND_ARRAYS:\n                while (t.isArrayType()) {\n                    t = t.getContentType();\n                }\n                // fall through\n            case OBJECT_AND_NON_CONCRETE:\n                // 19-Apr-2016, tatu: ReferenceType like Optional also requires similar handling:\n                while (t.isReferenceType()) {\n                    t = t.getReferencedType();\n                }\n                return t.isJavaLangObject()\n                        || (!t.isConcrete()\n                                // [databind#88] Should not apply to JSON tree models:\n                                && !TreeNode.class.isAssignableFrom(t.getRawClass()));\n\n            case NON_FINAL:\n                while (t.isArrayType()) {\n                    t = t.getContentType();\n                }\n                // 19-Apr-2016, tatu: ReferenceType like Optional also requires similar handling:\n                while (t.isReferenceType()) {\n                    t = t.getReferencedType();\n                }\n                // [databind#88] Should not apply to JSON tree models:\n                return !t.isFinal() && !TreeNode.class.isAssignableFrom(t.getRawClass());\n            default:\n            //case JAVA_LANG_OBJECT:\n                return t.isJavaLangObject();\n            }\n        }\n",
+          "fixed_method": "public boolean useForType(JavaType t)\n{\n    switch (_appliesFor) {\n    case NON_CONCRETE_AND_ARRAYS:\n        while (t.isArrayType()) {\n            t = t.getContentType();\n        }\n        // fall through\n    case OBJECT_AND_NON_CONCRETE:\n        while (t.isReferenceType()) {\n            t = t.getReferencedType();\n        }\n        return t.isJavaLangObject()\n                || (!t.isConcrete()\n                        && !TreeNode.class.isAssignableFrom(t.getRawClass()));\n    case NON_FINAL:\n        while (t.isArrayType()) {\n            t = t.getContentType();\n        }\n        while (t.isReferenceType()) {\n            t = t.getReferencedType();\n        }\n        return (!t.isFinal() || t.isPrimitive()) && !TreeNode.class.isAssignableFrom(t.getRawClass());\n    default:\n        return t.isJavaLangObject();\n    }\n}",
+          "iteration": 1
+        },
+        "src/main/java/com/fasterxml/jackson/databind/jsontype/impl/StdTypeResolverBuilder.java::StdTypeResolverBuilder::buildTypeSerializer::L67": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/jsontype/impl/StdTypeResolverBuilder.java",
+          "method_name": "buildTypeSerializer",
+          "class_name": "StdTypeResolverBuilder",
+          "line_numbers": [
+            67,
+            89
+          ],
+          "original_code": "\n    @Override\n    public TypeSerializer buildTypeSerializer(SerializationConfig config,\n            JavaType baseType, Collection<NamedType> subtypes)\n    {\n        if (_idType == JsonTypeInfo.Id.NONE) { return null; }\n        // 03-Oct-2016, tatu: As per [databind#1395] better prevent use for primitives,\n        //    regardless of setting\n        TypeIdResolver idRes = idResolver(config, baseType, subtypes, true, false);\n        switch (_includeAs) {\n        case WRAPPER_ARRAY:\n            return new AsArrayTypeSerializer(idRes, null);\n        case PROPERTY:\n            return new AsPropertyTypeSerializer(idRes, null, _typeProperty);\n        case WRAPPER_OBJECT:\n            return new AsWrapperTypeSerializer(idRes, null);\n        case EXTERNAL_PROPERTY:\n            return new AsExternalTypeSerializer(idRes, null, _typeProperty);\n        case EXISTING_PROPERTY:\n        \t// as per [#528]\n        \treturn new AsExistingPropertyTypeSerializer(idRes, null, _typeProperty);\n        }\n        throw new IllegalStateException(\"Do not know how to construct standard type serializer for inclusion type: \"+_includeAs);\n    }\n",
+          "fixed_method": "public TypeSerializer buildTypeSerializer(SerializationConfig config,\n        JavaType baseType, Collection<NamedType> subtypes)\n{\n    if (_idType == JsonTypeInfo.Id.NONE || baseType.isPrimitive()) { return null; }\n    TypeIdResolver idRes = idResolver(config, baseType, subtypes, true, false);\n    switch (_includeAs) {\n    case WRAPPER_ARRAY:\n        return new AsArrayTypeSerializer(idRes, null);\n    case PROPERTY:\n        return new AsPropertyTypeSerializer(idRes, null, _typeProperty);\n    case WRAPPER_OBJECT:\n        return new AsWrapperTypeSerializer(idRes, null);\n    case EXTERNAL_PROPERTY:\n        return new AsExternalTypeSerializer(idRes, null, _typeProperty);\n    case EXISTING_PROPERTY:\n        return new AsExistingPropertyTypeSerializer(idRes, null, _typeProperty);\n    }\n    throw new IllegalStateException(\"Do not know how to construct standard type serializer for inclusion type: \"+_includeAs);\n}",
+          "iteration": 1
+        },
+        "src/main/java/com/fasterxml/jackson/databind/jsontype/impl/StdTypeResolverBuilder.java::StdTypeResolverBuilder::buildTypeDeserializer::L97": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/jsontype/impl/StdTypeResolverBuilder.java",
+          "method_name": "buildTypeDeserializer",
+          "class_name": "StdTypeResolverBuilder",
+          "line_numbers": [
+            97,
+            144
+          ],
+          "original_code": "\n    @Override\n    public TypeDeserializer buildTypeDeserializer(DeserializationConfig config,\n            JavaType baseType, Collection<NamedType> subtypes)\n    {\n        if (_idType == JsonTypeInfo.Id.NONE) { return null; }\n        // 03-Oct-2016, tatu: As per [databind#1395] better prevent use for primitives,\n        //    regardless of setting\n\n        TypeIdResolver idRes = idResolver(config, baseType, subtypes, false, true);\n\n        JavaType defaultImpl;\n\n        if (_defaultImpl == null) {\n            defaultImpl = null;\n        } else {\n            // 20-Mar-2016, tatu: It is important to do specialization go through\n            //   TypeFactory to ensure proper resolution; with 2.7 and before, direct\n            //   call to JavaType was used, but that can not work reliably with 2.7\n            // 20-Mar-2016, tatu: Can finally add a check for type compatibility BUT\n            //   if so, need to add explicit checks for marker types. Not ideal, but\n            //   seems like a reasonable compromise.\n            if ((_defaultImpl == Void.class)\n                     || (_defaultImpl == NoClass.class)) {\n                defaultImpl = config.getTypeFactory().constructType(_defaultImpl);\n            } else {\n                defaultImpl = config.getTypeFactory()\n                    .constructSpecializedType(baseType, _defaultImpl);\n            }\n        }\n\n        // First, method for converting type info to type id:\n        switch (_includeAs) {\n        case WRAPPER_ARRAY:\n            return new AsArrayTypeDeserializer(baseType, idRes,\n                    _typeProperty, _typeIdVisible, defaultImpl);\n        case PROPERTY:\n        case EXISTING_PROPERTY: // as per [#528] same class as PROPERTY\n            return new AsPropertyTypeDeserializer(baseType, idRes,\n                    _typeProperty, _typeIdVisible, defaultImpl, _includeAs);\n        case WRAPPER_OBJECT:\n            return new AsWrapperTypeDeserializer(baseType, idRes,\n                    _typeProperty, _typeIdVisible, defaultImpl);\n        case EXTERNAL_PROPERTY:\n            return new AsExternalTypeDeserializer(baseType, idRes,\n                    _typeProperty, _typeIdVisible, defaultImpl);\n        }\n        throw new IllegalStateException(\"Do not know how to construct standard type serializer for inclusion type: \"+_includeAs);\n    }\n",
+          "fixed_method": "public TypeDeserializer buildTypeDeserializer(DeserializationConfig config,\n        JavaType baseType, Collection<NamedType> subtypes)\n{\n    if (_idType == JsonTypeInfo.Id.NONE || baseType.isPrimitive()) { return null; }\n    TypeIdResolver idRes = idResolver(config, baseType, subtypes, false, true);\n\n    JavaType defaultImpl;\n\n    if (_defaultImpl == null) {\n        defaultImpl = null;\n    } else {\n        if ((_defaultImpl == Void.class)\n                 || (_defaultImpl == NoClass.class)) {\n            defaultImpl = config.getTypeFactory().constructType(_defaultImpl);\n        } else {\n            defaultImpl = config.getTypeFactory()\n                .constructSpecializedType(baseType, _defaultImpl);\n        }\n    }\n\n    switch (_includeAs) {\n    case WRAPPER_ARRAY:\n        return new AsArrayTypeDeserializer(baseType, idRes,\n                _typeProperty, _typeIdVisible, defaultImpl);\n    case PROPERTY:\n    case EXISTING_PROPERTY:\n        return new AsPropertyTypeDeserializer(baseType, idRes,\n                _typeProperty, _typeIdVisible, defaultImpl, _includeAs);\n    case WRAPPER_OBJECT:\n        return new AsWrapperTypeDeserializer(baseType, idRes,\n                _typeProperty, _typeIdVisible, defaultImpl);\n    case EXTERNAL_PROPERTY:\n        return new AsExternalTypeDeserializer(baseType, idRes,\n                _typeProperty, _typeIdVisible, defaultImpl);\n    }\n    throw new IllegalStateException(\"Do not know how to construct standard type serializer for inclusion type: \"+_includeAs);\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-61/"
+}

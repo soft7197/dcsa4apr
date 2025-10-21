@@ -1,0 +1,52 @@
+{
+  "org.joda.time.TestMutableDateTime_Adds::testAddYears_int_dstOverlapWinter_addZero": [
+    {
+      "buggy_method": "addYears",
+      "class": "org.joda.time.MutableDateTime"
+    },
+    {
+      "buggy_method": "addHours",
+      "class": "org.joda.time.MutableDateTime"
+    }
+  ],
+  "org.joda.time.TestMutableDateTime_Adds::testAddDays_int_dstOverlapWinter_addZero": [
+    {
+      "buggy_method": "addDays",
+      "class": "org.joda.time.MutableDateTime"
+    },
+    {
+      "buggy_method": "addHours",
+      "class": "org.joda.time.MutableDateTime"
+    }
+  ],
+  "org.joda.time.TestMutableDateTime_Adds::testAddWeeks_int_dstOverlapWinter_addZero": [
+    {
+      "buggy_method": "addWeeks",
+      "class": "org.joda.time.MutableDateTime"
+    },
+    {
+      "buggy_method": "addHours",
+      "class": "org.joda.time.MutableDateTime"
+    }
+  ],
+  "org.joda.time.TestMutableDateTime_Adds::testAdd_DurationFieldType_int_dstOverlapWinter_addZero": [
+    {
+      "buggy_method": "add",
+      "class": "org.joda.time.MutableDateTime"
+    },
+    {
+      "buggy_method": "addHours",
+      "class": "org.joda.time.MutableDateTime"
+    }
+  ],
+  "org.joda.time.TestMutableDateTime_Adds::testAddMonths_int_dstOverlapWinter_addZero": [
+    {
+      "buggy_method": "addMonths",
+      "class": "org.joda.time.MutableDateTime"
+    },
+    {
+      "buggy_method": "addHours",
+      "class": "org.joda.time.MutableDateTime"
+    }
+  ]
+}

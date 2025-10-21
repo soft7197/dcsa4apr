@@ -1,0 +1,33 @@
+{
+  "bug_id": "Math-91",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-91_1772709349",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined fix addresses overfitting by replacing hardcoded values with general logical expressions and covering edge cases.",
+        "fixed_method": "public int compareTo(Fraction object) {\n  if (object == null) return -1;\n  int nOd = numerator * object.denominator;\n  int dOn = denominator * object.numerator;\n  if (nOd < dOn) {\n    return -1;\n  } else if (nOd > dOn) {\n    return 1;\n  } else {\n    return 0;\n  }\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/java/org/apache/commons/math/fraction/Fraction.java",
+        "method_name": "compareTo",
+        "class_name": "Fraction",
+        "iteration": 2,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the double comparison in the method. The method should compare the numerators and denominators instead.",
+        "line_numbers": [
+          258,
+          259,
+          260,
+          261,
+          262
+        ]
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Math-91/"
+}

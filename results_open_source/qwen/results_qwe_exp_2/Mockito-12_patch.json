@@ -1,0 +1,37 @@
+{
+  "bug_id": "Mockito-12",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-12_1771950537",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by attempting to cast a ParameterizedType directly to a Class, which is incorrect. We need to handle the case where the actual type argument is a ParameterizedType itself and extract the raw class from it.",
+        "changes": "- return (Class) actual;\n+ if (actual instanceof Class) {\n+     return (Class) actual;\n+ } else if (actual instanceof ParameterizedType) {\n+     return (Class) ((ParameterizedType) actual).getRawType();\n+ }",
+        "fixed_method": "public Class getGenericType(Field field) {        \n    Type generic = field.getGenericType();\n    if (generic != null && generic instanceof ParameterizedType) {\n        Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n        if (actual instanceof Class) {\n            return (Class) actual;\n        } else if (actual instanceof ParameterizedType) {\n            return (Class) ((ParameterizedType) actual).getRawType();\n        }\n        //in case of nested generics we don't go deep\n    }\n    \n    return Object.class;\n}",
+        "diff": "- return (Class) actual;\n+ if (actual instanceof Class) {\n+     return (Class) actual;\n+ } else if (actual instanceof ParameterizedType) {\n+     return (Class) ((ParameterizedType) actual).getRawType();\n+ }",
+        "file_path": "src/org/mockito/internal/util/reflection/GenericMaster.java",
+        "method_name": "getGenericType",
+        "class_name": "GenericMaster",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "original_code": "/**\n* Finds the generic type (parametrized type) of the field. If the field is not generic it returns Object.class.\n*\n* @param field\n* @return\n*/\npublic Class getGenericType(Field field) {        \n    Type generic = field.getGenericType();\n    if (generic != null && generic instanceof ParameterizedType) {\n        Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n            return (Class) actual;\n            //in case of nested generics we don't go deep\n    }\n    \n    return Object.class;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Mockito-12/"
+}

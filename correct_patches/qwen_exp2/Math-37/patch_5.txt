@@ -1,0 +1,25 @@
+File: src/main/java/org/apache/commons/math/complex/Complex.java
+Method: Complex.tan
+
+public Complex tan() {
+    if (isNaN) {
+        return NaN;
+    }
+
+    double real2 = 2.0 * real;
+    double imaginary2 = 2.0 * imaginary;
+    double cosReal2 = FastMath.cos(real2);
+    double coshImaginary2 = FastMath.cosh(imaginary2);
+    double d = cosReal2 + coshImaginary2;
+
+    if (Double.isInfinite(d)) {
+        return createComplex(0, FastMath.signum(imaginary));
+    } else if (d == 0) {
+        // Handle division by zero which can occur due to underflow
+        return createComplex(FastMath.sin(real2) / Double.MIN_NORMAL,
+                             FastMath.sinh(imaginary2) / Double.MIN_NORMAL);
+    }
+
+    return createComplex(FastMath.sin(real2) / d,
+                         FastMath.sinh(imaginary2) / d);
+}

@@ -1,0 +1,47 @@
+{
+  "bug_id": "Mockito-38",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-38_1773120444",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method toStringEquals throws a NullPointerException when arg is null because arg.toString() is being called without checking if arg is null.",
+        "changes": "- return StringDescription.toString(m).equals(arg.toString());\n+ return arg != null && StringDescription.toString(m).equals(arg.toString());",
+        "fixed_method": "private boolean toStringEquals(Matcher m, Object arg) {\n    return arg != null && StringDescription.toString(m).equals(arg.toString());\n}",
+        "diff": "- return StringDescription.toString(m).equals(arg.toString());\n+ return arg != null && StringDescription.toString(m).equals(arg.toString());",
+        "file_path": "src/org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java",
+        "method_name": "toStringEquals",
+        "class_name": "ArgumentMatchingTool",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          47,
+          48,
+          49
+        ],
+        "original_code": "/**\n* Suspiciously not matching arguments are those that don't much, the toString() representation is the same but types are different.\n*/\nprivate boolean toStringEquals(Matcher m, Object arg) {\n    return StringDescription.toString(m).equals(arg.toString());\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by a NullPointerException when attempting to call toString() on a null argument. The fix involves adding a null check for the `arg` parameter before calling `toString()`.",
+        "changes": "+ Handle null argument by returning false if arg is null",
+        "fixed_method": "private boolean toStringEquals(Matcher m, Object arg) {\n    if (arg == null) {\n        return false;\n    }\n    return StringDescription.toString(m).equals(arg.toString());\n}",
+        "diff": "+ Handle null argument by returning false if arg is null",
+        "file_path": "src/org/mockito/internal/verification/argumentmatching/ArgumentMatchingTool.java",
+        "method_name": "toStringEquals",
+        "class_name": "ArgumentMatchingTool",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          47,
+          48,
+          49
+        ],
+        "original_code": "/**\n* Suspiciously not matching arguments are those that don't much, the toString() representation is the same but types are different.\n*/\nprivate boolean toStringEquals(Matcher m, Object arg) {\n    return StringDescription.toString(m).equals(arg.toString());\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Mockito-38/"
+}

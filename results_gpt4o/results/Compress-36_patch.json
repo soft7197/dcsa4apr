@@ -1,0 +1,43 @@
+{
+  "bug_id": "Compress-36",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Compress-36_1773118415",
+  "patches": [
+    [
+      {
+        "hypothesis": "The IllegalStateException occurs because getCurrentStream() is called when either no stream or a stream that is completely read (like for 0-byte entries) is attempted to be accessed. We need to ensure getCurrentStream handles cases where a current stream exists without data.",
+        "changes": "-if (deferredBlockStreams.isEmpty()) { throw new IllegalStateException\n+if (deferredBlockStreams.isEmpty()) { return new ByteArrayInputStream(new byte[0]);",
+        "fixed_method": "private InputStream getCurrentStream() throws IOException {\n    if (deferredBlockStreams.isEmpty()) {\n        return new ByteArrayInputStream(new byte[0]);\n    }\n    \n    while (deferredBlockStreams.size() > 1) {\n        final InputStream stream = deferredBlockStreams.remove(0);\n        IOUtils.skip(stream, Long.MAX_VALUE);\n        stream.close();\n    }\n\n    return deferredBlockStreams.get(0);\n}",
+        "diff": "-if (deferredBlockStreams.isEmpty()) { throw new IllegalStateException\n+if (deferredBlockStreams.isEmpty()) { return new ByteArrayInputStream(new byte[0]);",
+        "file_path": "src/main/java/org/apache/commons/compress/archivers/sevenz/SevenZFile.java",
+        "method_name": "getCurrentStream",
+        "class_name": "SevenZFile",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          901,
+          902,
+          903,
+          904,
+          905,
+          906,
+          907,
+          908,
+          909,
+          910,
+          911,
+          912,
+          913,
+          914,
+          915,
+          916
+        ],
+        "original_code": "/**\n* Reads a byte of data.\n*\n* @return the byte read, or -1 if end of input is reached\n* @throws IOException\n*             if an I/O error has occurred\n*/\nprivate InputStream getCurrentStream() throws IOException {\n    if (deferredBlockStreams.isEmpty()) {\n        throw new IllegalStateException(\"No current 7z entry (call getNextEntry() first).\");\n    }\n    \n    while (deferredBlockStreams.size() > 1) {\n        // In solid compression mode we need to decompress all leading folder'\n        // streams to get access to an entry. We defer this until really needed\n        // so that entire blocks can be skipped without wasting time for decompression.\n        final InputStream stream = deferredBlockStreams.remove(0);\n        IOUtils.skip(stream, Long.MAX_VALUE);\n        stream.close();\n    }\n\n    return deferredBlockStreams.get(0);\n}"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Compress-36/"
+}

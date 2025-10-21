@@ -1,0 +1,31 @@
+File: src/main/java/com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java
+Method: JacksonAnnotationIntrospector.findNameForSerialization
+
+public PropertyName findNameForSerialization(Annotated a)
+{
+    String name = null;
+
+    JsonGetter jg = _findAnnotation(a, JsonGetter.class);
+    if (jg != null) {
+        name = jg.value();
+    } else {
+        JsonProperty pann = _findAnnotation(a, JsonProperty.class);
+        if (pann != null) {
+            name = pann.value();
+        }
+    }
+
+    // Check for any annotation that might imply a non-null name
+    if (name == null && hasRelevantAnnotations(a)) {
+        name = "";
+    }
+
+    return PropertyName.construct(name);
+}
+
+private boolean hasRelevantAnnotations(Annotated a) {
+    return _hasAnnotation(a, JsonUnwrapped.class)
+            || _hasAnnotation(a, JsonSerialize.class)
+            || _hasAnnotation(a, JsonView.class)
+            || _hasAnnotation(a, JsonRawValue.class);
+}

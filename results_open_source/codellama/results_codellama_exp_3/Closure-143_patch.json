@@ -1,0 +1,47 @@
+{
+  "bug_id": "Closure-143",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-143_1772938005",
+  "patches": [
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public void createDefineReplacements(List<String> definitions, CompilerOptions options) {\n    // Parse the definitions\n    for (String override : definitions) {\n        String[] assignment = override.split(\"=\", 2);\n        String defName = assignment[0];\n        \n        if (defName.length() > 0) {\n            if (assignment.length == 1) {\n                options.setDefineToBooleanLiteral(defName, true);\n                continue;\n            } else {\n                String defValue = assignment[1];\n                \n                if (defValue.equals(\"true\")) {\n                    options.setDefineToBooleanLiteral(defName, true);\n                    continue;\n                } else if (defValue.equals(\"false\")) {\n                    options.setDefineToBooleanLiteral(defName, false);\n                    continue;\n                } else if (defValue.length() > 1 && defValue.contains(\"'\")) {\n                    // If the value starts and ends with a single quote,\n                    // we assume that it's a string.\n                    String maybeStringVal = defValue.substring(1, defValue.length() - 1);\n                    if (maybeStringVal.indexOf(defValue.charAt(0)) == -1) {\n                        options.setDefineToStringLiteral(defName, maybeStringVal);\n                        continue;\n                    } else {\n                        try {\n                            options.setDefineToDoubleLiteral(defName, Double.parseDouble(defValue));\n                            continue;\n                        } catch (NumberFormatException e) {\n                            // do nothing, it will be caught at the end\n                        }\n                    }\n                } else {\n                    throw new RuntimeException(\"--define flag syntax invalid: \" + override);\n                }\n            }\n        }\n    }\n}",
+        "diff": "",
+        "file_path": "src/com/google/javascript/jscomp/AbstractCommandLineRunner.java",
+        "method_name": "createDefineReplacements",
+        "class_name": "AbstractCommandLineRunner",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          847,
+          895
+        ],
+        "original_code": "  /**\n   * Create a map of constant names to constant values from a textual\n   * description of the map.\n   *\n   * @param definitions A list of overriding definitions for defines in\n   *     the form <name>[=<val>], where <val> is a number, boolean, or\n   *     single-quoted string without single quotes.\n   */\n\n  @VisibleForTesting\n  static void createDefineReplacements(List<String> definitions,\n      CompilerOptions options) {\n    // Parse the definitions\n    for (String override : definitions) {\n      String[] assignment = override.split(\"=\", 2);\n      String defName = assignment[0];\n\n      if (defName.length() > 0) {\n        if (assignment.length == 1) {\n          options.setDefineToBooleanLiteral(defName, true);\n          continue;\n        } else {\n          String defValue = assignment[1];\n\n          if (defValue.equals(\"true\")) {\n            options.setDefineToBooleanLiteral(defName, true);\n            continue;\n          } else if (defValue.equals(\"false\")) {\n            options.setDefineToBooleanLiteral(defName, false);\n            continue;\n          } else if (defValue.length() > 1\n              && ((defValue.charAt(0) == '\\'' &&\n                  defValue.charAt(defValue.length() - 1) == '\\'')\n            )) {\n            // If the value starts and ends with a single quote,\n            // we assume that it's a string.\n            String maybeStringVal =\n                defValue.substring(1, defValue.length() - 1);\n            if (maybeStringVal.indexOf(defValue.charAt(0)) == -1) {\n              options.setDefineToStringLiteral(defName, maybeStringVal);\n              continue;\n            }\n          } else {\n            try {\n              options.setDefineToDoubleLiteral(defName,\n                  Double.parseDouble(defValue));\n              continue;\n            } catch (NumberFormatException e) {\n              // do nothing, it will be caught at the end\n            }\n          }\n        }\n      }\n\n      throw new RuntimeException(\n          \"--define flag syntax invalid: \" + override);\n    }\n  }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "The bug is caused by the `changeProxy.replaceWith` method not being called when the `exprBody` node has side effects.",
+        "changes": "- if (!NodeUtil.nodeTypeMayHaveSideEffects(exprBody)) {\n+ if (NodeUtil.nodeTypeMayHaveSideEffects(exprBody)) {\n    changeProxy.replaceWith(parent, node, getSideEffectNodes(exprBody));\n+ }\n}",
+        "fixed_method": "private void trySimplify(Node parent, Node node) {\n  if (node.getType() != Token.EXPR_RESULT) {\n    return;\n  }\n\n  Node exprBody = node.getFirstChild();\n  if (NodeUtil.nodeTypeMayHaveSideEffects(exprBody)) {\n    changeProxy.replaceWith(parent, node, getSideEffectNodes(exprBody));\n  }\n}",
+        "diff": "- if (!NodeUtil.nodeTypeMayHaveSideEffects(exprBody)) {\n+ if (NodeUtil.nodeTypeMayHaveSideEffects(exprBody)) {\n    changeProxy.replaceWith(parent, node, getSideEffectNodes(exprBody));\n+ }\n}",
+        "file_path": "src/com/google/javascript/jscomp/RemoveConstantExpressions.java",
+        "method_name": "trySimplify",
+        "class_name": "RemoveConstantExpressions",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          84,
+          94
+        ],
+        "original_code": "    /**\n     * Attempts to replace the input node with a simpler but functionally\n     * equivalent set of nodes.\n     */\n\n    private void trySimplify(Node parent, Node node) {\n      if (node.getType() != Token.EXPR_RESULT) {\n        return;\n      }\n\n      Node exprBody = node.getFirstChild();\n      if (!NodeUtil.nodeTypeMayHaveSideEffects(exprBody)\n      ) {\n        changeProxy.replaceWith(parent, node, getSideEffectNodes(exprBody));\n      }\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Closure-143/"
+}

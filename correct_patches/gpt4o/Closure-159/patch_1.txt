@@ -1,0 +1,27 @@
+File: src/com/google/javascript/jscomp/InlineFunctions.java
+Method: InlineFunctions.findCalledFunctions
+
+private void findCalledFunctions(Node node, Set<String> changed) {
+  Preconditions.checkArgument(changed != null);
+  // For each referenced function, add a new reference
+  if (node.getType() == Token.CALL) {
+    Node child = node.getFirstChild();
+    if (child.getType() == Token.NAME) {
+      changed.add(child.getString());
+    }
+    // Generalize to handle method calls with property
+    else if (child.getType() == Token.GETPROP) {
+      Node lastChild = child.getLastChild();
+      if (lastChild != null && "call".equals(lastChild.getString())) {
+        Node methodNode = child.getFirstChild();
+        if (methodNode.getType() == Token.NAME) {
+          changed.add(methodNode.getString());
+        }
+      }
+    }
+  }
+
+  for (Node c = node.getFirstChild(); c != null; c = c.getNext()) {
+    findCalledFunctions(c, changed);
+  }
+}

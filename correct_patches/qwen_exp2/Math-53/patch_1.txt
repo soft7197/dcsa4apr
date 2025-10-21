@@ -1,0 +1,13 @@
+File: src/main/java/org/apache/commons/math/complex/Complex.java
+Method: Complex.add
+
+public Complex add(Complex rhs)
+    throws NullArgumentException {
+    MathUtils.checkNotNull(rhs);
+    double realSum = real + rhs.getReal();
+    double imaginarySum = imaginary + rhs.getImaginary();
+    if (Double.isNaN(realSum) || Double.isNaN(imaginarySum)) {
+        return NaN;
+    }
+    return createComplex(realSum, imaginarySum);
+}

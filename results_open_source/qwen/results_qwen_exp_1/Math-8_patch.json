@@ -1,0 +1,42 @@
+{
+  "bug_id": "Math-8",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-8_1771877262",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by creating an array of a specific anonymous class type, which cannot store instances of other types. The fix involves using a more generic type that can accommodate the objects being sampled.",
+        "changes": "- final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n+ final T[] out = (T[]) new Object[sampleSize];",
+        "fixed_method": "public T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n    if (sampleSize <= 0) {\n        throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                sampleSize);\n    }\n\n    final T[] out = (T[]) new Object[sampleSize];\n\n    for (int i = 0; i < sampleSize; i++) {\n        out[i] = sample();\n    }\n\n    return out;\n}",
+        "diff": "- final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n+ final T[] out = (T[]) new Object[sampleSize];",
+        "file_path": "src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java",
+        "method_name": "sample",
+        "class_name": "DiscreteDistribution",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195
+        ],
+        "original_code": "/**\n* Generate a random sample from the distribution.\n*\n* @param sampleSize the number of random values to generate.\n* @return an array representing the random sample.\n* @throws NotStrictlyPositiveException if {@code sampleSize} is not\n* positive.\n*/\npublic T[] sample(int sampleSize) throws NotStrictlyPositiveException {\n    if (sampleSize <= 0) {\n        throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES,\n                sampleSize);\n    }\n\n    final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);\n\n    for (int i = 0; i < sampleSize; i++) {\n        out[i] = sample();\n    }\n\n    return out;\n\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-8/"
+}

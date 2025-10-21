@@ -1,0 +1,50 @@
+{
+  "bug_id": "JacksonDatabind-105",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-105_1773121264",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method does not handle Void.class type which results in missing deserializer for void/Void type causing test failure.",
+        "changes": "+    if (rawType == Void.class) {\n        return NullifyingDeserializer.instance;\n    }",
+        "fixed_method": "public static JsonDeserializer<?> find(Class<?> rawType, String clsName)\n{\n    if (_classNames.contains(clsName)) {\n        JsonDeserializer<?> d = FromStringDeserializer.findDeserializer(rawType);\n        if (d != null) {\n            return d;\n        }\n        if (rawType == UUID.class) {\n            return new UUIDDeserializer();\n        }\n        if (rawType == StackTraceElement.class) {\n            return new StackTraceElementDeserializer();\n        }\n        if (rawType == AtomicBoolean.class) {\n            return new AtomicBooleanDeserializer();\n        }\n        if (rawType == ByteBuffer.class) {\n            return new ByteBufferDeserializer();\n        }\n    }\n    if (rawType == Void.class) {\n        return NullifyingDeserializer.instance;\n    }\n    return null;\n}",
+        "diff": "+    if (rawType == Void.class) {\n        return NullifyingDeserializer.instance;\n    }",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/std/JdkDeserializers.java",
+        "method_name": "find",
+        "class_name": "JdkDeserializers",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50
+        ],
+        "original_code": "// note: can skip primitive types; other ways to check them:\npublic static JsonDeserializer<?> find(Class<?> rawType, String clsName)\n    {\n        if (_classNames.contains(clsName)) {\n            JsonDeserializer<?> d = FromStringDeserializer.findDeserializer(rawType);\n            if (d != null) {\n                return d;\n            }\n            if (rawType == UUID.class) {\n                return new UUIDDeserializer();\n            }\n            if (rawType == StackTraceElement.class) {\n                return new StackTraceElementDeserializer();\n            }\n            if (rawType == AtomicBoolean.class) {\n                // (note: AtomicInteger/Long work due to single-arg constructor. For now?\n                return new AtomicBooleanDeserializer();\n            }\n            if (rawType == ByteBuffer.class) {\n                return new ByteBufferDeserializer();\n            }\n        }\n        return null;\n    }"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-105/"
+}

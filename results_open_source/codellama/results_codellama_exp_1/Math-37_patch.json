@@ -1,0 +1,29 @@
+{
+  "bug_id": "Math-37",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-37_1772733027",
+  "patches": [
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public Complex tanh() {\n    if (isNaN) {\n        return NaN;\n    }\n    double real2 = 2.0 * real;\n    double imaginary2 = 2.0 * imaginary;\n    double d = FastMath.cosh(real2) + FastMath.cos(imaginary2);\n    if (Double.isInfinite(d)) {\n        return createComplex(FastMath.signum(real2), 0.0);\n    }\n    return createComplex(FastMath.sinh(real2) / d,\n                         FastMath.sin(imaginary2) / d);\n}",
+        "diff": "",
+        "file_path": "src/main/java/org/apache/commons/math/complex/Complex.java",
+        "method_name": "tanh",
+        "class_name": "Complex",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1062,
+          1072
+        ],
+        "original_code": "    /**\n     * Compute the\n     * <a href=\"http://mathworld.wolfram.com/HyperbolicTangent.html\" TARGET=\"_top\">\n     * hyperbolic tangent</a> of this complex number.\n     * Implements the formula:\n     * <pre>\n     *  <code>\n     *   tan(a + bi) = sinh(2a)/(cosh(2a)+cos(2b)) + [sin(2b)/(cosh(2a)+cos(2b))]i\n     *  </code>\n     * </pre>\n     * where the (real) functions on the right-hand side are\n     * {@link FastMath#sin}, {@link FastMath#cos}, {@link FastMath#cosh} and\n     * {@link FastMath#sinh}.\n     * <br/>\n     * Returns {@link Complex#NaN} if either real or imaginary part of the\n     * input argument is {@code NaN}.\n     * <br/>\n     * Infinite values in real or imaginary parts of the input may result in\n     * infinite or NaN values returned in parts of the result.\n     * <pre>\n     *  Examples:\n     *  <code>\n     *   tanh(a &plusmn; INFINITY i) = NaN + NaN i\n     *   tanh(&plusmn;INFINITY + bi) = &plusmn;1 + 0 i\n     *   tanh(&plusmn;INFINITY &plusmn; INFINITY i) = NaN + NaN i\n     *   tanh(0 + (&pi;/2)i) = NaN + INFINITY i\n     *  </code>\n     * </pre>\n     *\n     * @return the hyperbolic tangent of {@code this}.\n     * @since 1.2\n     */\n\n    public Complex tanh() {\n        if (isNaN) {\n            return NaN;\n        }\n        double real2 = 2.0 * real;\n        double imaginary2 = 2.0 * imaginary;\n        double d = FastMath.cosh(real2) + FastMath.cos(imaginary2);\n\n        return createComplex(FastMath.sinh(real2) / d,\n                             FastMath.sin(imaginary2) / d);\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Math-37/"
+}

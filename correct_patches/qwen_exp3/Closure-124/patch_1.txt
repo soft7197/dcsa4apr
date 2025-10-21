@@ -1,0 +1,30 @@
+File: src/com/google/javascript/jscomp/ExploitAssigns.java
+Method: ExploitAssigns.isSafeReplacement
+
+private boolean isSafeReplacement(Node node, Node replacement) {
+  // No checks are needed for simple names.
+  if (node.isName()) {
+    return true;
+  }
+  Preconditions.checkArgument(node.isGetProp());
+
+  return !containsAssignedName(node, replacement);
+}
+
+private boolean containsAssignedName(Node node, Node replacement) {
+  if (node == null) {
+    return false;
+  }
+
+  if (node.isName() && isNameAssignedTo(node.getString(), replacement)) {
+    return true;
+  }
+
+  for (Node child = node.getFirstChild(); child != null; child = child.getNext()) {
+    if (containsAssignedName(child, replacement)) {
+      return true;
+    }
+  }
+
+  return false;
+}

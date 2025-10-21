@@ -1,0 +1,14 @@
+File: src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java
+Method: FromStringDeserializer._deserializeFromEmptyString
+
+protected Object _deserializeFromEmptyString() throws IOException {
+    // As per [databind#398], URI requires special handling
+    if (_kind == STD_URI) {
+        return URI.create("");
+    }
+    // Special handling for Locale
+    if (_kind == STD_LOCALE) {
+        return Locale.ROOT;
+    }
+    return super._deserializeFromEmptyString();
+}

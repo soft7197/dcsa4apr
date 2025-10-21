@@ -1,0 +1,23 @@
+File: src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java
+Method: NumberSerializer.acceptJsonFormatVisitor
+
+public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException
+{
+    if (visitor == null || typeHint == null) {
+        return;
+    }
+    if (_isInt) {
+        visitIntFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);
+    } else {
+        Class<?> h = handledType();
+        if (h == BigDecimal.class) {
+            visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_DECIMAL);
+        } else if (h == Double.class || h == double.class) {
+            visitFloatFormat(visitor, typeHint, JsonParser.NumberType.DOUBLE);
+        } else if (h == Float.class || h == float.class) {
+            visitFloatFormat(visitor, typeHint, JsonParser.NumberType.FLOAT);
+        } else {
+            visitor.expectNumberFormat(typeHint);
+        }
+    }
+}

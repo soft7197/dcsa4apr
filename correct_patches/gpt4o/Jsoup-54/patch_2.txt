@@ -1,0 +1,12 @@
+File: src/main/java/org/jsoup/helper/W3CDom.java
+Method: W3CDom.copyAttributes
+
+private void copyAttributes(org.jsoup.nodes.Node source, Element el) {
+    for (Attribute attribute : source.attributes()) {
+        String key = attribute.getKey().replaceAll("[^-a-zA-Z0-9_:.]", "");
+        // names must not start with a digit, hyphen, or dot and must not be empty
+        if (!key.isEmpty() && !Character.isDigit(key.charAt(0)) && key.charAt(0) != '-' && key.charAt(0) != '.') {
+            el.setAttribute(key, attribute.getValue());
+        }
+    }
+}

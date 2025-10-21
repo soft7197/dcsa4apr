@@ -1,0 +1,29 @@
+{
+  "bug_id": "JxPath-16",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JxPath-16_1772730506",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method was not correctly handling the case where the test parameter is a NodeTypeTest and the node parameter is a text node.",
+        "changes": "+ if (test instanceof NodeTypeTest && node.getNodeType() == Node.TEXT_NODE) return true;\n- if (test instanceof NodeTypeTest) {",
+        "fixed_method": "public static boolean testNode(Node node, NodeTest test) {\n    if (test == null) {\n        return true;\n    }\n    if (test instanceof NodeNameTest) {\n        if (node.getNodeType() != Node.ELEMENT_NODE) {\n            return false;\n        }\n\n        NodeNameTest nodeNameTest = (NodeNameTest) test;\n        QName testName = nodeNameTest.getNodeName();\n        String namespaceURI = nodeNameTest.getNamespaceURI();\n        boolean wildcard = nodeNameTest.isWildcard();\n        String testPrefix = testName.getPrefix();\n        if (wildcard && testPrefix == null) {\n            return true;\n        }\n        if (wildcard\n                || testName.getName().equals(DOMNodePointer.getLocalName(node))) {\n            String nodeNS = DOMNodePointer.getNamespaceURI(node);\n            return equalStrings(namespaceURI, nodeNS) || nodeNS == null && equalStrings(testPrefix, getPrefix(node));\n        }\n        return false;\n    }\n    if (test instanceof NodeTypeTest && node.getNodeType() == Node.TEXT_NODE) return true;\n    if (test instanceof NodeTypeTest) {\n        int nodeType = node.getNodeType();\n        switch (((NodeTypeTest) test).getNodeType()) {\n            case Compiler.NODE_TYPE_NODE:\n                return nodeType == Node.ELEMENT_NODE || nodeType == Node.DOCUMENT_NODE;\n            case Compiler.NODE_TYPE_TEXT:\n                return nodeType == Node.CDATA_SECTION_NODE || nodeType == Node.TEXT_NODE;\n            case Compiler.NODE_TYPE_COMMENT:\n                return nodeType == Node.COMMENT_NODE;\n            case Compiler.NODE_TYPE_PI:\n                return nodeType == Node.PROCESSING_INSTRUCTION_NODE;\n        }\n        return false;\n    }\n    if (test instanceof ProcessingInstructionTest) {\n        if (node.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) {\n            String testPI = ((ProcessingInstructionTest) test).getTarget();\n            String nodePI = ((ProcessingInstruction) node).getTarget();\n            return testPI.equals(nodePI);\n        }\n    }\n    return false;\n}",
+        "diff": "+ if (test instanceof NodeTypeTest && node.getNodeType() == Node.TEXT_NODE) return true;\n- if (test instanceof NodeTypeTest) {",
+        "file_path": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java",
+        "method_name": "testNode",
+        "class_name": "DOMNodePointer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          117,
+          167
+        ],
+        "original_code": "    /**\n     * Test a Node.\n     * @param node to test\n     * @param test to execute\n     * @return true if node passes test\n     */\n\n    public static boolean testNode(Node node, NodeTest test) {\n        if (test == null) {\n            return true;\n        }\n        if (test instanceof NodeNameTest) {\n            if (node.getNodeType() != Node.ELEMENT_NODE) {\n                return false;\n            }\n\n            NodeNameTest nodeNameTest = (NodeNameTest) test;\n            QName testName = nodeNameTest.getNodeName();\n            String namespaceURI = nodeNameTest.getNamespaceURI();\n            boolean wildcard = nodeNameTest.isWildcard();\n            String testPrefix = testName.getPrefix();\n            if (wildcard && testPrefix == null) {\n                return true;\n            }\n            if (wildcard\n                || testName.getName()\n                        .equals(DOMNodePointer.getLocalName(node))) {\n                String nodeNS = DOMNodePointer.getNamespaceURI(node);\n                return equalStrings(namespaceURI, nodeNS) || nodeNS == null\n                        && equalStrings(testPrefix, getPrefix(node));\n            }\n            return false;\n        }\n        if (test instanceof NodeTypeTest) {\n            int nodeType = node.getNodeType();\n            switch (((NodeTypeTest) test).getNodeType()) {\n                case Compiler.NODE_TYPE_NODE :\n                    return nodeType == Node.ELEMENT_NODE\n                            || nodeType == Node.DOCUMENT_NODE;\n                case Compiler.NODE_TYPE_TEXT :\n                    return nodeType == Node.CDATA_SECTION_NODE\n                        || nodeType == Node.TEXT_NODE;\n                case Compiler.NODE_TYPE_COMMENT :\n                    return nodeType == Node.COMMENT_NODE;\n                case Compiler.NODE_TYPE_PI :\n                    return nodeType == Node.PROCESSING_INSTRUCTION_NODE;\n            }\n            return false;\n        }\n        if (test instanceof ProcessingInstructionTest) {\n            if (node.getNodeType() == Node.PROCESSING_INSTRUCTION_NODE) {\n                String testPI = ((ProcessingInstructionTest) test).getTarget();\n                String nodePI = ((ProcessingInstruction) node).getTarget();\n                return testPI.equals(nodePI);\n            }\n        }\n        return false;\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/JxPath-16/"
+}

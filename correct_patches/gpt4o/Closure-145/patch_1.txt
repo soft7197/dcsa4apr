@@ -1,0 +1,12 @@
+File: src/com/google/javascript/jscomp/CodeGenerator.java
+Method: CodeGenerator.isOneExactlyFunctionOrDo
+
+private boolean isOneExactlyFunctionOrDo(Node n) {
+    if (n.getType() == Token.LABEL) {
+        n = n.getLastChild();
+    }
+    if (n.getType() == Token.BLOCK) {
+        return n.hasOneChild() && isOneExactlyFunctionOrDo(n.getFirstChild());
+    }
+    return (n.getType() == Token.FUNCTION || n.getType() == Token.DO);
+}

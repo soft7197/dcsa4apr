@@ -1,0 +1,24 @@
+{
+  "com.google.javascript.jscomp.CheckGlobalThisTest::testIssue182a": [
+    {
+      "buggy_method": "shouldTraverse",
+      "class": "com.google.javascript.jscomp.CheckGlobalThis"
+    }
+  ],
+  "com.google.javascript.jscomp.CheckGlobalThisTest::testIssue182b": [
+    {
+      "buggy_method": "shouldTraverse",
+      "class": "com.google.javascript.jscomp.CheckGlobalThis"
+    }
+  ],
+  "com.google.javascript.jscomp.RuntimeTypeCheckTest::testValueWithInnerFn": [
+    {
+      "buggy_method": "visitFunction",
+      "class": "com.google.javascript.jscomp.RuntimeTypeCheck"
+    },
+    {
+      "buggy_method": "visitFunction",
+      "class": "com.google.javascript.jscomp.RuntimeTypeCheck"
+    }
+  ]
+}

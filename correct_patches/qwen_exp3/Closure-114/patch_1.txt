@@ -1,0 +1,23 @@
+File: src/com/google/javascript/jscomp/NameAnalyzer.java
+Method: NameAnalyzer.recordAssignment
+
+private void recordAssignment(NodeTraversal t, Node n, Node recordNode) {
+  Node nameNode = n.getFirstChild();
+  Node valueNode = n.getLastChild();
+  Node parent = n.getParent();
+  NameInformation ns = createNameInformation(t, nameNode);
+  if (ns != null) {
+    if (parent.isFor() && !NodeUtil.isForIn(parent)) {
+      if (parent.getFirstChild().getNext() != n) {
+        recordDepScope(recordNode, ns);
+      } else {
+        recordDepScope(nameNode, ns);
+      }
+    } else {
+      // Check if the assignment is part of a call expression
+      if (!(parent.isCall() && parent.getFirstChild() == n)) {
+        recordDepScope(recordNode, ns);
+      }
+    }
+  }
+}

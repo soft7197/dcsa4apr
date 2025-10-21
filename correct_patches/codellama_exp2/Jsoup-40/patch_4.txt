@@ -1,0 +1,14 @@
+File: src/main/java/org/jsoup/nodes/DocumentType.java
+Method: DocumentType.DocumentType
+
+public DocumentType(String name, String publicId, String systemId, String baseUri) {
+    super(baseUri);
+
+    if (name == null) {
+        throw new IllegalArgumentException("String must not be empty");
+    }
+
+    attr("name", name);
+    attr("publicId", publicId);
+    attr("systemId", systemId);
+}

@@ -1,0 +1,35 @@
+{
+  "bug_id": "Jsoup-54",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-54_1772699942",
+  "patches": [
+    [
+      {
+        "hypothesis": "Refined the overfitting patch by incorporating additional tests to cover edge cases and validating attribute names using a regular expression",
+        "fixed_method": "private void copyAttributes(org.jsoup.nodes.Node source, Element el) {\n  for (Attribute attribute : source.attributes()) {\n    if (attribute.getKey().matches(\"^[-a-zA-Z0-9_:{}]*\")) {\n      el.setAttribute(attribute.getKey(), attribute.getValue());\n    }\n  }\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/helper/W3CDom.java",
+        "method_name": "copyAttributes",
+        "class_name": "W3CDom",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the method not properly handling invalid attribute names in the HTML document. The method is trying to replace any invalid characters in the attribute name with an empty string, but this is not allowed in XML. The fix is to remove any attributes with invalid names instead.",
+        "line_numbers": [
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-54/"
+}

@@ -1,0 +1,82 @@
+{
+  "bug_id": "Closure-129",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-129_1772684024",
+  "patches": [
+    [
+      {
+        "hypothesis": "A more robust approach is needed to handle different types of nodes, edge cases, and avoid hardcoded values.",
+        "fixed_method": "private void annotateCalls(Node n) {\n  if (n == null || !n.isCall()) return;\n  Node first = n.getFirstChild();\n  if (first == null || !NodeUtil.isGet(first)) {\n    n.putBooleanProp(Node.DIRECT_EVAL, true);\n  }\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/com/google/javascript/jscomp/PrepareAst.java",
+        "method_name": "annotateCalls",
+        "class_name": "PrepareAst",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the missing null check in the annotateCalls method. The method assumes that the first child of a call node is always a GET node, but in some cases, it can be a NAME node, which causes the method to throw a null pointer exception.",
+        "line_numbers": [
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177
+        ]
+      },
+      {
+        "hypothesis": "The bug is caused by a missing null check in the `annotateCalls` method.",
+        "changes": "+ if (first == null) return;\n+ if (!NodeUtil.isGet(first)) {\n-   n.putBooleanProp(Node.FREE_CALL, true);\n+   return;\n+ }",
+        "fixed_method": "private void annotateCalls(Node n) {\n  Preconditions.checkState(n.isCall());\n\n  // Keep track of of the \"this\" context of a call.\n  Node first = n.getFirstChild();\n\n  // ignore cast nodes.\n  if (first == null) return;\n  if (!NodeUtil.isGet(first)) {\n    return;\n  }\n\n  // Keep track of the context in which eval is called.\n  if (first.isName() &&\n      \"eval\".equals(first.getString())) {\n    first.putBooleanProp(Node.DIRECT_EVAL, true);\n  }\n}",
+        "diff": "+ if (first == null) return;\n+ if (!NodeUtil.isGet(first)) {\n-   n.putBooleanProp(Node.FREE_CALL, true);\n+   return;\n+ }",
+        "file_path": "src/com/google/javascript/jscomp/PrepareAst.java",
+        "method_name": "annotateCalls",
+        "class_name": "PrepareAst",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177
+        ],
+        "original_code": "/**\n* There are two types of calls we are interested in calls without explicit\n* \"this\" values (what we are call \"free\" calls) and direct call to eval.\n*/\nprivate void annotateCalls(Node n) {\n  Preconditions.checkState(n.isCall());\n\n  // Keep track of of the \"this\" context of a call.  A call without an\n  // explicit \"this\" is a free call.\n  Node first = n.getFirstChild();\n\n  // ignore cast nodes.\n\n  if (!NodeUtil.isGet(first)) {\n    n.putBooleanProp(Node.FREE_CALL, true);\n  }\n\n  // Keep track of the context in which eval is called. It is important\n  // to distinguish between \"(0, eval)()\" and \"eval()\".\n  if (first.isName() &&\n      \"eval\".equals(first.getString())) {\n    first.putBooleanProp(Node.DIRECT_EVAL, true);\n  }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-129/"
+}

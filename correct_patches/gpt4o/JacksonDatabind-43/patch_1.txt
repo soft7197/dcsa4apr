@@ -1,0 +1,24 @@
+File: src/main/java/com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java
+Method: ObjectIdValueProperty.deserializeSetAndReturn
+
+@Override
+public Object deserializeSetAndReturn(JsonParser p,
+        DeserializationContext ctxt, Object instance) throws IOException
+{
+    if (p.getCurrentTokenId() == 11) { // Check for JSON null token
+        return instance;
+    }
+    Object id = _valueDeserializer.deserialize(p, ctxt);
+    // note: no null checks (unlike usually); deserializer should fail if one found
+    if (id == null) {
+        return null;
+    }
+    ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
+    roid.bindItem(instance);
+    // also: may need to set a property value as well
+    SettableBeanProperty idProp = _objectIdReader.idProperty;
+    if (idProp != null) {
+        return idProp.setAndReturn(instance, id);
+    }
+    return instance;
+}

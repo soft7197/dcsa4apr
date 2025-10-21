@@ -1,0 +1,4175 @@
+{
+  "com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys": [
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.FieldNamingPolicy",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        31,
+        37,
+        53,
+        72,
+        90,
+        113
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.FieldNamingPolicy$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        37
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.FieldNamingPolicy$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        53
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.FieldNamingPolicy$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        72
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.FieldNamingPolicy$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        90
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.FieldNamingPolicy$5",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        113
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        112
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        187,
+        188,
+        191,
+        192
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/internal/Excluder;Lcom/google/gson/FieldNamingStrategy;Ljava/util/Map;ZZZZZZZLcom/google/gson/LongSerializationPolicy;Ljava/util/List;)V",
+      "executed_lines": [
+        122,
+        125,
+        136,
+        143,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        207,
+        210,
+        211,
+        214,
+        217,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        258,
+        259,
+        260,
+        261,
+        262,
+        265,
+        266
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "atomicLongAdapter",
+      "signature": "(Lcom/google/gson/TypeAdapter;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        347,
+        355
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "atomicLongArrayAdapter",
+      "signature": "(Lcom/google/gson/TypeAdapter;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        359,
+        382
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "doubleAdapter",
+      "signature": "(Z)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        269,
+        272
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "floatAdapter",
+      "signature": "(Z)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        293,
+        296
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "fromJson",
+      "signature": "(Lcom/google/gson/stream/JsonReader;Ljava/lang/reflect/Type;)Ljava/lang/Object;",
+      "executed_lines": [
+        872,
+        873,
+        874,
+        876,
+        877,
+        878,
+        879,
+        880,
+        891,
+        892,
+        897,
+        898
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "fromJson",
+      "signature": "(Ljava/io/Reader;Ljava/lang/reflect/Type;)Ljava/lang/Object;",
+      "executed_lines": [
+        844,
+        845
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "fromJson",
+      "signature": "(Ljava/lang/String;Ljava/lang/reflect/Type;)Ljava/lang/Object;",
+      "executed_lines": [
+        790,
+        793,
+        794
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "getAdapter",
+      "signature": "(Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        393,
+        394,
+        398,
+        399,
+        400,
+        401,
+        402,
+        403,
+        407,
+        408,
+        413,
+        414,
+        416,
+        417,
+        418,
+        419,
+        420,
+        421,
+        423,
+        426,
+        428,
+        429
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "longAdapter",
+      "signature": "(Lcom/google/gson/LongSerializationPolicy;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        325,
+        326
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "newJsonReader",
+      "signature": "(Ljava/io/Reader;)Lcom/google/gson/stream/JsonReader;",
+      "executed_lines": [
+        721,
+        722,
+        723
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        112
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$2",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/Gson;)V",
+      "executed_lines": [
+        136
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$3",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/Gson;)V",
+      "executed_lines": [
+        143
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$4",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        272
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$5",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        296
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$7",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        347
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$8",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        359
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$FutureTypeAdapter",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        948
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$FutureTypeAdapter",
+      "method": "setDelegate",
+      "signature": "(Lcom/google/gson/TypeAdapter;)V",
+      "executed_lines": [
+        952,
+        955,
+        956
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.JsonParseException",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Throwable;)V",
+      "executed_lines": [
+        62,
+        63
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.JsonSyntaxException",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Throwable;)V",
+      "executed_lines": [
+        45,
+        46
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.LongSerializationPolicy",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        27,
+        34,
+        45
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.LongSerializationPolicy$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        34
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.LongSerializationPolicy$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        45
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.TypeAdapter",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        119
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.TypeAdapter",
+      "method": "nullSafe",
+      "signature": "()Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        186
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.TypeAdapter$1",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/TypeAdapter;)V",
+      "executed_lines": [
+        186
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Preconditions",
+      "method": "checkArgument",
+      "signature": "(Z)V",
+      "executed_lines": [
+        45,
+        48
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Preconditions",
+      "method": "checkNotNull",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        38,
+        41
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        44
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "canonicalize",
+      "signature": "(Ljava/lang/reflect/Type;)Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        96,
+        97,
+        98,
+        100,
+        101,
+        102,
+        103
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "checkNotPrimitive",
+      "signature": "(Ljava/lang/reflect/Type;)V",
+      "executed_lines": [
+        434,
+        435
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "getGenericSupertype",
+      "signature": "(Ljava/lang/reflect/Type;Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        229,
+        230
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "getMapKeyAndValueTypes",
+      "signature": "(Ljava/lang/reflect/Type;Ljava/lang/Class;)[Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        311,
+        315,
+        317,
+        318,
+        319
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "getRawType",
+      "signature": "(Ljava/lang/reflect/Type;)Ljava/lang/Class;",
+      "executed_lines": [
+        120,
+        122,
+        124,
+        125,
+        130,
+        131,
+        132
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "getSupertype",
+      "signature": "(Ljava/lang/reflect/Type;Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        270,
+        271,
+        272
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "hashCodeOrZero",
+      "signature": "(Ljava/lang/Object;)I",
+      "executed_lines": [
+        216
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "resolve",
+      "signature": "(Ljava/lang/reflect/Type;Ljava/lang/Class;Ljava/lang/reflect/Type;)Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        327,
+        342,
+        350,
+        351,
+        352,
+        353,
+        354,
+        356,
+        357,
+        358,
+        359,
+        368,
+        370,
+        372,
+        391
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl",
+      "method": "<init>",
+      "signature": "(Ljava/lang/reflect/Type;Ljava/lang/reflect/Type;[Ljava/lang/reflect/Type;)V",
+      "executed_lines": [
+        442,
+        444,
+        445,
+        446,
+        447,
+        448,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        459
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl",
+      "method": "getActualTypeArguments",
+      "signature": "()[Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        462
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl",
+      "method": "getOwnerType",
+      "signature": "()Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        470
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl",
+      "method": "getRawType",
+      "signature": "()Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        466
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl",
+      "method": "hashCode",
+      "signature": "()I",
+      "executed_lines": [
+        479,
+        480,
+        481
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.ConstructorConstructor",
+      "method": "<init>",
+      "signature": "(Ljava/util/Map;)V",
+      "executed_lines": [
+        51,
+        52,
+        53
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.ConstructorConstructor",
+      "method": "get",
+      "signature": "(Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/internal/ObjectConstructor;",
+      "executed_lines": [
+        56,
+        57,
+        62,
+        63,
+        73,
+        74,
+        75,
+        83,
+        84,
+        88,
+        89,
+        90
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.ConstructorConstructor",
+      "method": "newDefaultConstructor",
+      "signature": "(Ljava/lang/Class;)Lcom/google/gson/internal/ObjectConstructor;",
+      "executed_lines": [
+        99,
+        122,
+        123
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.ConstructorConstructor",
+      "method": "newDefaultImplementationConstructor",
+      "signature": "(Ljava/lang/reflect/Type;Ljava/lang/Class;)Lcom/google/gson/internal/ObjectConstructor;",
+      "executed_lines": [
+        134,
+        178,
+        179,
+        185,
+        191,
+        197,
+        198,
+        199
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.ConstructorConstructor$12",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/internal/ConstructorConstructor;)V",
+      "executed_lines": [
+        199
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.ConstructorConstructor$12",
+      "method": "construct",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        201
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.Excluder",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.Excluder",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        54,
+        55,
+        56,
+        58,
+        59
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.Excluder",
+      "method": "clone",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        50
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.Excluder",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        112,
+        113,
+        114,
+        116,
+        117
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.Excluder",
+      "method": "excludeClass",
+      "signature": "(Ljava/lang/Class;Z)Z",
+      "executed_lines": [
+        192,
+        197,
+        201,
+        205,
+        206,
+        212
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.Excluder",
+      "method": "isAnonymousOrLocal",
+      "signature": "(Ljava/lang/Class;)Z",
+      "executed_lines": [
+        216,
+        217
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.JsonReaderInternalAccess",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        25
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.ArrayTypeAdapter",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        39
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.ArrayTypeAdapter$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        39
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.ArrayTypeAdapter$1",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        42,
+        43,
+        44
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.CollectionTypeAdapterFactory",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/internal/ConstructorConstructor;)V",
+      "executed_lines": [
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.CollectionTypeAdapterFactory",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        45,
+        47,
+        48,
+        49
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.DateTypeAdapter",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        42
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.DateTypeAdapter$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        42
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.DateTypeAdapter$1",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        45
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/internal/ConstructorConstructor;)V",
+      "executed_lines": [
+        36,
+        37,
+        38
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.MapTypeAdapterFactory",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/internal/ConstructorConstructor;Z)V",
+      "executed_lines": [
+        110,
+        111,
+        112,
+        113
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.MapTypeAdapterFactory",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        116,
+        118,
+        119,
+        123,
+        124,
+        125,
+        126,
+        127,
+        131,
+        133
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.MapTypeAdapterFactory",
+      "method": "getKeyAdapter",
+      "signature": "(Lcom/google/gson/Gson;Ljava/lang/reflect/Type;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        140,
+        142
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/internal/bind/MapTypeAdapterFactory;Lcom/google/gson/Gson;Ljava/lang/reflect/Type;Lcom/google/gson/TypeAdapter;Ljava/lang/reflect/Type;Lcom/google/gson/TypeAdapter;Lcom/google/gson/internal/ObjectConstructor;)V",
+      "executed_lines": [
+        152,
+        153,
+        155,
+        157,
+        158
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter",
+      "method": "read",
+      "signature": "(Lcom/google/gson/stream/JsonReader;)Ljava/util/Map;",
+      "executed_lines": [
+        161,
+        162,
+        167,
+        169,
+        183,
+        184,
+        185,
+        186
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        145
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.ObjectTypeAdapter",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        38
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.ObjectTypeAdapter$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        38
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.ObjectTypeAdapter$1",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        41,
+        44
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.ReflectiveTypeAdapterFactory",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/internal/ConstructorConstructor;Lcom/google/gson/FieldNamingStrategy;Lcom/google/gson/internal/Excluder;)V",
+      "executed_lines": [
+        54,
+        55,
+        56,
+        57,
+        58
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.SqlDateTypeAdapter",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        39
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.SqlDateTypeAdapter$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        39
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.SqlDateTypeAdapter$1",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        42
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TimeTypeAdapter",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        41
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TimeTypeAdapter$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        41
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TimeTypeAdapter$1",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        44
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/TypeAdapter;Ljava/lang/reflect/Type;)V",
+      "executed_lines": [
+        32,
+        33,
+        34,
+        35,
+        36
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper",
+      "method": "read",
+      "signature": "(Lcom/google/gson/stream/JsonReader;)Ljava/lang/Object;",
+      "executed_lines": [
+        40
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        69,
+        90,
+        92,
+        149,
+        151,
+        177,
+        191,
+        192,
+        194,
+        214,
+        215,
+        217,
+        236,
+        237,
+        239,
+        257,
+        258,
+        260,
+        271,
+        272,
+        273,
+        275,
+        282,
+        283,
+        284,
+        286,
+        313,
+        314,
+        315,
+        317,
+        336,
+        351,
+        366,
+        386,
+        388,
+        407,
+        408,
+        410,
+        430,
+        448,
+        466,
+        468,
+        483,
+        484,
+        486,
+        501,
+        502,
+        504,
+        520,
+        522,
+        542,
+        544,
+        560,
+        561,
+        563,
+        578,
+        580,
+        589,
+        590,
+        592,
+        613,
+        678,
+        679,
+        681,
+        716,
+        718,
+        790,
+        791,
+        828
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters",
+      "method": "newFactory",
+      "signature": "(Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)Lcom/google/gson/TypeAdapterFactory;",
+      "executed_lines": [
+        854
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters",
+      "method": "newFactory",
+      "signature": "(Ljava/lang/Class;Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)Lcom/google/gson/TypeAdapterFactory;",
+      "executed_lines": [
+        867
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters",
+      "method": "newFactoryForMultipleTypes",
+      "signature": "(Ljava/lang/Class;Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)Lcom/google/gson/TypeAdapterFactory;",
+      "executed_lines": [
+        882
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters",
+      "method": "newTypeHierarchyFactory",
+      "signature": "(Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)Lcom/google/gson/TypeAdapterFactory;",
+      "executed_lines": [
+        901
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$1",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        69
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$10",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        286
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$11",
+      "method": "read",
+      "signature": "(Lcom/google/gson/stream/JsonReader;)Ljava/lang/Number;",
+      "executed_lines": [
+        320,
+        325
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$11",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        317
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$12",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        336
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$13",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        351
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$14",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        366
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$15",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        388
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$16",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        410
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$17",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        430
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$18",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        448
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$19",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        468
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$2",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        92
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$20",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        486
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$21",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        504
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$22",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        522
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$23",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        544
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$24",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        563
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$25",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        580
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$26",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        592
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$26",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        595,
+        596
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$27",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        613
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$28",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        681
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$29",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        718
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$3",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        151
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$30",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        828
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$32",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)V",
+      "executed_lines": [
+        854
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$32",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        857
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$33",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Class;Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)V",
+      "executed_lines": [
+        867
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$33",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        870,
+        871
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$34",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Class;Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)V",
+      "executed_lines": [
+        882
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$34",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        885,
+        886
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$35",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)V",
+      "executed_lines": [
+        901
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$35",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        904,
+        905,
+        906
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$4",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        177
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$5",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        194
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$6",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        217
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$7",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        239
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$8",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        260
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$9",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        275
+      ]
+    },
+    {
+      "package": "com.google.gson.reflect",
+      "class": "com.google.gson.reflect.TypeToken",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        61,
+        62,
+        63,
+        64,
+        65
+      ]
+    },
+    {
+      "package": "com.google.gson.reflect",
+      "class": "com.google.gson.reflect.TypeToken",
+      "method": "<init>",
+      "signature": "(Ljava/lang/reflect/Type;)V",
+      "executed_lines": [
+        71,
+        72,
+        73,
+        74,
+        75
+      ]
+    },
+    {
+      "package": "com.google.gson.reflect",
+      "class": "com.google.gson.reflect.TypeToken",
+      "method": "get",
+      "signature": "(Ljava/lang/reflect/Type;)Lcom/google/gson/reflect/TypeToken;",
+      "executed_lines": [
+        296
+      ]
+    },
+    {
+      "package": "com.google.gson.reflect",
+      "class": "com.google.gson.reflect.TypeToken",
+      "method": "getRawType",
+      "signature": "()Ljava/lang/Class;",
+      "executed_lines": [
+        94
+      ]
+    },
+    {
+      "package": "com.google.gson.reflect",
+      "class": "com.google.gson.reflect.TypeToken",
+      "method": "getSuperclassTypeParameter",
+      "signature": "(Ljava/lang/Class;)Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        82,
+        83,
+        86,
+        87
+      ]
+    },
+    {
+      "package": "com.google.gson.reflect",
+      "class": "com.google.gson.reflect.TypeToken",
+      "method": "getType",
+      "signature": "()Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        101
+      ]
+    },
+    {
+      "package": "com.google.gson.reflect",
+      "class": "com.google.gson.reflect.TypeToken",
+      "method": "hashCode",
+      "signature": "()I",
+      "executed_lines": [
+        280
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        192,
+        1593,
+        1616
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "<init>",
+      "signature": "(Ljava/io/Reader;)V",
+      "executed_lines": [
+        230,
+        238,
+        239,
+        240,
+        242,
+        243,
+        245,
+        269,
+        270,
+        272,
+        283,
+        284,
+        289,
+        290,
+        293,
+        294
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "beginObject",
+      "signature": "()V",
+      "executed_lines": [
+        379,
+        380,
+        383,
+        384,
+        385,
+        390
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "checkLenient",
+      "signature": "()V",
+      "executed_lines": [
+        1415,
+        1418
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "consumeNonExecutePrefix",
+      "signature": "()V",
+      "executed_lines": [
+        1575,
+        1576,
+        1578,
+        1582,
+        1583,
+        1584
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "doPeek",
+      "signature": "()I",
+      "executed_lines": [
+        466,
+        467,
+        469,
+        483,
+        485,
+        498,
+        499,
+        512,
+        513,
+        514,
+        515,
+        520,
+        537,
+        538,
+        540,
+        553,
+        554,
+        578
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "fillBuffer",
+      "signature": "(I)Z",
+      "executed_lines": [
+        1282,
+        1283,
+        1284,
+        1288,
+        1291,
+        1293,
+        1294,
+        1297,
+        1303,
+        1304
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "getColumnNumber",
+      "signature": "()I",
+      "executed_lines": [
+        1315
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "getLineNumber",
+      "signature": "()I",
+      "executed_lines": [
+        1311
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "getPath",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        1469,
+        1470,
+        1471,
+        1480,
+        1481,
+        1492
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "hasNext",
+      "signature": "()Z",
+      "executed_lines": [
+        416,
+        417,
+        418,
+        420
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "isLenient",
+      "signature": "()Z",
+      "executed_lines": [
+        333
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "isLiteral",
+      "signature": "(C)Z",
+      "executed_lines": [
+        749,
+        769
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "nextLong",
+      "signature": "()J",
+      "executed_lines": [
+        940,
+        941,
+        945,
+        951,
+        954,
+        965,
+        966
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "nextNonWhitespace",
+      "signature": "(Z)I",
+      "executed_lines": [
+        1333,
+        1334,
+        1335,
+        1337,
+        1338,
+        1339,
+        1342,
+        1343,
+        1346,
+        1347,
+        1351,
+        1355,
+        1390,
+        1402,
+        1403
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "peek",
+      "signature": "()Lcom/google/gson/stream/JsonToken;",
+      "executed_lines": [
+        427,
+        428,
+        429,
+        432,
+        434,
+        454
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "push",
+      "signature": "(I)V",
+      "executed_lines": [
+        1262,
+        1273,
+        1274
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "setLenient",
+      "signature": "(Z)V",
+      "executed_lines": [
+        326,
+        327
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        1593
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader$1",
+      "method": "promoteNameToValue",
+      "signature": "(Lcom/google/gson/stream/JsonReader;)V",
+      "executed_lines": [
+        1595,
+        1599,
+        1600,
+        1603,
+        1605,
+        1607,
+        1608,
+        1614
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonToken",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        25,
+        31,
+        37,
+        43,
+        49,
+        56,
+        61,
+        67,
+        72,
+        77,
+        84
+      ]
+    }
+  ],
+  "com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys": [
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.FieldNamingPolicy",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        31,
+        37,
+        53,
+        72,
+        90,
+        113
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.FieldNamingPolicy$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        37
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.FieldNamingPolicy$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        53
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.FieldNamingPolicy$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        72
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.FieldNamingPolicy$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        90
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.FieldNamingPolicy$5",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        113
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        112
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        187,
+        188,
+        191,
+        192
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/internal/Excluder;Lcom/google/gson/FieldNamingStrategy;Ljava/util/Map;ZZZZZZZLcom/google/gson/LongSerializationPolicy;Ljava/util/List;)V",
+      "executed_lines": [
+        122,
+        125,
+        136,
+        143,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        207,
+        210,
+        211,
+        214,
+        217,
+        220,
+        221,
+        222,
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        233,
+        234,
+        235,
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        255,
+        258,
+        259,
+        260,
+        261,
+        262,
+        265,
+        266
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "atomicLongAdapter",
+      "signature": "(Lcom/google/gson/TypeAdapter;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        347,
+        355
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "atomicLongArrayAdapter",
+      "signature": "(Lcom/google/gson/TypeAdapter;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        359,
+        382
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "doubleAdapter",
+      "signature": "(Z)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        269,
+        272
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "floatAdapter",
+      "signature": "(Z)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        293,
+        296
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "fromJson",
+      "signature": "(Lcom/google/gson/stream/JsonReader;Ljava/lang/reflect/Type;)Ljava/lang/Object;",
+      "executed_lines": [
+        872,
+        873,
+        874,
+        876,
+        877,
+        878,
+        879,
+        880,
+        891,
+        892,
+        897,
+        898
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "fromJson",
+      "signature": "(Ljava/io/Reader;Ljava/lang/reflect/Type;)Ljava/lang/Object;",
+      "executed_lines": [
+        844,
+        845
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "fromJson",
+      "signature": "(Ljava/lang/String;Ljava/lang/reflect/Type;)Ljava/lang/Object;",
+      "executed_lines": [
+        790,
+        793,
+        794
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "getAdapter",
+      "signature": "(Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        393,
+        394,
+        398,
+        399,
+        400,
+        401,
+        402,
+        403,
+        407,
+        408,
+        413,
+        414,
+        416,
+        417,
+        418,
+        419,
+        420,
+        421,
+        423,
+        426,
+        428,
+        429
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "longAdapter",
+      "signature": "(Lcom/google/gson/LongSerializationPolicy;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        325,
+        326
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson",
+      "method": "newJsonReader",
+      "signature": "(Ljava/io/Reader;)Lcom/google/gson/stream/JsonReader;",
+      "executed_lines": [
+        721,
+        722,
+        723
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        112
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$2",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/Gson;)V",
+      "executed_lines": [
+        136
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$3",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/Gson;)V",
+      "executed_lines": [
+        143
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$4",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        272
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$5",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        296
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$7",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        347
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$8",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        359
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$FutureTypeAdapter",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        948
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.Gson$FutureTypeAdapter",
+      "method": "setDelegate",
+      "signature": "(Lcom/google/gson/TypeAdapter;)V",
+      "executed_lines": [
+        952,
+        955,
+        956
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.JsonParseException",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Throwable;)V",
+      "executed_lines": [
+        62,
+        63
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.JsonSyntaxException",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Throwable;)V",
+      "executed_lines": [
+        45,
+        46
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.LongSerializationPolicy",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        27,
+        34,
+        45
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.LongSerializationPolicy$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        34
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.LongSerializationPolicy$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        45
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.TypeAdapter",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        119
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.TypeAdapter",
+      "method": "nullSafe",
+      "signature": "()Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        186
+      ]
+    },
+    {
+      "package": "com.google.gson",
+      "class": "com.google.gson.TypeAdapter$1",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/TypeAdapter;)V",
+      "executed_lines": [
+        186
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Preconditions",
+      "method": "checkArgument",
+      "signature": "(Z)V",
+      "executed_lines": [
+        45,
+        48
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Preconditions",
+      "method": "checkNotNull",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        38,
+        41
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        44
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "canonicalize",
+      "signature": "(Ljava/lang/reflect/Type;)Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        96,
+        97,
+        98,
+        100,
+        101,
+        102,
+        103
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "checkNotPrimitive",
+      "signature": "(Ljava/lang/reflect/Type;)V",
+      "executed_lines": [
+        434,
+        435
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "getGenericSupertype",
+      "signature": "(Ljava/lang/reflect/Type;Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        229,
+        230
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "getMapKeyAndValueTypes",
+      "signature": "(Ljava/lang/reflect/Type;Ljava/lang/Class;)[Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        311,
+        315,
+        317,
+        318,
+        319
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "getRawType",
+      "signature": "(Ljava/lang/reflect/Type;)Ljava/lang/Class;",
+      "executed_lines": [
+        120,
+        122,
+        124,
+        125,
+        130,
+        131,
+        132
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "getSupertype",
+      "signature": "(Ljava/lang/reflect/Type;Ljava/lang/Class;Ljava/lang/Class;)Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        270,
+        271,
+        272
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "hashCodeOrZero",
+      "signature": "(Ljava/lang/Object;)I",
+      "executed_lines": [
+        216
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types",
+      "method": "resolve",
+      "signature": "(Ljava/lang/reflect/Type;Ljava/lang/Class;Ljava/lang/reflect/Type;)Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        327,
+        342,
+        350,
+        351,
+        352,
+        353,
+        354,
+        356,
+        357,
+        358,
+        359,
+        368,
+        370,
+        372,
+        391
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl",
+      "method": "<init>",
+      "signature": "(Ljava/lang/reflect/Type;Ljava/lang/reflect/Type;[Ljava/lang/reflect/Type;)V",
+      "executed_lines": [
+        442,
+        444,
+        445,
+        446,
+        447,
+        448,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        459
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl",
+      "method": "getActualTypeArguments",
+      "signature": "()[Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        462
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl",
+      "method": "getOwnerType",
+      "signature": "()Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        470
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl",
+      "method": "getRawType",
+      "signature": "()Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        466
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.$Gson$Types$ParameterizedTypeImpl",
+      "method": "hashCode",
+      "signature": "()I",
+      "executed_lines": [
+        479,
+        480,
+        481
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.ConstructorConstructor",
+      "method": "<init>",
+      "signature": "(Ljava/util/Map;)V",
+      "executed_lines": [
+        51,
+        52,
+        53
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.ConstructorConstructor",
+      "method": "get",
+      "signature": "(Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/internal/ObjectConstructor;",
+      "executed_lines": [
+        56,
+        57,
+        62,
+        63,
+        73,
+        74,
+        75,
+        83,
+        84,
+        88,
+        89,
+        90
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.ConstructorConstructor",
+      "method": "newDefaultConstructor",
+      "signature": "(Ljava/lang/Class;)Lcom/google/gson/internal/ObjectConstructor;",
+      "executed_lines": [
+        99,
+        122,
+        123
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.ConstructorConstructor",
+      "method": "newDefaultImplementationConstructor",
+      "signature": "(Ljava/lang/reflect/Type;Ljava/lang/Class;)Lcom/google/gson/internal/ObjectConstructor;",
+      "executed_lines": [
+        134,
+        178,
+        179,
+        185,
+        191,
+        197,
+        198,
+        199
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.ConstructorConstructor$12",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/internal/ConstructorConstructor;)V",
+      "executed_lines": [
+        199
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.ConstructorConstructor$12",
+      "method": "construct",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        201
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.Excluder",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.Excluder",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        54,
+        55,
+        56,
+        58,
+        59
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.Excluder",
+      "method": "clone",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        50
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.Excluder",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        112,
+        113,
+        114,
+        116,
+        117
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.Excluder",
+      "method": "excludeClass",
+      "signature": "(Ljava/lang/Class;Z)Z",
+      "executed_lines": [
+        192,
+        197,
+        201,
+        205,
+        206,
+        212
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.Excluder",
+      "method": "isAnonymousOrLocal",
+      "signature": "(Ljava/lang/Class;)Z",
+      "executed_lines": [
+        216,
+        217
+      ]
+    },
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.JsonReaderInternalAccess",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        25
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.ArrayTypeAdapter",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        39
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.ArrayTypeAdapter$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        39
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.ArrayTypeAdapter$1",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        42,
+        43,
+        44
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.CollectionTypeAdapterFactory",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/internal/ConstructorConstructor;)V",
+      "executed_lines": [
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.CollectionTypeAdapterFactory",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        45,
+        47,
+        48,
+        49
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.DateTypeAdapter",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        42
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.DateTypeAdapter$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        42
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.DateTypeAdapter$1",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        45
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.JsonAdapterAnnotationTypeAdapterFactory",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/internal/ConstructorConstructor;)V",
+      "executed_lines": [
+        36,
+        37,
+        38
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.MapTypeAdapterFactory",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/internal/ConstructorConstructor;Z)V",
+      "executed_lines": [
+        110,
+        111,
+        112,
+        113
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.MapTypeAdapterFactory",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        116,
+        118,
+        119,
+        123,
+        124,
+        125,
+        126,
+        127,
+        131,
+        133
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.MapTypeAdapterFactory",
+      "method": "getKeyAdapter",
+      "signature": "(Lcom/google/gson/Gson;Ljava/lang/reflect/Type;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        140,
+        142
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/internal/bind/MapTypeAdapterFactory;Lcom/google/gson/Gson;Ljava/lang/reflect/Type;Lcom/google/gson/TypeAdapter;Ljava/lang/reflect/Type;Lcom/google/gson/TypeAdapter;Lcom/google/gson/internal/ObjectConstructor;)V",
+      "executed_lines": [
+        152,
+        153,
+        155,
+        157,
+        158
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter",
+      "method": "read",
+      "signature": "(Lcom/google/gson/stream/JsonReader;)Ljava/util/Map;",
+      "executed_lines": [
+        161,
+        162,
+        167,
+        169,
+        183,
+        184,
+        185,
+        186
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        145
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.ObjectTypeAdapter",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        38
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.ObjectTypeAdapter$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        38
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.ObjectTypeAdapter$1",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        41,
+        44
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.ReflectiveTypeAdapterFactory",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/internal/ConstructorConstructor;Lcom/google/gson/FieldNamingStrategy;Lcom/google/gson/internal/Excluder;)V",
+      "executed_lines": [
+        54,
+        55,
+        56,
+        57,
+        58
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.SqlDateTypeAdapter",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        39
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.SqlDateTypeAdapter$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        39
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.SqlDateTypeAdapter$1",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        42
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TimeTypeAdapter",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        41
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TimeTypeAdapter$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        41
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TimeTypeAdapter$1",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        44
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper",
+      "method": "<init>",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/TypeAdapter;Ljava/lang/reflect/Type;)V",
+      "executed_lines": [
+        32,
+        33,
+        34,
+        35,
+        36
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper",
+      "method": "read",
+      "signature": "(Lcom/google/gson/stream/JsonReader;)Ljava/lang/Object;",
+      "executed_lines": [
+        40
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        69,
+        90,
+        92,
+        149,
+        151,
+        177,
+        191,
+        192,
+        194,
+        214,
+        215,
+        217,
+        236,
+        237,
+        239,
+        257,
+        258,
+        260,
+        271,
+        272,
+        273,
+        275,
+        282,
+        283,
+        284,
+        286,
+        313,
+        314,
+        315,
+        317,
+        336,
+        351,
+        366,
+        386,
+        388,
+        407,
+        408,
+        410,
+        430,
+        448,
+        466,
+        468,
+        483,
+        484,
+        486,
+        501,
+        502,
+        504,
+        520,
+        522,
+        542,
+        544,
+        560,
+        561,
+        563,
+        578,
+        580,
+        589,
+        590,
+        592,
+        613,
+        678,
+        679,
+        681,
+        716,
+        718,
+        790,
+        791,
+        828
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters",
+      "method": "newFactory",
+      "signature": "(Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)Lcom/google/gson/TypeAdapterFactory;",
+      "executed_lines": [
+        854
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters",
+      "method": "newFactory",
+      "signature": "(Ljava/lang/Class;Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)Lcom/google/gson/TypeAdapterFactory;",
+      "executed_lines": [
+        867
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters",
+      "method": "newFactoryForMultipleTypes",
+      "signature": "(Ljava/lang/Class;Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)Lcom/google/gson/TypeAdapterFactory;",
+      "executed_lines": [
+        882
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters",
+      "method": "newTypeHierarchyFactory",
+      "signature": "(Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)Lcom/google/gson/TypeAdapterFactory;",
+      "executed_lines": [
+        901
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$1",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        69
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$10",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        286
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$11",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        317
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$12",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        336
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$13",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        351
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$14",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        366
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$15",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        388
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$16",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        410
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$17",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        430
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$18",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        448
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$19",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        468
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$2",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        92
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$20",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        486
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$21",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        504
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$22",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        522
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$23",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        544
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$24",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        563
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$25",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        580
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$26",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        592
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$26",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        595,
+        596
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$27",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        613
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$28",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        681
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$29",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        718
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$3",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        151
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$30",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        828
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$32",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)V",
+      "executed_lines": [
+        854
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$32",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        857
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$33",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Class;Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)V",
+      "executed_lines": [
+        867
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$33",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        870,
+        871
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$34",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Class;Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)V",
+      "executed_lines": [
+        882
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$34",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        885,
+        886
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$35",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Class;Lcom/google/gson/TypeAdapter;)V",
+      "executed_lines": [
+        901
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$35",
+      "method": "create",
+      "signature": "(Lcom/google/gson/Gson;Lcom/google/gson/reflect/TypeToken;)Lcom/google/gson/TypeAdapter;",
+      "executed_lines": [
+        904,
+        905,
+        906
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$4",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        177
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$5",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        194
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$6",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        217
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$7",
+      "method": "read",
+      "signature": "(Lcom/google/gson/stream/JsonReader;)Ljava/lang/Number;",
+      "executed_lines": [
+        242,
+        247
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$7",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        239
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$8",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        260
+      ]
+    },
+    {
+      "package": "com.google.gson.internal.bind",
+      "class": "com.google.gson.internal.bind.TypeAdapters$9",
+      "method": "write",
+      "signature": "(Lcom/google/gson/stream/JsonWriter;Ljava/lang/Object;)V",
+      "executed_lines": [
+        275
+      ]
+    },
+    {
+      "package": "com.google.gson.reflect",
+      "class": "com.google.gson.reflect.TypeToken",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        61,
+        62,
+        63,
+        64,
+        65
+      ]
+    },
+    {
+      "package": "com.google.gson.reflect",
+      "class": "com.google.gson.reflect.TypeToken",
+      "method": "<init>",
+      "signature": "(Ljava/lang/reflect/Type;)V",
+      "executed_lines": [
+        71,
+        72,
+        73,
+        74,
+        75
+      ]
+    },
+    {
+      "package": "com.google.gson.reflect",
+      "class": "com.google.gson.reflect.TypeToken",
+      "method": "get",
+      "signature": "(Ljava/lang/reflect/Type;)Lcom/google/gson/reflect/TypeToken;",
+      "executed_lines": [
+        296
+      ]
+    },
+    {
+      "package": "com.google.gson.reflect",
+      "class": "com.google.gson.reflect.TypeToken",
+      "method": "getRawType",
+      "signature": "()Ljava/lang/Class;",
+      "executed_lines": [
+        94
+      ]
+    },
+    {
+      "package": "com.google.gson.reflect",
+      "class": "com.google.gson.reflect.TypeToken",
+      "method": "getSuperclassTypeParameter",
+      "signature": "(Ljava/lang/Class;)Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        82,
+        83,
+        86,
+        87
+      ]
+    },
+    {
+      "package": "com.google.gson.reflect",
+      "class": "com.google.gson.reflect.TypeToken",
+      "method": "getType",
+      "signature": "()Ljava/lang/reflect/Type;",
+      "executed_lines": [
+        101
+      ]
+    },
+    {
+      "package": "com.google.gson.reflect",
+      "class": "com.google.gson.reflect.TypeToken",
+      "method": "hashCode",
+      "signature": "()I",
+      "executed_lines": [
+        280
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        192,
+        1593,
+        1616
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "<init>",
+      "signature": "(Ljava/io/Reader;)V",
+      "executed_lines": [
+        230,
+        238,
+        239,
+        240,
+        242,
+        243,
+        245,
+        269,
+        270,
+        272,
+        283,
+        284,
+        289,
+        290,
+        293,
+        294
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "beginObject",
+      "signature": "()V",
+      "executed_lines": [
+        379,
+        380,
+        383,
+        384,
+        385,
+        390
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "checkLenient",
+      "signature": "()V",
+      "executed_lines": [
+        1415,
+        1418
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "consumeNonExecutePrefix",
+      "signature": "()V",
+      "executed_lines": [
+        1575,
+        1576,
+        1578,
+        1582,
+        1583,
+        1584
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "doPeek",
+      "signature": "()I",
+      "executed_lines": [
+        466,
+        467,
+        469,
+        483,
+        485,
+        498,
+        499,
+        512,
+        513,
+        514,
+        515,
+        520,
+        537,
+        538,
+        540,
+        553,
+        554,
+        578
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "fillBuffer",
+      "signature": "(I)Z",
+      "executed_lines": [
+        1282,
+        1283,
+        1284,
+        1288,
+        1291,
+        1293,
+        1294,
+        1297,
+        1303,
+        1304
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "getColumnNumber",
+      "signature": "()I",
+      "executed_lines": [
+        1315
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "getLineNumber",
+      "signature": "()I",
+      "executed_lines": [
+        1311
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "getPath",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        1469,
+        1470,
+        1471,
+        1480,
+        1481,
+        1492
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "hasNext",
+      "signature": "()Z",
+      "executed_lines": [
+        416,
+        417,
+        418,
+        420
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "isLenient",
+      "signature": "()Z",
+      "executed_lines": [
+        333
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "isLiteral",
+      "signature": "(C)Z",
+      "executed_lines": [
+        749,
+        769
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "nextInt",
+      "signature": "()I",
+      "executed_lines": [
+        1162,
+        1163,
+        1168,
+        1179,
+        1182,
+        1193,
+        1194
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "nextNonWhitespace",
+      "signature": "(Z)I",
+      "executed_lines": [
+        1333,
+        1334,
+        1335,
+        1337,
+        1338,
+        1339,
+        1342,
+        1343,
+        1346,
+        1347,
+        1351,
+        1355,
+        1390,
+        1402,
+        1403
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "peek",
+      "signature": "()Lcom/google/gson/stream/JsonToken;",
+      "executed_lines": [
+        427,
+        428,
+        429,
+        432,
+        434,
+        454
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "push",
+      "signature": "(I)V",
+      "executed_lines": [
+        1262,
+        1273,
+        1274
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "setLenient",
+      "signature": "(Z)V",
+      "executed_lines": [
+        326,
+        327
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        1593
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader$1",
+      "method": "promoteNameToValue",
+      "signature": "(Lcom/google/gson/stream/JsonReader;)V",
+      "executed_lines": [
+        1595,
+        1599,
+        1600,
+        1603,
+        1605,
+        1607,
+        1608,
+        1614
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonToken",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        25,
+        31,
+        37,
+        43,
+        49,
+        56,
+        61,
+        67,
+        72,
+        77,
+        84
+      ]
+    }
+  ],
+  "com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers": [
+    {
+      "package": "com.google.gson.internal",
+      "class": "com.google.gson.internal.JsonReaderInternalAccess",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        25
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        192,
+        1593,
+        1616
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "<init>",
+      "signature": "(Ljava/io/Reader;)V",
+      "executed_lines": [
+        230,
+        238,
+        239,
+        240,
+        242,
+        243,
+        245,
+        269,
+        270,
+        272,
+        283,
+        284,
+        289,
+        290,
+        293,
+        294
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "beginArray",
+      "signature": "()V",
+      "executed_lines": [
+        341,
+        342,
+        343,
+        345,
+        346,
+        347,
+        348,
+        353
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "checkLenient",
+      "signature": "()V",
+      "executed_lines": [
+        1415,
+        1418
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "consumeNonExecutePrefix",
+      "signature": "()V",
+      "executed_lines": [
+        1575,
+        1576,
+        1578,
+        1582,
+        1583,
+        1584
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "doPeek",
+      "signature": "()I",
+      "executed_lines": [
+        466,
+        467,
+        468,
+        469,
+        520,
+        537,
+        538,
+        540,
+        553,
+        554,
+        576,
+        580,
+        583,
+        584,
+        588,
+        589,
+        593,
+        597,
+        598
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "fillBuffer",
+      "signature": "(I)Z",
+      "executed_lines": [
+        1282,
+        1283,
+        1284,
+        1288,
+        1291,
+        1293,
+        1294,
+        1297,
+        1303,
+        1304
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "getColumnNumber",
+      "signature": "()I",
+      "executed_lines": [
+        1315
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "getLineNumber",
+      "signature": "()I",
+      "executed_lines": [
+        1311
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "getPath",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        1469,
+        1470,
+        1471,
+        1474,
+        1475,
+        1492
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "isLiteral",
+      "signature": "(C)Z",
+      "executed_lines": [
+        749,
+        769
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "nextInt",
+      "signature": "()I",
+      "executed_lines": [
+        1162,
+        1163,
+        1168,
+        1179,
+        1182,
+        1193,
+        1194
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "nextNonWhitespace",
+      "signature": "(Z)I",
+      "executed_lines": [
+        1333,
+        1334,
+        1335,
+        1337,
+        1338,
+        1339,
+        1342,
+        1343,
+        1346,
+        1347,
+        1351,
+        1355,
+        1390,
+        1402,
+        1403
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "peek",
+      "signature": "()Lcom/google/gson/stream/JsonToken;",
+      "executed_lines": [
+        427,
+        428,
+        429,
+        432,
+        454
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "peekKeyword",
+      "signature": "()I",
+      "executed_lines": [
+        603,
+        607,
+        611,
+        615,
+        620
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "peekNumber",
+      "signature": "()I",
+      "executed_lines": [
+        647,
+        648,
+        649,
+        651,
+        652,
+        653,
+        654,
+        656,
+        659,
+        660,
+        673,
+        674,
+        695,
+        696,
+        697,
+        702,
+        703,
+        704,
+        709,
+        710,
+        713,
+        715,
+        716,
+        717,
+        718,
+        719,
+        722,
+        723,
+        725,
+        726,
+        727,
+        728,
+        729
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "push",
+      "signature": "(I)V",
+      "executed_lines": [
+        1262,
+        1273,
+        1274
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader",
+      "method": "setLenient",
+      "signature": "(Z)V",
+      "executed_lines": [
+        326,
+        327
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonReader$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        1593
+      ]
+    },
+    {
+      "package": "com.google.gson.stream",
+      "class": "com.google.gson.stream.JsonToken",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        25,
+        31,
+        37,
+        43,
+        49,
+        56,
+        61,
+        67,
+        72,
+        77,
+        84
+      ]
+    }
+  ]
+}

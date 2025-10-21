@@ -1,0 +1,16 @@
+File: src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java
+Method: TextBuffer.getTextBuffer
+
+public char[] getTextBuffer()
+{
+    // Are we just using shared input buffer?
+    if (_inputStart >= 0 && _inputBuffer != null) return _inputBuffer;
+    if (_resultArray != null)  return _resultArray;
+    if (_resultString != null) {
+        return (_resultArray = _resultString.toCharArray());
+    }
+    // Check if _currentSegment is not null before returning it
+    if (!_hasSegments && _currentSegment != null)  return _currentSegment;
+    // If none of the above conditions are met, create a non-segmented array
+    return contentsAsArray();
+}

@@ -1,0 +1,59 @@
+{
+  "bug_id": "Closure-114",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-114_1772681819",
+  "patches": [
+    [
+      {
+        "hypothesis": "Address overfitting by using more generalizable logic and avoiding hardcoded values",
+        "fixed_method": "private void recordAssignment(NodeTraversal t, Node n, Node recordNode) {\n    NameInformation ns = createNameInformation(t, n.getFirstChild());\n    if (ns != null && recordNode != null) {\n        if (n.getParent().isFor() && !NodeUtil.isForIn(n.getParent())) {\n            Node targetNode = n.getFirstChild().getNext() == n ? recordNode : n.getFirstChild();\n            recordDepScope(targetNode, ns);\n        } else {\n            recordDepScope(n.getFirstChild(), ns);\n        }\n    }\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/com/google/javascript/jscomp/NameAnalyzer.java",
+        "method_name": "recordAssignment",
+        "class_name": "NameAnalyzer",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "",
+        "line_numbers": [
+          558,
+          559,
+          560,
+          561,
+          562,
+          563,
+          564,
+          565,
+          566,
+          567,
+          568,
+          569,
+          570,
+          571,
+          572,
+          573,
+          574,
+          575,
+          576,
+          577,
+          578,
+          579,
+          580,
+          581,
+          582,
+          583,
+          584,
+          585,
+          586,
+          587,
+          588
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-114/"
+}

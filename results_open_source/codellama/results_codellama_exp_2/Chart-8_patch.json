@@ -1,0 +1,31 @@
+{
+  "bug_id": "Chart-8",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-8_1772762172",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the deprecated constructor using the default time zone, which is not the same as the time zone passed in the method call.",
+        "changes": "+ Use the passed time zone to determine the first day of the week, instead of the default time zone.",
+        "fixed_method": "public Week(Date time, TimeZone zone) {\n  // defer argument checking...\n  this(time, zone, Locale.getDefault());\n}",
+        "diff": "+ Use the passed time zone to determine the first day of the week, instead of the default time zone.",
+        "file_path": "source/org/jfree/data/time/Week.java",
+        "method_name": "Week",
+        "class_name": "Week",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          173,
+          174,
+          175,
+          176
+        ],
+        "original_code": "/**\n* Creates a time period for the week in which the specified date/time\n* falls, calculated relative to the specified time zone.\n*\n* @param time  the date/time (<code>null</code> not permitted).\n* @param zone  the time zone (<code>null</code> not permitted).\n*\n* @deprecated As of 1.0.7, use {@link #Week(Date, TimeZone, Locale)}.\n*/\npublic Week(Date time, TimeZone zone) {\n    // defer argument checking...\n    this(time, RegularTimePeriod.DEFAULT_TIME_ZONE, Locale.getDefault());\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Chart-8/"
+}

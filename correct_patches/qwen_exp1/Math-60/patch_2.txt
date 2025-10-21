@@ -1,0 +1,20 @@
+File: src/main/java/org/apache/commons/math/distribution/NormalDistributionImpl.java
+Method: NormalDistributionImpl.cumulativeProbability
+
+public double cumulativeProbability(double x) throws MathException {
+    final double dev = x - mean;
+    final double threshold = standardDeviation * FastMath.sqrt(-2.0 * FastMath.log(Double.MIN_NORMAL));
+    try {
+        if (dev < -threshold) return 0;
+        if (dev > threshold) return 1;
+        return 0.5 * (1.0 + Erf.erf(dev / (standardDeviation * FastMath.sqrt(2.0))));
+    } catch (MaxIterationsExceededException ex) {
+        if (x < (mean - 20 * standardDeviation)) { // JDK 1.5 blows at 38
+            return 0;
+        } else if (x > (mean + 20 * standardDeviation)) {
+            return 1;
+        } else {
+            throw ex;
+        }
+    }
+}

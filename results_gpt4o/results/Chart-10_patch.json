@@ -1,0 +1,85 @@
+{
+  "bug_id": "Chart-10",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-10_1773115331",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method doesn't handle HTML escaping of special characters like quotes properly, which leads to a mismatch in expected and actual output.",
+        "changes": "Escape special HTML characters using String.replace.",
+        "fixed_method": "public String generateToolTipFragment(String toolTipText) {\n    String escapedToolTipText = toolTipText.replace(\"\\\"\", \"&quot;\");\n    return \" title=\\\"\" + escapedToolTipText + \"\\\" alt=\\\"\\\"\";\n}",
+        "diff": "Escape special HTML characters using String.replace.",
+        "file_path": "source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java",
+        "method_name": "generateToolTipFragment",
+        "class_name": "StandardToolTipTagFragmentGenerator",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          64,
+          65,
+          66,
+          67
+        ],
+        "original_code": "/**\n* Generates a tooltip string to go in an HTML image map.\n*\n* @param toolTipText  the tooltip.\n*\n* @return The formatted HTML area tag attribute(s).\n*/\npublic String generateToolTipFragment(String toolTipText) {\n    return \" title=\\\"\" + toolTipText\n        + \"\\\" alt=\\\"\\\"\";\n}"
+      },
+      {
+        "hypothesis": "The method does not escape special HTML characters, causing differences in expected and actual outputs when special characters are present in the tooltip text.",
+        "changes": "- Escape special characters such as quotes.\n\\\" to \\&quot;",
+        "fixed_method": "public String generateToolTipFragment(String toolTipText) {\n    String escapedText = toolTipText.replace(\"\\\"\", \"&quot;\");\n    return \" title=\\\"\" + escapedText + \"\\\" alt=\\\"\\\"\";\n}",
+        "diff": "- Escape special characters such as quotes.\n\\\" to \\&quot;",
+        "file_path": "source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java",
+        "method_name": "generateToolTipFragment",
+        "class_name": "StandardToolTipTagFragmentGenerator",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          64,
+          65,
+          66,
+          67
+        ],
+        "original_code": "/**\n* Generates a tooltip string to go in an HTML image map.\n*\n* @param toolTipText  the tooltip.\n*\n* @return The formatted HTML area tag attribute(s).\n*/\npublic String generateToolTipFragment(String toolTipText) {\n    return \" title=\\\"\" + toolTipText\n        + \"\\\" alt=\\\"\\\"\";\n}"
+      },
+      {
+        "hypothesis": "The bug is due to missing HTML encoding for special characters within the tooltip text, such as quotation marks.",
+        "changes": "- Properly encode special characters to their HTML counterparts.",
+        "fixed_method": "public String generateToolTipFragment(String toolTipText) {\n    return \" title=\\\"\" + toolTipText.replace(\"\\\"\", \"&quot;\")\n        + \"\\\" alt=\\\"\\\"\";\n}",
+        "diff": "- Properly encode special characters to their HTML counterparts.",
+        "file_path": "source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java",
+        "method_name": "generateToolTipFragment",
+        "class_name": "StandardToolTipTagFragmentGenerator",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          64,
+          65,
+          66,
+          67
+        ],
+        "original_code": "/**\n* Generates a tooltip string to go in an HTML image map.\n*\n* @param toolTipText  the tooltip.\n*\n* @return The formatted HTML area tag attribute(s).\n*/\npublic String generateToolTipFragment(String toolTipText) {\n    return \" title=\\\"\" + toolTipText\n        + \"\\\" alt=\\\"\\\"\";\n}"
+      },
+      {
+        "hypothesis": "The issue is with the special character handling in the tooltip generation. HTML special characters need to be escaped, specifically quotes, to match expected HTML-safe output.",
+        "changes": "+ toolTipText = toolTipText.replace(\"\\\"\", \"&quot;\");",
+        "fixed_method": "public String generateToolTipFragment(String toolTipText) {\n    toolTipText = toolTipText.replace(\"\\\"\", \"&quot;\");\n    return \" title=\\\"\" + toolTipText + \"\\\" alt=\\\"\\\"\";\n}",
+        "diff": "+ toolTipText = toolTipText.replace(\"\\\"\", \"&quot;\");",
+        "file_path": "source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java",
+        "method_name": "generateToolTipFragment",
+        "class_name": "StandardToolTipTagFragmentGenerator",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          64,
+          65,
+          66,
+          67
+        ],
+        "original_code": "/**\n* Generates a tooltip string to go in an HTML image map.\n*\n* @param toolTipText  the tooltip.\n*\n* @return The formatted HTML area tag attribute(s).\n*/\npublic String generateToolTipFragment(String toolTipText) {\n    return \" title=\\\"\" + toolTipText\n        + \"\\\" alt=\\\"\\\"\";\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Chart-10/"
+}

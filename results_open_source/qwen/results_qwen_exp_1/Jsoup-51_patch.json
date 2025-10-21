@@ -1,0 +1,33 @@
+{
+  "bug_id": "Jsoup-51",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-51_1771867853",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is that the matchesLetter method only checks for ASCII letters (A-Z, a-z) and does not account for non-ASCII characters, which are required for the test to pass.",
+        "changes": "+ return Character.isLetter(c);",
+        "fixed_method": "boolean matchesLetter() {\n    if (isEmpty())\n        return false;\n    char c = input[pos];\n    return Character.isLetter(c);\n}",
+        "diff": "+ return Character.isLetter(c);",
+        "file_path": "src/main/java/org/jsoup/parser/CharacterReader.java",
+        "method_name": "matchesLetter",
+        "class_name": "CharacterReader",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          296,
+          297,
+          298,
+          299,
+          300,
+          301
+        ],
+        "original_code": "// '\\t', '\\n', '\\r', '\\f', ' ', '/', '>', nullChar\nboolean matchesLetter() {\n    if (isEmpty())\n        return false;\n    char c = input[pos];\n    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-51/"
+}

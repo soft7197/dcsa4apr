@@ -1,0 +1,63 @@
+{
+  "bug_id": "Lang-9",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-9_1771872777",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is likely due to the parser not correctly identifying unterminated quotes in the date format pattern. The parser should throw an exception when it encounters an unterminated quote.",
+        "changes": "- if(!patternMatcher.lookingAt()) {\n+ if(!patternMatcher.lookingAt() || pattern.substring(patternMatcher.end()).contains(\"'\")) {",
+        "fixed_method": "private void init() {\n    thisYear= Calendar.getInstance(timeZone, locale).get(Calendar.YEAR);\n\n    nameValues= new ConcurrentHashMap<Integer, KeyValue[]>();\n\n    StringBuilder regex= new StringBuilder();\n    List<Strategy> collector = new ArrayList<Strategy>();\n\n    Matcher patternMatcher= formatPattern.matcher(pattern);\n    if(!patternMatcher.lookingAt() || pattern.substring(patternMatcher.end()).contains(\"'\")) {\n        throw new IllegalArgumentException(\"Invalid pattern\");\n    }\n\n    currentFormatField= patternMatcher.group();\n    Strategy currentStrategy= getStrategy(currentFormatField);\n    for(;;) {\n        patternMatcher.region(patternMatcher.end(), patternMatcher.regionEnd());\n        if(!patternMatcher.lookingAt() || pattern.substring(patternMatcher.end()).contains(\"'\")) {\n            nextStrategy = null;\n            break;\n        }\n        String nextFormatField= patternMatcher.group();\n        nextStrategy = getStrategy(nextFormatField);\n        if(currentStrategy.addRegex(this, regex)) {\n            collector.add(currentStrategy);\n        }\n        currentFormatField= nextFormatField;\n        currentStrategy= nextStrategy;\n    }\n    if(currentStrategy.addRegex(this, regex)) {\n        collector.add(currentStrategy);\n    }\n    currentFormatField= null;\n    strategies= collector.toArray(new Strategy[collector.size()]);\n    parsePattern= Pattern.compile(regex.toString());\n}",
+        "diff": "- if(!patternMatcher.lookingAt()) {\n+ if(!patternMatcher.lookingAt() || pattern.substring(patternMatcher.end()).contains(\"'\")) {",
+        "file_path": "src/main/java/org/apache/commons/lang3/time/FastDateParser.java",
+        "method_name": "init",
+        "class_name": "FastDateParser",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150
+        ],
+        "original_code": "/**\n* Initialize derived fields from defining fields.\n* This is called from constructor and from readObject (de-serialization)\n*/\nprivate void init() {\n    thisYear= Calendar.getInstance(timeZone, locale).get(Calendar.YEAR);\n\n    nameValues= new ConcurrentHashMap<Integer, KeyValue[]>();\n\n    StringBuilder regex= new StringBuilder();\n    List<Strategy> collector = new ArrayList<Strategy>();\n\n    Matcher patternMatcher= formatPattern.matcher(pattern);\n    if(!patternMatcher.lookingAt()) {\n        throw new IllegalArgumentException(\"Invalid pattern\");\n    }\n\n    currentFormatField= patternMatcher.group();\n    Strategy currentStrategy= getStrategy(currentFormatField);\n    for(;;) {\n        patternMatcher.region(patternMatcher.end(), patternMatcher.regionEnd());\n        if(!patternMatcher.lookingAt()) {\n            nextStrategy = null;\n            break;\n        }\n        String nextFormatField= patternMatcher.group();\n        nextStrategy = getStrategy(nextFormatField);\n        if(currentStrategy.addRegex(this, regex)) {\n            collector.add(currentStrategy);\n        }\n        currentFormatField= nextFormatField;\n        currentStrategy= nextStrategy;\n    }\n    if(currentStrategy.addRegex(this, regex)) {\n        collector.add(currentStrategy);\n    }\n    currentFormatField= null;\n    strategies= collector.toArray(new Strategy[collector.size()]);\n    parsePattern= Pattern.compile(regex.toString());\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Lang-9/"
+}

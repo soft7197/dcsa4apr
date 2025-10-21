@@ -1,0 +1,20 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "doPeek_com.google.gson.stream.JsonReader"
+    ],
+    "tests": [
+      "com.google.gson.stream.JsonReaderTest::testTopLevelValueTypeWithSkipValue",
+      "com.google.gson.stream.JsonReaderTest::testTopLevelValueTypes"
+    ]
+  },
+  "Group_2": {
+    "buggy_methods": [
+      "beforeValue_com.google.gson.stream.JsonWriter",
+      "value_com.google.gson.stream.JsonWriter"
+    ],
+    "tests": [
+      "com.google.gson.stream.JsonWriterTest::testTopLevelValueTypes"
+    ]
+  }
+}

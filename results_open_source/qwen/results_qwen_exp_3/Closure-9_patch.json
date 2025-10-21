@@ -1,0 +1,43 @@
+{
+  "bug_id": "Closure-9",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-9_1772027736",
+  "patches": [
+    {
+      "hypothesis": "The issue arises because the normalizeSourceName method does not handle the conversion of backslashes to forward slashes consistently, which affects the guessCJSModuleName method's ability to correctly strip the prefix and generate the module name.",
+      "changes": "-    if (filename.indexOf(filenamePrefix) == 0) {\n+    filename = filename.replace(\"\\\\\", \"/\");\n+\n+    if (filename.indexOf(filenamePrefix) == 0) {",
+      "methods": {
+        "src/com/google/javascript/jscomp/ProcessCommonJSModules.java::ProcessCommonJSModules::normalizeSourceName::L116": {
+          "file_path": "src/com/google/javascript/jscomp/ProcessCommonJSModules.java",
+          "method_name": "normalizeSourceName",
+          "class_name": "ProcessCommonJSModules",
+          "line_numbers": [
+            116,
+            125
+          ],
+          "original_code": "\n  private String normalizeSourceName(String filename) {\n    // The DOS command shell will normalize \"/\" to \"\\\", so we have to\n    // wrestle it back.\n\n    if (filename.indexOf(filenamePrefix) == 0) {\n      filename = filename.substring(filenamePrefix.length());\n    }\n\n    return filename;\n  }\n",
+          "fixed_method": "  private String normalizeSourceName(String filename) {\n    // The DOS command shell will normalize \"/\" to \"\\\", so we have to\n    // wrestle it back.\n\n    filename = filename.replace(\"\\\\\", \"/\");\n\n    if (filename.indexOf(filenamePrefix) == 0) {\n      filename = filename.substring(filenamePrefix.length());\n    }\n\n    return filename;\n  }",
+          "iteration": 1
+        },
+        "src/com/google/javascript/jscomp/ProcessCommonJSModules.java::ProcessCommonJSModules::visitScript::L179": {
+          "file_path": "src/com/google/javascript/jscomp/ProcessCommonJSModules.java",
+          "method_name": "visitScript",
+          "class_name": "ProcessCommonJSModules",
+          "line_numbers": [
+            179,
+            204
+          ],
+          "original_code": "    /**\n     * Emit goog.provide and add suffix to all global vars to avoid conflicts\n     * with other modules.\n     */\n\n    private void visitScript(NodeTraversal t, Node script) {\n      Preconditions.checkArgument(scriptNodeCount == 1,\n          \"ProcessCommonJSModules supports only one invocation per \" +\n          \"CompilerInput / script node\");\n      String moduleName = guessCJSModuleName(normalizeSourceName(script.getSourceFileName()));\n      script.addChildToFront(IR.var(IR.name(moduleName), IR.objectlit())\n          .copyInformationFromForTree(script));\n      if (reportDependencies) {\n        CompilerInput ci = t.getInput();\n        ci.addProvide(moduleName);\n        JSModule m = new JSModule(moduleName);\n        m.addAndOverrideModule(ci);\n        module = m;\n      }\n      script.addChildToFront(IR.exprResult(\n          IR.call(IR.getprop(IR.name(\"goog\"), IR.string(\"provide\")),\n              IR.string(moduleName))).copyInformationFromForTree(script));\n\n      emitOptionalModuleExportsOverride(script, moduleName);\n\n      // Rename vars to not conflict in global scope.\n      NodeTraversal.traverse(compiler, script, new SuffixVarsCallback(\n          moduleName));\n\n      compiler.reportCodeChange();\n    }\n",
+          "fixed_method": "    private void visitScript(NodeTraversal t, Node script) {\n      Preconditions.checkArgument(scriptNodeCount == 1,\n          \"ProcessCommonJSModules supports only one invocation per \" +\n          \"CompilerInput / script node\");\n      String moduleName = guessCJSModuleName(normalizeSourceName(script.getSourceFileName()));\n      script.addChildToFront(IR.var(IR.name(moduleName), IR.objectlit())\n          .copyInformationFromForTree(script));\n      if (reportDependencies) {\n        CompilerInput ci = t.getInput();\n        ci.addProvide(moduleName);\n        JSModule m = new JSModule(moduleName);\n        m.addAndOverrideModule(ci);\n        module = m;\n      }\n      script.addChildToFront(IR.exprResult(\n          IR.call(IR.getprop(IR.name(\"goog\"), IR.string(\"provide\")),\n              IR.string(moduleName))).copyInformationFromForTree(script));\n\n      emitOptionalModuleExportsOverride(script, moduleName);\n\n      // Rename vars to not conflict in global scope.\n      NodeTraversal.traverse(compiler, script, new SuffixVarsCallback(\n          moduleName));\n\n      compiler.reportCodeChange();\n    }",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-9/"
+}

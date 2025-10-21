@@ -1,0 +1,14 @@
+File: src/java/org/apache/commons/math/fraction/Fraction.java
+Method: Fraction.compareTo
+
+public int compareTo(Fraction object) {
+    if (object == null) {
+        throw new NullPointerException("Object to compare cannot be null");
+    }
+    if (denominator == 0 || object.denominator == 0) {
+        throw new ArithmeticException("Denominator cannot be zero");
+    }
+    BigInteger nOd = BigInteger.valueOf(numerator).multiply(BigInteger.valueOf(object.denominator));
+    BigInteger dOn = BigInteger.valueOf(denominator).multiply(BigInteger.valueOf(object.numerator));
+    return nOd.compareTo(dOn);
+}

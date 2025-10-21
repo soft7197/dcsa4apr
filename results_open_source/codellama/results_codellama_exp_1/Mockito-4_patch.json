@@ -1,0 +1,93 @@
+{
+  "bug_id": "Mockito-4",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-4_1772735561",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method was not handling the case where the exception cause was null, which caused a NullPointerException.",
+        "changes": "+ if (exception.getCause() == null) return \"\";",
+        "fixed_method": "private String exceptionCauseMessageIfAvailable(Exception exception) {\n  if (exception.getCause() == null) return \"\";\n  return exception.getCause().getMessage();\n}",
+        "diff": "+ if (exception.getCause() == null) return \"\";",
+        "file_path": "src/org/mockito/exceptions/Reporter.java",
+        "method_name": "exceptionCauseMessageIfAvailable",
+        "class_name": "Reporter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          676,
+          678
+        ],
+        "original_code": "\n    private String exceptionCauseMessageIfAvailable(Exception details) {\n        return details.getCause().getMessage();\n    }\n"
+      },
+      {
+        "hypothesis": "The cause of the bug was a NullPointerException being thrown by the getCause() method when the Exception did not have a cause.",
+        "changes": "- return details.getCause().getMessage();\n+ return details.getCause() == null ? null : details.getCause().getMessage();",
+        "fixed_method": "private String exceptionCauseMessageIfAvailable(Exception details) {\n        return details.getCause() == null ? null : details.getCause().getMessage();\n    }\n",
+        "diff": "- return details.getCause().getMessage();\n+ return details.getCause() == null ? null : details.getCause().getMessage();",
+        "file_path": "src/org/mockito/exceptions/Reporter.java",
+        "method_name": "exceptionCauseMessageIfAvailable",
+        "class_name": "Reporter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          676,
+          678
+        ],
+        "original_code": "\n    private String exceptionCauseMessageIfAvailable(Exception details) {\n        return details.getCause().getMessage();\n    }\n"
+      },
+      {
+        "hypothesis": "The exception cause is null in the exceptionCauseMessageIfAvailable method",
+        "changes": "- return details.getCause().getMessage();\n+ if (details.getCause() != null) {\n+ return details.getCause().getMessage();\n+ }",
+        "fixed_method": "private String exceptionCauseMessageIfAvailable(Exception details) {\n  if (details.getCause() != null) {\n    return details.getCause().getMessage();\n  }\n  return null;\n}",
+        "diff": "- return details.getCause().getMessage();\n+ if (details.getCause() != null) {\n+ return details.getCause().getMessage();\n+ }",
+        "file_path": "src/org/mockito/exceptions/Reporter.java",
+        "method_name": "exceptionCauseMessageIfAvailable",
+        "class_name": "Reporter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          676,
+          678
+        ],
+        "original_code": "\n    private String exceptionCauseMessageIfAvailable(Exception details) {\n        return details.getCause().getMessage();\n    }\n"
+      },
+      {
+        "hypothesis": "The exception cause message is null when the exception has no cause.",
+        "changes": "+ if (cause == null) return null;",
+        "fixed_method": "private String exceptionCauseMessageIfAvailable(Exception details) {\n  Throwable cause = details.getCause();\n  if (cause == null) return null;\n  return cause.getMessage();\n}",
+        "diff": "+ if (cause == null) return null;",
+        "file_path": "src/org/mockito/exceptions/Reporter.java",
+        "method_name": "exceptionCauseMessageIfAvailable",
+        "class_name": "Reporter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          676,
+          678
+        ],
+        "original_code": "\n    private String exceptionCauseMessageIfAvailable(Exception details) {\n        return details.getCause().getMessage();\n    }\n"
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "private String exceptionCauseMessageIfAvailable(Exception details) {\n        if (details.getCause() == null) return null;\n        return details.getCause().getMessage();\n    }",
+        "diff": "",
+        "file_path": "src/org/mockito/exceptions/Reporter.java",
+        "method_name": "exceptionCauseMessageIfAvailable",
+        "class_name": "Reporter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          676,
+          678
+        ],
+        "original_code": "\n    private String exceptionCauseMessageIfAvailable(Exception details) {\n        return details.getCause().getMessage();\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Mockito-4/"
+}

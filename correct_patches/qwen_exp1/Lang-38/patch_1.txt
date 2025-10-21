@@ -1,0 +1,11 @@
+File: src/java/org/apache/commons/lang3/time/FastDateFormat.java
+Method: FastDateFormat.format
+
+public StringBuffer format(Calendar calendar, StringBuffer buf) {
+    if (mTimeZoneForced) {
+        calendar = (Calendar) calendar.clone();
+        calendar.setTimeInMillis(calendar.getTimeInMillis());
+        calendar.setTimeZone(mTimeZone);
+    }
+    return applyRules(calendar, buf);
+}

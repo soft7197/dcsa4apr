@@ -1,0 +1,13 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "getTypeWithProperty_com.google.javascript.jscomp.DisambiguateProperties",
+      "mayThrowException_com.google.javascript.jscomp.ControlFlowAnalysis"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.CheckUnreachableCodeTest::testInstanceOfThrowsException",
+      "com.google.javascript.jscomp.ControlFlowAnalysisTest::testInstanceOf",
+      "com.google.javascript.jscomp.DisambiguatePropertiesTest::testSupertypeReferenceOfSubtypeProperty"
+    ]
+  }
+}

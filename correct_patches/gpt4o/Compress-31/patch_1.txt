@@ -1,0 +1,49 @@
+File: src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java
+Method: TarUtils.parseOctal
+
+public static long parseOctal(final byte[] buffer, final int offset, final int length) {
+    if (length < 2) {
+        throw new IllegalArgumentException("Length " + length + " must be at least 2");
+    }
+
+    long result = 0;
+    int end = offset + length;
+    int start = offset;
+
+    if (buffer[start] == 0) {
+        return 0L;
+    }
+
+    // Skip leading spaces
+    while (start < end) {
+        if (buffer[start] == ' ') {
+            start++;
+        } else {
+            break;
+        }
+    }
+
+    // Process valid octal digits; trim all trailing NULs and spaces only after checking digits
+    for (; start < end; start++) {
+        final byte currentByte = buffer[start];
+        if (currentByte >= '0' && currentByte <= '7') {
+            result = (result << 3) + (currentByte - '0'); // convert from ASCII
+        } else if (currentByte == 0 || currentByte == ' ') {
+            // The valid ending conditions are reached
+            break;
+        } else {
+            throw new IllegalArgumentException("Invalid characters in octal input");
+        }
+    }
+
+    // Ensure trailing characters meet specification (trailing space or NUL)
+    while (start < end) {
+        final byte trailer = buffer[start];
+        if (trailer != 0 && trailer != ' ') {
+            throw new IllegalArgumentException("Invalid characters in octal input");
+        }
+        start++;
+    }
+
+    return result;
+}

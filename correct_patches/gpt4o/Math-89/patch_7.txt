@@ -1,0 +1,9 @@
+File: src/java/org/apache/commons/math/stat/Frequency.java
+Method: Frequency.addValue
+
+public void addValue(Object v) {
+    if (!(v instanceof Comparable<?>)) {
+        throw new IllegalArgumentException("Object is not Comparable");
+    }
+    addValue((Comparable<?>) v);
+}

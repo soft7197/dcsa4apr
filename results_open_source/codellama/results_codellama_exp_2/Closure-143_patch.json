@@ -1,0 +1,29 @@
+{
+  "bug_id": "Closure-143",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-143_1772811325",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue is caused by the method not properly parsing the define flag value, resulting in an invalid syntax error.",
+        "changes": "+ check for the presence of the double quote character in the define flag value, and handle it accordingly.",
+        "fixed_method": "static void createDefineReplacements(List<String> definitions, CompilerOptions options) {\n    // Parse the definitions\n    for (String override : definitions) {\n      String[] assignment = override.split(\"=\", 2);\n      String defName = assignment[0];\n\n      if (defName.length() > 0) {\n        if (assignment.length == 1) {\n          options.setDefineToBooleanLiteral(defName, true);\n          continue;\n        } else {\n          String defValue = assignment[1];\n\n          if (defValue.equals(\"true\")) {\n            options.setDefineToBooleanLiteral(defName, true);\n            continue;\n          } else if (defValue.equals(\"false\")) {\n            options.setDefineToBooleanLiteral(defName, false);\n            continue;\n          } else if (defValue.length() > 1\n              && ((defValue.charAt(0) == '\"' &&\n                  defValue.charAt(defValue.length() - 1) == '\"')\n            )) {\n            // If the value starts and ends with a double quote, we assume that it's a string.\n            String maybeStringVal = defValue.substring(1, defValue.length() - 1);\n            if (maybeStringVal.indexOf(defValue.charAt(0)) == -1) {\n              options.setDefineToStringLiteral(defName, maybeStringVal);\n              continue;\n            }\n          } else {\n            try {\n              options.setDefineToDoubleLiteral(defName, Double.parseDouble(defValue));\n              continue;\n            } catch (NumberFormatException e) {\n              // do nothing, it will be caught at the end\n            }\n          }\n        }\n      }\n\n      throw new RuntimeException(\"--define flag syntax invalid: \" + override);\n    }\n  }",
+        "diff": "+ check for the presence of the double quote character in the define flag value, and handle it accordingly.",
+        "file_path": "src/com/google/javascript/jscomp/AbstractCommandLineRunner.java",
+        "method_name": "createDefineReplacements",
+        "class_name": "AbstractCommandLineRunner",
+        "iteration": 4,
+        "is_multi_method": false,
+        "line_numbers": [
+          847,
+          895
+        ],
+        "original_code": "  /**\n   * Create a map of constant names to constant values from a textual\n   * description of the map.\n   *\n   * @param definitions A list of overriding definitions for defines in\n   *     the form <name>[=<val>], where <val> is a number, boolean, or\n   *     single-quoted string without single quotes.\n   */\n\n  @VisibleForTesting\n  static void createDefineReplacements(List<String> definitions,\n      CompilerOptions options) {\n    // Parse the definitions\n    for (String override : definitions) {\n      String[] assignment = override.split(\"=\", 2);\n      String defName = assignment[0];\n\n      if (defName.length() > 0) {\n        if (assignment.length == 1) {\n          options.setDefineToBooleanLiteral(defName, true);\n          continue;\n        } else {\n          String defValue = assignment[1];\n\n          if (defValue.equals(\"true\")) {\n            options.setDefineToBooleanLiteral(defName, true);\n            continue;\n          } else if (defValue.equals(\"false\")) {\n            options.setDefineToBooleanLiteral(defName, false);\n            continue;\n          } else if (defValue.length() > 1\n              && ((defValue.charAt(0) == '\\'' &&\n                  defValue.charAt(defValue.length() - 1) == '\\'')\n            )) {\n            // If the value starts and ends with a single quote,\n            // we assume that it's a string.\n            String maybeStringVal =\n                defValue.substring(1, defValue.length() - 1);\n            if (maybeStringVal.indexOf(defValue.charAt(0)) == -1) {\n              options.setDefineToStringLiteral(defName, maybeStringVal);\n              continue;\n            }\n          } else {\n            try {\n              options.setDefineToDoubleLiteral(defName,\n                  Double.parseDouble(defValue));\n              continue;\n            } catch (NumberFormatException e) {\n              // do nothing, it will be caught at the end\n            }\n          }\n        }\n      }\n\n      throw new RuntimeException(\n          \"--define flag syntax invalid: \" + override);\n    }\n  }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Closure-143/"
+}

@@ -1,0 +1,49 @@
+{
+  "bug_id": "Cli-27",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Cli-27_1772762948",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined patch should handle long options and edge cases in a more robust way.",
+        "fixed_method": "public void setSelected(Option option) throws AlreadySelectedException {\n  if (option == null) {\n    // reset the option previously selected\n    selected = null;\n    return;\n  }\n\n  // handle long options\n  if (option.hasLongOpt()) {\n    selected = option.getLongOpt();\n  } else {\n    // handle short options\n    if (selected == null || selected.equals(option.getOpt())) {\n      selected = option.getOpt();\n    } else {\n      throw new AlreadySelectedException(this, option);\n    }\n  }\n\n  // handle edge cases\n  if (selected.contains(\"--\")) {\n    selected = selected.split(\"--\")[1];\n  }\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/java/org/apache/commons/cli/OptionGroup.java",
+        "method_name": "setSelected",
+        "class_name": "OptionGroup",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "",
+        "line_numbers": [
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Cli-27/"
+}

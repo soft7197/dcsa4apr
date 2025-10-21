@@ -1,0 +1,30 @@
+{
+  "bug_id": "Closure-109",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-109_1773115433",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method is failing to recognize the '?' and '*' tokens as valid context type expressions for constructors, thus leading to warning messages.",
+        "changes": "- return parseTypeName(token);\n+ if (token == JsDocToken.QMARK) {\n+     return new Node(Token.QMARK);\n+ } else if (token == JsDocToken.STAR) {\n+     return new Node(Token.STAR);\n+ } else {\n+     return parseTypeName(token);\n+ }",
+        "fixed_method": "private Node parseContextTypeExpression(JsDocToken token) {\n    if (token == JsDocToken.QMARK) {\n        return new Node(Token.QMARK);\n    } else if (token == JsDocToken.STAR) {\n        return new Node(Token.STAR);\n    } else {\n        return parseTypeName(token);\n    }\n}",
+        "diff": "- return parseTypeName(token);\n+ if (token == JsDocToken.QMARK) {\n+     return new Node(Token.QMARK);\n+ } else if (token == JsDocToken.STAR) {\n+     return new Node(Token.STAR);\n+ } else {\n+     return parseTypeName(token);\n+ }",
+        "file_path": "src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java",
+        "method_name": "parseContextTypeExpression",
+        "class_name": "JsDocInfoParser",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          1907,
+          1908,
+          1909
+        ],
+        "original_code": "/**\n* ContextTypeExpression := BasicTypeExpression | '?'\n* For expressions on the right hand side of a this: or new:\n*/\nprivate Node parseContextTypeExpression(JsDocToken token) {\n        return parseTypeName(token);\n}"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Closure-109/"
+}

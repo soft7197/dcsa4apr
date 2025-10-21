@@ -1,0 +1,17 @@
+File: src/main/java/org/apache/commons/math3/distribution/MultivariateNormalDistribution.java
+Method: MultivariateNormalDistribution.density
+
+public double density(final double[] vals) throws DimensionMismatchException {
+    if (vals == null) {
+        throw new IllegalArgumentException("Input values array cannot be null");
+    }
+
+    final int dim = getDimension();
+    if (vals.length != dim) {
+        throw new DimensionMismatchException(vals.length, dim);
+    }
+
+    return FastMath.pow(2 * FastMath.PI, -dim / 2.0) *
+        FastMath.pow(covarianceMatrixDeterminant, -0.5) *
+        getExponentTerm(vals);
+}

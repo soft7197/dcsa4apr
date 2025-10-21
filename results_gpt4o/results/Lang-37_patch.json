@@ -1,0 +1,94 @@
+{
+  "bug_id": "Lang-37",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-37_1773119596",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method does not correctly handle arrays of different element types, causing an array store exception when incompatible types are mixed.",
+        "changes": "- if array1 is null, clone array2\n- if array2 is null, clone array1\n+ create the resultant array type based on the more general type of array1 and array2\n+ throw IllegalArgumentException when trying to merge incompatible array types",
+        "fixed_method": "public static <T> T[] addAll(T[] array1, T... array2) {\n    if (array1 == null && array2 == null) {\n        return null;\n    } else if (array1 == null) {\n        return clone(array2);\n    } else if (array2 == null) {\n        return clone(array1);\n    }\n    Class<?> type1 = array1.getClass().getComponentType();\n    Class<?> type2 = array2.getClass().getComponentType();\n    if (!type1.isAssignableFrom(type2) && !type2.isAssignableFrom(type1)) {\n        throw new IllegalArgumentException(\"Incompatible array types\");\n    }\n    Class<?> jointType = type1.isAssignableFrom(type2) ? type1 : type2;\n    T[] joinedArray = (T[]) Array.newInstance(jointType, array1.length + array2.length);\n    System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n    System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n    return joinedArray;\n}",
+        "diff": "- if array1 is null, clone array2\n- if array2 is null, clone array1\n+ create the resultant array type based on the more general type of array1 and array2\n+ throw IllegalArgumentException when trying to merge incompatible array types",
+        "file_path": "src/java/org/apache/commons/lang3/ArrayUtils.java",
+        "method_name": "addAll",
+        "class_name": "ArrayUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          2953,
+          2954,
+          2955,
+          2956,
+          2957,
+          2958,
+          2959,
+          2960,
+          2961,
+          2962,
+          2963,
+          2964,
+          2965
+        ],
+        "original_code": "/**\n* <p>Adds all the elements of the given arrays into a new array.</p>\n* <p>The new array contains all of the element of <code>array1</code> followed\n* by all of the elements <code>array2</code>. When an array is returned, it is always\n* a new array.</p>\n*\n* <pre>\n* ArrayUtils.addAll(null, null)     = null\n* ArrayUtils.addAll(array1, null)   = cloned copy of array1\n* ArrayUtils.addAll(null, array2)   = cloned copy of array2\n* ArrayUtils.addAll([], [])         = []\n* ArrayUtils.addAll([null], [null]) = [null, null]\n* ArrayUtils.addAll([\"a\", \"b\", \"c\"], [\"1\", \"2\", \"3\"]) = [\"a\", \"b\", \"c\", \"1\", \"2\", \"3\"]\n* </pre>\n*\n* @param array1  the first array whose elements are added to the new array, may be <code>null</code>\n* @param array2  the second array whose elements are added to the new array, may be <code>null</code>\n* @return The new array, <code>null</code> if both arrays are <code>null</code>.\n*      The type of the new array is the type of the first array,\n*      unless the first array is null, in which case the type is the same as the second array.\n* @since 2.1\n*/\npublic static <T> T[] addAll(T[] array1, T... array2) {\n    if (array1 == null) {\n        return clone(array2);\n    } else if (array2 == null) {\n        return clone(array1);\n    }\n    final Class<?> type1 = array1.getClass().getComponentType();\n    T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n    System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n        // Check if problem is incompatible types\n    return joinedArray;\n}"
+      },
+      {
+        "hypothesis": "The original implementation lacked a proper check to ensure the two arrays\u2019 component types were compatible, which led to potential runtime errors. An unnecessary strict type-check in the patch led to overfitting by limiting the flexibility of array merging. The refined solution ensures that both arrays can be merged while maintaining type safety by ensuring compatibility through instanceof checks.",
+        "fixed_method": "public static <T> T[] addAll(T[] array1, T... array2) {\n    if (array1 == null && array2 == null) {\n        return null;\n    }\n    if (array1 == null) {\n        return clone(array2);\n    }\n    if (array2 == null) {\n        return clone(array1);\n    }\n\n    final Class<?> type1 = array1.getClass().getComponentType();\n    if (!type1.isAssignableFrom(array2.getClass().getComponentType())) {\n        throw new IllegalArgumentException(\"Array types are incompatible\");\n    }\n\n    T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n    System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n    System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n    return joinedArray;\n}",
+        "diff": " ",
+        "file_path": "src/java/org/apache/commons/lang3/ArrayUtils.java",
+        "method_name": "addAll",
+        "class_name": "ArrayUtils",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method does not currently handle cases where types in array1 and array2 are not directly compatible. An IllegalArgumentException should be thrown in cases where elements from array2 cannot be safely added to the type of array1.",
+        "line_numbers": [
+          2953,
+          2954,
+          2955,
+          2956,
+          2957,
+          2958,
+          2959,
+          2960,
+          2961,
+          2962,
+          2963,
+          2964,
+          2965
+        ]
+      },
+      {
+        "hypothesis": "The original patch attempted to ensure compatibility between array types by checking for common superclasses but introduced complexity and overfitting by only addressing specific test cases instead of covering all potential edge cases. This refined approach checks for incompatibility upfront and handles arrays with potentially differing component types by choosing an appropriate common base class when necessary. The code has been simplified to handle both object and primitive arrays correctly while preserving the null handling and cloning logic for individual arrays.",
+        "fixed_method": "public static <T> T[] addAll(T[] array1, T... array2) {\n    if (array1 == null && array2 == null) {\n        return null;\n    } else if (array1 == null) {\n        return clone(array2);\n    } else if (array2 == null) {\n        return clone(array1);\n    }\n    final Class<?> type1 = array1.getClass().getComponentType();\n    final Class<?> type2 = array2.getClass().getComponentType();\n    if (!type1.isAssignableFrom(type2) && !type2.isAssignableFrom(type1)) {\n        throw new IllegalArgumentException(\"Incompatible array types: \" + type1.getName() + \" and \" + type2.getName());\n    }\n    final Class<?> commonType = type1.isAssignableFrom(type2) ? type1 : type2;\n    int length1 = array1.length;\n    int length2 = array2.length;\n    T[] joinedArray = (T[]) Array.newInstance(commonType, length1 + length2);\n    System.arraycopy(array1, 0, joinedArray, 0, length1);\n    System.arraycopy(array2, 0, joinedArray, length1, length2);\n    return joinedArray;\n}",
+        "diff": " ",
+        "file_path": "src/java/org/apache/commons/lang3/ArrayUtils.java",
+        "method_name": "addAll",
+        "class_name": "ArrayUtils",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The ArrayStoreException occurs because the method assumes all elements will use the same array type which causes issues when combining arrays of different subtypes.",
+        "line_numbers": [
+          2953,
+          2954,
+          2955,
+          2956,
+          2957,
+          2958,
+          2959,
+          2960,
+          2961,
+          2962,
+          2963,
+          2964,
+          2965
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Lang-37/"
+}

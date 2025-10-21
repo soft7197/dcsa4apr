@@ -1,0 +1,953 @@
+{
+  "org.jfree.data.general.junit.DatasetUtilitiesTests::testBug2849731_2": [
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.DatasetChangeInfo",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        49
+      ]
+    },
+    {
+      "package": "org.jfree.data",
+      "class": "org.jfree.data.ComparableObjectItem",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;Ljava/lang/Object;)V",
+      "executed_lines": [
+        72,
+        73,
+        76,
+        77,
+        78
+      ]
+    },
+    {
+      "package": "org.jfree.data",
+      "class": "org.jfree.data.ComparableObjectItem",
+      "method": "getObject",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        95
+      ]
+    },
+    {
+      "package": "org.jfree.data",
+      "class": "org.jfree.data.ComparableObjectSeries",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;ZZ)V",
+      "executed_lines": [
+        67,
+        98,
+        99,
+        100,
+        101,
+        102
+      ]
+    },
+    {
+      "package": "org.jfree.data",
+      "class": "org.jfree.data.ComparableObjectSeries",
+      "method": "add",
+      "signature": "(Lorg/jfree/data/ComparableObjectItem;Z)V",
+      "executed_lines": [
+        216,
+        220,
+        221,
+        222,
+        223,
+        244,
+        256,
+        259,
+        260,
+        262
+      ]
+    },
+    {
+      "package": "org.jfree.data",
+      "class": "org.jfree.data.ComparableObjectSeries",
+      "method": "getDataItem",
+      "signature": "(I)Lorg/jfree/data/ComparableObjectItem;",
+      "executed_lines": [
+        333
+      ]
+    },
+    {
+      "package": "org.jfree.data",
+      "class": "org.jfree.data.ComparableObjectSeries",
+      "method": "getItemCount",
+      "signature": "()I",
+      "executed_lines": [
+        131
+      ]
+    },
+    {
+      "package": "org.jfree.data.event",
+      "class": "org.jfree.data.event.DatasetChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/jfree/data/general/Dataset;Lorg/jfree/chart/event/DatasetChangeInfo;)V",
+      "executed_lines": [
+        87,
+        88,
+        91,
+        92,
+        93
+      ]
+    },
+    {
+      "package": "org.jfree.data.event",
+      "class": "org.jfree.data.event.SeriesChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        70,
+        71
+      ]
+    },
+    {
+      "package": "org.jfree.data.event",
+      "class": "org.jfree.data.event.SeriesChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/jfree/data/general/SeriesChangeInfo;)V",
+      "executed_lines": [
+        82,
+        83,
+        84
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.AbstractDataset",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        95,
+        96,
+        97,
+        98
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.AbstractDataset",
+      "method": "fireDatasetChanged",
+      "signature": "(Lorg/jfree/chart/event/DatasetChangeInfo;)V",
+      "executed_lines": [
+        176,
+        177
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.AbstractDataset",
+      "method": "notifyListeners",
+      "signature": "(Lorg/jfree/data/event/DatasetChangeEvent;)V",
+      "executed_lines": [
+        189,
+        190,
+        196
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.AbstractSeriesDataset",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        66,
+        67
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.DatasetGroup",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        63,
+        64,
+        65
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.DatasetUtilities",
+      "method": "iterateDomainBounds",
+      "signature": "(Lorg/jfree/data/xy/XYDataset;)Lorg/jfree/data/Range;",
+      "executed_lines": [
+        726
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.DatasetUtilities",
+      "method": "iterateDomainBounds",
+      "signature": "(Lorg/jfree/data/xy/XYDataset;Z)Lorg/jfree/data/Range;",
+      "executed_lines": [
+        742,
+        745,
+        746,
+        747,
+        750,
+        751,
+        752,
+        753,
+        754,
+        755,
+        756,
+        757,
+        760,
+        765,
+        779,
+        780
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.Series",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;)V",
+      "executed_lines": [
+        104,
+        105
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.Series",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;Ljava/lang/String;)V",
+      "executed_lines": [
+        113,
+        114,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.Series",
+      "method": "addChangeListener",
+      "signature": "(Lorg/jfree/data/event/SeriesChangeListener;)V",
+      "executed_lines": [
+        297,
+        298
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.Series",
+      "method": "fireSeriesChanged",
+      "signature": "()V",
+      "executed_lines": [
+        315,
+        316,
+        318
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.Series",
+      "method": "notifyListeners",
+      "signature": "(Lorg/jfree/data/event/SeriesChangeEvent;)V",
+      "executed_lines": [
+        328,
+        329,
+        336
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.AbstractIntervalXYDataset",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        51
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.AbstractXYDataset",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        55
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYInterval",
+      "method": "<init>",
+      "signature": "(DDDDD)V",
+      "executed_lines": [
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYInterval",
+      "method": "getXHigh",
+      "signature": "()D",
+      "executed_lines": [
+        101
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYInterval",
+      "method": "getXLow",
+      "signature": "()D",
+      "executed_lines": [
+        92
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalDataItem",
+      "method": "<init>",
+      "signature": "(DDDDDD)V",
+      "executed_lines": [
+        64,
+        65
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalDataItem",
+      "method": "getXHighValue",
+      "signature": "()D",
+      "executed_lines": [
+        112,
+        113,
+        114
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalDataItem",
+      "method": "getXLowValue",
+      "signature": "()D",
+      "executed_lines": [
+        97,
+        98,
+        99
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeries",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;)V",
+      "executed_lines": [
+        64,
+        65
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeries",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;ZZ)V",
+      "executed_lines": [
+        79,
+        80
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeries",
+      "method": "add",
+      "signature": "(DDDDDD)V",
+      "executed_lines": [
+        94,
+        95
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeries",
+      "method": "getDataItem",
+      "signature": "(I)Lorg/jfree/data/ComparableObjectItem;",
+      "executed_lines": [
+        189
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeries",
+      "method": "getXHighValue",
+      "signature": "(I)D",
+      "executed_lines": [
+        135,
+        136
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeries",
+      "method": "getXLowValue",
+      "signature": "(I)D",
+      "executed_lines": [
+        120,
+        121
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeriesCollection",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        73,
+        74,
+        75
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeriesCollection",
+      "method": "addSeries",
+      "signature": "(Lorg/jfree/data/xy/XYIntervalSeries;)V",
+      "executed_lines": [
+        84,
+        87,
+        88,
+        89,
+        91
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeriesCollection",
+      "method": "getEndXValue",
+      "signature": "(II)D",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeriesCollection",
+      "method": "getItemCount",
+      "signature": "(I)I",
+      "executed_lines": [
+        147
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeriesCollection",
+      "method": "getSeries",
+      "signature": "(I)Lorg/jfree/data/xy/XYIntervalSeries;",
+      "executed_lines": [
+        113,
+        116
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeriesCollection",
+      "method": "getSeriesCount",
+      "signature": "()I",
+      "executed_lines": [
+        99
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeriesCollection",
+      "method": "getStartXValue",
+      "signature": "(II)D",
+      "executed_lines": [
+        173,
+        174
+      ]
+    }
+  ],
+  "org.jfree.data.general.junit.DatasetUtilitiesTests::testBug2849731_3": [
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.DatasetChangeInfo",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        49
+      ]
+    },
+    {
+      "package": "org.jfree.data",
+      "class": "org.jfree.data.ComparableObjectItem",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;Ljava/lang/Object;)V",
+      "executed_lines": [
+        72,
+        73,
+        76,
+        77,
+        78
+      ]
+    },
+    {
+      "package": "org.jfree.data",
+      "class": "org.jfree.data.ComparableObjectItem",
+      "method": "getObject",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        95
+      ]
+    },
+    {
+      "package": "org.jfree.data",
+      "class": "org.jfree.data.ComparableObjectSeries",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;ZZ)V",
+      "executed_lines": [
+        67,
+        98,
+        99,
+        100,
+        101,
+        102
+      ]
+    },
+    {
+      "package": "org.jfree.data",
+      "class": "org.jfree.data.ComparableObjectSeries",
+      "method": "add",
+      "signature": "(Lorg/jfree/data/ComparableObjectItem;Z)V",
+      "executed_lines": [
+        216,
+        220,
+        221,
+        222,
+        223,
+        244,
+        256,
+        259,
+        260,
+        262
+      ]
+    },
+    {
+      "package": "org.jfree.data",
+      "class": "org.jfree.data.ComparableObjectSeries",
+      "method": "getDataItem",
+      "signature": "(I)Lorg/jfree/data/ComparableObjectItem;",
+      "executed_lines": [
+        333
+      ]
+    },
+    {
+      "package": "org.jfree.data",
+      "class": "org.jfree.data.ComparableObjectSeries",
+      "method": "getItemCount",
+      "signature": "()I",
+      "executed_lines": [
+        131
+      ]
+    },
+    {
+      "package": "org.jfree.data.event",
+      "class": "org.jfree.data.event.DatasetChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/jfree/data/general/Dataset;Lorg/jfree/chart/event/DatasetChangeInfo;)V",
+      "executed_lines": [
+        87,
+        88,
+        91,
+        92,
+        93
+      ]
+    },
+    {
+      "package": "org.jfree.data.event",
+      "class": "org.jfree.data.event.SeriesChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        70,
+        71
+      ]
+    },
+    {
+      "package": "org.jfree.data.event",
+      "class": "org.jfree.data.event.SeriesChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/jfree/data/general/SeriesChangeInfo;)V",
+      "executed_lines": [
+        82,
+        83,
+        84
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.AbstractDataset",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        95,
+        96,
+        97,
+        98
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.AbstractDataset",
+      "method": "fireDatasetChanged",
+      "signature": "(Lorg/jfree/chart/event/DatasetChangeInfo;)V",
+      "executed_lines": [
+        176,
+        177
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.AbstractDataset",
+      "method": "notifyListeners",
+      "signature": "(Lorg/jfree/data/event/DatasetChangeEvent;)V",
+      "executed_lines": [
+        189,
+        190,
+        196
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.AbstractSeriesDataset",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        66,
+        67
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.DatasetGroup",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        63,
+        64,
+        65
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.DatasetUtilities",
+      "method": "iterateRangeBounds",
+      "signature": "(Lorg/jfree/data/xy/XYDataset;)Lorg/jfree/data/Range;",
+      "executed_lines": [
+        1213
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.DatasetUtilities",
+      "method": "iterateRangeBounds",
+      "signature": "(Lorg/jfree/data/xy/XYDataset;Z)Lorg/jfree/data/Range;",
+      "executed_lines": [
+        1231,
+        1232,
+        1233,
+        1236,
+        1238,
+        1239,
+        1240,
+        1241,
+        1242,
+        1243,
+        1244,
+        1247,
+        1252,
+        1283,
+        1284
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.Series",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;)V",
+      "executed_lines": [
+        104,
+        105
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.Series",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;Ljava/lang/String;)V",
+      "executed_lines": [
+        113,
+        114,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.Series",
+      "method": "addChangeListener",
+      "signature": "(Lorg/jfree/data/event/SeriesChangeListener;)V",
+      "executed_lines": [
+        297,
+        298
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.Series",
+      "method": "fireSeriesChanged",
+      "signature": "()V",
+      "executed_lines": [
+        315,
+        316,
+        318
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.Series",
+      "method": "notifyListeners",
+      "signature": "(Lorg/jfree/data/event/SeriesChangeEvent;)V",
+      "executed_lines": [
+        328,
+        329,
+        336
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.AbstractIntervalXYDataset",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        51
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.AbstractXYDataset",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        55
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYInterval",
+      "method": "<init>",
+      "signature": "(DDDDD)V",
+      "executed_lines": [
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYInterval",
+      "method": "getYHigh",
+      "signature": "()D",
+      "executed_lines": [
+        128
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYInterval",
+      "method": "getYLow",
+      "signature": "()D",
+      "executed_lines": [
+        119
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalDataItem",
+      "method": "<init>",
+      "signature": "(DDDDDD)V",
+      "executed_lines": [
+        64,
+        65
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalDataItem",
+      "method": "getYHighValue",
+      "signature": "()D",
+      "executed_lines": [
+        142,
+        143,
+        144
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalDataItem",
+      "method": "getYLowValue",
+      "signature": "()D",
+      "executed_lines": [
+        127,
+        128,
+        129
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeries",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;)V",
+      "executed_lines": [
+        64,
+        65
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeries",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;ZZ)V",
+      "executed_lines": [
+        79,
+        80
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeries",
+      "method": "add",
+      "signature": "(DDDDDD)V",
+      "executed_lines": [
+        94,
+        95
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeries",
+      "method": "getDataItem",
+      "signature": "(I)Lorg/jfree/data/ComparableObjectItem;",
+      "executed_lines": [
+        189
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeries",
+      "method": "getYHighValue",
+      "signature": "(I)D",
+      "executed_lines": [
+        177,
+        178
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeries",
+      "method": "getYLowValue",
+      "signature": "(I)D",
+      "executed_lines": [
+        162,
+        163
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeriesCollection",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        73,
+        74,
+        75
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeriesCollection",
+      "method": "addSeries",
+      "signature": "(Lorg/jfree/data/xy/XYIntervalSeries;)V",
+      "executed_lines": [
+        84,
+        87,
+        88,
+        89,
+        91
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeriesCollection",
+      "method": "getEndYValue",
+      "signature": "(II)D",
+      "executed_lines": [
+        229,
+        230
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeriesCollection",
+      "method": "getItemCount",
+      "signature": "(I)I",
+      "executed_lines": [
+        147
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeriesCollection",
+      "method": "getSeries",
+      "signature": "(I)Lorg/jfree/data/xy/XYIntervalSeries;",
+      "executed_lines": [
+        113,
+        116
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeriesCollection",
+      "method": "getSeriesCount",
+      "signature": "()I",
+      "executed_lines": [
+        99
+      ]
+    },
+    {
+      "package": "org.jfree.data.xy",
+      "class": "org.jfree.data.xy.XYIntervalSeriesCollection",
+      "method": "getStartYValue",
+      "signature": "(II)D",
+      "executed_lines": [
+        215,
+        216
+      ]
+    }
+  ]
+}

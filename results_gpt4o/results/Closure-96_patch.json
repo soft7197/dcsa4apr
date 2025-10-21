@@ -1,0 +1,59 @@
+{
+  "bug_id": "Closure-96",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-96_1773118011",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method currently does not handle the case where the function type is a var_args function properly. Thus, it doesn't validate extra arguments beyond the defined parameters with the type expected.",
+        "changes": "Added a loop to process remaining arguments for var_args functions after all defined parameters are processed.",
+        "fixed_method": "private void visitParameterList(NodeTraversal t, Node call, FunctionType functionType) {\n  Iterator<Node> arguments = call.children().iterator();\n  arguments.next(); // skip the function name\n\n  Iterator<Node> parameters = functionType.getParameters().iterator();\n  int ordinal = 0;\n  Node parameter = null;\n  Node argument = null;\n  while (arguments.hasNext() && parameters.hasNext()) {\n    parameter = parameters.next();\n    argument = arguments.next();\n    ordinal++;\n\n    validator.expectArgumentMatchesParameter(t, argument,\n        getJSType(argument), getJSType(parameter), call, ordinal);\n  }\n\n  // Handle remaining arguments for var_args\n  while (arguments.hasNext()) {\n    argument = arguments.next();\n    ordinal++;\n\n    // Here, parameter should hold the last actual parameter, but\n    // adapt the expected type to match var_args' logic.\n    // Assuming `getJSType(parameter)` provides the correct expected type\n    validator.expectArgumentMatchesParameter(t, argument,\n        getJSType(argument), getJSType(parameter), call, ordinal);\n  }\n\n  int numArgs = call.getChildCount() - 1;\n  int minArgs = functionType.getMinArguments();\n  int maxArgs = functionType.getMaxArguments();\n  if (minArgs > numArgs || maxArgs < numArgs) {\n    report(t, call, WRONG_ARGUMENT_COUNT,\n            validator.getReadableJSTypeName(call.getFirstChild(), false),\n            String.valueOf(numArgs), String.valueOf(minArgs),\n            maxArgs != Integer.MAX_VALUE ?\n            \" and no more than \" + maxArgs + \" argument(s)\" : \"\");\n  }\n}",
+        "diff": "Added a loop to process remaining arguments for var_args functions after all defined parameters are processed.",
+        "file_path": "src/com/google/javascript/jscomp/TypeCheck.java",
+        "method_name": "visitParameterList",
+        "class_name": "TypeCheck",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1399,
+          1400,
+          1401,
+          1402,
+          1403,
+          1404,
+          1405,
+          1406,
+          1407,
+          1408,
+          1409,
+          1410,
+          1411,
+          1412,
+          1413,
+          1414,
+          1415,
+          1416,
+          1417,
+          1418,
+          1419,
+          1420,
+          1421,
+          1422,
+          1423,
+          1424,
+          1425,
+          1426,
+          1427,
+          1428,
+          1429,
+          1430
+        ],
+        "original_code": "/**\n* Visits the parameters of a CALL or a NEW node.\n*/\nprivate void visitParameterList(NodeTraversal t, Node call,\n    FunctionType functionType) {\n  Iterator<Node> arguments = call.children().iterator();\n  arguments.next(); // skip the function name\n\n  Iterator<Node> parameters = functionType.getParameters().iterator();\n  int ordinal = 0;\n  Node parameter = null;\n  Node argument = null;\n  while (arguments.hasNext() &&\n         parameters.hasNext()) {\n    // If there are no parameters left in the list, then the while loop\n    // above implies that this must be a var_args function.\n      parameter = parameters.next();\n    argument = arguments.next();\n    ordinal++;\n\n    validator.expectArgumentMatchesParameter(t, argument,\n        getJSType(argument), getJSType(parameter), call, ordinal);\n  }\n\n  int numArgs = call.getChildCount() - 1;\n  int minArgs = functionType.getMinArguments();\n  int maxArgs = functionType.getMaxArguments();\n  if (minArgs > numArgs || maxArgs < numArgs) {\n    report(t, call, WRONG_ARGUMENT_COUNT,\n            validator.getReadableJSTypeName(call.getFirstChild(), false),\n            String.valueOf(numArgs), String.valueOf(minArgs),\n            maxArgs != Integer.MAX_VALUE ?\n            \" and no more than \" + maxArgs + \" argument(s)\" : \"\");\n  }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-96/"
+}

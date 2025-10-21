@@ -1,0 +1,23 @@
+File: src/java/org/apache/commons/lang/ClassUtils.java
+Method: ClassUtils.getPackageName
+
+public static String getPackageName(String className) {
+    if (className == null) {
+        return StringUtils.EMPTY;
+    }
+
+    if (className.startsWith("[")) {
+        while (className.charAt(0) == '[') {
+            className = className.substring(1);
+        }
+        if (className.charAt(0) == 'L' && className.charAt(className.length() - 1) == ';') {
+            className = className.substring(1, className.length() - 1);
+        }
+    }
+
+    int i = className.lastIndexOf(PACKAGE_SEPARATOR_CHAR);
+    if (i == -1) {
+        return StringUtils.EMPTY;
+    }
+    return className.substring(0, i);
+}

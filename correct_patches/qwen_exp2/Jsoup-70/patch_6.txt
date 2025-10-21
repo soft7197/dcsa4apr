@@ -1,0 +1,13 @@
+File: src/main/java/org/jsoup/nodes/Element.java
+Method: Element.preserveWhitespace
+
+static boolean preserveWhitespace(Node node) {
+    // Recursively checks all ancestors without a depth limit
+    if (node != null && node instanceof Element) {
+        Element el = (Element) node;
+        if (el.tag().preserveWhitespace())
+            return true;
+        return preserveWhitespace(el.parent());
+    }
+    return false;
+}

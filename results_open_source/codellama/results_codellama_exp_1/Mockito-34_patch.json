@@ -1,0 +1,129 @@
+{
+  "bug_id": "Mockito-34",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-34_1772710376",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined patch addresses overfitting by using null checks and boundary conditions, while still maintaining correct handling of general cases.",
+        "fixed_method": "public void captureArgumentsFrom(Invocation i) {\n    if (i.getArguments() == null || i.getArguments().length == 0) return;\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments) {\n            ((CapturesArguments) m).captureFrom(i.getArguments()[0]);\n        }\n    }\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+        "method_name": "captureArgumentsFrom",
+        "class_name": "InvocationMatcher",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by an out-of-bounds error when the arguments array is empty.",
+        "line_numbers": [
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ]
+      },
+      {
+        "hypothesis": "The bug is caused by an out-of-bounds array access in the `captureArgumentsFrom` method, where the argument count is not correctly checked. The method assumes that the argument count is always at least 1, but in reality, the argument count can be 0 when an empty vararg is passed.",
+        "changes": "+ check for argument count before accessing the arguments array",
+        "fixed_method": "public void captureArgumentsFrom(Invocation i) {\n  int k = 0;\n  for (Matcher m : matchers) {\n    if (m instanceof CapturesArguments) {\n      if (i.getArguments().length > 0) {\n        ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n      }\n    }\n    k++;\n  }\n}",
+        "diff": "+ check for argument count before accessing the arguments array",
+        "file_path": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+        "method_name": "captureArgumentsFrom",
+        "class_name": "InvocationMatcher",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ],
+        "original_code": "/**\n* similar means the same method name, same mock, unverified\n* and: if arguments are the same cannot be overloaded\n*/\npublic void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments) {\n            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n        }\n        k++;\n    }\n}"
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (i.getArguments() == null || i.getArguments().length == 0) return;\n        if (m instanceof CapturesArguments) {\n            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n        }\n        k++;\n    }\n}",
+        "diff": "",
+        "file_path": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+        "method_name": "captureArgumentsFrom",
+        "class_name": "InvocationMatcher",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ],
+        "original_code": "/**\n* similar means the same method name, same mock, unverified\n* and: if arguments are the same cannot be overloaded\n*/\npublic void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments) {\n            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n        }\n        k++;\n    }\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by the absence of a null check in the captureArgumentsFrom method, which results in an ArrayIndexOutOfBoundsException when the arguments array is empty.",
+        "changes": "+ if (i.getArguments() == null || i.getArguments().length == 0) return;",
+        "fixed_method": "public void captureArgumentsFrom(Invocation i) {\n  if (i.getArguments() == null || i.getArguments().length == 0) return;\n  int k = 0;\n  for (Matcher m : matchers) {\n    if (m instanceof CapturesArguments) {\n      ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n    }\n    k++;\n  }\n}",
+        "diff": "+ if (i.getArguments() == null || i.getArguments().length == 0) return;",
+        "file_path": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+        "method_name": "captureArgumentsFrom",
+        "class_name": "InvocationMatcher",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ],
+        "original_code": "/**\n* similar means the same method name, same mock, unverified\n* and: if arguments are the same cannot be overloaded\n*/\npublic void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments) {\n            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n        }\n        k++;\n    }\n}"
+      },
+      {
+        "hypothesis": "The captureArgumentsFrom method was iterating over the matchers and capturing arguments from the invocation, but it was not handling the case where the matchers and invocation arguments were not the same size.",
+        "changes": "+ if (matchers.size() != invocation.getArguments().length) return;\n+ int k = 0;\n+ for (Matcher m : matchers) {\n- ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n+ if (k < invocation.getArguments().length) {\n+ ((CapturesArguments) m).captureFrom(invocation.getArguments()[k]);\n+ }\n+ k++;\n+ }",
+        "fixed_method": "public void captureArgumentsFrom(Invocation i) {\n    if (matchers.size() != i.getArguments().length) return;\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (k < i.getArguments().length) {\n            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n        }\n        k++;\n    }\n}",
+        "diff": "+ if (matchers.size() != invocation.getArguments().length) return;\n+ int k = 0;\n+ for (Matcher m : matchers) {\n- ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n+ if (k < invocation.getArguments().length) {\n+ ((CapturesArguments) m).captureFrom(invocation.getArguments()[k]);\n+ }\n+ k++;\n+ }",
+        "file_path": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+        "method_name": "captureArgumentsFrom",
+        "class_name": "InvocationMatcher",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ],
+        "original_code": "/**\n* similar means the same method name, same mock, unverified\n* and: if arguments are the same cannot be overloaded\n*/\npublic void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments) {\n            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n        }\n        k++;\n    }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Mockito-34/"
+}

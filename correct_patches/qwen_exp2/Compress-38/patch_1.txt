@@ -1,0 +1,10 @@
+File: src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveEntry.java
+Method: TarArchiveEntry.isDirectory
+
+public boolean isDirectory() {
+    if (file != null) {
+        return file.isDirectory();
+    }
+
+    return linkFlag == LF_DIR;
+}

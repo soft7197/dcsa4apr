@@ -1,0 +1,24 @@
+File: src/main/java/org/apache/commons/cli/Options.java
+Method: Options.getMatchingOptions
+
+public List<String> getMatchingOptions(String opt) {
+    opt = Util.stripLeadingHyphens(opt);
+    List<String> matchingOpts = new ArrayList<String>();
+    // for a perfect match return the single option only
+    if (longOpts.containsKey(opt)) {
+      matchingOpts.add(opt);
+      return matchingOpts;
+    }
+    // add edge case handling
+    if (opt.length() > 0 && opt.equals(longOpts.keySet().toArray()[0])) {
+      matchingOpts.add(opt);
+      return matchingOpts;
+    }    
+    //for a partial match return all matching options
+    for (String longOpt : longOpts.keySet()) {
+      if (longOpt.startsWith(opt)) {
+        matchingOpts.add(longOpt);
+      }
+    }
+    return matchingOpts;
+  }

@@ -1,0 +1,29 @@
+{
+  "bug_id": "Math-36",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-36_1772818928",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue is caused by the overflow of the numerator and denominator when they are too large, resulting in the calculation returning NaN instead of the expected value. The solution is to use BigDecimal's divide method to perform the calculation instead of using the floatValue method.",
+        "changes": "+ BigDecimal result = numerator.divide(denominator);",
+        "fixed_method": "@Override\npublic float floatValue() {\n    float result = numerator.divide(denominator).floatValue(); // Numerator and/or denominator must be out of range: Calculate how far to shift them to put them in range.\n    return result;\n}",
+        "diff": "+ BigDecimal result = numerator.divide(denominator);",
+        "file_path": "src/main/java/org/apache/commons/math/fraction/BigFraction.java",
+        "method_name": "floatValue",
+        "class_name": "BigFraction",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          730,
+          736
+        ],
+        "original_code": "    /**\n     * <p>\n     * Gets the fraction as a <tt>float</tt>. This calculates the fraction as\n     * the numerator divided by denominator.\n     * </p>\n     *\n     * @return the fraction as a <tt>float</tt>.\n     * @see java.lang.Number#floatValue()\n     */\n\n    @Override\n    public float floatValue() {\n        float result = numerator.floatValue() / denominator.floatValue();\n            // Numerator and/or denominator must be out of range:\n            // Calculate how far to shift them to put them in range.\n        return result;\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Math-36/"
+}

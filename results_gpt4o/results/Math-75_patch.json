@@ -1,0 +1,115 @@
+{
+  "bug_id": "Math-75",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-75_1773120123",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method getPct uses getCumPct, which returns a cumulative percentage rather than the specific percentage for the value. This causes incorrect percentage value when comparing individual occurrences.",
+        "changes": "-    return getCumPct((Comparable<?>) v);\n+    if (count == 0) {\n+        return Double.NaN;\n+    }\n+    long vCount = getCount((Comparable<?>) v);\n+    return (double) vCount / count;",
+        "fixed_method": "public double getPct(Object v) {\n    long count = getSumFreq();\n    if (count == 0) {\n        return Double.NaN;\n    }\n    long vCount = getCount((Comparable<?>) v);\n    return (double) vCount / count;\n}",
+        "diff": "-    return getCumPct((Comparable<?>) v);\n+    if (count == 0) {\n+        return Double.NaN;\n+    }\n+    long vCount = getCount((Comparable<?>) v);\n+    return (double) vCount / count;",
+        "file_path": "src/main/java/org/apache/commons/math/stat/Frequency.java",
+        "method_name": "getPct",
+        "class_name": "Frequency",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          302,
+          303,
+          304
+        ],
+        "original_code": "/**\n* Returns the percentage of values that are equal to v\n* (as a proportion between 0 and 1).\n* <p>\n* Returns <code>Double.NaN</code> if no values have been added.</p>\n*\n* @param v the value to lookup\n* @return the proportion of values equal to v\n* @deprecated replaced by {@link #getPct(Comparable)} as of 2.0\n*/\npublic double getPct(Object v) {\n    return getCumPct((Comparable<?>) v);\n}"
+      },
+      {
+        "hypothesis": "The root cause of the failure is that getPct method is erroneously using getCumPct, which calculates cumulative percentage instead of the actual percentage of occurrence. Replacing getCumPct with the proper logic to calculate the percentage based on frequency should resolve the test failures.",
+        "changes": "- return getCumPct((Comparable<?>) v); ++ return calculate actual percentage logic;",
+        "fixed_method": "public double getPct(Object v) {\n    long freq = getCount(v);\n    long total = getSumFreq();\n    if (total == 0) {\n        return Double.NaN;\n    }\n    return (double) freq / (double) total;\n}",
+        "diff": "- return getCumPct((Comparable<?>) v); ++ return calculate actual percentage logic;",
+        "file_path": "src/main/java/org/apache/commons/math/stat/Frequency.java",
+        "method_name": "getPct",
+        "class_name": "Frequency",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          302,
+          303,
+          304
+        ],
+        "original_code": "/**\n* Returns the percentage of values that are equal to v\n* (as a proportion between 0 and 1).\n* <p>\n* Returns <code>Double.NaN</code> if no values have been added.</p>\n*\n* @param v the value to lookup\n* @return the proportion of values equal to v\n* @deprecated replaced by {@link #getPct(Comparable)} as of 2.0\n*/\npublic double getPct(Object v) {\n    return getCumPct((Comparable<?>) v);\n}"
+      },
+      {
+        "hypothesis": "The bug is due to getPct using getCumPct, which calculates cumulative percentages rather than the specific value proportion.",
+        "changes": "- return getCumPct((Comparable<?>) v); \n+ compute the proportion of the specific value v directly",
+        "fixed_method": "public double getPct(Object v) {\n    long count = getCount((Comparable<?>) v);\n    long sumCount = getSumFreq();\n    return sumCount == 0 ? Double.NaN : (double) count / (double) sumCount;\n}",
+        "diff": "- return getCumPct((Comparable<?>) v); \n+ compute the proportion of the specific value v directly",
+        "file_path": "src/main/java/org/apache/commons/math/stat/Frequency.java",
+        "method_name": "getPct",
+        "class_name": "Frequency",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          302,
+          303,
+          304
+        ],
+        "original_code": "/**\n* Returns the percentage of values that are equal to v\n* (as a proportion between 0 and 1).\n* <p>\n* Returns <code>Double.NaN</code> if no values have been added.</p>\n*\n* @param v the value to lookup\n* @return the proportion of values equal to v\n* @deprecated replaced by {@link #getPct(Comparable)} as of 2.0\n*/\npublic double getPct(Object v) {\n    return getCumPct((Comparable<?>) v);\n}"
+      },
+      {
+        "hypothesis": "The method getPct is incorrectly using getCumPct instead of calculating the discrete percentage of occurrences.",
+        "changes": "- return getCumPct((Comparable<?>) v);\n+ return getCountPct(v);",
+        "fixed_method": "public double getPct(Object v) {\n    long countOfValue = getCount(v);\n    long totalCount = getSumFreq();\n    if (totalCount == 0) {\n        return Double.NaN;\n    }\n    return (double) countOfValue / (double) totalCount;\n}",
+        "diff": "- return getCumPct((Comparable<?>) v);\n+ return getCountPct(v);",
+        "file_path": "src/main/java/org/apache/commons/math/stat/Frequency.java",
+        "method_name": "getPct",
+        "class_name": "Frequency",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          302,
+          303,
+          304
+        ],
+        "original_code": "/**\n* Returns the percentage of values that are equal to v\n* (as a proportion between 0 and 1).\n* <p>\n* Returns <code>Double.NaN</code> if no values have been added.</p>\n*\n* @param v the value to lookup\n* @return the proportion of values equal to v\n* @deprecated replaced by {@link #getPct(Comparable)} as of 2.0\n*/\npublic double getPct(Object v) {\n    return getCumPct((Comparable<?>) v);\n}"
+      },
+      {
+        "hypothesis": "The getPct method incorrectly uses getCumPct, which accumulates counts. It should use a method that computes the precise percentage.",
+        "changes": "- return getCumPct((Comparable<?>) v); \n+ if (totalValues == 0) return Double.NaN; \n+ return (double) getCount(v) / totalValues;",
+        "fixed_method": "public double getPct(Object v) {\n    long totalValues = getSumFreq();\n    if (totalValues == 0) {\n        return Double.NaN;\n    }\n    return (double) getCount(v) / totalValues;\n}",
+        "diff": "- return getCumPct((Comparable<?>) v); \n+ if (totalValues == 0) return Double.NaN; \n+ return (double) getCount(v) / totalValues;",
+        "file_path": "src/main/java/org/apache/commons/math/stat/Frequency.java",
+        "method_name": "getPct",
+        "class_name": "Frequency",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          302,
+          303,
+          304
+        ],
+        "original_code": "/**\n* Returns the percentage of values that are equal to v\n* (as a proportion between 0 and 1).\n* <p>\n* Returns <code>Double.NaN</code> if no values have been added.</p>\n*\n* @param v the value to lookup\n* @return the proportion of values equal to v\n* @deprecated replaced by {@link #getPct(Comparable)} as of 2.0\n*/\npublic double getPct(Object v) {\n    return getCumPct((Comparable<?>) v);\n}"
+      },
+      {
+        "hypothesis": "The 'getPct' method relies on 'getCumPct', which incorrectly treats the value as a cumulative computation rather than a percentage of total counts of that specific value. As a result, the return value is inaccurate for direct comparisons, particularly when converting objects like Integer to Comparable.",
+        "changes": "- return getCumPct((Comparable<?>) v); + if (totalCount == 0) return Double.NaN; + return (double) getCount(v) / totalCount;",
+        "fixed_method": "public double getPct(Object v) {\n    long count = getCount(v);\n    long totalCount = getSumFreq();\n    if (totalCount == 0) {\n        return Double.NaN;\n    }\n    return (double) count / totalCount;\n}",
+        "diff": "- return getCumPct((Comparable<?>) v); + if (totalCount == 0) return Double.NaN; + return (double) getCount(v) / totalCount;",
+        "file_path": "src/main/java/org/apache/commons/math/stat/Frequency.java",
+        "method_name": "getPct",
+        "class_name": "Frequency",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          302,
+          303,
+          304
+        ],
+        "original_code": "/**\n* Returns the percentage of values that are equal to v\n* (as a proportion between 0 and 1).\n* <p>\n* Returns <code>Double.NaN</code> if no values have been added.</p>\n*\n* @param v the value to lookup\n* @return the proportion of values equal to v\n* @deprecated replaced by {@link #getPct(Comparable)} as of 2.0\n*/\npublic double getPct(Object v) {\n    return getCumPct((Comparable<?>) v);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-75/"
+}

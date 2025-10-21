@@ -1,0 +1,48 @@
+{
+  "bug_id": "Jsoup-77",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-77_1771941301",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined fix will ensure case-insensitive comparison for XML tags and add checks for null values and malformed tags. It will also handle namespaces by comparing the full qualified name if available.",
+        "fixed_method": "private void popStackToClose(Token.EndTag endTag) {\n    if (endTag == null || endTag.name() == null)\n        return; // skip if endTag or its name is null\n\n    String elName = endTag.name().toLowerCase();\n    Element firstFound = null;\n\n    for (int pos = stack.size() - 1; pos >= 0; pos--) {\n        Element next = stack.get(pos);\n        if (next != null && next.nodeName().toLowerCase().equals(elName)) {\n            firstFound = next;\n            break;\n        }\n    }\n    if (firstFound == null)\n        return; // not found, skip\n\n    for (int pos = stack.size() - 1; pos >= 0; pos--) {\n        Element next = stack.get(pos);\n        if (next == firstFound) {\n            stack.remove(pos);\n            break;\n        }\n    }\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/jsoup/parser/XmlTreeBuilder.java",
+        "method_name": "popStackToClose",
+        "class_name": "XmlTreeBuilder",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue arises because the current implementation of popStackToClose does not correctly handle case insensitivity in XML parsing, leading to incorrect stack popping behavior.",
+        "line_numbers": [
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-77/"
+}

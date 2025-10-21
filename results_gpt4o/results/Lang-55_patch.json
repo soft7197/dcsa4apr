@@ -1,0 +1,139 @@
+{
+  "bug_id": "Lang-55",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-55_1773119703",
+  "patches": [
+    [
+      {
+        "hypothesis": "The stop method does not correctly handle the STATE_SUSPENDED state. When the stopwatch is suspended, stopping it should not update the stopTime and should keep the elapsed time as when it was suspended.",
+        "changes": "- stopTime = System.currentTimeMillis(); if the stopwatch is in STATE_SUSPENDED\n+ stopTime = startTime + stopTime - startTime; if the stopwatch is in STATE_SUSPENDED",
+        "fixed_method": "public void stop() {\n    if (this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n        throw new IllegalStateException(\"Stopwatch is not running. \");\n    }\n    if (this.runningState == STATE_RUNNING) {\n        stopTime = System.currentTimeMillis();\n    }\n    // If suspended, stopTime should remain the same as when suspended\n    this.runningState = STATE_STOPPED;\n}",
+        "diff": "- stopTime = System.currentTimeMillis(); if the stopwatch is in STATE_SUSPENDED\n+ stopTime = startTime + stopTime - startTime; if the stopwatch is in STATE_SUSPENDED",
+        "file_path": "src/java/org/apache/commons/lang/time/StopWatch.java",
+        "method_name": "stop",
+        "class_name": "StopWatch",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120
+        ],
+        "original_code": "/**\n* <p>Stop the stopwatch.</p>\n*\n* <p>This method ends a new timing session, allowing the time to be retrieved.</p>\n*\n* @throws IllegalStateException if the StopWatch is not running.\n*/\npublic void stop() {\n    if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n        throw new IllegalStateException(\"Stopwatch is not running. \");\n    }\n        stopTime = System.currentTimeMillis();\n    this.runningState = STATE_STOPPED;\n}"
+      },
+      {
+        "hypothesis": "The stop method is inaccurately resetting the stopped time during the suspended state, which interferes with accurate time tracking when resuming from suspension.",
+        "changes": "-    stopTime = System.currentTimeMillis();\n+    if (this.runningState == STATE_RUNNING) {\n+        stopTime = System.currentTimeMillis();\n+    }",
+        "fixed_method": "public void stop() {\n    if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n        throw new IllegalStateException(\"Stopwatch is not running. \");\n    }\n    if (this.runningState == STATE_RUNNING) {\n        stopTime = System.currentTimeMillis();\n    }\n    this.runningState = STATE_STOPPED;\n}",
+        "diff": "-    stopTime = System.currentTimeMillis();\n+    if (this.runningState == STATE_RUNNING) {\n+        stopTime = System.currentTimeMillis();\n+    }",
+        "file_path": "src/java/org/apache/commons/lang/time/StopWatch.java",
+        "method_name": "stop",
+        "class_name": "StopWatch",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120
+        ],
+        "original_code": "/**\n* <p>Stop the stopwatch.</p>\n*\n* <p>This method ends a new timing session, allowing the time to be retrieved.</p>\n*\n* @throws IllegalStateException if the StopWatch is not running.\n*/\npublic void stop() {\n    if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n        throw new IllegalStateException(\"Stopwatch is not running. \");\n    }\n        stopTime = System.currentTimeMillis();\n    this.runningState = STATE_STOPPED;\n}"
+      },
+      {
+        "hypothesis": "The method incorrectly sets the stopTime even when the stopwatch is suspended, leading to inaccurate time calculations.",
+        "changes": "- Adjust stop() method logic to handle STATE_SUSPENDED properly. - Prevent stopTime from updating unless the stopwatch is running.",
+        "fixed_method": "public void stop() {\n    if(this.runningState == STATE_RUNNING) {\n        stopTime = System.currentTimeMillis();\n    } else if (this.runningState != STATE_SUSPENDED) {\n        throw new IllegalStateException(\"Stopwatch is not running.\");\n    }\n    this.runningState = STATE_STOPPED;\n}",
+        "diff": "- Adjust stop() method logic to handle STATE_SUSPENDED properly. - Prevent stopTime from updating unless the stopwatch is running.",
+        "file_path": "src/java/org/apache/commons/lang/time/StopWatch.java",
+        "method_name": "stop",
+        "class_name": "StopWatch",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120
+        ],
+        "original_code": "/**\n* <p>Stop the stopwatch.</p>\n*\n* <p>This method ends a new timing session, allowing the time to be retrieved.</p>\n*\n* @throws IllegalStateException if the StopWatch is not running.\n*/\npublic void stop() {\n    if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n        throw new IllegalStateException(\"Stopwatch is not running. \");\n    }\n        stopTime = System.currentTimeMillis();\n    this.runningState = STATE_STOPPED;\n}"
+      },
+      {
+        "hypothesis": "The stop method incorrectly records the stop time when the stopwatch is in a suspended state, leading to incorrect time calculations.",
+        "changes": "+ Ensure stop time is not updated if stopwatch is suspended",
+        "fixed_method": "public void stop() {\n    if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n        throw new IllegalStateException(\"Stopwatch is not running. \");\n    }\n    if(this.runningState != STATE_SUSPENDED) {\n        stopTime = System.currentTimeMillis();\n    }\n    this.runningState = STATE_STOPPED;\n}",
+        "diff": "+ Ensure stop time is not updated if stopwatch is suspended",
+        "file_path": "src/java/org/apache/commons/lang/time/StopWatch.java",
+        "method_name": "stop",
+        "class_name": "StopWatch",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120
+        ],
+        "original_code": "/**\n* <p>Stop the stopwatch.</p>\n*\n* <p>This method ends a new timing session, allowing the time to be retrieved.</p>\n*\n* @throws IllegalStateException if the StopWatch is not running.\n*/\npublic void stop() {\n    if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n        throw new IllegalStateException(\"Stopwatch is not running. \");\n    }\n        stopTime = System.currentTimeMillis();\n    this.runningState = STATE_STOPPED;\n}"
+      },
+      {
+        "hypothesis": "The stop method incorrectly calculates the stopTime even if the stopwatch is suspended, which leads to incorrect total time calculation.",
+        "changes": "-    stopTime = System.currentTimeMillis();\n+    if(this.runningState == STATE_RUNNING) {\n+        stopTime = System.currentTimeMillis();\n+    }\n",
+        "fixed_method": "public void stop() {\n    if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n        throw new IllegalStateException(\"Stopwatch is not running. \");\n    }\n    if(this.runningState == STATE_RUNNING) {\n        stopTime = System.currentTimeMillis();\n    }\n    this.runningState = STATE_STOPPED;\n}",
+        "diff": "-    stopTime = System.currentTimeMillis();\n+    if(this.runningState == STATE_RUNNING) {\n+        stopTime = System.currentTimeMillis();\n+    }\n",
+        "file_path": "src/java/org/apache/commons/lang/time/StopWatch.java",
+        "method_name": "stop",
+        "class_name": "StopWatch",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120
+        ],
+        "original_code": "/**\n* <p>Stop the stopwatch.</p>\n*\n* <p>This method ends a new timing session, allowing the time to be retrieved.</p>\n*\n* @throws IllegalStateException if the StopWatch is not running.\n*/\npublic void stop() {\n    if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n        throw new IllegalStateException(\"Stopwatch is not running. \");\n    }\n        stopTime = System.currentTimeMillis();\n    this.runningState = STATE_STOPPED;\n}"
+      },
+      {
+        "hypothesis": "The stop method does not account for the stopwatch being in a suspended state, preserving the time correctly. This causes the total time to include elapsed time during suspension.",
+        "changes": "- Moved stopTime assignment inside a conditional check for STATE_RUNNING.",
+        "fixed_method": "public void stop() {\n    if (this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n        throw new IllegalStateException(\"Stopwatch is not running. \");\n    }\n    if (this.runningState == STATE_RUNNING) {\n        stopTime = System.currentTimeMillis();\n    }\n    this.runningState = STATE_STOPPED;\n}",
+        "diff": "- Moved stopTime assignment inside a conditional check for STATE_RUNNING.",
+        "file_path": "src/java/org/apache/commons/lang/time/StopWatch.java",
+        "method_name": "stop",
+        "class_name": "StopWatch",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120
+        ],
+        "original_code": "/**\n* <p>Stop the stopwatch.</p>\n*\n* <p>This method ends a new timing session, allowing the time to be retrieved.</p>\n*\n* @throws IllegalStateException if the StopWatch is not running.\n*/\npublic void stop() {\n    if(this.runningState != STATE_RUNNING && this.runningState != STATE_SUSPENDED) {\n        throw new IllegalStateException(\"Stopwatch is not running. \");\n    }\n        stopTime = System.currentTimeMillis();\n    this.runningState = STATE_STOPPED;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Lang-55/"
+}

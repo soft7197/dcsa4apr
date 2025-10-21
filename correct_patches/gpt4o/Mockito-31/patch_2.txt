@@ -1,0 +1,18 @@
+File: src/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNulls.java
+Method: ReturnsSmartNulls.formatMethodCall
+
+private String formatMethodCall() {
+    return invocation.getMethod().getName() + formatArguments(invocation.getArguments());
+}
+
+private String formatArguments(Object[] arguments) {
+    StringBuilder formattedArgs = new StringBuilder("(");
+    for (int i = 0; i < arguments.length; i++) {
+        if (i > 0) {
+            formattedArgs.append(", ");
+        }
+        formattedArgs.append(arguments[i]);
+    }
+    formattedArgs.append(")");
+    return formattedArgs.toString();
+}

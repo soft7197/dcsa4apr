@@ -1,0 +1,79 @@
+{
+  "bug_id": "Closure-145",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-145_1773115949",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch was overfitting by specifically checking only the immediate child of a LABEL node, which could lead to incorrect behavior if the node structure is more complex or has additional nested labels. The refined method should more generally explore the children of a LABEL node to determine if there is a FUNCTION or DO type present, ensuring robust handling of complex nested structures and avoiding reliance on specific test case structures.",
+        "fixed_method": "private boolean isOneExactlyFunctionOrDo(Node n) {\n    if (n.getType() == Token.LABEL) {\n        Node current = n.getFirstChild();\n        while (current != null) {\n            if (current.getType() == Token.FUNCTION || current.getType() == Token.DO) {\n                return true;\n            }\n            current = current.getNext();\n        }\n        return false;\n    }\n    return n.getType() == Token.FUNCTION || n.getType() == Token.DO;\n}",
+        "diff": " ",
+        "file_path": "src/com/google/javascript/jscomp/CodeGenerator.java",
+        "method_name": "isOneExactlyFunctionOrDo",
+        "class_name": "CodeGenerator",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method is not properly handling nodes with labels, which causes incorrect code generation. It should check for labeled FUNCTION or DO nodes.",
+        "line_numbers": [
+          708,
+          709,
+          710,
+          711,
+          712,
+          713,
+          714,
+          715
+        ]
+      },
+      {
+        "hypothesis": "The method is missing checks for labeled statements and blocks, leading to incorrect handling of labeled FUNCTION and DO nodes.",
+        "changes": "- Add checks for BLOCK and LABEL nodes - Adjust logic to account for labeled nodes and ensure correct evaluation of FUNCTION or DO as standalone or part of BLOCK",
+        "fixed_method": "private boolean isOneExactlyFunctionOrDo(Node n) {\n    if (n.getType() == Token.LABEL) {\n        n = n.getLastChild();\n    }\n    if (n.getType() == Token.BLOCK) {\n        return n.hasOneChild() && isOneExactlyFunctionOrDo(n.getFirstChild());\n    }\n    return (n.getType() == Token.FUNCTION || n.getType() == Token.DO);\n}",
+        "diff": "- Add checks for BLOCK and LABEL nodes - Adjust logic to account for labeled nodes and ensure correct evaluation of FUNCTION or DO as standalone or part of BLOCK",
+        "file_path": "src/com/google/javascript/jscomp/CodeGenerator.java",
+        "method_name": "isOneExactlyFunctionOrDo",
+        "class_name": "CodeGenerator",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          708,
+          709,
+          710,
+          711,
+          712,
+          713,
+          714,
+          715
+        ],
+        "original_code": "/**\n* @return Whether the Node is a DO or FUNCTION (with or without\n* labels).\n*/\nprivate boolean isOneExactlyFunctionOrDo(Node n) {\n      // For labels with block children, we need to ensure that a\n      // labeled FUNCTION or DO isn't generated when extraneous BLOCKs \n      // are skipped. \n        // Either a empty statement or an block with more than one child,\n        // way it isn't a FUNCTION or DO.\n    return (n.getType() == Token.FUNCTION || n.getType() == Token.DO);\n}"
+      },
+      {
+        "hypothesis": "The overfitting patch successfully skips BLOCK and LABEL nodes but does not account for nested structures and multi-child LABEL nodes. The refined patch generalizes this behavior by iteratively processing nested LABEL and BLOCK structures, and ensuring that FUNCTION or DO detection only occurs as a final step after full traversal.",
+        "fixed_method": "private boolean isOneExactlyFunctionOrDo(Node n) {\n    while (n.getType() == Token.LABEL || n.getType() == Token.BLOCK) {\n        // For LABEL nodes, move to their last child\n        if (n.getType() == Token.LABEL) {\n            n = n.getLastChild();\n        } else if (n.getType() == Token.BLOCK) {\n            // For BLOCK nodes, ensure only one child exists and move to it\n            if (!n.hasOneChild()) {\n                return false;\n            }\n            n = n.getFirstChild();\n        }\n    }\n\n    // After all LABEL and BLOCK nodes are skipped, check FUNCTION or DO\n    return n.getType() == Token.FUNCTION || n.getType() == Token.DO;\n}",
+        "diff": " ",
+        "file_path": "src/com/google/javascript/jscomp/CodeGenerator.java",
+        "method_name": "isOneExactlyFunctionOrDo",
+        "class_name": "CodeGenerator",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method incorrectly checks nodes only at the outer level, mistakenly excluding nodes with labels. It needs to account for nodes with labels and blocks.",
+        "line_numbers": [
+          708,
+          709,
+          710,
+          711,
+          712,
+          713,
+          714,
+          715
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-145/"
+}

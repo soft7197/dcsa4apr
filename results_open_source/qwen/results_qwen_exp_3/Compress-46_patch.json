@@ -1,0 +1,55 @@
+{
+  "bug_id": "Compress-46",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Compress-46_1771999987",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the incorrect comparison logic in the unixTimeToZipLong method. The method incorrectly checks if the input value is greater than or equal to 2^32, which is the maximum value for an unsigned 32-bit integer. However, ZIP timestamps should be compared against the maximum value that fits in a signed 32-bit integer (2^31 - 1). The fix involves changing the comparison to check against the correct maximum value for a signed 32-bit integer.",
+        "changes": "- if (l >= TWO_TO_32) {\n+ if (l >= Integer.MAX_VALUE) {",
+        "fixed_method": "private static ZipLong unixTimeToZipLong(long l) {\n    if (l >= Integer.MAX_VALUE) {\n        throw new IllegalArgumentException(\"X5455 timestamps must fit in a signed 32 bit integer: \" + l);\n    }\n    return new ZipLong(l);\n}",
+        "diff": "- if (l >= TWO_TO_32) {\n+ if (l >= Integer.MAX_VALUE) {",
+        "file_path": "src/main/java/org/apache/commons/compress/archivers/zip/X5455_ExtendedTimestamp.java",
+        "method_name": "unixTimeToZipLong",
+        "class_name": "X5455_ExtendedTimestamp",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          528,
+          529,
+          530,
+          531,
+          532,
+          533,
+          534
+        ],
+        "original_code": "/**\n* Utility method converts java.util.Date (milliseconds since epoch)\n* into a ZipLong (seconds since epoch).\n* <p/>\n* Also makes sure the converted ZipLong is not too big to fit\n* in 32 unsigned bits.\n*\n* @param d java.util.Date to convert to ZipLong\n* @return ZipLong\n*/\nprivate static ZipLong unixTimeToZipLong(long l) {\n    final long TWO_TO_32 = 0x100000000L;\n    if (l >= TWO_TO_32) {\n        throw new IllegalArgumentException(\"X5455 timestamps must fit in a signed 32 bit integer: \" + l);\n    }\n    return new ZipLong(l);\n}"
+      },
+      {
+        "hypothesis": "The bug is due to incorrect validation logic in the unixTimeToZipLong method. The method checks if the input value is greater than or equal to 2^32, which is incorrect because it should check against the maximum value that can be represented by a signed 32-bit integer, which is 2^31 - 1.",
+        "changes": "- if (l >= TWO_TO_32) {\n+ if (l >= Integer.MAX_VALUE) {",
+        "fixed_method": "private static ZipLong unixTimeToZipLong(long l) {\n    final long TWO_TO_32 = 0x100000000L;\n    if (l >= Integer.MAX_VALUE) {\n        throw new IllegalArgumentException(\"X5455 timestamps must fit in a signed 32 bit integer: \" + l);\n    }\n    return new ZipLong(l);\n}",
+        "diff": "- if (l >= TWO_TO_32) {\n+ if (l >= Integer.MAX_VALUE) {",
+        "file_path": "src/main/java/org/apache/commons/compress/archivers/zip/X5455_ExtendedTimestamp.java",
+        "method_name": "unixTimeToZipLong",
+        "class_name": "X5455_ExtendedTimestamp",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          528,
+          529,
+          530,
+          531,
+          532,
+          533,
+          534
+        ],
+        "original_code": "/**\n* Utility method converts java.util.Date (milliseconds since epoch)\n* into a ZipLong (seconds since epoch).\n* <p/>\n* Also makes sure the converted ZipLong is not too big to fit\n* in 32 unsigned bits.\n*\n* @param d java.util.Date to convert to ZipLong\n* @return ZipLong\n*/\nprivate static ZipLong unixTimeToZipLong(long l) {\n    final long TWO_TO_32 = 0x100000000L;\n    if (l >= TWO_TO_32) {\n        throw new IllegalArgumentException(\"X5455 timestamps must fit in a signed 32 bit integer: \" + l);\n    }\n    return new ZipLong(l);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Compress-46/"
+}

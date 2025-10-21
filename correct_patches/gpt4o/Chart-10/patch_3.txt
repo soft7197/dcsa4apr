@@ -1,0 +1,7 @@
+File: source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java
+Method: StandardToolTipTagFragmentGenerator.generateToolTipFragment
+
+public String generateToolTipFragment(String toolTipText) {
+    return " title=\"" + toolTipText.replace("\"", "&quot;")
+        + "\" alt=\"\"";
+}

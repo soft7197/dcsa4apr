@@ -1,0 +1,25 @@
+File: src/main/java/org/apache/commons/lang3/StringUtils.java
+Method: StringUtils.containsAny
+
+public static boolean containsAny(CharSequence cs, char[] searchChars) {
+	if (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {
+		return false;
+	}
+	int csLength = cs.length();
+	int searchLength = searchChars.length;
+	for (int i = 0; i < csLength; ) {
+		int cp = Character.codePointAt(cs, i);
+		for (int j = 0; j < searchLength; j++) {
+			int searchCp = searchChars[j];
+			if (j + 1 < searchLength && Character.isHighSurrogate((char) searchCp) && Character.isLowSurrogate((char) searchChars[j + 1])) {
+				searchCp = Character.toCodePoint((char) searchCp, (char) searchChars[j + 1]);
+				j++; // Skip the low surrogate
+			}
+			if (cp == searchCp) {
+				return true;
+			}
+		}
+		i += Character.charCount(cp);
+	}
+	return false;
+}

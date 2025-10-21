@@ -1,0 +1,63 @@
+{
+  "bug_id": "JacksonDatabind-91",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-91_1772005184",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch incorrectly applies a key value handler check to all container types instead of only map-like types. To fix this, we need to add a specific check for map-like types and ensure that the value handler for keys is only checked when appropriate.",
+        "fixed_method": "private boolean _hasCustomHandlers(JavaType t) {\n    if (t.isContainerType()) {\n        // First: value types may have both value and type handlers\n        JavaType ct = t.getContentType();\n        if (ct != null && ((ct.getValueHandler() != null) || (ct.getTypeHandler() != null))) {\n            return true;\n        }\n        // Second: map(-like) types may have value handler for key (but not type; keys are untyped)\n        if (t.isMapLikeType()) {\n            JavaType kt = t.getKeyType();\n            if (kt != null && kt.getValueHandler() != null) {\n                return true;\n            }\n        }\n    }\n    return false;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/DeserializerCache.java",
+        "method_name": "_hasCustomHandlers",
+        "class_name": "DeserializerCache",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method _hasCustomHandlers does not check for custom key deserializers in map-like types, which is necessary for the test to pass.",
+        "line_numbers": [
+          536,
+          537,
+          538,
+          539,
+          540,
+          541,
+          542,
+          543,
+          544,
+          545,
+          546
+        ]
+      },
+      {
+        "hypothesis": "The bug is likely due to the method not checking for custom key deserializers in map-like types. The current implementation only checks for value handlers in container types and key value handlers in map-like types, but it does not account for custom key deserializers.",
+        "changes": "- return false;\n+ return (t.getKeyType() != null && t.getKeyType().getValueHandler() != null) || (ct.getValueHandler() != null) || (ct.getTypeHandler() != null);",
+        "fixed_method": "private boolean _hasCustomHandlers(JavaType t) {\n    if (t.isContainerType()) {\n        // First: value types may have both value and type handlers\n        JavaType ct = t.getContentType();\n        if (ct != null) {\n            return (t.getKeyType() != null && t.getKeyType().getValueHandler() != null) || (ct.getValueHandler() != null) || (ct.getTypeHandler() != null);\n        }\n        // Second: map(-like) types may have value handler for key (but not type; keys are untyped)\n    }\n    return false;\n}",
+        "diff": "- return false;\n+ return (t.getKeyType() != null && t.getKeyType().getValueHandler() != null) || (ct.getValueHandler() != null) || (ct.getTypeHandler() != null);",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/DeserializerCache.java",
+        "method_name": "_hasCustomHandlers",
+        "class_name": "DeserializerCache",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          536,
+          537,
+          538,
+          539,
+          540,
+          541,
+          542,
+          543,
+          544,
+          545,
+          546
+        ],
+        "original_code": "/**\n* Helper method used to prevent both caching and cache lookups for structured\n* types that have custom value handlers\n*\n* @since 2.8.11\n*/\nprivate boolean _hasCustomHandlers(JavaType t) {\n    if (t.isContainerType()) {\n        // First: value types may have both value and type handlers\n        JavaType ct = t.getContentType();\n        if (ct != null) {\n            return (ct.getValueHandler() != null) || (ct.getTypeHandler() != null);\n        // Second: map(-like) types may have value handler for key (but not type; keys are untyped)\n        }\n    }\n    return false;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-91/"
+}

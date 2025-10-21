@@ -1,0 +1,67 @@
+{
+  "bug_id": "Lang-21",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-21_1772701837",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method was incorrectly checking the time zones of the calendars instead of the time of day.",
+        "changes": "+ if (cal1.get(Calendar.HOUR_OF_DAY) != cal2.get(Calendar.HOUR_OF_DAY)) return false;",
+        "fixed_method": "public static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n    if (cal1 == null || cal2 == null) {\n        throw new IllegalArgumentException(\"The date must not be null\");\n    }\n    if (cal1.get(Calendar.MILLISECOND) != cal2.get(Calendar.MILLISECOND) ||\n            cal1.get(Calendar.SECOND) != cal2.get(Calendar.SECOND) ||\n            cal1.get(Calendar.MINUTE) != cal2.get(Calendar.MINUTE) ||\n            cal1.get(Calendar.HOUR_OF_DAY) != cal2.get(Calendar.HOUR_OF_DAY) ||\n            cal1.get(Calendar.DAY_OF_YEAR) != cal2.get(Calendar.DAY_OF_YEAR) ||\n            cal1.get(Calendar.YEAR) != cal2.get(Calendar.YEAR) ||\n            cal1.get(Calendar.ERA) != cal2.get(Calendar.ERA) ||\n            cal1.getClass() != cal2.getClass()) {\n        return false;\n    }\n    return true;\n}",
+        "diff": "+ if (cal1.get(Calendar.HOUR_OF_DAY) != cal2.get(Calendar.HOUR_OF_DAY)) return false;",
+        "file_path": "src/main/java/org/apache/commons/lang3/time/DateUtils.java",
+        "method_name": "isSameLocalTime",
+        "class_name": "DateUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          258,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267,
+          268,
+          269,
+          270
+        ],
+        "original_code": "/**\n* <p>Checks if two calendar objects represent the same local time.</p>\n*\n* <p>This method compares the values of the fields of the two objects.\n* In addition, both calendars must be the same of the same type.</p>\n*\n* @param cal1  the first calendar, not altered, not null\n* @param cal2  the second calendar, not altered, not null\n* @return true if they represent the same millisecond instant\n* @throws IllegalArgumentException if either date is <code>null</code>\n* @since 2.1\n*/\npublic static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n    if (cal1 == null || cal2 == null) {\n        throw new IllegalArgumentException(\"The date must not be null\");\n    }\n    return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n            cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n            cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n            cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n            cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n            cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n            cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n            cal1.getClass() == cal2.getClass());\n}"
+      },
+      {
+        "hypothesis": "The method was incorrectly comparing the time zones of the calendars instead of the local times.",
+        "changes": "- cal1.getTimeZone() == cal2.getTimeZone() + cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) && cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) && cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) && cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND)",
+        "fixed_method": "public static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n    if (cal1 == null || cal2 == null) {\n        throw new IllegalArgumentException(\"The date must not be null\");\n    }\n    return (cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) && cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) && cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) && cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND));\n}",
+        "diff": "- cal1.getTimeZone() == cal2.getTimeZone() + cal1.get(Calendar.HOUR_OF_DAY) == cal2.get(Calendar.HOUR_OF_DAY) && cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) && cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) && cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND)",
+        "file_path": "src/main/java/org/apache/commons/lang3/time/DateUtils.java",
+        "method_name": "isSameLocalTime",
+        "class_name": "DateUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          258,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267,
+          268,
+          269,
+          270
+        ],
+        "original_code": "/**\n* <p>Checks if two calendar objects represent the same local time.</p>\n*\n* <p>This method compares the values of the fields of the two objects.\n* In addition, both calendars must be the same of the same type.</p>\n*\n* @param cal1  the first calendar, not altered, not null\n* @param cal2  the second calendar, not altered, not null\n* @return true if they represent the same millisecond instant\n* @throws IllegalArgumentException if either date is <code>null</code>\n* @since 2.1\n*/\npublic static boolean isSameLocalTime(Calendar cal1, Calendar cal2) {\n    if (cal1 == null || cal2 == null) {\n        throw new IllegalArgumentException(\"The date must not be null\");\n    }\n    return (cal1.get(Calendar.MILLISECOND) == cal2.get(Calendar.MILLISECOND) &&\n            cal1.get(Calendar.SECOND) == cal2.get(Calendar.SECOND) &&\n            cal1.get(Calendar.MINUTE) == cal2.get(Calendar.MINUTE) &&\n            cal1.get(Calendar.HOUR) == cal2.get(Calendar.HOUR) &&\n            cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&\n            cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR) &&\n            cal1.get(Calendar.ERA) == cal2.get(Calendar.ERA) &&\n            cal1.getClass() == cal2.getClass());\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Lang-21/"
+}

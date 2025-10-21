@@ -1,0 +1,28 @@
+File: src/main/java/com/fasterxml/jackson/databind/jsontype/impl/ClassNameIdResolver.java
+Method: ClassNameIdResolver._typeFromId
+
+protected JavaType _typeFromId(String id, DatabindContext ctxt) throws IOException {
+    TypeFactory tf = ctxt.getTypeFactory();
+    JavaType constructedType;
+    if (id.indexOf('<') > 0) {
+        constructedType = tf.constructFromCanonical(id);
+    } else {
+        Class<?> cls;
+        try {
+            cls = tf.findClass(id);
+        } catch (ClassNotFoundException e) {
+            if (ctxt instanceof DeserializationContext) {
+                DeserializationContext dctxt = (DeserializationContext) ctxt;
+                return dctxt.handleUnknownTypeId(_baseType, id, this, "No such class found: " + id);
+            }
+            return null;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid type id '"+id+"' (for id type 'Id.class'): " + e.getMessage(), e);
+        }
+        constructedType = tf.constructSpecializedType(_baseType, cls);
+    }
+    if (!_baseType.hasRawClass(Object.class) && !constructedType.isTypeOrSubTypeOf(_baseType.getRawClass())) {
+        throw new IllegalArgumentException("Type '" + id + "' is not subtype of base type '" + _baseType + "'");
+    }
+    return constructedType;
+}

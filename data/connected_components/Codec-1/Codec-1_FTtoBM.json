@@ -1,0 +1,32 @@
+{
+  "org.apache.commons.codec.language.CaverphoneTest::testLocaleIndependence": [
+    {
+      "buggy_method": "caverphone",
+      "class": "org.apache.commons.codec.language.Caverphone"
+    }
+  ],
+  "org.apache.commons.codec.language.DoubleMetaphoneTest::testLocaleIndependence": [
+    {
+      "buggy_method": "metaphone",
+      "class": "org.apache.commons.codec.language.Metaphone"
+    }
+  ],
+  "org.apache.commons.codec.language.MetaphoneTest::testLocaleIndependence": [
+    {
+      "buggy_method": "metaphone",
+      "class": "org.apache.commons.codec.language.Metaphone"
+    }
+  ],
+  "org.apache.commons.codec.language.RefinedSoundexTest::testLocaleIndependence": [
+    {
+      "buggy_method": "clean",
+      "class": "org.apache.commons.codec.language.SoundexUtils"
+    }
+  ],
+  "org.apache.commons.codec.language.SoundexTest::testLocaleIndependence": [
+    {
+      "buggy_method": "clean",
+      "class": "org.apache.commons.codec.language.SoundexUtils"
+    }
+  ]
+}

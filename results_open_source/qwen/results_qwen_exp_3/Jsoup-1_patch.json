@@ -1,0 +1,103 @@
+{
+  "bug_id": "Jsoup-1",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-1_1772005807",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch only handled the specific case of moving non-blank text nodes to the start of the body without maintaining their order or considering other scenarios. The refined fix will collect all non-blank text nodes, remove them from their original positions, and then prepend them in reverse order to maintain their original sequence at the start of the body.",
+        "fixed_method": "private void normalise(Element element) {\n    List<Node> toMove = new ArrayList<Node>();\n    for (Node node: element.childNodes) {\n        if (node instanceof TextNode) {\n            TextNode tn = (TextNode) node;\n            if (!tn.isBlank())\n                toMove.add(tn);\n        }\n    }\n\n    // Remove nodes from original position\n    for (Node node: toMove) {\n        element.removeChild(node);\n    }\n\n    // Prepend nodes in reverse order to maintain original sequence\n    for (int i = toMove.size() - 1; i >= 0; i--) {\n        body().prependChild(toMove.get(i));\n        body().prependChild(new TextNode(\" \", \"\"));\n    }\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/jsoup/nodes/Document.java",
+        "method_name": "normalise",
+        "class_name": "Document",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method is supposed to move non-blank text nodes to the beginning of the body, but it currently appends them at the end. The fix involves inserting the nodes at the start of the body instead of appending them.",
+        "line_numbers": [
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ]
+      },
+      {
+        "hypothesis": "The refined fix will address the overfitting by ensuring that the body element is valid before attempting to prepend nodes. It will also handle general cases by moving non-blank text nodes to the beginning of the parent element rather than assuming a specific 'body' element.",
+        "fixed_method": "private void normalise(Element element) {\n    List<Node> toMove = new ArrayList<Node>();\n    for (Node node: element.childNodes) {\n        if (node instanceof TextNode) {\n            TextNode tn = (TextNode) node;\n            if (!tn.isBlank())\n                toMove.add(tn);\n        }\n    }\n\n    for (Node node: toMove) {\n        element.removeChild(node);\n        element.prependChild(node);\n    }\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/jsoup/nodes/Document.java",
+        "method_name": "normalise",
+        "class_name": "Document",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is due to the fact that the method is moving non-blank text nodes to the end of the body instead of the beginning. The fix involves modifying the loop to prepend the nodes to the body.",
+        "line_numbers": [
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ]
+      },
+      {
+        "hypothesis": "The original patch incorrectly prepended nodes to the body instead of normalizing them within their parent element. The refined fix will move non-blank text nodes to the beginning of their parent element without altering the body or other elements.",
+        "fixed_method": "private void normalise(Element element) {\n    List<Node> toMove = new ArrayList<Node>();\n    for (Node node: element.childNodes) {\n        if (node instanceof TextNode) {\n            TextNode tn = (TextNode) node;\n            if (!tn.isBlank())\n                toMove.add(tn);\n        }\n    }\n\n    for (Node node: toMove) {\n        element.removeChild(node);\n        element.prependChild(node);\n    }\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/jsoup/nodes/Document.java",
+        "method_name": "normalise",
+        "class_name": "Document",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is due to the nodes being moved to the end of the body instead of the beginning. The fix involves appending the nodes at the start of the body instead of the end.",
+        "line_numbers": [
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-1/"
+}

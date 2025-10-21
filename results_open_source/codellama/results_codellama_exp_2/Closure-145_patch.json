@@ -1,0 +1,36 @@
+{
+  "bug_id": "Closure-145",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-145_1772767128",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the hardcoded value of the function being commented out. After removing the hardcoded value, the patch passes the tests.",
+        "fixed_method": "private boolean isOneExactlyFunctionOrDo(Node n) {\n  // For labels with block children, we need to ensure that a\n  // labeled FUNCTION or DO isn't generated when extraneous BLOCKs\n  // are skipped.\n  // Either a empty statement or an block with more than one child,\n  // way it isn't a FUNCTION or DO.\n  return (n.getType() == Token.FUNCTION || n.getType() == Token.DO || (n.getType() == Token.LABEL && n.hasMoreThanOneChild()));\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/com/google/javascript/jscomp/CodeGenerator.java",
+        "method_name": "isOneExactlyFunctionOrDo",
+        "class_name": "CodeGenerator",
+        "iteration": 3,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the method `isOneExactlyFunctionOrDo` not being able to handle the case where the node is a `LABEL` with more than one child. The method only checks for the `FUNCTION` and `DO` types, but it should also check for `LABEL` with more than one child.",
+        "line_numbers": [
+          708,
+          709,
+          710,
+          711,
+          712,
+          713,
+          714,
+          715
+        ]
+      }
+    ]
+  ],
+  "iterations": 3,
+  "monitor_dir": "traces/Closure-145/"
+}

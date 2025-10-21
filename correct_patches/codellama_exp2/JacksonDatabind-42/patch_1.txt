@@ -1,0 +1,13 @@
+File: src/main/java/com/fasterxml/jackson/databind/deser/std/FromStringDeserializer.java
+Method: FromStringDeserializer._deserializeFromEmptyString
+
+protected Object _deserializeFromEmptyString() throws IOException {
+      switch (_kind) {
+        case STD_URI:
+          return URI.create("");
+        case STD_LOCALE:
+          return Locale.ROOT;
+        default:
+          return super._deserializeFromEmptyString();
+      }
+    }

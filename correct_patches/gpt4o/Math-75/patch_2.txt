@@ -1,0 +1,11 @@
+File: src/main/java/org/apache/commons/math/stat/Frequency.java
+Method: Frequency.getPct
+
+public double getPct(Object v) {
+    long freq = getCount(v);
+    long total = getSumFreq();
+    if (total == 0) {
+        return Double.NaN;
+    }
+    return (double) freq / (double) total;
+}

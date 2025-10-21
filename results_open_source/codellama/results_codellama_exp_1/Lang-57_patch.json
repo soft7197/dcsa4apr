@@ -1,0 +1,65 @@
+{
+  "bug_id": "Lang-57",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-57_1772703770",
+  "patches": [
+    [
+      {
+        "hypothesis": "Refined the patch by removing hardcoded values, adding null checks, and handling edge cases.",
+        "changes": "+ if (locale == null) return false; + if (cAvailableLocaleSet == null) { cAvailableLocaleSet = availableLocaleSet(); } + return cAvailableLocaleSet.contains(locale);",
+        "fixed_method": "public static boolean isAvailableLocale(Locale locale) { if (locale == null) return false; if (cAvailableLocaleSet == null) { cAvailableLocaleSet = availableLocaleSet(); } return cAvailableLocaleSet.contains(locale); }",
+        "diff": "+ if (locale == null) return false; + if (cAvailableLocaleSet == null) { cAvailableLocaleSet = availableLocaleSet(); } + return cAvailableLocaleSet.contains(locale);",
+        "file_path": "src/java/org/apache/commons/lang/LocaleUtils.java",
+        "method_name": "isAvailableLocale",
+        "class_name": "LocaleUtils",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "",
+        "line_numbers": [
+          222,
+          223,
+          224
+        ]
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public static boolean isAvailableLocale(Locale locale) {\n    if (cAvailableLocaleSet == null) return false;\n    return cAvailableLocaleSet.contains(locale);\n}",
+        "diff": "",
+        "file_path": "src/java/org/apache/commons/lang/LocaleUtils.java",
+        "method_name": "isAvailableLocale",
+        "class_name": "LocaleUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          222,
+          223,
+          224
+        ],
+        "original_code": "/**\n* <p>Checks if the locale specified is in the list of available locales.</p>\n*\n* @param locale the Locale object to check if it is available\n* @return true if the locale is a known locale\n*/\npublic static boolean isAvailableLocale(Locale locale) {\n    return cAvailableLocaleSet.contains(locale);\n}"
+      },
+      {
+        "hypothesis": "The issue is caused by the cAvailableLocaleSet variable being null, causing a NullPointerException when attempting to call the contains method on it.",
+        "changes": "+ cAvailableLocaleSet = new HashSet(Arrays.asList(Locale.getAvailableLocales()));",
+        "fixed_method": "public static boolean isAvailableLocale(Locale locale) {\n  Set cAvailableLocaleSet = new HashSet(Arrays.asList(Locale.getAvailableLocales()));\n  return cAvailableLocaleSet.contains(locale);\n}",
+        "diff": "+ cAvailableLocaleSet = new HashSet(Arrays.asList(Locale.getAvailableLocales()));",
+        "file_path": "src/java/org/apache/commons/lang/LocaleUtils.java",
+        "method_name": "isAvailableLocale",
+        "class_name": "LocaleUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          222,
+          223,
+          224
+        ],
+        "original_code": "/**\n* <p>Checks if the locale specified is in the list of available locales.</p>\n*\n* @param locale the Locale object to check if it is available\n* @return true if the locale is a known locale\n*/\npublic static boolean isAvailableLocale(Locale locale) {\n    return cAvailableLocaleSet.contains(locale);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Lang-57/"
+}

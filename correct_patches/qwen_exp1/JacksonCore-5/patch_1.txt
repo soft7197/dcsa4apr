@@ -1,0 +1,17 @@
+File: src/main/java/com/fasterxml/jackson/core/JsonPointer.java
+Method: JsonPointer._parseIndex
+
+private final static int _parseIndex(String str) {
+    if (str == null || str.isEmpty() || str.length() > 10) {
+        return -1;
+    }
+    try {
+        long l = NumberInput.parseLong(str);
+        if (l > Integer.MAX_VALUE || l < Integer.MIN_VALUE) {
+            return -1;
+        }
+        return (int) l;
+    } catch (NumberFormatException e) {
+        return -1;
+    }
+}

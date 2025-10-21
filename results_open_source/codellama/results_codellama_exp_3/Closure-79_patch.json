@@ -1,0 +1,47 @@
+{
+  "bug_id": "Closure-79",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-79_1772935263",
+  "patches": [
+    [
+      {
+        "hypothesis": "The root cause of the bug is that the `MakeDeclaredNamesUnique` pass is being run before the `Normalize` pass, which causes a conflict between the two passes. The `Normalize` pass assumes that the AST is in a consistent state, but the `MakeDeclaredNamesUnique` pass is modifying the AST in a way that violates this assumption. The fix is to run the `MakeDeclaredNamesUnique` pass before the `Normalize` pass.",
+        "changes": "+ if (MAKE_LOCAL_NAMES_UNIQUE) {\n+   MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n+   NodeTraversal t = new NodeTraversal(compiler, renamer);\n+   t.traverseRoots(externs, root);\n+ }\n\n- removeDuplicateDeclarations(externs, root);",
+        "fixed_method": "public void process(Node externs, Node root) {\n    new NodeTraversal(compiler, new NormalizeStatements(compiler, assertOnChange))\n        .traverse(root);\n    if (MAKE_LOCAL_NAMES_UNIQUE) {\n      MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n      NodeTraversal t = new NodeTraversal(compiler, renamer);\n      t.traverseRoots(externs, root);\n    }\n    if (!compiler.getLifeCycleStage().isNormalized()) {\n      compiler.setLifeCycleStage(LifeCycleStage.NORMALIZED);\n    }\n  }",
+        "diff": "+ if (MAKE_LOCAL_NAMES_UNIQUE) {\n+   MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n+   NodeTraversal t = new NodeTraversal(compiler, renamer);\n+   t.traverseRoots(externs, root);\n+ }\n\n- removeDuplicateDeclarations(externs, root);",
+        "file_path": "src/com/google/javascript/jscomp/Normalize.java",
+        "method_name": "process",
+        "class_name": "Normalize",
+        "iteration": 4,
+        "is_multi_method": false,
+        "line_numbers": [
+          118,
+          149
+        ],
+        "original_code": "\n  @Override\n  public void process(Node externs, Node root) {\n    new NodeTraversal(\n        compiler, new NormalizeStatements(compiler, assertOnChange))\n        .traverse(root);\n    if (MAKE_LOCAL_NAMES_UNIQUE) {\n      MakeDeclaredNamesUnique renamer = new MakeDeclaredNamesUnique();\n      NodeTraversal t = new NodeTraversal(compiler, renamer);\n      t.traverseRoots(externs, root);\n    }\n    // It is important that removeDuplicateDeclarations runs after\n    // MakeDeclaredNamesUnique in order for catch block exception names to be\n    // handled properly. Specifically, catch block exception names are\n    // only valid within the catch block, but our currect Scope logic\n    // has no concept of this and includes it in the containing function\n    // (or global scope). MakeDeclaredNamesUnique makes the catch exception\n    // names unique so that removeDuplicateDeclarations() will properly handle\n    // cases where a function scope variable conflict with a exception name:\n    //   function f() {\n    //      try {throw 0;} catch(e) {e; /* catch scope 'e'*/}\n    //      var e = 1; // f scope 'e'\n    //   }\n    // otherwise 'var e = 1' would be rewritten as 'e = 1'.\n    // TODO(johnlenz): Introduce a seperate scope for catch nodes.\n    removeDuplicateDeclarations(externs, root);\n    new PropagateConstantAnnotationsOverVars(compiler, assertOnChange)\n        .process(externs, root);\n\n    if (!compiler.getLifeCycleStage().isNormalized()) {\n      compiler.setLifeCycleStage(LifeCycleStage.NORMALIZED);\n    }\n  }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "private void createSynthesizedExternVar(String varName) {\n        Node nameNode = Node.newString(Token.NAME, varName);\n\n        // Mark the variable as constant if it matches the coding convention\n        // for constant vars.\n        // NOTE(nicksantos): honestly, i'm not sure how much this matters.\n        // AFAIK, all people who use the CONST coding convention also\n        // compile with undeclaredVars as errors. We have some test\n        // cases for this configuration though, and it makes them happier.\n        if (compiler.getCodingConvention().isConstant(varName)) {\n            nameNode.putBooleanProp(Node.IS_CONSTANT_NAME, true);\n        }\n\n        getSynthesizedExternsRoot().addChildToBack(\n                new Node(Token.VAR, nameNode));\n        varsToDeclareInExterns.remove(varName);\n        compiler.reportCodeChange();\n    }",
+        "diff": "",
+        "file_path": "src/com/google/javascript/jscomp/VarCheck.java",
+        "method_name": "createSynthesizedExternVar",
+        "class_name": "VarCheck",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          205,
+          221
+        ],
+        "original_code": "  /**\n   * Create a new variable in a synthetic script. This will prevent\n   * subsequent compiler passes from crashing.\n   */\n\n  private void createSynthesizedExternVar(String varName) {\n    Node nameNode = Node.newString(Token.NAME, varName);\n\n    // Mark the variable as constant if it matches the coding convention\n    // for constant vars.\n    // NOTE(nicksantos): honestly, i'm not sure how much this matters.\n    // AFAIK, all people who use the CONST coding convention also\n    // compile with undeclaredVars as errors. We have some test\n    // cases for this configuration though, and it makes them happier.\n    if (compiler.getCodingConvention().isConstant(varName)) {\n      nameNode.putBooleanProp(Node.IS_CONSTANT_NAME, true);\n    }\n\n    getSynthesizedExternsRoot().addChildToBack(\n        new Node(Token.VAR, nameNode));\n    varsToDeclareInExterns.remove(varName);\n  }\n"
+      }
+    ]
+  ],
+  "iterations": 4,
+  "monitor_dir": "traces/Closure-79/"
+}

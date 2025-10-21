@@ -1,0 +1,41 @@
+File: src/org/mockito/internal/configuration/injection/FinalMockCandidateFilter.java
+Method: FinalMockCandidateFilter.thenInject
+
+public OngoingInjecter filterCandidate(final Collection<Object> mocks, final Field field, final Object fieldInstance) {
+    if (mocks == null || mocks.size() != 1 || field == null || fieldInstance == null) {
+        return new OngoingInjecter() {
+            public boolean thenInject() {
+                return false;
+            }
+        };
+    }
+
+    final Object matchingMock = mocks.iterator().next();
+
+    return new OngoingInjecter() {
+        public boolean thenInject() {
+            try {
+                String setterName = "set" + capitalize(field.getName());
+                java.lang.reflect.Method setterMethod = fieldInstance.getClass().getMethod(setterName, field.getType());
+                setterMethod.invoke(fieldInstance, matchingMock);
+                return true;
+            } catch (NoSuchMethodException e) {
+                try {
+                    new FieldSetter(fieldInstance, field).set(matchingMock);
+                    return true;
+                } catch (Exception ex) {
+                    throw new MockitoException("Problems injecting dependency in " + field.getName(), ex);
+                }
+            } catch (Exception e) {
+                throw new MockitoException("Problems injecting dependency in " + field.getName(), e);
+            }
+        }
+    };
+}
+
+private String capitalize(String name) {
+    if (name == null || name.length() == 0) {
+        return name;
+    }
+    return name.substring(0, 1).toUpperCase() + name.substring(1);
+}

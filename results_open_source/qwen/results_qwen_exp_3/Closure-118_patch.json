@@ -1,0 +1,51 @@
+{
+  "bug_id": "Closure-118",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-118_1771987578",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue arises because the property renaming logic is incorrectly modifying the property names in the object literals. The `scheduleRenaming` method seems to be responsible for adding nodes to the renaming list, which is causing the property names to be changed unexpectedly. We need to ensure that the property names are not being altered unless explicitly intended.",
+        "changes": "- String name = child.getString();\n+ String name = child.isStringKey() ? child.getString() : child.getQualifiedName();\n- if (!prop.scheduleRenaming(child,\n+ if (!prop.scheduleRenaming(child, type)) {\n-                            processProperty(t, prop, type, null))) {",
+        "fixed_method": "private void handleObjectLit(NodeTraversal t, Node n) {\n  for (Node child = n.getFirstChild();\n      child != null;\n      child = child.getNext()) {\n    // Maybe STRING, GET, SET\n\n    // We should never see a mix of numbers and strings.\n    String name = child.isStringKey() ? child.getString() : child.getQualifiedName();\n    T type = typeSystem.getType(getScope(), n, name);\n\n    Property prop = getProperty(name);\n    if (!prop.scheduleRenaming(child, type)) {\n      // TODO(user): It doesn't look like the user can do much in this\n      // case right now.\n      if (propertiesToErrorFor.containsKey(name)) {\n        compiler.report(JSError.make(\n            t.getSourceName(), child, propertiesToErrorFor.get(name),\n            Warnings.INVALIDATION, name,\n            (type == null ? \"null\" : type.toString()), n.toString(), \"\"));\n      }\n    }\n  }\n}",
+        "diff": "- String name = child.getString();\n+ String name = child.isStringKey() ? child.getString() : child.getQualifiedName();\n- if (!prop.scheduleRenaming(child,\n+ if (!prop.scheduleRenaming(child, type)) {\n-                            processProperty(t, prop, type, null))) {",
+        "file_path": "src/com/google/javascript/jscomp/DisambiguateProperties.java",
+        "method_name": "handleObjectLit",
+        "class_name": "DisambiguateProperties",
+        "iteration": 3,
+        "is_multi_method": false,
+        "line_numbers": [
+          490,
+          491,
+          492,
+          493,
+          494,
+          495,
+          496,
+          497,
+          498,
+          499,
+          500,
+          501,
+          502,
+          503,
+          504,
+          505,
+          506,
+          507,
+          508,
+          509,
+          510,
+          511,
+          512,
+          513
+        ],
+        "original_code": "/**\n* Processes a OBJECTLIT node.\n*/\nprivate void handleObjectLit(NodeTraversal t, Node n) {\n  for (Node child = n.getFirstChild();\n      child != null;\n      child = child.getNext()) {\n    // Maybe STRING, GET, SET\n\n    // We should never see a mix of numbers and strings.\n    String name = child.getString();\n    T type = typeSystem.getType(getScope(), n, name);\n\n    Property prop = getProperty(name);\n    if (!prop.scheduleRenaming(child,\n                               processProperty(t, prop, type, null))) {\n      // TODO(user): It doesn't look like the user can do much in this\n      // case right now.\n      if (propertiesToErrorFor.containsKey(name)) {\n        compiler.report(JSError.make(\n            t.getSourceName(), child, propertiesToErrorFor.get(name),\n            Warnings.INVALIDATION, name,\n            (type == null ? \"null\" : type.toString()), n.toString(), \"\"));\n      }\n    }\n  }\n}"
+      }
+    ]
+  ],
+  "iterations": 3,
+  "monitor_dir": "traces/Closure-118/"
+}

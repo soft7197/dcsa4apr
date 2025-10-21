@@ -1,0 +1,48 @@
+{
+  "bug_id": "Math-2",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-2_1772704962",
+  "patches": [
+    [
+      {
+        "hypothesis": "Refined the patch to avoid overfitting by using general logic and handling edge cases.",
+        "fixed_method": "public double getNumericalMean() {\nlong N = getPopulationSize();\nlong m = getNumberOfSuccesses();\nlong n = getSampleSize();\nreturn m == 0.0 || n == 0.0 ? 0.0 : (double) (m * n) / (N == 0.0 ? 1.0 : N);\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java",
+        "method_name": "getNumericalMean",
+        "class_name": "HypergeometricDistribution",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by a negative value being returned from the method due to integer overflow. The fix is to use long variables for the intermediate calculations to avoid overflow.",
+        "line_numbers": [
+          267,
+          268,
+          269
+        ]
+      },
+      {
+        "hypothesis": "The method was returning a negative value due to integer overflow when the population size was large and the sample size was small.",
+        "changes": "+ Use long values for the intermediate calculations to prevent integer overflow.\n- Use floating-point division to ensure the returned value is non-negative.",
+        "fixed_method": "public double getNumericalMean() {\n    long sampleSize = (long) getSampleSize();\n    long populationSize = (long) getPopulationSize();\n    long numberOfSuccesses = (long) getNumberOfSuccesses();\n    return (double) (sampleSize * numberOfSuccesses) / populationSize;\n}",
+        "diff": "+ Use long values for the intermediate calculations to prevent integer overflow.\n- Use floating-point division to ensure the returned value is non-negative.",
+        "file_path": "src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java",
+        "method_name": "getNumericalMean",
+        "class_name": "HypergeometricDistribution",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          267,
+          268,
+          269
+        ],
+        "original_code": "/**\n* {@inheritDoc}\n*\n* For population size {@code N}, number of successes {@code m}, and sample\n* size {@code n}, the mean is {@code n * m / N}.\n*/\npublic double getNumericalMean() {\n    return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-2/"
+}

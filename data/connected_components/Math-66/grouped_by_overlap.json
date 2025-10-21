@@ -1,0 +1,15 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "BrentOptimizer_org.apache.commons.math.optimization.univariate.BrentOptimizer",
+      "localMin_org.apache.commons.math.optimization.univariate.BrentOptimizer",
+      "optimize_org.apache.commons.math.optimization.univariate.BrentOptimizer"
+    ],
+    "tests": [
+      "org.apache.commons.math.optimization.MultiStartUnivariateRealOptimizerTest::testQuinticMin",
+      "org.apache.commons.math.optimization.MultiStartUnivariateRealOptimizerTest::testSinMin",
+      "org.apache.commons.math.optimization.univariate.BrentOptimizerTest::testQuinticMinStatistics",
+      "org.apache.commons.math.optimization.univariate.BrentOptimizerTest::testSinMin"
+    ]
+  }
+}

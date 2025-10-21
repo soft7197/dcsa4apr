@@ -1,0 +1,13 @@
+File: src/main/java/org/apache/commons/compress/archivers/cpio/CpioArchiveOutputStream.java
+Method: CpioArchiveOutputStream.close
+
+public void close() throws IOException {
+    if (!closed) {
+        if (out == null) {
+            throw new IOException("Output stream is null");
+        }
+        finish();
+        out.close();
+        closed = true;
+    }
+}

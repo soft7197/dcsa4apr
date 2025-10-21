@@ -1,0 +1,41 @@
+File: src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMAttributeIterator.java
+Method: JDOMAttributeIterator.JDOMAttributeIterator
+
+public JDOMAttributeIterator(NodePointer parent, QName name) {
+    this.parent = parent;
+    this.attributes = new ArrayList();
+    
+    if (parent.getNode() instanceof Element) {
+        Element element = (Element) parent.getNode();
+        String prefix = name.getPrefix();
+        Namespace ns = Namespace.NO_NAMESPACE;
+        if (prefix != null && !prefix.equals("")) {
+            if (prefix.equals("xml")) {
+                ns = Namespace.XML_NAMESPACE;
+            } else {
+                String uri = parent.getNamespaceResolver().getNamespaceURI(prefix);
+                if (uri != null) {
+                    ns = Namespace.getNamespace(prefix, uri);
+                } else {
+                    return; // No namespace resolved, thus no attributes can match
+                }
+            }
+        }
+
+        String lname = name.getName();
+        if (!lname.equals("*")) {
+            Attribute attr = element.getAttribute(lname, ns);
+            if (attr != null) {
+                attributes.add(attr);
+            }
+        } else {
+            List allAttributes = element.getAttributes();
+            for (int i = 0; i < allAttributes.size(); i++) {
+                Attribute attr = (Attribute) allAttributes.get(i);
+                if (ns.equals(Namespace.NO_NAMESPACE) || attr.getNamespace().equals(ns)) {
+                    attributes.add(attr);
+                }
+            }
+        }
+    }
+}

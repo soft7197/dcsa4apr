@@ -1,0 +1,18 @@
+File: src/main/java/org/apache/commons/math/complex/Complex.java
+Method: Complex.tanh
+
+public Complex tanh() {
+    if (isNaN) {
+        return NaN;
+    }
+    double real2 = 2.0 * real;
+    double imaginary2 = 2.0 * imaginary;
+    double d = FastMath.cosh(real2) + FastMath.cos(imaginary2);
+
+    if (Double.isInfinite(d)) {
+        return createComplex(FastMath.copySign(1.0, real), 0.0);
+    }
+
+    return createComplex(FastMath.sinh(real2) / d,
+                         FastMath.sin(imaginary2) / d);
+}

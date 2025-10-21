@@ -1,0 +1,43 @@
+{
+  "bug_id": "Csv-8",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Csv-8_1772813517",
+  "patches": [
+    {
+      "hypothesis": "The validate method was not checking for duplicate header elements",
+      "changes": "+ if (set.size() != header.length) {\n- throw new IllegalStateException(\"The header contains duplicate names: \" + Arrays.toString(header));\n+ throw new IllegalArgumentException(\"The header contains duplicate names: \" + Arrays.toString(header));\n+ }",
+      "methods": {
+        "src/main/java/org/apache/commons/csv/CSVFormat.java::CSVFormat::CSVFormat::L296": {
+          "file_path": "src/main/java/org/apache/commons/csv/CSVFormat.java",
+          "method_name": "CSVFormat",
+          "class_name": "CSVFormat",
+          "line_numbers": [
+            296,
+            319
+          ],
+          "original_code": "    /**\n     * Creates a customized CSV format.\n     *\n     * @param delimiter\n     *            the char used for value separation, must not be a line break character\n     * @param quoteChar\n     *            the Character used as value encapsulation marker, may be {@code null} to disable\n     * @param quotePolicy\n     *            the quote policy\n     * @param commentStart\n     *            the Character used for comment identification, may be {@code null} to disable\n     * @param escape\n     *            the Character used to escape special characters in values, may be {@code null} to disable\n     * @param ignoreSurroundingSpaces\n     *            <tt>true</tt> when whitespaces enclosing values should be ignored\n     * @param ignoreEmptyLines\n     *            <tt>true</tt> when the parser should skip empty lines\n     * @param recordSeparator\n     *            the line separator to use for output\n     * @param nullString\n     *            the line separator to use for output\n     * @param header\n     *            the header\n     * @param skipHeaderRecord TODO\n     * @throws IllegalArgumentException if the delimiter is a line break character\n     */\n\n    private CSVFormat(final char delimiter, final Character quoteChar,\n            final Quote quotePolicy, final Character commentStart,\n            final Character escape, final boolean ignoreSurroundingSpaces,\n            final boolean ignoreEmptyLines, final String recordSeparator,\n            final String nullString, final String[] header, final boolean skipHeaderRecord) {\n        if (isLineBreak(delimiter)) {\n            throw new IllegalArgumentException(\"The delimiter cannot be a line break\");\n        }\n        this.delimiter = delimiter;\n        this.quoteChar = quoteChar;\n        this.quotePolicy = quotePolicy;\n        this.commentStart = commentStart;\n        this.escape = escape;\n        this.ignoreSurroundingSpaces = ignoreSurroundingSpaces;\n        this.ignoreEmptyLines = ignoreEmptyLines;\n        this.recordSeparator = recordSeparator;\n        this.nullString = nullString;\n        if (header == null) {\n        \tthis.header = null;\n        } else {\n            this.header = header.clone();        \t\n        }\n        this.skipHeaderRecord = skipHeaderRecord;\n    }\n",
+          "fixed_method": "private CSVFormat(final char delimiter, final Character quoteChar,\n        final Quote quotePolicy, final Character commentStart,\n        final Character escape, final boolean ignoreSurroundingSpaces,\n        final boolean ignoreEmptyLines, final String recordSeparator,\n        final String nullString, final String[] header, final boolean skipHeaderRecord) {\n    if (isLineBreak(delimiter)) {\n        throw new IllegalArgumentException(\"The delimiter cannot be a line break\");\n    }\n    this.delimiter = delimiter;\n    this.quoteChar = quoteChar;\n    this.quotePolicy = quotePolicy;\n    this.commentStart = commentStart;\n    this.escape = escape;\n    this.ignoreSurroundingSpaces = ignoreSurroundingSpaces;\n    this.ignoreEmptyLines = ignoreEmptyLines;\n    this.recordSeparator = recordSeparator;\n    this.nullString = nullString;\n    if (header == null) {\n        this.header = null;\n    } else {\n        this.header = header.clone();\n    }\n    this.skipHeaderRecord = skipHeaderRecord;\n}",
+          "iteration": 3
+        },
+        "src/main/java/org/apache/commons/csv/CSVFormat.java::CSVFormat::validate::L635": {
+          "file_path": "src/main/java/org/apache/commons/csv/CSVFormat.java",
+          "method_name": "validate",
+          "class_name": "CSVFormat",
+          "line_numbers": [
+            635,
+            672
+          ],
+          "original_code": "    /**\n     * Verifies the consistency of the parameters and throws an IllegalStateException if necessary.\n     *\n     * @throws IllegalStateException\n     */\n\n    void validate() throws IllegalStateException {\n        if (quoteChar != null && delimiter == quoteChar.charValue()) {\n            throw new IllegalStateException(\n                    \"The quoteChar character and the delimiter cannot be the same ('\" + quoteChar + \"')\");\n        }\n\n        if (escape != null && delimiter == escape.charValue()) {\n            throw new IllegalStateException(\n                    \"The escape character and the delimiter cannot be the same ('\" + escape + \"')\");\n        }\n\n        if (commentStart != null && delimiter == commentStart.charValue()) {\n            throw new IllegalStateException(\n                    \"The comment start character and the delimiter cannot be the same ('\" + commentStart + \"')\");\n        }\n\n        if (quoteChar != null && quoteChar.equals(commentStart)) {\n            throw new IllegalStateException(\n                    \"The comment start character and the quoteChar cannot be the same ('\" + commentStart + \"')\");\n        }\n\n        if (escape != null && escape.equals(commentStart)) {\n            throw new IllegalStateException(\n                    \"The comment start and the escape character cannot be the same ('\" + commentStart + \"')\");\n        }\n\n        if (escape == null && quotePolicy == Quote.NONE) {\n            throw new IllegalStateException(\"No quotes mode set but no escape character is set\");\n        }\n\n        if (header != null) {\n            final Set<String> set = new HashSet<String>(header.length);\n            set.addAll(Arrays.asList(header));\n            if (set.size() != header.length) {\n                throw new IllegalStateException(\"The header contains duplicate names: \" + Arrays.toString(header));\n            }\n        }\n    }\n",
+          "fixed_method": "void validate() {\n    if (quoteChar != null && delimiter == quoteChar.charValue()) {\n        throw new IllegalStateException(\n                \"The quoteChar character and the delimiter cannot be the same ('\" + quoteChar + \")\");\n    }\n\n    if (escape != null && delimiter == escape.charValue()) {\n        throw new IllegalStateException(\n                \"The escape character and the delimiter cannot be the same ('\" + escape + \")\");\n    }\n\n    if (commentStart != null && delimiter == commentStart.charValue()) {\n        throw new IllegalStateException(\n                \"The comment start character and the delimiter cannot be the same ('\" + commentStart + \")\");\n    }\n\n    if (quoteChar != null && quoteChar.equals(commentStart)) {\n        throw new IllegalStateException(\n                \"The comment start and the quoteChar cannot be the same ('\" + commentStart + \")\");\n    }\n\n    if (escape != null && escape.equals(commentStart)) {\n        throw new IllegalStateException(\n                \"The comment start and the escape character cannot be the same ('\" + commentStart + \")\");\n    }\n\n    if (escape == null && quotePolicy == Quote.NONE) {\n        throw new IllegalStateException(\"No quotes mode set but no escape character is set\");\n    }\n\n    if (header != null) {\n        final Set<String> set = new HashSet<String>(header.length);\n        set.addAll(Arrays.asList(header));\n        if (set.size() != header.length) {\n            throw new IllegalArgumentException(\"The header contains duplicate names: \" + Arrays.toString(header));\n        }\n    }\n}",
+          "iteration": 3
+        }
+      },
+      "iteration": 3,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 3,
+  "monitor_dir": "traces/Csv-8/"
+}

@@ -1,0 +1,74 @@
+{
+  "bug_id": "Jsoup-1",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-1_1772783099",
+  "patches": [
+    [
+      {
+        "hypothesis": "Address overfitting by avoiding hardcoded values, detecting body element more robustly, and covering more general scenarios. Add edge case handling for null body element. Keep test passing behavior and logic correct.",
+        "fixed_method": "private void normalise(Element element) {\n  List<Node> toMove = new ArrayList<Node>();\n  for (Node node: element.childNodes) {\n      if (node instanceof TextNode) {\n          TextNode tn = (TextNode) node;\n          if (!tn.isBlank()) {\n              toMove.add(tn);\n          }\n      }\n  }\n  if (body() != null) {\n      for (Node node: toMove) {\n          element.removeChild(node);\n          element.prependChild(new TextNode(\" \", \"\"));\n          element.prependChild(node);\n      }\n  } else {\n      for (Node node: toMove) {\n          element.removeChild(node);\n      }\n  }\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/nodes/Document.java",
+        "method_name": "normalise",
+        "class_name": "Document",
+        "iteration": 2,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the lack of a null check for the body() method, which is causing the 'foo' text node to be inserted at the end of the body instead of the start. The fix involves adding a null check for the body() method and moving the 'foo' text node to the start of the body.",
+        "line_numbers": [
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ]
+      },
+      {
+        "hypothesis": "The normalization of the 'foo' text node was incorrect and not part of the body of the document.",
+        "changes": "+ element.prependChild(node);",
+        "fixed_method": "private void normalise(Element element) {\n  List<Node> toMove = new ArrayList<Node>();\n  for (Node node: element.childNodes) {\n    if (node instanceof TextNode) {\n      TextNode tn = (TextNode) node;\n      if (!tn.isBlank()) {\n        toMove.add(tn);\n      }\n    }\n  }\n\n  for (Node node: toMove) {\n    element.removeChild(node);\n    element.prependChild(node);\n  }\n}",
+        "diff": "+ element.prependChild(node);",
+        "file_path": "src/main/java/org/jsoup/nodes/Document.java",
+        "method_name": "normalise",
+        "class_name": "Document",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ],
+        "original_code": "// does not recurse.\nprivate void normalise(Element element) {\n    List<Node> toMove = new ArrayList<Node>();\n    for (Node node: element.childNodes) {\n        if (node instanceof TextNode) {\n            TextNode tn = (TextNode) node;\n            if (!tn.isBlank())\n                toMove.add(tn);\n        }\n    }\n\n    for (Node node: toMove) {\n        element.removeChild(node);\n        body().appendChild(new TextNode(\" \", \"\"));\n        body().appendChild(node);\n    }\n}"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Jsoup-1/"
+}

@@ -1,0 +1,37 @@
+{
+  "bug_id": "Time-20",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Time-20_1771953024",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the method matching the shortest timezone ID first, which causes 'America/Dawson' to be matched instead of 'America/Dawson_Creek'. The fix is to match the longest timezone ID first.",
+        "changes": "-            if (str.startsWith(id)) {\n+            if (str.startsWith(id) && (longestId == null || id.length() > longestId.length())) {\n+                longestId = id;\n+            }\n+        }\n+        if (longestId != null) {\n+            bucket.setZone(DateTimeZone.forID(longestId));\n+            return position + longestId.length();",
+        "fixed_method": "public int parseInto(DateTimeParserBucket bucket, String text, int position) {\n    String str = text.substring(position);\n    String longestId = null;\n    for (String id : ALL_IDS) {\n        if (str.startsWith(id) && (longestId == null || id.length() > longestId.length())) {\n            longestId = id;\n        }\n    }\n    if (longestId != null) {\n        bucket.setZone(DateTimeZone.forID(longestId));\n        return position + longestId.length();\n    }\n    return ~position;\n}",
+        "diff": "-            if (str.startsWith(id)) {\n+            if (str.startsWith(id) && (longestId == null || id.length() > longestId.length())) {\n+                longestId = id;\n+            }\n+        }\n+        if (longestId != null) {\n+            bucket.setZone(DateTimeZone.forID(longestId));\n+            return position + longestId.length();",
+        "file_path": "src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java",
+        "method_name": "parseInto",
+        "class_name": "DateTimeFormatterBuilder",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          2540,
+          2541,
+          2542,
+          2543,
+          2544,
+          2545,
+          2546,
+          2547,
+          2548,
+          2549
+        ],
+        "original_code": "// no zone info\npublic int parseInto(DateTimeParserBucket bucket, String text, int position) {\n    String str = text.substring(position);\n    for (String id : ALL_IDS) {\n        if (str.startsWith(id)) {\n            bucket.setZone(DateTimeZone.forID(id));\n            return position + id.length();\n        }\n    }\n    return ~position;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Time-20/"
+}

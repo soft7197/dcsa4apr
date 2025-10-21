@@ -1,0 +1,20 @@
+File: src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java
+Method: TextBuffer.expandCurrentSegment
+
+public char[] expandCurrentSegment()
+{
+    final char[] curr = _currentSegment;
+    final int len = curr.length;
+    int newLen;
+
+    // Determine new length based on current length relative to MAX_SEGMENT_LEN
+    if (len >= MAX_SEGMENT_LEN) {
+        // If current length is at or exceeds MAX, grow by 25%
+        newLen = len + (len >> 2);
+    } else {
+        // Otherwise grow by default increment of 50% but not exceeding MAX
+        newLen = Math.min(MAX_SEGMENT_LEN, len + (len >> 1));
+    }
+
+    return (_currentSegment = Arrays.copyOf(curr, newLen));
+}

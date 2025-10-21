@@ -1,0 +1,25 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "processProperties_org.apache.commons.cli.Parser"
+    ],
+    "tests": [
+      "org.apache.commons.cli.BasicParserTest::testPropertyOptionGroup",
+      "org.apache.commons.cli.BasicParserTest::testPropertyOptionUnexpected",
+      "org.apache.commons.cli.GnuParserTest::testPropertyOptionGroup",
+      "org.apache.commons.cli.GnuParserTest::testPropertyOptionUnexpected",
+      "org.apache.commons.cli.OptionGroupTest::testTwoOptionsFromGroupWithProperties",
+      "org.apache.commons.cli.PosixParserTest::testPropertyOptionGroup",
+      "org.apache.commons.cli.PosixParserTest::testPropertyOptionUnexpected"
+    ]
+  },
+  "Group_2": {
+    "buggy_methods": [
+      "handleProperties_org.apache.commons.cli.DefaultParser"
+    ],
+    "tests": [
+      "org.apache.commons.cli.DefaultParserTest::testPropertyOptionGroup",
+      "org.apache.commons.cli.DefaultParserTest::testPropertyOptionUnexpected"
+    ]
+  }
+}

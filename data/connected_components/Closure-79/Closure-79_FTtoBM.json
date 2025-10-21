@@ -1,0 +1,32 @@
+{
+  "com.google.javascript.jscomp.NormalizeTest::testIssue": [
+    {
+      "buggy_method": "process",
+      "class": "com.google.javascript.jscomp.Normalize"
+    }
+  ],
+  "com.google.javascript.jscomp.VarCheckTest::testPropReferenceInExterns1": [
+    {
+      "buggy_method": "createSynthesizedExternVar",
+      "class": "com.google.javascript.jscomp.VarCheck"
+    }
+  ],
+  "com.google.javascript.jscomp.VarCheckTest::testPropReferenceInExterns3": [
+    {
+      "buggy_method": "createSynthesizedExternVar",
+      "class": "com.google.javascript.jscomp.VarCheck"
+    }
+  ],
+  "com.google.javascript.jscomp.VarCheckTest::testVarReferenceInExterns": [
+    {
+      "buggy_method": "createSynthesizedExternVar",
+      "class": "com.google.javascript.jscomp.VarCheck"
+    }
+  ],
+  "com.google.javascript.jscomp.VarCheckTest::testCallInExterns": [
+    {
+      "buggy_method": "createSynthesizedExternVar",
+      "class": "com.google.javascript.jscomp.VarCheck"
+    }
+  ]
+}

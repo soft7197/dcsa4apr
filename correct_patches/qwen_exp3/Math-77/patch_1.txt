@@ -1,0 +1,13 @@
+File: src/main/java/org/apache/commons/math/linear/ArrayRealVector.java
+Method: ArrayRealVector.getLInfNorm
+
+/** {@inheritDoc} */
+
+    @Override
+    public double getLInfNorm() {
+        double max = 0;
+        for (double a : data) {
+            max = Math.max(max, Math.abs(a));
+        }
+        return max;
+    }

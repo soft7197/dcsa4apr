@@ -1,0 +1,79 @@
+{
+  "bug_id": "Gson-6",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Gson-6_1773118606",
+  "patches": [
+    [
+      {
+        "hypothesis": "The NullPointerException occurs because the 'construct' method may be returning null when there is an issue with instantiation. Check for null before applying nullSafe.",
+        "changes": "+ if (typeAdapter != null) { typeAdapter = typeAdapter.nullSafe(); }",
+        "fixed_method": "static TypeAdapter<?> getTypeAdapter(ConstructorConstructor constructorConstructor, Gson gson, TypeToken<?> fieldType, JsonAdapter annotation) {\n  Class<?> value = annotation.value();\n  TypeAdapter<?> typeAdapter = null;\n  if (TypeAdapter.class.isAssignableFrom(value)) {\n    Class<TypeAdapter<?>> typeAdapterClass = (Class<TypeAdapter<?>>) value;\n    typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).construct();\n  } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {\n    Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;\n    typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))\n        .construct()\n        .create(gson, fieldType);\n  } else {\n    throw new IllegalArgumentException(\n        \"@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.\");\n  }\n  if (typeAdapter != null) {\n    typeAdapter = typeAdapter.nullSafe();\n  }\n  return typeAdapter;\n}",
+        "diff": "+ if (typeAdapter != null) { typeAdapter = typeAdapter.nullSafe(); }",
+        "file_path": "gson/src/main/java/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java",
+        "method_name": "getTypeAdapter",
+        "class_name": "JsonAdapterAnnotationTypeAdapterFactory",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69
+        ],
+        "original_code": "/**\n* Given a type T, looks for the annotation {@link JsonAdapter} and uses an instance of the\n* specified class as the default type adapter.\n*\n* @since 2.3\n*/\nstatic TypeAdapter<?> getTypeAdapter(ConstructorConstructor constructorConstructor, Gson gson,\n    TypeToken<?> fieldType, JsonAdapter annotation) {\n  Class<?> value = annotation.value();\n  TypeAdapter<?> typeAdapter;\n  if (TypeAdapter.class.isAssignableFrom(value)) {\n    Class<TypeAdapter<?>> typeAdapterClass = (Class<TypeAdapter<?>>) value;\n    typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).construct();\n  } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {\n    Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;\n    typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))\n        .construct()\n        .create(gson, fieldType);\n  } else {\n    throw new IllegalArgumentException(\n        \"@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.\");\n  }\n    typeAdapter = typeAdapter.nullSafe();\n  return typeAdapter;\n}"
+      },
+      {
+        "hypothesis": "The NullPointerException occurs because the code doesn't ensure the constructed typeAdapter is non-null before calling nullSafe(). The condition for null-check is missing for malformed @JsonAdapter classes that don't result in a proper TypeAdapter.",
+        "changes": "-    typeAdapter = typeAdapter.nullSafe()\n+    if (typeAdapter != null) { typeAdapter = typeAdapter.nullSafe(); }",
+        "fixed_method": "static TypeAdapter<?> getTypeAdapter(ConstructorConstructor constructorConstructor, Gson gson,\n    TypeToken<?> fieldType, JsonAdapter annotation) {\n  Class<?> value = annotation.value();\n  TypeAdapter<?> typeAdapter;\n  if (TypeAdapter.class.isAssignableFrom(value)) {\n    Class<TypeAdapter<?>> typeAdapterClass = (Class<TypeAdapter<?>>) value;\n    typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).construct();\n  } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {\n    Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;\n    typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))\n        .construct()\n        .create(gson, fieldType);\n  } else {\n    throw new IllegalArgumentException(\n        \"@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.\");\n  }\n  if (typeAdapter != null) {\n    typeAdapter = typeAdapter.nullSafe();\n  }\n  return typeAdapter;\n}",
+        "diff": "-    typeAdapter = typeAdapter.nullSafe()\n+    if (typeAdapter != null) { typeAdapter = typeAdapter.nullSafe(); }",
+        "file_path": "gson/src/main/java/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java",
+        "method_name": "getTypeAdapter",
+        "class_name": "JsonAdapterAnnotationTypeAdapterFactory",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69
+        ],
+        "original_code": "/**\n* Given a type T, looks for the annotation {@link JsonAdapter} and uses an instance of the\n* specified class as the default type adapter.\n*\n* @since 2.3\n*/\nstatic TypeAdapter<?> getTypeAdapter(ConstructorConstructor constructorConstructor, Gson gson,\n    TypeToken<?> fieldType, JsonAdapter annotation) {\n  Class<?> value = annotation.value();\n  TypeAdapter<?> typeAdapter;\n  if (TypeAdapter.class.isAssignableFrom(value)) {\n    Class<TypeAdapter<?>> typeAdapterClass = (Class<TypeAdapter<?>>) value;\n    typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).construct();\n  } else if (TypeAdapterFactory.class.isAssignableFrom(value)) {\n    Class<TypeAdapterFactory> typeAdapterFactory = (Class<TypeAdapterFactory>) value;\n    typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterFactory))\n        .construct()\n        .create(gson, fieldType);\n  } else {\n    throw new IllegalArgumentException(\n        \"@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.\");\n  }\n    typeAdapter = typeAdapter.nullSafe();\n  return typeAdapter;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Gson-6/"
+}

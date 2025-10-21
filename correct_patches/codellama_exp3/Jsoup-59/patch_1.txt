@@ -1,0 +1,25 @@
+File: src/main/java/org/jsoup/parser/Token.java
+Method: Token.newAttribute
+
+final void newAttribute() {
+    if (attributes == null)
+        attributes = new Attributes();
+
+    if (pendingAttributeName != null && pendingAttributeName.trim().length() > 0) {
+        pendingAttributeName = pendingAttributeName.trim();
+        Attribute attribute;
+        if (hasPendingAttributeValue)
+            attribute = new Attribute(pendingAttributeName,
+                pendingAttributeValue.length() > 0 ? pendingAttributeValue.toString() : pendingAttributeValueS);
+        else if (hasEmptyAttributeValue)
+            attribute = new Attribute(pendingAttributeName, "");
+        else
+            attribute = new BooleanAttribute(pendingAttributeName);
+        attributes.put(attribute);
+    }
+    pendingAttributeName = null;
+    hasEmptyAttributeValue = false;
+    hasPendingAttributeValue = false;
+    reset(pendingAttributeValue);
+    pendingAttributeValueS = null;
+}

@@ -1,0 +1,49 @@
+{
+  "bug_id": "JacksonDatabind-100",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-100_1773118700",
+  "patches": [
+    [
+      {
+        "hypothesis": "The getBinaryValue method needs to decode the text content of TextNode as base64 when the node represents text to handle different Base64 variants properly.",
+        "changes": "- if (n != null) {...} \n+ if (n != null && n.isTextual()) {...}",
+        "fixed_method": "public byte[] getBinaryValue(Base64Variant b64variant) throws IOException, JsonParseException {\n    JsonNode n = currentNode();\n    if (n != null) {\n        if (n.isTextual()) { // Check if it is a TextNode\n            return b64variant.decode(n.asText());\n        }\n        byte[] data = n.binaryValue();\n        if (data != null) {\n            return data;\n        }\n        if (n.isPojo()) {\n            Object ob = ((POJONode) n).getPojo();\n            if (ob instanceof byte[]) {\n                return (byte[]) ob;\n            }\n        }\n    }\n    return null;\n}",
+        "diff": "- if (n != null) {...} \n+ if (n != null && n.isTextual()) {...}",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/node/TreeTraversingParser.java",
+        "method_name": "getBinaryValue",
+        "class_name": "TreeTraversingParser",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          355,
+          356,
+          357,
+          358,
+          359,
+          360,
+          361,
+          362,
+          363,
+          364,
+          365,
+          366,
+          367,
+          368,
+          369,
+          370,
+          371,
+          372,
+          373,
+          374,
+          375,
+          376
+        ],
+        "original_code": "/**********************************************************\n*/\npublic byte[] getBinaryValue(Base64Variant b64variant)\n    throws IOException, JsonParseException\n{\n    // Multiple possibilities...\n    JsonNode n = currentNode();\n    if (n != null) {\n        // [databind#2096]: although `binaryValue()` works for real binary node\n        // and embedded \"POJO\" node, coercion from TextNode may require variant, so:\n        byte[] data = n.binaryValue();\n        if (data != null) {\n            return data;\n        }\n        if (n.isPojo()) {\n            Object ob = ((POJONode) n).getPojo();\n            if (ob instanceof byte[]) {\n                return (byte[]) ob;\n            }\n        }\n    }\n    // otherwise return null to mark we have no binary content\n    return null;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-100/"
+}

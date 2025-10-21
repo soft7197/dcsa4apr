@@ -1,0 +1,14 @@
+File: src/main/java/org/apache/commons/math/complex/Complex.java
+Method: Complex.add
+
+public Complex add(Complex rhs) throws NullArgumentException {
+    MathUtils.checkNotNull(rhs);
+    if (Double.isNaN(rhs.getReal()) || Double.isNaN(rhs.getImaginary())) {
+        return Complex.NaN;
+    }
+    Complex result = createComplex(real + rhs.getReal(), imaginary + rhs.getImaginary());
+    if (result.isNaN()) {
+        return Complex.NaN;
+    }
+    return result;
+}

@@ -1,0 +1,49 @@
+{
+  "bug_id": "Closure-19",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-19_1772685980",
+  "patches": [
+    [
+      {
+        "hypothesis": "The node type was not being handled correctly in the `declareNameInScope` method. The method was not able to declare the name in scope for the node type `THIS`",
+        "changes": "+ case Token.THIS: scope.inferSlotType(\"this\", type); break;",
+        "fixed_method": "protected void declareNameInScope(FlowScope scope, Node node, JSType type) {switch (node.getType()) {case Token.NAME: scope.inferSlotType(node.getString(), type); break;case Token.GETPROP: String qualifiedName = node.getQualifiedName(); Preconditions.checkNotNull(qualifiedName); JSType origType = node.getJSType(); origType = origType == null ? getNativeType(UNKNOWN_TYPE) : origType; scope.inferQualifiedSlot(node, qualifiedName, origType, type); break;case Token.THIS: scope.inferSlotType(\"this\", type); break;default: throw new IllegalArgumentException(\"Node cannot be refined. \\n\" +node.toStringTree());}}",
+        "diff": "+ case Token.THIS: scope.inferSlotType(\"this\", type); break;",
+        "file_path": "src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java",
+        "method_name": "declareNameInScope",
+        "class_name": "ChainableReverseAbstractInterpreter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178
+        ],
+        "original_code": "/**\n* Declares a refined type in {@code scope} for the name represented by\n* {@code node}. It must be possible to refine the type of the given node in\n* the given scope, as determined by {@link #getTypeIfRefinable}.\n*/\nprotected void declareNameInScope(FlowScope scope, Node node, JSType type) {\n  switch (node.getType()) {\n    case Token.NAME:\n      scope.inferSlotType(node.getString(), type);\n      break;\n\n    case Token.GETPROP:\n      String qualifiedName = node.getQualifiedName();\n      Preconditions.checkNotNull(qualifiedName);\n\n      JSType origType = node.getJSType();\n      origType = origType == null ? getNativeType(UNKNOWN_TYPE) : origType;\n      scope.inferQualifiedSlot(node, qualifiedName, origType, type);\n      break;\n\n      // \"this\" references aren't currently modeled in the CFG.\n\n    default:\n      throw new IllegalArgumentException(\"Node cannot be refined. \\n\" +\n          node.toStringTree());\n  }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-19/"
+}

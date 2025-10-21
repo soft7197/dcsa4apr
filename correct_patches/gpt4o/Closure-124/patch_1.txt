@@ -1,0 +1,22 @@
+File: src/com/google/javascript/jscomp/ExploitAssigns.java
+Method: ExploitAssigns.isSafeReplacement
+
+private boolean isSafeReplacement(Node node, Node replacement) {
+  // No checks are needed for simple names.
+  if (node.isName()) {
+    return true;
+  }
+  if (!node.isGetProp()) {
+    return false; // If it's neither a simple name nor a property chain, avoid replacement.
+  }
+
+  Node current = node;
+  while (current != null && current.isGetProp()) {
+    current = current.getFirstChild();
+    if (current != null && current.isName() && isNameAssignedTo(current.getString(), replacement)) {
+      return false;
+    }
+  }
+
+  return current == null || current.isName(); // Ensure we end up on a valid name after the loop.
+}

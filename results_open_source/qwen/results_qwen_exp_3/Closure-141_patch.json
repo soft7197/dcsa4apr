@@ -1,0 +1,29 @@
+{
+  "bug_id": "Closure-141",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-141_1772031518",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method incorrectly identifies certain expressions as decomposable when they should be movable. Specifically, it does not handle anonymous function expressions correctly, treating them as having side effects.",
+        "changes": "- return true;\n+ return false;",
+        "fixed_method": "static boolean canBeSideEffected(Node n, Set<String> knownConstants) {\n    switch (n.getType()) {\n      case Token.CALL:\n      case Token.NEW:\n        // Function calls or constructor can reference changed values.\n        // TODO(johnlenz): Add some mechanism for determining that functions\n        // are unaffected by side effects.\n        return true;\n      case Token.NAME:\n        // Non-constant names values may have been changed.\n        return !NodeUtil.isConstantName(n)\n            && !knownConstants.contains(n.getString());\n\n      // Properties on constant NAMEs can still be side-effected.\n      case Token.GETPROP:\n      case Token.GETELEM:\n        return true;\n\n      // Anonymous functions definitions are not changed by side-effects,\n      // and named functions are not part of expressions.\n      case Token.FUNCTION:\n        return false;\n    }\n\n    for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n      if (canBeSideEffected(c, knownConstants)) {\n        return true;\n      }\n    }\n\n    return false;\n  }",
+        "diff": "- return true;\n+ return false;",
+        "file_path": "src/com/google/javascript/jscomp/NodeUtil.java",
+        "method_name": "canBeSideEffected",
+        "class_name": "NodeUtil",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          584,
+          613
+        ],
+        "original_code": "  /**\n   * @param knownConstants A set of names known to be constant value at\n   * node 'n' (such as locals that are last written before n can execute).\n   * @return Whether the tree can be affected by side-effects or\n   * has side-effects.\n   */\n\n  static boolean canBeSideEffected(Node n, Set<String> knownConstants) {\n    switch (n.getType()) {\n      case Token.CALL:\n      case Token.NEW:\n        // Function calls or constructor can reference changed values.\n        // TODO(johnlenz): Add some mechanism for determining that functions\n        // are unaffected by side effects.\n        return true;\n      case Token.NAME:\n        // Non-constant names values may have been changed.\n        return !NodeUtil.isConstantName(n)\n            && !knownConstants.contains(n.getString());\n\n      // Properties on constant NAMEs can still be side-effected.\n      case Token.GETPROP:\n      case Token.GETELEM:\n        return true;\n\n        // Anonymous functions definitions are not changed by side-effects,\n        // and named functions are not part of expressions.\n    }\n\n    for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n      if (canBeSideEffected(c, knownConstants)) {\n        return true;\n      }\n    }\n\n    return false;\n  }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Closure-141/"
+}

@@ -1,0 +1,50 @@
+{
+  "org.jfree.data.category.junit.DefaultCategoryDatasetTests::testBug1835955": [
+    {
+      "buggy_method": "removeValue_int",
+      "class": "org.jfree.data.DefaultKeyedValues"
+    },
+    {
+      "buggy_method": "removeValue_Comparable",
+      "class": "org.jfree.data.DefaultKeyedValues"
+    },
+    {
+      "buggy_method": "removeColumn_Comparable",
+      "class": "org.jfree.data.DefaultKeyedValues2D"
+    }
+  ],
+  "org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey": [
+    {
+      "buggy_method": "removeValue_int",
+      "class": "org.jfree.data.DefaultKeyedValues"
+    },
+    {
+      "buggy_method": "removeValue_Comparable",
+      "class": "org.jfree.data.DefaultKeyedValues"
+    },
+    {
+      "buggy_method": "removeColumn_Comparable",
+      "class": "org.jfree.data.DefaultKeyedValues2D"
+    }
+  ],
+  "org.jfree.data.junit.DefaultKeyedValuesTests::testRemoveValue": [
+    {
+      "buggy_method": "removeValue_int",
+      "class": "org.jfree.data.DefaultKeyedValues"
+    },
+    {
+      "buggy_method": "removeValue_Comparable",
+      "class": "org.jfree.data.DefaultKeyedValues"
+    }
+  ],
+  "org.jfree.data.junit.DefaultKeyedValuesTests::testGetIndex2": [
+    {
+      "buggy_method": "removeValue_int",
+      "class": "org.jfree.data.DefaultKeyedValues"
+    },
+    {
+      "buggy_method": "removeValue_Comparable",
+      "class": "org.jfree.data.DefaultKeyedValues"
+    }
+  ]
+}

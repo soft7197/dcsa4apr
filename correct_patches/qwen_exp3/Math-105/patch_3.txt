@@ -1,0 +1,6 @@
+File: src/java/org/apache/commons/math/stat/regression/SimpleRegression.java
+Method: SimpleRegression.getSumSquaredErrors
+
+public double getSumSquaredErrors() {
+    return Math.max(0.0, sumYY - sumXY * sumXY / sumXX);
+}

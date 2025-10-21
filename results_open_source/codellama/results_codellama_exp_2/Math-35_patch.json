@@ -1,0 +1,43 @@
+{
+  "bug_id": "Math-35",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-35_1772818901",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "methods": {
+        "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java::ElitisticListPopulation::ElitisticListPopulation::L47": {
+          "file_path": "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java",
+          "method_name": "ElitisticListPopulation",
+          "class_name": "ElitisticListPopulation",
+          "line_numbers": [
+            47,
+            52
+          ],
+          "original_code": "    /**\n     * Creates a new ElitisticListPopulation instance.\n     *\n     * @param chromosomes list of chromosomes in the population\n     * @param populationLimit maximal size of the population\n     * @param elitismRate how many best chromosomes will be directly transferred to the\n     *                    next generation [in %]\n     * @throws OutOfRangeException if the elitism rate is outside the [0, 1] range\n     */\n\n    public ElitisticListPopulation(final List<Chromosome> chromosomes,\n                                   final int populationLimit,\n                                   final double elitismRate) {\n        super(chromosomes, populationLimit);\n        this.elitismRate = elitismRate;\n    }\n",
+          "fixed_method": "public ElitisticListPopulation(List<Chromosome> chromosomes, int populationLimit, double elitismRate) {\n\nsuper(chromosomes, populationLimit);\n\nif (elitismRate < 0 || elitismRate > 1) {\n\nthrow new OutOfRangeException(LocalizedFormats.ELITISM_RATE, elitismRate, 0, 1);\n\n}\n\nthis.elitismRate = elitismRate;\n\n}",
+          "iteration": 1
+        },
+        "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java::ElitisticListPopulation::ElitisticListPopulation::L63": {
+          "file_path": "src/main/java/org/apache/commons/math3/genetics/ElitisticListPopulation.java",
+          "method_name": "ElitisticListPopulation",
+          "class_name": "ElitisticListPopulation",
+          "line_numbers": [
+            63,
+            66
+          ],
+          "original_code": "    /**\n     * Creates a new ListPopulation instance and initializes its inner\n     * chromosome list.\n     *\n     * @param populationLimit maximal size of the population\n     * @param elitismRate how many best chromosomes will be directly transferred to the\n     *                    next generation [in %]\n     * @throws OutOfRangeException if the elitism rate is outside the [0, 1] range\n     */\n\n    public ElitisticListPopulation(final int populationLimit, final double elitismRate) {\n        super(populationLimit);\n        this.elitismRate = elitismRate;\n    }\n",
+          "fixed_method": "public ElitisticListPopulation(int populationLimit, double elitismRate) {\n\nsuper(populationLimit);\n\nif (elitismRate < 0 || elitismRate > 1) {\n\nthrow new OutOfRangeException(LocalizedFormats.ELITISM_RATE, elitismRate, 0, 1);\n\n}\n\nthis.elitismRate = elitismRate;\n\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-35/"
+}

@@ -1,0 +1,18 @@
+File: src/main/java/org/apache/commons/compress/archivers/sevenz/Coders.java
+Method: Coders.decode
+
+InputStream decode(final InputStream in, final Coder coder,
+        byte[] password) throws IOException {
+    if (coder == null || coder.properties == null || coder.properties.length < 5) {
+        throw new IllegalArgumentException("Invalid coder properties");
+    }
+    byte propsByte = coder.properties[0];
+    long dictSize = ((long) coder.properties[1] & 0xFF) |
+                  (((long) coder.properties[2] & 0xFF) << 8) |
+                  (((long) coder.properties[3] & 0xFF) << 16) |
+                  (((long) coder.properties[4] & 0xFF) << 24);
+    if (dictSize > LZMAInputStream.DICT_SIZE_MAX) {
+        throw new IOException("Dictionary larger than 4GiB maximum size");
+    }
+    return new LZMAInputStream(in, -1, propsByte, (int) dictSize);
+}

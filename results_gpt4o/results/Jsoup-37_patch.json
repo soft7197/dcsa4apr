@@ -1,0 +1,32 @@
+{
+  "bug_id": "Jsoup-37",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-37_1773119215",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue is that the method is trimming whitespace at the beginning and end, which is not desired when the document's prettyPrint setting is false.",
+        "changes": "- return accum.toString().trim();\n+ return accum.toString();",
+        "fixed_method": "public String html() {\n    StringBuilder accum = new StringBuilder();\n    html(accum);\n    return accum.toString();\n}",
+        "diff": "- return accum.toString().trim();\n+ return accum.toString();",
+        "file_path": "src/main/java/org/jsoup/nodes/Element.java",
+        "method_name": "html",
+        "class_name": "Element",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1098,
+          1099,
+          1100,
+          1101,
+          1102
+        ],
+        "original_code": "/**\n* Retrieves the element's inner HTML. E.g. on a {@code <div>} with one empty {@code <p>}, would return\n* {@code <p></p>}. (Whereas {@link #outerHtml()} would return {@code <div><p></p></div>}.)\n*\n* @return String of HTML.\n* @see #outerHtml()\n*/\npublic String html() {\n    StringBuilder accum = new StringBuilder();\n    html(accum);\n    return accum.toString().trim();\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-37/"
+}

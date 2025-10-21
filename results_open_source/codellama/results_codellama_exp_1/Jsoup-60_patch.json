@@ -1,0 +1,43 @@
+{
+  "bug_id": "Jsoup-60",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-60_1772729970",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "methods": {
+        "src/main/java/org/jsoup/parser/TokenQueue.java::TokenQueue::chompBalanced::L260": {
+          "file_path": "src/main/java/org/jsoup/parser/TokenQueue.java",
+          "method_name": "chompBalanced",
+          "class_name": "TokenQueue",
+          "line_numbers": [
+            260,
+            290
+          ],
+          "original_code": "    /**\n     * Pulls a balanced string off the queue. E.g. if queue is \"(one (two) three) four\", (,) will return \"one (two) three\",\n     * and leave \" four\" on the queue. Unbalanced openers and closers can quoted (with ' or \") or escaped (with \\). Those escapes will be left\n     * in the returned string, which is suitable for regexes (where we need to preserve the escape), but unsuitable for\n     * contains text strings; use unescape for that.\n     * @param open opener\n     * @param close closer\n     * @return data matched from the queue\n     */\n\n    public String chompBalanced(char open, char close) {\n        int start = -1;\n        int end = -1;\n        int depth = 0;\n        char last = 0;\n        boolean inQuote = false;\n\n        do {\n            if (isEmpty()) break;\n            Character c = consume();\n            if (last == 0 || last != ESC) {\n                if ((c.equals('\\'') || c.equals('\"')) && c != open)\n                    inQuote = !inQuote;\n                if (inQuote)\n                    continue;\n                if (c.equals(open)) {\n                    depth++;\n                    if (start == -1)\n                        start = pos;\n                }\n                else if (c.equals(close))\n                    depth--;\n            }\n\n            if (depth > 0 && last != 0)\n                end = pos; // don't include the outer match pair in the return\n            last = c;\n        } while (depth > 0);\n        final String out = (end >= 0) ? queue.substring(start, end) : \"\";\n        return out;\n    }\n",
+          "fixed_method": "public String chompBalanced(char open, char close) {\n        int start = -1;\n        int end = -1;\n        int depth = 0;\n        char last = 0;\n        boolean inQuote = false;\n\n        do {\n            if (isEmpty()) break;\n            Character c = consume();\n            if (last == 0 || last != ESC) {\n                if ((c.equals('\\'') || c.equals('\"')) && c != open)\n                    inQuote = !inQuote;\n                if (inQuote)\n                    continue;\n                if (c.equals(open)) {\n                    depth++;\n                    if (start == -1)\n                        start = pos;\n                }\n                else if (c.equals(close)) {\n                    depth--;\n                    if (depth == 0) {\n                        end = pos;\n                        break;\n                    }\n                }\n            }\n\n            if (depth > 0 && last != 0) {\n                end = pos;\n                // don't include the outer match pair in the return\n            }\n            last = c;\n        } while (depth > 0);\n\n        if (queue.isEmpty()) return \"\";\n\n        final String out = (end >= 0) ? queue.substring(start, end) : queue;\n        return out;\n    }",
+          "iteration": 1
+        },
+        "src/main/java/org/jsoup/select/QueryParser.java::QueryParser::parse::L37": {
+          "file_path": "src/main/java/org/jsoup/select/QueryParser.java",
+          "method_name": "parse",
+          "class_name": "QueryParser",
+          "line_numbers": [
+            37,
+            40
+          ],
+          "original_code": "    /**\n     * Parse a CSS query into an Evaluator.\n     * @param query CSS query\n     * @return Evaluator\n     */\n\n    public static Evaluator parse(String query) {\n            QueryParser p = new QueryParser(query);\n            return p.parse();\n    }\n",
+          "fixed_method": "public static Evaluator parse(String query) {\n        if (query.isEmpty()) return null;\n\n        QueryParser p = new QueryParser(query);\n        return p.parse() == null ? null : p.parse();\n    }",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-60/"
+}

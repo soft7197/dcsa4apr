@@ -1,0 +1,26 @@
+File: src/main/java/org/apache/commons/compress/utils/ArchiveUtils.java
+Method: ArchiveUtils.sanitize
+
+public static String sanitize(String s) {
+        if (s == null) {
+            return null;
+        }
+        final char[] chars = s.toCharArray();
+        final StringBuilder sb = new StringBuilder();
+        for (char c : chars) {
+            if (!Character.isISOControl(c)) {
+                Character.UnicodeBlock block = Character.UnicodeBlock.of(c);
+                if (block != null && block != Character.UnicodeBlock.SPECIALS) {
+                    sb.append(c);
+                    continue;
+                }
+            }
+            sb.append('?');
+        }
+        // Truncate if necessary
+        int maxLength = 255;
+        if (sb.length() > maxLength) {
+            return sb.substring(0, maxLength - 3) + "...";
+        }
+        return sb.toString();
+    }

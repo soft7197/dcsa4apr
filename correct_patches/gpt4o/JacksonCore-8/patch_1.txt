@@ -1,0 +1,28 @@
+File: src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java
+Method: TextBuffer.getTextBuffer
+
+public char[] getTextBuffer() {
+    // Check for valid input buffer
+    if (_inputStart >= 0 && _inputBuffer != null) {
+        return _inputBuffer;
+    }
+    // Return result array if available
+    if (_resultArray != null) {
+        return _resultArray;
+    }
+    // Convert and return result string if it's available
+    if (_resultString != null) {
+        _resultArray = _resultString.toCharArray();
+        return _resultArray;
+    }
+    // If no segments are involved, check current segment
+    if (!_hasSegments && _currentSegment != null) {
+        return _currentSegment;
+    }
+    // Handle the case with segments
+    if (_hasSegments) {
+        return contentsAsArray();
+    }
+    // Handle any other situations where none of the above conditions apply
+    return new char[0];
+}

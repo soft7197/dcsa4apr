@@ -1,0 +1,114 @@
+{
+  "bug_id": "Math-53",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-53_1772917327",
+  "patches": [
+    [
+      {
+        "hypothesis": "Refined the patch to handle edge cases, avoid hardcoded values, and use a more robust approach for NaN values.",
+        "fixed_method": "public Complex add(Complex rhs) throws NullArgumentException {\n    MathUtils.checkNotNull(rhs);\n\n    boolean hasNaN = Double.isNaN(rhs.getReal()) || Double.isNaN(rhs.getImaginary());\n    boolean hasInfinite = Double.isInfinite(rhs.getReal()) || Double.isInfinite(rhs.getImaginary());\n\n    if (hasNaN || hasInfinite) {\n      return createComplex(Double.NaN, Double.NaN);\n    } else {\n      return createComplex(real + rhs.getReal(), imaginary + rhs.getImaginary());\n    }\n  }",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/apache/commons/math/complex/Complex.java",
+        "method_name": "add",
+        "class_name": "Complex",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The add() method was not handling the case where one of the operands was NaN correctly. It was returning a Complex object with the correct real part but with the imaginary part set to 0.0 instead of NaN.",
+        "line_numbers": [
+          150,
+          151,
+          152,
+          153,
+          154,
+          155
+        ]
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public Complex add(Complex rhs) throws NullArgumentException {\n    MathUtils.checkNotNull(rhs);\n    if (Double.isNaN(real) || Double.isNaN(rhs.getReal())) {\n        return Complex.NaN;\n    }\n    if (Double.isNaN(imaginary) || Double.isNaN(rhs.getImaginary())) {\n        return Complex.NaN;\n    }\n    return createComplex(real + rhs.getReal(), imaginary + rhs.getImaginary());\n}",
+        "diff": "",
+        "file_path": "src/main/java/org/apache/commons/math/complex/Complex.java",
+        "method_name": "add",
+        "class_name": "Complex",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          150,
+          151,
+          152,
+          153,
+          154,
+          155
+        ],
+        "original_code": "/**\n* Return the sum of this complex number and the given complex number.\n* <p>\n* Uses the definitional formula\n* <pre>\n* (a + bi) + (c + di) = (a+c) + (b+d)i\n* </pre></p>\n* <p>\n* If either this or <code>rhs</code> has a NaN value in either part,\n* {@link #NaN} is returned; otherwise Infinite and NaN values are\n* returned in the parts of the result according to the rules for\n* {@link java.lang.Double} arithmetic.</p>\n*\n* @param rhs the other complex number\n* @return the complex number sum\n* @throws NullArgumentException if <code>rhs</code> is null\n*/\npublic Complex add(Complex rhs)\n    throws NullArgumentException {\n    MathUtils.checkNotNull(rhs);\n    return createComplex(real + rhs.getReal(),\n        imaginary + rhs.getImaginary());\n}"
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public Complex add(Complex rhs) throws NullArgumentException {\n        MathUtils.checkNotNull(rhs);\n        if (Double.isNaN(rhs.getReal()) || Double.isNaN(rhs.getImaginary())) {\n            return new Complex(Double.NaN, Double.NaN);\n        }\n        return createComplex(real + rhs.getReal(), imaginary + rhs.getImaginary());\n    }",
+        "diff": "",
+        "file_path": "src/main/java/org/apache/commons/math/complex/Complex.java",
+        "method_name": "add",
+        "class_name": "Complex",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          150,
+          151,
+          152,
+          153,
+          154,
+          155
+        ],
+        "original_code": "/**\n* Return the sum of this complex number and the given complex number.\n* <p>\n* Uses the definitional formula\n* <pre>\n* (a + bi) + (c + di) = (a+c) + (b+d)i\n* </pre></p>\n* <p>\n* If either this or <code>rhs</code> has a NaN value in either part,\n* {@link #NaN} is returned; otherwise Infinite and NaN values are\n* returned in the parts of the result according to the rules for\n* {@link java.lang.Double} arithmetic.</p>\n*\n* @param rhs the other complex number\n* @return the complex number sum\n* @throws NullArgumentException if <code>rhs</code> is null\n*/\npublic Complex add(Complex rhs)\n    throws NullArgumentException {\n    MathUtils.checkNotNull(rhs);\n    return createComplex(real + rhs.getReal(),\n        imaginary + rhs.getImaginary());\n}"
+      },
+      {
+        "hypothesis": "The issue is caused by the method not handling NaN values correctly. The null check was missing, and the method was not able to handle the NaN values.",
+        "changes": "Added a null check and fixed the handling of NaN values.",
+        "fixed_method": "public Complex add(Complex rhs) throws NullArgumentException {\n    MathUtils.checkNotNull(rhs);\n    if (Double.isNaN(rhs.getReal()) || Double.isNaN(rhs.getImaginary())) {\n        return Complex.NaN;\n    }\n    return createComplex(real + rhs.getReal(), imaginary + rhs.getImaginary());\n}",
+        "diff": "Added a null check and fixed the handling of NaN values.",
+        "file_path": "src/main/java/org/apache/commons/math/complex/Complex.java",
+        "method_name": "add",
+        "class_name": "Complex",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          150,
+          151,
+          152,
+          153,
+          154,
+          155
+        ],
+        "original_code": "/**\n* Return the sum of this complex number and the given complex number.\n* <p>\n* Uses the definitional formula\n* <pre>\n* (a + bi) + (c + di) = (a+c) + (b+d)i\n* </pre></p>\n* <p>\n* If either this or <code>rhs</code> has a NaN value in either part,\n* {@link #NaN} is returned; otherwise Infinite and NaN values are\n* returned in the parts of the result according to the rules for\n* {@link java.lang.Double} arithmetic.</p>\n*\n* @param rhs the other complex number\n* @return the complex number sum\n* @throws NullArgumentException if <code>rhs</code> is null\n*/\npublic Complex add(Complex rhs)\n    throws NullArgumentException {\n    MathUtils.checkNotNull(rhs);\n    return createComplex(real + rhs.getReal(),\n        imaginary + rhs.getImaginary());\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by the method not handling the case when the input is NaN.",
+        "changes": "+ if (Double.isNaN(rhs.getReal()) || Double.isNaN(rhs.getImaginary())) return Complex.NaN;",
+        "fixed_method": "public Complex add(Complex rhs) throws NullArgumentException {\n    MathUtils.checkNotNull(rhs);\n    if (Double.isNaN(rhs.getReal()) || Double.isNaN(rhs.getImaginary())) return Complex.NaN;\n    return createComplex(real + rhs.getReal(), imaginary + rhs.getImaginary());\n}",
+        "diff": "+ if (Double.isNaN(rhs.getReal()) || Double.isNaN(rhs.getImaginary())) return Complex.NaN;",
+        "file_path": "src/main/java/org/apache/commons/math/complex/Complex.java",
+        "method_name": "add",
+        "class_name": "Complex",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          150,
+          151,
+          152,
+          153,
+          154,
+          155
+        ],
+        "original_code": "/**\n* Return the sum of this complex number and the given complex number.\n* <p>\n* Uses the definitional formula\n* <pre>\n* (a + bi) + (c + di) = (a+c) + (b+d)i\n* </pre></p>\n* <p>\n* If either this or <code>rhs</code> has a NaN value in either part,\n* {@link #NaN} is returned; otherwise Infinite and NaN values are\n* returned in the parts of the result according to the rules for\n* {@link java.lang.Double} arithmetic.</p>\n*\n* @param rhs the other complex number\n* @return the complex number sum\n* @throws NullArgumentException if <code>rhs</code> is null\n*/\npublic Complex add(Complex rhs)\n    throws NullArgumentException {\n    MathUtils.checkNotNull(rhs);\n    return createComplex(real + rhs.getReal(),\n        imaginary + rhs.getImaginary());\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-53/"
+}

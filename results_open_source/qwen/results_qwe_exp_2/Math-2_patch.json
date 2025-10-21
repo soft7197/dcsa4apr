@@ -1,0 +1,64 @@
+{
+  "bug_id": "Math-2",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-2_1771945962",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug might be due to an incorrect calculation or logic in the sampling method that could produce negative values. However, the provided buggy method is getNumericalMean, which does not directly affect the sampling logic. The issue likely lies elsewhere, but we will focus on ensuring the mean calculation is correct as per the documentation.",
+        "changes": "- return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n+ return ((double) getSampleSize() * getNumberOfSuccesses()) / getPopulationSize();",
+        "fixed_method": "public double getNumericalMean() {\n    return ((double) getSampleSize() * getNumberOfSuccesses()) / getPopulationSize();\n}",
+        "diff": "- return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n+ return ((double) getSampleSize() * getNumberOfSuccesses()) / getPopulationSize();",
+        "file_path": "src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java",
+        "method_name": "getNumericalMean",
+        "class_name": "HypergeometricDistribution",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          267,
+          268,
+          269
+        ],
+        "original_code": "/**\n* {@inheritDoc}\n*\n* For population size {@code N}, number of successes {@code m}, and sample\n* size {@code n}, the mean is {@code n * m / N}.\n*/\npublic double getNumericalMean() {\n    return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n}"
+      },
+      {
+        "hypothesis": "The initial issue might be related to incorrect handling of edge cases in the sampling logic. The current patch introduces a new method `sample()` that is specific to certain test cases. To address this, we need to integrate proper sampling logic within the `getNumericalMean()` method and handle edge cases such as small population sizes, zero successes, and sample sizes equal to or larger than the population size.",
+        "fixed_method": "public double getNumericalMean() {\n    int populationSize = getPopulationSize();\n    int numberOfSuccesses = getNumberOfSuccesses();\n    int sampleSize = getSampleSize();\n\n    if (populationSize <= 0 || sampleSize <= 0) {\n        return 0.0;\n    }\n    if (numberOfSuccesses <= 0) {\n        return 0.0;\n    }\n    if (sampleSize >= populationSize) {\n        return (double) numberOfSuccesses;\n    }\n\n    int successes = 0;\n    for (int i = 0; i < sampleSize; i++) {\n        if (Math.random() < (double) (numberOfSuccesses) / populationSize) {\n            successes++;\n        }\n        populationSize--;\n        numberOfSuccesses--;\n    }\n    return (double) successes / sampleSize;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java",
+        "method_name": "getNumericalMean",
+        "class_name": "HypergeometricDistribution",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug might be due to incorrect calculation of the mean, which could indirectly affect the sampling logic. However, since the error message indicates a negative sample value, the issue is likely in the sampling logic rather than the mean calculation. We need to ensure that the sampling logic correctly generates values within the expected range [0, n].",
+        "line_numbers": [
+          267,
+          268,
+          269
+        ]
+      },
+      {
+        "hypothesis": "The bug likely stems from an incorrect calculation or implementation in the sampling logic of the HypergeometricDistribution class, not directly in the getNumericalMean method. However, since we're focusing on the provided method, we should ensure it's correct. The error message suggests that the sampling logic might be producing negative values, which is impossible for a hypergeometric distribution.",
+        "changes": "- return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n+ return (double) getSampleSize() * getNumberOfSuccesses() / getPopulationSize();",
+        "fixed_method": "public double getNumericalMean() {\n    return (double) getSampleSize() * getNumberOfSuccesses() / getPopulationSize();\n}",
+        "diff": "- return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n+ return (double) getSampleSize() * getNumberOfSuccesses() / getPopulationSize();",
+        "file_path": "src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java",
+        "method_name": "getNumericalMean",
+        "class_name": "HypergeometricDistribution",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          267,
+          268,
+          269
+        ],
+        "original_code": "/**\n* {@inheritDoc}\n*\n* For population size {@code N}, number of successes {@code m}, and sample\n* size {@code n}, the mean is {@code n * m / N}.\n*/\npublic double getNumericalMean() {\n    return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-2/"
+}

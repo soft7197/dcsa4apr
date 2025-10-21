@@ -1,0 +1,28 @@
+File: src/java/org/apache/commons/cli/Parser.java
+Method: Parser.checkRequiredOptions
+
+protected void checkRequiredOptions()
+    throws MissingOptionException
+{
+    // if there are required options that have not been
+    // processed
+    List<Object> requiredOptions = getRequiredOptions();
+    if (requiredOptions != null && !requiredOptions.isEmpty())
+    {
+        Iterator<Object> iter = requiredOptions.iterator();
+        StringBuffer buff = new StringBuffer("Missing required option");
+        buff.append(requiredOptions.size() == 1 ? "" : "s");
+        buff.append(": ");
+
+        // loop through the required options
+        while (iter.hasNext())
+        {
+            buff.append(iter.next());
+            if (iter.hasNext()) {
+                buff.append(", ");
+            }
+        }
+
+        throw new MissingOptionException(buff.toString());
+    }
+}

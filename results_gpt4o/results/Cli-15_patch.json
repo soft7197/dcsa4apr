@@ -1,0 +1,47 @@
+{
+  "bug_id": "Cli-15",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Cli-15_1773115331",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method incorrectly handles the case where additional default values should be added after parsing arguments, due to the improper logic in combining parsed arguments and defaults.",
+        "changes": "- Reorder the logic so default values are appended to the argument list only when it's required.\n- Ensure that the default values are merged correctly.",
+        "fixed_method": "public List getValues(final Option option,\n                      List defaultValues) {\n    // initialize the return list\n    List valueList = (List) values.get(option);\n\n    // if no parsed values, use default values or provided default values\n    if ((valueList == null) || valueList.isEmpty()) {\n        valueList = defaultValues != null ? new ArrayList(defaultValues) : (List) this.defaultValues.get(option);\n    } else {\n        // add additional default values if necessary\n        if (defaultValues != null && !defaultValues.isEmpty()) {\n            valueList.addAll(defaultValues.subList(valueList.size(), defaultValues.size()));\n        } else {\n            List internalDefaults = (List) this.defaultValues.get(option);\n            if (internalDefaults != null) {\n                valueList.addAll(internalDefaults.subList(valueList.size(), internalDefaults.size()));\n            }\n        }\n    }\n\n    return valueList == null ? Collections.EMPTY_LIST : valueList;\n}",
+        "diff": "- Reorder the logic so default values are appended to the argument list only when it's required.\n- Ensure that the default values are merged correctly.",
+        "file_path": "src/java/org/apache/commons/cli2/commandline/WriteableCommandLineImpl.java",
+        "method_name": "getValues",
+        "class_name": "WriteableCommandLineImpl",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130
+        ],
+        "original_code": "/**\n* Creates a new WriteableCommandLineImpl rooted on the specified Option, to\n* hold the parsed arguments.\n*\n* @param rootOption the CommandLine's root Option\n* @param arguments the arguments this CommandLine represents\n*/\npublic List getValues(final Option option,\n                      List defaultValues) {\n    // initialize the return list\n    List valueList = (List) values.get(option);\n\n    // grab the correct default values\n    if ((valueList == null) || valueList.isEmpty()) {\n        valueList = defaultValues;\n    }\n\n    // augment the list with the default values\n    if ((valueList == null) || valueList.isEmpty()) {\n        valueList = (List) this.defaultValues.get(option);\n    }\n            // if there are more default values as specified, add them to\n            // the list.\n                // copy the list first\n    \n    return valueList == null ? Collections.EMPTY_LIST : valueList;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Cli-15/"
+}

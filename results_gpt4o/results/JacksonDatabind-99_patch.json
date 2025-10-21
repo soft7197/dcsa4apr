@@ -1,0 +1,35 @@
+{
+  "bug_id": "JacksonDatabind-99",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-99_1773119114",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method buildCanonicalName is missing the closing '>' character for generic types, causing incorrect canonical name generation.",
+        "changes": "+ sb.append('>'); // add closing angle bracket for generics",
+        "fixed_method": "protected String buildCanonicalName() {\n    StringBuilder sb = new StringBuilder();\n    sb.append(_class.getName());\n    sb.append('<');\n    sb.append(_referencedType.toCanonical());\n    sb.append('>');\n    return sb.toString();\n}",
+        "diff": "+ sb.append('>'); // add closing angle bracket for generics",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/type/ReferenceType.java",
+        "method_name": "buildCanonicalName",
+        "class_name": "ReferenceType",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170
+        ],
+        "original_code": "// !!! TODO: missing supertypes\nprotected String buildCanonicalName()\n{\n    StringBuilder sb = new StringBuilder();\n    sb.append(_class.getName());\n    sb.append('<');\n    sb.append(_referencedType.toCanonical());\n    return sb.toString();\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-99/"
+}

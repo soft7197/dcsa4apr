@@ -1,0 +1,22 @@
+File: src/main/java/org/jsoup/parser/CharacterReader.java
+Method: CharacterReader.nextIndexOf
+
+int nextIndexOf(CharSequence seq) {
+    if (seq == null || seq.length() == 0) return -1; // handle null or empty sequence
+    char startChar = seq.charAt(0);
+    int inputLength = input.length;
+    int seqLength = seq.length();
+    if (seqLength > inputLength - pos) return -1; // early termination if sequence can't fit
+    for (int offset = pos; offset <= inputLength - seqLength; offset++) {
+        if (startChar != input[offset])
+            while (++offset <= inputLength - seqLength && startChar != input[offset]);
+        int i = offset + 1;
+        int last = i + seqLength - 1;
+        if (offset <= inputLength - seqLength) {
+            for (int j = 1; i < last && seq.charAt(j) == input[i]; i++, j++);
+            if (i == last) // found full sequence
+                return offset - pos;
+        }
+    }
+    return -1;
+}

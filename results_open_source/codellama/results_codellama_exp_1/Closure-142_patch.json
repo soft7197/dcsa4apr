@@ -1,0 +1,29 @@
+{
+  "bug_id": "Closure-142",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-142_1772725225",
+  "patches": [
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "private ExtractionInfo extractMultilineTextualBlock(JsDocToken token, WhitespaceOption option) {\n\nstream.update();\nint startLineno = stream.getLineno();\nint startCharno = stream.getCharno() + 1;\n\n// Read the content from the first line.\nString line = stream.getRemainingJSDocLine();\n\nif (option != WhitespaceOption.PRESERVE) {\nline = line.trim();\n}\n\nStringBuilder builder = new StringBuilder();\nbuilder.append(line);\n\nstate = State.SEARCHING_ANNOTATION;\ntoken = next();\n\nboolean ignoreStar = false;\n\ndo {\nswitch (token) {\ncase STAR:\nif (!ignoreStar) {\nif (builder.length() > 0) {\nbuilder.append(' ');\n}\n\nbuilder.append('*');\n}\n\ntoken = next();\ncontinue;\n\ncase EOL:\nif (option != WhitespaceOption.SINGLE_LINE) {\nbuilder.append(\"\\n\");\n}\n\nignoreStar = true;\ntoken = next();\ncontinue;\n\ncase ANNOTATION:\nif (builder.length() > 0) {\nbuilder.append(' ');\n}\n\nbuilder.append(toString(token));\ntoken = next();\nbreak;\n\ncase EOC:\ncase EOF:\n// When we're capturing a license block, annotations\n// in the block are ok.\nString multilineText = builder.toString();\n\nif (option != WhitespaceOption.PRESERVE) {\nmultilineText = multilineText.trim();\n}\n\nint endLineno = stream.getLineno();\nint endCharno = stream.getCharno();\n\nif (multilineText.length() > 0) {\njsdocBuilder.markText(multilineText, startLineno, startCharno,\nendLineno, endCharno);\n}\n\nreturn new ExtractionInfo(multilineText, token);\n\n// FALL THROUGH\n\ndefault:\nignoreStar = false;\nstate = State.SEARCHING_ANNOTATION;\n\nif (builder.length() > 0) {\nbuilder.append(' ');\n}\n\nbuilder.append(toString(token));\n\nline = stream.getRemainingJSDocLine();\n\nif (option != WhitespaceOption.PRESERVE) {\nline = trimEnd(line);\n}\n\nbuilder.append(line);\ntoken = next();\n}\n} while (true);\n}",
+        "diff": "",
+        "file_path": "src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java",
+        "method_name": "extractMultilineTextualBlock",
+        "class_name": "JsDocInfoParser",
+        "iteration": 3,
+        "is_multi_method": false,
+        "line_numbers": [
+          1112,
+          1206
+        ],
+        "original_code": "  /**\n   * Extracts the text found on the current line and all subsequent\n   * until either an annotation, end of comment or end of file is reached.\n   * Note that if this method detects an end of line as the first token, it\n   * will quit immediately (indicating that there is no text where it was\n   * expected).  Note that token = info.token; should be called after this\n   * method is used to update the token properly in the parser.\n   *\n   * @param token The start token.\n   * @param option How to handle whitespace.\n   *\n   * @return The extraction information.\n   */\n\n  @SuppressWarnings(\"fallthrough\")\n  private ExtractionInfo extractMultilineTextualBlock(JsDocToken token,\n                                                      WhitespaceOption option) {\n\n    if (token == JsDocToken.EOC || token == JsDocToken.EOL ||\n        token == JsDocToken.EOF) {\n      return new ExtractionInfo(\"\", token);\n    }\n\n    stream.update();\n    int startLineno = stream.getLineno();\n    int startCharno = stream.getCharno() + 1;\n\n    // Read the content from the first line.\n    String line = stream.getRemainingJSDocLine();\n\n    if (option != WhitespaceOption.PRESERVE) {\n      line = line.trim();\n    }\n\n    StringBuilder builder = new StringBuilder();\n    builder.append(line);\n\n    state = State.SEARCHING_ANNOTATION;\n    token = next();\n\n    boolean ignoreStar = false;\n\n    do {\n      switch (token) {\n        case STAR:\n          if (!ignoreStar) {\n            if (builder.length() > 0) {\n              builder.append(' ');\n            }\n\n            builder.append('*');\n          }\n\n          token = next();\n          continue;\n\n        case EOL:\n          if (option != WhitespaceOption.SINGLE_LINE) {\n            builder.append(\"\\n\");\n          }\n\n          ignoreStar = true;\n          token = next();\n          continue;\n\n        case ANNOTATION:\n        case EOC:\n        case EOF:\n          // When we're capturing a license block, annotations\n          // in the block are ok.\n            String multilineText = builder.toString();\n\n            if (option != WhitespaceOption.PRESERVE) {\n              multilineText = multilineText.trim();\n            }\n\n            int endLineno = stream.getLineno();\n            int endCharno = stream.getCharno();\n\n            if (multilineText.length() > 0) {\n              jsdocBuilder.markText(multilineText, startLineno, startCharno,\n                  endLineno, endCharno);\n            }\n\n            return new ExtractionInfo(multilineText, token);\n\n          // FALL THROUGH\n\n        default:\n          ignoreStar = false;\n          state = State.SEARCHING_ANNOTATION;\n\n          if (builder.length() > 0) {\n            builder.append(' ');\n          }\n\n          builder.append(toString(token));\n\n          line = stream.getRemainingJSDocLine();\n\n          if (option != WhitespaceOption.PRESERVE) {\n            line = trimEnd(line);\n          }\n\n          builder.append(line);\n          token = next();\n      }\n    } while (true);\n  }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Closure-142/"
+}

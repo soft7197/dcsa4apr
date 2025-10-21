@@ -1,0 +1,13 @@
+File: src/org/mockito/internal/invocation/InvocationMatcher.java
+Method: InvocationMatcher.captureArgumentsFrom
+
+public void captureArgumentsFrom(Invocation i) {
+    int k = 0;
+    for (Matcher m : matchers) {
+        if (m instanceof CapturesArguments) {
+            if (k >= i.getArguments().length) return;
+            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);
+        }
+        k++;
+    }
+}

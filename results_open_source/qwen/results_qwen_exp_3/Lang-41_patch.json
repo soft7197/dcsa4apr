@@ -1,0 +1,47 @@
+{
+  "bug_id": "Lang-41",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-41_1772038196",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method incorrectly handles array class names by using substring operations that do not properly account for the JVM's internal representation of array types. The method should correctly parse the array dimensions and handle primitive types appropriately.",
+        "changes": "- Removed manual string manipulation for arrays\n+ Added logic to handle array types by checking for '[' characters and constructing the correct short class name for arrays\n+ Corrected the logic to handle JVM internal array representations\n+ Added handling for primitive types",
+        "fixed_method": "    public static String getShortClassName(String className) {\n        if (className == null) {\n            return StringUtils.EMPTY;\n        }\n        if (className.length() == 0) {\n            return StringUtils.EMPTY;\n        }\n\n        // Handle array encoding\n        int dim = 0;\n        while (className.startsWith(\"[\")) {\n            dim++;\n            className = className.substring(1);\n        }\n        if (className.startsWith(\"L\") && className.endsWith(\";\")) {\n            className = className.substring(1, className.length() - 1);\n        }\n\n        int lastDotIdx = className.lastIndexOf(PACKAGE_SEPARATOR_CHAR);\n        int innerIdx = className.indexOf(INNER_CLASS_SEPARATOR_CHAR, lastDotIdx == -1 ? 0 : lastDotIdx + 1);\n        String out = className.substring(lastDotIdx + 1);\n        if (innerIdx != -1) {\n            out = out.replace(INNER_CLASS_SEPARATOR_CHAR, PACKAGE_SEPARATOR_CHAR);\n        }\n\n        // Handle primitive types\n        if (dim > 0) {\n            if (className.equals(\"Z\")) {\n                out = \"boolean\";\n            } else if (className.equals(\"B\")) {\n                out = \"byte\";\n            } else if (className.equals(\"C\")) {\n                out = \"char\";\n            } else if (className.equals(\"S\")) {\n                out = \"short\";\n            } else if (className.equals(\"I\")) {\n                out = \"int\";\n            } else if (className.equals(\"J\")) {\n                out = \"long\";\n            } else if (className.equals(\"F\")) {\n                out = \"float\";\n            } else if (className.equals(\"D\")) {\n                out = \"double\";\n            }\n            for (int i = 0; i < dim; i++) {\n                out += \"[]\";\n            }\n        }\n        return out;\n    }",
+        "diff": "- Removed manual string manipulation for arrays\n+ Added logic to handle array types by checking for '[' characters and constructing the correct short class name for arrays\n+ Corrected the logic to handle JVM internal array representations\n+ Added handling for primitive types",
+        "file_path": "src/java/org/apache/commons/lang/ClassUtils.java",
+        "method_name": "getShortClassName",
+        "class_name": "ClassUtils",
+        "iteration": 3,
+        "is_multi_method": false,
+        "line_numbers": [
+          183,
+          204
+        ],
+        "original_code": "    /**\n     * <p>Gets the class name minus the package name from a String.</p>\n     *\n     * <p>The string passed in is assumed to be a class name - it is not checked.</p>\n     *\n     * @param className  the className to get the short name for\n     * @return the class name of the class without the package name or an empty string\n     */\n\n    public static String getShortClassName(String className) {\n        if (className == null) {\n            return StringUtils.EMPTY;\n        }\n        if (className.length() == 0) {\n            return StringUtils.EMPTY;\n        }\n\n\n        // Handle array encoding\n            // Strip Object type encoding\n\n\n        int lastDotIdx = className.lastIndexOf(PACKAGE_SEPARATOR_CHAR);\n        int innerIdx = className.indexOf(\n                INNER_CLASS_SEPARATOR_CHAR, lastDotIdx == -1 ? 0 : lastDotIdx + 1);\n        String out = className.substring(lastDotIdx + 1);\n        if (innerIdx != -1) {\n            out = out.replace(INNER_CLASS_SEPARATOR_CHAR, PACKAGE_SEPARATOR_CHAR);\n        }\n        return out;\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "The refined fix addresses overfitting by properly handling multi-dimensional arrays and ensuring robustness against various edge cases, such as nested and inner classes.",
+        "fixed_method": "public static String getPackageName(String className) {\n    if (className == null) {\n        return StringUtils.EMPTY;\n    }\n\n    // Strip array encoding\n    int arrayDimension = 0;\n    while (className.startsWith(\"[\")) {\n        className = className.substring(1);\n        arrayDimension++;\n    }\n\n    // Strip Object type encoding\n    if (className.startsWith(\"L\") && className.endsWith(\";\")) {\n        className = className.substring(1, className.length() - 1);\n    }\n\n    int i = className.lastIndexOf(PACKAGE_SEPARATOR_CHAR);\n    if (i == -1) {\n        return StringUtils.EMPTY;\n    }\n    return className.substring(0, i);\n}",
+        "diff": " ",
+        "file_path": "src/java/org/apache/commons/lang/ClassUtils.java",
+        "method_name": "getPackageName",
+        "class_name": "ClassUtils",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by not stripping the array encoding ('[L') from the class name before determining the package name. We need to add logic to handle array types correctly.",
+        "line_numbers": [
+          244,
+          257
+        ]
+      }
+    ]
+  ],
+  "iterations": 3,
+  "monitor_dir": "traces/Lang-41/"
+}

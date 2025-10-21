@@ -1,0 +1,34 @@
+{
+  "bug_id": "JacksonDatabind-39",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-39_1773118877",
+  "patches": [
+    [
+      {
+        "hypothesis": "The current method is simply skipping all tokens instead of handling unknown properties gracefully. The test expects unknown properties to be ignored while deserializing. This needs explicit handling for unexpected fields.",
+        "changes": "+ Implement custom handling for unknown fields in deserialization to avoid UnrecognizedPropertyException",
+        "fixed_method": "public Object deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {\n    if (p.getCurrentToken() == JsonToken.START_OBJECT) {\n        p.nextToken(); // Move to first field\n    }\n    while (p.getCurrentToken() == JsonToken.FIELD_NAME) {\n        String fieldName = p.getCurrentName();\n        // Move to value\n        p.nextToken();\n        // Skip unrecognized fields\n        p.skipChildren();\n        p.nextToken(); // Move to next field or end object\n    }\n    return null;\n}",
+        "diff": "+ Implement custom handling for unknown fields in deserialization to avoid UnrecognizedPropertyException",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/std/NullifyingDeserializer.java",
+        "method_name": "deserialize",
+        "class_name": "NullifyingDeserializer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37
+        ],
+        "original_code": "/**********************************************************\n*/\npublic Object deserialize(JsonParser p, DeserializationContext ctxt) throws IOException\n{\n    // 29-Jan-2016, tatu: Simple skipping for all other tokens, but FIELD_NAME bit\n    //    special unfortunately\n        p.skipChildren();\n    return null;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-39/"
+}

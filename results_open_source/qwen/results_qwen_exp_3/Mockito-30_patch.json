@@ -1,0 +1,43 @@
+{
+  "bug_id": "Mockito-30",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-30_1772042817",
+  "patches": [
+    {
+      "hypothesis": "The bug is caused by the incorrect usage of the join method in smartNullPointerException, which is not properly formatting the parameters passed to it. Additionally, the intercept method does not pass the necessary parameters to smartNullPointerException to include the method call details in the exception message.",
+      "changes": "- public void smartNullPointerException(Location location) {\n+ public void smartNullPointerException(Location location, String... messages) {\n-             new Location(),\n+             String.join(\", \", messages),\n- new Reporter().smartNullPointerException(location);\n+ new Reporter().smartNullPointerException(location, formatMethodCall(), Arrays.toString(args));",
+      "methods": {
+        "src/org/mockito/exceptions/Reporter.java::Reporter::smartNullPointerException::L438": {
+          "file_path": "src/org/mockito/exceptions/Reporter.java",
+          "method_name": "smartNullPointerException",
+          "class_name": "Reporter",
+          "line_numbers": [
+            438,
+            446
+          ],
+          "original_code": "\n    public void smartNullPointerException(Location location) {\n        throw new SmartNullPointerException(join(\n                \"You have a NullPointerException here:\",\n                new Location(),\n                \"Because this method was *not* stubbed correctly:\",\n                location,\n                \"\"\n                ));\n    }\n",
+          "fixed_method": "public void smartNullPointerException(Location location, String... messages) {\n    throw new SmartNullPointerException(join(\n            \"You have a NullPointerException here:\",\n            location,\n            \"Because this method was *not* stubbed correctly:\",\n            String.join(\", \", messages),\n            \"\"\n            ));\n}",
+          "iteration": 1
+        },
+        "src/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNulls.java::ReturnsSmartNulls::intercept::L51": {
+          "file_path": "src/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNulls.java",
+          "method_name": "intercept",
+          "class_name": "ReturnsSmartNulls",
+          "line_numbers": [
+            51,
+            58
+          ],
+          "original_code": "\n        public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {\n            if (new ObjectMethodsGuru().isToString(method)) {\n                return \"SmartNull returned by unstubbed \" + formatMethodCall()  + \" method on mock\";\n            }\n\n            new Reporter().smartNullPointerException(location);\n            return null;\n        }\n",
+          "fixed_method": "public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {\n    if (new ObjectMethodsGuru().isToString(method)) {\n        return \"SmartNull returned by unstubbed \" + formatMethodCall()  + \" method on mock\";\n    }\n\n    new Reporter().smartNullPointerException(location, formatMethodCall(), Arrays.toString(args));\n    return null;\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Mockito-30/"
+}

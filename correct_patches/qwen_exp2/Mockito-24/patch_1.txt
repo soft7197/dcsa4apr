@@ -1,0 +1,25 @@
+File: src/org/mockito/internal/stubbing/defaultanswers/ReturnsEmptyValues.java
+Method: ReturnsEmptyValues.answer
+
+public Object answer(InvocationOnMock invocation) {
+    if (methodsGuru.isToString(invocation.getMethod())) {
+        Object mock = invocation.getMock();
+        MockName name = mockUtil.getMockName(mock);
+        if (name.isDefault()) {
+            return "Mock for " + mockUtil.getMockSettings(mock).getTypeToMock().getSimpleName() + ", hashCode: " + mock.hashCode();
+        } else {
+            return name.toString();
+        }
+    } else if (methodsGuru.isCompareToMethod(invocation.getMethod())) {
+        Object mock = invocation.getMock();
+        Object[] args = invocation.getArguments();
+        if (args.length > 0 && args[0] != null && args[0].getClass().equals(mock.getClass())) {
+            return mock == args[0] ? 0 : 1;
+        } else {
+            return 1; // If the argument is null or of a different type, return 1
+        }
+    }
+    
+    Class<?> returnType = invocation.getMethod().getReturnType();
+    return returnValueFor(returnType);
+}

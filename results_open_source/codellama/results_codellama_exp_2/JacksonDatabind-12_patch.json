@@ -1,0 +1,56 @@
+{
+  "bug_id": "JacksonDatabind-12",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-12_1772779853",
+  "patches": [
+    [
+      {
+        "hypothesis": "Refined fix for isCachable() to address overfitting, handle general cases, and include proper edge case handling.",
+        "fixed_method": "public boolean isCachable() {\n    if (_valueTypeDeserializer != null) {\n        return true;\n    }\n    if (_ignorableProperties != null) {\n        return true;\n    }\n    return false;\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/std/MapDeserializer.java",
+        "method_name": "isCachable",
+        "class_name": "MapDeserializer",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The if condition was not properly checking for null values.",
+        "line_numbers": [
+          299,
+          300,
+          301,
+          302,
+          303,
+          304,
+          305
+        ]
+      },
+      {
+        "hypothesis": "The bug is caused by the `isCachable` method returning `true` even when there is a value type deserializer, which is causing the test to fail. The fix is to add a null check for the value type deserializer.",
+        "changes": "+ if (_valueTypeDeserializer == null) return false;",
+        "fixed_method": "public boolean isCachable() {\n    if (_valueTypeDeserializer == null) return false;\n    return (_ignorableProperties == null);\n}",
+        "diff": "+ if (_valueTypeDeserializer == null) return false;",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/std/MapDeserializer.java",
+        "method_name": "isCachable",
+        "class_name": "MapDeserializer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          299,
+          300,
+          301,
+          302,
+          303,
+          304,
+          305
+        ],
+        "original_code": "/**\n* Turns out that these are expensive enough to create so that caching\n* does make sense.\n*<p>\n* IMPORTANT: but, note, that instances CAN NOT BE CACHED if there is\n* a value type deserializer; this caused an issue with 2.4.4 of\n* JAXB Annotations (failing a test).\n* It is also possible that some other settings could make deserializers\n* un-cacheable; but on the other hand, caching can make a big positive\n* difference with performance... so it's a hard choice.\n*\n* @since 2.4.4\n*/\npublic boolean isCachable() {\n    /* As per [databind#735], existence of value or key deserializer (only passed\n     * if annotated to use non-standard one) should also prevent caching.\n     */\n    return (_valueTypeDeserializer == null)\n            && (_ignorableProperties == null);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-12/"
+}

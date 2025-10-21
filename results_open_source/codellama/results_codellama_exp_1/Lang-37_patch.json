@@ -1,0 +1,95 @@
+{
+  "bug_id": "Lang-37",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-37_1772702571",
+  "patches": [
+    [
+      {
+        "hypothesis": "Refined the patch to handle general cases, edge cases, and identified overfitting patterns.",
+        "fixed_method": "public static <T> T[] addAll(T[] array1, T... array2) {\n\nif (array1 == null || array2 == null) {\n\nreturn clone(array1 == null ? array2 : array1);\n\n}\n\nfinal Class<?> type1 = array1.getClass().getComponentType();\n\nfinal Class<?> type2 = array2.getClass().getComponentType();\n\nif (!type1.isAssignableFrom(type2)) {\n\nthrow new IllegalArgumentException(\"Cannot add arrays of different types\");\n\n}\n\nT[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n\nSystem.arraycopy(array1, 0, joinedArray, 0, array1.length);\n\nSystem.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n\nreturn joinedArray;\n\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/java/org/apache/commons/lang3/ArrayUtils.java",
+        "method_name": "addAll",
+        "class_name": "ArrayUtils",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method was not properly checking the types of the input arrays before combining them into a new array, leading to an ArrayStoreException when incompatible types were encountered.",
+        "line_numbers": [
+          2953,
+          2954,
+          2955,
+          2956,
+          2957,
+          2958,
+          2959,
+          2960,
+          2961,
+          2962,
+          2963,
+          2964,
+          2965
+        ]
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public static <T> T[] addAll(T[] array1, T... array2) {\n    if (array1 == null) {\n        return clone(array2);\n    } else if (array2 == null) {\n        return clone(array1);\n    }\n    final Class<?> type1 = array1.getClass().getComponentType();\n    final Class<?> type2 = array2.getClass().getComponentType();\n    if (!type1.isAssignableFrom(type2)) {\n        throw new IllegalArgumentException(\"Cannot store incompatible type \" + type2.getName() + \" in an array of type \" + type1.getName());\n    }\n    T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n    System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n    System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n    return joinedArray;\n}",
+        "diff": "",
+        "file_path": "src/java/org/apache/commons/lang3/ArrayUtils.java",
+        "method_name": "addAll",
+        "class_name": "ArrayUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          2953,
+          2954,
+          2955,
+          2956,
+          2957,
+          2958,
+          2959,
+          2960,
+          2961,
+          2962,
+          2963,
+          2964,
+          2965
+        ],
+        "original_code": "/**\n* <p>Adds all the elements of the given arrays into a new array.</p>\n* <p>The new array contains all of the element of <code>array1</code> followed\n* by all of the elements <code>array2</code>. When an array is returned, it is always\n* a new array.</p>\n*\n* <pre>\n* ArrayUtils.addAll(null, null)     = null\n* ArrayUtils.addAll(array1, null)   = cloned copy of array1\n* ArrayUtils.addAll(null, array2)   = cloned copy of array2\n* ArrayUtils.addAll([], [])         = []\n* ArrayUtils.addAll([null], [null]) = [null, null]\n* ArrayUtils.addAll([\"a\", \"b\", \"c\"], [\"1\", \"2\", \"3\"]) = [\"a\", \"b\", \"c\", \"1\", \"2\", \"3\"]\n* </pre>\n*\n* @param array1  the first array whose elements are added to the new array, may be <code>null</code>\n* @param array2  the second array whose elements are added to the new array, may be <code>null</code>\n* @return The new array, <code>null</code> if both arrays are <code>null</code>.\n*      The type of the new array is the type of the first array,\n*      unless the first array is null, in which case the type is the same as the second array.\n* @since 2.1\n*/\npublic static <T> T[] addAll(T[] array1, T... array2) {\n    if (array1 == null) {\n        return clone(array2);\n    } else if (array2 == null) {\n        return clone(array1);\n    }\n    final Class<?> type1 = array1.getClass().getComponentType();\n    T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n    System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n        // Check if problem is incompatible types\n    return joinedArray;\n}"
+      },
+      {
+        "hypothesis": "The type of the newly created array was determined by the first array, but the second array was not checked for compatibility. The `addAll` method was also not properly handling the case where the first array was null.",
+        "changes": "+ Check if second array is null and throw an exception if it is. + Use the type of the second array if the first array is null. + Check if arrays are compatible and throw an exception if they are not. + Use a more specific exception type for the incompatible types error.",
+        "fixed_method": "public static <T> T[] addAll(T[] array1, T... array2) {\nif (array2 == null) {\nthrow new IllegalArgumentException(\"Second array is null\");\n}\nif (array1 == null) {\nreturn clone(array2);\n}\nfinal Class<?> type1 = array1.getClass().getComponentType();\nfinal Class<?> type2 = array2.getClass().getComponentType();\nif (!type1.isAssignableFrom(type2)) {\nthrow new IllegalArgumentException(\"Incompatible types\");\n}\nT[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\nSystem.arraycopy(array1, 0, joinedArray, 0, array1.length);\nSystem.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\nreturn joinedArray;\n}",
+        "diff": "+ Check if second array is null and throw an exception if it is. + Use the type of the second array if the first array is null. + Check if arrays are compatible and throw an exception if they are not. + Use a more specific exception type for the incompatible types error.",
+        "file_path": "src/java/org/apache/commons/lang3/ArrayUtils.java",
+        "method_name": "addAll",
+        "class_name": "ArrayUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          2953,
+          2954,
+          2955,
+          2956,
+          2957,
+          2958,
+          2959,
+          2960,
+          2961,
+          2962,
+          2963,
+          2964,
+          2965
+        ],
+        "original_code": "/**\n* <p>Adds all the elements of the given arrays into a new array.</p>\n* <p>The new array contains all of the element of <code>array1</code> followed\n* by all of the elements <code>array2</code>. When an array is returned, it is always\n* a new array.</p>\n*\n* <pre>\n* ArrayUtils.addAll(null, null)     = null\n* ArrayUtils.addAll(array1, null)   = cloned copy of array1\n* ArrayUtils.addAll(null, array2)   = cloned copy of array2\n* ArrayUtils.addAll([], [])         = []\n* ArrayUtils.addAll([null], [null]) = [null, null]\n* ArrayUtils.addAll([\"a\", \"b\", \"c\"], [\"1\", \"2\", \"3\"]) = [\"a\", \"b\", \"c\", \"1\", \"2\", \"3\"]\n* </pre>\n*\n* @param array1  the first array whose elements are added to the new array, may be <code>null</code>\n* @param array2  the second array whose elements are added to the new array, may be <code>null</code>\n* @return The new array, <code>null</code> if both arrays are <code>null</code>.\n*      The type of the new array is the type of the first array,\n*      unless the first array is null, in which case the type is the same as the second array.\n* @since 2.1\n*/\npublic static <T> T[] addAll(T[] array1, T... array2) {\n    if (array1 == null) {\n        return clone(array2);\n    } else if (array2 == null) {\n        return clone(array1);\n    }\n    final Class<?> type1 = array1.getClass().getComponentType();\n    T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);\n    System.arraycopy(array1, 0, joinedArray, 0, array1.length);\n        System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);\n        // Check if problem is incompatible types\n    return joinedArray;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Lang-37/"
+}

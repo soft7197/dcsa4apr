@@ -1,0 +1,30 @@
+{
+  "bug_id": "Jsoup-88",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-88_1771942198",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug cause is that the 'getValue' method returns 'null' when the attribute value is not explicitly set, which is the case for boolean attributes like 'hidden'. The fix is to ensure that boolean attributes return an empty string instead of null.",
+        "changes": "- return val;\n+ return val != null ? val : \"\";",
+        "fixed_method": "public String getValue() {\n    return val != null ? val : \"\";\n}",
+        "diff": "- return val;\n+ return val != null ? val : \"\";",
+        "file_path": "src/main/java/org/jsoup/nodes/Attribute.java",
+        "method_name": "getValue",
+        "class_name": "Attribute",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          79,
+          80,
+          81
+        ],
+        "original_code": "/**\nGet the attribute value.\n@return the attribute value\n*/\npublic String getValue() {\n    return val;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-88/"
+}

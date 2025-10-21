@@ -1,0 +1,43 @@
+{
+  "bug_id": "Closure-6",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-6_1772720208",
+  "patches": [
+    {
+      "hypothesis": "The issue is caused by a combination of the two methods not properly handling the case where the provided owner type is a function prototype type, and the provided left type is a function type. Additionally, the mismatch warning was not properly formatted.",
+      "changes": "+ check if right type can be assigned to left type in `expectCanAssignTo` method\n+ inverted the type checking in `expectCanAssignTo` method\n+ removed unnecessary type checks and casts in `expectCanAssignToPropertyOf` method",
+      "methods": {
+        "src/com/google/javascript/jscomp/TypeValidator.java::TypeValidator::expectCanAssignToPropertyOf::L362": {
+          "file_path": "src/com/google/javascript/jscomp/TypeValidator.java",
+          "method_name": "expectCanAssignToPropertyOf",
+          "class_name": "TypeValidator",
+          "line_numbers": [
+            362,
+            389
+          ],
+          "original_code": "  /**\n   * Expect that the first type can be assigned to a symbol of the second\n   * type.\n   *\n   * @param t The node traversal.\n   * @param n The node to issue warnings on.\n   * @param rightType The type on the RHS of the assign.\n   * @param leftType The type of the symbol on the LHS of the assign.\n   * @param owner The owner of the property being assigned to.\n   * @param propName The name of the property being assigned to.\n   * @return True if the types matched, false otherwise.\n   */\n\n  boolean expectCanAssignToPropertyOf(NodeTraversal t, Node n, JSType rightType,\n      JSType leftType, Node owner, String propName) {\n    // The NoType check is a hack to make typedefs work OK.\n    if (!leftType.isNoType() && !rightType.canAssignTo(leftType)) {\n      if ((leftType.isConstructor() || leftType.isEnumType()) && (rightType.isConstructor() || rightType.isEnumType())) {\n        registerMismatch(rightType, leftType, null);\n      } else {\n      // Do not type-check interface methods, because we expect that\n      // they will have dummy implementations that do not match the type\n      // annotations.\n      JSType ownerType = getJSType(owner);\n      if (ownerType.isFunctionPrototypeType()) {\n        FunctionType ownerFn = ownerType.toObjectType().getOwnerFunction();\n        if (ownerFn.isInterface() &&\n            rightType.isFunctionType() && leftType.isFunctionType()) {\n          return true;\n        }\n      }\n\n      mismatch(t, n,\n          \"assignment to property \" + propName + \" of \" +\n          getReadableJSTypeName(owner, true),\n          rightType, leftType);\n      }\n      return false;\n    }\n    return true;\n  }\n",
+          "fixed_method": "boolean expectCanAssignTo(NodeTraversal t, Node n, JSType rightType, JSType leftType, String msg) {\n  if (rightType.canAssignTo(leftType)) {\n    return true;\n  } else {\n    mismatch(t, n, msg, rightType, leftType);\n    return false;\n  }\n}",
+          "iteration": 3
+        },
+        "src/com/google/javascript/jscomp/TypeValidator.java::TypeValidator::expectCanAssignTo::L402": {
+          "file_path": "src/com/google/javascript/jscomp/TypeValidator.java",
+          "method_name": "expectCanAssignTo",
+          "class_name": "TypeValidator",
+          "line_numbers": [
+            402,
+            413
+          ],
+          "original_code": "  /**\n   * Expect that the first type can be assigned to a symbol of the second\n   * type.\n   *\n   * @param t The node traversal.\n   * @param n The node to issue warnings on.\n   * @param rightType The type on the RHS of the assign.\n   * @param leftType The type of the symbol on the LHS of the assign.\n   * @param msg An extra message for the mismatch warning, if necessary.\n   * @return True if the types matched, false otherwise.\n   */\n\n  boolean expectCanAssignTo(NodeTraversal t, Node n, JSType rightType,\n      JSType leftType, String msg) {\n    if (!rightType.canAssignTo(leftType)) {\n      if ((leftType.isConstructor() || leftType.isEnumType()) && (rightType.isConstructor() || rightType.isEnumType())) {\n        registerMismatch(rightType, leftType, null);\n      } else {\n      mismatch(t, n, msg, rightType, leftType);\n      }\n      return false;\n    }\n    return true;\n  }\n",
+          "fixed_method": "boolean expectCanAssignToPropertyOf(NodeTraversal t, Node n, JSType rightType, JSType leftType, Node owner, String propName) {\n  if (rightType.canAssignTo(leftType)) {\n    return true;\n  } else {\n    mismatch(t, n, \"assignment to property \" + propName + \" of \" + getReadableJSTypeName(owner, true), rightType, leftType);\n    return false;\n  }\n}",
+          "iteration": 3
+        }
+      },
+      "iteration": 3,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 3,
+  "monitor_dir": "traces/Closure-6/"
+}

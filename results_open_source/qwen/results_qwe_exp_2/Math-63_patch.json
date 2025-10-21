@@ -1,0 +1,30 @@
+{
+  "bug_id": "Math-63",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-63_1771948759",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug arises because the current `equals` method does not correctly handle NaN comparisons for individual doubles. The test case expects that two NaN values should not be considered equal, which contradicts the current implementation. We need to ensure that NaN comparisons are handled correctly without affecting other equality checks.",
+        "changes": "- return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n+ return Double.isNaN(x) && Double.isNaN(y) ? false : x == y;",
+        "fixed_method": "public static boolean equals(double x, double y) {\n    return Double.isNaN(x) && Double.isNaN(y) ? false : x == y;\n}",
+        "diff": "- return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n+ return Double.isNaN(x) && Double.isNaN(y) ? false : x == y;",
+        "file_path": "src/main/java/org/apache/commons/math/util/MathUtils.java",
+        "method_name": "equals",
+        "class_name": "MathUtils",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          416,
+          417,
+          418
+        ],
+        "original_code": "/**\n* Returns true iff they are equal as defined by\n* {@link #equals(double,double,int) equals(x, y, 1)}.\n*\n* @param x first value\n* @param y second value\n* @return {@code true} if the values are equal.\n*/\npublic static boolean equals(double x, double y) {\n    return (Double.isNaN(x) && Double.isNaN(y)) || x == y;\n}"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Math-63/"
+}

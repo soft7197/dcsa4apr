@@ -1,0 +1,139 @@
+{
+  "bug_id": "Jsoup-54",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-54_1773119316",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method was attempting to sanitize attribute names but was not correctly handling cases with invalid starting characters for XML attribute names.",
+        "changes": "- String key = attribute.getKey().replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");\n+ String key = attribute.getKey().replaceAll(\"^[^a-zA-Z_:]\", \"_\").replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");",
+        "fixed_method": "private void copyAttributes(org.jsoup.nodes.Node source, Element el) {\n    for (Attribute attribute : source.attributes()) {\n        // replace invalid starting characters with '_' and ensure valid XML attribute name\n        String key = attribute.getKey().replaceAll(\"^[^a-zA-Z_:]\", \"_\").replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");\n        el.setAttribute(key, attribute.getValue());\n    }\n}",
+        "diff": "- String key = attribute.getKey().replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");\n+ String key = attribute.getKey().replaceAll(\"^[^a-zA-Z_:]\", \"_\").replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");",
+        "file_path": "src/main/java/org/jsoup/helper/W3CDom.java",
+        "method_name": "copyAttributes",
+        "class_name": "W3CDom",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ],
+        "original_code": "// unhandled\nprivate void copyAttributes(org.jsoup.nodes.Node source, Element el) {\n    for (Attribute attribute : source.attributes()) {\n        // valid xml attribute names are: ^[a-zA-Z_:][-a-zA-Z0-9_:.]\n        String key = attribute.getKey().replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");\n            el.setAttribute(key, attribute.getValue());\n    }\n}"
+      },
+      {
+        "hypothesis": "The method is supposed to translate HTML attributes to XML-compatible attributes but does not handle the scenario when attribute names have invalid characters as per XML standards. The fix involves skipping or modifying these invalid attribute names instead of attempting to set them in the XML document.",
+        "changes": "-    el.setAttribute(key, attribute.getValue());\n+    if (!key.isEmpty()) { el.setAttribute(key, attribute.getValue()); }",
+        "fixed_method": "private void copyAttributes(org.jsoup.nodes.Node source, Element el) {\n    for (Attribute attribute : source.attributes()) {\n        // valid xml attribute names are: ^[a-zA-Z_:][-a-zA-Z0-9_:.]\n        String key = attribute.getKey().replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");\n        if (!key.isEmpty()) {\n            el.setAttribute(key, attribute.getValue());\n        }\n    }\n}",
+        "diff": "-    el.setAttribute(key, attribute.getValue());\n+    if (!key.isEmpty()) { el.setAttribute(key, attribute.getValue()); }",
+        "file_path": "src/main/java/org/jsoup/helper/W3CDom.java",
+        "method_name": "copyAttributes",
+        "class_name": "W3CDom",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ],
+        "original_code": "// unhandled\nprivate void copyAttributes(org.jsoup.nodes.Node source, Element el) {\n    for (Attribute attribute : source.attributes()) {\n        // valid xml attribute names are: ^[a-zA-Z_:][-a-zA-Z0-9_:.]\n        String key = attribute.getKey().replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");\n            el.setAttribute(key, attribute.getValue());\n    }\n}"
+      },
+      {
+        "hypothesis": "The overfitting issue was that the patch only handled special cases by skipping entries if they were empty or started with a hyphen. A more complete solution involves checking that the attribute name matches a valid XML name pattern according to XML naming rules and avoiding empty keys. This ensures robustness in attribute copying for valid XML.",
+        "fixed_method": "private void copyAttributes(org.jsoup.nodes.Node source, Element el) {\n    for (Attribute attribute : source.attributes()) {\n        String key = attribute.getKey().replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");\n        // names must not start with a digit, hyphen, or dot and must not be empty\n        if (!key.isEmpty() && !Character.isDigit(key.charAt(0)) && key.charAt(0) != '-' && key.charAt(0) != '.') {\n            el.setAttribute(key, attribute.getValue());\n        }\n    }\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/jsoup/helper/W3CDom.java",
+        "method_name": "copyAttributes",
+        "class_name": "W3CDom",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The current method attempts to replace invalid XML attribute characters but does not handle empty or invalid attribute names gracefully, which leads to invalid XML when such attributes are encountered.",
+        "line_numbers": [
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ]
+      },
+      {
+        "hypothesis": "The method attempts to sanitize attribute keys by removing invalid characters. The regex used does not cover the complete range of valid XML characters, thus allowing illegal XML characters to slip through, leading to an INVALID_CHARACTER_ERR.",
+        "changes": "-        String key = attribute.getKey().replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");\n+        String key = attribute.getKey().replaceAll(\"[^a-zA-Z0-9_:.\\\\-]\", \"\");\n        if (!key.matches(\"^[a-zA-Z_:][-a-zA-Z0-9_:.]*$\")) continue;",
+        "fixed_method": "private void copyAttributes(org.jsoup.nodes.Node source, Element el) {\n    for (Attribute attribute : source.attributes()) {\n        // valid xml attribute names are: ^[a-zA-Z_:][-a-zA-Z0-9_:.]\n        String key = attribute.getKey().replaceAll(\"[^a-zA-Z0-9_:.\\\\-]\", \"\");\n        if (!key.matches(\"^[a-zA-Z_:][-a-zA-Z0-9_:.]*$\")) continue;\n        el.setAttribute(key, attribute.getValue());\n    }\n}",
+        "diff": "-        String key = attribute.getKey().replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");\n+        String key = attribute.getKey().replaceAll(\"[^a-zA-Z0-9_:.\\\\-]\", \"\");\n        if (!key.matches(\"^[a-zA-Z_:][-a-zA-Z0-9_:.]*$\")) continue;",
+        "file_path": "src/main/java/org/jsoup/helper/W3CDom.java",
+        "method_name": "copyAttributes",
+        "class_name": "W3CDom",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ],
+        "original_code": "// unhandled\nprivate void copyAttributes(org.jsoup.nodes.Node source, Element el) {\n    for (Attribute attribute : source.attributes()) {\n        // valid xml attribute names are: ^[a-zA-Z_:][-a-zA-Z0-9_:.]\n        String key = attribute.getKey().replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");\n            el.setAttribute(key, attribute.getValue());\n    }\n}"
+      },
+      {
+        "hypothesis": "The overfitting patch attempted to sanitize attribute keys by replacing invalid characters at the start but did not consider key collisions or XML conventions. The refined approach uses a prefix for invalid starting characters and ensures uniqueness by appending a number if necessary.",
+        "fixed_method": "private void copyAttributes(org.jsoup.nodes.Node source, Element el) {\n    for (Attribute attribute : source.attributes()) {\n        String key = attribute.getKey();\n        // Replace invalid starting characters with prefix 'attr_' to ensure valid XML names\n        if (!key.matches(\"^[a-zA-Z_:].*\")) {\n            key = \"attr_\" + key;\n        }\n        // Replace non-valid characters within the key\n        key = key.replaceAll(\"[^-a-zA-Z0-9_:.]\", \"_\");\n        // Ensure the key is unique within the element\n        String originalKey = key;\n        int counter = 1;\n        while (el.hasAttribute(key)) {\n            key = originalKey + \"_\" + counter++;\n        }\n        el.setAttribute(key, attribute.getValue());\n    }\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/jsoup/helper/W3CDom.java",
+        "method_name": "copyAttributes",
+        "class_name": "W3CDom",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method doesn't handle invalid XML attribute names correctly, leading to exceptions when illegal characters are processed.",
+        "line_numbers": [
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ]
+      },
+      {
+        "hypothesis": "The current method removes invalid characters from attribute names, but it should remove attributes with invalid names entirely to prevent invalid XML.",
+        "changes": "- Remove invalid attribute names instead of trying to sanitize them",
+        "fixed_method": "private void copyAttributes(org.jsoup.nodes.Node source, Element el) {\n    for (Attribute attribute : source.attributes()) {\n        String key = attribute.getKey();\n        if (key.matches(\"^[a-zA-Z_:][-a-zA-Z0-9_:.]*$\")) {\n            el.setAttribute(key, attribute.getValue());\n        }\n    }\n}",
+        "diff": "- Remove invalid attribute names instead of trying to sanitize them",
+        "file_path": "src/main/java/org/jsoup/helper/W3CDom.java",
+        "method_name": "copyAttributes",
+        "class_name": "W3CDom",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ],
+        "original_code": "// unhandled\nprivate void copyAttributes(org.jsoup.nodes.Node source, Element el) {\n    for (Attribute attribute : source.attributes()) {\n        // valid xml attribute names are: ^[a-zA-Z_:][-a-zA-Z0-9_:.]\n        String key = attribute.getKey().replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");\n            el.setAttribute(key, attribute.getValue());\n    }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-54/"
+}

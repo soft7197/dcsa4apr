@@ -1,0 +1,28 @@
+{
+  "com.google.javascript.jscomp.TypeCheckTest::testIssue783": [
+    {
+      "buggy_method": "caseEquality",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter"
+    },
+    {
+      "buggy_method": "maybeRestrictTwoNames",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter"
+    }
+  ],
+  "com.google.javascript.jscomp.TypeCheckTest::testMissingProperty20": [
+    {
+      "buggy_method": "caseNameOrGetProp",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter"
+    },
+    {
+      "buggy_method": "getRestrictedTypeGivenToBooleanOutcome",
+      "class": "com.google.javascript.rhino.jstype.JSType"
+    }
+  ],
+  "com.google.javascript.rhino.jstype.JSTypeTest::testRestrictedTypeGivenToBoolean": [
+    {
+      "buggy_method": "getRestrictedTypeGivenToBooleanOutcome",
+      "class": "com.google.javascript.rhino.jstype.JSType"
+    }
+  ]
+}

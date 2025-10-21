@@ -1,0 +1,24 @@
+File: src/main/java/org/jsoup/safety/Whitelist.java
+Method: Whitelist.testValidProtocol
+
+private boolean testValidProtocol(Element el, Attribute attr, Set<Protocol> protocols) {
+    // Try to resolve relative URLs to absolute, and optionally update the attribute so output HTML has abs.
+    // Rels without a base URI do not have an absolute path and should remain relative.
+    String absValue = el.absUrl(attr.getKey());
+    String value = attr.getValue();
+
+    if (!preserveRelativeLinks && !absValue.isEmpty()) {
+        // Only set the value if an absolute URL can be obtained
+        attr.setValue(absValue);
+        value = absValue; // Use the absolute URL if obtainable
+    }
+
+    for (Protocol protocol : protocols) {
+        String prot = protocol.toString() + ":";
+        if (value.toLowerCase().startsWith(prot)) {
+            return true;
+        }
+    }
+
+    return false;
+}

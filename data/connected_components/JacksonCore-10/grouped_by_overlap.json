@@ -1,0 +1,14 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "_findOffsetForAdd_com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer",
+      "calcHash_com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer"
+    ],
+    "tests": [
+      "com.fasterxml.jackson.core.sym.TestByteBasedSymbols::testIssue207",
+      "com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b",
+      "com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew",
+      "com.fasterxml.jackson.core.sym.TestSymbolTables::testSyntheticWithBytesNew"
+    ]
+  }
+}

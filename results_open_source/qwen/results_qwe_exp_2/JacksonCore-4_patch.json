@@ -1,0 +1,36 @@
+{
+  "bug_id": "JacksonCore-4",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonCore-4_1771933151",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the incorrect calculation of the new length when the current length is equal to MAX_SEGMENT_LEN. The logic should ensure that once it reaches MAX_SEGMENT_LEN, it should always expand beyond it, not stay at MAX_SEGMENT_LEN.",
+        "changes": "- int newLen = (len == MAX_SEGMENT_LEN) ? (MAX_SEGMENT_LEN+1) : Math.min(MAX_SEGMENT_LEN, len + (len >> 1));\n+ int newLen = (len >= MAX_SEGMENT_LEN) ? (len + 1) : Math.min(MAX_SEGMENT_LEN, len + (len >> 1));",
+        "fixed_method": "public char[] expandCurrentSegment()\n{\n    final char[] curr = _currentSegment;\n    // Let's grow by 50% by default\n    final int len = curr.length;\n    // but above intended maximum, slow to increase by 25%\n    int newLen = (len >= MAX_SEGMENT_LEN) ? (len + 1) : Math.min(MAX_SEGMENT_LEN, len + (len >> 1));\n    return (_currentSegment = Arrays.copyOf(curr, newLen));\n}",
+        "diff": "- int newLen = (len == MAX_SEGMENT_LEN) ? (MAX_SEGMENT_LEN+1) : Math.min(MAX_SEGMENT_LEN, len + (len >> 1));\n+ int newLen = (len >= MAX_SEGMENT_LEN) ? (len + 1) : Math.min(MAX_SEGMENT_LEN, len + (len >> 1));",
+        "file_path": "src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java",
+        "method_name": "expandCurrentSegment",
+        "class_name": "TextBuffer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          580,
+          581,
+          582,
+          583,
+          584,
+          585,
+          586,
+          587,
+          588
+        ],
+        "original_code": "/**\n* Method called to expand size of the current segment, to\n* accommodate for more contiguous content. Usually only\n* used when parsing tokens like names if even then.\n*/\npublic char[] expandCurrentSegment()\n{\n    final char[] curr = _currentSegment;\n    // Let's grow by 50% by default\n    final int len = curr.length;\n    // but above intended maximum, slow to increase by 25%\n    int newLen = (len == MAX_SEGMENT_LEN) ? (MAX_SEGMENT_LEN+1) : Math.min(MAX_SEGMENT_LEN, len + (len >> 1));\n    return (_currentSegment = Arrays.copyOf(curr, newLen));\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonCore-4/"
+}

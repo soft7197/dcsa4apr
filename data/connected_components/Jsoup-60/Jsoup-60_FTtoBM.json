@@ -1,0 +1,22 @@
+{
+  "org.jsoup.select.QueryParserTest::testParsesSingleQuoteInContains": [
+    {
+      "buggy_method": "chompBalanced",
+      "class": "org.jsoup.parser.TokenQueue"
+    },
+    {
+      "buggy_method": "parse",
+      "class": "org.jsoup.select.QueryParser"
+    }
+  ],
+  "org.jsoup.select.QueryParserTest::exceptionOnUncloseAttribute": [
+    {
+      "buggy_method": "chompBalanced",
+      "class": "org.jsoup.parser.TokenQueue"
+    },
+    {
+      "buggy_method": "parse",
+      "class": "org.jsoup.select.QueryParser"
+    }
+  ]
+}

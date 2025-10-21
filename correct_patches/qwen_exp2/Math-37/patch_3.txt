@@ -1,0 +1,28 @@
+File: src/main/java/org/apache/commons/math/complex/Complex.java
+Method: Complex.tan
+
+public Complex tan() {
+    if (isNaN) {
+        return NaN;
+    }
+
+    double real2 = 2.0 * real;
+    double imaginary2 = 2.0 * imaginary;
+    double cosReal2 = FastMath.cos(real2);
+    double coshImaginary2 = FastMath.cosh(imaginary2);
+    double sinhImaginary2 = FastMath.sinh(imaginary2);
+    double sinReal2 = FastMath.sin(real2);
+    double d = cosReal2 + coshImaginary2;
+
+    if (Double.isInfinite(d)) {
+        // Asymptotic behavior: tan(a + bi) -> ±∞ + NaN*i when cos(2a) + cosh(2b) -> ±∞
+        if (FastMath.abs(cosReal2) > FastMath.abs(coshImaginary2)) {
+            return createComplex(FastMath.signum(sinReal2) * Double.POSITIVE_INFINITY, Double.NaN);
+        } else {
+            return createComplex(0, FastMath.signum(sinhImaginary2));
+        }
+    }
+
+    return createComplex(sinReal2 / d,
+                         sinhImaginary2 / d);
+}

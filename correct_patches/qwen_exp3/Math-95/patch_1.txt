@@ -1,0 +1,17 @@
+File: src/java/org/apache/commons/math/distribution/FDistributionImpl.java
+Method: FDistributionImpl.getInitialDomain
+
+protected double getInitialDomain(double p) {
+    double ret;
+    double d = getDenominatorDegreesOfFreedom();
+    if (d <= 2.0) {
+        // For d <= 2, the distribution is not defined or behaves differently.
+        // A common approach is to return a value that avoids division by zero or undefined behavior.
+        // Here, we return a small positive value to indicate the boundary condition.
+        ret = Double.MIN_VALUE;
+    } else {
+        // Use the mean for d > 2
+        ret = d / (d - 2.0);
+    }
+    return ret;
+}

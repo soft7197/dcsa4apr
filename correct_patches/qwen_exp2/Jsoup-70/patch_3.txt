@@ -1,0 +1,16 @@
+File: src/main/java/org/jsoup/nodes/Element.java
+Method: Element.preserveWhitespace
+
+static boolean preserveWhitespace(Node node) {
+    // looks only at this element and five levels up, to prevent recursion & needless stack searches
+    if (node != null && node instanceof Element) {
+        Element el = (Element) node;
+        int depth = 0;
+        while (el != null && !el.tag.preserveWhitespace() && depth < 6) {
+            el = el.parent();
+            depth++;
+        }
+        return el != null && el.tag.preserveWhitespace();
+    }
+    return false;
+}

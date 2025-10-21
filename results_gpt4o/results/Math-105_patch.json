@@ -1,0 +1,81 @@
+{
+  "bug_id": "Math-105",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-105_1773119768",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method does not handle negative results due to rounding errors, which violates the method's contract to return a non-negative result.",
+        "changes": "+ Ensure the return value is non-negative by returning Math.max(0.0, computedSSE)",
+        "fixed_method": "public double getSumSquaredErrors() {\n    return Math.max(0.0, sumYY - sumXY * sumXY / sumXX);\n}",
+        "diff": "+ Ensure the return value is non-negative by returning Math.max(0.0, computedSSE)",
+        "file_path": "src/java/org/apache/commons/math/stat/regression/SimpleRegression.java",
+        "method_name": "getSumSquaredErrors",
+        "class_name": "SimpleRegression",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          263,
+          264,
+          265
+        ],
+        "original_code": "/**\n* Returns the <a href=\"http://www.xycoon.com/SumOfSquares.htm\">\n* sum of squared errors</a> (SSE) associated with the regression\n* model.\n* <p>\n* The sum is computed using the computational formula\n* <p>\n* <code>SSE = SYY - (SXY * SXY / SXX)</code>\n* <p>\n* where <code>SYY</code> is the sum of the squared deviations of the y\n* values about their mean, <code>SXX</code> is similarly defined and\n* <code>SXY</code> is the sum of the products of x and y mean deviations.\n* <p>\n* The sums are accumulated using the updating algorithm referenced in\n* {@link #addData}.\n* <p>\n* The return value is constrained to be non-negative - i.e., if due to\n* rounding errors the computational formula returns a negative result,\n* 0 is returned.\n* <p>\n* <strong>Preconditions</strong>: <ul>\n* <li>At least two observations (with at least two different x values)\n* must have been added before invoking this method. If this method is\n* invoked before a model can be estimated, <code>Double,NaN</code> is\n* returned.\n* </li></ul>\n*\n* @return sum of squared errors associated with the regression model\n*/\npublic double getSumSquaredErrors() {\n    return sumYY - sumXY * sumXY / sumXX;\n}"
+      },
+      {
+        "hypothesis": "The method fails to ensure non-negative SSE due to floating-point operations potentially resulting in negative values. We need to return 0 if the calculated SSE is negative.",
+        "changes": "Added a check to ensure the result is non-negative by returning Math.max(0.0, actualResult).",
+        "fixed_method": "public double getSumSquaredErrors() {\n    double sse = sumYY - sumXY * sumXY / sumXX;\n    return Math.max(0.0, sse);\n}",
+        "diff": "Added a check to ensure the result is non-negative by returning Math.max(0.0, actualResult).",
+        "file_path": "src/java/org/apache/commons/math/stat/regression/SimpleRegression.java",
+        "method_name": "getSumSquaredErrors",
+        "class_name": "SimpleRegression",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          263,
+          264,
+          265
+        ],
+        "original_code": "/**\n* Returns the <a href=\"http://www.xycoon.com/SumOfSquares.htm\">\n* sum of squared errors</a> (SSE) associated with the regression\n* model.\n* <p>\n* The sum is computed using the computational formula\n* <p>\n* <code>SSE = SYY - (SXY * SXY / SXX)</code>\n* <p>\n* where <code>SYY</code> is the sum of the squared deviations of the y\n* values about their mean, <code>SXX</code> is similarly defined and\n* <code>SXY</code> is the sum of the products of x and y mean deviations.\n* <p>\n* The sums are accumulated using the updating algorithm referenced in\n* {@link #addData}.\n* <p>\n* The return value is constrained to be non-negative - i.e., if due to\n* rounding errors the computational formula returns a negative result,\n* 0 is returned.\n* <p>\n* <strong>Preconditions</strong>: <ul>\n* <li>At least two observations (with at least two different x values)\n* must have been added before invoking this method. If this method is\n* invoked before a model can be estimated, <code>Double,NaN</code> is\n* returned.\n* </li></ul>\n*\n* @return sum of squared errors associated with the regression model\n*/\npublic double getSumSquaredErrors() {\n    return sumYY - sumXY * sumXY / sumXX;\n}"
+      },
+      {
+        "hypothesis": "The current implementation doesn't handle cases where rounding errors cause a negative result. The algorithm should ensure the result is non-negative.",
+        "changes": "-return sumYY - (sumXY * sumXY / sumXX); +return Math.max(0, sumYY - (sumXY * sumXY / sumXX));",
+        "fixed_method": "public double getSumSquaredErrors() {\n    return Math.max(0, sumYY - (sumXY * sumXY / sumXX));\n}",
+        "diff": "-return sumYY - (sumXY * sumXY / sumXX); +return Math.max(0, sumYY - (sumXY * sumXY / sumXX));",
+        "file_path": "src/java/org/apache/commons/math/stat/regression/SimpleRegression.java",
+        "method_name": "getSumSquaredErrors",
+        "class_name": "SimpleRegression",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          263,
+          264,
+          265
+        ],
+        "original_code": "/**\n* Returns the <a href=\"http://www.xycoon.com/SumOfSquares.htm\">\n* sum of squared errors</a> (SSE) associated with the regression\n* model.\n* <p>\n* The sum is computed using the computational formula\n* <p>\n* <code>SSE = SYY - (SXY * SXY / SXX)</code>\n* <p>\n* where <code>SYY</code> is the sum of the squared deviations of the y\n* values about their mean, <code>SXX</code> is similarly defined and\n* <code>SXY</code> is the sum of the products of x and y mean deviations.\n* <p>\n* The sums are accumulated using the updating algorithm referenced in\n* {@link #addData}.\n* <p>\n* The return value is constrained to be non-negative - i.e., if due to\n* rounding errors the computational formula returns a negative result,\n* 0 is returned.\n* <p>\n* <strong>Preconditions</strong>: <ul>\n* <li>At least two observations (with at least two different x values)\n* must have been added before invoking this method. If this method is\n* invoked before a model can be estimated, <code>Double,NaN</code> is\n* returned.\n* </li></ul>\n*\n* @return sum of squared errors associated with the regression model\n*/\npublic double getSumSquaredErrors() {\n    return sumYY - sumXY * sumXY / sumXX;\n}"
+      },
+      {
+        "hypothesis": "The method doesn't handle rounding errors correctly, resulting in a negative SSE. Adding a check to return 0 if SSE is negative fixes the issue.",
+        "changes": "-    return sumYY - sumXY * sumXY / sumXX;\n+    double sse = sumYY - sumXY * sumXY / sumXX;\n+    return sse < 0 ? 0 : sse;",
+        "fixed_method": "public double getSumSquaredErrors() {\n    double sse = sumYY - sumXY * sumXY / sumXX;\n    return sse < 0 ? 0 : sse;\n}",
+        "diff": "-    return sumYY - sumXY * sumXY / sumXX;\n+    double sse = sumYY - sumXY * sumXY / sumXX;\n+    return sse < 0 ? 0 : sse;",
+        "file_path": "src/java/org/apache/commons/math/stat/regression/SimpleRegression.java",
+        "method_name": "getSumSquaredErrors",
+        "class_name": "SimpleRegression",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          263,
+          264,
+          265
+        ],
+        "original_code": "/**\n* Returns the <a href=\"http://www.xycoon.com/SumOfSquares.htm\">\n* sum of squared errors</a> (SSE) associated with the regression\n* model.\n* <p>\n* The sum is computed using the computational formula\n* <p>\n* <code>SSE = SYY - (SXY * SXY / SXX)</code>\n* <p>\n* where <code>SYY</code> is the sum of the squared deviations of the y\n* values about their mean, <code>SXX</code> is similarly defined and\n* <code>SXY</code> is the sum of the products of x and y mean deviations.\n* <p>\n* The sums are accumulated using the updating algorithm referenced in\n* {@link #addData}.\n* <p>\n* The return value is constrained to be non-negative - i.e., if due to\n* rounding errors the computational formula returns a negative result,\n* 0 is returned.\n* <p>\n* <strong>Preconditions</strong>: <ul>\n* <li>At least two observations (with at least two different x values)\n* must have been added before invoking this method. If this method is\n* invoked before a model can be estimated, <code>Double,NaN</code> is\n* returned.\n* </li></ul>\n*\n* @return sum of squared errors associated with the regression model\n*/\npublic double getSumSquaredErrors() {\n    return sumYY - sumXY * sumXY / sumXX;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-105/"
+}

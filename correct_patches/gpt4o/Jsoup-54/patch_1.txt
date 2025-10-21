@@ -1,0 +1,10 @@
+File: src/main/java/org/jsoup/helper/W3CDom.java
+Method: W3CDom.copyAttributes
+
+private void copyAttributes(org.jsoup.nodes.Node source, Element el) {
+    for (Attribute attribute : source.attributes()) {
+        // replace invalid starting characters with '_' and ensure valid XML attribute name
+        String key = attribute.getKey().replaceAll("^[^a-zA-Z_:]", "_").replaceAll("[^-a-zA-Z0-9_:.]", "");
+        el.setAttribute(key, attribute.getValue());
+    }
+}

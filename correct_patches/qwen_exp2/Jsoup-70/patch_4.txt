@@ -1,0 +1,17 @@
+File: src/main/java/org/jsoup/nodes/Element.java
+Method: Element.preserveWhitespace
+
+static boolean preserveWhitespace(Node node) {
+    // Recursively check each parent element for the whitespace preservation flag
+    if (node != null && node instanceof Element) {
+        Element el = (Element) node;
+        if (el.tag.preserveWhitespace())
+            return true;
+        Node parent = el.parent();
+        while (parent != null && !(parent instanceof Element)) {
+            parent = parent.parent();
+        }
+        return parent != null && preserveWhitespace(parent);
+    }
+    return false;
+}

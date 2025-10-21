@@ -1,0 +1,115 @@
+{
+  "bug_id": "Chart-14",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-14_1772930428",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method was not handling the case where the markers list is null, causing a NullPointerException when trying to call the remove() method on a null object.",
+        "changes": "+ if (markers == null) return false;",
+        "fixed_method": "public boolean removeRangeMarker(int index, Marker marker, Layer layer, boolean notify) {\n    if (marker == null) {\n        throw new IllegalArgumentException(\"Null 'marker' argument.\");\n    }\n    ArrayList markers;\n    if (layer == Layer.FOREGROUND) {\n        markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(index));\n    } else {\n        markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(index));\n    }\n    if (markers == null) return false;\n    boolean removed = markers.remove(marker);\n    if (removed && notify) {\n        fireChangeEvent();\n    }\n    return removed;\n}",
+        "diff": "+ if (markers == null) return false;",
+        "file_path": "source/org/jfree/chart/plot/CategoryPlot.java",
+        "method_name": "removeRangeMarker",
+        "class_name": "CategoryPlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          2434,
+          2453
+        ],
+        "original_code": "    /**\n     * Removes a marker for a specific dataset/renderer and sends a\n     * {@link PlotChangeEvent} to all registered listeners.\n     *\n     * @param index  the dataset/renderer index.\n     * @param marker  the marker.\n     * @param layer  the layer (foreground or background).\n     * @param notify  notify listeners.\n     *\n     * @return A boolean indicating whether or not the marker was actually \n     *         removed.\n     *\n     * @since 1.0.10\n     * \n     * @see #addRangeMarker(int, Marker, Layer, boolean)\n     */\n\n    public boolean removeRangeMarker(int index, Marker marker, Layer layer,\n    \t\tboolean notify) {\n        if (marker == null) {\n            throw new IllegalArgumentException(\"Null 'marker' argument.\");\n        }\n        ArrayList markers;\n        if (layer == Layer.FOREGROUND) {\n            markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(\n                    index));\n        }\n        else {\n            markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(\n                    index));\n        }\n        boolean removed = markers.remove(marker);\n        if (removed && notify) {\n            fireChangeEvent();\n        }\n        return removed;\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public boolean removeDomainMarker(int index, Marker marker, Layer layer, boolean notify) {\n        ArrayList markers;\n        if (layer == Layer.FOREGROUND) {\n            markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(index));\n        } else {\n            markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(index));\n        }\n        if (markers == null) return false;\n        boolean removed = markers.remove(marker);\n        if (removed && notify) {\n            fireChangeEvent();\n        }\n        return removed;\n    }",
+        "diff": "",
+        "file_path": "source/org/jfree/chart/plot/CategoryPlot.java",
+        "method_name": "removeDomainMarker",
+        "class_name": "CategoryPlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          2155,
+          2171
+        ],
+        "original_code": "    /**\n     * Removes a marker for a specific dataset/renderer and, if requested, \n     * sends a {@link PlotChangeEvent} to all registered listeners.\n     *\n     * @param index the dataset/renderer index.\n     * @param marker the marker.\n     * @param layer the layer (foreground or background).\n     *\n     * @return A boolean indicating whether or not the marker was actually \n     *         removed.\n     *\n     * @since 1.0.10\n     */\n\n    public boolean removeDomainMarker(int index, Marker marker, Layer layer,\n    \t\tboolean notify) {\n        ArrayList markers;\n        if (layer == Layer.FOREGROUND) {\n            markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(\n                    index));\n        }\n        else {\n            markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(\n                    index));\n        }\n        boolean removed = markers.remove(marker);\n        if (removed && notify) {\n            fireChangeEvent();\n        }\n        return removed;\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "The error is caused by the null check in the method signature which is missing in the implementation. The test is passing a null value to the method, which causes a NullPointerException when it tries to call the remove() method on the null markers list.",
+        "changes": "+ if (markers == null) return false;",
+        "fixed_method": "public boolean removeRangeMarker(int index, Marker marker, Layer layer, boolean notify) {\n        if (marker == null) {\n            throw new IllegalArgumentException(\"Null 'marker' argument.\");\n        }\n        ArrayList markers;\n        if (layer == Layer.FOREGROUND) {\n            markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(index));\n        } else {\n            markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(index));\n        }\n        if (markers == null) return false;\n        boolean removed = markers.remove(marker);\n        if (removed && notify) {\n            fireChangeEvent();\n        }\n        return removed;\n    }",
+        "diff": "+ if (markers == null) return false;",
+        "file_path": "source/org/jfree/chart/plot/XYPlot.java",
+        "method_name": "removeRangeMarker",
+        "class_name": "XYPlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          2515,
+          2534
+        ],
+        "original_code": "    /**\n     * Removes a marker for a specific dataset/renderer and sends a\n     * {@link PlotChangeEvent} to all registered listeners.\n     *\n     * @param index  the dataset/renderer index.\n     * @param marker  the marker.\n     * @param layer  the layer (foreground or background).\n     * @param notify  notify listeners?\n     *\n     * @return A boolean indicating whether or not the marker was actually \n     *         removed.\n     *\n     * @since 1.0.10\n     */\n\n    public boolean removeRangeMarker(int index, Marker marker, Layer layer,\n    \t\tboolean notify) {\n        if (marker == null) {\n            throw new IllegalArgumentException(\"Null 'marker' argument.\");\n        }\n        ArrayList markers;\n        if (layer == Layer.FOREGROUND) {\n            markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(\n                    index));\n        }\n        else {\n            markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(\n                    index));\n        }\n        boolean removed = markers.remove(marker);\n        if (removed && notify) {\n            fireChangeEvent();\n        }\n        return removed;\n    }\n"
+      },
+      {
+        "hypothesis": "The method was incorrectly removing the marker from the list, and then checking if the marker was removed, even if it was not present in the list. The method was also missing a null check for the `markers` list.",
+        "changes": "+ Check if the `markers` list is null before attempting to remove the marker from it. + Check if the marker was actually removed from the list before firing the change event.",
+        "fixed_method": "public boolean removeRangeMarker(int index, Marker marker, Layer layer, boolean notify) {\n    if (marker == null) {\n        throw new IllegalArgumentException(\"Null 'marker' argument.\");\n    }\n    ArrayList markers;\n    if (layer == Layer.FOREGROUND) {\n        markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(index));\n    } else {\n        markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(index));\n    }\n    if (markers == null) {\n        return false;\n    }\n    boolean removed = markers.remove(marker);\n    if (removed && notify) {\n        fireChangeEvent();\n    }\n    return removed;\n}",
+        "diff": "+ Check if the `markers` list is null before attempting to remove the marker from it. + Check if the marker was actually removed from the list before firing the change event.",
+        "file_path": "source/org/jfree/chart/plot/XYPlot.java",
+        "method_name": "removeRangeMarker",
+        "class_name": "XYPlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          2515,
+          2534
+        ],
+        "original_code": "    /**\n     * Removes a marker for a specific dataset/renderer and sends a\n     * {@link PlotChangeEvent} to all registered listeners.\n     *\n     * @param index  the dataset/renderer index.\n     * @param marker  the marker.\n     * @param layer  the layer (foreground or background).\n     * @param notify  notify listeners?\n     *\n     * @return A boolean indicating whether or not the marker was actually \n     *         removed.\n     *\n     * @since 1.0.10\n     */\n\n    public boolean removeRangeMarker(int index, Marker marker, Layer layer,\n    \t\tboolean notify) {\n        if (marker == null) {\n            throw new IllegalArgumentException(\"Null 'marker' argument.\");\n        }\n        ArrayList markers;\n        if (layer == Layer.FOREGROUND) {\n            markers = (ArrayList) this.foregroundRangeMarkers.get(new Integer(\n                    index));\n        }\n        else {\n            markers = (ArrayList) this.backgroundRangeMarkers.get(new Integer(\n                    index));\n        }\n        boolean removed = markers.remove(marker);\n        if (removed && notify) {\n            fireChangeEvent();\n        }\n        return removed;\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public boolean removeDomainMarker(int index, Marker marker, Layer layer, boolean notify) {\n        ArrayList markers;\n        if (layer == Layer.FOREGROUND) {\n            markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(index));\n        } else {\n            markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(index));\n        }\n        if (markers == null) return false;\n        boolean removed = markers.remove(marker);\n        if (removed && notify) {\n            fireChangeEvent();\n        }\n        return removed;\n    }",
+        "diff": "",
+        "file_path": "source/org/jfree/chart/plot/XYPlot.java",
+        "method_name": "removeDomainMarker",
+        "class_name": "XYPlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          2282,
+          2298
+        ],
+        "original_code": "    /**\n     * Removes a marker for a specific dataset/renderer and, if requested, \n     * sends a {@link PlotChangeEvent} to all registered listeners.\n     *\n     * @param index  the dataset/renderer index.\n     * @param marker  the marker.\n     * @param layer  the layer (foreground or background).\n     * @param notify  notify listeners?\n     *\n     * @return A boolean indicating whether or not the marker was actually \n     *         removed.\n     *\n     * @since 1.0.10\n     */\n\n    public boolean removeDomainMarker(int index, Marker marker, Layer layer,\n    \t\tboolean notify) {\n        ArrayList markers;\n        if (layer == Layer.FOREGROUND) {\n            markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(\n                    index));\n        }\n        else {\n            markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(\n                    index));\n        }\n        boolean removed = markers.remove(marker);\n        if (removed && notify) {\n            fireChangeEvent();\n        }\n        return removed;\n    }\n"
+      },
+      {
+        "hypothesis": "The bug is caused by a null pointer exception in the `XYPlot.removeDomainMarker` method, which is caused by the `markers` array being null. This occurs when the `index` parameter is not a valid index for the `foregroundDomainMarkers` or `backgroundDomainMarkers` maps.",
+        "changes": "+ null check for `markers` array",
+        "fixed_method": "public boolean removeDomainMarker(int index, Marker marker, Layer layer, boolean notify) {\n    ArrayList markers;\n    if (layer == Layer.FOREGROUND) {\n        markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(index));\n    } else {\n        markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(index));\n    }\n    if (markers == null) {\n        return false;\n    }\n    boolean removed = markers.remove(marker);\n    if (removed && notify) {\n        fireChangeEvent();\n    }\n    return removed;\n}",
+        "diff": "+ null check for `markers` array",
+        "file_path": "source/org/jfree/chart/plot/XYPlot.java",
+        "method_name": "removeDomainMarker",
+        "class_name": "XYPlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          2282,
+          2298
+        ],
+        "original_code": "    /**\n     * Removes a marker for a specific dataset/renderer and, if requested, \n     * sends a {@link PlotChangeEvent} to all registered listeners.\n     *\n     * @param index  the dataset/renderer index.\n     * @param marker  the marker.\n     * @param layer  the layer (foreground or background).\n     * @param notify  notify listeners?\n     *\n     * @return A boolean indicating whether or not the marker was actually \n     *         removed.\n     *\n     * @since 1.0.10\n     */\n\n    public boolean removeDomainMarker(int index, Marker marker, Layer layer,\n    \t\tboolean notify) {\n        ArrayList markers;\n        if (layer == Layer.FOREGROUND) {\n            markers = (ArrayList) this.foregroundDomainMarkers.get(new Integer(\n                    index));\n        }\n        else {\n            markers = (ArrayList) this.backgroundDomainMarkers.get(new Integer(\n                    index));\n        }\n        boolean removed = markers.remove(marker);\n        if (removed && notify) {\n            fireChangeEvent();\n        }\n        return removed;\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Chart-14/"
+}

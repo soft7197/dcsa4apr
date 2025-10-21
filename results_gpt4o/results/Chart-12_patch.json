@@ -1,0 +1,103 @@
+{
+  "bug_id": "Chart-12",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-12_1773115331",
+  "patches": [
+    [
+      {
+        "hypothesis": "The constructor does not register the MultiplePiePlot instance as a listener to the dataset, failing the test.",
+        "changes": "+ dataset.addChangeListener(this);",
+        "fixed_method": "public MultiplePiePlot(CategoryDataset dataset) {\n    super();\n    this.dataset = dataset;\n    if (this.dataset != null) {\n        dataset.addChangeListener(this);\n    }\n    PiePlot piePlot = new PiePlot(null);\n    this.pieChart = new JFreeChart(piePlot);\n    this.pieChart.removeLegend();\n    this.dataExtractOrder = TableOrder.BY_COLUMN;\n    this.pieChart.setBackgroundPaint(null);\n    TextTitle seriesTitle = new TextTitle(\"Series Title\",\n            new Font(\"SansSerif\", Font.BOLD, 12));\n    seriesTitle.setPosition(RectangleEdge.BOTTOM);\n    this.pieChart.setTitle(seriesTitle);\n    this.aggregatedItemsKey = \"Other\";\n    this.aggregatedItemsPaint = Color.lightGray;\n    this.sectionPaints = new HashMap();\n}",
+        "diff": "+ dataset.addChangeListener(this);",
+        "file_path": "source/org/jfree/chart/plot/MultiplePiePlot.java",
+        "method_name": "MultiplePiePlot",
+        "class_name": "MultiplePiePlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158
+        ],
+        "original_code": "/**\n* Creates a new plot.\n*\n* @param dataset  the dataset (<code>null</code> permitted).\n*/\npublic MultiplePiePlot(CategoryDataset dataset) {\n    super();\n    this.dataset = dataset;\n    PiePlot piePlot = new PiePlot(null);\n    this.pieChart = new JFreeChart(piePlot);\n    this.pieChart.removeLegend();\n    this.dataExtractOrder = TableOrder.BY_COLUMN;\n    this.pieChart.setBackgroundPaint(null);\n    TextTitle seriesTitle = new TextTitle(\"Series Title\",\n            new Font(\"SansSerif\", Font.BOLD, 12));\n    seriesTitle.setPosition(RectangleEdge.BOTTOM);\n    this.pieChart.setTitle(seriesTitle);\n    this.aggregatedItemsKey = \"Other\";\n    this.aggregatedItemsPaint = Color.lightGray;\n    this.sectionPaints = new HashMap();\n}"
+      },
+      {
+        "hypothesis": "The constructor does not register itself as a listener to the provided dataset, causing the test to fail.",
+        "changes": "+ this.dataset.addChangeListener(this);",
+        "fixed_method": "public MultiplePiePlot(CategoryDataset dataset) {\n    super();\n    this.dataset = dataset;\n    if (dataset != null) {\n        dataset.addChangeListener(this);\n    }\n    PiePlot piePlot = new PiePlot(null);\n    this.pieChart = new JFreeChart(piePlot);\n    this.pieChart.removeLegend();\n    this.dataExtractOrder = TableOrder.BY_COLUMN;\n    this.pieChart.setBackgroundPaint(null);\n    TextTitle seriesTitle = new TextTitle(\"Series Title\",\n            new Font(\"SansSerif\", Font.BOLD, 12));\n    seriesTitle.setPosition(RectangleEdge.BOTTOM);\n    this.pieChart.setTitle(seriesTitle);\n    this.aggregatedItemsKey = \"Other\";\n    this.aggregatedItemsPaint = Color.lightGray;\n    this.sectionPaints = new HashMap();\n}",
+        "diff": "+ this.dataset.addChangeListener(this);",
+        "file_path": "source/org/jfree/chart/plot/MultiplePiePlot.java",
+        "method_name": "MultiplePiePlot",
+        "class_name": "MultiplePiePlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158
+        ],
+        "original_code": "/**\n* Creates a new plot.\n*\n* @param dataset  the dataset (<code>null</code> permitted).\n*/\npublic MultiplePiePlot(CategoryDataset dataset) {\n    super();\n    this.dataset = dataset;\n    PiePlot piePlot = new PiePlot(null);\n    this.pieChart = new JFreeChart(piePlot);\n    this.pieChart.removeLegend();\n    this.dataExtractOrder = TableOrder.BY_COLUMN;\n    this.pieChart.setBackgroundPaint(null);\n    TextTitle seriesTitle = new TextTitle(\"Series Title\",\n            new Font(\"SansSerif\", Font.BOLD, 12));\n    seriesTitle.setPosition(RectangleEdge.BOTTOM);\n    this.pieChart.setTitle(seriesTitle);\n    this.aggregatedItemsKey = \"Other\";\n    this.aggregatedItemsPaint = Color.lightGray;\n    this.sectionPaints = new HashMap();\n}"
+      },
+      {
+        "hypothesis": "The constructor does not add the MultiplePiePlot instance as a listener to the specified dataset, which causes the test to fail when checking for the listener registration.",
+        "changes": "+this.dataset.addChangeListener(this);",
+        "fixed_method": "public MultiplePiePlot(CategoryDataset dataset) {\n    super();\n    this.dataset = dataset;\n    if (this.dataset != null) {\n        this.dataset.addChangeListener(this);\n    }\n    PiePlot piePlot = new PiePlot(null);\n    this.pieChart = new JFreeChart(piePlot);\n    this.pieChart.removeLegend();\n    this.dataExtractOrder = TableOrder.BY_COLUMN;\n    this.pieChart.setBackgroundPaint(null);\n    TextTitle seriesTitle = new TextTitle(\"Series Title\",\n            new Font(\"SansSerif\", Font.BOLD, 12));\n    seriesTitle.setPosition(RectangleEdge.BOTTOM);\n    this.pieChart.setTitle(seriesTitle);\n    this.aggregatedItemsKey = \"Other\";\n    this.aggregatedItemsPaint = Color.lightGray;\n    this.sectionPaints = new HashMap();\n}",
+        "diff": "+this.dataset.addChangeListener(this);",
+        "file_path": "source/org/jfree/chart/plot/MultiplePiePlot.java",
+        "method_name": "MultiplePiePlot",
+        "class_name": "MultiplePiePlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158
+        ],
+        "original_code": "/**\n* Creates a new plot.\n*\n* @param dataset  the dataset (<code>null</code> permitted).\n*/\npublic MultiplePiePlot(CategoryDataset dataset) {\n    super();\n    this.dataset = dataset;\n    PiePlot piePlot = new PiePlot(null);\n    this.pieChart = new JFreeChart(piePlot);\n    this.pieChart.removeLegend();\n    this.dataExtractOrder = TableOrder.BY_COLUMN;\n    this.pieChart.setBackgroundPaint(null);\n    TextTitle seriesTitle = new TextTitle(\"Series Title\",\n            new Font(\"SansSerif\", Font.BOLD, 12));\n    seriesTitle.setPosition(RectangleEdge.BOTTOM);\n    this.pieChart.setTitle(seriesTitle);\n    this.aggregatedItemsKey = \"Other\";\n    this.aggregatedItemsPaint = Color.lightGray;\n    this.sectionPaints = new HashMap();\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Chart-12/"
+}

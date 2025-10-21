@@ -1,0 +1,27 @@
+File: src/com/google/javascript/jscomp/CodeGenerator.java
+Method: CodeGenerator.isSimpleNumber
+
+static boolean isSimpleNumber(String s) {
+  int len = s.length();
+  for (int index = 0; index < len; index++) {
+    char c = s.charAt(index);
+    if (!Character.isDigit(c)) {
+        return false;
+    } else if (index == 0 && c == '0' && len > 1) {
+        return false;
+    } else if (c == '.' && (index == 0 || index == len - 1)) {
+        return false;
+    } else if (c == '.') {
+        int dotCount = 0;
+        for (char ch : s.toCharArray()) {
+            if (ch == '.') {
+                dotCount++;
+            }
+        }
+        if (dotCount != 1) {
+            return false;
+        }
+    }
+  }
+  return len > 0;
+}

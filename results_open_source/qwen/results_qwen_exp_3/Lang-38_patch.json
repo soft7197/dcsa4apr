@@ -1,0 +1,34 @@
+{
+  "bug_id": "Lang-38",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-38_1772011723",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the forced timezone conversion which shifts the hour incorrectly. The fix involves ensuring that the time is correctly adjusted to the target timezone without altering the actual time values.",
+        "changes": "- calendar.setTimeZone(mTimeZone);\n+ calendar.setTimeInMillis(calendar.getTimeInMillis());\n+ calendar.setTimeZone(mTimeZone);",
+        "fixed_method": "public StringBuffer format(Calendar calendar, StringBuffer buf) {\n    if (mTimeZoneForced) {\n        calendar = (Calendar) calendar.clone();\n        calendar.setTimeInMillis(calendar.getTimeInMillis());\n        calendar.setTimeZone(mTimeZone);\n    }\n    return applyRules(calendar, buf);\n}",
+        "diff": "- calendar.setTimeZone(mTimeZone);\n+ calendar.setTimeInMillis(calendar.getTimeInMillis());\n+ calendar.setTimeZone(mTimeZone);",
+        "file_path": "src/java/org/apache/commons/lang3/time/FastDateFormat.java",
+        "method_name": "format",
+        "class_name": "FastDateFormat",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          870,
+          871,
+          872,
+          873,
+          874,
+          875,
+          876
+        ],
+        "original_code": "/**\n* <p>Formats a <code>Calendar</code> object into the\n* supplied <code>StringBuffer</code>.</p>\n*\n* @param calendar  the calendar to format\n* @param buf  the buffer to format into\n* @return the specified string buffer\n*/\npublic StringBuffer format(Calendar calendar, StringBuffer buf) {\n    if (mTimeZoneForced) {\n        calendar = (Calendar) calendar.clone();\n        calendar.setTimeZone(mTimeZone);\n    }\n    return applyRules(calendar, buf);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Lang-38/"
+}

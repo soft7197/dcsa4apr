@@ -1,0 +1,527 @@
+{
+  "com.google.javascript.jscomp.CoalesceVariableNamesTest::testParameter4": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        68
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/AbstractCompiler;Z)V",
+      "executed_lines": [
+        79,
+        80,
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames",
+      "method": "checkRanges",
+      "signature": "(Ljava/util/ArrayList;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        283,
+        285,
+        286
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames",
+      "method": "computeVariableNamesInterferenceGraph",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/jscomp/ControlFlowGraph;Ljava/util/Set;)Lcom/google/javascript/jscomp/graph/UndiGraph;",
+      "executed_lines": [
+        197,
+        199,
+        202,
+        203,
+        204,
+        212,
+        213,
+        216,
+        220,
+        221,
+        222,
+        223,
+        226,
+        227,
+        231,
+        232,
+        233,
+        234,
+        236,
+        243,
+        244,
+        246,
+        248,
+        249,
+        251,
+        253,
+        255,
+        257,
+        259,
+        260,
+        263,
+        264,
+        265,
+        266,
+        267,
+        268
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames",
+      "method": "enterScope",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        96,
+        97,
+        98,
+        100,
+        102,
+        108,
+        110,
+        114,
+        118,
+        119,
+        120
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames",
+      "method": "exitScope",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        124,
+        125,
+        127,
+        128
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames",
+      "method": "removeVarDeclaration",
+      "signature": "(Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        359,
+        360,
+        363,
+        366,
+        368,
+        382,
+        385,
+        386,
+        390
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames",
+      "method": "visit",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        132,
+        135,
+        137,
+        138,
+        139,
+        143,
+        145,
+        146,
+        148,
+        152,
+        153,
+        155,
+        156,
+        193
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames$1",
+      "method": "compare",
+      "signature": "(Lcom/google/javascript/jscomp/Scope$Var;Lcom/google/javascript/jscomp/Scope$Var;)I",
+      "executed_lines": [
+        71
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames$1",
+      "method": "compare",
+      "signature": "(Ljava/lang/Object;Ljava/lang/Object;)I",
+      "executed_lines": [
+        69
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames$CombinedCfgNodeLiveRangeChecker",
+      "method": "<init>",
+      "signature": "(Ljava/util/ArrayList;)V",
+      "executed_lines": [
+        299,
+        300,
+        301
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames$CombinedCfgNodeLiveRangeChecker",
+      "method": "visit",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        305,
+        306,
+        307,
+        308,
+        310
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames$CombinedLiveRangeChecker",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/CoalesceVariableNames$LiveRangeChecker;Lcom/google/javascript/jscomp/CoalesceVariableNames$LiveRangeChecker;)V",
+      "executed_lines": [
+        326,
+        327,
+        328,
+        329
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames$CombinedLiveRangeChecker",
+      "method": "connectIfCrossed",
+      "signature": "(Lcom/google/javascript/jscomp/graph/UndiGraph;)V",
+      "executed_lines": [
+        346,
+        351
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames$CombinedLiveRangeChecker",
+      "method": "shouldVisit",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        336
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames$CombinedLiveRangeChecker",
+      "method": "visit",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        341,
+        342,
+        343
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames$LiveRangeChecker",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/Scope$Var;Lcom/google/javascript/jscomp/Scope$Var;)V",
+      "executed_lines": [
+        394,
+        395,
+        399,
+        400,
+        401,
+        402
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames$LiveRangeChecker",
+      "method": "isAssignTo",
+      "signature": "(Lcom/google/javascript/jscomp/Scope$Var;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        428,
+        430,
+        432,
+        433,
+        436,
+        438,
+        441,
+        442
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames$LiveRangeChecker",
+      "method": "isReadFrom",
+      "signature": "(Lcom/google/javascript/jscomp/Scope$Var;Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        449
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames$LiveRangeChecker",
+      "method": "shouldVisit",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        412
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.CoalesceVariableNames$LiveRangeChecker",
+      "method": "visit",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        418,
+        419,
+        422,
+        425
+      ]
+    }
+  ],
+  "com.google.javascript.jscomp.parsing.JsDocInfoParserTest::testParseLicenseWithAnnotation": [
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        1950
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/parsing/JsDocTokenStream;Ljava/lang/String;Lcom/google/javascript/jscomp/parsing/Config;Lcom/google/javascript/jscomp/mozilla/rhino/ErrorReporter;)V",
+      "executed_lines": [
+        51,
+        66,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        109,
+        110,
+        1955
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser",
+      "method": "extractBlockComment",
+      "signature": "(Lcom/google/javascript/jscomp/parsing/JsDocToken;)Lcom/google/javascript/jscomp/parsing/JsDocInfoParser$ExtractionInfo;",
+      "executed_lines": [
+        1221,
+        1223,
+        1226,
+        1230
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser",
+      "method": "extractMultilineTextualBlock",
+      "signature": "(Lcom/google/javascript/jscomp/parsing/JsDocToken;Lcom/google/javascript/jscomp/parsing/JsDocInfoParser$WhitespaceOption;)Lcom/google/javascript/jscomp/parsing/JsDocInfoParser$ExtractionInfo;",
+      "executed_lines": [
+        1116,
+        1121,
+        1122,
+        1123,
+        1126,
+        1128,
+        1132,
+        1133,
+        1135,
+        1136,
+        1138,
+        1141,
+        1143,
+        1151,
+        1152,
+        1155,
+        1156,
+        1159,
+        1160,
+        1161,
+        1168,
+        1170,
+        1174,
+        1175,
+        1177,
+        1178,
+        1182
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser",
+      "method": "extractSingleLineBlock",
+      "signature": "()Lcom/google/javascript/jscomp/parsing/JsDocInfoParser$ExtractionInfo;",
+      "executed_lines": [
+        1066,
+        1067,
+        1068,
+        1070,
+        1073,
+        1074,
+        1078
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser",
+      "method": "hasParsedFileOverviewDocInfo",
+      "signature": "()Z",
+      "executed_lines": [
+        2014
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser",
+      "method": "next",
+      "signature": "()Lcom/google/javascript/jscomp/parsing/JsDocToken;",
+      "executed_lines": [
+        1980,
+        1981
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser",
+      "method": "parse",
+      "signature": "()Z",
+      "executed_lines": [
+        145,
+        146,
+        148,
+        149,
+        152,
+        158,
+        160,
+        161,
+        162,
+        163,
+        165,
+        166,
+        167,
+        172,
+        174,
+        176,
+        177,
+        179,
+        183,
+        186,
+        187,
+        276,
+        280,
+        282,
+        283,
+        284,
+        288,
+        289,
+        757,
+        761
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser",
+      "method": "retrieveAndResetParsedJSDocInfo",
+      "signature": "()Lcom/google/javascript/rhino/JSDocInfo;",
+      "executed_lines": [
+        2022
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser",
+      "method": "setFileLevelJsDocBuilder",
+      "signature": "(Lcom/google/javascript/rhino/Node$FileLevelJsDocBuilder;)V",
+      "executed_lines": [
+        82,
+        83
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser$1",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        158,
+        691
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser$ErrorReporterParser",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/parsing/JsDocInfoParser;Lcom/google/javascript/jscomp/parsing/JsDocInfoParser$1;)V",
+      "executed_lines": [
+        53
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser$ExtractionInfo",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;Lcom/google/javascript/jscomp/parsing/JsDocToken;)V",
+      "executed_lines": [
+        1042,
+        1043,
+        1044,
+        1045
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser$ExtractionInfo",
+      "method": "access$400",
+      "signature": "(Lcom/google/javascript/jscomp/parsing/JsDocInfoParser$ExtractionInfo;)Ljava/lang/String;",
+      "executed_lines": [
+        1038
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser$State",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        93,
+        94,
+        95,
+        96
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.parsing",
+      "class": "com.google.javascript.jscomp.parsing.JsDocInfoParser$WhitespaceOption",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        1085,
+        1090,
+        1093,
+        1096
+      ]
+    }
+  ]
+}

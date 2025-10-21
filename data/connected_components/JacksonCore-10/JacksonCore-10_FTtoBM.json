@@ -1,0 +1,42 @@
+{
+  "com.fasterxml.jackson.core.sym.TestByteBasedSymbols::testIssue207": [
+    {
+      "buggy_method": "_findOffsetForAdd",
+      "class": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer"
+    },
+    {
+      "buggy_method": "calcHash",
+      "class": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer"
+    }
+  ],
+  "com.fasterxml.jackson.core.sym.TestSymbolTables::testCollisionsWithBytesNew187b": [
+    {
+      "buggy_method": "_findOffsetForAdd",
+      "class": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer"
+    },
+    {
+      "buggy_method": "calcHash",
+      "class": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer"
+    }
+  ],
+  "com.fasterxml.jackson.core.sym.TestSymbolTables::testSyntheticWithBytesNew": [
+    {
+      "buggy_method": "_findOffsetForAdd",
+      "class": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer"
+    },
+    {
+      "buggy_method": "calcHash",
+      "class": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer"
+    }
+  ],
+  "com.fasterxml.jackson.core.sym.TestSymbolTables::testShortNameCollisionsDirectNew": [
+    {
+      "buggy_method": "_findOffsetForAdd",
+      "class": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer"
+    },
+    {
+      "buggy_method": "calcHash",
+      "class": "com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer"
+    }
+  ]
+}

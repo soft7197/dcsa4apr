@@ -1,0 +1,8 @@
+File: src/java/org/apache/commons/lang/LocaleUtils.java
+Method: LocaleUtils.isAvailableLocale
+
+public static boolean isAvailableLocale(Locale locale) {
+  Set cAvailableLocaleSet = new HashSet(Arrays.asList(Locale.getAvailableLocales()));
+  if (locale == null) return false;
+  return cAvailableLocaleSet.contains(locale);
+}

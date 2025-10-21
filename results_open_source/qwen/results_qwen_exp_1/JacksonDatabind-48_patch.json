@@ -1,0 +1,46 @@
+{
+  "bug_id": "JacksonDatabind-48",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-48_1771897100",
+  "patches": [
+    [
+      {
+        "hypothesis": "The overfitting issues arise from the introduction of specific checks for AUTO_DETECT_GETTERS and AUTO_DETECT_IS_GETTERS without understanding their broader implications. The refined strategy will ensure that the visibility checks are applied consistently and logically across both methods, addressing the root causes and handling general cases.",
+        "changes": "- Removed redundant method definition\n+ Ensured consistent application of visibility checks across methods",
+        "methods": {
+          "src/main/java/com/fasterxml/jackson/databind/DeserializationConfig.java::DeserializationConfig::getDefaultVisibilityChecker::L770": {
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/DeserializationConfig.java",
+            "method_name": "getDefaultVisibilityChecker",
+            "class_name": "DeserializationConfig",
+            "line_numbers": [
+              770,
+              784
+            ],
+            "original_code": "\n    @Override\n    public VisibilityChecker<?> getDefaultVisibilityChecker()\n    {\n        VisibilityChecker<?> vchecker = super.getDefaultVisibilityChecker();\n        if (!isEnabled(MapperFeature.AUTO_DETECT_SETTERS)) {\n            vchecker = vchecker.withSetterVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_CREATORS)) {\n            vchecker = vchecker.withCreatorVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_FIELDS)) {\n            vchecker = vchecker.withFieldVisibility(Visibility.NONE);\n        }\n        return vchecker;\n    }\n",
+            "fixed_method": "    @Override\n    public VisibilityChecker<?> getDefaultVisibilityChecker()\n    {\n        VisibilityChecker<?> vchecker = super.getDefaultVisibilityChecker();\n        if (!isEnabled(MapperFeature.AUTO_DETECT_SETTERS)) {\n            vchecker = vchecker.withSetterVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_CREATORS)) {\n            vchecker = vchecker.withCreatorVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_FIELDS)) {\n            vchecker = vchecker.withFieldVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_GETTERS)) {\n            vchecker = vchecker.withGetterVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_IS_GETTERS)) {\n            vchecker = vchecker.withIsGetterVisibility(Visibility.NONE);\n        }\n        return vchecker;\n    }",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/databind/SerializationConfig.java::SerializationConfig::getDefaultVisibilityChecker::L860": {
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/SerializationConfig.java",
+            "method_name": "getDefaultVisibilityChecker",
+            "class_name": "SerializationConfig",
+            "line_numbers": [
+              860,
+              875
+            ],
+            "original_code": "\n    @Override\n    public VisibilityChecker<?> getDefaultVisibilityChecker()\n    {\n        VisibilityChecker<?> vchecker = super.getDefaultVisibilityChecker();\n        // then global overrides (disabling)\n        if (!isEnabled(MapperFeature.AUTO_DETECT_GETTERS)) {\n            vchecker = vchecker.withGetterVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_IS_GETTERS)) {\n            vchecker = vchecker.withIsGetterVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_FIELDS)) {\n            vchecker = vchecker.withFieldVisibility(Visibility.NONE);\n        }\n        return vchecker;\n    }\n",
+            "fixed_method": "    @Override\n    public VisibilityChecker<?> getDefaultVisibilityChecker()\n    {\n        VisibilityChecker<?> vchecker = super.getDefaultVisibilityChecker();\n        if (!isEnabled(MapperFeature.AUTO_DETECT_SETTERS)) {\n            vchecker = vchecker.withSetterVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_CREATORS)) {\n            vchecker = vchecker.withCreatorVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_FIELDS)) {\n            vchecker = vchecker.withFieldVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_GETTERS)) {\n            vchecker = vchecker.withGetterVisibility(Visibility.NONE);\n        }\n        if (!isEnabled(MapperFeature.AUTO_DETECT_IS_GETTERS)) {\n            vchecker = vchecker.withIsGetterVisibility(Visibility.NONE);\n        }\n        return vchecker;\n    }",
+            "attempt": 1
+          }
+        },
+        "is_multi_method": true,
+        "is_refinement": true,
+        "refinement_attempt": 1
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-48/"
+}

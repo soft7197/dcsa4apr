@@ -1,0 +1,5978 @@
+{
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testParseSourceMetaMap": [
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        51,
+        56,
+        58
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "access$300",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;)[Ljava/lang/String;",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "compareEntry",
+      "signature": "(Ljava/util/ArrayList;II)I",
+      "executed_lines": [
+        461
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getJavaStringArray",
+      "signature": "(Lorg/json/JSONArray;)[Ljava/lang/String;",
+      "executed_lines": [
+        270,
+        271,
+        272,
+        273,
+        275
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getMappingForLine",
+      "signature": "(II)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        208,
+        209,
+        211,
+        215,
+        216,
+        220,
+        224,
+        226,
+        227,
+        231,
+        232,
+        233
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getOriginalMappingForEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        483,
+        487,
+        491,
+        492,
+        494
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "parse",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        72,
+        73
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "parse",
+      "signature": "(Ljava/lang/String;Lcom/google/debugging/sourcemap/SourceMapSupplier;)V",
+      "executed_lines": [
+        81,
+        82,
+        85,
+        86
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "parse",
+      "signature": "(Lorg/json/JSONObject;Lcom/google/debugging/sourcemap/SourceMapSupplier;)V",
+      "executed_lines": [
+        102,
+        103,
+        107,
+        108,
+        112,
+        114,
+        115,
+        118,
+        119,
+        121,
+        122,
+        124,
+        126,
+        129,
+        130
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "parseMetaMap",
+      "signature": "(Lorg/json/JSONObject;Lcom/google/debugging/sourcemap/SourceMapSupplier;)V",
+      "executed_lines": [
+        139,
+        145,
+        146,
+        150,
+        151,
+        155,
+        162,
+        163,
+        164,
+        165,
+        166,
+        170,
+        171,
+        172,
+        174,
+        175,
+        176,
+        177,
+        180,
+        186,
+        189,
+        191,
+        195,
+        197,
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "search",
+      "signature": "(Ljava/util/ArrayList;III)I",
+      "executed_lines": [
+        437,
+        438,
+        439,
+        440,
+        441,
+        443,
+        444,
+        449,
+        450,
+        454
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "visitMappings",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$EntryVisitor;)V",
+      "executed_lines": [
+        685,
+        686,
+        687,
+        688,
+        689,
+        691,
+        692,
+        693,
+        694,
+        695,
+        696,
+        697,
+        698,
+        699,
+        701,
+        707,
+        710,
+        711,
+        712,
+        713,
+        715,
+        717,
+        723
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;Ljava/lang/String;)V",
+      "executed_lines": [
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        288,
+        289,
+        290
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "build",
+      "signature": "()V",
+      "executed_lines": [
+        293,
+        294,
+        295,
+        297,
+        301,
+        302,
+        304,
+        308,
+        309,
+        310,
+        311,
+        312,
+        314,
+        315,
+        316,
+        317,
+        319,
+        321,
+        322,
+        325,
+        326,
+        328
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "decodeEntry",
+      "signature": "([II)Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;",
+      "executed_lines": [
+        351,
+        365,
+        368,
+        369,
+        373,
+        379,
+        380,
+        381,
+        382,
+        383,
+        388,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "entryComplete",
+      "signature": "()Z",
+      "executed_lines": [
+        418,
+        422,
+        423
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "nextValue",
+      "signature": "()I",
+      "executed_lines": [
+        427
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "tryConsumeToken",
+      "signature": "(C)Z",
+      "executed_lines": [
+        409,
+        411,
+        412,
+        414
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "validateEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)V",
+      "executed_lines": [
+        334,
+        335,
+        337,
+        339
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "<init>",
+      "signature": "(IIIII)V",
+      "executed_lines": [
+        666,
+        667,
+        668
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        672
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        551,
+        553,
+        554,
+        555,
+        556
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "hasNext",
+      "signature": "()Z",
+      "executed_lines": [
+        569
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "next",
+      "signature": "()C",
+      "executed_lines": [
+        560
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "peek",
+      "signature": "()C",
+      "executed_lines": [
+        564
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        591,
+        592,
+        593
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "getGeneratedColumn",
+      "signature": "()I",
+      "executed_lines": [
+        597
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        617
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "getSourceFileId",
+      "signature": "()I",
+      "executed_lines": [
+        602
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "<init>",
+      "signature": "(IIII)V",
+      "executed_lines": [
+        631,
+        632,
+        633,
+        634,
+        635
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        654
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceColumn",
+      "signature": "()I",
+      "executed_lines": [
+        649
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceFileId",
+      "signature": "()I",
+      "executed_lines": [
+        639
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceLine",
+      "signature": "()I",
+      "executed_lines": [
+        644
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testGoldenOutput0a": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testMultilineMapping": [
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        51,
+        56,
+        58
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "access$300",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;)[Ljava/lang/String;",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "compareEntry",
+      "signature": "(Ljava/util/ArrayList;II)I",
+      "executed_lines": [
+        461
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getJavaStringArray",
+      "signature": "(Lorg/json/JSONArray;)[Ljava/lang/String;",
+      "executed_lines": [
+        270,
+        271,
+        272,
+        273,
+        275
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getMappingForLine",
+      "signature": "(II)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        208,
+        209,
+        211,
+        215,
+        216,
+        220,
+        224,
+        226,
+        227,
+        231,
+        232,
+        233
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getOriginalMappingForEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        483,
+        487,
+        491,
+        492,
+        494
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "parse",
+      "signature": "(Lorg/json/JSONObject;Lcom/google/debugging/sourcemap/SourceMapSupplier;)V",
+      "executed_lines": [
+        102,
+        103,
+        107,
+        108,
+        112,
+        118,
+        119,
+        121,
+        122,
+        124,
+        126,
+        129,
+        130
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "search",
+      "signature": "(Ljava/util/ArrayList;III)I",
+      "executed_lines": [
+        437,
+        438,
+        439,
+        441,
+        443,
+        444,
+        449,
+        450,
+        451,
+        454
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;Ljava/lang/String;)V",
+      "executed_lines": [
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        288,
+        289,
+        290
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "build",
+      "signature": "()V",
+      "executed_lines": [
+        293,
+        294,
+        295,
+        297,
+        301,
+        302,
+        304,
+        308,
+        309,
+        310,
+        311,
+        312,
+        314,
+        315,
+        316,
+        317,
+        319,
+        321,
+        322,
+        325,
+        326,
+        328
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "decodeEntry",
+      "signature": "([II)Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;",
+      "executed_lines": [
+        351,
+        373,
+        379,
+        380,
+        381,
+        382,
+        383,
+        388,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "entryComplete",
+      "signature": "()Z",
+      "executed_lines": [
+        418,
+        422,
+        423
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "nextValue",
+      "signature": "()I",
+      "executed_lines": [
+        427
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "tryConsumeToken",
+      "signature": "(C)Z",
+      "executed_lines": [
+        409,
+        411,
+        412,
+        414
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "validateEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)V",
+      "executed_lines": [
+        334,
+        335,
+        337,
+        339
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "<init>",
+      "signature": "(IIIII)V",
+      "executed_lines": [
+        666,
+        667,
+        668
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        672
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        551,
+        553,
+        554,
+        555,
+        556
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "hasNext",
+      "signature": "()Z",
+      "executed_lines": [
+        569
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "next",
+      "signature": "()C",
+      "executed_lines": [
+        560
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "peek",
+      "signature": "()C",
+      "executed_lines": [
+        564
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        591,
+        592,
+        593
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "getGeneratedColumn",
+      "signature": "()I",
+      "executed_lines": [
+        597
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "<init>",
+      "signature": "(IIII)V",
+      "executed_lines": [
+        631,
+        632,
+        633,
+        634,
+        635
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        654
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceColumn",
+      "signature": "()I",
+      "executed_lines": [
+        649
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceFileId",
+      "signature": "()I",
+      "executed_lines": [
+        639
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceLine",
+      "signature": "()I",
+      "executed_lines": [
+        644
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testMultiFunctionMapping": [
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        51,
+        56,
+        58
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "access$300",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;)[Ljava/lang/String;",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "compareEntry",
+      "signature": "(Ljava/util/ArrayList;II)I",
+      "executed_lines": [
+        461
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getJavaStringArray",
+      "signature": "(Lorg/json/JSONArray;)[Ljava/lang/String;",
+      "executed_lines": [
+        270,
+        271,
+        272,
+        273,
+        275
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getMappingForLine",
+      "signature": "(II)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        208,
+        209,
+        211,
+        215,
+        216,
+        220,
+        224,
+        226,
+        227,
+        231,
+        232,
+        233
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getOriginalMappingForEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        483,
+        487,
+        491,
+        492,
+        494
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "parse",
+      "signature": "(Lorg/json/JSONObject;Lcom/google/debugging/sourcemap/SourceMapSupplier;)V",
+      "executed_lines": [
+        102,
+        103,
+        107,
+        108,
+        112,
+        118,
+        119,
+        121,
+        122,
+        124,
+        126,
+        129,
+        130
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "search",
+      "signature": "(Ljava/util/ArrayList;III)I",
+      "executed_lines": [
+        437,
+        438,
+        439,
+        441,
+        443,
+        444,
+        445,
+        449,
+        450,
+        454
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;Ljava/lang/String;)V",
+      "executed_lines": [
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        288,
+        289,
+        290
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "build",
+      "signature": "()V",
+      "executed_lines": [
+        293,
+        294,
+        295,
+        297,
+        301,
+        302,
+        304,
+        308,
+        309,
+        310,
+        311,
+        312,
+        314,
+        315,
+        316,
+        317,
+        319,
+        321,
+        322,
+        325,
+        326,
+        328
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "decodeEntry",
+      "signature": "([II)Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;",
+      "executed_lines": [
+        351,
+        373,
+        379,
+        380,
+        381,
+        382,
+        383,
+        388,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "entryComplete",
+      "signature": "()Z",
+      "executed_lines": [
+        418,
+        422,
+        423
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "nextValue",
+      "signature": "()I",
+      "executed_lines": [
+        427
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "tryConsumeToken",
+      "signature": "(C)Z",
+      "executed_lines": [
+        409,
+        411,
+        412,
+        414
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "validateEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)V",
+      "executed_lines": [
+        334,
+        335,
+        337,
+        339
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "<init>",
+      "signature": "(IIIII)V",
+      "executed_lines": [
+        666,
+        667,
+        668
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        672
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        551,
+        553,
+        554,
+        555,
+        556
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "hasNext",
+      "signature": "()Z",
+      "executed_lines": [
+        569
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "next",
+      "signature": "()C",
+      "executed_lines": [
+        560
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "peek",
+      "signature": "()C",
+      "executed_lines": [
+        564
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        591,
+        592,
+        593
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "getGeneratedColumn",
+      "signature": "()I",
+      "executed_lines": [
+        597
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "<init>",
+      "signature": "(IIII)V",
+      "executed_lines": [
+        631,
+        632,
+        633,
+        634,
+        635
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        654
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceColumn",
+      "signature": "()I",
+      "executed_lines": [
+        649
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceFileId",
+      "signature": "()I",
+      "executed_lines": [
+        639
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceLine",
+      "signature": "()I",
+      "executed_lines": [
+        644
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testLiteralMappingsGoldenOutput": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testMultilineMapping2": [
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        51,
+        56,
+        58
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "access$300",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;)[Ljava/lang/String;",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "compareEntry",
+      "signature": "(Ljava/util/ArrayList;II)I",
+      "executed_lines": [
+        461
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getJavaStringArray",
+      "signature": "(Lorg/json/JSONArray;)[Ljava/lang/String;",
+      "executed_lines": [
+        270,
+        271,
+        272,
+        273,
+        275
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getMappingForLine",
+      "signature": "(II)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        208,
+        209,
+        211,
+        215,
+        216,
+        220,
+        224,
+        226,
+        227,
+        231,
+        232,
+        233
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getOriginalMappingForEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        483,
+        487,
+        491,
+        492,
+        494
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "parse",
+      "signature": "(Lorg/json/JSONObject;Lcom/google/debugging/sourcemap/SourceMapSupplier;)V",
+      "executed_lines": [
+        102,
+        103,
+        107,
+        108,
+        112,
+        118,
+        119,
+        121,
+        122,
+        124,
+        126,
+        129,
+        130
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "search",
+      "signature": "(Ljava/util/ArrayList;III)I",
+      "executed_lines": [
+        437,
+        438,
+        439,
+        441,
+        443,
+        444,
+        449,
+        450,
+        451,
+        454
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;Ljava/lang/String;)V",
+      "executed_lines": [
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        288,
+        289,
+        290
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "build",
+      "signature": "()V",
+      "executed_lines": [
+        293,
+        294,
+        295,
+        297,
+        301,
+        302,
+        304,
+        308,
+        309,
+        310,
+        311,
+        312,
+        314,
+        315,
+        316,
+        317,
+        319,
+        321,
+        322,
+        325,
+        326,
+        328
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "decodeEntry",
+      "signature": "([II)Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;",
+      "executed_lines": [
+        351,
+        373,
+        379,
+        380,
+        381,
+        382,
+        383,
+        388,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "entryComplete",
+      "signature": "()Z",
+      "executed_lines": [
+        418,
+        422,
+        423
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "nextValue",
+      "signature": "()I",
+      "executed_lines": [
+        427
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "tryConsumeToken",
+      "signature": "(C)Z",
+      "executed_lines": [
+        409,
+        411,
+        412,
+        414
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "validateEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)V",
+      "executed_lines": [
+        334,
+        335,
+        337,
+        339
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "<init>",
+      "signature": "(IIIII)V",
+      "executed_lines": [
+        666,
+        667,
+        668
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        672
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        551,
+        553,
+        554,
+        555,
+        556
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "hasNext",
+      "signature": "()Z",
+      "executed_lines": [
+        569
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "next",
+      "signature": "()C",
+      "executed_lines": [
+        560
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "peek",
+      "signature": "()C",
+      "executed_lines": [
+        564
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        591,
+        592,
+        593
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "getGeneratedColumn",
+      "signature": "()I",
+      "executed_lines": [
+        597
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "<init>",
+      "signature": "(IIII)V",
+      "executed_lines": [
+        631,
+        632,
+        633,
+        634,
+        635
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        654
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceColumn",
+      "signature": "()I",
+      "executed_lines": [
+        649
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceFileId",
+      "signature": "()I",
+      "executed_lines": [
+        639
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceLine",
+      "signature": "()I",
+      "executed_lines": [
+        644
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testBasicMappingGoldenOutput": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testSourceMapMerging": [
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        51,
+        56,
+        58
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "access$300",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;)[Ljava/lang/String;",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "compareEntry",
+      "signature": "(Ljava/util/ArrayList;II)I",
+      "executed_lines": [
+        461
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getJavaStringArray",
+      "signature": "(Lorg/json/JSONArray;)[Ljava/lang/String;",
+      "executed_lines": [
+        270,
+        271,
+        272,
+        273,
+        275
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getMappingForLine",
+      "signature": "(II)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        208,
+        209,
+        211,
+        215,
+        216,
+        220,
+        224,
+        226,
+        227,
+        231,
+        232,
+        233
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getOriginalMappingForEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        483,
+        487,
+        491,
+        492,
+        494
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "parse",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        72,
+        73
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "parse",
+      "signature": "(Ljava/lang/String;Lcom/google/debugging/sourcemap/SourceMapSupplier;)V",
+      "executed_lines": [
+        81,
+        82,
+        85,
+        86
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "parse",
+      "signature": "(Lorg/json/JSONObject;Lcom/google/debugging/sourcemap/SourceMapSupplier;)V",
+      "executed_lines": [
+        102,
+        103,
+        107,
+        108,
+        112,
+        118,
+        119,
+        121,
+        122,
+        124,
+        126,
+        129,
+        130
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "search",
+      "signature": "(Ljava/util/ArrayList;III)I",
+      "executed_lines": [
+        437,
+        438,
+        439,
+        440,
+        441,
+        443,
+        444,
+        449,
+        450,
+        454
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "visitMappings",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$EntryVisitor;)V",
+      "executed_lines": [
+        685,
+        686,
+        687,
+        688,
+        689,
+        691,
+        692,
+        693,
+        694,
+        695,
+        696,
+        697,
+        698,
+        699,
+        701,
+        707,
+        710,
+        711,
+        712,
+        713,
+        715,
+        717,
+        723
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;Ljava/lang/String;)V",
+      "executed_lines": [
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        288,
+        289,
+        290
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "build",
+      "signature": "()V",
+      "executed_lines": [
+        293,
+        294,
+        295,
+        297,
+        301,
+        302,
+        304,
+        308,
+        309,
+        310,
+        311,
+        312,
+        314,
+        315,
+        316,
+        317,
+        319,
+        321,
+        322,
+        325,
+        326,
+        328
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "decodeEntry",
+      "signature": "([II)Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;",
+      "executed_lines": [
+        351,
+        365,
+        368,
+        369,
+        373,
+        379,
+        380,
+        381,
+        382,
+        383,
+        388,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "entryComplete",
+      "signature": "()Z",
+      "executed_lines": [
+        418,
+        422,
+        423
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "nextValue",
+      "signature": "()I",
+      "executed_lines": [
+        427
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "tryConsumeToken",
+      "signature": "(C)Z",
+      "executed_lines": [
+        409,
+        411,
+        412,
+        414
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "validateEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)V",
+      "executed_lines": [
+        334,
+        335,
+        337,
+        339
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "<init>",
+      "signature": "(IIIII)V",
+      "executed_lines": [
+        666,
+        667,
+        668
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        672
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        551,
+        553,
+        554,
+        555,
+        556
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "hasNext",
+      "signature": "()Z",
+      "executed_lines": [
+        569
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "next",
+      "signature": "()C",
+      "executed_lines": [
+        560
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "peek",
+      "signature": "()C",
+      "executed_lines": [
+        564
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        591,
+        592,
+        593
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "getGeneratedColumn",
+      "signature": "()I",
+      "executed_lines": [
+        597
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        617
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "getSourceFileId",
+      "signature": "()I",
+      "executed_lines": [
+        602
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "<init>",
+      "signature": "(IIII)V",
+      "executed_lines": [
+        631,
+        632,
+        633,
+        634,
+        635
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        654
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceColumn",
+      "signature": "()I",
+      "executed_lines": [
+        649
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceFileId",
+      "signature": "()I",
+      "executed_lines": [
+        639
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceLine",
+      "signature": "()I",
+      "executed_lines": [
+        644
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testLiteralMappings": [
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        51,
+        56,
+        58
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "access$300",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;)[Ljava/lang/String;",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "compareEntry",
+      "signature": "(Ljava/util/ArrayList;II)I",
+      "executed_lines": [
+        461
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getJavaStringArray",
+      "signature": "(Lorg/json/JSONArray;)[Ljava/lang/String;",
+      "executed_lines": [
+        270,
+        271,
+        272,
+        273,
+        275
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getMappingForLine",
+      "signature": "(II)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        208,
+        209,
+        211,
+        215,
+        216,
+        220,
+        224,
+        226,
+        227,
+        231,
+        232,
+        233
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getOriginalMappingForEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        483,
+        487,
+        491,
+        492,
+        494
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "parse",
+      "signature": "(Lorg/json/JSONObject;Lcom/google/debugging/sourcemap/SourceMapSupplier;)V",
+      "executed_lines": [
+        102,
+        103,
+        107,
+        108,
+        112,
+        118,
+        119,
+        121,
+        122,
+        124,
+        126,
+        129,
+        130
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "search",
+      "signature": "(Ljava/util/ArrayList;III)I",
+      "executed_lines": [
+        437,
+        438,
+        439,
+        441,
+        443,
+        444,
+        445,
+        449,
+        450,
+        454
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;Ljava/lang/String;)V",
+      "executed_lines": [
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        288,
+        289,
+        290
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "build",
+      "signature": "()V",
+      "executed_lines": [
+        293,
+        294,
+        295,
+        297,
+        301,
+        302,
+        304,
+        308,
+        309,
+        310,
+        311,
+        312,
+        314,
+        315,
+        316,
+        317,
+        319,
+        321,
+        322,
+        325,
+        326,
+        328
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "decodeEntry",
+      "signature": "([II)Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;",
+      "executed_lines": [
+        351,
+        373,
+        379,
+        380,
+        381,
+        382,
+        383,
+        388,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "entryComplete",
+      "signature": "()Z",
+      "executed_lines": [
+        418,
+        422,
+        423
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "nextValue",
+      "signature": "()I",
+      "executed_lines": [
+        427
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "tryConsumeToken",
+      "signature": "(C)Z",
+      "executed_lines": [
+        409,
+        411,
+        412,
+        414
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "validateEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)V",
+      "executed_lines": [
+        334,
+        335,
+        337,
+        339
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "<init>",
+      "signature": "(IIIII)V",
+      "executed_lines": [
+        666,
+        667,
+        668
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        672
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        551,
+        553,
+        554,
+        555,
+        556
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "hasNext",
+      "signature": "()Z",
+      "executed_lines": [
+        569
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "next",
+      "signature": "()C",
+      "executed_lines": [
+        560
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "peek",
+      "signature": "()C",
+      "executed_lines": [
+        564
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        591,
+        592,
+        593
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "getGeneratedColumn",
+      "signature": "()I",
+      "executed_lines": [
+        597
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "<init>",
+      "signature": "(IIII)V",
+      "executed_lines": [
+        631,
+        632,
+        633,
+        634,
+        635
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        654
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceColumn",
+      "signature": "()I",
+      "executed_lines": [
+        649
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceFileId",
+      "signature": "()I",
+      "executed_lines": [
+        639
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceLine",
+      "signature": "()I",
+      "executed_lines": [
+        644
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testBasicMapping1": [
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        51,
+        56,
+        58
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "access$300",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;)[Ljava/lang/String;",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "compareEntry",
+      "signature": "(Ljava/util/ArrayList;II)I",
+      "executed_lines": [
+        461
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getJavaStringArray",
+      "signature": "(Lorg/json/JSONArray;)[Ljava/lang/String;",
+      "executed_lines": [
+        270,
+        271,
+        272,
+        273,
+        275
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getMappingForLine",
+      "signature": "(II)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        208,
+        209,
+        211,
+        215,
+        216,
+        220,
+        224,
+        226,
+        227,
+        231,
+        232,
+        233
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getOriginalMappingForEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        483,
+        487,
+        491,
+        492,
+        494
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "parse",
+      "signature": "(Lorg/json/JSONObject;Lcom/google/debugging/sourcemap/SourceMapSupplier;)V",
+      "executed_lines": [
+        102,
+        103,
+        107,
+        108,
+        112,
+        118,
+        119,
+        121,
+        122,
+        124,
+        126,
+        129,
+        130
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "search",
+      "signature": "(Ljava/util/ArrayList;III)I",
+      "executed_lines": [
+        437,
+        438,
+        439,
+        441,
+        443,
+        444,
+        449,
+        450,
+        451,
+        454
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;Ljava/lang/String;)V",
+      "executed_lines": [
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        288,
+        289,
+        290
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "build",
+      "signature": "()V",
+      "executed_lines": [
+        293,
+        294,
+        295,
+        297,
+        301,
+        302,
+        304,
+        308,
+        309,
+        310,
+        311,
+        312,
+        314,
+        315,
+        316,
+        317,
+        319,
+        321,
+        322,
+        325,
+        326,
+        328
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "decodeEntry",
+      "signature": "([II)Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;",
+      "executed_lines": [
+        351,
+        373,
+        379,
+        380,
+        381,
+        382,
+        383,
+        388,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "entryComplete",
+      "signature": "()Z",
+      "executed_lines": [
+        418,
+        422,
+        423
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "nextValue",
+      "signature": "()I",
+      "executed_lines": [
+        427
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "tryConsumeToken",
+      "signature": "(C)Z",
+      "executed_lines": [
+        409,
+        411,
+        412,
+        414
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "validateEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)V",
+      "executed_lines": [
+        334,
+        335,
+        337,
+        339
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "<init>",
+      "signature": "(IIIII)V",
+      "executed_lines": [
+        666,
+        667,
+        668
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        672
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        551,
+        553,
+        554,
+        555,
+        556
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "hasNext",
+      "signature": "()Z",
+      "executed_lines": [
+        569
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "next",
+      "signature": "()C",
+      "executed_lines": [
+        560
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "peek",
+      "signature": "()C",
+      "executed_lines": [
+        564
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        591,
+        592,
+        593
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "getGeneratedColumn",
+      "signature": "()I",
+      "executed_lines": [
+        597
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "<init>",
+      "signature": "(IIII)V",
+      "executed_lines": [
+        631,
+        632,
+        633,
+        634,
+        635
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        654
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceColumn",
+      "signature": "()I",
+      "executed_lines": [
+        649
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceFileId",
+      "signature": "()I",
+      "executed_lines": [
+        639
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceLine",
+      "signature": "()I",
+      "executed_lines": [
+        644
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testBasicMapping2": [
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        51,
+        56,
+        58
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "access$300",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;)[Ljava/lang/String;",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "compareEntry",
+      "signature": "(Ljava/util/ArrayList;II)I",
+      "executed_lines": [
+        461
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getJavaStringArray",
+      "signature": "(Lorg/json/JSONArray;)[Ljava/lang/String;",
+      "executed_lines": [
+        270,
+        271,
+        272,
+        273,
+        275
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getMappingForLine",
+      "signature": "(II)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        208,
+        209,
+        211,
+        215,
+        216,
+        220,
+        224,
+        226,
+        227,
+        231,
+        232,
+        233
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "getOriginalMappingForEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)Lcom/google/debugging/sourcemap/proto/Mapping$OriginalMapping;",
+      "executed_lines": [
+        483,
+        487,
+        491,
+        492,
+        494
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "parse",
+      "signature": "(Lorg/json/JSONObject;Lcom/google/debugging/sourcemap/SourceMapSupplier;)V",
+      "executed_lines": [
+        102,
+        103,
+        107,
+        108,
+        112,
+        118,
+        119,
+        121,
+        122,
+        124,
+        126,
+        129,
+        130
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3",
+      "method": "search",
+      "signature": "(Ljava/util/ArrayList;III)I",
+      "executed_lines": [
+        437,
+        438,
+        439,
+        441,
+        443,
+        444,
+        445,
+        449,
+        450,
+        454
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3;Ljava/lang/String;)V",
+      "executed_lines": [
+        281,
+        282,
+        283,
+        284,
+        285,
+        286,
+        288,
+        289,
+        290
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "build",
+      "signature": "()V",
+      "executed_lines": [
+        293,
+        294,
+        295,
+        297,
+        301,
+        302,
+        304,
+        308,
+        309,
+        310,
+        311,
+        312,
+        314,
+        315,
+        316,
+        317,
+        319,
+        321,
+        322,
+        325,
+        326,
+        328
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "decodeEntry",
+      "signature": "([II)Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;",
+      "executed_lines": [
+        351,
+        373,
+        379,
+        380,
+        381,
+        382,
+        383,
+        388,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "entryComplete",
+      "signature": "()Z",
+      "executed_lines": [
+        418,
+        422,
+        423
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "nextValue",
+      "signature": "()I",
+      "executed_lines": [
+        427
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "tryConsumeToken",
+      "signature": "(C)Z",
+      "executed_lines": [
+        409,
+        411,
+        412,
+        414
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$MappingBuilder",
+      "method": "validateEntry",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapConsumerV3$Entry;)V",
+      "executed_lines": [
+        334,
+        335,
+        337,
+        339
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "<init>",
+      "signature": "(IIIII)V",
+      "executed_lines": [
+        666,
+        667,
+        668
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$NamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        672
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        551,
+        553,
+        554,
+        555,
+        556
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "hasNext",
+      "signature": "()Z",
+      "executed_lines": [
+        569
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "next",
+      "signature": "()C",
+      "executed_lines": [
+        560
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$StringCharIterator",
+      "method": "peek",
+      "signature": "()C",
+      "executed_lines": [
+        564
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        591,
+        592,
+        593
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnmappedEntry",
+      "method": "getGeneratedColumn",
+      "signature": "()I",
+      "executed_lines": [
+        597
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "<init>",
+      "signature": "(IIII)V",
+      "executed_lines": [
+        631,
+        632,
+        633,
+        634,
+        635
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getNameId",
+      "signature": "()I",
+      "executed_lines": [
+        654
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceColumn",
+      "signature": "()I",
+      "executed_lines": [
+        649
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceFileId",
+      "signature": "()I",
+      "executed_lines": [
+        639
+      ]
+    },
+    {
+      "package": "com.google.debugging.sourcemap",
+      "class": "com.google.debugging.sourcemap.SourceMapConsumerV3$UnnamedEntry",
+      "method": "getSourceLine",
+      "signature": "()I",
+      "executed_lines": [
+        644
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testGoldenOutput1": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testGoldenOutput2": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testGoldenOutput3": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testGoldenOutput4": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ],
+  "com.google.debugging.sourcemap.SourceMapGeneratorV3Test::testGoldenOutput5": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;)V",
+      "executed_lines": [
+        109,
+        110,
+        113,
+        114,
+        115
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "<init>",
+      "signature": "(Lcom/google/debugging/sourcemap/SourceMapGenerator;Lcom/google/javascript/jscomp/SourceMap$1;)V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "addMapping",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/debugging/sourcemap/FilePosition;Lcom/google/debugging/sourcemap/FilePosition;)V",
+      "executed_lines": [
+        121,
+        126,
+        130,
+        132,
+        139,
+        143
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "appendTo",
+      "signature": "(Ljava/lang/Appendable;Ljava/lang/String;)V",
+      "executed_lines": [
+        178,
+        179
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "fixupSourceLocation",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        150,
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setPrefixMappings",
+      "signature": "(Ljava/util/List;)V",
+      "executed_lines": [
+        202,
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "setStartingPosition",
+      "signature": "(II)V",
+      "executed_lines": [
+        187,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap",
+      "method": "validate",
+      "signature": "(Z)V",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        76,
+        79,
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        81
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        79
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$DetailLevel$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        86
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        45,
+        46,
+        52,
+        58,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$1",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$2",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$3",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        58
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;I)V",
+      "executed_lines": [
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.SourceMap$Format$4",
+      "method": "getInstance",
+      "signature": "()Lcom/google/javascript/jscomp/SourceMap;",
+      "executed_lines": [
+        66
+      ]
+    }
+  ]
+}

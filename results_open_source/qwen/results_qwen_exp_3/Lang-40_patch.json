@@ -1,0 +1,53 @@
+{
+  "bug_id": "Lang-40",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-40_1772011766",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue arises because converting strings to uppercase using Locale.ROOT does not handle certain character cases correctly across different locales, particularly involving special characters like '\u00df'. The correct approach is to use the `equalsIgnoreCase` method directly on the original strings.",
+        "changes": "- return contains(str.toUpperCase(Locale.ROOT), searchStr.toUpperCase(Locale.ROOT));\n+ return str.equalsIgnoreCase(searchStr);",
+        "fixed_method": "public static boolean containsIgnoreCase(String str, String searchStr) {\n    if (str == null || searchStr == null) {\n        return false;\n    }\n    return str.equalsIgnoreCase(searchStr);\n}",
+        "diff": "- return contains(str.toUpperCase(Locale.ROOT), searchStr.toUpperCase(Locale.ROOT));\n+ return str.equalsIgnoreCase(searchStr);",
+        "file_path": "src/java/org/apache/commons/lang/StringUtils.java",
+        "method_name": "containsIgnoreCase",
+        "class_name": "StringUtils",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          1044,
+          1045,
+          1046,
+          1047,
+          1048,
+          1049
+        ],
+        "original_code": "/**\n* <p>Checks if String contains a search String irrespective of case,\n* handling <code>null</code>. Case-insensitivity is defined as by\n* {@link String#equalsIgnoreCase(String)}.\n*\n* <p>A <code>null</code> String will return <code>false</code>.</p>\n*\n* <pre>\n* StringUtils.contains(null, *) = false\n* StringUtils.contains(*, null) = false\n* StringUtils.contains(\"\", \"\") = true\n* StringUtils.contains(\"abc\", \"\") = true\n* StringUtils.contains(\"abc\", \"a\") = true\n* StringUtils.contains(\"abc\", \"z\") = false\n* StringUtils.contains(\"abc\", \"A\") = true\n* StringUtils.contains(\"abc\", \"Z\") = false\n* </pre>\n*\n* @param str  the String to check, may be null\n* @param searchStr  the String to find, may be null\n* @return true if the String contains the search String irrespective of\n* case or false if not or <code>null</code> string input\n*/\npublic static boolean containsIgnoreCase(String str, String searchStr) {\n    if (str == null || searchStr == null) {\n        return false;\n    }\n    return contains(str.toUpperCase(), searchStr.toUpperCase());\n}"
+      },
+      {
+        "hypothesis": "The issue arises because converting strings to uppercase using Locale.ROOT does not handle certain locale-specific cases correctly, such as the German '\u00df' character. Using String.regionMatches with ignoreCase set to true should resolve the issue as it provides locale-independent case-insensitive comparison.",
+        "changes": "- return contains(str.toUpperCase(Locale.ROOT), searchStr.toUpperCase(Locale.ROOT));\n+ return str.regionMatches(true, 0, searchStr, 0, searchStr.length());",
+        "fixed_method": "public static boolean containsIgnoreCase(String str, String searchStr) {\n    if (str == null || searchStr == null) {\n        return false;\n    }\n    return str.regionMatches(true, 0, searchStr, 0, searchStr.length());\n}",
+        "diff": "- return contains(str.toUpperCase(Locale.ROOT), searchStr.toUpperCase(Locale.ROOT));\n+ return str.regionMatches(true, 0, searchStr, 0, searchStr.length());",
+        "file_path": "src/java/org/apache/commons/lang/StringUtils.java",
+        "method_name": "containsIgnoreCase",
+        "class_name": "StringUtils",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          1044,
+          1045,
+          1046,
+          1047,
+          1048,
+          1049
+        ],
+        "original_code": "/**\n* <p>Checks if String contains a search String irrespective of case,\n* handling <code>null</code>. Case-insensitivity is defined as by\n* {@link String#equalsIgnoreCase(String)}.\n*\n* <p>A <code>null</code> String will return <code>false</code>.</p>\n*\n* <pre>\n* StringUtils.contains(null, *) = false\n* StringUtils.contains(*, null) = false\n* StringUtils.contains(\"\", \"\") = true\n* StringUtils.contains(\"abc\", \"\") = true\n* StringUtils.contains(\"abc\", \"a\") = true\n* StringUtils.contains(\"abc\", \"z\") = false\n* StringUtils.contains(\"abc\", \"A\") = true\n* StringUtils.contains(\"abc\", \"Z\") = false\n* </pre>\n*\n* @param str  the String to check, may be null\n* @param searchStr  the String to find, may be null\n* @return true if the String contains the search String irrespective of\n* case or false if not or <code>null</code> string input\n*/\npublic static boolean containsIgnoreCase(String str, String searchStr) {\n    if (str == null || searchStr == null) {\n        return false;\n    }\n    return contains(str.toUpperCase(), searchStr.toUpperCase());\n}"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Lang-40/"
+}

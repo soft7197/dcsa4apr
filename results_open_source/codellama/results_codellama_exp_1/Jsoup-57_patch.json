@@ -1,0 +1,38 @@
+{
+  "bug_id": "Jsoup-57",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-57_1772700165",
+  "patches": [
+    [
+      {
+        "hypothesis": "Introduced a more robust approach to handle multiple attributes with same case-insensitive key, added more test cases to cover different scenarios and edge cases, and refined the method to avoid hardcoded values and edge-case specific approaches.",
+        "fixed_method": "\npublic void removeIgnoreCase(String key) {\nValidate.notEmpty(key);\nif (attributes == null)\n{\nreturn;\n}\nString attrKey = null;\nfor (Iterator<String> it = attributes.keySet().iterator(); it.hasNext(); ) {\nattrKey = it.next();\nif (attrKey.equalsIgnoreCase(key)) {\nit.remove();\n}\n}\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/nodes/Attributes.java",
+        "method_name": "removeIgnoreCase",
+        "class_name": "Attributes",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The null check was missing and the iterator was being modified during iteration",
+        "line_numbers": [
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-57/"
+}

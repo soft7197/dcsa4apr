@@ -1,0 +1,15 @@
+File: src/main/java/org/apache/commons/csv/CSVPrinter.java
+Method: CSVPrinter.CSVPrinter
+
+public CSVPrinter(final Appendable out, final CSVFormat format) throws IOException {
+    Assertions.notNull(out, "out");
+    Assertions.notNull(format, "format");
+
+    this.out = out;
+    this.format = format;
+    this.format.validate();
+    // Check if the header is not null and has elements before printing
+    if (format.getHeader() != null && format.getHeader().length > 0) {
+        printRecord((Object[]) format.getHeader());
+    }
+}

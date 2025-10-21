@@ -1,0 +1,31 @@
+{
+  "bug_id": "Math-70",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-70_1772708138",
+  "patches": [
+    [
+      {
+        "hypothesis": "The `solve` method was overridden with an incorrect signature, causing the `f` parameter to be null when the method was called.",
+        "changes": "- solve(min, max);\n+ solve(f, min, max);",
+        "fixed_method": "public double solve(final UnivariateRealFunction f, double min, double max, double initial) throws MaxIterationsExceededException, FunctionEvaluationException {\n    return solve(f, min, max);\n}",
+        "diff": "- solve(min, max);\n+ solve(f, min, max);",
+        "file_path": "src/main/java/org/apache/commons/math/analysis/solvers/BisectionSolver.java",
+        "method_name": "solve",
+        "class_name": "BisectionSolver",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          70,
+          71,
+          72,
+          73
+        ],
+        "original_code": "/**\n* Construct a solver.\n*\n*/\npublic double solve(final UnivariateRealFunction f, double min, double max, double initial)\n    throws MaxIterationsExceededException, FunctionEvaluationException {\n    return solve(min, max);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-70/"
+}

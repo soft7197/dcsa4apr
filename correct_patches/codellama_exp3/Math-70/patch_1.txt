@@ -1,0 +1,7 @@
+File: src/main/java/org/apache/commons/math/analysis/solvers/BisectionSolver.java
+Method: BisectionSolver.solve
+
+public double solve(final UnivariateRealFunction f, double min, double max, double initial) throws MaxIterationsExceededException, FunctionEvaluationException {
+ if (min > max) return solve(f, max, min, initial);
+ return solve(f, min, max);
+}

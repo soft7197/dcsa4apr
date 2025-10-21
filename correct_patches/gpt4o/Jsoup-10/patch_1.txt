@@ -1,0 +1,32 @@
+File: src/main/java/org/jsoup/nodes/Node.java
+Method: Node.absUrl
+
+public String absUrl(String attributeKey) {
+    Validate.notEmpty(attributeKey);
+
+    if (!hasAttr(attributeKey)) {
+        return ""; // nothing to make absolute with
+    }
+
+    String relUrl = attr(attributeKey);
+    URL base;
+    try {
+        try {
+            base = new URL(baseUri);
+        } catch (MalformedURLException e) {
+            // If the base URI is invalid, attempt to create a URL from the relative URL alone.
+            URL abs = new URL(relUrl);
+            return abs.toExternalForm();
+        }
+
+        // Ensure relative URLs with leading ? or # are resolved correctly by combining with base's path.
+        if (relUrl.startsWith("?") || relUrl.startsWith("#")) {
+            relUrl = base.getPath() + relUrl;
+        }
+
+        URL abs = new URL(base, relUrl);
+        return abs.toExternalForm();
+    } catch (MalformedURLException e) {
+        return "";
+    }
+}

@@ -1,0 +1,59 @@
+{
+  "bug_id": "JacksonDatabind-45",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-45_1771934938",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch introduced a specific condition for 'ANY' shape which is too narrow. Instead, we should check if any formatting options are specified and default to string serialization in those cases. This makes the logic more general and avoids overfitting.",
+        "fixed_method": "public JsonSerializer<?> createContextual(SerializerProvider serializers,\n        BeanProperty property) throws JsonMappingException\n{\n    if (property != null) {\n        JsonFormat.Value format = serializers.getAnnotationIntrospector().findFormat((Annotated)property.getMember());\n        if (format != null) {\n\n            // Simple case first: serialize as numeric timestamp?\n            JsonFormat.Shape shape = format.getShape();\n            if (shape.isNumeric()) {\n                return withFormat(Boolean.TRUE, null);\n            }\n\n            // Check if any formatting options are specified\n            if (shape == JsonFormat.Shape.STRING || shape == JsonFormat.Shape.ANY && (format.hasPattern() || format.hasLocale() || format.getTimeZone() != null)) {\n                TimeZone tz = format.getTimeZone();\n                final String pattern = format.hasPattern()\n                                ? format.getPattern()\n                                : StdDateFormat.DATE_FORMAT_STR_ISO8601;\n                final Locale loc = format.hasLocale()\n                                ? format.getLocale()\n                                : serializers.getLocale();\n                SimpleDateFormat df = new SimpleDateFormat(pattern, loc);\n                if (tz == null) {\n                    tz = serializers.getTimeZone();\n                }\n                df.setTimeZone(tz);\n                return withFormat(Boolean.FALSE, df);\n            }\n        }\n    }\n    return this;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java",
+        "method_name": "createContextual",
+        "class_name": "DateTimeSerializerBase",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue arises because the method does not correctly handle the case where the JsonFormat is 'ANY' and the SerializationFeature.WRITE_DATES_AS_TIMESTAMPS is enabled. In such cases, it should default to string serialization if any specific formatting options (pattern, locale, timezone) are provided.",
+        "line_numbers": [
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-45/"
+}

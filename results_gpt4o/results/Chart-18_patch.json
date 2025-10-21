@@ -1,0 +1,55 @@
+{
+  "bug_id": "Chart-18",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-18_1773111768",
+  "patches": [
+    {
+      "hypothesis": "The main issue across these methods is improper handling of keys and indices, leading to exceptions and incorrect behavior when removing or re-adding values. Removing columns or values should ensure the structure is appropriately updated, including validation of the presence of a key beforehand and correctly managing indices.",
+      "changes": "- Added index out-of-bounds validation in removeValue(int index)\n- Added null and unknown key validation in removeValue(Comparable key)\n- Added null and unknown column key validation in removeColumn(Comparable columnKey)\n- Updated removeColumn to ensure column key exists before operation",
+      "methods": {
+        "source/org/jfree/data/DefaultKeyedValues.java::DefaultKeyedValues::removeValue::L315": {
+          "file_path": "source/org/jfree/data/DefaultKeyedValues.java",
+          "method_name": "removeValue",
+          "class_name": "DefaultKeyedValues",
+          "line_numbers": [
+            315,
+            321
+          ],
+          "original_code": "    /**\n     * Removes a value from the collection.\n     *\n     * @param index  the index of the item to remove (in the range \n     *     <code>0</code> to <code>getItemCount() - 1</code>).\n     *     \n     * @throws IndexOutOfBoundsException if <code>index</code> is not within\n     *     the specified range.\n     */\n\n    public void removeValue(int index) {\n        this.keys.remove(index);\n        this.values.remove(index);\n        if (index < this.keys.size()) {\n        rebuildIndex();\n        }\n    }\n",
+          "fixed_method": "public void removeValue(int index) {\n    if (index < 0 || index >= this.keys.size()) {\n        throw new IndexOutOfBoundsException(\"Index: \" + index + \", Size: \" + this.keys.size());\n    }\n    this.keys.remove(index);\n    this.values.remove(index);\n    rebuildIndex();\n}",
+          "iteration": 1
+        },
+        "source/org/jfree/data/DefaultKeyedValues.java::DefaultKeyedValues::removeValue::L332": {
+          "file_path": "source/org/jfree/data/DefaultKeyedValues.java",
+          "method_name": "removeValue",
+          "class_name": "DefaultKeyedValues",
+          "line_numbers": [
+            332,
+            338
+          ],
+          "original_code": "    /**\n     * Removes a value from the collection.\n     *\n     * @param key  the item key (<code>null</code> not permitted).\n     * \n     * @throws IllegalArgumentException if <code>key</code> is \n     *     <code>null</code>.\n     * @throws UnknownKeyException if <code>key</code> is not recognised.\n     */\n\n    public void removeValue(Comparable key) {\n        int index = getIndex(key);\n        if (index < 0) {\n\t\t\treturn;\n        }\n        removeValue(index);\n    }\n",
+          "fixed_method": "public void removeValue(Comparable key) {\n    if (key == null) {\n        throw new IllegalArgumentException(\"Null key not permitted.\");\n    }\n    int index = getIndex(key);\n    if (index == -1) {\n        throw new UnknownKeyException(\"Key not recognized.\");\n    }\n    removeValue(index);\n}",
+          "iteration": 1
+        },
+        "source/org/jfree/data/DefaultKeyedValues2D.java::DefaultKeyedValues2D::removeColumn::L454": {
+          "file_path": "source/org/jfree/data/DefaultKeyedValues2D.java",
+          "method_name": "removeColumn",
+          "class_name": "DefaultKeyedValues2D",
+          "line_numbers": [
+            454,
+            461
+          ],
+          "original_code": "    /**\n     * Removes a column from the table.\n     *\n     * @param columnKey  the column key (<code>null</code> not permitted).\n     * \n     * @throws UnknownKeyException if the table does not contain a column with\n     *     the specified key.\n     * @throws IllegalArgumentException if <code>columnKey</code> is \n     *     <code>null</code>.\n     * \n     * @see #removeColumn(int)\n     * @see #removeRow(Comparable)\n     */\n\n    public void removeColumn(Comparable columnKey) {\n        Iterator iterator = this.rows.iterator();\n        while (iterator.hasNext()) {\n            DefaultKeyedValues rowData = (DefaultKeyedValues) iterator.next();\n                rowData.removeValue(columnKey);\n        }\n        this.columnKeys.remove(columnKey);\n    }\n",
+          "fixed_method": "public void removeColumn(Comparable columnKey) {\n    if (columnKey == null) {\n        throw new IllegalArgumentException(\"Null key not permitted.\");\n    }\n    if (!this.columnKeys.contains(columnKey)) {\n        throw new UnknownKeyException(\"Column key not recognized.\");\n    }\n    Iterator iterator = this.rows.iterator();\n    while (iterator.hasNext()) {\n        DefaultKeyedValues rowData = (DefaultKeyedValues) iterator.next();\n        if (rowData.getIndex(columnKey) != -1) {\n            rowData.removeValue(columnKey);\n        }\n    }\n    this.columnKeys.remove(columnKey);\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Chart-18/"
+}

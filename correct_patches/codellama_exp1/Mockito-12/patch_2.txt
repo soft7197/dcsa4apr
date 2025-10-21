@@ -1,0 +1,20 @@
+File: src/org/mockito/internal/util/reflection/GenericMaster.java
+Method: GenericMaster.getGenericType
+
+public Class getGenericType(Field field) {
+  Type generic = field.getGenericType();
+  if (generic != null) {
+    if (generic instanceof ParameterizedType) {
+      Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];
+      if (actual instanceof ParameterizedType) {
+        return (Class) ((ParameterizedType) actual).getRawType();
+      } else {
+        return (Class) actual;
+      }
+    } else {
+      return Object.class;
+    }
+  } else {
+    return Object.class;
+  }
+}

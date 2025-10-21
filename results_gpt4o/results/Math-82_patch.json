@@ -1,0 +1,103 @@
+{
+  "bug_id": "Math-82",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-82_1773120158",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method incorrectly calculates the pivot row for the Simplex algorithm, particularly due to the incorrect handling of non-positive entries in the pivot column, causing an incorrect solution.",
+        "changes": "- Corrected the condition to examine both non-negative and positive entries since division by zero must be avoided.",
+        "fixed_method": "private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n    double minRatio = Double.MAX_VALUE;\n    Integer minRatioPos = null;\n    for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n        final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n        final double entry = tableau.getEntry(i, col);\n        if (MathUtils.compareTo(entry, 0, epsilon) > 0) {  // Changed to > 0 to avoid division by zero\n            final double ratio = rhs / entry;\n            if (ratio < minRatio) {\n                minRatio = ratio;\n                minRatioPos = i; \n            }\n        }\n    }\n    return minRatioPos;\n}",
+        "diff": "- Corrected the condition to examine both non-negative and positive entries since division by zero must be avoided.",
+        "file_path": "src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java",
+        "method_name": "getPivotRow",
+        "class_name": "SimplexSolver",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91
+        ],
+        "original_code": "/**\n* Returns the row with the minimum ratio as given by the minimum ratio test (MRT).\n* @param tableau simple tableau for the problem\n* @param col the column to test the ratio of.  See {@link #getPivotColumn(SimplexTableau)}\n* @return row with the minimum ratio\n*/\nprivate Integer getPivotRow(final int col, final SimplexTableau tableau) {\n    double minRatio = Double.MAX_VALUE;\n    Integer minRatioPos = null;\n    for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n        final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n        final double entry = tableau.getEntry(i, col);\n        if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n            final double ratio = rhs / entry;\n            if (ratio < minRatio) {\n                minRatio = ratio;\n                minRatioPos = i; \n            }\n        }\n    }\n    return minRatioPos;\n}"
+      },
+      {
+        "hypothesis": "The method incorrectly considers ratios when pivot column entry is zero, leading to incorrect min ratio selection.",
+        "changes": "-if (MathUtils.compareTo(entry, 0, epsilon) >= 0) { +if (MathUtils.compareTo(entry, 0, epsilon) > 0) {",
+        "fixed_method": "private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n    double minRatio = Double.MAX_VALUE;\n    Integer minRatioPos = null;\n    for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n        final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n        final double entry = tableau.getEntry(i, col);\n        if (MathUtils.compareTo(entry, 0, epsilon) > 0) {\n            final double ratio = rhs / entry;\n            if (ratio < minRatio) {\n                minRatio = ratio;\n                minRatioPos = i; \n            }\n        }\n    }\n    return minRatioPos;\n}",
+        "diff": "-if (MathUtils.compareTo(entry, 0, epsilon) >= 0) { +if (MathUtils.compareTo(entry, 0, epsilon) > 0) {",
+        "file_path": "src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java",
+        "method_name": "getPivotRow",
+        "class_name": "SimplexSolver",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91
+        ],
+        "original_code": "/**\n* Returns the row with the minimum ratio as given by the minimum ratio test (MRT).\n* @param tableau simple tableau for the problem\n* @param col the column to test the ratio of.  See {@link #getPivotColumn(SimplexTableau)}\n* @return row with the minimum ratio\n*/\nprivate Integer getPivotRow(final int col, final SimplexTableau tableau) {\n    double minRatio = Double.MAX_VALUE;\n    Integer minRatioPos = null;\n    for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n        final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n        final double entry = tableau.getEntry(i, col);\n        if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n            final double ratio = rhs / entry;\n            if (ratio < minRatio) {\n                minRatio = ratio;\n                minRatioPos = i; \n            }\n        }\n    }\n    return minRatioPos;\n}"
+      },
+      {
+        "hypothesis": "The method is incorrectly allowing non-positive entries which should not be used in the minimum ratio test. This leads to incorrect pivot row selection and ultimately wrong solution value.",
+        "changes": "+ Ensured that only positive entries contribute to the ratios by correcting the condition.",
+        "fixed_method": "private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n    double minRatio = Double.MAX_VALUE;\n    Integer minRatioPos = null;\n    for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n        final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n        final double entry = tableau.getEntry(i, col);\n        if (MathUtils.compareTo(entry, 0, epsilon) > 0) { // Changed condition to strictly greater than zero\n            final double ratio = rhs / entry;\n            if (ratio < minRatio) {\n                minRatio = ratio;\n                minRatioPos = i; \n            }\n        }\n    }\n    return minRatioPos;\n}",
+        "diff": "+ Ensured that only positive entries contribute to the ratios by correcting the condition.",
+        "file_path": "src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java",
+        "method_name": "getPivotRow",
+        "class_name": "SimplexSolver",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91
+        ],
+        "original_code": "/**\n* Returns the row with the minimum ratio as given by the minimum ratio test (MRT).\n* @param tableau simple tableau for the problem\n* @param col the column to test the ratio of.  See {@link #getPivotColumn(SimplexTableau)}\n* @return row with the minimum ratio\n*/\nprivate Integer getPivotRow(final int col, final SimplexTableau tableau) {\n    double minRatio = Double.MAX_VALUE;\n    Integer minRatioPos = null;\n    for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n        final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n        final double entry = tableau.getEntry(i, col);\n        if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n            final double ratio = rhs / entry;\n            if (ratio < minRatio) {\n                minRatio = ratio;\n                minRatioPos = i; \n            }\n        }\n    }\n    return minRatioPos;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-82/"
+}

@@ -1,0 +1,7 @@
+File: src/java/org/apache/commons/math/fraction/Fraction.java
+Method: Fraction.compareTo
+
+public int compareTo(Fraction object) {
+    long difference = (long) this.numerator * object.denominator - (long) object.numerator * this.denominator;
+    return (difference < 0) ? -1 : ((difference > 0) ? +1 : 0);
+}

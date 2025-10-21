@@ -1,0 +1,10 @@
+File: src/main/java/org/joda/time/LocalDate.java
+Method: LocalDate.fromCalendarFields
+
+public static LocalDate fromCalendarFields(Calendar calendar) {
+        if (calendar == null) {
+            throw new IllegalArgumentException("The calendar must not be null");
+        }
+        int yearOfEra = calendar.get(Calendar.ERA) == GregorianCalendar.BC ? 1 - calendar.get(Calendar.YEAR) : calendar.get(Calendar.YEAR);
+        return new LocalDate(yearOfEra, calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH));
+    }

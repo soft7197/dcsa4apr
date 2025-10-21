@@ -1,0 +1,6 @@
+File: src/main/java/org/apache/commons/math3/dfp/Dfp.java
+Method: Dfp.multiply
+
+public Dfp multiply(final int x) {
+    return multiply(field.newDfp(x));
+}

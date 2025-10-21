@@ -1,0 +1,1501 @@
+{
+  "com.google.javascript.jscomp.TypeCheckTest::testIssue783": [
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        47,
+        61,
+        76,
+        91
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/CodingConvention;Lcom/google/javascript/rhino/jstype/JSTypeRegistry;)V",
+      "executed_lines": [
+        105,
+        121,
+        122
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter",
+      "method": "caseEquality",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/jscomp/type/FlowScope;Lcom/google/common/base/Function;)Lcom/google/javascript/jscomp/type/FlowScope;",
+      "executed_lines": [
+        268
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter",
+      "method": "caseEquality",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/jscomp/type/FlowScope;Lcom/google/common/base/Function;)Lcom/google/javascript/jscomp/type/FlowScope;",
+      "executed_lines": [
+        275,
+        277,
+        278,
+        285,
+        287,
+        288,
+        295,
+        298,
+        299
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter",
+      "method": "getPreciserScopeKnowingConditionOutcome",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/jscomp/type/FlowScope;Z)Lcom/google/javascript/jscomp/type/FlowScope;",
+      "executed_lines": [
+        128,
+        129,
+        169,
+        235,
+        236,
+        262
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter",
+      "method": "maybeRestrictTwoNames",
+      "signature": "(Lcom/google/javascript/jscomp/type/FlowScope;Lcom/google/javascript/rhino/Node;ZLcom/google/javascript/rhino/jstype/JSType;Lcom/google/javascript/rhino/Node;ZLcom/google/javascript/rhino/jstype/JSType;)Lcom/google/javascript/jscomp/type/FlowScope;",
+      "executed_lines": [
+        409,
+        411,
+        413,
+        414,
+        415,
+        416,
+        418,
+        419,
+        421
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        48
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        62
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter$3",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        77
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter$4",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        92
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter$5",
+      "method": "apply",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType$TypePair;)Lcom/google/javascript/rhino/jstype/JSType$TypePair;",
+      "executed_lines": [
+        110
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter$5",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        107
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        92
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSTypeRegistry;)V",
+      "executed_lines": [
+        70,
+        71,
+        73,
+        105,
+        106,
+        107
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "autobox",
+      "signature": "()Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        616,
+        617,
+        618
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "autoboxesTo",
+      "signature": "()Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        587
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "canAssignTo",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)Z",
+      "executed_lines": [
+        575,
+        576
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "dereference",
+      "signature": "()Lcom/google/javascript/rhino/jstype/ObjectType;",
+      "executed_lines": [
+        628
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "differsFrom",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)Z",
+      "executed_lines": [
+        1066,
+        1067,
+        1070
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "equals",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        478
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "getJSDocInfo",
+      "signature": "()Lcom/google/javascript/rhino/JSDocInfo;",
+      "executed_lines": [
+        122
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "getLeastSupertype",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        746,
+        750
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "getLeastSupertype",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;Lcom/google/javascript/rhino/jstype/JSType;)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        758,
+        759
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "getNativeType",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSTypeNative;)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        113
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "hasAnyTemplate",
+      "signature": "()Z",
+      "executed_lines": [
+        370,
+        371,
+        372,
+        373,
+        374,
+        377
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "hasAnyTemplateInternal",
+      "signature": "()Z",
+      "executed_lines": [
+        382
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "hashCode",
+      "signature": "()I",
+      "executed_lines": [
+        484
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isAllType",
+      "signature": "()Z",
+      "executed_lines": [
+        236
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isConstructor",
+      "signature": "()Z",
+      "executed_lines": [
+        398
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isEmptyType",
+      "signature": "()Z",
+      "executed_lines": [
+        159
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isEnumType",
+      "signature": "()Z",
+      "executed_lines": [
+        305
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isEquivalentTo",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)Z",
+      "executed_lines": [
+        461,
+        468
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isFunctionType",
+      "signature": "()Z",
+      "executed_lines": [
+        267
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isInstanceType",
+      "signature": "()Z",
+      "executed_lines": [
+        438
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isInterface",
+      "signature": "()Z",
+      "executed_lines": [
+        446
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNoObjectType",
+      "signature": "()Z",
+      "executed_lines": [
+        155
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNoResolvedType",
+      "signature": "()Z",
+      "executed_lines": [
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNoType",
+      "signature": "()Z",
+      "executed_lines": [
+        147
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNominalType",
+      "signature": "()Z",
+      "executed_lines": [
+        406
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNullType",
+      "signature": "()Z",
+      "executed_lines": [
+        228
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNumber",
+      "signature": "()Z",
+      "executed_lines": [
+        203
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isRecordType",
+      "signature": "()Z",
+      "executed_lines": [
+        320
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isSubtype",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)Z",
+      "executed_lines": [
+        1053
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isSubtypeHelper",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;Lcom/google/javascript/rhino/jstype/JSType;)Z",
+      "executed_lines": [
+        1079,
+        1080,
+        1083,
+        1084,
+        1087,
+        1091,
+        1092,
+        1093,
+        1094,
+        1095,
+        1097,
+        1100,
+        1104
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isTemplateType",
+      "signature": "()Z",
+      "executed_lines": [
+        351
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isUnionType",
+      "signature": "()Z",
+      "executed_lines": [
+        248
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isUnknownType",
+      "signature": "()Z",
+      "executed_lines": [
+        240
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isVoidType",
+      "signature": "()Z",
+      "executed_lines": [
+        232
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "resolve",
+      "signature": "(Lcom/google/javascript/rhino/ErrorReporter;Lcom/google/javascript/rhino/jstype/StaticScope;)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        1142,
+        1145,
+        1148,
+        1150,
+        1151,
+        1152,
+        1153
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "restrictByNotNullOrUndefined",
+      "signature": "()Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        1023
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "safeResolve",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;Lcom/google/javascript/rhino/ErrorReporter;Lcom/google/javascript/rhino/jstype/StaticScope;)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        1183
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "setResolvedTypeInternal",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)V",
+      "executed_lines": [
+        1162,
+        1163,
+        1164
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeEnumType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/EnumType;",
+      "executed_lines": [
+        312
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeFunctionType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/FunctionType;",
+      "executed_lines": [
+        283
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeFunctionType",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)Lcom/google/javascript/rhino/jstype/FunctionType;",
+      "executed_lines": [
+        290
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeRecordType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/RecordType;",
+      "executed_lines": [
+        328
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeTemplateType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/TemplateType;",
+      "executed_lines": [
+        359
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeUnionType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/UnionType;",
+      "executed_lines": [
+        257
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toObjectType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/ObjectType;",
+      "executed_lines": [
+        607
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toString",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        1212
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType$1",
+      "method": "compare",
+      "signature": "(Ljava/lang/Object;Ljava/lang/Object;)I",
+      "executed_lines": [
+        92
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType$TypePair",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;Lcom/google/javascript/rhino/jstype/JSType;)V",
+      "executed_lines": [
+        1200,
+        1201,
+        1202,
+        1203
+      ]
+    }
+  ],
+  "com.google.javascript.jscomp.TypeCheckTest::testMissingProperty20": [
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        47,
+        61,
+        76,
+        91
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/CodingConvention;Lcom/google/javascript/rhino/jstype/JSTypeRegistry;)V",
+      "executed_lines": [
+        105,
+        121,
+        122
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter",
+      "method": "caseNameOrGetProp",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/jscomp/type/FlowScope;Z)Lcom/google/javascript/jscomp/type/FlowScope;",
+      "executed_lines": [
+        428,
+        429,
+        430,
+        432,
+        433,
+        434
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter",
+      "method": "getPreciserScopeKnowingConditionOutcome",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/jscomp/type/FlowScope;Z)Lcom/google/javascript/jscomp/type/FlowScope;",
+      "executed_lines": [
+        128,
+        129,
+        169,
+        218
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        48
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter$2",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        62
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter$3",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        77
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter$4",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        92
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp.type",
+      "class": "com.google.javascript.jscomp.type.SemanticReverseAbstractInterpreter$5",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        107
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        92
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSTypeRegistry;)V",
+      "executed_lines": [
+        70,
+        71,
+        73,
+        105,
+        106,
+        107
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "autobox",
+      "signature": "()Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        616,
+        617,
+        618
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "autoboxesTo",
+      "signature": "()Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        587
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "canAssignTo",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)Z",
+      "executed_lines": [
+        575,
+        576
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "dereference",
+      "signature": "()Lcom/google/javascript/rhino/jstype/ObjectType;",
+      "executed_lines": [
+        628
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "equals",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        478
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "getJSDocInfo",
+      "signature": "()Lcom/google/javascript/rhino/JSDocInfo;",
+      "executed_lines": [
+        122
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "getLeastSupertype",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        746,
+        750
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "getLeastSupertype",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;Lcom/google/javascript/rhino/jstype/JSType;)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        758,
+        759
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "getNativeType",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSTypeNative;)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        113
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "getRestrictedTypeGivenToBooleanOutcome",
+      "signature": "(Z)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        884,
+        885,
+        886
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "hasAnyTemplate",
+      "signature": "()Z",
+      "executed_lines": [
+        370,
+        371,
+        372,
+        373,
+        374,
+        377
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "hasAnyTemplateInternal",
+      "signature": "()Z",
+      "executed_lines": [
+        382
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "hashCode",
+      "signature": "()I",
+      "executed_lines": [
+        484
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isAllType",
+      "signature": "()Z",
+      "executed_lines": [
+        236
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isConstructor",
+      "signature": "()Z",
+      "executed_lines": [
+        398
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isEmptyType",
+      "signature": "()Z",
+      "executed_lines": [
+        159
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isEnumType",
+      "signature": "()Z",
+      "executed_lines": [
+        305
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isEquivalentTo",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)Z",
+      "executed_lines": [
+        461,
+        468
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isFunctionType",
+      "signature": "()Z",
+      "executed_lines": [
+        267
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isInstanceType",
+      "signature": "()Z",
+      "executed_lines": [
+        438
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isInterface",
+      "signature": "()Z",
+      "executed_lines": [
+        446
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNoObjectType",
+      "signature": "()Z",
+      "executed_lines": [
+        155
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNoResolvedType",
+      "signature": "()Z",
+      "executed_lines": [
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNoType",
+      "signature": "()Z",
+      "executed_lines": [
+        147
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNominalType",
+      "signature": "()Z",
+      "executed_lines": [
+        406
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNullType",
+      "signature": "()Z",
+      "executed_lines": [
+        228
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isRecordType",
+      "signature": "()Z",
+      "executed_lines": [
+        320
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isSubtype",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)Z",
+      "executed_lines": [
+        1053
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isSubtypeHelper",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;Lcom/google/javascript/rhino/jstype/JSType;)Z",
+      "executed_lines": [
+        1079,
+        1080,
+        1083,
+        1084,
+        1087,
+        1091,
+        1092,
+        1093,
+        1094,
+        1097,
+        1100,
+        1104
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isTemplateType",
+      "signature": "()Z",
+      "executed_lines": [
+        351
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isUnionType",
+      "signature": "()Z",
+      "executed_lines": [
+        248
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isUnknownType",
+      "signature": "()Z",
+      "executed_lines": [
+        240
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isVoidType",
+      "signature": "()Z",
+      "executed_lines": [
+        232
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "resolve",
+      "signature": "(Lcom/google/javascript/rhino/ErrorReporter;Lcom/google/javascript/rhino/jstype/StaticScope;)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        1142,
+        1145,
+        1148,
+        1150,
+        1151,
+        1152,
+        1153
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "restrictByNotNullOrUndefined",
+      "signature": "()Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        1023
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "safeResolve",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;Lcom/google/javascript/rhino/ErrorReporter;Lcom/google/javascript/rhino/jstype/StaticScope;)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        1183
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "setResolvedTypeInternal",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)V",
+      "executed_lines": [
+        1162,
+        1163,
+        1164
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeEnumType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/EnumType;",
+      "executed_lines": [
+        312
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeFunctionType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/FunctionType;",
+      "executed_lines": [
+        283
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeFunctionType",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)Lcom/google/javascript/rhino/jstype/FunctionType;",
+      "executed_lines": [
+        290
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeRecordType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/RecordType;",
+      "executed_lines": [
+        328
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeTemplateType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/TemplateType;",
+      "executed_lines": [
+        359
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeUnionType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/UnionType;",
+      "executed_lines": [
+        257
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toObjectType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/ObjectType;",
+      "executed_lines": [
+        607
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toString",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        1212
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType$1",
+      "method": "compare",
+      "signature": "(Ljava/lang/Object;Ljava/lang/Object;)I",
+      "executed_lines": [
+        92
+      ]
+    }
+  ],
+  "com.google.javascript.rhino.jstype.JSTypeTest::testRestrictedTypeGivenToBoolean": [
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        92
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSTypeRegistry;)V",
+      "executed_lines": [
+        70,
+        71,
+        73,
+        105,
+        106,
+        107
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "getNativeType",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSTypeNative;)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        113
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "getRestrictedTypeGivenToBooleanOutcome",
+      "signature": "(Z)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        884,
+        885,
+        886,
+        888
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "hasAnyTemplate",
+      "signature": "()Z",
+      "executed_lines": [
+        370,
+        371,
+        372,
+        373,
+        374
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "hasAnyTemplateInternal",
+      "signature": "()Z",
+      "executed_lines": [
+        382
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "hashCode",
+      "signature": "()I",
+      "executed_lines": [
+        484
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isAllType",
+      "signature": "()Z",
+      "executed_lines": [
+        236
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isEmptyType",
+      "signature": "()Z",
+      "executed_lines": [
+        159
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isEquivalentTo",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)Z",
+      "executed_lines": [
+        461,
+        468
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isFunctionType",
+      "signature": "()Z",
+      "executed_lines": [
+        267
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNoObjectType",
+      "signature": "()Z",
+      "executed_lines": [
+        155
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNoResolvedType",
+      "signature": "()Z",
+      "executed_lines": [
+        151
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNoType",
+      "signature": "()Z",
+      "executed_lines": [
+        147
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isNominalType",
+      "signature": "()Z",
+      "executed_lines": [
+        406
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isRecordType",
+      "signature": "()Z",
+      "executed_lines": [
+        320
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isResolved",
+      "signature": "()Z",
+      "executed_lines": [
+        1168
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isSubtype",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)Z",
+      "executed_lines": [
+        1053
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isSubtypeHelper",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;Lcom/google/javascript/rhino/jstype/JSType;)Z",
+      "executed_lines": [
+        1079,
+        1083,
+        1087,
+        1091,
+        1100,
+        1104
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isUnionType",
+      "signature": "()Z",
+      "executed_lines": [
+        248
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "isUnknownType",
+      "signature": "()Z",
+      "executed_lines": [
+        240
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "resolve",
+      "signature": "(Lcom/google/javascript/rhino/ErrorReporter;Lcom/google/javascript/rhino/jstype/StaticScope;)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        1142,
+        1145,
+        1148,
+        1150,
+        1151,
+        1152,
+        1153
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "restrictByNotNullOrUndefined",
+      "signature": "()Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        1023
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "safeResolve",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;Lcom/google/javascript/rhino/ErrorReporter;Lcom/google/javascript/rhino/jstype/StaticScope;)Lcom/google/javascript/rhino/jstype/JSType;",
+      "executed_lines": [
+        1183
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "setResolvedTypeInternal",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)V",
+      "executed_lines": [
+        1162,
+        1163,
+        1164
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeFunctionType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/FunctionType;",
+      "executed_lines": [
+        283
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeRecordType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/RecordType;",
+      "executed_lines": [
+        328
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toMaybeUnionType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/UnionType;",
+      "executed_lines": [
+        257
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toObjectType",
+      "signature": "()Lcom/google/javascript/rhino/jstype/ObjectType;",
+      "executed_lines": [
+        607
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType",
+      "method": "toString",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        1212
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino.jstype",
+      "class": "com.google.javascript.rhino.jstype.JSType$1",
+      "method": "compare",
+      "signature": "(Ljava/lang/Object;Ljava/lang/Object;)I",
+      "executed_lines": [
+        92
+      ]
+    }
+  ]
+}

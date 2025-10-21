@@ -1,0 +1,10 @@
+File: src/main/java/org/apache/commons/csv/CSVParser.java
+Method: CSVParser.getHeaderMap
+
+public Map<String, Integer> getHeaderMap() {
+    if (this.headerMap == null) {
+        return null;
+    } else {
+        return new LinkedHashMap<String, Integer>(this.headerMap);
+    }
+}

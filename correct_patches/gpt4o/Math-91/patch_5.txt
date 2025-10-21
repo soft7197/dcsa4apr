@@ -1,0 +1,8 @@
+File: src/java/org/apache/commons/math/fraction/Fraction.java
+Method: Fraction.compareTo
+
+public int compareTo(Fraction object) {
+    long nOd = (long)this.numerator * object.denominator;
+    long dOn = (long)this.denominator * object.numerator;
+    return Long.compare(nOd, dOn);
+}

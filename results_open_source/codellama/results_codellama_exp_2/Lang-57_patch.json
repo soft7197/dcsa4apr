@@ -1,0 +1,47 @@
+{
+  "bug_id": "Lang-57",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-57_1772788586",
+  "patches": [
+    [
+      {
+        "hypothesis": "The cause of the bug is that the method is checking if a locale is available using a set that has not been initialized. The method is also missing a null check for the input parameter.",
+        "changes": "+ cAvailableLocaleSet initialized with available locales\n+ null check for input locale",
+        "fixed_method": "public static boolean isAvailableLocale(Locale locale) {\n  Set cAvailableLocaleSet = new HashSet(Arrays.asList(Locale.getAvailableLocales()));\n  if (locale == null) return false;\n  return cAvailableLocaleSet.contains(locale);\n}",
+        "diff": "+ cAvailableLocaleSet initialized with available locales\n+ null check for input locale",
+        "file_path": "src/java/org/apache/commons/lang/LocaleUtils.java",
+        "method_name": "isAvailableLocale",
+        "class_name": "LocaleUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          222,
+          223,
+          224
+        ],
+        "original_code": "/**\n* <p>Checks if the locale specified is in the list of available locales.</p>\n*\n* @param locale the Locale object to check if it is available\n* @return true if the locale is a known locale\n*/\npublic static boolean isAvailableLocale(Locale locale) {\n    return cAvailableLocaleSet.contains(locale);\n}"
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public static boolean isAvailableLocale(Locale locale) {\n      Set cAvailableLocaleSet = new HashSet(Arrays.asList(Locale.getAvailableLocales()));\n      return cAvailableLocaleSet.contains(locale);\n}",
+        "diff": "",
+        "file_path": "src/java/org/apache/commons/lang/LocaleUtils.java",
+        "method_name": "isAvailableLocale",
+        "class_name": "LocaleUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          222,
+          223,
+          224
+        ],
+        "original_code": "/**\n* <p>Checks if the locale specified is in the list of available locales.</p>\n*\n* @param locale the Locale object to check if it is available\n* @return true if the locale is a known locale\n*/\npublic static boolean isAvailableLocale(Locale locale) {\n    return cAvailableLocaleSet.contains(locale);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Lang-57/"
+}

@@ -1,0 +1,52 @@
+{
+  "bug_id": "Jsoup-59",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-59_1772700179",
+  "patches": [
+    [
+      {
+        "hypothesis": "The overfitting was caused by hardcoded values and a lack of edge case handling. The refined patch will address these issues by using more robust approaches and added more test cases to cover broader scenarios.",
+        "fixed_method": "final void newAttribute() {\n  if (attributes == null) attributes = new Attributes();\n\n  if (pendingAttributeName == null) pendingAttributeName = \"\";\n\n  if (pendingAttributeName.trim().length() > 0) {\n    Attribute attribute;\n    if (hasPendingAttributeValue || hasEmptyAttributeValue) {\n      attribute = new Attribute(pendingAttributeName, pendingAttributeValue.length() > 0 ? pendingAttributeValue.toString() : pendingAttributeValueS);\n    } else {\n      attribute = new BooleanAttribute(pendingAttributeName);\n    }\n\n    attributes.put(attribute);\n  }\n\n  pendingAttributeName = null;\n  hasEmptyAttributeValue = false;\n  hasPendingAttributeValue = false;\n  reset(pendingAttributeValue);\n  pendingAttributeValueS = null;\n  }",
+        "pendingAttributeValue.toString()": "pendingAttributeValueS);\n    } else {\n      attribute = new BooleanAttribute(pendingAttributeName);\n    }\n\n    attributes.put(attribute);\n  }\n\n  pendingAttributeName = null;\n  hasEmptyAttributeValue = false;\n  hasPendingAttributeValue = false;\n  reset(pendingAttributeValue);\n  pendingAttributeValueS = null;\n  }",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/parser/Token.java",
+        "method_name": "newAttribute",
+        "class_name": "Token",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "",
+        "line_numbers": [
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-59/"
+}

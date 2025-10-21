@@ -1,0 +1,14 @@
+File: src/main/java/com/fasterxml/jackson/databind/type/ReferenceType.java
+Method: ReferenceType.buildCanonicalName
+
+protected String buildCanonicalName()
+{
+    StringBuilder sb = new StringBuilder();
+    sb.append(_class.getName());
+    if (_referencedType != null && !_referencedType.toCanonical().isEmpty()) {
+        sb.append('<');
+        sb.append(_referencedType.toCanonical());
+        sb.append('>');
+    }
+    return sb.toString();
+}

@@ -1,0 +1,969 @@
+{
+  "org.apache.commons.math3.geometry.euclidean.threed.SubLineTest::testIntersectionNotIntersecting": [
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet",
+      "method": "<init>",
+      "signature": "(DD)V",
+      "executed_lines": [
+        47,
+        48
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet",
+      "method": "buildTree",
+      "signature": "(DD)Lorg/apache/commons/math3/geometry/partitioning/BSPTree;",
+      "executed_lines": [
+        94,
+        107,
+        108,
+        109,
+        118,
+        119,
+        120
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.OrientedPoint",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/oned/Vector1D;Z)V",
+      "executed_lines": [
+        42,
+        43,
+        44,
+        45
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.OrientedPoint",
+      "method": "wholeHyperplane",
+      "signature": "()Lorg/apache/commons/math3/geometry/euclidean/oned/SubOrientedPoint;",
+      "executed_lines": [
+        74
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/partitioning/Hyperplane;Lorg/apache/commons/math3/geometry/partitioning/Region;)V",
+      "executed_lines": [
+        39,
+        40
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.Vector1D",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        36,
+        39,
+        43,
+        47,
+        51
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.Vector1D",
+      "method": "<init>",
+      "signature": "(D)V",
+      "executed_lines": [
+        65,
+        66,
+        67
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.Vector1D",
+      "method": "getX",
+      "signature": "()D",
+      "executed_lines": [
+        128
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Line",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;)V",
+      "executed_lines": [
+        54,
+        55,
+        56
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Line",
+      "method": "closestPoint",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/threed/Line;)Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;",
+      "executed_lines": [
+        195,
+        196,
+        197,
+        202,
+        203,
+        204,
+        206
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Line",
+      "method": "contains",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;)Z",
+      "executed_lines": [
+        156
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Line",
+      "method": "distance",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;)D",
+      "executed_lines": [
+        164,
+        165,
+        166
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Line",
+      "method": "getAbscissa",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;)D",
+      "executed_lines": [
+        114
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Line",
+      "method": "intersection",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/threed/Line;)Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;",
+      "executed_lines": [
+        216,
+        217
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Line",
+      "method": "reset",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;)V",
+      "executed_lines": [
+        74,
+        75,
+        76,
+        79,
+        80,
+        81
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Line",
+      "method": "toSubSpace",
+      "signature": "(Lorg/apache/commons/math3/geometry/Vector;)Lorg/apache/commons/math3/geometry/euclidean/oned/Vector1D;",
+      "executed_lines": [
+        129
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.SubLine",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/threed/Line;Lorg/apache/commons/math3/geometry/euclidean/oned/IntervalsSet;)V",
+      "executed_lines": [
+        44,
+        45,
+        46,
+        47
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.SubLine",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;)V",
+      "executed_lines": [
+        56,
+        57
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.SubLine",
+      "method": "buildIntervalSet",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;)Lorg/apache/commons/math3/geometry/euclidean/oned/IntervalsSet;",
+      "executed_lines": [
+        137,
+        138,
+        139
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.SubLine",
+      "method": "intersection",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/threed/SubLine;Z)Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;",
+      "executed_lines": [
+        113,
+        116
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Vector3D",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        41,
+        44,
+        47,
+        50,
+        53,
+        56,
+        59,
+        63,
+        67,
+        71
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Vector3D",
+      "method": "<init>",
+      "signature": "(DDD)V",
+      "executed_lines": [
+        95,
+        96,
+        97,
+        98,
+        99
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Vector3D",
+      "method": "<init>",
+      "signature": "(DLorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;)V",
+      "executed_lines": [
+        137,
+        138,
+        139,
+        140,
+        141
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Vector3D",
+      "method": "<init>",
+      "signature": "(DLorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;DLorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;)V",
+      "executed_lines": [
+        151,
+        152,
+        153,
+        154,
+        155
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Vector3D",
+      "method": "dotProduct",
+      "signature": "(Lorg/apache/commons/math3/geometry/Vector;)D",
+      "executed_lines": [
+        453,
+        454
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Vector3D",
+      "method": "getNorm",
+      "signature": "()D",
+      "executed_lines": [
+        243
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Vector3D",
+      "method": "getNormSq",
+      "signature": "()D",
+      "executed_lines": [
+        249
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.threed",
+      "class": "org.apache.commons.math3.geometry.euclidean.threed.Vector3D",
+      "method": "subtract",
+      "signature": "(Lorg/apache/commons/math3/geometry/Vector;)Lorg/apache/commons/math3/geometry/euclidean/threed/Vector3D;",
+      "executed_lines": [
+        286,
+        287
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.partitioning",
+      "class": "org.apache.commons.math3.geometry.partitioning.AbstractRegion",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/partitioning/BSPTree;)V",
+      "executed_lines": [
+        67,
+        68,
+        69
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.partitioning",
+      "class": "org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/partitioning/Hyperplane;Lorg/apache/commons/math3/geometry/partitioning/Region;)V",
+      "executed_lines": [
+        50,
+        51,
+        52,
+        53
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.partitioning",
+      "class": "org.apache.commons.math3.geometry.partitioning.BSPTree",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.partitioning",
+      "class": "org.apache.commons.math3.geometry.partitioning.BSPTree",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/partitioning/SubHyperplane;Lorg/apache/commons/math3/geometry/partitioning/BSPTree;Lorg/apache/commons/math3/geometry/partitioning/BSPTree;Ljava/lang/Object;)V",
+      "executed_lines": [
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.FastMath",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        97,
+        115,
+        128,
+        141,
+        160,
+        179,
+        198,
+        218,
+        237,
+        256,
+        277,
+        285,
+        288
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.FastMath",
+      "method": "sqrt",
+      "signature": "(D)D",
+      "executed_lines": [
+        385
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.MathArrays",
+      "method": "linearCombination",
+      "signature": "(DDDD)D",
+      "executed_lines": [
+        896,
+        897,
+        898,
+        899,
+        900,
+        901,
+        904,
+        905,
+        908,
+        909,
+        910,
+        911,
+        912,
+        913,
+        916,
+        917,
+        920,
+        921,
+        922,
+        926,
+        928,
+        934
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.MathArrays",
+      "method": "linearCombination",
+      "signature": "(DDDDDD)D",
+      "executed_lines": [
+        976,
+        977,
+        978,
+        979,
+        980,
+        981,
+        984,
+        985,
+        988,
+        989,
+        990,
+        991,
+        992,
+        993,
+        996,
+        997,
+        1000,
+        1001,
+        1002,
+        1003,
+        1004,
+        1005,
+        1008,
+        1009,
+        1012,
+        1013,
+        1014,
+        1017,
+        1018,
+        1019,
+        1023,
+        1025,
+        1031
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.Precision",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        70,
+        77,
+        78
+      ]
+    }
+  ],
+  "org.apache.commons.math3.geometry.euclidean.twod.SubLineTest::testIntersectionParallel": [
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet",
+      "method": "<init>",
+      "signature": "(DD)V",
+      "executed_lines": [
+        47,
+        48
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.IntervalsSet",
+      "method": "buildTree",
+      "signature": "(DD)Lorg/apache/commons/math3/geometry/partitioning/BSPTree;",
+      "executed_lines": [
+        94,
+        107,
+        108,
+        109,
+        118,
+        119,
+        120
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.OrientedPoint",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/oned/Vector1D;Z)V",
+      "executed_lines": [
+        42,
+        43,
+        44,
+        45
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.OrientedPoint",
+      "method": "wholeHyperplane",
+      "signature": "()Lorg/apache/commons/math3/geometry/euclidean/oned/SubOrientedPoint;",
+      "executed_lines": [
+        74
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.SubOrientedPoint",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/partitioning/Hyperplane;Lorg/apache/commons/math3/geometry/partitioning/Region;)V",
+      "executed_lines": [
+        39,
+        40
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.Vector1D",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        36,
+        39,
+        43,
+        47,
+        51
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.Vector1D",
+      "method": "<init>",
+      "signature": "(D)V",
+      "executed_lines": [
+        65,
+        66,
+        67
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.oned",
+      "class": "org.apache.commons.math3.geometry.euclidean.oned.Vector1D",
+      "method": "getX",
+      "signature": "()D",
+      "executed_lines": [
+        128
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.twod",
+      "class": "org.apache.commons.math3.geometry.euclidean.twod.Line",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/twod/Vector2D;Lorg/apache/commons/math3/geometry/euclidean/twod/Vector2D;)V",
+      "executed_lines": [
+        81,
+        82,
+        83
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.twod",
+      "class": "org.apache.commons.math3.geometry.euclidean.twod.Line",
+      "method": "intersection",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/twod/Line;)Lorg/apache/commons/math3/geometry/euclidean/twod/Vector2D;",
+      "executed_lines": [
+        198,
+        199,
+        200
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.twod",
+      "class": "org.apache.commons.math3.geometry.euclidean.twod.Line",
+      "method": "reset",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/twod/Vector2D;Lorg/apache/commons/math3/geometry/euclidean/twod/Vector2D;)V",
+      "executed_lines": [
+        129,
+        130,
+        131,
+        132,
+        138,
+        139,
+        140,
+        141,
+        143
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.twod",
+      "class": "org.apache.commons.math3.geometry.euclidean.twod.Line",
+      "method": "toSubSpace",
+      "signature": "(Lorg/apache/commons/math3/geometry/Vector;)Lorg/apache/commons/math3/geometry/euclidean/oned/Vector1D;",
+      "executed_lines": [
+        181,
+        182
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.twod",
+      "class": "org.apache.commons.math3.geometry.euclidean.twod.SubLine",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/twod/Vector2D;Lorg/apache/commons/math3/geometry/euclidean/twod/Vector2D;)V",
+      "executed_lines": [
+        56,
+        57
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.twod",
+      "class": "org.apache.commons.math3.geometry.euclidean.twod.SubLine",
+      "method": "buildIntervalSet",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/twod/Vector2D;Lorg/apache/commons/math3/geometry/euclidean/twod/Vector2D;)Lorg/apache/commons/math3/geometry/euclidean/oned/IntervalsSet;",
+      "executed_lines": [
+        139,
+        140,
+        141
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.twod",
+      "class": "org.apache.commons.math3.geometry.euclidean.twod.SubLine",
+      "method": "intersection",
+      "signature": "(Lorg/apache/commons/math3/geometry/euclidean/twod/SubLine;Z)Lorg/apache/commons/math3/geometry/euclidean/twod/Vector2D;",
+      "executed_lines": [
+        113,
+        114,
+        117,
+        120
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.twod",
+      "class": "org.apache.commons.math3.geometry.euclidean.twod.Vector2D",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        37,
+        41,
+        45,
+        49
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.twod",
+      "class": "org.apache.commons.math3.geometry.euclidean.twod.Vector2D",
+      "method": "<init>",
+      "signature": "(DD)V",
+      "executed_lines": [
+        68,
+        69,
+        70,
+        71
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.twod",
+      "class": "org.apache.commons.math3.geometry.euclidean.twod.Vector2D",
+      "method": "getX",
+      "signature": "()D",
+      "executed_lines": [
+        150
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.euclidean.twod",
+      "class": "org.apache.commons.math3.geometry.euclidean.twod.Vector2D",
+      "method": "getY",
+      "signature": "()D",
+      "executed_lines": [
+        158
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.partitioning",
+      "class": "org.apache.commons.math3.geometry.partitioning.AbstractRegion",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/partitioning/BSPTree;)V",
+      "executed_lines": [
+        67,
+        68,
+        69
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.partitioning",
+      "class": "org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/partitioning/Hyperplane;Lorg/apache/commons/math3/geometry/partitioning/Region;)V",
+      "executed_lines": [
+        50,
+        51,
+        52,
+        53
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.partitioning",
+      "class": "org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane",
+      "method": "getHyperplane",
+      "signature": "()Lorg/apache/commons/math3/geometry/partitioning/Hyperplane;",
+      "executed_lines": [
+        72
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.partitioning",
+      "class": "org.apache.commons.math3.geometry.partitioning.AbstractSubHyperplane",
+      "method": "getRemainingRegion",
+      "signature": "()Lorg/apache/commons/math3/geometry/partitioning/Region;",
+      "executed_lines": [
+        83
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.partitioning",
+      "class": "org.apache.commons.math3.geometry.partitioning.BSPTree",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.geometry.partitioning",
+      "class": "org.apache.commons.math3.geometry.partitioning.BSPTree",
+      "method": "<init>",
+      "signature": "(Lorg/apache/commons/math3/geometry/partitioning/SubHyperplane;Lorg/apache/commons/math3/geometry/partitioning/BSPTree;Lorg/apache/commons/math3/geometry/partitioning/BSPTree;Ljava/lang/Object;)V",
+      "executed_lines": [
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.FastMath",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        97,
+        115,
+        128,
+        141,
+        160,
+        179,
+        198,
+        218,
+        237,
+        256,
+        277,
+        285,
+        288
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.FastMath",
+      "method": "abs",
+      "signature": "(D)D",
+      "executed_lines": [
+        3025
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.FastMath",
+      "method": "atan2",
+      "signature": "(DD)D",
+      "executed_lines": [
+        2582,
+        2586,
+        2612,
+        2624,
+        2636,
+        2646,
+        2659,
+        2660,
+        2664,
+        2665
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.FastMath",
+      "method": "cos",
+      "signature": "(D)D",
+      "executed_lines": [
+        2295,
+        2298,
+        2299,
+        2303,
+        2308,
+        2309,
+        2328,
+        2330
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.FastMath",
+      "method": "cosQ",
+      "signature": "(DD)D",
+      "executed_lines": [
+        1843,
+        1844,
+        1846,
+        1847,
+        1848,
+        1850
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.FastMath",
+      "method": "getExponent",
+      "signature": "(D)I",
+      "executed_lines": [
+        3685
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.FastMath",
+      "method": "hypot",
+      "signature": "(DD)D",
+      "executed_lines": [
+        3574,
+        3576,
+        3580,
+        3581,
+        3582,
+        3585,
+        3587
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.FastMath",
+      "method": "polyCosine",
+      "signature": "(D)D",
+      "executed_lines": [
+        1700,
+        1702,
+        1703,
+        1704,
+        1705,
+        1706,
+        1708
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.FastMath",
+      "method": "polySine",
+      "signature": "(D)D",
+      "executed_lines": [
+        1680,
+        1682,
+        1683,
+        1684,
+        1685,
+        1688,
+        1690
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.FastMath",
+      "method": "sin",
+      "signature": "(D)D",
+      "executed_lines": [
+        2228,
+        2229,
+        2231,
+        2234,
+        2235,
+        2241,
+        2249,
+        2254,
+        2270,
+        2274,
+        2276
+      ]
+    },
+    {
+      "package": "org.apache.commons.math3.util",
+      "class": "org.apache.commons.math3.util.FastMath",
+      "method": "sinQ",
+      "signature": "(DD)D",
+      "executed_lines": [
+        1719,
+        1720,
+        1723,
+        1724,
+        1725,
+        1726,
+        1729,
+        1730,
+        1731,
+        1732,
+        1735,
+        1736,
+        1737,
+        1738,
+        1764,
+        1765,
+        1767,
+        1768,
+        1769,
+        1770,
+        1771,
+        1773,
+        1774,
+        1775,
+        1776,
+        1777,
+        1779,
+        1794,
+        1821,
+        1822,
+        1824,
+        1825,
+        1826,
+        1827,
+        1830,
+        1832
+      ]
+    }
+  ]
+}

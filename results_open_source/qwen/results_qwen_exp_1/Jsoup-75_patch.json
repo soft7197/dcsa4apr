@@ -1,0 +1,44 @@
+{
+  "bug_id": "Jsoup-75",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-75_1771868781",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch introduced a condition that did not comprehensively handle boolean attributes across different syntaxes and configurations. The refined fix will ensure that boolean attributes are handled correctly according to the HTML specification, including cases where the attribute has a non-empty value, and will maintain general correctness across all syntaxes.",
+        "fixed_method": "final void html(final Appendable accum, final Document.OutputSettings out) throws IOException {\n    final int sz = size;\n    for (int i = 0; i < sz; i++) {\n        // inlined from Attribute.html()\n        final String key = keys[i];\n        final String val = vals[i];\n        accum.append(' ').append(key);\n\n        // collapse checked=null, checked='', checked=checked; write out others\n        if (!(out.syntax() == Document.OutputSettings.Syntax.html\n            && Attribute.isBooleanAttribute(key)\n            && (val == null || val.isEmpty() || val.equalsIgnoreCase(key)))) {\n            accum.append('=').append('\"');\n            Entities.escape(accum, val == null ? \"\" : val, out, true, false, false);\n            accum.append('\"');\n        }\n    }\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/jsoup/nodes/Attributes.java",
+        "method_name": "html",
+        "class_name": "Attributes",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by incorrectly handling boolean attributes. The code should not append an empty value string for boolean attributes when they are present without a value.",
+        "line_numbers": [
+          310,
+          311,
+          312,
+          313,
+          314,
+          315,
+          316,
+          317,
+          318,
+          319,
+          320,
+          321,
+          322,
+          323,
+          324,
+          325,
+          326
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-75/"
+}

@@ -1,0 +1,29 @@
+{
+  "bug_id": "JxPath-1",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JxPath-1_1772730446",
+  "patches": [
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public static boolean testNode(NodePointer pointer, Object node, NodeTest test) {\n        if (test == null) {\n            return true;\n        }\n        else if (test instanceof NodeNameTest) {\n            if (!(node instanceof Element)) {\n                return false;\n            }\n\n            NodeNameTest nodeNameTest = (NodeNameTest) test;\n            QName testName = nodeNameTest.getNodeName();\n            String namespaceURI = nodeNameTest.getNamespaceURI();\n            boolean wildcard = nodeNameTest.isWildcard();\n            String testPrefix = testName.getPrefix();\n            if (wildcard && testPrefix == null) {\n                return true;\n            }\n\n            if (wildcard\n                || testName.getName()\n                        .equals(JDOMNodePointer.getLocalName(node))) {\n                String nodeNS = JDOMNodePointer.getNamespaceURI(node);\n                return equalStrings(namespaceURI, nodeNS);\n            }\n\n        }\n        else if (test instanceof NodeTypeTest) {\n            switch (((NodeTypeTest) test).getNodeType()) {\n                case Compiler.NODE_TYPE_NODE :\n                    return node instanceof Element;\n                case Compiler.NODE_TYPE_TEXT :\n                    return (node instanceof Text) || (node instanceof CDATA);\n                case Compiler.NODE_TYPE_COMMENT :\n                    return node instanceof Comment;\n                case Compiler.NODE_TYPE_PI :\n                    return node instanceof ProcessingInstruction;\n            }\n            return false;\n        }\n        else if (test instanceof ProcessingInstructionTest) {\n            if (node instanceof ProcessingInstruction) {\n                String testPI = ((ProcessingInstructionTest) test).getTarget();\n                String nodePI = ((ProcessingInstruction) node).getTarget();\n                return testPI.equals(nodePI);\n            }\n        }\n        if (node instanceof Element) { // Fix for bugzilla #38586\n            return true;\n        }\n        return false;\n    }",
+        "diff": "",
+        "file_path": "src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java",
+        "method_name": "testNode",
+        "class_name": "JDOMNodePointer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          343,
+          395
+        ],
+        "original_code": "\n    public static boolean testNode(\n        NodePointer pointer,\n        Object node,\n        NodeTest test) \n    {\n        if (test == null) {\n            return true;\n        }\n        else if (test instanceof NodeNameTest) {\n            if (!(node instanceof Element)) {\n                return false;\n            }\n\n            NodeNameTest nodeNameTest = (NodeNameTest) test;\n            QName testName = nodeNameTest.getNodeName();\n            String namespaceURI = nodeNameTest.getNamespaceURI();\n            boolean wildcard = nodeNameTest.isWildcard();\n            String testPrefix = testName.getPrefix();\n            if (wildcard && testPrefix == null) {\n                return true;\n            }\n\n            if (wildcard\n                || testName.getName()\n                        .equals(JDOMNodePointer.getLocalName(node))) {\n                String nodeNS = JDOMNodePointer.getNamespaceURI(node);\n                return equalStrings(namespaceURI, nodeNS);\n            }\n\n        }\n        else if (test instanceof NodeTypeTest) {\n            switch (((NodeTypeTest) test).getNodeType()) {\n                case Compiler.NODE_TYPE_NODE :\n                    return node instanceof Element;\n                case Compiler.NODE_TYPE_TEXT :\n                    return (node instanceof Text) || (node instanceof CDATA);\n                case Compiler.NODE_TYPE_COMMENT :\n                    return node instanceof Comment;\n                case Compiler.NODE_TYPE_PI :\n                    return node instanceof ProcessingInstruction;\n            }\n            return false;\n        }\n        else if (test instanceof ProcessingInstructionTest) {\n            if (node instanceof ProcessingInstruction) {\n                String testPI = ((ProcessingInstructionTest) test).getTarget();\n                String nodePI = ((ProcessingInstruction) node).getTarget();\n                return testPI.equals(nodePI);\n            }\n        }\n\n        return false;\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/JxPath-1/"
+}

@@ -1,0 +1,66 @@
+{
+  "bug_id": "Gson-11",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Gson-11_1772694251",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined fix addresses the overfitting by using a more generic approach to handle different types of input, including null values, and adding proper null checks and boundary conditions.",
+        "fixed_method": "public Number read(JsonReader in) throws IOException {\n  JsonToken jsonToken = in.peek();\n  if (jsonToken == null) return null;\n  switch (jsonToken) {\n  case NULL:\n    in.nextNull();\n    return null;\n  case NUMBER:\n    return new LazilyParsedNumber(in.nextString());\n  case STRING:\n    return new LazilyParsedNumber(in.nextString());\n  default:\n    throw new JsonSyntaxException(\"Expecting number, got: \" + jsonToken);\n  }\n\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java",
+        "method_name": "read",
+        "class_name": "TypeAdapters",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method was not handling the case where the input value is a string containing a number.",
+        "line_numbers": [
+          364,
+          365,
+          366,
+          367,
+          368,
+          369,
+          370,
+          371,
+          372,
+          373,
+          374,
+          375
+        ]
+      },
+      {
+        "hypothesis": "The method was not handling the case where the input string is a valid number.",
+        "changes": "+ if (jsonToken == JsonToken.STRING) return new LazilyParsedNumber(in.nextString());",
+        "fixed_method": "public Number read(JsonReader in) throws IOException {\n  JsonToken jsonToken = in.peek();\n  switch (jsonToken) {\n  case NULL:\n    in.nextNull();\n    return null;\n  case NUMBER:\n    return new LazilyParsedNumber(in.nextString());\n  case STRING:\n    return new LazilyParsedNumber(in.nextString());\n  default:\n    throw new JsonSyntaxException(\"Expecting number or string, got: \" + jsonToken);\n  }\n}",
+        "diff": "+ if (jsonToken == JsonToken.STRING) return new LazilyParsedNumber(in.nextString());",
+        "file_path": "gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java",
+        "method_name": "read",
+        "class_name": "TypeAdapters",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          364,
+          365,
+          366,
+          367,
+          368,
+          369,
+          370,
+          371,
+          372,
+          373,
+          374,
+          375
+        ],
+        "original_code": "/**\n* Writes a boolean as a string. Useful for map keys, where booleans aren't\n* otherwise permitted.\n*/\npublic Number read(JsonReader in) throws IOException {\n  JsonToken jsonToken = in.peek();\n  switch (jsonToken) {\n  case NULL:\n    in.nextNull();\n    return null;\n  case NUMBER:\n    return new LazilyParsedNumber(in.nextString());\n  default:\n    throw new JsonSyntaxException(\"Expecting number, got: \" + jsonToken);\n  }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Gson-11/"
+}

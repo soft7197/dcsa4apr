@@ -1,0 +1,26 @@
+{
+  "org.mockitousage.bugs.NPEWithCertainMatchersTest::shouldNotThrowNPEWhenIntPassed": [
+    {
+      "buggy_method": "isA",
+      "class": "org.mockito.Matchers"
+    }
+  ],
+  "org.mockitousage.bugs.NPEWithCertainMatchersTest::shouldNotThrowNPEWhenIntegerPassed": [
+    {
+      "buggy_method": "isA",
+      "class": "org.mockito.Matchers"
+    }
+  ],
+  "org.mockitousage.bugs.NPEWithCertainMatchersTest::shouldNotThrowNPEWhenIntegerPassedToEq": [
+    {
+      "buggy_method": "eq",
+      "class": "org.mockito.Matchers"
+    }
+  ],
+  "org.mockitousage.bugs.NPEWithCertainMatchersTest::shouldNotThrowNPEWhenIntegerPassedToSame": [
+    {
+      "buggy_method": "same",
+      "class": "org.mockito.Matchers"
+    }
+  ]
+}

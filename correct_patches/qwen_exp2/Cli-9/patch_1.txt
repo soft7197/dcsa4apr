@@ -1,0 +1,15 @@
+File: src/java/org/apache/commons/cli/Parser.java
+Method: Parser.checkRequiredOptions
+
+protected void checkRequiredOptions()
+    throws MissingOptionException
+{
+    // if there are required options that have not been
+    // processed
+    List<String> requiredOptions = getRequiredOptions();
+    if (!requiredOptions.isEmpty())
+    {
+        String errorMessage = "Missing required option" + (requiredOptions.size() == 1 ? "" : "s") + ": " + String.join(", ", requiredOptions);
+        throw new MissingOptionException(errorMessage);
+    }
+}

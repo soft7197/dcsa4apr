@@ -1,0 +1,83 @@
+{
+  "bug_id": "Closure-101",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-101_1771850129",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the 'closurePass' being set to true when '--process_closure_primitives=false' is specified. The flag should correctly control whether the closurePass is enabled.",
+        "changes": "-options.closurePass = true;\n+if (flags.process_closure_primitives) {\n+    options.closurePass = true;\n+} else {\n+    options.closurePass = false;\n+}",
+        "fixed_method": "protected CompilerOptions createOptions() {\n  CompilerOptions options = new CompilerOptions();\n  options.setCodingConvention(new ClosureCodingConvention());\n  CompilationLevel level = flags.compilation_level;\n  level.setOptionsForCompilationLevel(options);\n  if (flags.debug) {\n    level.setDebugOptionsForCompilationLevel(options);\n  }\n\n  WarningLevel wLevel = flags.warning_level;\n  wLevel.setOptionsForWarningLevel(options);\n  for (FormattingOption formattingOption : flags.formatting) {\n    formattingOption.applyToOptions(options);\n  }\n  if (flags.process_closure_primitives) {\n    options.closurePass = true;\n  } else {\n    options.closurePass = false;\n  }\n\n  initOptionsFromFlags(options);\n  return options;\n}",
+        "diff": "-options.closurePass = true;\n+if (flags.process_closure_primitives) {\n+    options.closurePass = true;\n+} else {\n+    options.closurePass = false;\n+}",
+        "file_path": "src/com/google/javascript/jscomp/CommandLineRunner.java",
+        "method_name": "createOptions",
+        "class_name": "CommandLineRunner",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          419,
+          420,
+          421,
+          422,
+          423,
+          424,
+          425,
+          426,
+          427,
+          428,
+          429,
+          430,
+          431,
+          432,
+          433,
+          434,
+          435,
+          436,
+          437,
+          438,
+          439
+        ],
+        "original_code": "// expects.\nprotected CompilerOptions createOptions() {\n  CompilerOptions options = new CompilerOptions();\n  options.setCodingConvention(new ClosureCodingConvention());\n  CompilationLevel level = flags.compilation_level;\n  level.setOptionsForCompilationLevel(options);\n  if (flags.debug) {\n    level.setDebugOptionsForCompilationLevel(options);\n  }\n\n  WarningLevel wLevel = flags.warning_level;\n  wLevel.setOptionsForWarningLevel(options);\n  for (FormattingOption formattingOption : flags.formatting) {\n    formattingOption.applyToOptions(options);\n  }\n  if (flags.process_closure_primitives) {\n    options.closurePass = true;\n  }\n\n  initOptionsFromFlags(options);\n  return options;\n}"
+      },
+      {
+        "hypothesis": "The issue arises because the flag 'process_closure_primitives' is not being correctly interpreted. When set to false, the compiler should not modify the code involving 'goog.provide'. The current implementation sets 'options.closurePass' to true when 'process_closure_primitives' is true, but it does not handle the case where 'process_closure_primitives' is false.",
+        "changes": "- options.closurePass = true;\n+ options.closurePass = flags.process_closure_primitives;",
+        "fixed_method": "protected CompilerOptions createOptions() {\n  CompilerOptions options = new CompilerOptions();\n  options.setCodingConvention(new ClosureCodingConvention());\n  CompilationLevel level = flags.compilation_level;\n  level.setOptionsForCompilationLevel(options);\n  if (flags.debug) {\n    level.setDebugOptionsForCompilationLevel(options);\n  }\n\n  WarningLevel wLevel = flags.warning_level;\n  wLevel.setOptionsForWarningLevel(options);\n  for (FormattingOption formattingOption : flags.formatting) {\n    formattingOption.applyToOptions(options);\n  }\n  options.closurePass = flags.process_closure_primitives;\n\n  initOptionsFromFlags(options);\n  return options;\n}",
+        "diff": "- options.closurePass = true;\n+ options.closurePass = flags.process_closure_primitives;",
+        "file_path": "src/com/google/javascript/jscomp/CommandLineRunner.java",
+        "method_name": "createOptions",
+        "class_name": "CommandLineRunner",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          419,
+          420,
+          421,
+          422,
+          423,
+          424,
+          425,
+          426,
+          427,
+          428,
+          429,
+          430,
+          431,
+          432,
+          433,
+          434,
+          435,
+          436,
+          437,
+          438,
+          439
+        ],
+        "original_code": "// expects.\nprotected CompilerOptions createOptions() {\n  CompilerOptions options = new CompilerOptions();\n  options.setCodingConvention(new ClosureCodingConvention());\n  CompilationLevel level = flags.compilation_level;\n  level.setOptionsForCompilationLevel(options);\n  if (flags.debug) {\n    level.setDebugOptionsForCompilationLevel(options);\n  }\n\n  WarningLevel wLevel = flags.warning_level;\n  wLevel.setOptionsForWarningLevel(options);\n  for (FormattingOption formattingOption : flags.formatting) {\n    formattingOption.applyToOptions(options);\n  }\n  if (flags.process_closure_primitives) {\n    options.closurePass = true;\n  }\n\n  initOptionsFromFlags(options);\n  return options;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-101/"
+}

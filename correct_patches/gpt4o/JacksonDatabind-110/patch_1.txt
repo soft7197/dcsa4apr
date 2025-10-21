@@ -1,0 +1,33 @@
+File: src/main/java/com/fasterxml/jackson/databind/deser/impl/JavaUtilCollectionsDeserializers.java
+Method: JavaUtilCollectionsDeserializers.findForCollection
+
+public static JsonDeserializer<?> findForCollection(DeserializationContext ctxt, JavaType type) throws JsonMappingException {
+        JavaUtilCollectionsConverter conv;
+
+        // Handle types from java.util.Collections/java.util.Arrays that need conversion
+        if (type.hasRawClass(CLASS_AS_ARRAYS_LIST)) {
+            conv = converter(TYPE_AS_LIST, type, List.class);
+        } else if (type.hasRawClass(CLASS_SINGLETON_LIST)) {
+            conv = converter(TYPE_SINGLETON_LIST, type, List.class);
+        } else if (type.hasRawClass(CLASS_SINGLETON_SET)) {
+            conv = converter(TYPE_SINGLETON_SET, type, Set.class);
+        } else if (isUnmodifiableCollection(type)) {
+            if (type.isTypeOrSubTypeOf(List.class)) {
+                conv = converter(TYPE_UNMODIFIABLE_LIST, type, List.class);
+            } else if (type.isTypeOrSubTypeOf(Set.class)) {
+                conv = converter(TYPE_UNMODIFIABLE_SET, type, Set.class);
+            } else if (type.isTypeOrSubTypeOf(Map.class)) {
+                conv = converter(TYPE_UNMODIFIABLE_MAP, type, Map.class);
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+        return new StdDelegatingDeserializer<Object>(conv);
+    }
+
+    private static boolean isUnmodifiableCollection(JavaType type) {
+        String className = type.getRawClass().getName();
+        return className.startsWith("java.util.Collections$Unmodifiable");
+    }

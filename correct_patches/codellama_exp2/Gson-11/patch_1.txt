@@ -1,0 +1,23 @@
+File: gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
+Method: TypeAdapters.read
+
+public Number read(JsonReader in) throws IOException {
+ JsonToken jsonToken = in.peek();
+ switch (jsonToken) {
+ case NULL:
+ in.nextNull();
+ return null;
+ case NUMBER:
+ return new LazilyParsedNumber(in.nextString());
+ case STRING:
+ String valueString = in.nextString();
+ if (valueString != null) {
+ return new LazilyParsedNumber(valueString);
+ }
+ else {
+ return null;
+ }
+ default:
+ throw new JsonSyntaxException("Expecting number, got: " + jsonToken);
+ }
+}

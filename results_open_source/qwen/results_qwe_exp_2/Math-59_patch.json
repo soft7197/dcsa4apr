@@ -1,0 +1,64 @@
+{
+  "bug_id": "Math-59",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-59_1771948525",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is in the conditional return statement where NaN handling is incorrectly implemented. The current implementation returns NaN when the sum of a and b is NaN, which is not the intended behavior for a max function. The correct behavior should be to return NaN if either a or b is NaN.",
+        "changes": "- return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n+ return (Float.isNaN(a) || Float.isNaN(b)) ? Float.NaN : ((a <= b) ? b : a);",
+        "fixed_method": "public static float max(final float a, final float b) {\n    return (Float.isNaN(a) || Float.isNaN(b)) ? Float.NaN : ((a <= b) ? b : a);\n}",
+        "diff": "- return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n+ return (Float.isNaN(a) || Float.isNaN(b)) ? Float.NaN : ((a <= b) ? b : a);",
+        "file_path": "src/main/java/org/apache/commons/math/util/FastMath.java",
+        "method_name": "max",
+        "class_name": "FastMath",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          3481,
+          3482,
+          3483
+        ],
+        "original_code": "/** Compute the maximum of two values\n* @param a first value\n* @param b second value\n* @return b if a is lesser or equal to b, a otherwise\n*/\npublic static float max(final float a, final float b) {\n    return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n}"
+      },
+      {
+        "hypothesis": "The bug is in the incorrect handling of NaN values and the logic for determining the maximum value. The current implementation incorrectly returns b when a is NaN, which does not align with the expected behavior of returning NaN if either operand is NaN.",
+        "changes": "- return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n+ return (Float.isNaN(a) || Float.isNaN(b)) ? Float.NaN : (a <= b) ? b : a;",
+        "fixed_method": "public static float max(final float a, final float b) {\n    return (Float.isNaN(a) || Float.isNaN(b)) ? Float.NaN : (a <= b) ? b : a;\n}",
+        "diff": "- return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n+ return (Float.isNaN(a) || Float.isNaN(b)) ? Float.NaN : (a <= b) ? b : a;",
+        "file_path": "src/main/java/org/apache/commons/math/util/FastMath.java",
+        "method_name": "max",
+        "class_name": "FastMath",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          3481,
+          3482,
+          3483
+        ],
+        "original_code": "/** Compute the maximum of two values\n* @param a first value\n* @param b second value\n* @return b if a is lesser or equal to b, a otherwise\n*/\npublic static float max(final float a, final float b) {\n    return (a <= b) ? b : (Float.isNaN(a + b) ? Float.NaN : b);\n}"
+      },
+      {
+        "hypothesis": "The original patch incorrectly handled NaN values, specifically when both a and b are NaN. The refined fix ensures that if either a or b is NaN, the function returns NaN, correctly handling all edge cases involving NaN.",
+        "fixed_method": "public static float max(final float a, final float b) {\n    if (Float.isNaN(a) || Float.isNaN(b)) {\n        return Float.NaN;\n    }\n    return (a <= b) ? b : a;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/apache/commons/math/util/FastMath.java",
+        "method_name": "max",
+        "class_name": "FastMath",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is in the conditional return statement where NaN handling is incorrect. The current implementation incorrectly returns b when both a and b are NaN. It should return NaN in such cases.",
+        "line_numbers": [
+          3481,
+          3482,
+          3483
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-59/"
+}

@@ -1,0 +1,61 @@
+{
+  "bug_id": "Math-77",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-77_1772734715",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the incorrect calculation of the L-infinity norm, which should be the maximum absolute value of the elements, but the current implementation calculates the sum of the absolute values.",
+        "changes": "- max += Math.max(max, Math.abs(a));\n+ max = Math.max(max, Math.abs(a));",
+        "fixed_method": "public double getLInfNorm() {\n        double max = 0;\n        for (double a : data) {\n            max = Math.max(max, Math.abs(a));\n        }\n        return max;\n    }",
+        "diff": "- max += Math.max(max, Math.abs(a));\n+ max = Math.max(max, Math.abs(a));",
+        "file_path": "src/main/java/org/apache/commons/math/linear/ArrayRealVector.java",
+        "method_name": "getLInfNorm",
+        "class_name": "ArrayRealVector",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          717,
+          724
+        ],
+        "original_code": "    /** {@inheritDoc} */\n\n    @Override\n    public double getLInfNorm() {\n        double max = 0;\n        for (double a : data) {\n            max += Math.max(max, Math.abs(a));\n        }\n        return max;\n    }\n"
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public double getLInfNorm() {\n        double max = Double.NEGATIVE_INFINITY;\n        for (double a : data) {\n            max = Math.max(max, Math.abs(a));\n        }\n        return max;\n    }",
+        "diff": "",
+        "file_path": "src/main/java/org/apache/commons/math/linear/ArrayRealVector.java",
+        "method_name": "getLInfNorm",
+        "class_name": "ArrayRealVector",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          717,
+          724
+        ],
+        "original_code": "    /** {@inheritDoc} */\n\n    @Override\n    public double getLInfNorm() {\n        double max = 0;\n        for (double a : data) {\n            max += Math.max(max, Math.abs(a));\n        }\n        return max;\n    }\n"
+      },
+      {
+        "hypothesis": "The getLInfNorm method calculates the L-infinity norm, which is the maximum absolute value of the elements in the vector. The bug is caused by the fact that the maximum value is not correctly calculated.",
+        "changes": "-max += Math.max(max, Math.abs(a));\n+max = Math.max(max, Math.abs(a));",
+        "fixed_method": "@Override\npublic double getLInfNorm() {\n  double max = 0;\n  for (double a : data) {\n    max = Math.max(max, Math.abs(a));\n  }\n  return max;\n}",
+        "diff": "-max += Math.max(max, Math.abs(a));\n+max = Math.max(max, Math.abs(a));",
+        "file_path": "src/main/java/org/apache/commons/math/linear/ArrayRealVector.java",
+        "method_name": "getLInfNorm",
+        "class_name": "ArrayRealVector",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          717,
+          724
+        ],
+        "original_code": "    /** {@inheritDoc} */\n\n    @Override\n    public double getLInfNorm() {\n        double max = 0;\n        for (double a : data) {\n            max += Math.max(max, Math.abs(a));\n        }\n        return max;\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Math-77/"
+}

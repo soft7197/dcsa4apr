@@ -1,0 +1,83 @@
+{
+  "bug_id": "Mockito-33",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-33_1772921663",
+  "patches": [
+    [
+      {
+        "hypothesis": "Refined fix to handle edge cases and avoid hardcoded values",
+        "fixed_method": "public boolean hasSameMethod(Invocation candidate) {\n if (this.getMethod() == null || candidate.getMethod() == null) return false; \n String m1 = this.getMethod().getName(); \n String m2 = candidate.getMethod().getName(); \n return m1.equals(m2); \n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+        "method_name": "hasSameMethod",
+        "class_name": "InvocationMatcher",
+        "iteration": 4,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "",
+        "line_numbers": [
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ]
+      },
+      {
+        "hypothesis": "The `Method.equals()` method requires the same type of method object, which is not the case in the failing test. The bug is caused by comparing the method objects of different types.",
+        "changes": "- Method m1 = invocation.getMethod();\n- Method m2 = candidate.getMethod();\n+ Method m1 = invocation.getMethod().getName();\n+ Method m2 = candidate.getMethod().getName();",
+        "fixed_method": "public boolean hasSameMethod(Invocation candidate) {\n        //not using method.equals() for 1 good reason: \n        //sometimes java generates forwarding methods when generics are in play see JavaGenericsForwardingMethodsTest \n        String m1 = invocation.getMethod().getName(); \n        String m2 = candidate.getMethod().getName(); \n        \n        // Avoid unnecessary cloning \n        return m1.equals(m2);\n    }",
+        "diff": "- Method m1 = invocation.getMethod();\n- Method m2 = candidate.getMethod();\n+ Method m1 = invocation.getMethod().getName();\n+ Method m2 = candidate.getMethod().getName();",
+        "file_path": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+        "method_name": "hasSameMethod",
+        "class_name": "InvocationMatcher",
+        "iteration": 4,
+        "is_multi_method": false,
+        "line_numbers": [
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "original_code": "/**\n* similar means the same method name, same mock, unverified\n* and: if arguments are the same cannot be overloaded\n*/\npublic boolean hasSameMethod(Invocation candidate) {        \n    //not using method.equals() for 1 good reason:\n    //sometimes java generates forwarding methods when generics are in play see JavaGenericsForwardingMethodsTest\n    Method m1 = invocation.getMethod();\n    Method m2 = candidate.getMethod();\n    \n    \t/* Avoid unnecessary cloning */\n    return m1.equals(m2);\n}"
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public boolean hasSameMethod(Invocation candidate) {\n    //not using method.equals() for 1 good reason:\n    //sometimes java generates forwarding methods when generics are in play see JavaGenericsForwardingMethodsTest\n    Method m1 = invocation.getMethod();\n    Method m2 = candidate.getMethod();\n    \n    \t/* Avoid unnecessary cloning */\n    return m1.getName().equals(m2.getName());\n}",
+        "diff": "",
+        "file_path": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+        "method_name": "hasSameMethod",
+        "class_name": "InvocationMatcher",
+        "iteration": 4,
+        "is_multi_method": false,
+        "line_numbers": [
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "original_code": "/**\n* similar means the same method name, same mock, unverified\n* and: if arguments are the same cannot be overloaded\n*/\npublic boolean hasSameMethod(Invocation candidate) {        \n    //not using method.equals() for 1 good reason:\n    //sometimes java generates forwarding methods when generics are in play see JavaGenericsForwardingMethodsTest\n    Method m1 = invocation.getMethod();\n    Method m2 = candidate.getMethod();\n    \n    \t/* Avoid unnecessary cloning */\n    return m1.equals(m2);\n}"
+      }
+    ]
+  ],
+  "iterations": 4,
+  "monitor_dir": "traces/Mockito-33/"
+}

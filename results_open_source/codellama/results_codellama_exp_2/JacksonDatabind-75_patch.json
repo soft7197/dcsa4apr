@@ -1,0 +1,55 @@
+{
+  "bug_id": "JacksonDatabind-75",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-75_1772815780",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "methods": {
+        "src/main/java/com/fasterxml/jackson/databind/ser/std/EnumSerializer.java::EnumSerializer::construct::L77": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/std/EnumSerializer.java",
+          "method_name": "construct",
+          "class_name": "EnumSerializer",
+          "line_numbers": [
+            77,
+            88
+          ],
+          "original_code": "    /**\n     * Factory method used by {@link com.fasterxml.jackson.databind.ser.BasicSerializerFactory}\n     * for constructing serializer instance of Enum types.\n     * \n     * @since 2.1\n     */\n\n    @SuppressWarnings(\"unchecked\")\n    public static EnumSerializer construct(Class<?> enumClass, SerializationConfig config,\n            BeanDescription beanDesc, JsonFormat.Value format)\n    {\n        /* 08-Apr-2015, tatu: As per [databind#749], we can not statically determine\n         *   between name() and toString(), need to construct `EnumValues` with names,\n         *   handle toString() case dynamically (for example)\n         */\n        EnumValues v = EnumValues.constructFromName(config, (Class<Enum<?>>) enumClass);\n        Boolean serializeAsIndex = _isShapeWrittenUsingIndex(enumClass, format, true);\n        return new EnumSerializer(v, serializeAsIndex);\n    }\n",
+          "fixed_method": "public static EnumSerializer construct(Class<?> enumClass, SerializationConfig config, BeanDescription beanDesc, JsonFormat.Value format) {\n@SuppressWarnings(\"unchecked\")\nEnumValues v = EnumValues.constructFromName(config, (Class<Enum<?>>) enumClass);\nBoolean serializeAsIndex = _isShapeWrittenUsingIndex(enumClass, format, true);\nif (serializeAsIndex == null) {\nserializeAsIndex = Boolean.TRUE;\n}\nreturn new EnumSerializer(v, serializeAsIndex);\n}",
+          "iteration": 2
+        },
+        "src/main/java/com/fasterxml/jackson/databind/ser/std/EnumSerializer.java::EnumSerializer::createContextual::L95": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/std/EnumSerializer.java",
+          "method_name": "createContextual",
+          "class_name": "EnumSerializer",
+          "line_numbers": [
+            95,
+            111
+          ],
+          "original_code": "    /**\n     * To support some level of per-property configuration, we will need\n     * to make things contextual. We are limited to \"textual vs index\"\n     * choice here, however.\n     */\n\n    @Override\n    public JsonSerializer<?> createContextual(SerializerProvider serializers,\n            BeanProperty property) throws JsonMappingException\n    {\n        if (property != null) {\n            JsonFormat.Value format = findFormatOverrides(serializers,\n                    property, handledType());\n            if (format != null) {\n                Boolean serializeAsIndex = _isShapeWrittenUsingIndex(property.getType().getRawClass(),\n                        format, false);\n                if (serializeAsIndex != _serializeAsIndex) {\n                    return new EnumSerializer(_values, serializeAsIndex);\n                }\n            }\n        }\n        return this;\n    }\n",
+          "fixed_method": "@Override\npublic JsonSerializer<?> createContextual(SerializerProvider serializers, BeanProperty property) throws JsonMappingException {\nif (property != null) {\nJsonFormat.Value format = findFormatOverrides(serializers, property, handledType());\nif (format != null) {\nBoolean serializeAsIndex = _isShapeWrittenUsingIndex(property.getType().getRawClass(), format, false);\nif (serializeAsIndex == null) {\nserializeAsIndex = Boolean.TRUE;\n}\nif (serializeAsIndex != _serializeAsIndex) {\nreturn new EnumSerializer(_values, serializeAsIndex);\n}\n}\n}\nreturn this;\n}",
+          "iteration": 2
+        },
+        "src/main/java/com/fasterxml/jackson/databind/ser/std/EnumSerializer.java::EnumSerializer::_isShapeWrittenUsingIndex::L216": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/std/EnumSerializer.java",
+          "method_name": "_isShapeWrittenUsingIndex",
+          "class_name": "EnumSerializer",
+          "line_numbers": [
+            216,
+            239
+          ],
+          "original_code": "    /**\n     * Helper method called to check whether serialization should be done using\n     * index (number) or not.\n     */\n\n    protected static Boolean _isShapeWrittenUsingIndex(Class<?> enumClass,\n            JsonFormat.Value format, boolean fromClass)\n    {\n        JsonFormat.Shape shape = (format == null) ? null : format.getShape();\n        if (shape == null) {\n            return null;\n        }\n        // i.e. \"default\", check dynamically\n        if (shape == Shape.ANY || shape == Shape.SCALAR) {\n            return null;\n        }\n        // 19-May-2016, tatu: also consider \"natural\" shape\n        if (shape == Shape.STRING || shape == Shape.NATURAL) {\n            return Boolean.FALSE;\n        }\n        // 01-Oct-2014, tatu: For convenience, consider \"as-array\" to also mean 'yes, use index')\n        if (shape.isNumeric() || (shape == Shape.ARRAY)) {\n            return Boolean.TRUE;\n        }\n        // 07-Mar-2017, tatu: Also means `OBJECT` not available as property annotation...\n        throw new IllegalArgumentException(String.format(\n                \"Unsupported serialization shape (%s) for Enum %s, not supported as %s annotation\",\n                    shape, enumClass.getName(), (fromClass? \"class\" : \"property\")));\n    }\n",
+          "fixed_method": "protected static Boolean _isShapeWrittenUsingIndex(Class<?> enumClass, JsonFormat.Value format, boolean fromClass) {\nJsonFormat.Shape shape = (format == null) ? null : format.getShape();\nif (shape == null) {\nreturn Boolean.FALSE;\n}\nif (shape == Shape.ANY || shape == Shape.SCALAR) {\nreturn null;\n}\nif (shape == Shape.STRING || shape == Shape.NATURAL) {\nreturn Boolean.FALSE;\n}\nif (shape.isNumeric() || (shape == Shape.ARRAY)) {\nreturn Boolean.TRUE;\n}\nthrow new IllegalArgumentException(String.format(\"Unsupported serialization shape (%s) for Enum %s, not supported as %s annotation\", shape, enumClass.getName(), (fromClass? \"class\" : \"property\")));\n}",
+          "iteration": 2
+        }
+      },
+      "iteration": 2,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/JacksonDatabind-75/"
+}

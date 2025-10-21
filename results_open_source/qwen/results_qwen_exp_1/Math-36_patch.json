@@ -1,0 +1,63 @@
+{
+  "bug_id": "Math-36",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-36_1771902042",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by attempting to convert very large BigIntegers to floats, which results in overflow and NaN values. The fix involves scaling down the numerator and denominator to prevent overflow before performing the division.",
+        "changes": "- float result = numerator.floatValue() / denominator.floatValue();\n+ float result = numerator.divide(denominator).floatValue();",
+        "fixed_method": "    @Override\n    public float floatValue() {\n        float result = numerator.divide(denominator).floatValue();\n        return result;\n    }",
+        "diff": "- float result = numerator.floatValue() / denominator.floatValue();\n+ float result = numerator.divide(denominator).floatValue();",
+        "file_path": "src/main/java/org/apache/commons/math/fraction/BigFraction.java",
+        "method_name": "floatValue",
+        "class_name": "BigFraction",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          730,
+          736
+        ],
+        "original_code": "    /**\n     * <p>\n     * Gets the fraction as a <tt>float</tt>. This calculates the fraction as\n     * the numerator divided by denominator.\n     * </p>\n     *\n     * @return the fraction as a <tt>float</tt>.\n     * @see java.lang.Number#floatValue()\n     */\n\n    @Override\n    public float floatValue() {\n        float result = numerator.floatValue() / denominator.floatValue();\n            // Numerator and/or denominator must be out of range:\n            // Calculate how far to shift them to put them in range.\n        return result;\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "The bug is caused by overflow when converting large BigInteger values to double. The fix involves using a more precise calculation method to avoid overflow.",
+        "changes": "- double result = numerator.doubleValue() / denominator.doubleValue();\n+ double result = numerator.divide(denominator).doubleValue();",
+        "fixed_method": "    @Override\n    public double doubleValue() {\n        double result = numerator.divide(denominator).doubleValue();\n        return result;\n    }",
+        "diff": "- double result = numerator.doubleValue() / denominator.doubleValue();\n+ double result = numerator.divide(denominator).doubleValue();",
+        "file_path": "src/main/java/org/apache/commons/math/fraction/BigFraction.java",
+        "method_name": "doubleValue",
+        "class_name": "BigFraction",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          683,
+          689
+        ],
+        "original_code": "    /**\n     * <p>\n     * Gets the fraction as a <tt>double</tt>. This calculates the fraction as\n     * the numerator divided by denominator.\n     * </p>\n     *\n     * @return the fraction as a <tt>double</tt>\n     * @see java.lang.Number#doubleValue()\n     */\n\n    @Override\n    public double doubleValue() {\n        double result = numerator.doubleValue() / denominator.doubleValue();\n            // Numerator and/or denominator must be out of range:\n            // Calculate how far to shift them to put them in range.\n        return result;\n    }\n"
+      },
+      {
+        "hypothesis": "The bug is likely due to the division of very large numbers resulting in a value that cannot be represented as a double, leading to NaN. The fix involves scaling down the numerator and denominator to prevent overflow.",
+        "changes": "- double result = numerator.doubleValue() / denominator.doubleValue();\n+ double result = numerator.divide(denominator).doubleValue();",
+        "fixed_method": "    @Override\n    public double doubleValue() {\n        return numerator.divide(denominator).doubleValue();\n    }",
+        "diff": "- double result = numerator.doubleValue() / denominator.doubleValue();\n+ double result = numerator.divide(denominator).doubleValue();",
+        "file_path": "src/main/java/org/apache/commons/math/fraction/BigFraction.java",
+        "method_name": "doubleValue",
+        "class_name": "BigFraction",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          683,
+          689
+        ],
+        "original_code": "    /**\n     * <p>\n     * Gets the fraction as a <tt>double</tt>. This calculates the fraction as\n     * the numerator divided by denominator.\n     * </p>\n     *\n     * @return the fraction as a <tt>double</tt>\n     * @see java.lang.Number#doubleValue()\n     */\n\n    @Override\n    public double doubleValue() {\n        double result = numerator.doubleValue() / denominator.doubleValue();\n            // Numerator and/or denominator must be out of range:\n            // Calculate how far to shift them to put them in range.\n        return result;\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-36/"
+}

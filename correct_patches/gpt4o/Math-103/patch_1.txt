@@ -1,0 +1,17 @@
+File: src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java
+Method: NormalDistributionImpl.cumulativeProbability
+
+public double cumulativeProbability(double x) throws MathException {
+    if (Double.isNaN(x)) {
+        throw new MathException("Input value cannot be NaN.");
+    }
+    double devs = (x - mean) / standardDeviation;
+    // Handle extreme cases explicitly
+    if (devs < -20) {
+        return 0.0;
+    } else if (devs > 20) {
+        return 1.0;
+    }
+    // Use Erf to calculate the CDF for the normal distribution
+    return 0.5 * (1.0 + Erf.erf(devs / Math.sqrt(2.0)));
+}

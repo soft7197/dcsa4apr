@@ -1,0 +1,7008 @@
+{
+  "org.mockitousage.bugs.NPEWithCertainMatchersTest::shouldNotThrowNPEWhenIntPassed": [
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.ArgumentMatcher",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        62
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Matchers",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        95
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Matchers",
+      "method": "isA",
+      "signature": "(Ljava/lang/Class;)Ljava/lang/Object;",
+      "executed_lines": [
+        362
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Matchers",
+      "method": "reportMatcher",
+      "signature": "(Lorg/hamcrest/Matcher;)Lorg/mockito/internal/progress/HandyReturnValues;",
+      "executed_lines": [
+        717
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        630,
+        641,
+        673,
+        686,
+        720
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "mock",
+      "signature": "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Object;",
+      "executed_lines": [
+        749,
+        750,
+        751
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "mock",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/MockSettings;)Ljava/lang/Object;",
+      "executed_lines": [
+        835
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "times",
+      "signature": "(I)Lorg/mockito/internal/verification/api/VerificationMode;",
+      "executed_lines": [
+        1395
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "verify",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        1033
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "withSettings",
+      "signature": "()Lorg/mockito/MockSettings;",
+      "executed_lines": [
+        1566
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.MockitoAnnotations",
+      "method": "initMocks",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        81,
+        85,
+        86,
+        87,
+        88,
+        90
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.MockitoAnnotations",
+      "method": "scan",
+      "signature": "(Ljava/lang/Object;Ljava/lang/Class;)V",
+      "executed_lines": [
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        102,
+        106,
+        107,
+        111
+      ]
+    },
+    {
+      "package": "org.mockito.configuration",
+      "class": "org.mockito.configuration.DefaultMockitoConfiguration",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.configuration",
+      "class": "org.mockito.configuration.DefaultMockitoConfiguration",
+      "method": "getDefaultAnswer",
+      "signature": "()Lorg/mockito/stubbing/Answer;",
+      "executed_lines": [
+        32
+      ]
+    },
+    {
+      "package": "org.mockito.exceptions",
+      "class": "org.mockito.exceptions.Reporter",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockHandler",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/util/MockName;Lorg/mockito/internal/progress/MockingProgress;Lorg/mockito/internal/invocation/MatchersBinder;Lorg/mockito/internal/creation/MockSettingsImpl;)V",
+      "executed_lines": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockHandler",
+      "method": "handle",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;)Ljava/lang/Object;",
+      "executed_lines": [
+        60,
+        67,
+        69,
+        72,
+        74,
+        80,
+        81,
+        82,
+        83,
+        85,
+        86,
+        92,
+        97,
+        104,
+        105
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockitoCore",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        26,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockitoCore",
+      "method": "mock",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/MockSettings;)Ljava/lang/Object;",
+      "executed_lines": [
+        33,
+        34,
+        35
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockitoCore",
+      "method": "verify",
+      "signature": "(Ljava/lang/Object;Lorg/mockito/internal/verification/api/VerificationMode;)Ljava/lang/Object;",
+      "executed_lines": [
+        60,
+        62,
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.ClassPathLoader",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        10
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.ClassPathLoader",
+      "method": "loadConfiguration",
+      "signature": "()Lorg/mockito/configuration/IMockitoConfiguration;",
+      "executed_lines": [
+        18,
+        20,
+        24,
+        27
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.DefaultAnnotationEngine",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.DefaultAnnotationEngine",
+      "method": "createMockFor",
+      "signature": "(Ljava/lang/annotation/Annotation;Ljava/lang/reflect/Field;)Ljava/lang/Object;",
+      "executed_lines": [
+        27,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        19
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        26,
+        28,
+        29,
+        31
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "createConfig",
+      "signature": "()Lorg/mockito/configuration/IMockitoConfiguration;",
+      "executed_lines": [
+        34,
+        35,
+        36,
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "getAnnotationEngine",
+      "signature": "()Lorg/mockito/configuration/AnnotationEngine;",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "getDefaultAnswer",
+      "signature": "()Lorg/mockito/stubbing/Answer;",
+      "executed_lines": [
+        60
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "getIt",
+      "signature": "()Lorg/mockito/configuration/IMockitoConfiguration;",
+      "executed_lines": [
+        23
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "validate",
+      "signature": "()V",
+      "executed_lines": [
+        44,
+        45
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.AbstractMockitoMethodProxy",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        8
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.AbstractMockitoMethodProxy",
+      "method": "reflectOnCreateInfo",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodProxy;)Ljava/lang/reflect/Field;",
+      "executed_lines": [
+        35,
+        39,
+        42
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.AbstractMockitoMethodProxy",
+      "method": "setNamingPolicyField",
+      "signature": "(Lorg/mockito/internal/creation/cglib/MockitoNamingPolicy;)V",
+      "executed_lines": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        7
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "<init>",
+      "signature": "(Ljava/lang/reflect/Method;)V",
+      "executed_lines": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "getJavaMethod",
+      "signature": "()Ljava/lang/reflect/Method;",
+      "executed_lines": [
+        21
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "getReturnType",
+      "signature": "()Ljava/lang/Class;",
+      "executed_lines": [
+        33
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "isVarArgs",
+      "signature": "()Z",
+      "executed_lines": [
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMockitoMethodProxy",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodProxy;)V",
+      "executed_lines": [
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMockitoMethodProxy",
+      "method": "getMethodProxy",
+      "signature": "()Lorg/mockito/cglib/proxy/MethodProxy;",
+      "executed_lines": [
+        15
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/IMockHandler;Lorg/mockito/internal/creation/MockSettingsImpl;)V",
+      "executed_lines": [
+        23,
+        24,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "createMockitoMethod",
+      "signature": "(Ljava/lang/reflect/Method;)Lorg/mockito/internal/invocation/MockitoMethod;",
+      "executed_lines": [
+        65,
+        68
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "createMockitoMethodProxy",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodProxy;)Lorg/mockito/internal/creation/MockitoMethodProxy;",
+      "executed_lines": [
+        59,
+        61
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "intercept",
+      "signature": "(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;Lorg/mockito/cglib/proxy/MethodProxy;)Ljava/lang/Object;",
+      "executed_lines": [
+        34,
+        36,
+        40,
+        41,
+        43,
+        45,
+        46,
+        47
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "defaultAnswer",
+      "signature": "(Lorg/mockito/stubbing/Answer;)Lorg/mockito/MockSettings;",
+      "executed_lines": [
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getDefaultAnswer",
+      "signature": "()Lorg/mockito/stubbing/Answer;",
+      "executed_lines": [
+        70
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getExtraInterfaces",
+      "signature": "()[Ljava/lang/Class;",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getMockName",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        42
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getSpiedInstance",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        50
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "isSerializable",
+      "signature": "()Z",
+      "executed_lines": [
+        74
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "name",
+      "signature": "(Ljava/lang/String;)Lorg/mockito/MockSettings;",
+      "executed_lines": [
+        54,
+        55
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.CGLIBHacker",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.CGLIBHacker",
+      "method": "setMockitoNamingPolicy",
+      "signature": "(Lorg/mockito/internal/creation/MockitoMethodProxy;)V",
+      "executed_lines": [
+        16,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.MockitoNamingPolicy",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.MockitoNamingPolicy",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        9
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.MockitoNamingPolicy",
+      "method": "getTag",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        15
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        21,
+        30,
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        23,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "canImposterise",
+      "signature": "(Ljava/lang/Class;)Z",
+      "executed_lines": [
+        44
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "createProxy",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/cglib/proxy/MethodInterceptor;)Ljava/lang/Object;",
+      "executed_lines": [
+        111,
+        112,
+        113
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "createProxyClass",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/Class;",
+      "executed_lines": [
+        64,
+        68,
+        75,
+        76,
+        77,
+        78,
+        79,
+        84,
+        85,
+        86,
+        89,
+        93
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "imposterise",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodInterceptor;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/Object;",
+      "executed_lines": [
+        49,
+        50,
+        51,
+        53
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "prepend",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)[Ljava/lang/Class;",
+      "executed_lines": [
+        117,
+        118,
+        119,
+        120
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "setConstructorsAccessible",
+      "signature": "(Ljava/lang/Class;Z)V",
+      "executed_lines": [
+        58,
+        61
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$2",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$2",
+      "method": "accept",
+      "signature": "(Ljava/lang/reflect/Method;)I",
+      "executed_lines": [
+        39
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$3",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/creation/jmock/ClassImposterizer;)V",
+      "executed_lines": [
+        68
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$3",
+      "method": "filterConstructors",
+      "signature": "(Ljava/lang/Class;Ljava/util/List;)V",
+      "executed_lines": [
+        73
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "addIfNewElement",
+      "signature": "(Ljava/util/List;Ljava/lang/ClassLoader;)V",
+      "executed_lines": [
+        63,
+        64,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "combine",
+      "signature": "(Ljava/util/List;)Ljava/lang/ClassLoader;",
+      "executed_lines": [
+        53,
+        55,
+        59
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "combineLoadersOf",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/ClassLoader;",
+      "executed_lines": [
+        28,
+        30,
+        31,
+        32,
+        40,
+        44,
+        49
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "combineLoadersOf",
+      "signature": "([Ljava/lang/Class;)Ljava/lang/ClassLoader;",
+      "executed_lines": [
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SerializableNoOp",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SerializableNoOp",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        8
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.DebuggingInfo",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        15,
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.Localized",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        13,
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.Location",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.Location",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/exceptions/base/StackTraceFilter;)V",
+      "executed_lines": [
+        20,
+        21,
+        22,
+        23,
+        26,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.exceptions.base",
+      "class": "org.mockito.internal.exceptions.base.StackTraceFilter",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        12
+      ]
+    },
+    {
+      "package": "org.mockito.internal.exceptions.base",
+      "class": "org.mockito.internal.exceptions.base.StackTraceFilter",
+      "method": "filter",
+      "signature": "([Ljava/lang/StackTraceElement;Z)[Ljava/lang/StackTraceElement;",
+      "executed_lines": [
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        37,
+        38,
+        39,
+        44,
+        47,
+        50,
+        51,
+        52,
+        53
+      ]
+    },
+    {
+      "package": "org.mockito.internal.exceptions.base",
+      "class": "org.mockito.internal.exceptions.base.StackTraceFilter",
+      "method": "isBad",
+      "signature": "(Ljava/lang/StackTraceElement;)Z",
+      "executed_lines": [
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/mockito/internal/invocation/MockitoMethod;[Ljava/lang/Object;ILorg/mockito/internal/invocation/realmethod/RealMethod;)V",
+      "executed_lines": [
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "argumentsToMatchers",
+      "signature": "()Ljava/util/List;",
+      "executed_lines": [
+        146,
+        147,
+        148,
+        151,
+        154
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "expandVarArgs",
+      "signature": "(Z[Ljava/lang/Object;)[Ljava/lang/Object;",
+      "executed_lines": [
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "getMethod",
+      "signature": "()Ljava/lang/reflect/Method;",
+      "executed_lines": [
+        89
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "isToString",
+      "signature": "(Lorg/mockito/invocation/InvocationOnMock;)Z",
+      "executed_lines": [
+        158
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "isVoid",
+      "signature": "()Z",
+      "executed_lines": [
+        182
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.InvocationMatcher",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;Ljava/util/List;)V",
+      "executed_lines": [
+        26,
+        27,
+        28,
+        29,
+        33
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.InvocationMatcher",
+      "method": "getInvocation",
+      "signature": "()Lorg/mockito/internal/invocation/Invocation;",
+      "executed_lines": [
+        44
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.MatchersBinder",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        15
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.MatchersBinder",
+      "method": "bindMatchers",
+      "signature": "(Lorg/mockito/internal/progress/ArgumentMatcherStorage;Lorg/mockito/internal/invocation/Invocation;)Lorg/mockito/internal/invocation/InvocationMatcher;",
+      "executed_lines": [
+        20,
+        21,
+        23,
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.MatchersBinder",
+      "method": "validateMatchers",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;Ljava/util/List;)V",
+      "executed_lines": [
+        28,
+        35
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation.realmethod",
+      "class": "org.mockito.internal.invocation.realmethod.CGLIBProxyRealMethod",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/creation/MockitoMethodProxy;)V",
+      "executed_lines": [
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation.realmethod",
+      "class": "org.mockito.internal.invocation.realmethod.FilteredCGLIBProxyRealMethod",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/creation/MockitoMethodProxy;)V",
+      "executed_lines": [
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation.realmethod",
+      "class": "org.mockito.internal.invocation.realmethod.FilteredCGLIBProxyRealMethod",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/invocation/realmethod/RealMethod;)V",
+      "executed_lines": [
+        20,
+        21,
+        22
+      ]
+    },
+    {
+      "package": "org.mockito.internal.matchers",
+      "class": "org.mockito.internal.matchers.Equals",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.matchers",
+      "class": "org.mockito.internal.matchers.InstanceOf",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Class;)V",
+      "executed_lines": [
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.matchers",
+      "class": "org.mockito.internal.matchers.LocalizedMatcher",
+      "method": "<init>",
+      "signature": "(Lorg/hamcrest/Matcher;)V",
+      "executed_lines": [
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        22,
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "pullMatchers",
+      "signature": "()Ljava/util/List;",
+      "executed_lines": [
+        38,
+        39
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "reportMatcher",
+      "signature": "(Lorg/hamcrest/Matcher;)Lorg/mockito/internal/progress/HandyReturnValues;",
+      "executed_lines": [
+        30,
+        31
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "reset",
+      "signature": "()V",
+      "executed_lines": [
+        111,
+        112
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "validateState",
+      "signature": "()V",
+      "executed_lines": [
+        100,
+        105
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.HandyReturnValues",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.HandyReturnValues",
+      "method": "returnNull",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        16,
+        18,
+        19,
+        21,
+        25
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "getArgumentMatcherStorage",
+      "signature": "()Lorg/mockito/internal/progress/ArgumentMatcherStorage;",
+      "executed_lines": [
+        103
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "pullVerificationMode",
+      "signature": "()Lorg/mockito/internal/verification/api/VerificationMode;",
+      "executed_lines": [
+        51,
+        52
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "reportOngoingStubbing",
+      "signature": "(Lorg/mockito/internal/progress/IOngoingStubbing;)V",
+      "executed_lines": [
+        28,
+        29
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "reset",
+      "signature": "()V",
+      "executed_lines": [
+        97,
+        98,
+        99,
+        100
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "resetOngoingStubbing",
+      "signature": "()V",
+      "executed_lines": [
+        47,
+        48
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "validateState",
+      "signature": "()V",
+      "executed_lines": [
+        68,
+        70,
+        76,
+        82,
+        83
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "verificationStarted",
+      "signature": "(Lorg/mockito/internal/verification/api/VerificationMode;)V",
+      "executed_lines": [
+        38,
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.SequenceNumber",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        9
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.SequenceNumber",
+      "method": "next",
+      "signature": "()I",
+      "executed_lines": [
+        12
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        16
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        13
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "getArgumentMatcherStorage",
+      "signature": "()Lorg/mockito/internal/progress/ArgumentMatcherStorage;",
+      "executed_lines": [
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "pullVerificationMode",
+      "signature": "()Lorg/mockito/internal/verification/api/VerificationMode;",
+      "executed_lines": [
+        38
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "reportOngoingStubbing",
+      "signature": "(Lorg/mockito/internal/progress/IOngoingStubbing;)V",
+      "executed_lines": [
+        26,
+        27
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "reset",
+      "signature": "()V",
+      "executed_lines": [
+        58,
+        59
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "resetOngoingStubbing",
+      "signature": "()V",
+      "executed_lines": [
+        62,
+        63
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "threadSafely",
+      "signature": "()Lorg/mockito/internal/progress/MockingProgress;",
+      "executed_lines": [
+        19,
+        20,
+        22
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "validateState",
+      "signature": "()V",
+      "executed_lines": [
+        46,
+        47
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "verificationStarted",
+      "signature": "(Lorg/mockito/internal/verification/api/VerificationMode;)V",
+      "executed_lines": [
+        34,
+        35
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.BaseStubbing",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        13
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/progress/MockingProgress;)V",
+      "executed_lines": [
+        22,
+        24,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "findAnswerFor",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;)Lorg/mockito/internal/stubbing/StubbedInvocationMatcher;",
+      "executed_lines": [
+        62,
+        68
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "hasAnswersForStubbing",
+      "signature": "()Z",
+      "executed_lines": [
+        80
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "setInvocationForPotentialStubbing",
+      "signature": "(Lorg/mockito/internal/invocation/InvocationMatcher;)V",
+      "executed_lines": [
+        33,
+        34
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.OngoingStubbingImpl",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/stubbing/MockitoStubber;Lorg/mockito/internal/verification/RegisteredInvocations;)V",
+      "executed_lines": [
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.answers",
+      "class": "org.mockito.internal.stubbing.answers.CallsRealMethods",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.GloballyConfiguredAnswer",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        19
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.GloballyConfiguredAnswer",
+      "method": "answer",
+      "signature": "(Lorg/mockito/invocation/InvocationOnMock;)Ljava/lang/Object;",
+      "executed_lines": [
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        50
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "answer",
+      "signature": "(Lorg/mockito/invocation/InvocationOnMock;)Ljava/lang/Object;",
+      "executed_lines": [
+        58,
+        68,
+        69
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "primitiveOf",
+      "signature": "(Ljava/lang/Class;)Ljava/lang/Object;",
+      "executed_lines": [
+        113,
+        115,
+        118
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "returnValueFor",
+      "signature": "(Ljava/lang/Class;)Ljava/lang/Object;",
+      "executed_lines": [
+        73,
+        74
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsMocks",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        13,
+        16,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsMoreEmptyValues",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        43,
+        46
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNulls",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        37,
+        59
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "validateExtraInterfaces",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)V",
+      "executed_lines": [
+        20,
+        21
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "validateMockedType",
+      "signature": "(Ljava/lang/Class;Ljava/lang/Object;)V",
+      "executed_lines": [
+        32,
+        33
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "validateType",
+      "signature": "(Ljava/lang/Class;)V",
+      "executed_lines": [
+        14,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockName",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;Ljava/lang/Class;)V",
+      "executed_lines": [
+        16,
+        17,
+        21,
+        23
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        31,
+        32
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/util/CreationValidator;)V",
+      "executed_lines": [
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "createMock",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/internal/progress/MockingProgress;Lorg/mockito/internal/creation/MockSettingsImpl;)Ljava/lang/Object;",
+      "executed_lines": [
+        35,
+        36,
+        37,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        46,
+        48,
+        52
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "getInterceptor",
+      "signature": "(Ljava/lang/Object;)Lorg/mockito/internal/creation/MethodInterceptorFilter;",
+      "executed_lines": [
+        84,
+        85,
+        86,
+        87
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "isMock",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        80
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "isMockitoMock",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        76
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        9
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isEqualsMethod",
+      "signature": "(Ljava/lang/reflect/Method;)Z",
+      "executed_lines": [
+        23
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isHashCodeMethod",
+      "signature": "(Ljava/lang/reflect/Method;)Z",
+      "executed_lines": [
+        27
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isToString",
+      "signature": "(Ljava/lang/reflect/Method;)Z",
+      "executed_lines": [
+        14
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isToString",
+      "signature": "(Lorg/mockito/internal/invocation/MockitoMethod;)Z",
+      "executed_lines": [
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.RegisteredInvocations",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        17,
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.RegisteredInvocations",
+      "method": "add",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;)V",
+      "executed_lines": [
+        23,
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.Times",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        24,
+        25,
+        28,
+        29
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.VerificationModeFactory",
+      "method": "times",
+      "signature": "(I)Lorg/mockito/internal/verification/Times;",
+      "executed_lines": [
+        24
+      ]
+    }
+  ],
+  "org.mockitousage.bugs.NPEWithCertainMatchersTest::shouldNotThrowNPEWhenIntegerPassed": [
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.ArgumentMatcher",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        62
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Matchers",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        95
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Matchers",
+      "method": "isA",
+      "signature": "(Ljava/lang/Class;)Ljava/lang/Object;",
+      "executed_lines": [
+        362
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Matchers",
+      "method": "reportMatcher",
+      "signature": "(Lorg/hamcrest/Matcher;)Lorg/mockito/internal/progress/HandyReturnValues;",
+      "executed_lines": [
+        717
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        630,
+        641,
+        673,
+        686,
+        720
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "mock",
+      "signature": "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Object;",
+      "executed_lines": [
+        749,
+        750,
+        751
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "mock",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/MockSettings;)Ljava/lang/Object;",
+      "executed_lines": [
+        835
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "times",
+      "signature": "(I)Lorg/mockito/internal/verification/api/VerificationMode;",
+      "executed_lines": [
+        1395
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "verify",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        1033
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "withSettings",
+      "signature": "()Lorg/mockito/MockSettings;",
+      "executed_lines": [
+        1566
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.MockitoAnnotations",
+      "method": "initMocks",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        81,
+        85,
+        86,
+        87,
+        88,
+        90
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.MockitoAnnotations",
+      "method": "scan",
+      "signature": "(Ljava/lang/Object;Ljava/lang/Class;)V",
+      "executed_lines": [
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        102,
+        106,
+        107,
+        111
+      ]
+    },
+    {
+      "package": "org.mockito.configuration",
+      "class": "org.mockito.configuration.DefaultMockitoConfiguration",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.configuration",
+      "class": "org.mockito.configuration.DefaultMockitoConfiguration",
+      "method": "getDefaultAnswer",
+      "signature": "()Lorg/mockito/stubbing/Answer;",
+      "executed_lines": [
+        32
+      ]
+    },
+    {
+      "package": "org.mockito.exceptions",
+      "class": "org.mockito.exceptions.Reporter",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockHandler",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/util/MockName;Lorg/mockito/internal/progress/MockingProgress;Lorg/mockito/internal/invocation/MatchersBinder;Lorg/mockito/internal/creation/MockSettingsImpl;)V",
+      "executed_lines": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockHandler",
+      "method": "handle",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;)Ljava/lang/Object;",
+      "executed_lines": [
+        60,
+        67,
+        69,
+        72,
+        74,
+        80,
+        81,
+        82,
+        83,
+        85,
+        86,
+        92,
+        97,
+        104,
+        105
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockitoCore",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        26,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockitoCore",
+      "method": "mock",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/MockSettings;)Ljava/lang/Object;",
+      "executed_lines": [
+        33,
+        34,
+        35
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockitoCore",
+      "method": "verify",
+      "signature": "(Ljava/lang/Object;Lorg/mockito/internal/verification/api/VerificationMode;)Ljava/lang/Object;",
+      "executed_lines": [
+        60,
+        62,
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.ClassPathLoader",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        10
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.ClassPathLoader",
+      "method": "loadConfiguration",
+      "signature": "()Lorg/mockito/configuration/IMockitoConfiguration;",
+      "executed_lines": [
+        18,
+        20,
+        24,
+        27
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.DefaultAnnotationEngine",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.DefaultAnnotationEngine",
+      "method": "createMockFor",
+      "signature": "(Ljava/lang/annotation/Annotation;Ljava/lang/reflect/Field;)Ljava/lang/Object;",
+      "executed_lines": [
+        27,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        19
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        26,
+        28,
+        29,
+        31
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "createConfig",
+      "signature": "()Lorg/mockito/configuration/IMockitoConfiguration;",
+      "executed_lines": [
+        34,
+        35,
+        36,
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "getAnnotationEngine",
+      "signature": "()Lorg/mockito/configuration/AnnotationEngine;",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "getDefaultAnswer",
+      "signature": "()Lorg/mockito/stubbing/Answer;",
+      "executed_lines": [
+        60
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "getIt",
+      "signature": "()Lorg/mockito/configuration/IMockitoConfiguration;",
+      "executed_lines": [
+        23
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "validate",
+      "signature": "()V",
+      "executed_lines": [
+        44,
+        45
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.AbstractMockitoMethodProxy",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        8
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.AbstractMockitoMethodProxy",
+      "method": "reflectOnCreateInfo",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodProxy;)Ljava/lang/reflect/Field;",
+      "executed_lines": [
+        35,
+        39,
+        42
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.AbstractMockitoMethodProxy",
+      "method": "setNamingPolicyField",
+      "signature": "(Lorg/mockito/internal/creation/cglib/MockitoNamingPolicy;)V",
+      "executed_lines": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        7
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "<init>",
+      "signature": "(Ljava/lang/reflect/Method;)V",
+      "executed_lines": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "getJavaMethod",
+      "signature": "()Ljava/lang/reflect/Method;",
+      "executed_lines": [
+        21
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "getReturnType",
+      "signature": "()Ljava/lang/Class;",
+      "executed_lines": [
+        33
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "isVarArgs",
+      "signature": "()Z",
+      "executed_lines": [
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMockitoMethodProxy",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodProxy;)V",
+      "executed_lines": [
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMockitoMethodProxy",
+      "method": "getMethodProxy",
+      "signature": "()Lorg/mockito/cglib/proxy/MethodProxy;",
+      "executed_lines": [
+        15
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/IMockHandler;Lorg/mockito/internal/creation/MockSettingsImpl;)V",
+      "executed_lines": [
+        23,
+        24,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "createMockitoMethod",
+      "signature": "(Ljava/lang/reflect/Method;)Lorg/mockito/internal/invocation/MockitoMethod;",
+      "executed_lines": [
+        65,
+        68
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "createMockitoMethodProxy",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodProxy;)Lorg/mockito/internal/creation/MockitoMethodProxy;",
+      "executed_lines": [
+        59,
+        61
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "intercept",
+      "signature": "(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;Lorg/mockito/cglib/proxy/MethodProxy;)Ljava/lang/Object;",
+      "executed_lines": [
+        34,
+        36,
+        40,
+        41,
+        43,
+        45,
+        46,
+        47
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "defaultAnswer",
+      "signature": "(Lorg/mockito/stubbing/Answer;)Lorg/mockito/MockSettings;",
+      "executed_lines": [
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getDefaultAnswer",
+      "signature": "()Lorg/mockito/stubbing/Answer;",
+      "executed_lines": [
+        70
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getExtraInterfaces",
+      "signature": "()[Ljava/lang/Class;",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getMockName",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        42
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getSpiedInstance",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        50
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "isSerializable",
+      "signature": "()Z",
+      "executed_lines": [
+        74
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "name",
+      "signature": "(Ljava/lang/String;)Lorg/mockito/MockSettings;",
+      "executed_lines": [
+        54,
+        55
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.CGLIBHacker",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.CGLIBHacker",
+      "method": "setMockitoNamingPolicy",
+      "signature": "(Lorg/mockito/internal/creation/MockitoMethodProxy;)V",
+      "executed_lines": [
+        16,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.MockitoNamingPolicy",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.MockitoNamingPolicy",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        9
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.MockitoNamingPolicy",
+      "method": "getTag",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        15
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        21,
+        30,
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        23,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "canImposterise",
+      "signature": "(Ljava/lang/Class;)Z",
+      "executed_lines": [
+        44
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "createProxy",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/cglib/proxy/MethodInterceptor;)Ljava/lang/Object;",
+      "executed_lines": [
+        111,
+        112,
+        113
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "createProxyClass",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/Class;",
+      "executed_lines": [
+        64,
+        68,
+        75,
+        76,
+        77,
+        78,
+        79,
+        84,
+        85,
+        86,
+        89,
+        93
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "imposterise",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodInterceptor;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/Object;",
+      "executed_lines": [
+        49,
+        50,
+        51,
+        53
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "prepend",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)[Ljava/lang/Class;",
+      "executed_lines": [
+        117,
+        118,
+        119,
+        120
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "setConstructorsAccessible",
+      "signature": "(Ljava/lang/Class;Z)V",
+      "executed_lines": [
+        58,
+        61
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$2",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$2",
+      "method": "accept",
+      "signature": "(Ljava/lang/reflect/Method;)I",
+      "executed_lines": [
+        39
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$3",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/creation/jmock/ClassImposterizer;)V",
+      "executed_lines": [
+        68
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$3",
+      "method": "filterConstructors",
+      "signature": "(Ljava/lang/Class;Ljava/util/List;)V",
+      "executed_lines": [
+        73
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "addIfNewElement",
+      "signature": "(Ljava/util/List;Ljava/lang/ClassLoader;)V",
+      "executed_lines": [
+        63,
+        64,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "combine",
+      "signature": "(Ljava/util/List;)Ljava/lang/ClassLoader;",
+      "executed_lines": [
+        53,
+        55,
+        59
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "combineLoadersOf",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/ClassLoader;",
+      "executed_lines": [
+        28,
+        30,
+        31,
+        32,
+        40,
+        44,
+        49
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "combineLoadersOf",
+      "signature": "([Ljava/lang/Class;)Ljava/lang/ClassLoader;",
+      "executed_lines": [
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SerializableNoOp",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SerializableNoOp",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        8
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.DebuggingInfo",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        15,
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.Localized",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        13,
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.Location",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.Location",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/exceptions/base/StackTraceFilter;)V",
+      "executed_lines": [
+        20,
+        21,
+        22,
+        23,
+        26,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.exceptions.base",
+      "class": "org.mockito.internal.exceptions.base.StackTraceFilter",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        12
+      ]
+    },
+    {
+      "package": "org.mockito.internal.exceptions.base",
+      "class": "org.mockito.internal.exceptions.base.StackTraceFilter",
+      "method": "filter",
+      "signature": "([Ljava/lang/StackTraceElement;Z)[Ljava/lang/StackTraceElement;",
+      "executed_lines": [
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        37,
+        38,
+        39,
+        44,
+        47,
+        50,
+        51,
+        52,
+        53
+      ]
+    },
+    {
+      "package": "org.mockito.internal.exceptions.base",
+      "class": "org.mockito.internal.exceptions.base.StackTraceFilter",
+      "method": "isBad",
+      "signature": "(Ljava/lang/StackTraceElement;)Z",
+      "executed_lines": [
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/mockito/internal/invocation/MockitoMethod;[Ljava/lang/Object;ILorg/mockito/internal/invocation/realmethod/RealMethod;)V",
+      "executed_lines": [
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "argumentsToMatchers",
+      "signature": "()Ljava/util/List;",
+      "executed_lines": [
+        146,
+        147,
+        148,
+        151,
+        154
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "expandVarArgs",
+      "signature": "(Z[Ljava/lang/Object;)[Ljava/lang/Object;",
+      "executed_lines": [
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "getMethod",
+      "signature": "()Ljava/lang/reflect/Method;",
+      "executed_lines": [
+        89
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "isToString",
+      "signature": "(Lorg/mockito/invocation/InvocationOnMock;)Z",
+      "executed_lines": [
+        158
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "isVoid",
+      "signature": "()Z",
+      "executed_lines": [
+        182
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.InvocationMatcher",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;Ljava/util/List;)V",
+      "executed_lines": [
+        26,
+        27,
+        28,
+        29,
+        33
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.InvocationMatcher",
+      "method": "getInvocation",
+      "signature": "()Lorg/mockito/internal/invocation/Invocation;",
+      "executed_lines": [
+        44
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.MatchersBinder",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        15
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.MatchersBinder",
+      "method": "bindMatchers",
+      "signature": "(Lorg/mockito/internal/progress/ArgumentMatcherStorage;Lorg/mockito/internal/invocation/Invocation;)Lorg/mockito/internal/invocation/InvocationMatcher;",
+      "executed_lines": [
+        20,
+        21,
+        23,
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.MatchersBinder",
+      "method": "validateMatchers",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;Ljava/util/List;)V",
+      "executed_lines": [
+        28,
+        35
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation.realmethod",
+      "class": "org.mockito.internal.invocation.realmethod.CGLIBProxyRealMethod",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/creation/MockitoMethodProxy;)V",
+      "executed_lines": [
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation.realmethod",
+      "class": "org.mockito.internal.invocation.realmethod.FilteredCGLIBProxyRealMethod",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/creation/MockitoMethodProxy;)V",
+      "executed_lines": [
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation.realmethod",
+      "class": "org.mockito.internal.invocation.realmethod.FilteredCGLIBProxyRealMethod",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/invocation/realmethod/RealMethod;)V",
+      "executed_lines": [
+        20,
+        21,
+        22
+      ]
+    },
+    {
+      "package": "org.mockito.internal.matchers",
+      "class": "org.mockito.internal.matchers.Equals",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.matchers",
+      "class": "org.mockito.internal.matchers.InstanceOf",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Class;)V",
+      "executed_lines": [
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.matchers",
+      "class": "org.mockito.internal.matchers.LocalizedMatcher",
+      "method": "<init>",
+      "signature": "(Lorg/hamcrest/Matcher;)V",
+      "executed_lines": [
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        22,
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "pullMatchers",
+      "signature": "()Ljava/util/List;",
+      "executed_lines": [
+        38,
+        39
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "reportMatcher",
+      "signature": "(Lorg/hamcrest/Matcher;)Lorg/mockito/internal/progress/HandyReturnValues;",
+      "executed_lines": [
+        30,
+        31
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "reset",
+      "signature": "()V",
+      "executed_lines": [
+        111,
+        112
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "validateState",
+      "signature": "()V",
+      "executed_lines": [
+        100,
+        105
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.HandyReturnValues",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.HandyReturnValues",
+      "method": "returnNull",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        16,
+        18,
+        19,
+        21,
+        25
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "getArgumentMatcherStorage",
+      "signature": "()Lorg/mockito/internal/progress/ArgumentMatcherStorage;",
+      "executed_lines": [
+        103
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "pullVerificationMode",
+      "signature": "()Lorg/mockito/internal/verification/api/VerificationMode;",
+      "executed_lines": [
+        51,
+        52
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "reportOngoingStubbing",
+      "signature": "(Lorg/mockito/internal/progress/IOngoingStubbing;)V",
+      "executed_lines": [
+        28,
+        29
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "reset",
+      "signature": "()V",
+      "executed_lines": [
+        97,
+        98,
+        99,
+        100
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "resetOngoingStubbing",
+      "signature": "()V",
+      "executed_lines": [
+        47,
+        48
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "validateState",
+      "signature": "()V",
+      "executed_lines": [
+        68,
+        70,
+        76,
+        82,
+        83
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "verificationStarted",
+      "signature": "(Lorg/mockito/internal/verification/api/VerificationMode;)V",
+      "executed_lines": [
+        38,
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.SequenceNumber",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        9
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.SequenceNumber",
+      "method": "next",
+      "signature": "()I",
+      "executed_lines": [
+        12
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        16
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        13
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "getArgumentMatcherStorage",
+      "signature": "()Lorg/mockito/internal/progress/ArgumentMatcherStorage;",
+      "executed_lines": [
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "pullVerificationMode",
+      "signature": "()Lorg/mockito/internal/verification/api/VerificationMode;",
+      "executed_lines": [
+        38
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "reportOngoingStubbing",
+      "signature": "(Lorg/mockito/internal/progress/IOngoingStubbing;)V",
+      "executed_lines": [
+        26,
+        27
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "reset",
+      "signature": "()V",
+      "executed_lines": [
+        58,
+        59
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "resetOngoingStubbing",
+      "signature": "()V",
+      "executed_lines": [
+        62,
+        63
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "threadSafely",
+      "signature": "()Lorg/mockito/internal/progress/MockingProgress;",
+      "executed_lines": [
+        19,
+        20,
+        22
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "validateState",
+      "signature": "()V",
+      "executed_lines": [
+        46,
+        47
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "verificationStarted",
+      "signature": "(Lorg/mockito/internal/verification/api/VerificationMode;)V",
+      "executed_lines": [
+        34,
+        35
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.BaseStubbing",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        13
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/progress/MockingProgress;)V",
+      "executed_lines": [
+        22,
+        24,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "findAnswerFor",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;)Lorg/mockito/internal/stubbing/StubbedInvocationMatcher;",
+      "executed_lines": [
+        62,
+        68
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "hasAnswersForStubbing",
+      "signature": "()Z",
+      "executed_lines": [
+        80
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "setInvocationForPotentialStubbing",
+      "signature": "(Lorg/mockito/internal/invocation/InvocationMatcher;)V",
+      "executed_lines": [
+        33,
+        34
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.OngoingStubbingImpl",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/stubbing/MockitoStubber;Lorg/mockito/internal/verification/RegisteredInvocations;)V",
+      "executed_lines": [
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.answers",
+      "class": "org.mockito.internal.stubbing.answers.CallsRealMethods",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.GloballyConfiguredAnswer",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        19
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.GloballyConfiguredAnswer",
+      "method": "answer",
+      "signature": "(Lorg/mockito/invocation/InvocationOnMock;)Ljava/lang/Object;",
+      "executed_lines": [
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        50
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "answer",
+      "signature": "(Lorg/mockito/invocation/InvocationOnMock;)Ljava/lang/Object;",
+      "executed_lines": [
+        58,
+        68,
+        69
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "primitiveOf",
+      "signature": "(Ljava/lang/Class;)Ljava/lang/Object;",
+      "executed_lines": [
+        113,
+        115,
+        118
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "returnValueFor",
+      "signature": "(Ljava/lang/Class;)Ljava/lang/Object;",
+      "executed_lines": [
+        73,
+        74
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsMocks",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        13,
+        16,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsMoreEmptyValues",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        43,
+        46
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNulls",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        37,
+        59
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "validateExtraInterfaces",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)V",
+      "executed_lines": [
+        20,
+        21
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "validateMockedType",
+      "signature": "(Ljava/lang/Class;Ljava/lang/Object;)V",
+      "executed_lines": [
+        32,
+        33
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "validateType",
+      "signature": "(Ljava/lang/Class;)V",
+      "executed_lines": [
+        14,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockName",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;Ljava/lang/Class;)V",
+      "executed_lines": [
+        16,
+        17,
+        21,
+        23
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        31,
+        32
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/util/CreationValidator;)V",
+      "executed_lines": [
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "createMock",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/internal/progress/MockingProgress;Lorg/mockito/internal/creation/MockSettingsImpl;)Ljava/lang/Object;",
+      "executed_lines": [
+        35,
+        36,
+        37,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        46,
+        48,
+        52
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "getInterceptor",
+      "signature": "(Ljava/lang/Object;)Lorg/mockito/internal/creation/MethodInterceptorFilter;",
+      "executed_lines": [
+        84,
+        85,
+        86,
+        87
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "isMock",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        80
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "isMockitoMock",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        76
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        9
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isEqualsMethod",
+      "signature": "(Ljava/lang/reflect/Method;)Z",
+      "executed_lines": [
+        23
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isHashCodeMethod",
+      "signature": "(Ljava/lang/reflect/Method;)Z",
+      "executed_lines": [
+        27
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isToString",
+      "signature": "(Ljava/lang/reflect/Method;)Z",
+      "executed_lines": [
+        14
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isToString",
+      "signature": "(Lorg/mockito/internal/invocation/MockitoMethod;)Z",
+      "executed_lines": [
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.RegisteredInvocations",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        17,
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.RegisteredInvocations",
+      "method": "add",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;)V",
+      "executed_lines": [
+        23,
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.Times",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        24,
+        25,
+        28,
+        29
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.VerificationModeFactory",
+      "method": "times",
+      "signature": "(I)Lorg/mockito/internal/verification/Times;",
+      "executed_lines": [
+        24
+      ]
+    }
+  ],
+  "org.mockitousage.bugs.NPEWithCertainMatchersTest::shouldNotThrowNPEWhenIntegerPassedToEq": [
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.ArgumentMatcher",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        62
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Matchers",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        95
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Matchers",
+      "method": "eq",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        479
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Matchers",
+      "method": "reportMatcher",
+      "signature": "(Lorg/hamcrest/Matcher;)Lorg/mockito/internal/progress/HandyReturnValues;",
+      "executed_lines": [
+        717
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        630,
+        641,
+        673,
+        686,
+        720
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "mock",
+      "signature": "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Object;",
+      "executed_lines": [
+        749,
+        750,
+        751
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "mock",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/MockSettings;)Ljava/lang/Object;",
+      "executed_lines": [
+        835
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "times",
+      "signature": "(I)Lorg/mockito/internal/verification/api/VerificationMode;",
+      "executed_lines": [
+        1395
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "verify",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        1033
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "withSettings",
+      "signature": "()Lorg/mockito/MockSettings;",
+      "executed_lines": [
+        1566
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.MockitoAnnotations",
+      "method": "initMocks",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        81,
+        85,
+        86,
+        87,
+        88,
+        90
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.MockitoAnnotations",
+      "method": "scan",
+      "signature": "(Ljava/lang/Object;Ljava/lang/Class;)V",
+      "executed_lines": [
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        102,
+        106,
+        107,
+        111
+      ]
+    },
+    {
+      "package": "org.mockito.configuration",
+      "class": "org.mockito.configuration.DefaultMockitoConfiguration",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.configuration",
+      "class": "org.mockito.configuration.DefaultMockitoConfiguration",
+      "method": "getDefaultAnswer",
+      "signature": "()Lorg/mockito/stubbing/Answer;",
+      "executed_lines": [
+        32
+      ]
+    },
+    {
+      "package": "org.mockito.exceptions",
+      "class": "org.mockito.exceptions.Reporter",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockHandler",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/util/MockName;Lorg/mockito/internal/progress/MockingProgress;Lorg/mockito/internal/invocation/MatchersBinder;Lorg/mockito/internal/creation/MockSettingsImpl;)V",
+      "executed_lines": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockHandler",
+      "method": "handle",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;)Ljava/lang/Object;",
+      "executed_lines": [
+        60,
+        67,
+        69,
+        72,
+        74,
+        80,
+        81,
+        82,
+        83,
+        85,
+        86,
+        92,
+        97,
+        104,
+        105
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockitoCore",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        26,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockitoCore",
+      "method": "mock",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/MockSettings;)Ljava/lang/Object;",
+      "executed_lines": [
+        33,
+        34,
+        35
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockitoCore",
+      "method": "verify",
+      "signature": "(Ljava/lang/Object;Lorg/mockito/internal/verification/api/VerificationMode;)Ljava/lang/Object;",
+      "executed_lines": [
+        60,
+        62,
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.ClassPathLoader",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        10
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.ClassPathLoader",
+      "method": "loadConfiguration",
+      "signature": "()Lorg/mockito/configuration/IMockitoConfiguration;",
+      "executed_lines": [
+        18,
+        20,
+        24,
+        27
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.DefaultAnnotationEngine",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.DefaultAnnotationEngine",
+      "method": "createMockFor",
+      "signature": "(Ljava/lang/annotation/Annotation;Ljava/lang/reflect/Field;)Ljava/lang/Object;",
+      "executed_lines": [
+        27,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        19
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        26,
+        28,
+        29,
+        31
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "createConfig",
+      "signature": "()Lorg/mockito/configuration/IMockitoConfiguration;",
+      "executed_lines": [
+        34,
+        35,
+        36,
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "getAnnotationEngine",
+      "signature": "()Lorg/mockito/configuration/AnnotationEngine;",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "getDefaultAnswer",
+      "signature": "()Lorg/mockito/stubbing/Answer;",
+      "executed_lines": [
+        60
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "getIt",
+      "signature": "()Lorg/mockito/configuration/IMockitoConfiguration;",
+      "executed_lines": [
+        23
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "validate",
+      "signature": "()V",
+      "executed_lines": [
+        44,
+        45
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.AbstractMockitoMethodProxy",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        8
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.AbstractMockitoMethodProxy",
+      "method": "reflectOnCreateInfo",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodProxy;)Ljava/lang/reflect/Field;",
+      "executed_lines": [
+        35,
+        39,
+        42
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.AbstractMockitoMethodProxy",
+      "method": "setNamingPolicyField",
+      "signature": "(Lorg/mockito/internal/creation/cglib/MockitoNamingPolicy;)V",
+      "executed_lines": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        7
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "<init>",
+      "signature": "(Ljava/lang/reflect/Method;)V",
+      "executed_lines": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "getJavaMethod",
+      "signature": "()Ljava/lang/reflect/Method;",
+      "executed_lines": [
+        21
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "getReturnType",
+      "signature": "()Ljava/lang/Class;",
+      "executed_lines": [
+        33
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "isVarArgs",
+      "signature": "()Z",
+      "executed_lines": [
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMockitoMethodProxy",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodProxy;)V",
+      "executed_lines": [
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMockitoMethodProxy",
+      "method": "getMethodProxy",
+      "signature": "()Lorg/mockito/cglib/proxy/MethodProxy;",
+      "executed_lines": [
+        15
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/IMockHandler;Lorg/mockito/internal/creation/MockSettingsImpl;)V",
+      "executed_lines": [
+        23,
+        24,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "createMockitoMethod",
+      "signature": "(Ljava/lang/reflect/Method;)Lorg/mockito/internal/invocation/MockitoMethod;",
+      "executed_lines": [
+        65,
+        68
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "createMockitoMethodProxy",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodProxy;)Lorg/mockito/internal/creation/MockitoMethodProxy;",
+      "executed_lines": [
+        59,
+        61
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "intercept",
+      "signature": "(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;Lorg/mockito/cglib/proxy/MethodProxy;)Ljava/lang/Object;",
+      "executed_lines": [
+        34,
+        36,
+        40,
+        41,
+        43,
+        45,
+        46,
+        47
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "defaultAnswer",
+      "signature": "(Lorg/mockito/stubbing/Answer;)Lorg/mockito/MockSettings;",
+      "executed_lines": [
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getDefaultAnswer",
+      "signature": "()Lorg/mockito/stubbing/Answer;",
+      "executed_lines": [
+        70
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getExtraInterfaces",
+      "signature": "()[Ljava/lang/Class;",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getMockName",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        42
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getSpiedInstance",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        50
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "isSerializable",
+      "signature": "()Z",
+      "executed_lines": [
+        74
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "name",
+      "signature": "(Ljava/lang/String;)Lorg/mockito/MockSettings;",
+      "executed_lines": [
+        54,
+        55
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.CGLIBHacker",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.CGLIBHacker",
+      "method": "setMockitoNamingPolicy",
+      "signature": "(Lorg/mockito/internal/creation/MockitoMethodProxy;)V",
+      "executed_lines": [
+        16,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.MockitoNamingPolicy",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.MockitoNamingPolicy",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        9
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.MockitoNamingPolicy",
+      "method": "getTag",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        15
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        21,
+        30,
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        23,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "canImposterise",
+      "signature": "(Ljava/lang/Class;)Z",
+      "executed_lines": [
+        44
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "createProxy",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/cglib/proxy/MethodInterceptor;)Ljava/lang/Object;",
+      "executed_lines": [
+        111,
+        112,
+        113
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "createProxyClass",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/Class;",
+      "executed_lines": [
+        64,
+        68,
+        75,
+        76,
+        77,
+        78,
+        79,
+        84,
+        85,
+        86,
+        89,
+        93
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "imposterise",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodInterceptor;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/Object;",
+      "executed_lines": [
+        49,
+        50,
+        51,
+        53
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "prepend",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)[Ljava/lang/Class;",
+      "executed_lines": [
+        117,
+        118,
+        119,
+        120
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "setConstructorsAccessible",
+      "signature": "(Ljava/lang/Class;Z)V",
+      "executed_lines": [
+        58,
+        61
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$2",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$2",
+      "method": "accept",
+      "signature": "(Ljava/lang/reflect/Method;)I",
+      "executed_lines": [
+        39
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$3",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/creation/jmock/ClassImposterizer;)V",
+      "executed_lines": [
+        68
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$3",
+      "method": "filterConstructors",
+      "signature": "(Ljava/lang/Class;Ljava/util/List;)V",
+      "executed_lines": [
+        73
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "addIfNewElement",
+      "signature": "(Ljava/util/List;Ljava/lang/ClassLoader;)V",
+      "executed_lines": [
+        63,
+        64,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "combine",
+      "signature": "(Ljava/util/List;)Ljava/lang/ClassLoader;",
+      "executed_lines": [
+        53,
+        55,
+        59
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "combineLoadersOf",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/ClassLoader;",
+      "executed_lines": [
+        28,
+        30,
+        31,
+        32,
+        40,
+        44,
+        49
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "combineLoadersOf",
+      "signature": "([Ljava/lang/Class;)Ljava/lang/ClassLoader;",
+      "executed_lines": [
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SerializableNoOp",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SerializableNoOp",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        8
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.DebuggingInfo",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        15,
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.Localized",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        13,
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.Location",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.Location",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/exceptions/base/StackTraceFilter;)V",
+      "executed_lines": [
+        20,
+        21,
+        22,
+        23,
+        26,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.exceptions.base",
+      "class": "org.mockito.internal.exceptions.base.StackTraceFilter",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        12
+      ]
+    },
+    {
+      "package": "org.mockito.internal.exceptions.base",
+      "class": "org.mockito.internal.exceptions.base.StackTraceFilter",
+      "method": "filter",
+      "signature": "([Ljava/lang/StackTraceElement;Z)[Ljava/lang/StackTraceElement;",
+      "executed_lines": [
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        37,
+        38,
+        39,
+        44,
+        47,
+        50,
+        51,
+        52,
+        53
+      ]
+    },
+    {
+      "package": "org.mockito.internal.exceptions.base",
+      "class": "org.mockito.internal.exceptions.base.StackTraceFilter",
+      "method": "isBad",
+      "signature": "(Ljava/lang/StackTraceElement;)Z",
+      "executed_lines": [
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/mockito/internal/invocation/MockitoMethod;[Ljava/lang/Object;ILorg/mockito/internal/invocation/realmethod/RealMethod;)V",
+      "executed_lines": [
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "argumentsToMatchers",
+      "signature": "()Ljava/util/List;",
+      "executed_lines": [
+        146,
+        147,
+        148,
+        151,
+        154
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "expandVarArgs",
+      "signature": "(Z[Ljava/lang/Object;)[Ljava/lang/Object;",
+      "executed_lines": [
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "getMethod",
+      "signature": "()Ljava/lang/reflect/Method;",
+      "executed_lines": [
+        89
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "isToString",
+      "signature": "(Lorg/mockito/invocation/InvocationOnMock;)Z",
+      "executed_lines": [
+        158
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "isVoid",
+      "signature": "()Z",
+      "executed_lines": [
+        182
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.InvocationMatcher",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;Ljava/util/List;)V",
+      "executed_lines": [
+        26,
+        27,
+        28,
+        29,
+        33
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.InvocationMatcher",
+      "method": "getInvocation",
+      "signature": "()Lorg/mockito/internal/invocation/Invocation;",
+      "executed_lines": [
+        44
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.MatchersBinder",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        15
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.MatchersBinder",
+      "method": "bindMatchers",
+      "signature": "(Lorg/mockito/internal/progress/ArgumentMatcherStorage;Lorg/mockito/internal/invocation/Invocation;)Lorg/mockito/internal/invocation/InvocationMatcher;",
+      "executed_lines": [
+        20,
+        21,
+        23,
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.MatchersBinder",
+      "method": "validateMatchers",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;Ljava/util/List;)V",
+      "executed_lines": [
+        28,
+        35
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation.realmethod",
+      "class": "org.mockito.internal.invocation.realmethod.CGLIBProxyRealMethod",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/creation/MockitoMethodProxy;)V",
+      "executed_lines": [
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation.realmethod",
+      "class": "org.mockito.internal.invocation.realmethod.FilteredCGLIBProxyRealMethod",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/creation/MockitoMethodProxy;)V",
+      "executed_lines": [
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation.realmethod",
+      "class": "org.mockito.internal.invocation.realmethod.FilteredCGLIBProxyRealMethod",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/invocation/realmethod/RealMethod;)V",
+      "executed_lines": [
+        20,
+        21,
+        22
+      ]
+    },
+    {
+      "package": "org.mockito.internal.matchers",
+      "class": "org.mockito.internal.matchers.Equals",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.matchers",
+      "class": "org.mockito.internal.matchers.LocalizedMatcher",
+      "method": "<init>",
+      "signature": "(Lorg/hamcrest/Matcher;)V",
+      "executed_lines": [
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        22,
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "pullMatchers",
+      "signature": "()Ljava/util/List;",
+      "executed_lines": [
+        38,
+        39
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "reportMatcher",
+      "signature": "(Lorg/hamcrest/Matcher;)Lorg/mockito/internal/progress/HandyReturnValues;",
+      "executed_lines": [
+        30,
+        31
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "reset",
+      "signature": "()V",
+      "executed_lines": [
+        111,
+        112
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "validateState",
+      "signature": "()V",
+      "executed_lines": [
+        100,
+        105
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.HandyReturnValues",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.HandyReturnValues",
+      "method": "returnNull",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        16,
+        18,
+        19,
+        21,
+        25
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "getArgumentMatcherStorage",
+      "signature": "()Lorg/mockito/internal/progress/ArgumentMatcherStorage;",
+      "executed_lines": [
+        103
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "pullVerificationMode",
+      "signature": "()Lorg/mockito/internal/verification/api/VerificationMode;",
+      "executed_lines": [
+        51,
+        52
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "reportOngoingStubbing",
+      "signature": "(Lorg/mockito/internal/progress/IOngoingStubbing;)V",
+      "executed_lines": [
+        28,
+        29
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "reset",
+      "signature": "()V",
+      "executed_lines": [
+        97,
+        98,
+        99,
+        100
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "resetOngoingStubbing",
+      "signature": "()V",
+      "executed_lines": [
+        47,
+        48
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "validateState",
+      "signature": "()V",
+      "executed_lines": [
+        68,
+        70,
+        76,
+        82,
+        83
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "verificationStarted",
+      "signature": "(Lorg/mockito/internal/verification/api/VerificationMode;)V",
+      "executed_lines": [
+        38,
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.SequenceNumber",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        9
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.SequenceNumber",
+      "method": "next",
+      "signature": "()I",
+      "executed_lines": [
+        12
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        16
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        13
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "getArgumentMatcherStorage",
+      "signature": "()Lorg/mockito/internal/progress/ArgumentMatcherStorage;",
+      "executed_lines": [
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "pullVerificationMode",
+      "signature": "()Lorg/mockito/internal/verification/api/VerificationMode;",
+      "executed_lines": [
+        38
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "reportOngoingStubbing",
+      "signature": "(Lorg/mockito/internal/progress/IOngoingStubbing;)V",
+      "executed_lines": [
+        26,
+        27
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "reset",
+      "signature": "()V",
+      "executed_lines": [
+        58,
+        59
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "resetOngoingStubbing",
+      "signature": "()V",
+      "executed_lines": [
+        62,
+        63
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "threadSafely",
+      "signature": "()Lorg/mockito/internal/progress/MockingProgress;",
+      "executed_lines": [
+        19,
+        20,
+        22
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "validateState",
+      "signature": "()V",
+      "executed_lines": [
+        46,
+        47
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "verificationStarted",
+      "signature": "(Lorg/mockito/internal/verification/api/VerificationMode;)V",
+      "executed_lines": [
+        34,
+        35
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.BaseStubbing",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        13
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/progress/MockingProgress;)V",
+      "executed_lines": [
+        22,
+        24,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "findAnswerFor",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;)Lorg/mockito/internal/stubbing/StubbedInvocationMatcher;",
+      "executed_lines": [
+        62,
+        68
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "hasAnswersForStubbing",
+      "signature": "()Z",
+      "executed_lines": [
+        80
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "setInvocationForPotentialStubbing",
+      "signature": "(Lorg/mockito/internal/invocation/InvocationMatcher;)V",
+      "executed_lines": [
+        33,
+        34
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.OngoingStubbingImpl",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/stubbing/MockitoStubber;Lorg/mockito/internal/verification/RegisteredInvocations;)V",
+      "executed_lines": [
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.answers",
+      "class": "org.mockito.internal.stubbing.answers.CallsRealMethods",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.GloballyConfiguredAnswer",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        19
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.GloballyConfiguredAnswer",
+      "method": "answer",
+      "signature": "(Lorg/mockito/invocation/InvocationOnMock;)Ljava/lang/Object;",
+      "executed_lines": [
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        50
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "answer",
+      "signature": "(Lorg/mockito/invocation/InvocationOnMock;)Ljava/lang/Object;",
+      "executed_lines": [
+        58,
+        68,
+        69
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "primitiveOf",
+      "signature": "(Ljava/lang/Class;)Ljava/lang/Object;",
+      "executed_lines": [
+        113,
+        115,
+        118
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "returnValueFor",
+      "signature": "(Ljava/lang/Class;)Ljava/lang/Object;",
+      "executed_lines": [
+        73,
+        74
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsMocks",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        13,
+        16,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsMoreEmptyValues",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        43,
+        46
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNulls",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        37,
+        59
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "validateExtraInterfaces",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)V",
+      "executed_lines": [
+        20,
+        21
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "validateMockedType",
+      "signature": "(Ljava/lang/Class;Ljava/lang/Object;)V",
+      "executed_lines": [
+        32,
+        33
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "validateType",
+      "signature": "(Ljava/lang/Class;)V",
+      "executed_lines": [
+        14,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockName",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;Ljava/lang/Class;)V",
+      "executed_lines": [
+        16,
+        17,
+        21,
+        23
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        31,
+        32
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/util/CreationValidator;)V",
+      "executed_lines": [
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "createMock",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/internal/progress/MockingProgress;Lorg/mockito/internal/creation/MockSettingsImpl;)Ljava/lang/Object;",
+      "executed_lines": [
+        35,
+        36,
+        37,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        46,
+        48,
+        52
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "getInterceptor",
+      "signature": "(Ljava/lang/Object;)Lorg/mockito/internal/creation/MethodInterceptorFilter;",
+      "executed_lines": [
+        84,
+        85,
+        86,
+        87
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "isMock",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        80
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "isMockitoMock",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        76
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        9
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isEqualsMethod",
+      "signature": "(Ljava/lang/reflect/Method;)Z",
+      "executed_lines": [
+        23
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isHashCodeMethod",
+      "signature": "(Ljava/lang/reflect/Method;)Z",
+      "executed_lines": [
+        27
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isToString",
+      "signature": "(Ljava/lang/reflect/Method;)Z",
+      "executed_lines": [
+        14
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isToString",
+      "signature": "(Lorg/mockito/internal/invocation/MockitoMethod;)Z",
+      "executed_lines": [
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.RegisteredInvocations",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        17,
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.RegisteredInvocations",
+      "method": "add",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;)V",
+      "executed_lines": [
+        23,
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.Times",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        24,
+        25,
+        28,
+        29
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.VerificationModeFactory",
+      "method": "times",
+      "signature": "(I)Lorg/mockito/internal/verification/Times;",
+      "executed_lines": [
+        24
+      ]
+    }
+  ],
+  "org.mockitousage.bugs.NPEWithCertainMatchersTest::shouldNotThrowNPEWhenIntegerPassedToSame": [
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.ArgumentMatcher",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        62
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Matchers",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        95
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Matchers",
+      "method": "reportMatcher",
+      "signature": "(Lorg/hamcrest/Matcher;)Lorg/mockito/internal/progress/HandyReturnValues;",
+      "executed_lines": [
+        717
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Matchers",
+      "method": "same",
+      "signature": "(Ljava/lang/Object;)Ljava/lang/Object;",
+      "executed_lines": [
+        516
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        630,
+        641,
+        673,
+        686,
+        720
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "mock",
+      "signature": "(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Object;",
+      "executed_lines": [
+        749,
+        750,
+        751
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "mock",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/MockSettings;)Ljava/lang/Object;",
+      "executed_lines": [
+        835
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "never",
+      "signature": "()Lorg/mockito/internal/verification/api/VerificationMode;",
+      "executed_lines": [
+        1416
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "times",
+      "signature": "(I)Lorg/mockito/internal/verification/api/VerificationMode;",
+      "executed_lines": [
+        1395
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "verify",
+      "signature": "(Ljava/lang/Object;Lorg/mockito/internal/verification/api/VerificationMode;)Ljava/lang/Object;",
+      "executed_lines": [
+        1059
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.Mockito",
+      "method": "withSettings",
+      "signature": "()Lorg/mockito/MockSettings;",
+      "executed_lines": [
+        1566
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.MockitoAnnotations",
+      "method": "initMocks",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        81,
+        85,
+        86,
+        87,
+        88,
+        90
+      ]
+    },
+    {
+      "package": "org.mockito",
+      "class": "org.mockito.MockitoAnnotations",
+      "method": "scan",
+      "signature": "(Ljava/lang/Object;Ljava/lang/Class;)V",
+      "executed_lines": [
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        102,
+        106,
+        107,
+        111
+      ]
+    },
+    {
+      "package": "org.mockito.configuration",
+      "class": "org.mockito.configuration.DefaultMockitoConfiguration",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.configuration",
+      "class": "org.mockito.configuration.DefaultMockitoConfiguration",
+      "method": "getDefaultAnswer",
+      "signature": "()Lorg/mockito/stubbing/Answer;",
+      "executed_lines": [
+        32
+      ]
+    },
+    {
+      "package": "org.mockito.exceptions",
+      "class": "org.mockito.exceptions.Reporter",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        43
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockHandler",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/util/MockName;Lorg/mockito/internal/progress/MockingProgress;Lorg/mockito/internal/invocation/MatchersBinder;Lorg/mockito/internal/creation/MockSettingsImpl;)V",
+      "executed_lines": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockHandler",
+      "method": "handle",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;)Ljava/lang/Object;",
+      "executed_lines": [
+        60,
+        67,
+        69,
+        72,
+        74,
+        80,
+        81,
+        82,
+        83,
+        85,
+        86,
+        92,
+        97,
+        104,
+        105
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockitoCore",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        26,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockitoCore",
+      "method": "mock",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/MockSettings;)Ljava/lang/Object;",
+      "executed_lines": [
+        33,
+        34,
+        35
+      ]
+    },
+    {
+      "package": "org.mockito.internal",
+      "class": "org.mockito.internal.MockitoCore",
+      "method": "verify",
+      "signature": "(Ljava/lang/Object;Lorg/mockito/internal/verification/api/VerificationMode;)Ljava/lang/Object;",
+      "executed_lines": [
+        60,
+        62,
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.ClassPathLoader",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        10
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.ClassPathLoader",
+      "method": "loadConfiguration",
+      "signature": "()Lorg/mockito/configuration/IMockitoConfiguration;",
+      "executed_lines": [
+        18,
+        20,
+        24,
+        27
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.DefaultAnnotationEngine",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.DefaultAnnotationEngine",
+      "method": "createMockFor",
+      "signature": "(Ljava/lang/annotation/Annotation;Ljava/lang/reflect/Field;)Ljava/lang/Object;",
+      "executed_lines": [
+        27,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        19
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        26,
+        28,
+        29,
+        31
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "createConfig",
+      "signature": "()Lorg/mockito/configuration/IMockitoConfiguration;",
+      "executed_lines": [
+        34,
+        35,
+        36,
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "getAnnotationEngine",
+      "signature": "()Lorg/mockito/configuration/AnnotationEngine;",
+      "executed_lines": [
+        52
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "getDefaultAnswer",
+      "signature": "()Lorg/mockito/stubbing/Answer;",
+      "executed_lines": [
+        60
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "getIt",
+      "signature": "()Lorg/mockito/configuration/IMockitoConfiguration;",
+      "executed_lines": [
+        23
+      ]
+    },
+    {
+      "package": "org.mockito.internal.configuration",
+      "class": "org.mockito.internal.configuration.GlobalConfiguration",
+      "method": "validate",
+      "signature": "()V",
+      "executed_lines": [
+        44,
+        45
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.AbstractMockitoMethodProxy",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        8
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.AbstractMockitoMethodProxy",
+      "method": "reflectOnCreateInfo",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodProxy;)Ljava/lang/reflect/Field;",
+      "executed_lines": [
+        35,
+        39,
+        42
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.AbstractMockitoMethodProxy",
+      "method": "setNamingPolicyField",
+      "signature": "(Lorg/mockito/internal/creation/cglib/MockitoNamingPolicy;)V",
+      "executed_lines": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        7
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "<init>",
+      "signature": "(Ljava/lang/reflect/Method;)V",
+      "executed_lines": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "getJavaMethod",
+      "signature": "()Ljava/lang/reflect/Method;",
+      "executed_lines": [
+        21
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "getReturnType",
+      "signature": "()Ljava/lang/Class;",
+      "executed_lines": [
+        33
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMethod",
+      "method": "isVarArgs",
+      "signature": "()Z",
+      "executed_lines": [
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMockitoMethodProxy",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodProxy;)V",
+      "executed_lines": [
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.DelegatingMockitoMethodProxy",
+      "method": "getMethodProxy",
+      "signature": "()Lorg/mockito/cglib/proxy/MethodProxy;",
+      "executed_lines": [
+        15
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/IMockHandler;Lorg/mockito/internal/creation/MockSettingsImpl;)V",
+      "executed_lines": [
+        23,
+        24,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "createMockitoMethod",
+      "signature": "(Ljava/lang/reflect/Method;)Lorg/mockito/internal/invocation/MockitoMethod;",
+      "executed_lines": [
+        65,
+        68
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "createMockitoMethodProxy",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodProxy;)Lorg/mockito/internal/creation/MockitoMethodProxy;",
+      "executed_lines": [
+        59,
+        61
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MethodInterceptorFilter",
+      "method": "intercept",
+      "signature": "(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;Lorg/mockito/cglib/proxy/MethodProxy;)Ljava/lang/Object;",
+      "executed_lines": [
+        34,
+        36,
+        40,
+        41,
+        43,
+        45,
+        46,
+        47
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "defaultAnswer",
+      "signature": "(Lorg/mockito/stubbing/Answer;)Lorg/mockito/MockSettings;",
+      "executed_lines": [
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getDefaultAnswer",
+      "signature": "()Lorg/mockito/stubbing/Answer;",
+      "executed_lines": [
+        70
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getExtraInterfaces",
+      "signature": "()[Ljava/lang/Class;",
+      "executed_lines": [
+        46
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getMockName",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        42
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "getSpiedInstance",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        50
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "isSerializable",
+      "signature": "()Z",
+      "executed_lines": [
+        74
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation",
+      "class": "org.mockito.internal.creation.MockSettingsImpl",
+      "method": "name",
+      "signature": "(Ljava/lang/String;)Lorg/mockito/MockSettings;",
+      "executed_lines": [
+        54,
+        55
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.CGLIBHacker",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.CGLIBHacker",
+      "method": "setMockitoNamingPolicy",
+      "signature": "(Lorg/mockito/internal/creation/MockitoMethodProxy;)V",
+      "executed_lines": [
+        16,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.MockitoNamingPolicy",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.MockitoNamingPolicy",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        9
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.cglib",
+      "class": "org.mockito.internal.creation.cglib.MockitoNamingPolicy",
+      "method": "getTag",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        15
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        21,
+        30,
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        23,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "canImposterise",
+      "signature": "(Ljava/lang/Class;)Z",
+      "executed_lines": [
+        44
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "createProxy",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/cglib/proxy/MethodInterceptor;)Ljava/lang/Object;",
+      "executed_lines": [
+        111,
+        112,
+        113
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "createProxyClass",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/Class;",
+      "executed_lines": [
+        64,
+        68,
+        75,
+        76,
+        77,
+        78,
+        79,
+        84,
+        85,
+        86,
+        89,
+        93
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "imposterise",
+      "signature": "(Lorg/mockito/cglib/proxy/MethodInterceptor;Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/Object;",
+      "executed_lines": [
+        49,
+        50,
+        51,
+        53
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "prepend",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)[Ljava/lang/Class;",
+      "executed_lines": [
+        117,
+        118,
+        119,
+        120
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer",
+      "method": "setConstructorsAccessible",
+      "signature": "(Ljava/lang/Class;Z)V",
+      "executed_lines": [
+        58,
+        61
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$1",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$2",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        37
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$2",
+      "method": "accept",
+      "signature": "(Ljava/lang/reflect/Method;)I",
+      "executed_lines": [
+        39
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$3",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/creation/jmock/ClassImposterizer;)V",
+      "executed_lines": [
+        68
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.ClassImposterizer$3",
+      "method": "filterConstructors",
+      "signature": "(Ljava/lang/Class;Ljava/util/List;)V",
+      "executed_lines": [
+        73
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "addIfNewElement",
+      "signature": "(Ljava/util/List;Ljava/lang/ClassLoader;)V",
+      "executed_lines": [
+        63,
+        64,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "combine",
+      "signature": "(Ljava/util/List;)Ljava/lang/ClassLoader;",
+      "executed_lines": [
+        53,
+        55,
+        59
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "combineLoadersOf",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)Ljava/lang/ClassLoader;",
+      "executed_lines": [
+        28,
+        30,
+        31,
+        32,
+        40,
+        44,
+        49
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SearchingClassLoader",
+      "method": "combineLoadersOf",
+      "signature": "([Ljava/lang/Class;)Ljava/lang/ClassLoader;",
+      "executed_lines": [
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SerializableNoOp",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.creation.jmock",
+      "class": "org.mockito.internal.creation.jmock.SerializableNoOp",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        8
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.DebuggingInfo",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        15,
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.Localized",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        13,
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.Location",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.debugging",
+      "class": "org.mockito.internal.debugging.Location",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/exceptions/base/StackTraceFilter;)V",
+      "executed_lines": [
+        20,
+        21,
+        22,
+        23,
+        26,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.exceptions.base",
+      "class": "org.mockito.internal.exceptions.base.StackTraceFilter",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        12
+      ]
+    },
+    {
+      "package": "org.mockito.internal.exceptions.base",
+      "class": "org.mockito.internal.exceptions.base.StackTraceFilter",
+      "method": "filter",
+      "signature": "([Ljava/lang/StackTraceElement;Z)[Ljava/lang/StackTraceElement;",
+      "executed_lines": [
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        37,
+        38,
+        39,
+        44,
+        47,
+        50,
+        51,
+        52,
+        53
+      ]
+    },
+    {
+      "package": "org.mockito.internal.exceptions.base",
+      "class": "org.mockito.internal.exceptions.base.StackTraceFilter",
+      "method": "isBad",
+      "signature": "(Ljava/lang/StackTraceElement;)Z",
+      "executed_lines": [
+        15,
+        16,
+        17,
+        18,
+        19
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/mockito/internal/invocation/MockitoMethod;[Ljava/lang/Object;ILorg/mockito/internal/invocation/realmethod/RealMethod;)V",
+      "executed_lines": [
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "argumentsToMatchers",
+      "signature": "()Ljava/util/List;",
+      "executed_lines": [
+        146,
+        147,
+        148,
+        151,
+        154
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "expandVarArgs",
+      "signature": "(Z[Ljava/lang/Object;)[Ljava/lang/Object;",
+      "executed_lines": [
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "getMethod",
+      "signature": "()Ljava/lang/reflect/Method;",
+      "executed_lines": [
+        89
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "isToString",
+      "signature": "(Lorg/mockito/invocation/InvocationOnMock;)Z",
+      "executed_lines": [
+        158
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.Invocation",
+      "method": "isVoid",
+      "signature": "()Z",
+      "executed_lines": [
+        182
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.InvocationMatcher",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;Ljava/util/List;)V",
+      "executed_lines": [
+        26,
+        27,
+        28,
+        29,
+        33
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.InvocationMatcher",
+      "method": "getInvocation",
+      "signature": "()Lorg/mockito/internal/invocation/Invocation;",
+      "executed_lines": [
+        44
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.MatchersBinder",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        15
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.MatchersBinder",
+      "method": "bindMatchers",
+      "signature": "(Lorg/mockito/internal/progress/ArgumentMatcherStorage;Lorg/mockito/internal/invocation/Invocation;)Lorg/mockito/internal/invocation/InvocationMatcher;",
+      "executed_lines": [
+        20,
+        21,
+        23,
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation",
+      "class": "org.mockito.internal.invocation.MatchersBinder",
+      "method": "validateMatchers",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;Ljava/util/List;)V",
+      "executed_lines": [
+        28,
+        35
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation.realmethod",
+      "class": "org.mockito.internal.invocation.realmethod.CGLIBProxyRealMethod",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/creation/MockitoMethodProxy;)V",
+      "executed_lines": [
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation.realmethod",
+      "class": "org.mockito.internal.invocation.realmethod.FilteredCGLIBProxyRealMethod",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/creation/MockitoMethodProxy;)V",
+      "executed_lines": [
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.invocation.realmethod",
+      "class": "org.mockito.internal.invocation.realmethod.FilteredCGLIBProxyRealMethod",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/invocation/realmethod/RealMethod;)V",
+      "executed_lines": [
+        20,
+        21,
+        22
+      ]
+    },
+    {
+      "package": "org.mockito.internal.matchers",
+      "class": "org.mockito.internal.matchers.Equals",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.matchers",
+      "class": "org.mockito.internal.matchers.LocalizedMatcher",
+      "method": "<init>",
+      "signature": "(Lorg/hamcrest/Matcher;)V",
+      "executed_lines": [
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.internal.matchers",
+      "class": "org.mockito.internal.matchers.Same",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        22,
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "pullMatchers",
+      "signature": "()Ljava/util/List;",
+      "executed_lines": [
+        38,
+        39
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "reportMatcher",
+      "signature": "(Lorg/hamcrest/Matcher;)Lorg/mockito/internal/progress/HandyReturnValues;",
+      "executed_lines": [
+        30,
+        31
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "reset",
+      "signature": "()V",
+      "executed_lines": [
+        111,
+        112
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ArgumentMatcherStorageImpl",
+      "method": "validateState",
+      "signature": "()V",
+      "executed_lines": [
+        100,
+        105
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.HandyReturnValues",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.HandyReturnValues",
+      "method": "returnNull",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        16,
+        18,
+        19,
+        21,
+        25
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "getArgumentMatcherStorage",
+      "signature": "()Lorg/mockito/internal/progress/ArgumentMatcherStorage;",
+      "executed_lines": [
+        103
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "pullVerificationMode",
+      "signature": "()Lorg/mockito/internal/verification/api/VerificationMode;",
+      "executed_lines": [
+        51,
+        52
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "reportOngoingStubbing",
+      "signature": "(Lorg/mockito/internal/progress/IOngoingStubbing;)V",
+      "executed_lines": [
+        28,
+        29
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "reset",
+      "signature": "()V",
+      "executed_lines": [
+        97,
+        98,
+        99,
+        100
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "resetOngoingStubbing",
+      "signature": "()V",
+      "executed_lines": [
+        47,
+        48
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "validateState",
+      "signature": "()V",
+      "executed_lines": [
+        68,
+        70,
+        76,
+        82,
+        83
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.MockingProgressImpl",
+      "method": "verificationStarted",
+      "signature": "(Lorg/mockito/internal/verification/api/VerificationMode;)V",
+      "executed_lines": [
+        38,
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.SequenceNumber",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        9
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.SequenceNumber",
+      "method": "next",
+      "signature": "()I",
+      "executed_lines": [
+        12
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        16
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        13
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "getArgumentMatcherStorage",
+      "signature": "()Lorg/mockito/internal/progress/ArgumentMatcherStorage;",
+      "executed_lines": [
+        66
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "pullVerificationMode",
+      "signature": "()Lorg/mockito/internal/verification/api/VerificationMode;",
+      "executed_lines": [
+        38
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "reportOngoingStubbing",
+      "signature": "(Lorg/mockito/internal/progress/IOngoingStubbing;)V",
+      "executed_lines": [
+        26,
+        27
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "reset",
+      "signature": "()V",
+      "executed_lines": [
+        58,
+        59
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "resetOngoingStubbing",
+      "signature": "()V",
+      "executed_lines": [
+        62,
+        63
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "threadSafely",
+      "signature": "()Lorg/mockito/internal/progress/MockingProgress;",
+      "executed_lines": [
+        19,
+        20,
+        22
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "validateState",
+      "signature": "()V",
+      "executed_lines": [
+        46,
+        47
+      ]
+    },
+    {
+      "package": "org.mockito.internal.progress",
+      "class": "org.mockito.internal.progress.ThreadSafeMockingProgress",
+      "method": "verificationStarted",
+      "signature": "(Lorg/mockito/internal/verification/api/VerificationMode;)V",
+      "executed_lines": [
+        34,
+        35
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.BaseStubbing",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        13
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/progress/MockingProgress;)V",
+      "executed_lines": [
+        22,
+        24,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "findAnswerFor",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;)Lorg/mockito/internal/stubbing/StubbedInvocationMatcher;",
+      "executed_lines": [
+        62,
+        68
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "hasAnswersForStubbing",
+      "signature": "()Z",
+      "executed_lines": [
+        80
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.MockitoStubber",
+      "method": "setInvocationForPotentialStubbing",
+      "signature": "(Lorg/mockito/internal/invocation/InvocationMatcher;)V",
+      "executed_lines": [
+        33,
+        34
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing",
+      "class": "org.mockito.internal.stubbing.OngoingStubbingImpl",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/stubbing/MockitoStubber;Lorg/mockito/internal/verification/RegisteredInvocations;)V",
+      "executed_lines": [
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.answers",
+      "class": "org.mockito.internal.stubbing.answers.CallsRealMethods",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        30
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.GloballyConfiguredAnswer",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        19
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.GloballyConfiguredAnswer",
+      "method": "answer",
+      "signature": "(Lorg/mockito/invocation/InvocationOnMock;)Ljava/lang/Object;",
+      "executed_lines": [
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        50
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "answer",
+      "signature": "(Lorg/mockito/invocation/InvocationOnMock;)Ljava/lang/Object;",
+      "executed_lines": [
+        58,
+        68,
+        69
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "primitiveOf",
+      "signature": "(Ljava/lang/Class;)Ljava/lang/Object;",
+      "executed_lines": [
+        113,
+        115,
+        118
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsEmptyValues",
+      "method": "returnValueFor",
+      "signature": "(Ljava/lang/Class;)Ljava/lang/Object;",
+      "executed_lines": [
+        73,
+        74
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsMocks",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        13,
+        16,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsMoreEmptyValues",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        43,
+        46
+      ]
+    },
+    {
+      "package": "org.mockito.internal.stubbing.defaultanswers",
+      "class": "org.mockito.internal.stubbing.defaultanswers.ReturnsSmartNulls",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        37,
+        59
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        11
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "validateExtraInterfaces",
+      "signature": "(Ljava/lang/Class;[Ljava/lang/Class;)V",
+      "executed_lines": [
+        20,
+        21
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "validateMockedType",
+      "signature": "(Ljava/lang/Class;Ljava/lang/Object;)V",
+      "executed_lines": [
+        32,
+        33
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.CreationValidator",
+      "method": "validateType",
+      "signature": "(Ljava/lang/Class;)V",
+      "executed_lines": [
+        14,
+        17
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockName",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;Ljava/lang/Class;)V",
+      "executed_lines": [
+        16,
+        17,
+        21,
+        23
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        31,
+        32
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "<init>",
+      "signature": "(Lorg/mockito/internal/util/CreationValidator;)V",
+      "executed_lines": [
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "createMock",
+      "signature": "(Ljava/lang/Class;Lorg/mockito/internal/progress/MockingProgress;Lorg/mockito/internal/creation/MockSettingsImpl;)Ljava/lang/Object;",
+      "executed_lines": [
+        35,
+        36,
+        37,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        46,
+        48,
+        52
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "getInterceptor",
+      "signature": "(Ljava/lang/Object;)Lorg/mockito/internal/creation/MethodInterceptorFilter;",
+      "executed_lines": [
+        84,
+        85,
+        86,
+        87
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "isMock",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        80
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.MockUtil",
+      "method": "isMockitoMock",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        76
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        9
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isEqualsMethod",
+      "signature": "(Ljava/lang/reflect/Method;)Z",
+      "executed_lines": [
+        23
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isHashCodeMethod",
+      "signature": "(Ljava/lang/reflect/Method;)Z",
+      "executed_lines": [
+        27
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isToString",
+      "signature": "(Ljava/lang/reflect/Method;)Z",
+      "executed_lines": [
+        14
+      ]
+    },
+    {
+      "package": "org.mockito.internal.util",
+      "class": "org.mockito.internal.util.ObjectMethodsGuru",
+      "method": "isToString",
+      "signature": "(Lorg/mockito/internal/invocation/MockitoMethod;)Z",
+      "executed_lines": [
+        18
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.RegisteredInvocations",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        17,
+        20
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.RegisteredInvocations",
+      "method": "add",
+      "signature": "(Lorg/mockito/internal/invocation/Invocation;)V",
+      "executed_lines": [
+        23,
+        24
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.Times",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        24,
+        25,
+        28,
+        29
+      ]
+    },
+    {
+      "package": "org.mockito.internal.verification",
+      "class": "org.mockito.internal.verification.VerificationModeFactory",
+      "method": "times",
+      "signature": "(I)Lorg/mockito/internal/verification/Times;",
+      "executed_lines": [
+        24
+      ]
+    }
+  ]
+}

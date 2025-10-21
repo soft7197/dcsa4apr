@@ -1,0 +1,8 @@
+File: src/main/java/org/jsoup/nodes/Element.java
+Method: Element.equals
+
+public boolean equals(Object o) {
+    if (o == null || o.getClass() != getClass()) return false;
+    Element element = (Element) o;
+    return this.outerHtml().equals(element.outerHtml());
+}

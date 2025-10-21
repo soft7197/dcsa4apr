@@ -1,0 +1,38 @@
+{
+  "bug_id": "JacksonDatabind-91",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-91_1771936551",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch incorrectly added a check for key type handlers in map-like types, which contradicts the comment stating keys are untyped and should not have type handlers. The refined fix will properly handle container types by checking content types for both value and type handlers, and specifically handle map-like types by checking the key type for a value handler without introducing incorrect assumptions.",
+        "fixed_method": "private boolean _hasCustomHandlers(JavaType t) {\n    if (t.isContainerType()) {\n        // First: value types may have both value and type handlers\n        JavaType ct = t.getContentType();\n        if (ct != null) {\n            if ((ct.getValueHandler() != null) || (ct.getTypeHandler() != null)) {\n                return true;\n            }\n        }\n        // Second: map(-like) types may have value handler for key (but not type; keys are untyped)\n        JavaType kt = t.getKeyType();\n        if (kt != null && kt.getValueHandler() != null) {\n            return true;\n        }\n    }\n    return false;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/DeserializerCache.java",
+        "method_name": "_hasCustomHandlers",
+        "class_name": "DeserializerCache",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method _hasCustomHandlers does not check for custom key deserializers in map-like types. The test expects the method to return true if there is a custom key deserializer, but it currently only checks for value handlers in map-like types.",
+        "line_numbers": [
+          536,
+          537,
+          538,
+          539,
+          540,
+          541,
+          542,
+          543,
+          544,
+          545,
+          546
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-91/"
+}

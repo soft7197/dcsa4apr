@@ -1,0 +1,10 @@
+File: src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java
+Method: NormalDistributionImpl.cumulativeProbability
+
+public double cumulativeProbability(double x) throws MathException {
+	if (Math.abs(x - mean) > 10 * standardDeviation) {
+		return x < mean ? 0.0 : 1.0;
+	}
+
+	return 0.5 * (1.0 + Erf.erf((x - mean) / (standardDeviation * Math.sqrt(2.0))));
+}

@@ -1,0 +1,29 @@
+{
+  "bug_id": "Math-1",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-1_1772945264",
+  "patches": [
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "private Fraction(double value, double epsilon, int maxDenominator, int maxIterations) throws FractionConversionException {\n\nlong overflow = Long.MAX_VALUE;\n\ndouble r0 = value;\n\nlong a0 = (long) FastMath.floor(r0);\n\nif (FastMath.abs(a0) > overflow) {\n\nthrow new FractionConversionException(value, a0, 1l);\n\n}\n\n\n\n// check for (almost) integer arguments, which should not go to iterations.\n\nif (FastMath.abs(a0 - value) < epsilon) {\n\nthis.numerator = (int) a0;\n\nthis.denominator = 1;\n\nreturn;\n\n}\n\n\n\nlong p0 = 1;\n\nlong q0 = 0;\n\nlong p1 = a0;\n\nlong q1 = 1;\n\n\n\nlong p2 = 0;\n\nlong q2 = 1;\n\n\n\nint n = 0;\n\nboolean stop = false;\n\ndo {\n\n++n;\n\ndouble r1 = 1.0 / (r0 - a0);\n\nlong a1 = (long) FastMath.floor(r1);\n\np2 = (a1 * p1) + p0;\n\nq2 = (a1 * q1) + q0;\n\n\n\nif (FastMath.abs(a0) > overflow || FastMath.abs(p2) > overflow || FastMath.abs(q2) > overflow) {\n\n// in maxDenominator mode, if the last fraction was very close to the actual value\n\n// q2 may overflow in the next iteration; in this case return the last one.\n\nthrow new FractionConversionException(value, p2, q2);\n\n}\n\n\n\ndouble convergent = (double) p2 / (double) q2;\n\nif (n < maxIterations && FastMath.abs(convergent - value) > epsilon && q2 < maxDenominator) {\n\np0 = p1;\n\np1 = p2;\n\nq0 = q1;\n\nq1 = q2;\n\na0 = a1;\n\nr0 = r1;\n\n}\n\nelse {\n\nstop = true;\n\n}\n\n} while (!stop);\n\n\n\nif (n >= maxIterations) {\n\nthrow new FractionConversionException(value, maxIterations);\n\n}\n\n\n\nif (q2 < maxDenominator) {\n\nthis.numerator = (int) p2;\n\nthis.denominator = (int) q2;\n\n}\n\nelse {\n\nthis.numerator = (int) p1;\n\nthis.denominator = (int) q1;\n\n}\n\n}",
+        "diff": "",
+        "file_path": "src/main/java/org/apache/commons/math3/fraction/Fraction.java",
+        "method_name": "Fraction",
+        "class_name": "Fraction",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          178,
+          243
+        ],
+        "original_code": "    /**\n     * Create a fraction given the double value and either the maximum error\n     * allowed or the maximum number of denominator digits.\n     * <p>\n     *\n     * NOTE: This constructor is called with EITHER\n     *   - a valid epsilon value and the maxDenominator set to Integer.MAX_VALUE\n     *     (that way the maxDenominator has no effect).\n     * OR\n     *   - a valid maxDenominator value and the epsilon value set to zero\n     *     (that way epsilon only has effect if there is an exact match before\n     *     the maxDenominator value is reached).\n     * </p><p>\n     *\n     * It has been done this way so that the same code can be (re)used for both\n     * scenarios. However this could be confusing to users if it were part of\n     * the public API and this constructor should therefore remain PRIVATE.\n     * </p>\n     *\n     * See JIRA issue ticket MATH-181 for more details:\n     *\n     *     https://issues.apache.org/jira/browse/MATH-181\n     *\n     * @param value the double value to convert to a fraction.\n     * @param epsilon maximum error allowed.  The resulting fraction is within\n     *        {@code epsilon} of {@code value}, in absolute terms.\n     * @param maxDenominator maximum denominator value allowed.\n     * @param maxIterations maximum number of convergents\n     * @throws FractionConversionException if the continued fraction failed to\n     *         converge.\n     */\n\n    private Fraction(double value, double epsilon, int maxDenominator, int maxIterations)\n        throws FractionConversionException\n    {\n        long overflow = Integer.MAX_VALUE;\n        double r0 = value;\n        long a0 = (long)FastMath.floor(r0);\n        if (FastMath.abs(a0) > overflow) {\n            throw new FractionConversionException(value, a0, 1l);\n        }\n\n        // check for (almost) integer arguments, which should not go to iterations.\n        if (FastMath.abs(a0 - value) < epsilon) {\n            this.numerator = (int) a0;\n            this.denominator = 1;\n            return;\n        }\n\n        long p0 = 1;\n        long q0 = 0;\n        long p1 = a0;\n        long q1 = 1;\n\n        long p2 = 0;\n        long q2 = 1;\n\n        int n = 0;\n        boolean stop = false;\n        do {\n            ++n;\n            double r1 = 1.0 / (r0 - a0);\n            long a1 = (long)FastMath.floor(r1);\n            p2 = (a1 * p1) + p0;\n            q2 = (a1 * q1) + q0;\n\n            if ((FastMath.abs(p2) > overflow) || (FastMath.abs(q2) > overflow)) {\n                // in maxDenominator mode, if the last fraction was very close to the actual value\n                // q2 may overflow in the next iteration; in this case return the last one.\n                throw new FractionConversionException(value, p2, q2);\n            }\n\n            double convergent = (double)p2 / (double)q2;\n            if (n < maxIterations && FastMath.abs(convergent - value) > epsilon && q2 < maxDenominator) {\n                p0 = p1;\n                p1 = p2;\n                q0 = q1;\n                q1 = q2;\n                a0 = a1;\n                r0 = r1;\n            } else {\n                stop = true;\n            }\n        } while (!stop);\n\n        if (n >= maxIterations) {\n            throw new FractionConversionException(value, maxIterations);\n        }\n\n        if (q2 < maxDenominator) {\n            this.numerator = (int) p2;\n            this.denominator = (int) q2;\n        } else {\n            this.numerator = (int) p1;\n            this.denominator = (int) q1;\n        }\n\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Math-1/"
+}

@@ -1,0 +1,44 @@
+{
+  "bug_id": "Math-30",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-30_1773119837",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method should use a two-tailed test, aggregating probabilities from both extremes of the distribution, which was incorrectly implemented.",
+        "changes": "- final double VarU = n1n2prod * (n1 + n2 + 1) / 12.0;\n+ final double VarU = (double)n1n2prod * (n1 + n2 + 1) / 12.0;",
+        "fixed_method": "private double calculateAsymptoticPValue(final double Umin,\n                                         final int n1,\n                                         final int n2)\n    throws ConvergenceException, MaxCountExceededException {\n\n    final int n1n2prod = n1 * n2;\n\n    // Use integer division avoidance\n    final double EU = n1n2prod / 2.0;\n    final double VarU = (double)n1n2prod * (n1 + n2 + 1) / 12.0;\n\n    final double z = (Umin - EU) / FastMath.sqrt(VarU);\n\n    final NormalDistribution standardNormal = new NormalDistribution(0, 1);\n\n    return 2 * (1.0 - standardNormal.cumulativeProbability(Math.abs(z)));\n}",
+        "diff": "- final double VarU = n1n2prod * (n1 + n2 + 1) / 12.0;\n+ final double VarU = (double)n1n2prod * (n1 + n2 + 1) / 12.0;",
+        "file_path": "src/main/java/org/apache/commons/math3/stat/inference/MannWhitneyUTest.java",
+        "method_name": "calculateAsymptoticPValue",
+        "class_name": "MannWhitneyUTest",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184
+        ],
+        "original_code": "/**\n* @param Umin smallest Mann-Whitney U value\n* @param n1 number of subjects in first sample\n* @param n2 number of subjects in second sample\n* @return two-sided asymptotic p-value\n* @throws ConvergenceException if the p-value can not be computed\n* due to a convergence error\n* @throws MaxCountExceededException if the maximum number of\n* iterations is exceeded\n*/\nprivate double calculateAsymptoticPValue(final double Umin,\n                                         final int n1,\n                                         final int n2)\n    throws ConvergenceException, MaxCountExceededException {\n\n    final int n1n2prod = n1 * n2;\n\n    // http://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U#Normal_approximation\n    final double EU = n1n2prod / 2.0;\n    final double VarU = n1n2prod * (n1 + n2 + 1) / 12.0;\n\n    final double z = (Umin - EU) / FastMath.sqrt(VarU);\n\n    final NormalDistribution standardNormal = new NormalDistribution(0, 1);\n\n    return 2 * standardNormal.cumulativeProbability(z);\n}"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Math-30/"
+}

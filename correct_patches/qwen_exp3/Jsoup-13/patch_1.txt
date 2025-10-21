@@ -1,0 +1,20 @@
+File: src/main/java/org/jsoup/nodes/Node.java
+Method: Node.hasAttr
+
+public boolean hasAttr(String attributeKey) {
+    Validate.notNull(attributeKey);
+
+    // Generalized check for prefixed attributes
+    String[] prefixes = {"abs:"}; // This can be expanded with more prefixes as needed
+    for (String prefix : prefixes) {
+        if (attributeKey.startsWith(prefix)) {
+            String keyWithoutPrefix = attributeKey.substring(prefix.length());
+            if (!keyWithoutPrefix.isEmpty() && !absUrl(keyWithoutPrefix).isEmpty()) {
+                return true;
+            }
+        }
+    }
+
+    // Fallback to the original check for non-prefixed attributes
+    return attributes.hasKey(attributeKey);
+}

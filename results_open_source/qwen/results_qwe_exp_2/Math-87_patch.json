@@ -1,0 +1,67 @@
+{
+  "bug_id": "Math-87",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-87_1771949651",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue might be related to how the basic row is determined, causing the solver to incorrectly identify the solution. The method should correctly identify the basic variable and its corresponding value.",
+        "changes": "- if (row == null) {\n+ if (row == null && MathUtils.equals(getEntry(i, col), 1.0, epsilon)) {",
+        "fixed_method": "private Integer getBasicRow(final int col) {\n    Integer row = null;\n    for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n        if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n            if (row == null && MathUtils.equals(getEntry(i, col), 1.0, epsilon)) {\n                row = i;\n            } else {\n                return null;\n            }\n        }\n    }\n    return row;\n}",
+        "diff": "- if (row == null) {\n+ if (row == null && MathUtils.equals(getEntry(i, col), 1.0, epsilon)) {",
+        "file_path": "src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java",
+        "method_name": "getBasicRow",
+        "class_name": "SimplexTableau",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          272,
+          273,
+          274,
+          275,
+          276,
+          277,
+          278,
+          279,
+          280,
+          281,
+          282,
+          283,
+          284
+        ],
+        "original_code": "/**\n* Checks whether the given column is basic.\n* @param col index of the column to check\n* @return the row that the variable is basic in.  null if the column is not basic\n*/\nprivate Integer getBasicRow(final int col) {\n    Integer row = null;\n    for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n        if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n            if (row == null) {\n            row = i;\n            } else {\n            return null;\n            }\n        }\n    }\n    return row;\n}"
+      },
+      {
+        "hypothesis": "The bug likely stems from incorrect handling of the basic row identification in the tableau, which affects the solution calculation. The method should correctly identify the basic row for a column, ensuring the simplex algorithm computes the right solution.",
+        "changes": "+                if (MathUtils.equals(getEntry(i, col), 1.0, epsilon) && MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n-                if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {",
+        "fixed_method": "private Integer getBasicRow(final int col) {\n    Integer row = null;\n    for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n        if (MathUtils.equals(getEntry(i, col), 1.0, epsilon)) {\n            if (row == null) {\n                row = i;\n            } else {\n                return null;\n            }\n        }\n    }\n    return row;\n}",
+        "diff": "+                if (MathUtils.equals(getEntry(i, col), 1.0, epsilon) && MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n-                if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {",
+        "file_path": "src/java/org/apache/commons/math/optimization/linear/SimplexTableau.java",
+        "method_name": "getBasicRow",
+        "class_name": "SimplexTableau",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          272,
+          273,
+          274,
+          275,
+          276,
+          277,
+          278,
+          279,
+          280,
+          281,
+          282,
+          283,
+          284
+        ],
+        "original_code": "/**\n* Checks whether the given column is basic.\n* @param col index of the column to check\n* @return the row that the variable is basic in.  null if the column is not basic\n*/\nprivate Integer getBasicRow(final int col) {\n    Integer row = null;\n    for (int i = getNumObjectiveFunctions(); i < getHeight(); i++) {\n        if (!MathUtils.equals(getEntry(i, col), 0.0, epsilon)) {\n            if (row == null) {\n            row = i;\n            } else {\n            return null;\n            }\n        }\n    }\n    return row;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-87/"
+}

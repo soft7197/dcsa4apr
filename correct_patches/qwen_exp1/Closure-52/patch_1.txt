@@ -1,0 +1,23 @@
+File: src/com/google/javascript/jscomp/CodeGenerator.java
+Method: CodeGenerator.isSimpleNumber
+
+static boolean isSimpleNumber(String s) {
+  if (s == null || s.isEmpty()) {
+    return false;
+  }
+  if (s.equals("0")) {
+    return true;
+  }
+  int len = s.length();
+  boolean hasLeadingZero = s.charAt(0) == '0';
+  for (int index = 0; index < len; index++) {
+    char c = s.charAt(index);
+    if (!Character.isDigit(c)) {
+      return false;
+    }
+    if (hasLeadingZero && index == 1) {
+      return false;
+    }
+  }
+  return true;
+}

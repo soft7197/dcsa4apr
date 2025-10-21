@@ -1,0 +1,8 @@
+File: src/main/java/org/apache/commons/math3/fraction/Fraction.java
+Method: Fraction.percentageValue
+
+public double percentageValue() {
+  long numerator = getNumerator();
+  long denominator = getDenominator();
+  return (double) numerator * 100.0 / (double) denominator;
+}

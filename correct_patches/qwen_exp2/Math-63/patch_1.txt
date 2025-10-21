@@ -1,0 +1,6 @@
+File: src/main/java/org/apache/commons/math/util/MathUtils.java
+Method: MathUtils.equals
+
+public static boolean equals(double x, double y) {
+    return Double.isNaN(x) && Double.isNaN(y) ? false : x == y;
+}

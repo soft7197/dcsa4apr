@@ -1,0 +1,52 @@
+{
+  "bug_id": "Jsoup-53",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-53_1771868104",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch hardcoded the double quote character for handling quoted sections. To fix this, we need to dynamically handle both single and double quotes. Additionally, we should ensure that the escape character is correctly processed and that the method handles edge cases such as empty input or unbalanced brackets.",
+        "fixed_method": "public String chompBalanced(char open, char close) {\n    int start = -1;\n    int end = -1;\n    int depth = 0;\n    char last = 0;\n    boolean quoteOpen = false;\n    final char SINGLE_QUOTE = '\\'';\n    final char DOUBLE_QUOTE = '\"';\n\n    do {\n        if (isEmpty()) break;\n        Character c = consume();\n        if (last == 0 || last != ESC) {\n            if ((c == open && !quoteOpen) || (c == close && !quoteOpen)) {\n                depth += (c == open) ? 1 : -1;\n                if (depth > 0 && start == -1)\n                    start = pos;\n            } else if ((c == SINGLE_QUOTE || c == DOUBLE_QUOTE) && last != ESC) {\n                quoteOpen = !quoteOpen;\n            }\n        }\n\n        if (depth > 0 && last != 0)\n            end = pos; // don't include the outer match pair in the return\n        last = c;\n    } while (depth > 0);\n    return (end >= 0) ? queue.substring(start, end) : \"\";\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/jsoup/parser/TokenQueue.java",
+        "method_name": "chompBalanced",
+        "class_name": "TokenQueue",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by incorrect handling of escaped characters and quotes, leading to incorrect balancing of parentheses. The fix involves properly checking for escaped characters and quotes to ensure they are not misinterpreted as openers or closers.",
+        "line_numbers": [
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267,
+          268,
+          269,
+          270,
+          271,
+          272,
+          273,
+          274,
+          275,
+          276,
+          277,
+          278,
+          279,
+          280,
+          281,
+          282,
+          283,
+          284
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-53/"
+}

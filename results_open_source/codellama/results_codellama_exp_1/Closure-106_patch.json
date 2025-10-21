@@ -1,0 +1,29 @@
+{
+  "bug_id": "Closure-106",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-106_1772724037",
+  "patches": [
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public boolean recordBlockDescription(String description) {\n    if (description != null && !description.isEmpty()) {\n        populated = true;\n    }\n    return currentInfo.documentBlock(description);\n  }",
+        "diff": "",
+        "file_path": "src/com/google/javascript/rhino/JSDocInfoBuilder.java",
+        "method_name": "recordBlockDescription",
+        "class_name": "JSDocInfoBuilder",
+        "iteration": 3,
+        "is_multi_method": false,
+        "line_numbers": [
+          188,
+          193
+        ],
+        "original_code": "  /**\n   * Records a block-level description.\n   *\n   * @return {@code true} if the description was recorded.\n   */\n\n  public boolean recordBlockDescription(String description) {\n    if (parseDocumentation) {\n    populated = true;\n    }\n    return currentInfo.documentBlock(description);\n  }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Closure-106/"
+}

@@ -1,0 +1,40 @@
+{
+  "bug_id": "Compress-7",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Compress-7_1771861092",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is likely due to incorrect character encoding or misinterpretation of byte values, leading to unexpected characters in the output string.",
+        "changes": "- result.append((char) buffer[i]);\n+ result.append((char) (buffer[i] & 0xFF));",
+        "fixed_method": "public static String parseName(byte[] buffer, final int offset, final int length) {\n    StringBuffer result = new StringBuffer(length);\n    int          end = offset + length;\n\n    for (int i = offset; i < end; ++i) {\n        if (buffer[i] == 0) {\n            break;\n        }\n        result.append((char) (buffer[i] & 0xFF));\n    }\n\n    return result.toString();\n}",
+        "diff": "- result.append((char) buffer[i]);\n+ result.append((char) (buffer[i] & 0xFF));",
+        "file_path": "src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java",
+        "method_name": "parseName",
+        "class_name": "TarUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105
+        ],
+        "original_code": "/**\n* Parse an entry name from a buffer.\n* Parsing stops when a NUL is found\n* or the buffer length is reached.\n*\n* @param buffer The buffer from which to parse.\n* @param offset The offset into the buffer from which to parse.\n* @param length The maximum number of bytes to parse.\n* @return The entry name.\n*/\npublic static String parseName(byte[] buffer, final int offset, final int length) {\n    StringBuffer result = new StringBuffer(length);\n    int          end = offset + length;\n\n    for (int i = offset; i < end; ++i) {\n        if (buffer[i] == 0) {\n            break;\n        }\n        result.append((char) buffer[i]);\n    }\n\n    return result.toString();\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Compress-7/"
+}

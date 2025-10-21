@@ -1,0 +1,40 @@
+{
+  "bug_id": "Compress-23",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Compress-23_1772776603",
+  "patches": [
+    [
+      {
+        "hypothesis": "Removed hardcoded values and improved dictionary size calculation to handle general cases and edge cases.",
+        "fixed_method": "InputStream decode(final InputStream in, final Coder coder, byte[] password) throws IOException {\n\n  long dictSize = 0;\n  for (int i = 1; i < coder.properties.length; i++) {\n      dictSize |= (coder.properties[i] & 0xFF) << ((i - 1) * 8);\n  }\n  if (dictSize < 1) {\n      throw new IOException(\"Dictionary smaller than minimum size\");\n  }\n  if (dictSize > LZMAInputStream.DICT_SIZE_MAX) {\n      throw new IOException(\"Dictionary larger than 4GiB maximum size\");\n  }\n  return new LZMAInputStream(in, -1, coder.properties[0], (int) dictSize);\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/apache/commons/compress/archivers/sevenz/Coders.java",
+        "method_name": "decode",
+        "class_name": "Coders",
+        "iteration": 3,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The dictionary size calculation was incorrect and caused an UnsupportedOptionsException.",
+        "line_numbers": [
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118
+        ]
+      }
+    ]
+  ],
+  "iterations": 3,
+  "monitor_dir": "traces/Compress-23/"
+}

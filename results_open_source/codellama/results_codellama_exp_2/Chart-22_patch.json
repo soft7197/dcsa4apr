@@ -1,0 +1,29 @@
+{
+  "bug_id": "Chart-22",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-22_1772806275",
+  "patches": [
+    [
+      {
+        "hypothesis": "The root cause of the bug is the incorrect usage of the `columnKey` variable in the `removeColumn` method. The method is first called with a column key that is not present in the `KeyedObjects2D` instance, which leads to an `IndexOutOfBoundsException`. The subsequent call to `removeColumn` with a valid column key then fails due to the incorrect usage of the `columnKey` variable.",
+        "changes": "The `removeColumn` method has been updated to correctly handle the case where the provided column key is not present in the `KeyedObjects2D` instance. A new variable `columnIndex` has been introduced to keep track of the column index that needs to be removed. The method now first checks if the column key is present in the `KeyedObjects2D` instance, and if not, it throws an `UnknownKeyException`. If the column key is present, the method retrieves the column index and uses it to remove the column from the `KeyedObjects2D` instance.",
+        "fixed_method": "public void removeColumn(Comparable columnKey) {\n    int columnIndex = getColumnIndex(columnKey);\n    if (columnIndex < 0) {\n        throw new UnknownKeyException(\"Column key (\" + columnKey + \") not recognised.\");\n    }\n    KeyedObjects rowData = (KeyedObjects) this.rows.get(columnIndex);\n    rowData.removeValue(columnKey);\n    this.columnKeys.remove(columnKey);\n}",
+        "diff": "The `removeColumn` method has been updated to correctly handle the case where the provided column key is not present in the `KeyedObjects2D` instance. A new variable `columnIndex` has been introduced to keep track of the column index that needs to be removed. The method now first checks if the column key is present in the `KeyedObjects2D` instance, and if not, it throws an `UnknownKeyException`. If the column key is present, the method retrieves the column index and uses it to remove the column from the `KeyedObjects2D` instance.",
+        "file_path": "source/org/jfree/data/KeyedObjects2D.java",
+        "method_name": "removeColumn",
+        "class_name": "KeyedObjects2D",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          369,
+          381
+        ],
+        "original_code": "    /**\n     * Removes an entire column from the table.\n     *\n     * @param columnKey  the column key (<code>null</code> not permitted).\n     * \n     * @throws UnknownKeyException if <code>rowKey</code> is not recognised.\n     * \n     * @see #removeRow(Comparable)\n     */\n\n    public void removeColumn(Comparable columnKey) {\n        int index = getColumnIndex(columnKey);\n        if (index < 0) {\n            throw new UnknownKeyException(\"Column key (\" + columnKey \n                    + \") not recognised.\");\n        }\n        Iterator iterator = this.rows.iterator();\n        while (iterator.hasNext()) {\n            KeyedObjects rowData = (KeyedObjects) iterator.next();\n                rowData.removeValue(columnKey);\n        }\n        this.columnKeys.remove(columnKey);\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Chart-22/"
+}

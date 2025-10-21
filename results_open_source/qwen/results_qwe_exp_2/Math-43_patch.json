@@ -1,0 +1,81 @@
+{
+  "bug_id": "Math-43",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-43_1771947685",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue arises because when custom implementations of mean, variance, or geometric mean are set, they are not properly incremented in the addValue method. The checks should be inverted to ensure that the custom implementations are incremented instead of the default ones.",
+        "changes": "- if (!(meanImpl instanceof Mean)) {\n+ if (meanImpl instanceof Mean) {\n- if (!(varianceImpl instanceof Variance)) {\n+ if (varianceImpl instanceof Variance) {\n- if (!(geoMeanImpl instanceof GeometricMean)) {\n+ if (geoMeanImpl instanceof GeometricMean) {",
+        "fixed_method": "public void addValue(double value) {\n    sumImpl.increment(value);\n    sumsqImpl.increment(value);\n    minImpl.increment(value);\n    maxImpl.increment(value);\n    sumLogImpl.increment(value);\n    secondMoment.increment(value);\n    // If mean, variance or geomean have been overridden,\n    // need to increment these\n    if (meanImpl instanceof Mean) {\n        meanImpl.increment(value);\n    }\n    if (varianceImpl instanceof Variance) {\n        varianceImpl.increment(value);\n    }\n    if (geoMeanImpl instanceof GeometricMean) {\n        geoMeanImpl.increment(value);\n    }\n    n++;\n}",
+        "diff": "- if (!(meanImpl instanceof Mean)) {\n+ if (meanImpl instanceof Mean) {\n- if (!(varianceImpl instanceof Variance)) {\n+ if (varianceImpl instanceof Variance) {\n- if (!(geoMeanImpl instanceof GeometricMean)) {\n+ if (geoMeanImpl instanceof GeometricMean) {",
+        "file_path": "src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java",
+        "method_name": "addValue",
+        "class_name": "SummaryStatistics",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168
+        ],
+        "original_code": "/**\n* Add a value to the data\n* @param value the value to add\n*/\npublic void addValue(double value) {\n    sumImpl.increment(value);\n    sumsqImpl.increment(value);\n    minImpl.increment(value);\n    maxImpl.increment(value);\n    sumLogImpl.increment(value);\n    secondMoment.increment(value);\n    // If mean, variance or geomean have been overridden,\n    // need to increment these\n    if (!(meanImpl instanceof Mean)) {\n        meanImpl.increment(value);\n    }\n    if (!(varianceImpl instanceof Variance)) {\n        varianceImpl.increment(value);\n    }\n    if (!(geoMeanImpl instanceof GeometricMean)) {\n        geoMeanImpl.increment(value);\n    }\n    n++;\n}"
+      },
+      {
+        "hypothesis": "The refined fix ensures that the implementations are correctly set to instances of Mean, GeometricMean, and Variance before calling increment on them. It adds null checks to prevent NullPointerException and ensures that the objects are of the correct type.",
+        "fixed_method": "public void addValue(double value) {\n    sumImpl.increment(value);\n    sumsqImpl.increment(value);\n    minImpl.increment(value);\n    maxImpl.increment(value);\n    sumLogImpl.increment(value);\n    secondMoment.increment(value);\n    // If mean, variance or geomean have been overridden,\n    // need to increment these\n    if (meanImpl instanceof Mean && meanImpl != null) {\n        meanImpl.increment(value);\n    }\n    if (varianceImpl instanceof Variance && varianceImpl != null) {\n        varianceImpl.increment(value);\n    }\n    if (geoMeanImpl instanceof GeometricMean && geoMeanImpl != null) {\n        geoMeanImpl.increment(value);\n    }\n    n++;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/apache/commons/math/stat/descriptive/SummaryStatistics.java",
+        "method_name": "addValue",
+        "class_name": "SummaryStatistics",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue arises because when custom implementations of Mean, GeometricMean, and Variance are set, they are not incremented correctly within the addValue method, leading to NaN results.",
+        "line_numbers": [
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-43/"
+}

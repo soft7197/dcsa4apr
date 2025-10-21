@@ -1,0 +1,23 @@
+File: src/main/java/org/apache/commons/math3/genetics/ListPopulation.java
+Method: ListPopulation.iterator
+
+public Iterator<Chromosome> iterator() {
+    return new Iterator<Chromosome>() {
+        private final Iterator<Chromosome> delegate = chromosomes.iterator();
+
+        @Override
+        public boolean hasNext() {
+            return delegate.hasNext();
+        }
+
+        @Override
+        public Chromosome next() {
+            return delegate.next();
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("Remove operation is not supported");
+        }
+    };
+}

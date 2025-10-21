@@ -1,0 +1,46 @@
+File: src/main/java/org/jsoup/helper/HttpConnection.java
+Method: HttpConnection.looksLikeUtf8
+
+private static boolean looksLikeUtf8(byte[] input) {
+    if (input == null) return false;  // Proper null handling
+    int i = 0;
+    // BOM:
+    if (input.length >= 3 && (input[0] & 0xFF) == 0xEF
+        && (input[1] & 0xFF) == 0xBB && (input[2] & 0xFF) == 0xBF) {
+        i = 3;
+    }
+
+    while (i < input.length) {
+        int o = input[i] & 0xFF;
+        if ((o & 0x80) == 0) {  // ASCII, single byte
+            i++;
+            continue;
+        }
+
+        int numBytes;
+        if ((o & 0xE0) == 0xC0) {
+            numBytes = 2;
+        } else if ((o & 0xF0) == 0xE0) {
+            numBytes = 3;
+        } else if ((o & 0xF8) == 0xF0) {
+            numBytes = 4;
+        } else {
+            return false;  // Invalid leading byte
+        }
+
+        // Ensure there are enough bytes left for this sequence
+        if (i + numBytes > input.length) {
+            return false;
+        }
+
+        // Verify trailing bytes
+        for (int j = 1; j < numBytes; j++) {
+            o = input[i + j] & 0xFF;
+            if ((o & 0xC0) != 0x80) {
+                return false;
+            }
+        }
+        i += numBytes;
+    }
+    return true;
+}

@@ -1,0 +1,67 @@
+{
+  "bug_id": "Math-49",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-49_1771969953",
+  "patches": [
+    {
+      "hypothesis": "The bug is caused by modifying the map (vector entries) while iterating over it. To fix this, we should create a new iterator for the result vector and iterate over the original vector's entries without modifying the result vector during iteration.",
+      "changes": "- iter = res.entries.iterator();\n+ iter = this.entries.iterator();",
+      "methods": {
+        "src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java::OpenMapRealVector::ebeDivide::L342": {
+          "file_path": "src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java",
+          "method_name": "ebeDivide",
+          "class_name": "OpenMapRealVector",
+          "line_numbers": [
+            342,
+            351
+          ],
+          "original_code": "    /** {@inheritDoc} */\n\n    public OpenMapRealVector ebeDivide(RealVector v) {\n        checkVectorDimensions(v.getDimension());\n        OpenMapRealVector res = new OpenMapRealVector(this);\n        Iterator iter = res.entries.iterator();\n        while (iter.hasNext()) {\n            iter.advance();\n            res.setEntry(iter.key(), iter.value() / v.getEntry(iter.key()));\n        }\n        return res;\n    }\n",
+          "fixed_method": "public OpenMapRealVector ebeDivide(RealVector v) {\n    checkVectorDimensions(v.getDimension());\n    OpenMapRealVector res = new OpenMapRealVector(this);\n    Iterator iter = this.entries.iterator();\n    while (iter.hasNext()) {\n        iter.advance();\n        res.setEntry(iter.key(), iter.value() / v.getEntry(iter.key()));\n    }\n    return res;\n}",
+          "iteration": 1
+        },
+        "src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java::OpenMapRealVector::ebeDivide::L354": {
+          "file_path": "src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java",
+          "method_name": "ebeDivide",
+          "class_name": "OpenMapRealVector",
+          "line_numbers": [
+            354,
+            364
+          ],
+          "original_code": "    /** {@inheritDoc} */\n\n    @Override\n    public OpenMapRealVector ebeDivide(double[] v) {\n        checkVectorDimensions(v.length);\n        OpenMapRealVector res = new OpenMapRealVector(this);\n        Iterator iter = res.entries.iterator();\n        while (iter.hasNext()) {\n            iter.advance();\n            res.setEntry(iter.key(), iter.value() / v[iter.key()]);\n        }\n        return res;\n    }\n",
+          "fixed_method": "@Override\npublic OpenMapRealVector ebeDivide(double[] v) {\n    checkVectorDimensions(v.length);\n    OpenMapRealVector res = new OpenMapRealVector(this);\n    Iterator iter = this.entries.iterator();\n    while (iter.hasNext()) {\n        iter.advance();\n        res.setEntry(iter.key(), iter.value() / v[iter.key()]);\n    }\n    return res;\n}",
+          "iteration": 1
+        },
+        "src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java::OpenMapRealVector::ebeMultiply::L367": {
+          "file_path": "src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java",
+          "method_name": "ebeMultiply",
+          "class_name": "OpenMapRealVector",
+          "line_numbers": [
+            367,
+            376
+          ],
+          "original_code": "    /** {@inheritDoc} */\n\n    public OpenMapRealVector ebeMultiply(RealVector v) {\n        checkVectorDimensions(v.getDimension());\n        OpenMapRealVector res = new OpenMapRealVector(this);\n        Iterator iter = res.entries.iterator();\n        while (iter.hasNext()) {\n            iter.advance();\n            res.setEntry(iter.key(), iter.value() * v.getEntry(iter.key()));\n        }\n        return res;\n    }\n",
+          "fixed_method": "public OpenMapRealVector ebeMultiply(RealVector v) {\n    checkVectorDimensions(v.getDimension());\n    OpenMapRealVector res = new OpenMapRealVector(this);\n    Iterator iter = this.entries.iterator();\n    while (iter.hasNext()) {\n        iter.advance();\n        res.setEntry(iter.key(), iter.value() * v.getEntry(iter.key()));\n    }\n    return res;\n}",
+          "iteration": 1
+        },
+        "src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java::OpenMapRealVector::ebeMultiply::L379": {
+          "file_path": "src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java",
+          "method_name": "ebeMultiply",
+          "class_name": "OpenMapRealVector",
+          "line_numbers": [
+            379,
+            389
+          ],
+          "original_code": "    /** {@inheritDoc} */\n\n    @Override\n    public OpenMapRealVector ebeMultiply(double[] v) {\n        checkVectorDimensions(v.length);\n        OpenMapRealVector res = new OpenMapRealVector(this);\n        Iterator iter = res.entries.iterator();\n        while (iter.hasNext()) {\n            iter.advance();\n            res.setEntry(iter.key(), iter.value() * v[iter.key()]);\n        }\n        return res;\n    }\n",
+          "fixed_method": "@Override\npublic OpenMapRealVector ebeMultiply(double[] v) {\n    checkVectorDimensions(v.length);\n    OpenMapRealVector res = new OpenMapRealVector(this);\n    Iterator iter = this.entries.iterator();\n    while (iter.hasNext()) {\n        iter.advance();\n        res.setEntry(iter.key(), iter.value() * v[iter.key()]);\n    }\n    return res;\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-49/"
+}

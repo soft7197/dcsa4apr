@@ -1,0 +1,79 @@
+{
+  "bug_id": "Jsoup-26",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-26_1773119180",
+  "patches": [
+    [
+      {
+        "hypothesis": "The NullPointerException is due to the absence of <body> in documents containing framesets, as framesets replace the <body> tag.",
+        "changes": "+ Document body check\n+ Conditional copySafeNodes only if body is present",
+        "fixed_method": "public Document clean(Document dirtyDocument) {\n    Validate.notNull(dirtyDocument);\n    \n    Document clean = Document.createShell(dirtyDocument.baseUri());\n    if (dirtyDocument.body() != null) {\n        copySafeNodes(dirtyDocument.body(), clean.body());\n    }\n\n    return clean;\n}",
+        "diff": "+ Document body check\n+ Conditional copySafeNodes only if body is present",
+        "file_path": "src/main/java/org/jsoup/safety/Cleaner.java",
+        "method_name": "clean",
+        "class_name": "Cleaner",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "original_code": "/**\nCreates a new, clean document, from the original dirty document, containing only elements allowed by the whitelist.\nThe original document is not modified. Only elements from the dirt document's <code>body</code> are used.\n@param dirtyDocument Untrusted base document to clean.\n@return cleaned document.\n*/\npublic Document clean(Document dirtyDocument) {\n    Validate.notNull(dirtyDocument);\n\n    Document clean = Document.createShell(dirtyDocument.baseUri());\n        copySafeNodes(dirtyDocument.body(), clean.body());\n\n    return clean;\n}"
+      },
+      {
+        "hypothesis": "The method encounters a NullPointerException because the `body()` method returns null for a document with a frameset tag, which is not handled.",
+        "changes": "-    copySafeNodes(dirtyDocument.body(), clean.body());\n+    Element body = dirtyDocument.body();\n+    if (body != null) {\n+        copySafeNodes(body, clean.body());\n+    }",
+        "fixed_method": "public Document clean(Document dirtyDocument) {\n    Validate.notNull(dirtyDocument);\n\n    Document clean = Document.createShell(dirtyDocument.baseUri());\n    Element body = dirtyDocument.body();\n    if (body != null) {\n        copySafeNodes(body, clean.body());\n    }\n\n    return clean;\n}",
+        "diff": "-    copySafeNodes(dirtyDocument.body(), clean.body());\n+    Element body = dirtyDocument.body();\n+    if (body != null) {\n+        copySafeNodes(body, clean.body());\n+    }",
+        "file_path": "src/main/java/org/jsoup/safety/Cleaner.java",
+        "method_name": "clean",
+        "class_name": "Cleaner",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "original_code": "/**\nCreates a new, clean document, from the original dirty document, containing only elements allowed by the whitelist.\nThe original document is not modified. Only elements from the dirt document's <code>body</code> are used.\n@param dirtyDocument Untrusted base document to clean.\n@return cleaned document.\n*/\npublic Document clean(Document dirtyDocument) {\n    Validate.notNull(dirtyDocument);\n\n    Document clean = Document.createShell(dirtyDocument.baseUri());\n        copySafeNodes(dirtyDocument.body(), clean.body());\n\n    return clean;\n}"
+      },
+      {
+        "hypothesis": "The NullPointerException occurs because the body() method is called on the document which uses frameset elements instead of a regular body. The fix requires handling cases where the body element may not be present.",
+        "changes": "- Ensure that we have a valid body element to work with; if not present, use a different logic",
+        "fixed_method": "public Document clean(Document dirtyDocument) {\n    Validate.notNull(dirtyDocument);\n\n    Element body = dirtyDocument.body();\n    if (body == null) { // Handle documents without a <body> element\n        // Create an empty clean document\n        return Document.createShell(dirtyDocument.baseUri());\n    }\n\n    Document clean = Document.createShell(dirtyDocument.baseUri());\n    copySafeNodes(body, clean.body());\n\n    return clean;\n}",
+        "diff": "- Ensure that we have a valid body element to work with; if not present, use a different logic",
+        "file_path": "src/main/java/org/jsoup/safety/Cleaner.java",
+        "method_name": "clean",
+        "class_name": "Cleaner",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "original_code": "/**\nCreates a new, clean document, from the original dirty document, containing only elements allowed by the whitelist.\nThe original document is not modified. Only elements from the dirt document's <code>body</code> are used.\n@param dirtyDocument Untrusted base document to clean.\n@return cleaned document.\n*/\npublic Document clean(Document dirtyDocument) {\n    Validate.notNull(dirtyDocument);\n\n    Document clean = Document.createShell(dirtyDocument.baseUri());\n        copySafeNodes(dirtyDocument.body(), clean.body());\n\n    return clean;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-26/"
+}

@@ -1,0 +1,33 @@
+{
+  "bug_id": "Math-45",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-45_1771947762",
+  "patches": [
+    [
+      {
+        "hypothesis": "The constructor does not validate the input dimensions, specifically it does not check if the column dimension is too large, which leads to the test expecting a NumberIsTooLargeException to be thrown but it is not.",
+        "changes": "+ added validation for columnDimension to throw NumberIsTooLargeException if it exceeds a reasonable limit",
+        "fixed_method": "public OpenMapRealMatrix(int rowDimension, int columnDimension) {\n    super(rowDimension, columnDimension);\n    if (columnDimension > Integer.MAX_VALUE / rowDimension) {\n        throw new NumberIsTooLargeException(columnDimension, Integer.MAX_VALUE / rowDimension, true);\n    }\n    this.rows = rowDimension;\n    this.columns = columnDimension;\n    this.entries = new OpenIntToDoubleHashMap(0.0);\n}",
+        "diff": "+ added validation for columnDimension to throw NumberIsTooLargeException if it exceeds a reasonable limit",
+        "file_path": "src/main/java/org/apache/commons/math/linear/OpenMapRealMatrix.java",
+        "method_name": "OpenMapRealMatrix",
+        "class_name": "OpenMapRealMatrix",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          48,
+          49,
+          50,
+          51,
+          52,
+          53
+        ],
+        "original_code": "/**\n* Build a sparse matrix with the supplied row and column dimensions.\n*\n* @param rowDimension Number of rows of the matrix.\n* @param columnDimension Number of columns of the matrix.\n*/\npublic OpenMapRealMatrix(int rowDimension, int columnDimension) {\n    super(rowDimension, columnDimension);\n    this.rows = rowDimension;\n    this.columns = columnDimension;\n    this.entries = new OpenIntToDoubleHashMap(0.0);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-45/"
+}

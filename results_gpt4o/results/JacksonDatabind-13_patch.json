@@ -1,0 +1,43 @@
+{
+  "bug_id": "JacksonDatabind-13",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-13_1773123037",
+  "patches": [
+    {
+      "hypothesis": "The issue arises from a NullPointerException due to the handling of null object IDs. The code should account for null IDs without attempting to process them beyond ensuring they can be stored and passed as necessary.",
+      "changes": "+ Handle null object IDs in findObjectId by returning null immediately\n+ Ensure deserializeSetAndReturn accounts for and properly handles null IDs",
+      "methods": {
+        "src/main/java/com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java::DefaultDeserializationContext::findObjectId::L81": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java",
+          "method_name": "findObjectId",
+          "class_name": "DefaultDeserializationContext",
+          "line_numbers": [
+            81,
+            131
+          ],
+          "original_code": "\n    @Override\n    public ReadableObjectId findObjectId(Object id, ObjectIdGenerator<?> gen, ObjectIdResolver resolverType)\n    {\n        /* 02-Apr-2015, tatu: As per [databind#742] should allow 'null', similar to how\n         *   missing id already works.\n         */\n\n        final ObjectIdGenerator.IdKey key = gen.key(id);\n\n        if (_objectIds == null) {\n            _objectIds = new LinkedHashMap<ObjectIdGenerator.IdKey,ReadableObjectId>();\n        } else {\n            ReadableObjectId entry = _objectIds.get(key);\n            if (entry != null) {\n                return entry;\n            }\n        }\n\n        // Not seen yet, must create entry and configure resolver.\n        ObjectIdResolver resolver = null;\n\n        if (_objectIdResolvers == null) {\n            _objectIdResolvers = new ArrayList<ObjectIdResolver>(8);\n        } else {\n            for (ObjectIdResolver res : _objectIdResolvers) {\n                if (res.canUseFor(resolverType)) {\n                    resolver = res;\n                    break;\n                }\n            }\n        }\n\n        if (resolver == null) {\n            resolver = resolverType.newForDeserialization(this);\n            // 19-Dec-2014, tatu: For final 2.5.0, remove temporary (2.4.x) work-around\n            //   needed to clear state between calls.\n            // !!! 18-Jun-2014, pgelinas: Temporary fix for [#490] until real\n            //    fix (for jackson-annotations, SimpleObjectIdResolver) can be added.\n            /*\n            if (resolverType.getClass() == SimpleObjectIdResolver.class) {\n                resolver = new SimpleObjectIdResolver();\n            }\n            */\n            _objectIdResolvers.add(resolver);\n        }\n\n        ReadableObjectId entry = new ReadableObjectId(key);\n        entry.setResolver(resolver);\n        _objectIds.put(key, entry);\n        return entry;\n    }\n",
+          "fixed_method": "public ReadableObjectId findObjectId(Object id, ObjectIdGenerator<?> gen, ObjectIdResolver resolverType) {\n    // Check for null ID and return null immediately if that's the case\n    if (id == null) {\n        return null;\n    }\n    final ObjectIdGenerator.IdKey key = gen.key(id);\n\n    if (_objectIds == null) {\n        _objectIds = new LinkedHashMap<ObjectIdGenerator.IdKey, ReadableObjectId>();\n    } else {\n        ReadableObjectId entry = _objectIds.get(key);\n        if (entry != null) {\n            return entry;\n        }\n    }\n\n    // Not seen yet, must create entry and configure resolver.\n    ObjectIdResolver resolver = null;\n\n    if (_objectIdResolvers == null) {\n        _objectIdResolvers = new ArrayList<ObjectIdResolver>(8);\n    } else {\n        for (ObjectIdResolver res : _objectIdResolvers) {\n            if (res.canUseFor(resolverType)) {\n                resolver = res;\n                break;\n            }\n        }\n    }\n\n    if (resolver == null) {\n        resolver = resolverType.newForDeserialization(this);\n        _objectIdResolvers.add(resolver);\n    }\n\n    ReadableObjectId entry = new ReadableObjectId(key);\n    entry.setResolver(resolver);\n    _objectIds.put(key, entry);\n    return entry;\n}",
+          "iteration": 1
+        },
+        "src/main/java/com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java::ObjectIdValueProperty::deserializeSetAndReturn::L80": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java",
+          "method_name": "deserializeSetAndReturn",
+          "class_name": "ObjectIdValueProperty",
+          "line_numbers": [
+            80,
+            101
+          ],
+          "original_code": "\n    @Override\n    public Object deserializeSetAndReturn(JsonParser jp,\n    \t\tDeserializationContext ctxt, Object instance) throws IOException\n    {\n        // note: no null checks (unlike usually); deserializer should fail if one found\n        Object id = _valueDeserializer.deserialize(jp, ctxt);\n\n        /* 02-Apr-2015, tatu: Actually, as per [databind#742], let it be;\n         *  missing or null id is needed for some cases, such as cases where id\n         *  will be generated externally, at a later point, and is not available\n         *  quite yet. Typical use case is with DB inserts.\n         */\n        \n        ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);\n        roid.bindItem(instance);\n        // also: may need to set a property value as well\n        SettableBeanProperty idProp = _objectIdReader.idProperty;\n        if (idProp != null) {\n            return idProp.setAndReturn(instance, id);\n        }\n        return instance;\n    }\n",
+          "fixed_method": "public Object deserializeSetAndReturn(JsonParser jp, DeserializationContext ctxt, Object instance) throws IOException {\n    Object id = _valueDeserializer.deserialize(jp, ctxt);\n\n    // If id is null, we should return the instance as is\n    if (id == null) {\n        return instance;\n    }\n\n    ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);\n    if (roid != null) {\n        roid.bindItem(instance);\n    }\n\n    SettableBeanProperty idProp = _objectIdReader.idProperty;\n    if (idProp != null) {\n        return idProp.setAndReturn(instance, id);\n    }\n    return instance;\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-13/"
+}

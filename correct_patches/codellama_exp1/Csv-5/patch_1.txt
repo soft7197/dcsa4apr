@@ -1,0 +1,8 @@
+File: src/main/java/org/apache/commons/csv/CSVPrinter.java
+Method: CSVPrinter.println
+
+public void println() throws IOException {
+    final String recordSeparator = format.getRecordSeparator() == null ? "" : format.getRecordSeparator();
+    out.append(recordSeparator);
+    newRecord = true;
+}

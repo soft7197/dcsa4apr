@@ -1,0 +1,15 @@
+File: src/main/java/org/apache/commons/math3/distribution/UniformRealDistribution.java
+Method: UniformRealDistribution.isSupportUpperBoundInclusive
+
+public boolean isSupportUpperBoundInclusive() {
+    // Assuming there's a configuration or context object that determines inclusivity
+    // For demonstration, let's assume there's a method `getUpperBoundConfig()` that returns a boolean
+    // This should be replaced with actual logic based on the application's context
+    return getUpperBoundConfig();
+}
+
+// Dummy method to simulate configuration retrieval
+private boolean getUpperBoundConfig() {
+    // Example logic: return true if a certain condition is met
+    return true; // This should be replaced with actual logic
+}

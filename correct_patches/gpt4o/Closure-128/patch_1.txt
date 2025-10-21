@@ -1,0 +1,17 @@
+File: src/com/google/javascript/jscomp/CodeGenerator.java
+Method: CodeGenerator.isSimpleNumber
+
+static boolean isSimpleNumber(String s) {
+  if (s == null || s.isEmpty()) {
+    return false;
+  }
+  int len = s.length();
+  for (int index = 0; index < len; index++) {
+    char c = s.charAt(index);
+    if (c < '0' || c > '9') {
+      return false;
+    }
+  }
+  // Allow '0' as a valid number but reject other numbers starting with '0'
+  return !(len > 1 && s.charAt(0) == '0');
+}

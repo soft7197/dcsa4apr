@@ -1,0 +1,103 @@
+{
+  "bug_id": "Jsoup-1",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-1_1773119155",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method incorrectly appends nodes to the body, resulting in an incorrect order.",
+        "changes": "- element.removeChild(node);\n- body().appendChild(new TextNode(\" \", \"\"));\n- body().appendChild(node);\n+ element.prependChild(node);\n+ element.prependChild(new TextNode(\" \", \"\"));",
+        "fixed_method": "private void normalise(Element element) {\n    List<Node> toMove = new ArrayList<Node>();\n    for (Node node: element.childNodes) {\n        if (node instanceof TextNode) {\n            TextNode tn = (TextNode) node;\n            if (!tn.isBlank())\n                toMove.add(tn);\n        }\n    }\n\n    for (Node node: toMove) {\n        element.removeChild(node);\n        element.prependChild(new TextNode(\" \", \"\"));\n        element.prependChild(node);\n    }\n}",
+        "diff": "- element.removeChild(node);\n- body().appendChild(new TextNode(\" \", \"\"));\n- body().appendChild(node);\n+ element.prependChild(node);\n+ element.prependChild(new TextNode(\" \", \"\"));",
+        "file_path": "src/main/java/org/jsoup/nodes/Document.java",
+        "method_name": "normalise",
+        "class_name": "Document",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ],
+        "original_code": "// does not recurse.\nprivate void normalise(Element element) {\n    List<Node> toMove = new ArrayList<Node>();\n    for (Node node: element.childNodes) {\n        if (node instanceof TextNode) {\n            TextNode tn = (TextNode) node;\n            if (!tn.isBlank())\n                toMove.add(tn);\n        }\n    }\n\n    for (Node node: toMove) {\n        element.removeChild(node);\n        body().appendChild(new TextNode(\" \", \"\"));\n        body().appendChild(node);\n    }\n}"
+      },
+      {
+        "hypothesis": "The overfitting comes from the assumption that all non-blank text nodes should be moved to the start, potentially disrupting the natural document flow. The refined method maintains the order by collapsing adjacent text nodes and re-organizing them, while handling nested elements and mixed content types correctly.",
+        "fixed_method": "private void normalise(Element element) {\n    for (int i = 0; i < element.childNodes.size(); i++) {\n        Node current = element.childNode(i);\n        if (current instanceof TextNode) {\n            TextNode textNode = (TextNode) current;\n            if (textNode.isBlank()) {\n                element.removeChild(current);\n                i--; // Adjust index after removal\n            } else {\n                // Collapse adjacent text nodes\n                StringBuilder sb = new StringBuilder();\n                sb.append(textNode.text());\n\n                Node next = textNode.nextSibling();\n                while (next instanceof TextNode) {\n                    TextNode nextTextNode = (TextNode) next;\n                    sb.append(nextTextNode.text());\n                    element.removeChild(next);\n                    next = textNode.nextSibling();\n                }\n                textNode.text(sb.toString());\n            }\n        } else if (current instanceof Element) {\n            normalise((Element) current);\n        }\n    }\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/jsoup/nodes/Document.java",
+        "method_name": "normalise",
+        "class_name": "Document",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method moves text nodes to the end of the body, breaking the required order. It should prepend non-blank text nodes to maintain the order.",
+        "line_numbers": [
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ]
+      },
+      {
+        "hypothesis": "The initial patch incorrectly alters the order of text nodes by prepending them to the body, which was not the intended fix. The key is to normalize text nodes by eliminating blank text nodes and keeping their order intact within the same parent element. Additionally, handling nested elements and complex structures can be achieved by recursively normalizing child elements.",
+        "fixed_method": "private void normalise(Element element) {\n    List<Node> toRemove = new ArrayList<Node>();\n    for (Node node : element.childNodes) {\n        if (node instanceof TextNode) {\n            TextNode tn = (TextNode) node;\n            if (tn.isBlank()) {\n                toRemove.add(tn);\n            }\n        } else if (node instanceof Element) {\n            // Recursively normalize child elements\n            normalise((Element) node);\n        }\n    }\n\n    // Remove all blank text nodes from the current element\n    for (Node node : toRemove) {\n        element.removeChild(node);\n    }\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/jsoup/nodes/Document.java",
+        "method_name": "normalise",
+        "class_name": "Document",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method processes and moves TextNodes incorrectly, causing the text order to be incorrect in the document.",
+        "line_numbers": [
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-1/"
+}

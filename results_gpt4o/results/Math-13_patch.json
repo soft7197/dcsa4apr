@@ -1,0 +1,31 @@
+{
+  "bug_id": "Math-13",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-13_1773119791",
+  "patches": [
+    [
+      {
+        "hypothesis": "The memory issue is due to the EigenDecomposition method which is resource-intensive and doesn't handle large matrices well. Using another method which can compute the square root for symmetric, positive-definite matrices more efficiently should resolve the issue.",
+        "changes": "-        final EigenDecomposition dec = new EigenDecomposition(m);\n-        return dec.getSquareRoot();\n+        final RealMatrix sqrtMatrix = m.copy();\n+        for (int i = 0; i < sqrtMatrix.getRowDimension(); i++) {\n+            sqrtMatrix.multiplyEntry(i, i, Math.sqrt(sqrtMatrix.getEntry(i, i)));\n+        }\n+        return sqrtMatrix;",
+        "fixed_method": "private RealMatrix squareRoot(RealMatrix m) {\n    final RealMatrix sqrtMatrix = m.copy();\n    for (int i = 0; i < sqrtMatrix.getRowDimension(); i++) {\n        sqrtMatrix.multiplyEntry(i, i, Math.sqrt(sqrtMatrix.getEntry(i, i)));\n    }\n    return sqrtMatrix;\n}",
+        "diff": "-        final EigenDecomposition dec = new EigenDecomposition(m);\n-        return dec.getSquareRoot();\n+        final RealMatrix sqrtMatrix = m.copy();\n+        for (int i = 0; i < sqrtMatrix.getRowDimension(); i++) {\n+            sqrtMatrix.multiplyEntry(i, i, Math.sqrt(sqrtMatrix.getEntry(i, i)));\n+        }\n+        return sqrtMatrix;",
+        "file_path": "src/main/java/org/apache/commons/math3/optimization/general/AbstractLeastSquaresOptimizer.java",
+        "method_name": "squareRoot",
+        "class_name": "AbstractLeastSquaresOptimizer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          561,
+          562,
+          563,
+          564
+        ],
+        "original_code": "/**\n* Computes the square-root of the weight matrix.\n*\n* @param m Symmetric, positive-definite (weight) matrix.\n* @return the square-root of the weight matrix.\n*/\nprivate RealMatrix squareRoot(RealMatrix m) {\n        final EigenDecomposition dec = new EigenDecomposition(m);\n        return dec.getSquareRoot();\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-13/"
+}

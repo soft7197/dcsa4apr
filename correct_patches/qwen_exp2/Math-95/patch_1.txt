@@ -1,0 +1,14 @@
+File: src/java/org/apache/commons/math/distribution/FDistributionImpl.java
+Method: FDistributionImpl.getInitialDomain
+
+protected double getInitialDomain(double p) {
+    double ret;
+    double d = getDenominatorDegreesOfFreedom();
+    if (d > 2.0) {
+        ret = d / (d - 2.0);
+    } else {
+        // Use a safer heuristic for d <= 2, such as the mean of the distribution
+        ret = 1.0 + (p * (d - 1)); // Generalized heuristic
+    }
+    return ret;
+}

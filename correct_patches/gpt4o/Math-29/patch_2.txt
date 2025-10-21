@@ -1,0 +1,18 @@
+File: src/main/java/org/apache/commons/math3/linear/OpenMapRealVector.java
+Method: OpenMapRealVector.ebeDivide
+
+@Override
+public OpenMapRealVector ebeDivide(RealVector v) {
+    checkVectorDimensions(v.getDimension());
+    OpenMapRealVector res = new OpenMapRealVector(this);
+    for (int i = 0; i < getDimension(); i++) {
+        double numerator = getEntry(i);
+        double denominator = v.getEntry(i);
+        if (numerator == 0 && denominator == 0) {
+            res.setEntry(i, Double.NaN);
+        } else {
+            res.setEntry(i, numerator / denominator);
+        }
+    }
+    return res;
+}

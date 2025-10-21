@@ -1,0 +1,50 @@
+{
+  "org.jfree.data.junit.KeyedObjects2DTests::testRemoveColumnByKey": [
+    {
+      "buggy_method": "removeColumn",
+      "class": "org.jfree.data.KeyedObjects2D"
+    }
+  ],
+  "org.jfree.data.junit.KeyedObjects2DTests::testRemoveValue": [
+    {
+      "buggy_method": "removeObject",
+      "class": "org.jfree.data.KeyedObjects2D"
+    }
+  ],
+  "org.jfree.data.junit.KeyedObjects2DTests::testGetValueByKey": [
+    {
+      "buggy_method": "getObject",
+      "class": "org.jfree.data.KeyedObjects2D"
+    }
+  ],
+  "org.jfree.data.junit.KeyedObjects2DTests::testRemoveColumnByIndex": [
+    {
+      "buggy_method": "removeColumn",
+      "class": "org.jfree.data.KeyedObjects2D"
+    },
+    {
+      "buggy_method": "removeColumn",
+      "class": "org.jfree.data.KeyedObjects2D"
+    }
+  ],
+  "org.jfree.data.junit.KeyedObjects2DTests::testSetObject": [
+    {
+      "buggy_method": "getObject",
+      "class": "org.jfree.data.KeyedObjects2D"
+    }
+  ],
+  "org.jfree.data.junit.KeyedObjects2DTests::testRemoveRowByKey": [
+    {
+      "buggy_method": "getObject",
+      "class": "org.jfree.data.KeyedObjects2D"
+    },
+    {
+      "buggy_method": "removeRow",
+      "class": "org.jfree.data.KeyedObjects2D"
+    },
+    {
+      "buggy_method": "removeRow",
+      "class": "org.jfree.data.KeyedObjects2D"
+    }
+  ]
+}

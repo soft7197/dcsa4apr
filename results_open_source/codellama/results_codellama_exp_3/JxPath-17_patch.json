@@ -1,0 +1,29 @@
+{
+  "bug_id": "JxPath-17",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JxPath-17_1772943920",
+  "patches": [
+    [
+      {
+        "hypothesis": "The test expects the method to return true when the input attribute has a prefix that matches the prefix of the given name, but the method was not handling this case properly.",
+        "changes": "- if (testPrefix == null) return false;\n+ if (testPrefix == null || equalStrings(testPrefix, nodePrefix)) return true;",
+        "fixed_method": "private boolean testAttr(Attr attr) {\n  String nodePrefix = DOMNodePointer.getPrefix(attr);\n  String nodeLocalName = DOMNodePointer.getLocalName(attr);\n\n  if (nodePrefix != null && nodePrefix.equals(\"xmlns\")) {\n    return false;\n  }\n\n  if (nodePrefix == null && nodeLocalName.equals(\"xmlns\")) {\n    return false;\n  }\n\n  String testLocalName = name.getName();\n  if (testLocalName.equals(\"*\") || testLocalName.equals(nodeLocalName)) {\n    String testPrefix = name.getPrefix();\n\n    if (testPrefix == null || equalStrings(testPrefix, nodePrefix)) {\n      return true;\n    }\n\n    String testNS = null;\n    if (testPrefix != null) {\n      testNS = parent.getNamespaceURI(testPrefix);\n    }\n\n    String nodeNS = null;\n    if (nodePrefix != null) {\n      nodeNS = parent.getNamespaceURI(nodePrefix);\n    }\n\n    return equalStrings(testNS, nodeNS);\n  }\n\n  return false;\n}",
+        "diff": "- if (testPrefix == null) return false;\n+ if (testPrefix == null || equalStrings(testPrefix, nodePrefix)) return true;",
+        "file_path": "src/java/org/apache/commons/jxpath/ri/model/dom/DOMAttributeIterator.java",
+        "method_name": "testAttr",
+        "class_name": "DOMAttributeIterator",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          68,
+          98
+        ],
+        "original_code": "\n    private boolean testAttr(Attr attr) {\n        String nodePrefix = DOMNodePointer.getPrefix(attr);\n        String nodeLocalName = DOMNodePointer.getLocalName(attr);\n\n        if (nodePrefix != null && nodePrefix.equals(\"xmlns\")) {\n            return false;\n        }\n\n        if (nodePrefix == null && nodeLocalName.equals(\"xmlns\")) {\n            return false;\n        }\n\n        String testLocalName = name.getName();\n        if (testLocalName.equals(\"*\") || testLocalName.equals(nodeLocalName)) {\n            String testPrefix = name.getPrefix();\n\n            if (equalStrings(testPrefix, nodePrefix)) {\n                return true;\n            }\n            String testNS = null;\n            if (testPrefix != null) {\n                testNS = parent.getNamespaceURI(testPrefix);\n            }\n            String nodeNS = null;\n            if (nodePrefix != null) {\n                nodeNS = parent.getNamespaceURI(nodePrefix);\n            }\n            return equalStrings(testNS, nodeNS);\n        }\n        return false;\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/JxPath-17/"
+}

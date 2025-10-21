@@ -1,0 +1,13 @@
+File: src/main/java/org/apache/commons/compress/utils/ChecksumCalculatingInputStream.java
+Method: ChecksumCalculatingInputStream.ChecksumCalculatingInputStream
+
+public ChecksumCalculatingInputStream(final Checksum checksum, final InputStream in) {
+    if (checksum == null) {
+        throw new NullPointerException("Checksum cannot be null");
+    }
+    if (in == null) {
+        throw new NullPointerException("InputStream cannot be null");
+    }
+    this.checksum = checksum;
+    this.in = in;
+}

@@ -1,0 +1,14 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "maybeDeclareQualifiedName_com.google.javascript.jscomp.TypedScopeCreator",
+      "setPrototypeBasedOn_com.google.javascript.rhino.jstype.FunctionType",
+      "setPrototype_com.google.javascript.rhino.jstype.FunctionType"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.TypeCheckTest::testIssue537a",
+      "com.google.javascript.jscomp.TypeCheckTest::testIssue537b",
+      "com.google.javascript.jscomp.TypedScopeCreatorTest::testPropertyOnUnknownSuperClass2"
+    ]
+  }
+}

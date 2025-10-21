@@ -1,0 +1,30 @@
+{
+  "bug_id": "Math-75",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-75_1772708398",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method was returning the wrong value for the three (Object) pct. The method was using deprecated code which was not being maintained, and the fix is to use the new updated code.",
+        "changes": "- return getCumPct((Comparable<?>) v);\n+ return getPct((Comparable<?>) v);",
+        "fixed_method": "public double getPct(Object v) {\n  return getPct((Comparable<?>) v);\n}",
+        "diff": "- return getCumPct((Comparable<?>) v);\n+ return getPct((Comparable<?>) v);",
+        "file_path": "src/main/java/org/apache/commons/math/stat/Frequency.java",
+        "method_name": "getPct",
+        "class_name": "Frequency",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          302,
+          303,
+          304
+        ],
+        "original_code": "/**\n* Returns the percentage of values that are equal to v\n* (as a proportion between 0 and 1).\n* <p>\n* Returns <code>Double.NaN</code> if no values have been added.</p>\n*\n* @param v the value to lookup\n* @return the proportion of values equal to v\n* @deprecated replaced by {@link #getPct(Comparable)} as of 2.0\n*/\npublic double getPct(Object v) {\n    return getCumPct((Comparable<?>) v);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-75/"
+}

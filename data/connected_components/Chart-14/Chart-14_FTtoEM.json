@@ -1,0 +1,3832 @@
+{
+  "org.jfree.chart.plot.junit.CategoryPlotTests::testRemoveRangeMarker": [
+    {
+      "package": "org.jfree.chart",
+      "class": "org.jfree.chart.ChartColor",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        59,
+        62,
+        65,
+        68,
+        71,
+        74,
+        77,
+        80,
+        83,
+        86,
+        89,
+        92,
+        95,
+        98,
+        101,
+        104,
+        107,
+        110,
+        113,
+        116,
+        119,
+        122,
+        125,
+        128
+      ]
+    },
+    {
+      "package": "org.jfree.chart",
+      "class": "org.jfree.chart.ChartColor",
+      "method": "createDefaultPaintArray",
+      "signature": "()[Ljava/awt/Paint;",
+      "executed_lines": [
+        151
+      ]
+    },
+    {
+      "package": "org.jfree.chart.axis",
+      "class": "org.jfree.chart.axis.AxisLocation",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        61,
+        65,
+        69,
+        73
+      ]
+    },
+    {
+      "package": "org.jfree.chart.axis",
+      "class": "org.jfree.chart.axis.AxisLocation",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        84,
+        85,
+        86
+      ]
+    },
+    {
+      "package": "org.jfree.chart.axis",
+      "class": "org.jfree.chart.axis.CategoryAnchor",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        56,
+        60,
+        64
+      ]
+    },
+    {
+      "package": "org.jfree.chart.axis",
+      "class": "org.jfree.chart.axis.CategoryAnchor",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        75,
+        76,
+        77
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        69,
+        70
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/jfree/chart/JFreeChart;Lorg/jfree/chart/event/ChartChangeEventType;)V",
+      "executed_lines": [
+        93,
+        94,
+        95,
+        96
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEvent",
+      "method": "setType",
+      "signature": "(Lorg/jfree/chart/event/ChartChangeEventType;)V",
+      "executed_lines": [
+        131,
+        132
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEventType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        55,
+        59,
+        63
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEventType",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        74,
+        75,
+        76
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.PlotChangeEvent",
+      "method": "<init>",
+      "signature": "(Lorg/jfree/chart/plot/Plot;)V",
+      "executed_lines": [
+        64,
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        251,
+        256,
+        259,
+        274,
+        282,
+        285,
+        286
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        430,
+        431
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "<init>",
+      "signature": "(Lorg/jfree/data/category/CategoryDataset;Lorg/jfree/chart/axis/CategoryAxis;Lorg/jfree/chart/axis/ValueAxis;Lorg/jfree/chart/renderer/category/CategoryItemRenderer;)V",
+      "executed_lines": [
+        326,
+        333,
+        339,
+        387,
+        447,
+        449,
+        452,
+        453,
+        454,
+        455,
+        457,
+        458,
+        460,
+        462,
+        463,
+        464,
+        468,
+        470,
+        471,
+        473,
+        474,
+        479,
+        480,
+        481,
+        485,
+        487,
+        488,
+        489,
+        494,
+        495,
+        497,
+        498,
+        499,
+        500,
+        502,
+        503,
+        504,
+        506,
+        507,
+        508,
+        509,
+        511,
+        514,
+        516,
+        518,
+        519,
+        520,
+        521,
+        523,
+        525
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "addRangeMarker",
+      "signature": "(ILorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;)V",
+      "executed_lines": [
+        2217,
+        2218
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "addRangeMarker",
+      "signature": "(ILorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;Z)V",
+      "executed_lines": [
+        2239,
+        2248,
+        2249,
+        2251,
+        2252,
+        2253,
+        2255,
+        2257,
+        2258,
+        2259,
+        2261
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "addRangeMarker",
+      "signature": "(Lorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;)V",
+      "executed_lines": [
+        2200,
+        2201
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "configureDomainAxes",
+      "signature": "()V",
+      "executed_lines": [
+        867,
+        868,
+        869,
+        873
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "configureRangeAxes",
+      "signature": "()V",
+      "executed_lines": [
+        1145,
+        1146,
+        1147,
+        1151
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "datasetChanged",
+      "signature": "(Lorg/jfree/data/general/DatasetChangeEvent;)V",
+      "executed_lines": [
+        1855,
+        1856,
+        1857,
+        1858,
+        1862,
+        1866,
+        1867,
+        1868,
+        1871
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "getDataset",
+      "signature": "(I)Lorg/jfree/data/category/CategoryDataset;",
+      "executed_lines": [
+        1174,
+        1175,
+        1176,
+        1178
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "getRangeAxis",
+      "signature": "(I)Lorg/jfree/chart/axis/ValueAxis;",
+      "executed_lines": [
+        894,
+        895,
+        896,
+        898,
+        899,
+        900,
+        905
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "mapDatasetToDomainAxis",
+      "signature": "(II)V",
+      "executed_lines": [
+        1241,
+        1243,
+        1244
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "mapDatasetToRangeAxis",
+      "signature": "(II)V",
+      "executed_lines": [
+        1274,
+        1276,
+        1277
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "removeRangeMarker",
+      "signature": "(ILorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;)Z",
+      "executed_lines": [
+        2415
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "removeRangeMarker",
+      "signature": "(ILorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;Z)Z",
+      "executed_lines": [
+        2436,
+        2440,
+        2441,
+        2448
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "removeRangeMarker",
+      "signature": "(Lorg/jfree/chart/plot/Marker;)Z",
+      "executed_lines": [
+        2378
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "removeRangeMarker",
+      "signature": "(Lorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;)Z",
+      "executed_lines": [
+        2396
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "setDomainAxisLocation",
+      "signature": "(ILorg/jfree/chart/axis/AxisLocation;Z)V",
+      "executed_lines": [
+        800,
+        804,
+        805,
+        808
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "setDomainAxisLocation",
+      "signature": "(Lorg/jfree/chart/axis/AxisLocation;Z)V",
+      "executed_lines": [
+        767,
+        768
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "setRangeAxisLocation",
+      "signature": "(ILorg/jfree/chart/axis/AxisLocation;Z)V",
+      "executed_lines": [
+        1081,
+        1085,
+        1086,
+        1089
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "setRangeAxisLocation",
+      "signature": "(Lorg/jfree/chart/axis/AxisLocation;Z)V",
+      "executed_lines": [
+        1051,
+        1052
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DatasetRenderingOrder",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        62,
+        69
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DatasetRenderingOrder",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        80,
+        81,
+        82
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        84,
+        87,
+        91,
+        95,
+        100,
+        105,
+        106
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        150,
+        156
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "<init>",
+      "signature": "([Ljava/awt/Paint;[Ljava/awt/Paint;[Ljava/awt/Paint;[Ljava/awt/Stroke;[Ljava/awt/Stroke;[Ljava/awt/Shape;)V",
+      "executed_lines": [
+        197,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "createStandardSeriesShapes",
+      "signature": "()[Ljava/awt/Shape;",
+      "executed_lines": [
+        289,
+        291,
+        292,
+        293,
+        294,
+        297,
+        299,
+        302,
+        303,
+        304,
+        307,
+        308,
+        309,
+        312,
+        315,
+        316,
+        317,
+        320,
+        323,
+        324,
+        325,
+        328,
+        331,
+        332,
+        333,
+        335
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "intArray",
+      "signature": "(DDD)[I",
+      "executed_lines": [
+        517
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "intArray",
+      "signature": "(DDDD)[I",
+      "executed_lines": [
+        532
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Marker",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        144,
+        145
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Marker",
+      "method": "<init>",
+      "signature": "(Ljava/awt/Paint;)V",
+      "executed_lines": [
+        153,
+        155
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Marker",
+      "method": "<init>",
+      "signature": "(Ljava/awt/Paint;Ljava/awt/Stroke;Ljava/awt/Paint;Ljava/awt/Stroke;F)V",
+      "executed_lines": [
+        115,
+        173,
+        175,
+        178,
+        181,
+        185,
+        186,
+        187,
+        188,
+        189,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        198,
+        199
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Marker",
+      "method": "addChangeListener",
+      "signature": "(Lorg/jfree/chart/event/MarkerChangeListener;)V",
+      "executed_lines": [
+        534,
+        535
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        191,
+        194,
+        198,
+        201,
+        210,
+        219,
+        223
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        264,
+        267,
+        284,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        296,
+        297,
+        298,
+        300,
+        302,
+        304
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "fireChangeEvent",
+      "signature": "()V",
+      "executed_lines": [
+        902,
+        903
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "getParent",
+      "signature": "()Lorg/jfree/chart/plot/Plot;",
+      "executed_lines": [
+        433
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "notifyListeners",
+      "signature": "(Lorg/jfree/chart/event/PlotChangeEvent;)V",
+      "executed_lines": [
+        888,
+        889,
+        894
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.PlotOrientation",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        57,
+        61
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.PlotOrientation",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        72,
+        73,
+        74
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.ValueMarker",
+      "method": "<init>",
+      "signature": "(D)V",
+      "executed_lines": [
+        68,
+        69,
+        70
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.ValueMarker",
+      "method": "<init>",
+      "signature": "(DLjava/awt/Paint;Ljava/awt/Stroke;Ljava/awt/Paint;Ljava/awt/Stroke;F)V",
+      "executed_lines": [
+        95,
+        96,
+        97
+      ]
+    },
+    {
+      "package": "org.jfree.chart.text",
+      "class": "org.jfree.chart.text.TextAnchor",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        58,
+        62,
+        66,
+        70,
+        74,
+        78,
+        82,
+        86,
+        89,
+        93,
+        97,
+        101,
+        105,
+        109,
+        113
+      ]
+    },
+    {
+      "package": "org.jfree.chart.text",
+      "class": "org.jfree.chart.text.TextAnchor",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        124,
+        125,
+        126
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        77,
+        78
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        86,
+        87
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "<init>",
+      "signature": "(II)V",
+      "executed_lines": [
+        68,
+        71,
+        95,
+        96,
+        97,
+        98
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "get",
+      "signature": "(I)Ljava/lang/Object;",
+      "executed_lines": [
+        109,
+        110,
+        111,
+        113
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "set",
+      "signature": "(ILjava/lang/Object;)V",
+      "executed_lines": [
+        123,
+        126,
+        131,
+        132,
+        133
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "size",
+      "signature": "()I",
+      "executed_lines": [
+        149
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.Layer",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        56,
+        59
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.Layer",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        69,
+        70,
+        71
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.LengthAdjustmentType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        57,
+        61,
+        65
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.LengthAdjustmentType",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        76,
+        77,
+        78
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.ObjectList",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        58,
+        59
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.ObjectList",
+      "method": "get",
+      "signature": "(I)Ljava/lang/Object;",
+      "executed_lines": [
+        85
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.ObjectList",
+      "method": "set",
+      "signature": "(ILjava/lang/Object;)V",
+      "executed_lines": [
+        95,
+        96
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleAnchor",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        63,
+        67,
+        71,
+        75,
+        79,
+        83,
+        87,
+        91,
+        95
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleAnchor",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        106,
+        107,
+        108
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleInsets",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        65
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleInsets",
+      "method": "<init>",
+      "signature": "(DDDD)V",
+      "executed_lines": [
+        102,
+        103
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleInsets",
+      "method": "<init>",
+      "signature": "(Lorg/jfree/chart/util/UnitType;DDDD)V",
+      "executed_lines": [
+        116,
+        117,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.SortOrder",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        59,
+        63
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.SortOrder",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        74,
+        75,
+        76
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.UnitType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        56,
+        59
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.UnitType",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        69,
+        70,
+        71
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.DatasetChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/jfree/data/general/Dataset;)V",
+      "executed_lines": [
+        71,
+        72,
+        73
+      ]
+    }
+  ],
+  "org.jfree.chart.plot.junit.CategoryPlotTests::testRemoveDomainMarker": [
+    {
+      "package": "org.jfree.chart",
+      "class": "org.jfree.chart.ChartColor",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        59,
+        62,
+        65,
+        68,
+        71,
+        74,
+        77,
+        80,
+        83,
+        86,
+        89,
+        92,
+        95,
+        98,
+        101,
+        104,
+        107,
+        110,
+        113,
+        116,
+        119,
+        122,
+        125,
+        128
+      ]
+    },
+    {
+      "package": "org.jfree.chart",
+      "class": "org.jfree.chart.ChartColor",
+      "method": "createDefaultPaintArray",
+      "signature": "()[Ljava/awt/Paint;",
+      "executed_lines": [
+        151
+      ]
+    },
+    {
+      "package": "org.jfree.chart.axis",
+      "class": "org.jfree.chart.axis.AxisLocation",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        61,
+        65,
+        69,
+        73
+      ]
+    },
+    {
+      "package": "org.jfree.chart.axis",
+      "class": "org.jfree.chart.axis.AxisLocation",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        84,
+        85,
+        86
+      ]
+    },
+    {
+      "package": "org.jfree.chart.axis",
+      "class": "org.jfree.chart.axis.CategoryAnchor",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        56,
+        60,
+        64
+      ]
+    },
+    {
+      "package": "org.jfree.chart.axis",
+      "class": "org.jfree.chart.axis.CategoryAnchor",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        75,
+        76,
+        77
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        69,
+        70
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/jfree/chart/JFreeChart;Lorg/jfree/chart/event/ChartChangeEventType;)V",
+      "executed_lines": [
+        93,
+        94,
+        95,
+        96
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEvent",
+      "method": "setType",
+      "signature": "(Lorg/jfree/chart/event/ChartChangeEventType;)V",
+      "executed_lines": [
+        131,
+        132
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEventType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        55,
+        59,
+        63
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEventType",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        74,
+        75,
+        76
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.MarkerChangeEvent",
+      "method": "<init>",
+      "signature": "(Lorg/jfree/chart/plot/Marker;)V",
+      "executed_lines": [
+        65,
+        66,
+        67
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.PlotChangeEvent",
+      "method": "<init>",
+      "signature": "(Lorg/jfree/chart/plot/Plot;)V",
+      "executed_lines": [
+        64,
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryMarker",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;)V",
+      "executed_lines": [
+        80,
+        81
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryMarker",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;Ljava/awt/Paint;Ljava/awt/Stroke;)V",
+      "executed_lines": [
+        91,
+        92
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryMarker",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Comparable;Ljava/awt/Paint;Ljava/awt/Stroke;Ljava/awt/Paint;Ljava/awt/Stroke;F)V",
+      "executed_lines": [
+        72,
+        107,
+        108,
+        109,
+        110
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        251,
+        256,
+        259,
+        274,
+        282,
+        285,
+        286
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        430,
+        431
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "<init>",
+      "signature": "(Lorg/jfree/data/category/CategoryDataset;Lorg/jfree/chart/axis/CategoryAxis;Lorg/jfree/chart/axis/ValueAxis;Lorg/jfree/chart/renderer/category/CategoryItemRenderer;)V",
+      "executed_lines": [
+        326,
+        333,
+        339,
+        387,
+        447,
+        449,
+        452,
+        453,
+        454,
+        455,
+        457,
+        458,
+        460,
+        462,
+        463,
+        464,
+        468,
+        470,
+        471,
+        473,
+        474,
+        479,
+        480,
+        481,
+        485,
+        487,
+        488,
+        489,
+        494,
+        495,
+        497,
+        498,
+        499,
+        500,
+        502,
+        503,
+        504,
+        506,
+        507,
+        508,
+        509,
+        511,
+        514,
+        516,
+        518,
+        519,
+        520,
+        521,
+        523,
+        525
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "addRangeMarker",
+      "signature": "(ILorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;)V",
+      "executed_lines": [
+        2217,
+        2218
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "addRangeMarker",
+      "signature": "(ILorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;Z)V",
+      "executed_lines": [
+        2239,
+        2248,
+        2249,
+        2251,
+        2252,
+        2253,
+        2255,
+        2257,
+        2258,
+        2259,
+        2261
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "addRangeMarker",
+      "signature": "(Lorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;)V",
+      "executed_lines": [
+        2200,
+        2201
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "configureDomainAxes",
+      "signature": "()V",
+      "executed_lines": [
+        867,
+        868,
+        869,
+        873
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "configureRangeAxes",
+      "signature": "()V",
+      "executed_lines": [
+        1145,
+        1146,
+        1147,
+        1151
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "datasetChanged",
+      "signature": "(Lorg/jfree/data/general/DatasetChangeEvent;)V",
+      "executed_lines": [
+        1855,
+        1856,
+        1857,
+        1858,
+        1862,
+        1866,
+        1867,
+        1868,
+        1871
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "getDataset",
+      "signature": "(I)Lorg/jfree/data/category/CategoryDataset;",
+      "executed_lines": [
+        1174,
+        1175,
+        1176,
+        1178
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "getRangeAxis",
+      "signature": "(I)Lorg/jfree/chart/axis/ValueAxis;",
+      "executed_lines": [
+        894,
+        895,
+        896,
+        898,
+        899,
+        900,
+        905
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "mapDatasetToDomainAxis",
+      "signature": "(II)V",
+      "executed_lines": [
+        1241,
+        1243,
+        1244
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "mapDatasetToRangeAxis",
+      "signature": "(II)V",
+      "executed_lines": [
+        1274,
+        1276,
+        1277
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "removeDomainMarker",
+      "signature": "(ILorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;)Z",
+      "executed_lines": [
+        2139
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "removeDomainMarker",
+      "signature": "(ILorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;Z)Z",
+      "executed_lines": [
+        2158,
+        2159,
+        2166
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "removeDomainMarker",
+      "signature": "(Lorg/jfree/chart/plot/Marker;)Z",
+      "executed_lines": [
+        2106
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "removeDomainMarker",
+      "signature": "(Lorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;)Z",
+      "executed_lines": [
+        2122
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "setDomainAxisLocation",
+      "signature": "(ILorg/jfree/chart/axis/AxisLocation;Z)V",
+      "executed_lines": [
+        800,
+        804,
+        805,
+        808
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "setDomainAxisLocation",
+      "signature": "(Lorg/jfree/chart/axis/AxisLocation;Z)V",
+      "executed_lines": [
+        767,
+        768
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "setRangeAxisLocation",
+      "signature": "(ILorg/jfree/chart/axis/AxisLocation;Z)V",
+      "executed_lines": [
+        1081,
+        1085,
+        1086,
+        1089
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.CategoryPlot",
+      "method": "setRangeAxisLocation",
+      "signature": "(Lorg/jfree/chart/axis/AxisLocation;Z)V",
+      "executed_lines": [
+        1051,
+        1052
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DatasetRenderingOrder",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        62,
+        69
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DatasetRenderingOrder",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        80,
+        81,
+        82
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        84,
+        87,
+        91,
+        95,
+        100,
+        105,
+        106
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        150,
+        156
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "<init>",
+      "signature": "([Ljava/awt/Paint;[Ljava/awt/Paint;[Ljava/awt/Paint;[Ljava/awt/Stroke;[Ljava/awt/Stroke;[Ljava/awt/Shape;)V",
+      "executed_lines": [
+        197,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "createStandardSeriesShapes",
+      "signature": "()[Ljava/awt/Shape;",
+      "executed_lines": [
+        289,
+        291,
+        292,
+        293,
+        294,
+        297,
+        299,
+        302,
+        303,
+        304,
+        307,
+        308,
+        309,
+        312,
+        315,
+        316,
+        317,
+        320,
+        323,
+        324,
+        325,
+        328,
+        331,
+        332,
+        333,
+        335
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "intArray",
+      "signature": "(DDD)[I",
+      "executed_lines": [
+        517
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "intArray",
+      "signature": "(DDDD)[I",
+      "executed_lines": [
+        532
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Marker",
+      "method": "<init>",
+      "signature": "(Ljava/awt/Paint;Ljava/awt/Stroke;Ljava/awt/Paint;Ljava/awt/Stroke;F)V",
+      "executed_lines": [
+        115,
+        173,
+        175,
+        178,
+        181,
+        185,
+        186,
+        187,
+        188,
+        189,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        198,
+        199
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Marker",
+      "method": "addChangeListener",
+      "signature": "(Lorg/jfree/chart/event/MarkerChangeListener;)V",
+      "executed_lines": [
+        534,
+        535
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Marker",
+      "method": "notifyListeners",
+      "signature": "(Lorg/jfree/chart/event/MarkerChangeEvent;)V",
+      "executed_lines": [
+        559,
+        560,
+        566
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Marker",
+      "method": "setLabelOffsetType",
+      "signature": "(Lorg/jfree/chart/util/LengthAdjustmentType;)V",
+      "executed_lines": [
+        490,
+        493,
+        494,
+        495
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        191,
+        194,
+        198,
+        201,
+        210,
+        219,
+        223
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        264,
+        267,
+        284,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        296,
+        297,
+        298,
+        300,
+        302,
+        304
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "fireChangeEvent",
+      "signature": "()V",
+      "executed_lines": [
+        902,
+        903
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "getParent",
+      "signature": "()Lorg/jfree/chart/plot/Plot;",
+      "executed_lines": [
+        433
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "notifyListeners",
+      "signature": "(Lorg/jfree/chart/event/PlotChangeEvent;)V",
+      "executed_lines": [
+        888,
+        889,
+        894
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.PlotOrientation",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        57,
+        61
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.PlotOrientation",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        72,
+        73,
+        74
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.ValueMarker",
+      "method": "<init>",
+      "signature": "(DLjava/awt/Paint;Ljava/awt/Stroke;Ljava/awt/Paint;Ljava/awt/Stroke;F)V",
+      "executed_lines": [
+        95,
+        96,
+        97
+      ]
+    },
+    {
+      "package": "org.jfree.chart.text",
+      "class": "org.jfree.chart.text.TextAnchor",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        58,
+        62,
+        66,
+        70,
+        74,
+        78,
+        82,
+        86,
+        89,
+        93,
+        97,
+        101,
+        105,
+        109,
+        113
+      ]
+    },
+    {
+      "package": "org.jfree.chart.text",
+      "class": "org.jfree.chart.text.TextAnchor",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        124,
+        125,
+        126
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        77,
+        78
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        86,
+        87
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "<init>",
+      "signature": "(II)V",
+      "executed_lines": [
+        68,
+        71,
+        95,
+        96,
+        97,
+        98
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "get",
+      "signature": "(I)Ljava/lang/Object;",
+      "executed_lines": [
+        109,
+        110,
+        111,
+        113
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "set",
+      "signature": "(ILjava/lang/Object;)V",
+      "executed_lines": [
+        123,
+        126,
+        131,
+        132,
+        133
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "size",
+      "signature": "()I",
+      "executed_lines": [
+        149
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.Layer",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        56,
+        59
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.Layer",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        69,
+        70,
+        71
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.LengthAdjustmentType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        57,
+        61,
+        65
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.LengthAdjustmentType",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        76,
+        77,
+        78
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.ObjectList",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        58,
+        59
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.ObjectList",
+      "method": "get",
+      "signature": "(I)Ljava/lang/Object;",
+      "executed_lines": [
+        85
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.ObjectList",
+      "method": "set",
+      "signature": "(ILjava/lang/Object;)V",
+      "executed_lines": [
+        95,
+        96
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleAnchor",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        63,
+        67,
+        71,
+        75,
+        79,
+        83,
+        87,
+        91,
+        95
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleAnchor",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        106,
+        107,
+        108
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleInsets",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        65
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleInsets",
+      "method": "<init>",
+      "signature": "(DDDD)V",
+      "executed_lines": [
+        102,
+        103
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleInsets",
+      "method": "<init>",
+      "signature": "(Lorg/jfree/chart/util/UnitType;DDDD)V",
+      "executed_lines": [
+        116,
+        117,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.SortOrder",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        59,
+        63
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.SortOrder",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        74,
+        75,
+        76
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.UnitType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        56,
+        59
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.UnitType",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        69,
+        70,
+        71
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.DatasetChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/jfree/data/general/Dataset;)V",
+      "executed_lines": [
+        71,
+        72,
+        73
+      ]
+    }
+  ],
+  "org.jfree.chart.plot.junit.XYPlotTests::testRemoveRangeMarker": [
+    {
+      "package": "org.jfree.chart",
+      "class": "org.jfree.chart.ChartColor",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        59,
+        62,
+        65,
+        68,
+        71,
+        74,
+        77,
+        80,
+        83,
+        86,
+        89,
+        92,
+        95,
+        98,
+        101,
+        104,
+        107,
+        110,
+        113,
+        116,
+        119,
+        122,
+        125,
+        128
+      ]
+    },
+    {
+      "package": "org.jfree.chart",
+      "class": "org.jfree.chart.ChartColor",
+      "method": "createDefaultPaintArray",
+      "signature": "()[Ljava/awt/Paint;",
+      "executed_lines": [
+        151
+      ]
+    },
+    {
+      "package": "org.jfree.chart.axis",
+      "class": "org.jfree.chart.axis.AxisLocation",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        61,
+        65,
+        69,
+        73
+      ]
+    },
+    {
+      "package": "org.jfree.chart.axis",
+      "class": "org.jfree.chart.axis.AxisLocation",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        84,
+        85,
+        86
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        69,
+        70
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/jfree/chart/JFreeChart;Lorg/jfree/chart/event/ChartChangeEventType;)V",
+      "executed_lines": [
+        93,
+        94,
+        95,
+        96
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEvent",
+      "method": "setType",
+      "signature": "(Lorg/jfree/chart/event/ChartChangeEventType;)V",
+      "executed_lines": [
+        131,
+        132
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEventType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        55,
+        59,
+        63
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEventType",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        74,
+        75,
+        76
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.PlotChangeEvent",
+      "method": "<init>",
+      "signature": "(Lorg/jfree/chart/plot/Plot;)V",
+      "executed_lines": [
+        64,
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DatasetRenderingOrder",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        62,
+        69
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DatasetRenderingOrder",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        80,
+        81,
+        82
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        84,
+        87,
+        91,
+        95,
+        100,
+        105,
+        106
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        150,
+        156
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "<init>",
+      "signature": "([Ljava/awt/Paint;[Ljava/awt/Paint;[Ljava/awt/Paint;[Ljava/awt/Stroke;[Ljava/awt/Stroke;[Ljava/awt/Shape;)V",
+      "executed_lines": [
+        197,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "createStandardSeriesShapes",
+      "signature": "()[Ljava/awt/Shape;",
+      "executed_lines": [
+        289,
+        291,
+        292,
+        293,
+        294,
+        297,
+        299,
+        302,
+        303,
+        304,
+        307,
+        308,
+        309,
+        312,
+        315,
+        316,
+        317,
+        320,
+        323,
+        324,
+        325,
+        328,
+        331,
+        332,
+        333,
+        335
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "intArray",
+      "signature": "(DDD)[I",
+      "executed_lines": [
+        517
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "intArray",
+      "signature": "(DDDD)[I",
+      "executed_lines": [
+        532
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Marker",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        144,
+        145
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Marker",
+      "method": "<init>",
+      "signature": "(Ljava/awt/Paint;)V",
+      "executed_lines": [
+        153,
+        155
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Marker",
+      "method": "<init>",
+      "signature": "(Ljava/awt/Paint;Ljava/awt/Stroke;Ljava/awt/Paint;Ljava/awt/Stroke;F)V",
+      "executed_lines": [
+        115,
+        173,
+        175,
+        178,
+        181,
+        185,
+        186,
+        187,
+        188,
+        189,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        198,
+        199
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        191,
+        194,
+        198,
+        201,
+        210,
+        219,
+        223
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        264,
+        267,
+        284,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        296,
+        297,
+        298,
+        300,
+        302,
+        304
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "getParent",
+      "signature": "()Lorg/jfree/chart/plot/Plot;",
+      "executed_lines": [
+        433
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "notifyListeners",
+      "signature": "(Lorg/jfree/chart/event/PlotChangeEvent;)V",
+      "executed_lines": [
+        888,
+        889,
+        894
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.PlotOrientation",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        57,
+        61
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.PlotOrientation",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        72,
+        73,
+        74
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.SeriesRenderingOrder",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        60,
+        67
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.SeriesRenderingOrder",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        78,
+        79,
+        80
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.ValueMarker",
+      "method": "<init>",
+      "signature": "(D)V",
+      "executed_lines": [
+        68,
+        69,
+        70
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        284,
+        289,
+        295,
+        299,
+        302,
+        303
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        501,
+        502
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "<init>",
+      "signature": "(Lorg/jfree/data/xy/XYDataset;Lorg/jfree/chart/axis/ValueAxis;Lorg/jfree/chart/axis/ValueAxis;Lorg/jfree/chart/renderer/xy/XYItemRenderer;)V",
+      "executed_lines": [
+        345,
+        348,
+        419,
+        437,
+        474,
+        481,
+        520,
+        522,
+        523,
+        524,
+        527,
+        528,
+        529,
+        530,
+        532,
+        533,
+        534,
+        535,
+        537,
+        538,
+        540,
+        541,
+        543,
+        544,
+        548,
+        549,
+        554,
+        555,
+        556,
+        560,
+        562,
+        563,
+        564,
+        568,
+        570,
+        571,
+        573,
+        574,
+        575,
+        577,
+        578,
+        579,
+        581,
+        582,
+        583,
+        585,
+        586,
+        587,
+        589,
+        590,
+        591,
+        592,
+        594,
+        595,
+        596,
+        597,
+        599,
+        601
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "configureDomainAxes",
+      "signature": "()V",
+      "executed_lines": [
+        860,
+        861,
+        862,
+        866
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "configureRangeAxes",
+      "signature": "()V",
+      "executed_lines": [
+        1160,
+        1161,
+        1162,
+        1166
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "datasetChanged",
+      "signature": "(Lorg/jfree/data/general/DatasetChangeEvent;)V",
+      "executed_lines": [
+        4033,
+        4034,
+        4035,
+        4039,
+        4040,
+        4041,
+        4043
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "getDataset",
+      "signature": "(I)Lorg/jfree/data/xy/XYDataset;",
+      "executed_lines": [
+        1273,
+        1274,
+        1275,
+        1277
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "mapDatasetToDomainAxis",
+      "signature": "(II)V",
+      "executed_lines": [
+        1354,
+        1357,
+        1358
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "mapDatasetToRangeAxis",
+      "signature": "(II)V",
+      "executed_lines": [
+        1370,
+        1373,
+        1374
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "removeRangeMarker",
+      "signature": "(ILorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;)Z",
+      "executed_lines": [
+        2498
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "removeRangeMarker",
+      "signature": "(ILorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;Z)Z",
+      "executed_lines": [
+        2517,
+        2521,
+        2522,
+        2529
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "removeRangeMarker",
+      "signature": "(Lorg/jfree/chart/plot/Marker;)Z",
+      "executed_lines": [
+        2465
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "removeRangeMarker",
+      "signature": "(Lorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;)Z",
+      "executed_lines": [
+        2481
+      ]
+    },
+    {
+      "package": "org.jfree.chart.text",
+      "class": "org.jfree.chart.text.TextAnchor",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        58,
+        62,
+        66,
+        70,
+        74,
+        78,
+        82,
+        86,
+        89,
+        93,
+        97,
+        101,
+        105,
+        109,
+        113
+      ]
+    },
+    {
+      "package": "org.jfree.chart.text",
+      "class": "org.jfree.chart.text.TextAnchor",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        124,
+        125,
+        126
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        77,
+        78
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        86,
+        87
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "<init>",
+      "signature": "(II)V",
+      "executed_lines": [
+        68,
+        71,
+        95,
+        96,
+        97,
+        98
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "get",
+      "signature": "(I)Ljava/lang/Object;",
+      "executed_lines": [
+        109,
+        110,
+        111,
+        113
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "set",
+      "signature": "(ILjava/lang/Object;)V",
+      "executed_lines": [
+        123,
+        126,
+        131,
+        132,
+        133
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "size",
+      "signature": "()I",
+      "executed_lines": [
+        149
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.Layer",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        56,
+        59
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.Layer",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        69,
+        70,
+        71
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.LengthAdjustmentType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        57,
+        61,
+        65
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.LengthAdjustmentType",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        76,
+        77,
+        78
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.ObjectList",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        58,
+        59
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.ObjectList",
+      "method": "get",
+      "signature": "(I)Ljava/lang/Object;",
+      "executed_lines": [
+        85
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.ObjectList",
+      "method": "set",
+      "signature": "(ILjava/lang/Object;)V",
+      "executed_lines": [
+        95,
+        96
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleAnchor",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        63,
+        67,
+        71,
+        75,
+        79,
+        83,
+        87,
+        91,
+        95
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleAnchor",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        106,
+        107,
+        108
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleInsets",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        65
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleInsets",
+      "method": "<init>",
+      "signature": "(DDDD)V",
+      "executed_lines": [
+        102,
+        103
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleInsets",
+      "method": "<init>",
+      "signature": "(Lorg/jfree/chart/util/UnitType;DDDD)V",
+      "executed_lines": [
+        116,
+        117,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.UnitType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        56,
+        59
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.UnitType",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        69,
+        70,
+        71
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.DatasetChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/jfree/data/general/Dataset;)V",
+      "executed_lines": [
+        71,
+        72,
+        73
+      ]
+    }
+  ],
+  "org.jfree.chart.plot.junit.XYPlotTests::testRemoveDomainMarker": [
+    {
+      "package": "org.jfree.chart",
+      "class": "org.jfree.chart.ChartColor",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        59,
+        62,
+        65,
+        68,
+        71,
+        74,
+        77,
+        80,
+        83,
+        86,
+        89,
+        92,
+        95,
+        98,
+        101,
+        104,
+        107,
+        110,
+        113,
+        116,
+        119,
+        122,
+        125,
+        128
+      ]
+    },
+    {
+      "package": "org.jfree.chart",
+      "class": "org.jfree.chart.ChartColor",
+      "method": "createDefaultPaintArray",
+      "signature": "()[Ljava/awt/Paint;",
+      "executed_lines": [
+        151
+      ]
+    },
+    {
+      "package": "org.jfree.chart.axis",
+      "class": "org.jfree.chart.axis.AxisLocation",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        61,
+        65,
+        69,
+        73
+      ]
+    },
+    {
+      "package": "org.jfree.chart.axis",
+      "class": "org.jfree.chart.axis.AxisLocation",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        84,
+        85,
+        86
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        69,
+        70
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/jfree/chart/JFreeChart;Lorg/jfree/chart/event/ChartChangeEventType;)V",
+      "executed_lines": [
+        93,
+        94,
+        95,
+        96
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEvent",
+      "method": "setType",
+      "signature": "(Lorg/jfree/chart/event/ChartChangeEventType;)V",
+      "executed_lines": [
+        131,
+        132
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEventType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        55,
+        59,
+        63
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.ChartChangeEventType",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        74,
+        75,
+        76
+      ]
+    },
+    {
+      "package": "org.jfree.chart.event",
+      "class": "org.jfree.chart.event.PlotChangeEvent",
+      "method": "<init>",
+      "signature": "(Lorg/jfree/chart/plot/Plot;)V",
+      "executed_lines": [
+        64,
+        65,
+        66
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DatasetRenderingOrder",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        62,
+        69
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DatasetRenderingOrder",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        80,
+        81,
+        82
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        84,
+        87,
+        91,
+        95,
+        100,
+        105,
+        106
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        150,
+        156
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "<init>",
+      "signature": "([Ljava/awt/Paint;[Ljava/awt/Paint;[Ljava/awt/Paint;[Ljava/awt/Stroke;[Ljava/awt/Stroke;[Ljava/awt/Shape;)V",
+      "executed_lines": [
+        197,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "createStandardSeriesShapes",
+      "signature": "()[Ljava/awt/Shape;",
+      "executed_lines": [
+        289,
+        291,
+        292,
+        293,
+        294,
+        297,
+        299,
+        302,
+        303,
+        304,
+        307,
+        308,
+        309,
+        312,
+        315,
+        316,
+        317,
+        320,
+        323,
+        324,
+        325,
+        328,
+        331,
+        332,
+        333,
+        335
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "intArray",
+      "signature": "(DDD)[I",
+      "executed_lines": [
+        517
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.DefaultDrawingSupplier",
+      "method": "intArray",
+      "signature": "(DDDD)[I",
+      "executed_lines": [
+        532
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Marker",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        144,
+        145
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Marker",
+      "method": "<init>",
+      "signature": "(Ljava/awt/Paint;)V",
+      "executed_lines": [
+        153,
+        155
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Marker",
+      "method": "<init>",
+      "signature": "(Ljava/awt/Paint;Ljava/awt/Stroke;Ljava/awt/Paint;Ljava/awt/Stroke;F)V",
+      "executed_lines": [
+        115,
+        173,
+        175,
+        178,
+        181,
+        185,
+        186,
+        187,
+        188,
+        189,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        198,
+        199
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        191,
+        194,
+        198,
+        201,
+        210,
+        219,
+        223
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        264,
+        267,
+        284,
+        286,
+        287,
+        288,
+        289,
+        290,
+        291,
+        292,
+        293,
+        294,
+        296,
+        297,
+        298,
+        300,
+        302,
+        304
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "getParent",
+      "signature": "()Lorg/jfree/chart/plot/Plot;",
+      "executed_lines": [
+        433
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.Plot",
+      "method": "notifyListeners",
+      "signature": "(Lorg/jfree/chart/event/PlotChangeEvent;)V",
+      "executed_lines": [
+        888,
+        889,
+        894
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.PlotOrientation",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        57,
+        61
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.PlotOrientation",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        72,
+        73,
+        74
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.SeriesRenderingOrder",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        60,
+        67
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.SeriesRenderingOrder",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        78,
+        79,
+        80
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.ValueMarker",
+      "method": "<init>",
+      "signature": "(D)V",
+      "executed_lines": [
+        68,
+        69,
+        70
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        284,
+        289,
+        295,
+        299,
+        302,
+        303
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        501,
+        502
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "<init>",
+      "signature": "(Lorg/jfree/data/xy/XYDataset;Lorg/jfree/chart/axis/ValueAxis;Lorg/jfree/chart/axis/ValueAxis;Lorg/jfree/chart/renderer/xy/XYItemRenderer;)V",
+      "executed_lines": [
+        345,
+        348,
+        419,
+        437,
+        474,
+        481,
+        520,
+        522,
+        523,
+        524,
+        527,
+        528,
+        529,
+        530,
+        532,
+        533,
+        534,
+        535,
+        537,
+        538,
+        540,
+        541,
+        543,
+        544,
+        548,
+        549,
+        554,
+        555,
+        556,
+        560,
+        562,
+        563,
+        564,
+        568,
+        570,
+        571,
+        573,
+        574,
+        575,
+        577,
+        578,
+        579,
+        581,
+        582,
+        583,
+        585,
+        586,
+        587,
+        589,
+        590,
+        591,
+        592,
+        594,
+        595,
+        596,
+        597,
+        599,
+        601
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "configureDomainAxes",
+      "signature": "()V",
+      "executed_lines": [
+        860,
+        861,
+        862,
+        866
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "configureRangeAxes",
+      "signature": "()V",
+      "executed_lines": [
+        1160,
+        1161,
+        1162,
+        1166
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "datasetChanged",
+      "signature": "(Lorg/jfree/data/general/DatasetChangeEvent;)V",
+      "executed_lines": [
+        4033,
+        4034,
+        4035,
+        4039,
+        4040,
+        4041,
+        4043
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "getDataset",
+      "signature": "(I)Lorg/jfree/data/xy/XYDataset;",
+      "executed_lines": [
+        1273,
+        1274,
+        1275,
+        1277
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "mapDatasetToDomainAxis",
+      "signature": "(II)V",
+      "executed_lines": [
+        1354,
+        1357,
+        1358
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "mapDatasetToRangeAxis",
+      "signature": "(II)V",
+      "executed_lines": [
+        1370,
+        1373,
+        1374
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "removeDomainMarker",
+      "signature": "(ILorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;)Z",
+      "executed_lines": [
+        2265
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "removeDomainMarker",
+      "signature": "(ILorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;Z)Z",
+      "executed_lines": [
+        2285,
+        2286,
+        2293
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "removeDomainMarker",
+      "signature": "(Lorg/jfree/chart/plot/Marker;)Z",
+      "executed_lines": [
+        2232
+      ]
+    },
+    {
+      "package": "org.jfree.chart.plot",
+      "class": "org.jfree.chart.plot.XYPlot",
+      "method": "removeDomainMarker",
+      "signature": "(Lorg/jfree/chart/plot/Marker;Lorg/jfree/chart/util/Layer;)Z",
+      "executed_lines": [
+        2248
+      ]
+    },
+    {
+      "package": "org.jfree.chart.text",
+      "class": "org.jfree.chart.text.TextAnchor",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        58,
+        62,
+        66,
+        70,
+        74,
+        78,
+        82,
+        86,
+        89,
+        93,
+        97,
+        101,
+        105,
+        109,
+        113
+      ]
+    },
+    {
+      "package": "org.jfree.chart.text",
+      "class": "org.jfree.chart.text.TextAnchor",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        124,
+        125,
+        126
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        77,
+        78
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        86,
+        87
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "<init>",
+      "signature": "(II)V",
+      "executed_lines": [
+        68,
+        71,
+        95,
+        96,
+        97,
+        98
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "get",
+      "signature": "(I)Ljava/lang/Object;",
+      "executed_lines": [
+        109,
+        110,
+        111,
+        113
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "set",
+      "signature": "(ILjava/lang/Object;)V",
+      "executed_lines": [
+        123,
+        126,
+        131,
+        132,
+        133
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.AbstractObjectList",
+      "method": "size",
+      "signature": "()I",
+      "executed_lines": [
+        149
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.Layer",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        56,
+        59
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.Layer",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        69,
+        70,
+        71
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.LengthAdjustmentType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        57,
+        61,
+        65
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.LengthAdjustmentType",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        76,
+        77,
+        78
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.ObjectList",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        58,
+        59
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.ObjectList",
+      "method": "get",
+      "signature": "(I)Ljava/lang/Object;",
+      "executed_lines": [
+        85
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.ObjectList",
+      "method": "set",
+      "signature": "(ILjava/lang/Object;)V",
+      "executed_lines": [
+        95,
+        96
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleAnchor",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        63,
+        67,
+        71,
+        75,
+        79,
+        83,
+        87,
+        91,
+        95
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleAnchor",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        106,
+        107,
+        108
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleInsets",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        65
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleInsets",
+      "method": "<init>",
+      "signature": "(DDDD)V",
+      "executed_lines": [
+        102,
+        103
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.RectangleInsets",
+      "method": "<init>",
+      "signature": "(Lorg/jfree/chart/util/UnitType;DDDD)V",
+      "executed_lines": [
+        116,
+        117,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.UnitType",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        56,
+        59
+      ]
+    },
+    {
+      "package": "org.jfree.chart.util",
+      "class": "org.jfree.chart.util.UnitType",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        69,
+        70,
+        71
+      ]
+    },
+    {
+      "package": "org.jfree.data.general",
+      "class": "org.jfree.data.general.DatasetChangeEvent",
+      "method": "<init>",
+      "signature": "(Ljava/lang/Object;Lorg/jfree/data/general/Dataset;)V",
+      "executed_lines": [
+        71,
+        72,
+        73
+      ]
+    }
+  ]
+}

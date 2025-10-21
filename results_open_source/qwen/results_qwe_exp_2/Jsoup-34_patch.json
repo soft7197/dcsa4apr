@@ -1,0 +1,44 @@
+{
+  "bug_id": "Jsoup-34",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-34_1771937565",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch does not handle cases where the sequence is longer than the remaining input or where there is a partial match. It also lacks null checks and proper boundary condition handling. The refined patch will address these issues by adding necessary checks and ensuring the loop conditions are robust.",
+        "fixed_method": "int nextIndexOf(CharSequence seq) {\n    if (seq == null || seq.length() == 0) {\n        throw new IllegalArgumentException(\"Input sequence cannot be null or empty\");\n    }\n    if (pos >= length) {\n        return -1;\n    }\n    char startChar = seq.charAt(0);\n    for (int offset = pos; offset <= length - seq.length(); offset++) {\n        if (input[offset] == startChar) {\n            int i = offset + 1;\n            int j = 1;\n            while (j < seq.length() && i < length && seq.charAt(j) == input[i]) {\n                i++;\n                j++;\n            }\n            if (j == seq.length()) {\n                return offset - pos;\n            }\n        }\n    }\n    return -1;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/jsoup/parser/CharacterReader.java",
+        "method_name": "nextIndexOf",
+        "class_name": "CharacterReader",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by not properly checking the bounds of the input array when comparing characters in the sequence. This leads to ArrayIndexOutOfBoundsException when the sequence is not fully matched before reaching the end of the input.",
+        "line_numbers": [
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-34/"
+}

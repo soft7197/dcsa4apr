@@ -1,0 +1,45 @@
+{
+  "bug_id": "Closure-47",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-47_1771887863",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issues stem from inconsistent handling of line and column numbers between 0-based and 1-based indexing. Method 1 adjusts column positions to be 1-based, while Method 2 treats column positions as 0-based. To fix this, we need to ensure consistent indexing across both methods.",
+        "changes": "- .setLineNumber(entry.getSourceLine())\n+ .setLineNumber(entry.getSourceLine() + 1)\n- .setColumnPosition(entry.getSourceColumn());\n+ .setColumnPosition(entry.getSourceColumn() + 1);\n- new FilePosition(node.getLineno(), node.getCharno()),\n+ new FilePosition(node.getLineno() - 1, node.getCharno()),",
+        "methods": {
+          "src/com/google/debugging/sourcemap/SourceMapConsumerV3.java::SourceMapConsumerV3::getOriginalMappingForEntry::L482": {
+            "file_path": "src/com/google/debugging/sourcemap/SourceMapConsumerV3.java",
+            "method_name": "getOriginalMappingForEntry",
+            "class_name": "SourceMapConsumerV3",
+            "line_numbers": [
+              482,
+              496
+            ],
+            "original_code": "  /**\n   * Creates an \"OriginalMapping\" object for the given entry object.\n   */\n\n  private OriginalMapping getOriginalMappingForEntry(Entry entry) {\n    if (entry.getSourceFileId() == UNMAPPED) {\n      return null;\n    } else {\n      // Adjust the line/column here to be start at 1.\n      Builder x = OriginalMapping.newBuilder()\n        .setOriginalFile(sources[entry.getSourceFileId()])\n        .setLineNumber(entry.getSourceLine())\n        .setColumnPosition(entry.getSourceColumn());\n      if (entry.getNameId() != UNMAPPED) {\n        x.setIdentifier(names[entry.getNameId()]);\n      }\n      return x.build();\n    }\n  }\n",
+            "fixed_method": "private OriginalMapping getOriginalMappingForEntry(Entry entry) {\n    if (entry.getSourceFileId() == UNMAPPED) {\n      return null;\n    } else {\n      // Adjust the line/column here to be start at 1.\n      Builder x = OriginalMapping.newBuilder()\n        .setOriginalFile(sources[entry.getSourceFileId()])\n        .setLineNumber(entry.getSourceLine() + 1)\n        .setColumnPosition(entry.getSourceColumn() + 1);\n      if (entry.getNameId() != UNMAPPED) {\n        x.setIdentifier(names[entry.getNameId()]);\n      }\n      return x.build();\n    }\n  }",
+            "iteration": 1
+          },
+          "src/com/google/javascript/jscomp/SourceMap.java::SourceMap::addMapping::L117": {
+            "file_path": "src/com/google/javascript/jscomp/SourceMap.java",
+            "method_name": "addMapping",
+            "class_name": "SourceMap",
+            "line_numbers": [
+              117,
+              143
+            ],
+            "original_code": "\n  public void addMapping(\n      Node node,\n      FilePosition outputStartPosition,\n      FilePosition outputEndPosition) {\n    String sourceFile = node.getSourceFileName();\n\n    // If the node does not have an associated source file or\n    // its line number is -1, then the node does not have sufficient\n    // information for a mapping to be useful.\n    if (sourceFile == null || node.getLineno() < 0) {\n      return;\n    }\n\n    sourceFile = fixupSourceLocation(sourceFile);\n\n    String originalName = (String) node.getProp(Node.ORIGINALNAME_PROP);\n\n    // Strangely, Rhino source lines are one based but columns are\n    // zero based.\n    // We don't change this for the v1 or v2 source maps but for\n    // v3 we make them both 0 based.\n\n    generator.addMapping(\n        sourceFile, originalName,\n        new FilePosition(node.getLineno(), node.getCharno()),\n        outputStartPosition, outputEndPosition);\n  }\n",
+            "fixed_method": "public void addMapping(\n      Node node,\n      FilePosition outputStartPosition,\n      FilePosition outputEndPosition) {\n    String sourceFile = node.getSourceFileName();\n\n    // If the node does not have an associated source file or\n    // its line number is -1, then the node does not have sufficient\n    // information for a mapping to be useful.\n    if (sourceFile == null || node.getLineno() < 0) {\n      return;\n    }\n\n    sourceFile = fixupSourceLocation(sourceFile);\n\n    String originalName = (String) node.getProp(Node.ORIGINALNAME_PROP);\n\n    // Strangely, Rhino source lines are one based but columns are\n    // zero based.\n    // We don't change this for the v1 or v2 source maps but for\n    // v3 we make them both 0 based.\n\n    generator.addMapping(\n        sourceFile, originalName,\n        new FilePosition(node.getLineno() - 1, node.getCharno()),\n        outputStartPosition, outputEndPosition);\n  }",
+            "iteration": 1
+          }
+        },
+        "iteration": 1,
+        "is_multi_method": true
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-47/"
+}

@@ -1,0 +1,30 @@
+File: src/main/java/org/apache/commons/cli/Options.java
+Method: Options.getMatchingOptions
+
+public List<String> getMatchingOptions(String opt)
+{
+    if (opt == null) {
+        return Collections.emptyList();
+    }
+    
+    opt = Util.stripLeadingHyphens(opt);
+    
+    List<String> matchingOpts = new ArrayList<String>();
+
+    for (String longOpt : longOpts.keySet())
+    {
+        if (longOpt.startsWith(opt))
+        {
+            matchingOpts.add(longOpt);
+        }
+    }
+    
+    // Check for exact match to override if necessary
+    if (matchingOpts.size() == 1 && matchingOpts.get(0).equals(opt)) {
+        return matchingOpts;
+    } else if (longOpts.containsKey(opt)) {
+        return Collections.singletonList(opt);
+    }
+    
+    return matchingOpts;
+}

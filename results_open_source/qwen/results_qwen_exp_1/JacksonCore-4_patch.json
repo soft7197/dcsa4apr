@@ -1,0 +1,36 @@
+{
+  "bug_id": "JacksonCore-4",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonCore-4_1771862217",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch allows the buffer to grow beyond MAX_SEGMENT_LEN by only incrementing by 1 each time, which is inefficient. The refined fix will introduce a more controlled growth strategy once MAX_SEGMENT_LEN is reached, such as increasing by a fixed percentage or a fixed amount.",
+        "fixed_method": "public char[] expandCurrentSegment()\n{\n    final char[] curr = _currentSegment;\n    // Let's grow by 50% by default\n    final int len = curr.length;\n    int newLen;\n    if (len < MAX_SEGMENT_LEN) {\n        newLen = Math.min(MAX_SEGMENT_LEN, len + (len >> 1));\n    } else {\n        // Once we reach MAX_SEGMENT_LEN, grow by a fixed percentage, e.g., 25%\n        newLen = len + (len >> 2);\n    }\n    return (_currentSegment = Arrays.copyOf(curr, newLen));\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java",
+        "method_name": "expandCurrentSegment",
+        "class_name": "TextBuffer",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the incorrect calculation of newLen when the current length is at MAX_SEGMENT_LEN. The condition should allow the buffer to grow beyond MAX_SEGMENT_LEN if necessary.",
+        "line_numbers": [
+          580,
+          581,
+          582,
+          583,
+          584,
+          585,
+          586,
+          587,
+          588
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonCore-4/"
+}

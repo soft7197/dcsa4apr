@@ -1,0 +1,43 @@
+{
+  "bug_id": "Math-82",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-82_1772018021",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch changed the comparison from '>= 0' to '> 0', which can incorrectly exclude rows where the entry is exactly zero. To fix this, we should maintain the '>= 0' comparison to handle edge cases properly. Additionally, we should add a check to handle division by zero when the entry is exactly zero.",
+        "fixed_method": "private Integer getPivotRow(final int col, final SimplexTableau tableau) {\n    double minRatio = Double.MAX_VALUE;\n    Integer minRatioPos = null;\n    for (int i = tableau.getNumObjectiveFunctions(); i < tableau.getHeight(); i++) {\n        final double rhs = tableau.getEntry(i, tableau.getWidth() - 1);\n        final double entry = tableau.getEntry(i, col);\n        if (MathUtils.compareTo(entry, 0, epsilon) >= 0) {\n            if (MathUtils.compareTo(entry, 0, epsilon) == 0) {\n                continue; // Skip division by zero\n            }\n            final double ratio = rhs / entry;\n            if (ratio < minRatio) {\n                minRatio = ratio;\n                minRatioPos = i; \n            }\n        }\n    }\n    return minRatioPos;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/apache/commons/math/optimization/linear/SimplexSolver.java",
+        "method_name": "getPivotRow",
+        "class_name": "SimplexSolver",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue likely arises from incorrect handling of floating-point comparisons or incorrect calculation of the pivot row. The current implementation uses a strict comparison which might fail due to precision issues. We should ensure that the comparison accounts for floating-point precision.",
+        "line_numbers": [
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-82/"
+}

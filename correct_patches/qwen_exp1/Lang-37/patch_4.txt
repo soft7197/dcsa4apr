@@ -1,0 +1,23 @@
+File: src/java/org/apache/commons/lang3/ArrayUtils.java
+Method: ArrayUtils.addAll
+
+public static <T> T[] addAll(T[] array1, T... array2) {
+    if (array1 == null && array2 == null) {
+        return null;
+    }
+    if (array1 == null) {
+        return clone(array2);
+    } else if (array2 == null) {
+        return clone(array1);
+    }
+    final Class<?> type1 = array1.getClass().getComponentType();
+    for (T element : array2) {
+        if (element != null && !type1.isInstance(element)) {
+            throw new IllegalArgumentException("Cannot store elements of type " + element.getClass() + " into an array of type " + type1);
+        }
+    }
+    T[] joinedArray = (T[]) Array.newInstance(type1, array1.length + array2.length);
+    System.arraycopy(array1, 0, joinedArray, 0, array1.length);
+    System.arraycopy(array2, 0, joinedArray, array1.length, array2.length);
+    return joinedArray;
+}

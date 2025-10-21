@@ -1,0 +1,59 @@
+File: src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java
+Method: NumericEntityUnescaper.translate
+
+public int translate(CharSequence input, int index, Writer out) throws IOException {
+    // Check if the index and next index are within input's length
+    if(index < 0 || index + 1 >= input.length()) {
+        return 0;
+    }
+    
+    if(input.charAt(index) == '&' && input.charAt(index + 1) == '#') {
+        int start = index + 2;
+        boolean isHex = false;
+
+        // Ensure that start is within the bounds of the input length
+        if(start >= input.length()) {
+            return 0;
+        }
+
+        char firstChar = input.charAt(start);
+        if(firstChar == 'x' || firstChar == 'X') {
+            start++;
+            isHex = true;
+        }
+
+        int end = start;
+        // Prevent infinite loop by ensuring end doesn't exceed the input length
+        while(end < input.length() && input.charAt(end) != ';') {
+            end++;
+        }
+
+        // If we reached the end of the input without finding ';', return 0 (invalid sequence)
+        if(end >= input.length() || input.charAt(end) != ';') {
+            return 0;
+        }
+
+        int entityValue;
+        try {
+            if(isHex) {
+                entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 16);
+            } else {
+                entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 10);
+            }
+        } catch(NumberFormatException nfe) {
+            return 0;
+        }
+
+        // Check the entity value and write the correct characters
+        if(entityValue > 0xFFFF) {
+            char[] chars = Character.toChars(entityValue);
+            out.write(chars[0]);
+            out.write(chars[1]);
+        } else {
+            out.write(entityValue);
+        }
+
+        return 2 + (end - start) + (isHex ? 1 : 0) + 1;
+    }
+    return 0;
+}

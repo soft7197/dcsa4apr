@@ -1,0 +1,35 @@
+{
+  "bug_id": "JacksonDatabind-46",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-46_1773118909",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue arises from incorrect placement of the semicolon following the generic type signature. The method wrongly appends a semicolon after each generic argument rather than after the entire generic signature.",
+        "changes": "+ sb.append('>'); sb.append(';');",
+        "fixed_method": "public StringBuilder getGenericSignature(StringBuilder sb) {\n    _classSignature(_class, sb, false);\n    sb.append('<');\n    sb = _referencedType.getGenericSignature(sb);\n    sb.append('>');\n    sb.append(';');\n    return sb;\n}",
+        "diff": "+ sb.append('>'); sb.append(';');",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/type/ReferenceType.java",
+        "method_name": "getGenericSignature",
+        "class_name": "ReferenceType",
+        "iteration": 4,
+        "is_multi_method": false,
+        "line_numbers": [
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158
+        ],
+        "original_code": "// Hmmh. For now, assume it's the raw type\npublic StringBuilder getGenericSignature(StringBuilder sb)\n{\n    _classSignature(_class, sb, false);\n    sb.append('<');\n    sb = _referencedType.getGenericSignature(sb);\n    sb.append(';');\n    return sb;\n}"
+      }
+    ]
+  ],
+  "iterations": 4,
+  "monitor_dir": "traces/JacksonDatabind-46/"
+}

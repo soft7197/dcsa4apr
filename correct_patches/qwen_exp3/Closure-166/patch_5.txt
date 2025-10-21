@@ -1,0 +1,20 @@
+File: src/com/google/javascript/rhino/jstype/PrototypeObjectType.java
+Method: PrototypeObjectType.matchConstraint
+
+public void matchConstraint(JSType constraint) {
+  // We only want to match constraints on anonymous types.
+  if (hasReferenceName()) {
+    return;
+  }
+
+  // Handle the case where the constraint object is a union of record types.
+  if (constraint.isUnionType()) {
+    for (JSType alt : constraint.toMaybeUnionType().getAlternates()) {
+      if (alt.isRecordType()) {
+        matchRecordTypeConstraint(alt.toObjectType());
+      }
+    }
+  } else if (constraint.isRecordType()) {
+    matchRecordTypeConstraint(constraint.toObjectType());
+  }
+}

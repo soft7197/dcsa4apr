@@ -1,0 +1,30 @@
+{
+  "bug_id": "Mockito-35",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-35_1772822697",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue is caused by the fact that the `eq` method is returning `null` instead of the expected value.",
+        "changes": "- return reportMatcher(new Equals(value)).<T>returnNull();\n+ return value;",
+        "reasoning": "The failing test is expecting the `eq` method to return the value passed as argument, but instead it is returning `null`. Therefore, the fix is to return the value passed as argument.",
+        "fixed_method": "public static <T> T eq(T value) {\n  return value;\n}",
+        "diff": "- return reportMatcher(new Equals(value)).<T>returnNull();\n+ return value;",
+        "file_path": "src/org/mockito/Matchers.java",
+        "method_name": "eq",
+        "class_name": "Matchers",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          478,
+          480
+        ],
+        "original_code": "    /**\n     * Object argument that is equal to the given value.\n     * <p>\n     * See examples in javadoc for {@link Matchers} class\n     * \n     * @param value\n     *            the given value.\n     * @return <code>null</code>.\n     */\n\n    public static <T> T eq(T value) {\n        return reportMatcher(new Equals(value)).<T>returnNull();\n    }  \n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Mockito-35/"
+}

@@ -1,0 +1,47 @@
+{
+  "bug_id": "Math-22",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-22_1772818736",
+  "patches": [
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public boolean isSupportLowerBoundInclusive() {\nreturn false;\n}",
+        "diff": "",
+        "file_path": "src/main/java/org/apache/commons/math3/distribution/FDistribution.java",
+        "method_name": "isSupportLowerBoundInclusive",
+        "class_name": "FDistribution",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          274,
+          276
+        ],
+        "original_code": "    /** {@inheritDoc} */\n\n    public boolean isSupportLowerBoundInclusive() {\n        return true;\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public boolean isSupportUpperBoundInclusive() {\n    return true;\n}",
+        "diff": "",
+        "file_path": "src/main/java/org/apache/commons/math3/distribution/UniformRealDistribution.java",
+        "method_name": "isSupportUpperBoundInclusive",
+        "class_name": "UniformRealDistribution",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          183,
+          185
+        ],
+        "original_code": "    /** {@inheritDoc} */\n\n    public boolean isSupportUpperBoundInclusive() {\n        return false;\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-22/"
+}

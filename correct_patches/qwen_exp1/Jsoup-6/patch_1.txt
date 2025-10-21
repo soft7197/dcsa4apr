@@ -1,0 +1,46 @@
+File: src/main/java/org/jsoup/nodes/Entities.java
+Method: Entities.unescape
+
+static String unescape(String string) {
+    if (string == null || !string.contains("&"))
+        return string;
+
+    Matcher m = unescapePattern.matcher(string);
+    StringBuffer accum = new StringBuffer(string.length());
+
+    while (m.find()) {
+        int charval = -1;
+        String num = m.group(3);
+        if (num != null) {
+            try {
+                int base = (m.group(2) != null) ? 16 : 10;
+                charval = Integer.parseInt(num, base);
+                if (charval < 0 || charval > 0x10FFFF)
+                    charval = -1; // invalid Unicode code point
+            } catch (NumberFormatException e) {
+                // skip malformed numeric entity
+            }
+        } else {
+            String name = m.group(1);
+            if (name != null && full.containsKey(name))
+                charval = full.get(name);
+        }
+
+        if (charval != -1) {
+            if (charval <= 0xFFFF) {
+                String c = Character.toString((char) charval);
+                m.appendReplacement(accum, Matcher.quoteReplacement(c));
+            } else {
+                // Handle supplementary characters (surrogate pairs)
+                int highSurrogate = 0xD800 | ((charval - 0x10000) >> 10);
+                int lowSurrogate = 0xDC00 | ((charval - 0x10000) & 0x3FF);
+                String c = new String(new char[]{(char) highSurrogate, (char) lowSurrogate});
+                m.appendReplacement(accum, Matcher.quoteReplacement(c));
+            }
+        } else {
+            m.appendReplacement(accum, Matcher.quoteReplacement(m.group(0))); // keep malformed entity unchanged
+        }
+    }
+    m.appendTail(accum);
+    return accum.toString();
+}

@@ -1,0 +1,55 @@
+{
+  "bug_id": "JacksonDatabind-49",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-49_1773118929",
+  "patches": [
+    [
+      {
+        "hypothesis": "The buggy method does not return any existing object ID if it's already generated, causing unresolved forward reference errors.",
+        "changes": "Add logic to check for an existing ID and return it before generating a new one.",
+        "fixed_method": "public Object generateId(Object forPojo) {\n    // Check for existing ID first\n    if (id == null) {\n        id = generator.generateId(forPojo);\n    }\n    return id;\n}",
+        "diff": "Add logic to check for an existing ID and return it before generating a new one.",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/impl/WritableObjectId.java",
+        "method_name": "generateId",
+        "class_name": "WritableObjectId",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52
+        ],
+        "original_code": "// 03-Aug-2013, tatu: Prefer Native Object Ids if available\npublic Object generateId(Object forPojo) {\n    // 04-Jun-2016, tatu: As per [databind#1255], need to consider possibility of\n    //    id being generated for \"alwaysAsId\", but not being written as POJO; regardless,\n    //    need to use existing id if there is one:\n        id = generator.generateId(forPojo);\n    return id;\n}"
+      },
+      {
+        "hypothesis": "The method 'generateId' did not check if an existing ID for this 'forPojo' should be used, leading to potential unresolved references during deserialization.",
+        "changes": "+ if (id != null) { return id; }",
+        "fixed_method": "public Object generateId(Object forPojo) {\n    // Use existing ID if one was previously generated\n    if (id != null) {\n        return id;\n    }\n    // Generate new ID if necessary\n    id = generator.generateId(forPojo);\n    return id;\n}",
+        "diff": "+ if (id != null) { return id; }",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/impl/WritableObjectId.java",
+        "method_name": "generateId",
+        "class_name": "WritableObjectId",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52
+        ],
+        "original_code": "// 03-Aug-2013, tatu: Prefer Native Object Ids if available\npublic Object generateId(Object forPojo) {\n    // 04-Jun-2016, tatu: As per [databind#1255], need to consider possibility of\n    //    id being generated for \"alwaysAsId\", but not being written as POJO; regardless,\n    //    need to use existing id if there is one:\n        id = generator.generateId(forPojo);\n    return id;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-49/"
+}

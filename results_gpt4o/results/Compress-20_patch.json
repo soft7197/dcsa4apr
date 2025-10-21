@@ -1,0 +1,57 @@
+{
+  "bug_id": "Compress-20",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Compress-20_1773122795",
+  "patches": [
+    [
+      {
+        "hypothesis": "The methods are failing because the mode field is latching onto unsupported or invalid values causing exceptions. All methods need guard clauses to allow only acceptable 'mode' values or handle invalid modes properly.",
+        "changes": "- Added try-catch blocks to handle IllegalArgumentException when setting mode\n- In 'readNewEntry', fallback to zero mode when an exception occurs",
+        "methods": {
+          "src/main/java/org/apache/commons/compress/archivers/cpio/CpioArchiveInputStream.java::CpioArchiveInputStream::readNewEntry::L320": {
+            "file_path": "src/main/java/org/apache/commons/compress/archivers/cpio/CpioArchiveInputStream.java",
+            "method_name": "readNewEntry",
+            "class_name": "CpioArchiveInputStream",
+            "line_numbers": [
+              320,
+              353
+            ],
+            "original_code": "\n    private CpioArchiveEntry readNewEntry(final boolean hasCrc)\n            throws IOException {\n        CpioArchiveEntry ret;\n        if (hasCrc) {\n            ret = new CpioArchiveEntry(FORMAT_NEW_CRC);\n        } else {\n            ret = new CpioArchiveEntry(FORMAT_NEW);\n        }\n\n        ret.setInode(readAsciiLong(8, 16));\n        long mode = readAsciiLong(8, 16);\n        if (mode != 0){\n            ret.setMode(mode);\n        }\n        ret.setUID(readAsciiLong(8, 16));\n        ret.setGID(readAsciiLong(8, 16));\n        ret.setNumberOfLinks(readAsciiLong(8, 16));\n        ret.setTime(readAsciiLong(8, 16));\n        ret.setSize(readAsciiLong(8, 16));\n        ret.setDeviceMaj(readAsciiLong(8, 16));\n        ret.setDeviceMin(readAsciiLong(8, 16));\n        ret.setRemoteDeviceMaj(readAsciiLong(8, 16));\n        ret.setRemoteDeviceMin(readAsciiLong(8, 16));\n        long namesize = readAsciiLong(8, 16);\n        ret.setChksum(readAsciiLong(8, 16));\n        String name = readCString((int) namesize);\n        ret.setName(name);\n        if (mode == 0 && !name.equals(CPIO_TRAILER)){\n            throw new IOException(\"Mode 0 only allowed in the trailer. Found entry name: \"+name + \" Occured at byte: \" + getBytesRead());\n        }\n        skip(ret.getHeaderPadCount());\n\n        return ret;\n    }\n",
+            "fixed_method": "private CpioArchiveEntry readNewEntry(final boolean hasCrc) throws IOException {\n        CpioArchiveEntry ret;\n        if (hasCrc) {\n            ret = new CpioArchiveEntry(FORMAT_NEW_CRC);\n        } else {\n            ret = new CpioArchiveEntry(FORMAT_NEW);\n        }\n\n        ret.setInode(readAsciiLong(8, 16));\n        long mode = readAsciiLong(8, 16);\n        if (mode != 0) {\n            try {\n                ret.setMode(mode);\n            } catch (IllegalArgumentException e) {\n                mode = 0; // Fallback to zero mode in case of invalid mode\n            }\n        }\n        ret.setUID(readAsciiLong(8, 16));\n        ret.setGID(readAsciiLong(8, 16));\n        ret.setNumberOfLinks(readAsciiLong(8, 16));\n        ret.setTime(readAsciiLong(8, 16));\n        ret.setSize(readAsciiLong(8, 16));\n        ret.setDeviceMaj(readAsciiLong(8, 16));\n        ret.setDeviceMin(readAsciiLong(8, 16));\n        ret.setRemoteDeviceMaj(readAsciiLong(8, 16));\n        ret.setRemoteDeviceMin(readAsciiLong(8, 16));\n        long namesize = readAsciiLong(8, 16);\n        ret.setChksum(readAsciiLong(8, 16));\n        String name = readCString((int) namesize);\n        ret.setName(name);\n        if (mode == 0 && !name.equals(CPIO_TRAILER)) {\n            throw new IOException(\"Mode 0 only allowed in the trailer. Found entry name: \" + name + \" Occured at byte: \" + getBytesRead());\n        }\n        skip(ret.getHeaderPadCount());\n        return ret;\n    }",
+            "iteration": 1
+          },
+          "src/main/java/org/apache/commons/compress/archivers/cpio/CpioArchiveInputStream.java::CpioArchiveInputStream::readOldAsciiEntry::L355": {
+            "file_path": "src/main/java/org/apache/commons/compress/archivers/cpio/CpioArchiveInputStream.java",
+            "method_name": "readOldAsciiEntry",
+            "class_name": "CpioArchiveInputStream",
+            "line_numbers": [
+              355,
+              378
+            ],
+            "original_code": "\n    private CpioArchiveEntry readOldAsciiEntry() throws IOException {\n        CpioArchiveEntry ret = new CpioArchiveEntry(FORMAT_OLD_ASCII);\n\n        ret.setDevice(readAsciiLong(6, 8));\n        ret.setInode(readAsciiLong(6, 8));\n        final long mode = readAsciiLong(6, 8);\n        if (mode != 0) {\n            ret.setMode(mode);\n        }\n        ret.setUID(readAsciiLong(6, 8));\n        ret.setGID(readAsciiLong(6, 8));\n        ret.setNumberOfLinks(readAsciiLong(6, 8));\n        ret.setRemoteDevice(readAsciiLong(6, 8));\n        ret.setTime(readAsciiLong(11, 8));\n        long namesize = readAsciiLong(6, 8);\n        ret.setSize(readAsciiLong(11, 8));\n        final String name = readCString((int) namesize);\n        ret.setName(name);\n        if (mode == 0 && !name.equals(CPIO_TRAILER)){\n            throw new IOException(\"Mode 0 only allowed in the trailer. Found entry: \"+ name + \" Occured at byte: \" + getBytesRead());\n        }\n\n        return ret;\n    }\n",
+            "fixed_method": "private CpioArchiveEntry readOldAsciiEntry() throws IOException {\n        CpioArchiveEntry ret = new CpioArchiveEntry(FORMAT_OLD_ASCII);\n\n        ret.setDevice(readAsciiLong(6, 8));\n        ret.setInode(readAsciiLong(6, 8));\n        final long mode = readAsciiLong(6, 8);\n        if (mode != 0) {\n            try {\n                ret.setMode(mode);\n            } catch (IllegalArgumentException e) {\n                // Handle or log unexpected mode\n            }\n        }\n        ret.setUID(readAsciiLong(6, 8));\n        ret.setGID(readAsciiLong(6, 8));\n        ret.setNumberOfLinks(readAsciiLong(6, 8));\n        ret.setRemoteDevice(readAsciiLong(6, 8));\n        ret.setTime(readAsciiLong(11, 8));\n        long namesize = readAsciiLong(6, 8);\n        ret.setSize(readAsciiLong(11, 8));\n        final String name = readCString((int) namesize);\n        ret.setName(name);\n        if (mode == 0 && !name.equals(CPIO_TRAILER)) {\n            throw new IOException(\"Mode 0 only allowed in the trailer. Found entry: \" + name + \" Occured at byte: \" + getBytesRead());\n        }\n\n        return ret;\n    }",
+            "iteration": 1
+          },
+          "src/main/java/org/apache/commons/compress/archivers/cpio/CpioArchiveInputStream.java::CpioArchiveInputStream::readOldBinaryEntry::L380": {
+            "file_path": "src/main/java/org/apache/commons/compress/archivers/cpio/CpioArchiveInputStream.java",
+            "method_name": "readOldBinaryEntry",
+            "class_name": "CpioArchiveInputStream",
+            "line_numbers": [
+              380,
+              405
+            ],
+            "original_code": "\n    private CpioArchiveEntry readOldBinaryEntry(final boolean swapHalfWord)\n            throws IOException {\n        CpioArchiveEntry ret = new CpioArchiveEntry(FORMAT_OLD_BINARY);\n\n        ret.setDevice(readBinaryLong(2, swapHalfWord));\n        ret.setInode(readBinaryLong(2, swapHalfWord));\n        final long mode = readBinaryLong(2, swapHalfWord);\n        if (mode != 0){\n            ret.setMode(mode);\n        }\n        ret.setUID(readBinaryLong(2, swapHalfWord));\n        ret.setGID(readBinaryLong(2, swapHalfWord));\n        ret.setNumberOfLinks(readBinaryLong(2, swapHalfWord));\n        ret.setRemoteDevice(readBinaryLong(2, swapHalfWord));\n        ret.setTime(readBinaryLong(4, swapHalfWord));\n        long namesize = readBinaryLong(2, swapHalfWord);\n        ret.setSize(readBinaryLong(4, swapHalfWord));\n        final String name = readCString((int) namesize);\n        ret.setName(name);\n        if (mode == 0 && !name.equals(CPIO_TRAILER)){\n            throw new IOException(\"Mode 0 only allowed in the trailer. Found entry: \"+name + \"Occured at byte: \" + getBytesRead());\n        }\n        skip(ret.getHeaderPadCount());\n\n        return ret;\n    }\n",
+            "fixed_method": "private CpioArchiveEntry readOldBinaryEntry(final boolean swapHalfWord) throws IOException {\n        CpioArchiveEntry ret = new CpioArchiveEntry(FORMAT_OLD_BINARY);\n\n        ret.setDevice(readBinaryLong(2, swapHalfWord));\n        ret.setInode(readBinaryLong(2, swapHalfWord));\n        final long mode = readBinaryLong(2, swapHalfWord);\n        if (mode != 0) {\n            try {\n                ret.setMode(mode);\n            } catch (IllegalArgumentException e) {\n                // Handle or log unexpected mode\n            }\n        }\n        ret.setUID(readBinaryLong(2, swapHalfWord));\n        ret.setGID(readBinaryLong(2, swapHalfWord));\n        ret.setNumberOfLinks(readBinaryLong(2, swapHalfWord));\n        ret.setRemoteDevice(readBinaryLong(2, swapHalfWord));\n        ret.setTime(readBinaryLong(4, swapHalfWord));\n        long namesize = readBinaryLong(2, swapHalfWord);\n        ret.setSize(readBinaryLong(4, swapHalfWord));\n        final String name = readCString((int) namesize);\n        ret.setName(name);\n        if (mode == 0 && !name.equals(CPIO_TRAILER)) {\n            throw new IOException(\"Mode 0 only allowed in the trailer. Found entry: \" + name + \"Occured at byte: \" + getBytesRead());\n        }\n        skip(ret.getHeaderPadCount());\n        return ret;\n    }",
+            "iteration": 1
+          }
+        },
+        "iteration": 1,
+        "is_multi_method": true
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Compress-20/"
+}

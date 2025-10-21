@@ -1,0 +1,20 @@
+File: src/main/java/org/jsoup/nodes/Element.java
+Method: Element.preserveWhitespace
+
+static boolean preserveWhitespace(Node node) {
+    if (node != null && node instanceof Element) {
+        Element el = (Element) node;
+        return el.tag.preserveWhitespace() || preserveAncestorWhitespace(el);
+    }
+    return false;
+}
+
+private static boolean preserveAncestorWhitespace(Element el) {
+    while (el.parent() != null) {
+        el = el.parent();
+        if (el.tag.preserveWhitespace()) {
+            return true;
+        }
+    }
+    return false;
+}

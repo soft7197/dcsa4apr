@@ -1,0 +1,7 @@
+File: src/main/java/org/jsoup/nodes/Attribute.java
+Method: Attribute.getValue
+
+public String getValue() {
+  if (val == null) val = "";
+  return val;
+}

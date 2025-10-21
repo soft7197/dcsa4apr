@@ -1,0 +1,7 @@
+File: src/java/org/apache/commons/math/stat/regression/SimpleRegression.java
+Method: SimpleRegression.getSumSquaredErrors
+
+public double getSumSquaredErrors() {
+    double sse = sumYY - sumXY * sumXY / sumXX;
+    return sse < 0 ? 0 : sse;
+}

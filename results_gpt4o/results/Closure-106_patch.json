@@ -1,0 +1,45 @@
+{
+  "bug_id": "Closure-106",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-106_1773122299",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method incorrectly allows collapsing when a function assigned to a property is also used to access child properties, which prevents correct reference tracking of the alias.",
+        "changes": "- if (type == Type.FUNCTION || aliasingGets == 0) + if (type != Type.FUNCTION && aliasingGets == 0)",
+        "fixed_method": "boolean canCollapseUnannotatedChildNames() {\n      if (type == Type.OTHER || globalSets != 1 || localSets != 0) {\n        return false;\n      }\n\n      // Don't try to collapse if the one global set is a twin reference.\n      // We could theoretically handle this case in CollapseProperties, but\n      // it's probably not worth the effort.\n\n      if (isClassOrEnum) {\n        return true;\n      }\n      return (type != Type.FUNCTION && aliasingGets == 0) &&\n          (parent == null || parent.canCollapseUnannotatedChildNames());\n    }",
+        "diff": "- if (type == Type.FUNCTION || aliasingGets == 0) + if (type != Type.FUNCTION && aliasingGets == 0)",
+        "file_path": "src/com/google/javascript/jscomp/GlobalNamespace.java",
+        "method_name": "canCollapseUnannotatedChildNames",
+        "class_name": "GlobalNamespace",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          899,
+          913
+        ],
+        "original_code": "\n    boolean canCollapseUnannotatedChildNames() {\n      if (type == Type.OTHER || globalSets != 1 || localSets != 0) {\n        return false;\n      }\n\n      // Don't try to collapse if the one global set is a twin reference.\n      // We could theoretically handle this case in CollapseProperties, but\n      // it's probably not worth the effort.\n\n      if (isClassOrEnum) {\n        return true;\n      }\n      return (type == Type.FUNCTION || aliasingGets == 0) &&\n          (parent == null || parent.canCollapseUnannotatedChildNames());\n    }\n"
+      },
+      {
+        "hypothesis": "The method does not correctly handle cases where a function is assigned using operators or within complex statements like comma operator, leading to collapsing errors.",
+        "changes": "- Modify check conditions to prevent collapsing when a twin reference in assignment is involved.",
+        "fixed_method": "boolean canCollapseUnannotatedChildNames() {\n  if (type == Type.OTHER || globalSets != 1 || localSets != 0) {\n    return false;\n  }\n\n  if (isClassOrEnum) {\n    return true;\n  }\n\n  boolean hasComplexAssignment = aliasingGets != 0 || type == Type.FUNCTION;\n  boolean hasTwinAssignmentInBlock = parent != null && !parent.canCollapseUnannotatedChildNames();\n\n  return !hasComplexAssignment && !hasTwinAssignmentInBlock;\n}",
+        "diff": "- Modify check conditions to prevent collapsing when a twin reference in assignment is involved.",
+        "file_path": "src/com/google/javascript/jscomp/GlobalNamespace.java",
+        "method_name": "canCollapseUnannotatedChildNames",
+        "class_name": "GlobalNamespace",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          899,
+          913
+        ],
+        "original_code": "\n    boolean canCollapseUnannotatedChildNames() {\n      if (type == Type.OTHER || globalSets != 1 || localSets != 0) {\n        return false;\n      }\n\n      // Don't try to collapse if the one global set is a twin reference.\n      // We could theoretically handle this case in CollapseProperties, but\n      // it's probably not worth the effort.\n\n      if (isClassOrEnum) {\n        return true;\n      }\n      return (type == Type.FUNCTION || aliasingGets == 0) &&\n          (parent == null || parent.canCollapseUnannotatedChildNames());\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Closure-106/"
+}

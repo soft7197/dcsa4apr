@@ -1,0 +1,11 @@
+File: src/main/java/org/jsoup/nodes/Attribute.java
+Method: Attribute.getValue
+
+public String getValue() {
+    if (val == null) {
+        // Assuming val is supposed to be a String, return an empty string.
+        // If val can be of other types, additional logic should be added here.
+        return "";
+    }
+    return val;
+}

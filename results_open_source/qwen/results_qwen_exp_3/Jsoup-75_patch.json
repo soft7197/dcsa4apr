@@ -1,0 +1,44 @@
+{
+  "bug_id": "Jsoup-75",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-75_1772009005",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue arises because the current logic does not correctly handle boolean attributes, especially when their value is 'false'. The fix involves adjusting the condition to properly skip adding '=\"\"' for boolean attributes unless their value is explicitly 'false'.",
+        "changes": "- if (!(out.syntax() == Document.OutputSettings.Syntax.html\n+ if (!(out.syntax() == Document.OutputSettings.Syntax.html\n-                && (val == null || val.equals(key) && Attribute.isBooleanAttribute(key)))) {\n+                && (val == null || Attribute.isBooleanAttribute(key) && !\"false\".equalsIgnoreCase(val)))) {",
+        "fixed_method": "final void html(final Appendable accum, final Document.OutputSettings out) throws IOException {\n    final int sz = size;\n    for (int i = 0; i < sz; i++) {\n        // inlined from Attribute.html()\n        final String key = keys[i];\n        final String val = vals[i];\n        accum.append(' ').append(key);\n\n        // collapse checked=null, checked=\"\", checked=checked; write out others\n        if (!(out.syntax() == Document.OutputSettings.Syntax.html\n                && (val == null || Attribute.isBooleanAttribute(key) && !\"false\".equalsIgnoreCase(val)))) {\n            accum.append(\"=\");\n            accum.append('\"');\n            Entities.escape(accum, val == null ? EmptyString : val, out, true, false, false);\n            accum.append('\"');\n        }\n    }\n}",
+        "diff": "- if (!(out.syntax() == Document.OutputSettings.Syntax.html\n+ if (!(out.syntax() == Document.OutputSettings.Syntax.html\n-                && (val == null || val.equals(key) && Attribute.isBooleanAttribute(key)))) {\n+                && (val == null || Attribute.isBooleanAttribute(key) && !\"false\".equalsIgnoreCase(val)))) {",
+        "file_path": "src/main/java/org/jsoup/nodes/Attributes.java",
+        "method_name": "html",
+        "class_name": "Attributes",
+        "iteration": 4,
+        "is_multi_method": false,
+        "line_numbers": [
+          310,
+          311,
+          312,
+          313,
+          314,
+          315,
+          316,
+          317,
+          318,
+          319,
+          320,
+          321,
+          322,
+          323,
+          324,
+          325,
+          326
+        ],
+        "original_code": "/**\nGet the HTML representation of these attributes.\n@return HTML\n@throws SerializationException if the HTML representation of the attributes cannot be constructed.\n*/\nfinal void html(final Appendable accum, final Document.OutputSettings out) throws IOException {\n    final int sz = size;\n    for (int i = 0; i < sz; i++) {\n        // inlined from Attribute.html()\n        final String key = keys[i];\n        final String val = vals[i];\n        accum.append(' ').append(key);\n\n        // collapse checked=null, checked=\"\", checked=checked; write out others\n        if (!(out.syntax() == Document.OutputSettings.Syntax.html\n            && (val == null || val.equals(key) && Attribute.isBooleanAttribute(key)))) {\n            accum.append(\"=\\\"\");\n            Entities.escape(accum, val == null ? EmptyString : val, out, true, false, false);\n            accum.append('\"');\n        }\n    }\n}"
+      }
+    ]
+  ],
+  "iterations": 4,
+  "monitor_dir": "traces/Jsoup-75/"
+}

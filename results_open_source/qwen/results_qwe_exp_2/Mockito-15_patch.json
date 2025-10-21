@@ -1,0 +1,50 @@
+{
+  "bug_id": "Mockito-15",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-15_1771955871",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the method always attempting to set the field directly instead of trying the property setter first. We need to implement logic to attempt using a property setter before falling back to field injection.",
+        "changes": "+ tryPropertySetter(fieldInstance, field, matchingMock);\n- new FieldSetter(fieldInstance, field).set(matchingMock);",
+        "fixed_method": "public OngoingInjecter filterCandidate(final Collection<Object> mocks, final Field field, final Object fieldInstance) {\n    if(mocks.size() == 1) {\n        final Object matchingMock = mocks.iterator().next();\n\n        return new OngoingInjecter() {\n            public boolean thenInject() {\n                try {\n                    if (!tryPropertySetter(fieldInstance, field, matchingMock)) {\n                        new FieldSetter(fieldInstance, field).set(matchingMock);\n                    }\n                } catch (Exception e) {\n                    throw new MockitoException(\"Problems injecting dependency in \" + field.getName(), e);\n                }\n                return true;\n            }\n        };\n    }\n\n    return new OngoingInjecter() {\n        public boolean thenInject() {\n            return false;\n        }\n    };\n}\n\nprivate boolean tryPropertySetter(Object instance, Field field, Object value) throws Exception {\n    String setterName = \"set\" + capitalize(field.getName());\n    java.lang.reflect.Method method = null;\n    try {\n        method = instance.getClass().getMethod(setterName, field.getType());\n    } catch (NoSuchMethodException e) {\n        return false;\n    }\n    method.invoke(instance, value);\n    return true;\n}\n\nprivate String capitalize(String name) {\n    if (name == null || name.length() == 0) {\n        return name;\n    }\n    return name.substring(0, 1).toUpperCase() + name.substring(1);\n}",
+        "diff": "+ tryPropertySetter(fieldInstance, field, matchingMock);\n- new FieldSetter(fieldInstance, field).set(matchingMock);",
+        "file_path": "src/org/mockito/internal/configuration/injection/FinalMockCandidateFilter.java",
+        "method_name": "thenInject",
+        "class_name": "FinalMockCandidateFilter",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40
+        ],
+        "original_code": "/**\n* This node returns an actual injecter which will be either :\n*\n* <ul>\n* <li>an {@link OngoingInjecter} that do nothing if a candidate couldn't be found</li>\n* <li>an {@link OngoingInjecter} that will try to inject the candidate trying first the property setter then if not possible try the field access</li>\n* </ul>\n*/\npublic OngoingInjecter filterCandidate(final Collection<Object> mocks, final Field field, final Object fieldInstance) {\n        if(mocks.size() == 1) {\n            final Object matchingMock = mocks.iterator().next();\n\n            return new OngoingInjecter() {\n                public boolean thenInject() {\n                    try {\n                            new FieldSetter(fieldInstance, field).set(matchingMock);\n                    } catch (Exception e) {\n                        throw new MockitoException(\"Problems injecting dependency in \" + field.getName(), e);\n                    }\n                    return true;\n                }\n            };\n        }\n\n        return new OngoingInjecter() {\n            public boolean thenInject() {\n                return false;\n            }\n        };\n\n    }"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Mockito-15/"
+}

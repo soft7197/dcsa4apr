@@ -1,0 +1,40 @@
+File: src/org/mockito/internal/configuration/injection/FinalMockCandidateFilter.java
+Method: FinalMockCandidateFilter.thenInject
+
+public OngoingInjecter filterCandidate(final Collection<Object> mocks, final Field field, final Object fieldInstance) {
+    if (mocks.size() == 1 && field != null && fieldInstance != null) {
+        final Object matchingMock = mocks.iterator().next();
+        return new OngoingInjecter() {
+            public boolean thenInject() {
+                try {
+                    if (!field.getName().isEmpty()) {
+                        // Create the setter method name
+                        String setterName = "set" + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1);
+                        try {
+                            // Attempt to find the setter method
+                            java.lang.reflect.Method setterMethod = fieldInstance.getClass().getMethod(setterName, field.getType());
+                            // Check if the setter's parameter type matches the mock type
+                            if (setterMethod.getParameterTypes()[0].isAssignableFrom(matchingMock.getClass())) {
+                                setterMethod.invoke(fieldInstance, matchingMock);
+                                return true;
+                            }
+                        } catch (NoSuchMethodException nsme) {
+                            // If setter doesn't exist, use field injection as a fallback
+                        }
+                    }
+                    // Fallback to field injection
+                    new FieldSetter(fieldInstance, field).set(matchingMock);
+                    return true;
+                } catch (Exception e) {
+                    throw new MockitoException("Problems injecting dependency in " + field.getName(), e);
+                }
+            }
+        };
+    }
+
+    return new OngoingInjecter() {
+        public boolean thenInject() {
+            return false;
+        }
+    };
+}

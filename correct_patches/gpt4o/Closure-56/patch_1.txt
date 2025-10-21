@@ -1,0 +1,41 @@
+File: src/com/google/javascript/jscomp/SourceFile.java
+Method: SourceFile.getLine
+
+public String getLine(int lineNumber) {
+  String js = "";
+  try {
+    js = getCode();
+  } catch (IOException e) {
+    return null;
+  }
+
+  int pos = 0;
+  int startLine = 1;
+
+  if (lineNumber >= lastLine) {
+    pos = lastOffset;
+    startLine = lastLine;
+  }
+
+  for (int n = startLine; n < lineNumber; n++) {
+    int nextpos = js.indexOf('\n', pos);
+    if (nextpos == -1) {
+      return null;
+    }
+    pos = nextpos + 1;
+  }
+
+  lastOffset = pos;
+  lastLine = lineNumber;
+
+  int nextNewLinePosition = js.indexOf('\n', pos);
+  if (nextNewLinePosition == -1) {
+    if (pos >= js.length()) {
+      return null;
+    }
+    // If there is no new line, but we still have content, return it.
+    return js.substring(pos);
+  } else {
+    return js.substring(pos, nextNewLinePosition);
+  }
+}

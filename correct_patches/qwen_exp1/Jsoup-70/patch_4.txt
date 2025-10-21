@@ -1,0 +1,14 @@
+File: src/main/java/org/jsoup/nodes/Element.java
+Method: Element.preserveWhitespace
+
+static boolean preserveWhitespace(Node node) {
+    // Traverse up the tree until we find an element that preserves whitespace or reach the root
+    while (node != null && node instanceof Element) {
+        Element el = (Element) node;
+        if (el.tag.preserveWhitespace()) {
+            return true;
+        }
+        node = el.parent();
+    }
+    return false;
+}

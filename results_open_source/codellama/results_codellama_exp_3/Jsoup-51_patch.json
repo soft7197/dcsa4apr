@@ -1,0 +1,94 @@
+{
+  "bug_id": "Jsoup-51",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-51_1772908687",
+  "patches": [
+    [
+      {
+        "hypothesis": "Refined fix addressing overfitting, general cases, edge cases, and avoiding hardcoded values",
+        "fixed_method": "boolean matchesLetter() {\n  if (isEmpty())\n  return false;\n  char c = input[pos];\n  if ( c < 0x80 ) {\n  return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');\n  } else if ( c < 0x00800 ) {\n  return (c & 0xFC00) == 0x0000;\n  } else {\n  return (c & 0xF800) != 0xD800;\n  }\n  }",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/parser/CharacterReader.java",
+        "method_name": "matchesLetter",
+        "class_name": "CharacterReader",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "",
+        "line_numbers": [
+          296,
+          297,
+          298,
+          299,
+          300,
+          301
+        ]
+      },
+      {
+        "hypothesis": "The issue is caused by the method not supporting non-ASCII characters in the input string. The fix involves modifying the method to accept non-ASCII characters.",
+        "changes": "+ if (c >= '\u0080' && c <= '\uffff')\n+ return true;",
+        "fixed_method": "boolean matchesLetter() {\n    if (isEmpty()) return false;\n    char c = input[pos];\n    if (c >= 'A' && c <= 'Z') return true;\n    if (c >= 'a' && c <= 'z') return true;\n    if (c >= '\\u0080' && c <= '\\uFFFF') return true;\n    return false;\n}",
+        "diff": "+ if (c >= '\u0080' && c <= '\uffff')\n+ return true;",
+        "file_path": "src/main/java/org/jsoup/parser/CharacterReader.java",
+        "method_name": "matchesLetter",
+        "class_name": "CharacterReader",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          296,
+          297,
+          298,
+          299,
+          300,
+          301
+        ],
+        "original_code": "// '\\t', '\\n', '\\r', '\\f', ' ', '/', '>', nullChar\nboolean matchesLetter() {\n    if (isEmpty())\n        return false;\n    char c = input[pos];\n    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');\n}"
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "boolean matchesLetter() {\n    if (isEmpty()) {\n        return false;\n    }\n    char c = input[pos];\n    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || Character.isLetter(c);\n}",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/parser/CharacterReader.java",
+        "method_name": "matchesLetter",
+        "class_name": "CharacterReader",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          296,
+          297,
+          298,
+          299,
+          300,
+          301
+        ],
+        "original_code": "// '\\t', '\\n', '\\r', '\\f', ' ', '/', '>', nullChar\nboolean matchesLetter() {\n    if (isEmpty())\n        return false;\n    char c = input[pos];\n    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');\n}"
+      },
+      {
+        "hypothesis": "The `matchesLetter` method was not handling non-ASCII characters correctly, causing the test to fail.",
+        "changes": "+ if (c >= 0x4E00 && c <= 0x9FA5) return true;",
+        "fixed_method": "boolean matchesLetter() {\n    if (isEmpty()) return false;\n    char c = input[pos];\n    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= 0x4E00 && c <= 0x9FA5);\n}",
+        "diff": "+ if (c >= 0x4E00 && c <= 0x9FA5) return true;",
+        "file_path": "src/main/java/org/jsoup/parser/CharacterReader.java",
+        "method_name": "matchesLetter",
+        "class_name": "CharacterReader",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          296,
+          297,
+          298,
+          299,
+          300,
+          301
+        ],
+        "original_code": "// '\\t', '\\n', '\\r', '\\f', ' ', '/', '>', nullChar\nboolean matchesLetter() {\n    if (isEmpty())\n        return false;\n    char c = input[pos];\n    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-51/"
+}

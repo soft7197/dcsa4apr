@@ -1,0 +1,6 @@
+File: src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveEntry.java
+Method: ZipArchiveEntry.setName
+
+protected void setName(String name) {
+    this.name = name.replace('\\', '/');
+}

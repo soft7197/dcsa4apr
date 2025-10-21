@@ -1,0 +1,22 @@
+{
+  "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testCascadedRemovalOfUnlessUnconditonalJumps": [
+    {
+      "buggy_method": "tryRemoveUnconditionalBranching",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination"
+    },
+    {
+      "buggy_method": "computeFollowing",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination"
+    }
+  ],
+  "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue311": [
+    {
+      "buggy_method": "tryRemoveUnconditionalBranching",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination"
+    },
+    {
+      "buggy_method": "computeFollowing",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination"
+    }
+  ]
+}

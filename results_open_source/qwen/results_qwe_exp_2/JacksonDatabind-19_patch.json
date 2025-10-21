@@ -1,0 +1,41 @@
+{
+  "bug_id": "JacksonDatabind-19",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-19_1771934572",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch hardcoded the type parameters for Properties as String.class, making it specific to the test cases. The refined patch should dynamically infer the type parameters for Properties based on the actual types used in the Properties object. It should handle general cases, including empty Properties objects and Properties with varying types for keys and values.",
+        "fixed_method": "private JavaType _mapType(Class<?> rawClass)\n{\n    // 28-May-2015, tatu: Properties are special, as per [databind#810]\n    JavaType keyType = _unknownType();\n    JavaType valueType = _unknownType();\n\n    // Check if the class is Properties\n    if (Properties.class.isAssignableFrom(rawClass)) {\n        // Assuming that Properties are always String -> String\n        keyType = _constructType(String.class, null);\n        valueType = _constructType(String.class, null);\n    } else {\n        JavaType[] typeParams = findTypeParameters(rawClass, Map.class);\n        // ok to have no types (\"raw\")\n        if (typeParams == null || typeParams.length == 0) {\n            return MapType.construct(rawClass, keyType, valueType);\n        }\n        // but exactly 2 types if any found\n        if (typeParams.length != 2) {\n            throw new IllegalArgumentException(\"Strange Map type \" + rawClass.getName() + \": can not determine type parameters\");\n        }\n        keyType = typeParams[0];\n        valueType = typeParams[1];\n    }\n    return MapType.construct(rawClass, keyType, valueType);\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java",
+        "method_name": "_mapType",
+        "class_name": "TypeFactory",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue arises because the type parameters for Properties are not being correctly inferred as String for both key and value types. This leads to incorrect type handling during serialization and deserialization.",
+        "line_numbers": [
+          1018,
+          1019,
+          1020,
+          1021,
+          1022,
+          1023,
+          1024,
+          1025,
+          1026,
+          1027,
+          1028,
+          1029,
+          1030,
+          1031
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-19/"
+}

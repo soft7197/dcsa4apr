@@ -1,0 +1,11 @@
+File: src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java
+Method: DiscreteDistribution.sample
+
+public Object[] sample(int sampleSize) throws NotStrictlyPositiveException {
+    if (sampleSize <= 0) throw new NotStrictlyPositiveException(LocalizedFormats.NUMBER_OF_SAMPLES, sampleSize);
+    final Object[] sample = new Object[sampleSize];
+    for (int i=0; i<sampleSize; i++) {
+      sample[i] = sample();
+    }
+    return sample;
+}

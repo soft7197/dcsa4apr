@@ -1,0 +1,91 @@
+{
+  "bug_id": "JacksonDatabind-97",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-97_1771936748",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch overfits by directly using the serializer found for the specific class of _value. Instead, we should leverage the existing mechanisms in SerializerProvider to handle serialization properly, ensuring it works for nested objects, arrays, and other complex structures without being class-specific.",
+        "fixed_method": "public final void serialize(JsonGenerator gen, SerializerProvider ctxt) throws IOException\n{\n    if (_value == null) {\n        ctxt.defaultSerializeNull(gen);\n    } else if (_value instanceof JsonSerializable) {\n        ((JsonSerializable) _value).serialize(gen, ctxt);\n    } else {\n        ctxt.defaultSerializeValue(_value, gen);\n    }\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/node/POJONode.java",
+        "method_name": "serialize",
+        "class_name": "POJONode",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the default serialization of the POJO object using gen.writeObject(_value), which does not take into account custom serializers set via the serializer provider context. The fix involves using the serializer provider to find and use a custom serializer if available.",
+        "line_numbers": [
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116
+        ]
+      },
+      {
+        "hypothesis": "The issue arises because the custom serializer is not being invoked when the value is an instance of a custom serializable class. The default serialization path is taken instead, which does not apply the custom serializer logic.",
+        "changes": "- gen.writeObject(_value);\n+ ctxt.findTypedValueSerializer(_value.getClass(), true, null).serialize(_value, gen, ctxt);",
+        "fixed_method": "public final void serialize(JsonGenerator gen, SerializerProvider ctxt) throws IOException\n{\n    if (_value == null) {\n        ctxt.defaultSerializeNull(gen);\n    } else if (_value instanceof JsonSerializable) {\n        ((JsonSerializable) _value).serialize(gen, ctxt);\n    } else {\n        // 25-May-2018, tatu: [databind#1991] do not call via generator but through context;\n        //    this to preserve contextual information\n        ctxt.findTypedValueSerializer(_value.getClass(), true, null).serialize(_value, gen, ctxt);\n    }\n}",
+        "diff": "- gen.writeObject(_value);\n+ ctxt.findTypedValueSerializer(_value.getClass(), true, null).serialize(_value, gen, ctxt);",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/node/POJONode.java",
+        "method_name": "serialize",
+        "class_name": "POJONode",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116
+        ],
+        "original_code": "/**********************************************************\n*/\npublic final void serialize(JsonGenerator gen, SerializerProvider ctxt) throws IOException\n{\n    if (_value == null) {\n        ctxt.defaultSerializeNull(gen);\n    } else if (_value instanceof JsonSerializable) {\n        ((JsonSerializable) _value).serialize(gen, ctxt);\n    } else {\n        // 25-May-2018, tatu: [databind#1991] do not call via generator but through context;\n        //    this to preserve contextual information\n        gen.writeObject(_value);\n    }\n}"
+      },
+      {
+        "hypothesis": "The bug occurs because the custom serializer is not being invoked when serializing a POJO within a JsonNode. The existing code uses gen.writeObject(_value) which does not consider the serializer registered for the type of _value.",
+        "changes": "- gen.writeObject(_value);\n+ ctxt.defaultSerializeValue(_value, gen);",
+        "fixed_method": "public final void serialize(JsonGenerator gen, SerializerProvider ctxt) throws IOException\n{\n    if (_value == null) {\n        ctxt.defaultSerializeNull(gen);\n    } else if (_value instanceof JsonSerializable) {\n        ((JsonSerializable) _value).serialize(gen, ctxt);\n    } else {\n        // 25-May-2018, tatu: [databind#1991] do not call via generator but through context;\n        //    this to preserve contextual information\n        ctxt.defaultSerializeValue(_value, gen);\n    }\n}",
+        "diff": "- gen.writeObject(_value);\n+ ctxt.defaultSerializeValue(_value, gen);",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/node/POJONode.java",
+        "method_name": "serialize",
+        "class_name": "POJONode",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116
+        ],
+        "original_code": "/**********************************************************\n*/\npublic final void serialize(JsonGenerator gen, SerializerProvider ctxt) throws IOException\n{\n    if (_value == null) {\n        ctxt.defaultSerializeNull(gen);\n    } else if (_value instanceof JsonSerializable) {\n        ((JsonSerializable) _value).serialize(gen, ctxt);\n    } else {\n        // 25-May-2018, tatu: [databind#1991] do not call via generator but through context;\n        //    this to preserve contextual information\n        gen.writeObject(_value);\n    }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-97/"
+}

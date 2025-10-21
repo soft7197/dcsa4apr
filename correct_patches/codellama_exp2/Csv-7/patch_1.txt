@@ -1,0 +1,55 @@
+File: src/main/java/org/apache/commons/csv/CSVParser.java
+Method: CSVParser.initializeHeader
+
+private Map<String, Integer> initializeHeader() throws IOException {
+
+    Map<String, Integer> hdrMap = new LinkedHashMap<String, Integer>();
+
+    final String[] formatHeader = this.format.getHeader();
+
+    if (formatHeader != null) {
+
+        String[] header = null;
+
+        if (formatHeader.length == 0) {
+
+            // read the header from the first line of the file
+
+            final CSVRecord nextRecord = this.nextRecord();
+
+            if (nextRecord != null) {
+
+                header = nextRecord.values();
+
+            }
+
+        } else {
+
+            if (this.format.getSkipHeaderRecord()) {
+
+                this.nextRecord();
+
+            }
+
+            header = formatHeader;
+
+        }
+
+        for (String column : header) {
+
+            if (!hdrMap.containsKey(column)) {
+
+                hdrMap.put(column, hdrMap.size());
+
+            } else {
+
+                throw new IllegalStateException("Duplicate header entry: " + column);
+
+            }
+
+        }
+
+    }
+
+    return hdrMap;
+}

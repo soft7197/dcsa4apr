@@ -1,0 +1,43 @@
+{
+  "bug_id": "Math-100",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-100_1771904172",
+  "patches": [
+    {
+      "hypothesis": "The bug in getCovariances is due to incorrect indexing of the jacobian array, causing an ArrayIndexOutOfBoundsException. In guessParametersErrors, the errors for bound parameters should be set to zero, and the iteration should consider only unbound parameters for error calculation.",
+      "changes": "- final int cols = problem.getAllParameters().length;\n+ final int cols = problem.getUnboundParameters().length;\n- for (int k = 0; k < max; k += cols) {\n+ for (int k = 0; k < rows; ++k) {\n- sum += jacobian[k + i] * jacobian[k + j];\n+ sum += jacobian[k * cols + i] * jacobian[k * cols + j];\n- int p = problem.getAllParameters().length;\n+ int p = problem.getUnboundParameters().length;\n- double[] errors = new double[problem.getAllParameters().length];\n+ double[] errors = new double[p];\n+ for (int i = 0, j = 0; i < errors.length; ++i) {\n+     if (!problem.getAllParameters()[i].isBound()) {\n+         errors[i] = Math.sqrt(covar[j][j]) * c;\n+         j++;\n+     } else {\n+         errors[i] = 0;\n+     }\n+ }",
+      "methods": {
+        "src/java/org/apache/commons/math/estimation/AbstractEstimator.java::AbstractEstimator::getCovariances::L158": {
+          "file_path": "src/java/org/apache/commons/math/estimation/AbstractEstimator.java",
+          "method_name": "getCovariances",
+          "class_name": "AbstractEstimator",
+          "line_numbers": [
+            158,
+            188
+          ],
+          "original_code": "    /**\n     * Get the covariance matrix of unbound estimated parameters.\n     * @param problem estimation problem\n     * @return covariance matrix\n     * @exception EstimationException if the covariance matrix\n     * cannot be computed (singular problem)\n     */\n\n    public double[][] getCovariances(EstimationProblem problem)\n      throws EstimationException {\n \n        // set up the jacobian\n        updateJacobian();\n\n        // compute transpose(J).J, avoiding building big intermediate matrices\n        final int rows = problem.getMeasurements().length;\n        final int cols = problem.getAllParameters().length;\n        final int max  = cols * rows;\n        double[][] jTj = new double[cols][cols];\n        for (int i = 0; i < cols; ++i) {\n            for (int j = i; j < cols; ++j) {\n                double sum = 0;\n                for (int k = 0; k < max; k += cols) {\n                    sum += jacobian[k + i] * jacobian[k + j];\n                }\n                jTj[i][j] = sum;\n                jTj[j][i] = sum;\n            }\n        }\n\n        try {\n            // compute the covariances matrix\n            return new RealMatrixImpl(jTj).inverse().getData();\n        } catch (InvalidMatrixException ime) {\n            throw new EstimationException(\"unable to compute covariances: singular problem\",\n                                          new Object[0]);\n        }\n\n    }\n",
+          "fixed_method": "public double[][] getCovariances(EstimationProblem problem)\n  throws EstimationException {\n\n    // set up the jacobian\n    updateJacobian();\n\n    // compute transpose(J).J, avoiding building big intermediate matrices\n    final int rows = problem.getMeasurements().length;\n    final int cols = problem.getUnboundParameters().length;\n    double[][] jTj = new double[cols][cols];\n    for (int i = 0; i < cols; ++i) {\n        for (int j = i; j < cols; ++j) {\n            double sum = 0;\n            for (int k = 0; k < rows; ++k) {\n                sum += jacobian[k * cols + i] * jacobian[k * cols + j];\n            }\n            jTj[i][j] = sum;\n            jTj[j][i] = sum;\n        }\n    }\n\n    try {\n        // compute the covariances matrix\n        return new RealMatrixImpl(jTj).inverse().getData();\n    } catch (InvalidMatrixException ime) {\n        throw new EstimationException(\"unable to compute covariances: singular problem\",\n                                      new Object[0]);\n    }\n\n}",
+          "iteration": 3
+        },
+        "src/java/org/apache/commons/math/estimation/AbstractEstimator.java::AbstractEstimator::guessParametersErrors::L199": {
+          "file_path": "src/java/org/apache/commons/math/estimation/AbstractEstimator.java",
+          "method_name": "guessParametersErrors",
+          "class_name": "AbstractEstimator",
+          "line_numbers": [
+            199,
+            214
+          ],
+          "original_code": "    /**\n     * Guess the errors in unbound estimated parameters.\n     * <p>Guessing is covariance-based, it only gives rough order of magnitude.</p>\n     * @param problem estimation problem\n     * @return errors in estimated parameters\n     * @exception EstimationException if the covariances matrix cannot be computed\n     * or the number of degrees of freedom is not positive (number of measurements\n     * lesser or equal to number of parameters)\n     */\n\n    public double[] guessParametersErrors(EstimationProblem problem)\n      throws EstimationException {\n        int m = problem.getMeasurements().length;\n        int p = problem.getAllParameters().length;\n        if (m <= p) {\n            throw new EstimationException(\"no degrees of freedom ({0} measurements, {1} parameters)\",\n                                          new Object[] { new Integer(m), new Integer(p)});\n        }\n        double[] errors = new double[problem.getAllParameters().length];\n        final double c = Math.sqrt(getChiSquare(problem) / (m - p));\n        double[][] covar = getCovariances(problem);\n        for (int i = 0; i < errors.length; ++i) {\n            errors[i] = Math.sqrt(covar[i][i]) * c;\n        }\n        return errors;\n    }\n",
+          "fixed_method": "public double[] guessParametersErrors(EstimationProblem problem)\n  throws EstimationException {\n    int m = problem.getMeasurements().length;\n    int p = problem.getUnboundParameters().length;\n    if (m <= p) {\n        throw new EstimationException(\"no degrees of freedom ({0} measurements, {1} parameters)\",\n                                      new Object[] { new Integer(m), new Integer(p)});\n    }\n    double[] errors = new double[problem.getAllParameters().length];\n    final double c = Math.sqrt(getChiSquare(problem) / (m - p));\n    double[][] covar = getCovariances(problem);\n    for (int i = 0, j = 0; i < errors.length; ++i) {\n        if (!problem.getAllParameters()[i].isBound()) {\n            errors[i] = Math.sqrt(covar[j][j]) * c;\n            j++;\n        } else {\n            errors[i] = 0;\n        }\n    }\n    return errors;\n}",
+          "iteration": 3
+        }
+      },
+      "iteration": 3,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 3,
+  "monitor_dir": "traces/Math-100/"
+}

@@ -1,0 +1,30 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "removeColumn_org.jfree.data.KeyedObjects2D"
+    ],
+    "tests": [
+      "org.jfree.data.junit.KeyedObjects2DTests::testRemoveColumnByIndex",
+      "org.jfree.data.junit.KeyedObjects2DTests::testRemoveColumnByKey"
+    ]
+  },
+  "Group_2": {
+    "buggy_methods": [
+      "removeObject_org.jfree.data.KeyedObjects2D"
+    ],
+    "tests": [
+      "org.jfree.data.junit.KeyedObjects2DTests::testRemoveValue"
+    ]
+  },
+  "Group_3": {
+    "buggy_methods": [
+      "getObject_org.jfree.data.KeyedObjects2D",
+      "removeRow_org.jfree.data.KeyedObjects2D"
+    ],
+    "tests": [
+      "org.jfree.data.junit.KeyedObjects2DTests::testGetValueByKey",
+      "org.jfree.data.junit.KeyedObjects2DTests::testRemoveRowByKey",
+      "org.jfree.data.junit.KeyedObjects2DTests::testSetObject"
+    ]
+  }
+}

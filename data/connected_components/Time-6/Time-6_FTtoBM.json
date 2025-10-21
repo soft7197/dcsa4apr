@@ -1,0 +1,56 @@
+{
+  "org.joda.time.chrono.TestGJDate::test_cutoverPreZero": [
+    {
+      "buggy_method": "getInstance_DateTimeZoneReadableInstantint",
+      "class": "org.joda.time.chrono.GJChronology"
+    }
+  ],
+  "org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToNegative_crossCutover": [
+    {
+      "buggy_method": "getInstance_DateTimeZoneReadableInstantint",
+      "class": "org.joda.time.chrono.GJChronology"
+    },
+    {
+      "buggy_method": "add_longint",
+      "class": "org.joda.time.chrono.GJChronology"
+    }
+  ],
+  "org.joda.time.chrono.TestGJDate::test_plusYears_positiveToZero_crossCutover": [
+    {
+      "buggy_method": "getInstance_DateTimeZoneReadableInstantint",
+      "class": "org.joda.time.chrono.GJChronology"
+    },
+    {
+      "buggy_method": "add_longint",
+      "class": "org.joda.time.chrono.GJChronology"
+    },
+    {
+      "buggy_method": "add_longint",
+      "class": "org.joda.time.chrono.GJChronology"
+    }
+  ],
+  "org.joda.time.chrono.TestGJDate::test_plusYears_positiveToNegative_crossCutover": [
+    {
+      "buggy_method": "getInstance_DateTimeZoneReadableInstantint",
+      "class": "org.joda.time.chrono.GJChronology"
+    },
+    {
+      "buggy_method": "add_longint",
+      "class": "org.joda.time.chrono.GJChronology"
+    },
+    {
+      "buggy_method": "add_longint",
+      "class": "org.joda.time.chrono.GJChronology"
+    }
+  ],
+  "org.joda.time.chrono.TestGJDate::test_plusWeekyears_positiveToZero_crossCutover": [
+    {
+      "buggy_method": "getInstance_DateTimeZoneReadableInstantint",
+      "class": "org.joda.time.chrono.GJChronology"
+    },
+    {
+      "buggy_method": "add_longint",
+      "class": "org.joda.time.chrono.GJChronology"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+File: src/com/google/javascript/jscomp/ClosureCodingConvention.java
+Method: ClosureCodingConvention.extractClassNameIfGoog
+
+private static String extractClassNameIfGoog(Node node, Node parent, String functionName){
+  String className = null;
+  if (NodeUtil.isExprCall(parent)) {
+    Node callee = node.getFirstChild();
+    if (callee != null && callee.getType() == Token.GETPROP) {
+      String qualifiedName = callee.getQualifiedName();
+      if (functionName.equals(qualifiedName)) {
+        Node callNode = callee.getParent();
+        if (callNode != null && callNode.getType() == Token.CALL) {
+          Node arguments = callNode.getFirstChild().getNext();
+          if (arguments != null && arguments.getType() == Token.STRING) {
+            className = arguments.getString();
+          }
+        }
+      }
+    }
+  }
+  return className;
+}

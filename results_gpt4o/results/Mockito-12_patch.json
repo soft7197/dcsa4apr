@@ -1,0 +1,109 @@
+{
+  "bug_id": "Mockito-12",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-12_1773120334",
+  "patches": [
+    [
+      {
+        "hypothesis": "The previous fix overfit by adding a method to handle specific cases, potentially missing other Type subclasses. The refinement properly handles additional subclasses such as GenericArrayType and TypeVariable, offering a broader solution that should work for any Field generic type structure.",
+        "fixed_method": "public Class getGenericType(Field field) {\n    Type generic = field.getGenericType();\n    if (generic instanceof ParameterizedType) {\n        Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n        return resolveClass(actual);\n    }\n    return Object.class;\n}\n\nprivate Class resolveClass(Type type) {\n    if (type instanceof Class) {\n        return (Class) type;\n    } else if (type instanceof ParameterizedType) {\n        return (Class) ((ParameterizedType) type).getRawType();\n    } else if (type instanceof java.lang.reflect.WildcardType) {\n        Type[] bounds = ((java.lang.reflect.WildcardType) type).getUpperBounds();\n        return bounds.length > 0 ? resolveClass(bounds[0]) : Object.class;\n    } else if (type instanceof java.lang.reflect.GenericArrayType) {\n        Type componentType = ((java.lang.reflect.GenericArrayType) type).getGenericComponentType();\n        Class<?> componentClass = resolveClass(componentType);\n        return java.lang.reflect.Array.newInstance(componentClass, 0).getClass();\n    } else if (type instanceof java.lang.reflect.TypeVariable) {\n        Type[] bounds = ((java.lang.reflect.TypeVariable<?>) type).getBounds();\n        return bounds.length > 0 ? resolveClass(bounds[0]) : Object.class;\n    }\n    return Object.class;\n}",
+        "diff": " ",
+        "file_path": "src/org/mockito/internal/util/reflection/GenericMaster.java",
+        "method_name": "getGenericType",
+        "class_name": "GenericMaster",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The code currently attempts to cast a Type to a Class without checking if it's a Class type. This causes a ClassCastException for ParameterizedType instances, which occurs especially when dealing with nested generics.",
+        "line_numbers": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ]
+      },
+      {
+        "hypothesis": "The method incorrectly casts a ParameterizedType to a Class, leading to a ClassCastException. To resolve this, additional logic is needed to handle nested generics.",
+        "changes": "+Check if 'actual' is an instance of ParameterizedType and handle its raw type\n+Return the raw type of ParameterizedType if necessary",
+        "fixed_method": "public Class getGenericType(Field field) {        \n    Type generic = field.getGenericType();\n    if (generic != null && generic instanceof ParameterizedType) {\n        Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n        if (actual instanceof ParameterizedType) {\n            actual = ((ParameterizedType) actual).getRawType();\n        }\n        if (actual instanceof Class) {\n            return (Class) actual;\n        }\n    }\n    \n    return Object.class;\n}",
+        "diff": "+Check if 'actual' is an instance of ParameterizedType and handle its raw type\n+Return the raw type of ParameterizedType if necessary",
+        "file_path": "src/org/mockito/internal/util/reflection/GenericMaster.java",
+        "method_name": "getGenericType",
+        "class_name": "GenericMaster",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "original_code": "/**\n* Finds the generic type (parametrized type) of the field. If the field is not generic it returns Object.class.\n*\n* @param field\n* @return\n*/\npublic Class getGenericType(Field field) {        \n    Type generic = field.getGenericType();\n    if (generic != null && generic instanceof ParameterizedType) {\n        Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n            return (Class) actual;\n            //in case of nested generics we don't go deep\n    }\n    \n    return Object.class;\n}"
+      },
+      {
+        "hypothesis": "The method incorrectly assumes that the type argument of a ParameterizedType is always a Class. Instead, it should check if the type is a Class or another ParameterizedType.",
+        "changes": "+ Use a conditional to check if the actual type argument is an instance of Class.\n+ In case it's another ParameterizedType, return its row class.",
+        "fixed_method": "public Class getGenericType(Field field) { \n    Type generic = field.getGenericType();\n    if (generic != null && generic instanceof ParameterizedType) {\n        Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n        if (actual instanceof Class) {\n            return (Class) actual;\n        } else if (actual instanceof ParameterizedType) {\n            return (Class) ((ParameterizedType) actual).getRawType();\n        }\n    }\n    return Object.class;\n}",
+        "diff": "+ Use a conditional to check if the actual type argument is an instance of Class.\n+ In case it's another ParameterizedType, return its row class.",
+        "file_path": "src/org/mockito/internal/util/reflection/GenericMaster.java",
+        "method_name": "getGenericType",
+        "class_name": "GenericMaster",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "original_code": "/**\n* Finds the generic type (parametrized type) of the field. If the field is not generic it returns Object.class.\n*\n* @param field\n* @return\n*/\npublic Class getGenericType(Field field) {        \n    Type generic = field.getGenericType();\n    if (generic != null && generic instanceof ParameterizedType) {\n        Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n            return (Class) actual;\n            //in case of nested generics we don't go deep\n    }\n    \n    return Object.class;\n}"
+      },
+      {
+        "hypothesis": "The initial patch overfitted the solution by assuming the actual type argument is either a Class or a ParameterizedType. However, the type argument can also be a TypeVariable or WildcardType. This refined solution addresses these possibilities by returning Object.class for them, maintaining robustness and general applicability.",
+        "fixed_method": "public Class getGenericType(Field field) { \n    Type generic = field.getGenericType();\n    if (generic instanceof ParameterizedType) {\n        Type actual = ((ParameterizedType) generic).getActualTypeArguments()[0];\n        if (actual instanceof Class) {\n            return (Class) actual;\n        } else if (actual instanceof ParameterizedType) {\n            return (Class) ((ParameterizedType) actual).getRawType();\n        } else {\n            // Handles other possible Type instances like TypeVariable or WildcardType\n            return Object.class;\n        }\n    }\n    return Object.class;\n}",
+        "diff": " ",
+        "file_path": "src/org/mockito/internal/util/reflection/GenericMaster.java",
+        "method_name": "getGenericType",
+        "class_name": "GenericMaster",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method attempts to cast a Type instance to Class directly which fails for ParameterizedType instances. Instead, we should handle nested generic types and extract the raw type.",
+        "line_numbers": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Mockito-12/"
+}

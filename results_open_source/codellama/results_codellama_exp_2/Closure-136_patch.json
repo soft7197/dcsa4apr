@@ -1,0 +1,29 @@
+{
+  "bug_id": "Closure-136",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-136_1772810533",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the incorrect handling of the case where the function is a variable, which is not properly handled in the `addPossibleSignature` method. The method assumes that the function is always a direct child of the node, but in the case where the function is a variable, it may be a grandchild or further descendant.",
+        "changes": "+ if (node.getType() == Token.NAME) {\n+   Node function = node.getFirstChild();\n+   if (function != null && function.getType() == Token.FUNCTION) {\n+     addSignature(name, function, t.getSourceName());\n+     signatureAdded = true;\n+   }\n+ }\n",
+        "fixed_method": "private void addPossibleSignature(String name, Node node, NodeTraversal t) {\n  boolean signatureAdded = false;\n  if (node.getType() == Token.FUNCTION) {\n    // The node we're looking at is a function, so we can add it directly\n    addSignature(name, node, t.getSourceName());\n    signatureAdded = true;\n  } else if (node.getType() == Token.NAME) {\n    Node function = node.getFirstChild();\n    if (function != null && function.getType() == Token.FUNCTION) {\n      addSignature(name, function, t.getSourceName());\n      signatureAdded = true;\n    }\n  }\n  if (!signatureAdded) {\n    nonMethodProperties.add(name);\n  }\n}",
+        "diff": "+ if (node.getType() == Token.NAME) {\n+   Node function = node.getFirstChild();\n+   if (function != null && function.getType() == Token.FUNCTION) {\n+     addSignature(name, function, t.getSourceName());\n+     signatureAdded = true;\n+   }\n+ }\n",
+        "file_path": "src/com/google/javascript/jscomp/MethodCompilerPass.java",
+        "method_name": "addPossibleSignature",
+        "class_name": "MethodCompilerPass",
+        "iteration": 5,
+        "is_multi_method": false,
+        "line_numbers": [
+          101,
+          128
+        ],
+        "original_code": "  /**\n   * Adds a node that may represent a function signature (if it's a function\n   * itself or the name of a function).\n   */\n\n  private void addPossibleSignature(String name, Node node, NodeTraversal t) {\n    boolean signatureAdded = false;\n    if (node.getType() == Token.FUNCTION) {\n      // The node we're looking at is a function, so we can add it directly\n      addSignature(name, node, t.getSourceName());\n      signatureAdded = true;\n    } else if (node.getType() == Token.NAME) {\n      String functionName = node.getString();\n      Scope.Var v = t.getScope().getVar(functionName);\n      if (v == null) {\n        if (compiler.isIdeMode()) {\n          return;\n        } else {\n          throw new IllegalStateException(\n              \"VarCheck should have caught this undefined function\");\n        }\n      }\n      Node function = v.getInitialValue();\n      if (function != null &&\n          function.getType() == Token.FUNCTION) {\n        addSignature(name, function, v.getInputName());\n        signatureAdded = true;\n      }\n    }\n    if (!signatureAdded) {\n      nonMethodProperties.add(name);\n    }\n  }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Closure-136/"
+}

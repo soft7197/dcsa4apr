@@ -1,0 +1,45 @@
+{
+  "bug_id": "JacksonDatabind-2",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-2_1771895507",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue arises because the methods writeObject and writeTree are embedding the objects directly without converting them to a JSON tree structure. This results in the JsonNode being of type POJO instead of Object. To fix this, we need to ensure that the objects are properly converted to JSON trees before being appended. Since _codec is not available, we need to find another way to convert the objects to JsonNodes.",
+        "changes": "- _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);\n+ ObjectMapper mapper = new ObjectMapper();\n+ JsonNode node = mapper.valueToTree(value);\n+ _append(JsonToken.VALUE_EMBEDDED_OBJECT, node);\n\n- _append(JsonToken.VALUE_EMBEDDED_OBJECT, node);\n+ ObjectMapper mapper = new ObjectMapper();\n+ JsonNode jsonNode = mapper.valueToTree(node);\n+ _append(JsonToken.VALUE_EMBEDDED_OBJECT, jsonNode);",
+        "methods": {
+          "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java::TokenBuffer::writeObject::L780": {
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java",
+            "method_name": "writeObject",
+            "class_name": "TokenBuffer",
+            "line_numbers": [
+              780,
+              788
+            ],
+            "original_code": "\n    @Override\n    public void writeObject(Object value) throws IOException\n    {\n            _append(JsonToken.VALUE_EMBEDDED_OBJECT, value);\n            /* 28-May-2014, tatu: Tricky choice here; if no codec, should we\n             *   err out, or just embed? For now, do latter.\n             */\n//          throw new JsonMappingException(\"No ObjectCodec configured for TokenBuffer, writeObject() called\");\n    }\n",
+            "fixed_method": "    @Override\n    public void writeObject(Object value) throws IOException\n    {\n        ObjectMapper mapper = new ObjectMapper();\n        JsonNode node = mapper.valueToTree(value);\n        _append(JsonToken.VALUE_EMBEDDED_OBJECT, node);\n    }",
+            "iteration": 2
+          },
+          "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java::TokenBuffer::writeTree::L790": {
+            "file_path": "src/main/java/com/fasterxml/jackson/databind/util/TokenBuffer.java",
+            "method_name": "writeTree",
+            "class_name": "TokenBuffer",
+            "line_numbers": [
+              790,
+              796
+            ],
+            "original_code": "\n    @Override\n    public void writeTree(TreeNode node) throws IOException\n    {\n\n            // as with 'writeObject()', is codec optional?\n            _append(JsonToken.VALUE_EMBEDDED_OBJECT, node);\n    }\n",
+            "fixed_method": "    @Override\n    public void writeTree(TreeNode node) throws IOException\n    {\n        ObjectMapper mapper = new ObjectMapper();\n        JsonNode jsonNode = mapper.valueToTree(node);\n        _append(JsonToken.VALUE_EMBEDDED_OBJECT, jsonNode);\n    }",
+            "iteration": 2
+          }
+        },
+        "iteration": 2,
+        "is_multi_method": true
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/JacksonDatabind-2/"
+}

@@ -1,0 +1,45 @@
+{
+  "bug_id": "Closure-142",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-142_1771891558",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch removed the handling of the ANNOTATION case, which caused overfitting by not allowing annotations to be part of the extracted text block when appropriate. The refined fix reintroduces the ANNOTATION case and modifies the logic to append text until an EOC, EOF, or another annotation is encountered, ensuring annotations are correctly processed and included in the extracted text.",
+        "fixed_method": "@SuppressWarnings(\"fallthrough\")\nprivate ExtractionInfo extractMultilineTextualBlock(JsDocToken token,\n                                                  WhitespaceOption option) {\n\n  if (token == JsDocToken.EOC || token == JsDocToken.EOL ||\n      token == JsDocToken.EOF) {\n    return new ExtractionInfo(\"\", token);\n  }\n\n  stream.update();\n  int startLineno = stream.getLineno();\n  int startCharno = stream.getCharno() + 1;\n\n  // Read the content from the first line.\n  String line = stream.getRemainingJSDocLine();\n\n  if (option != WhitespaceOption.PRESERVE) {\n    line = line.trim();\n  }\n\n  StringBuilder builder = new StringBuilder();\n  builder.append(line);\n\n  state = State.SEARCHING_ANNOTATION;\n  token = next();\n\n  boolean ignoreStar = false;\n\n  do {\n    switch (token) {\n      case STAR:\n        if (!ignoreStar) {\n          if (builder.length() > 0) {\n            builder.append(' ');\n          }\n\n          builder.append('*');\n        }\n\n        token = next();\n        continue;\n\n      case EOL:\n        if (option != WhitespaceOption.SINGLE_LINE) {\n          builder.append(\"\\n\");\n        }\n\n        ignoreStar = true;\n        token = next();\n        continue;\n\n      case ANNOTATION:\n        if (builder.length() > 0) {\n          builder.append(' ');\n        }\n        builder.append(toString(token));\n        token = next();\n        continue;\n\n      case EOC:\n      case EOF:\n        // When we're capturing a license block, annotations\n        // in the block are ok.\n        String multilineText = builder.toString();\n\n        if (option != WhitespaceOption.PRESERVE) {\n          multilineText = multilineText.trim();\n        }\n\n        int endLineno = stream.getLineno();\n        int endCharno = stream.getCharno();\n\n        if (multilineText.length() > 0) {\n          jsdocBuilder.markText(multilineText, startLineno, startCharno,\n              endLineno, endCharno);\n        }\n\n        return new ExtractionInfo(multilineText, token);\n\n      // FALL THROUGH\n\n      default:\n        ignoreStar = false;\n        state = State.SEARCHING_ANNOTATION;\n\n        if (builder.length() > 0) {\n          builder.append(' ');\n        }\n\n        builder.append(toString(token));\n\n        line = stream.getRemainingJSDocLine();\n\n        if (option != WhitespaceOption.PRESERVE) {\n          line = trimEnd(line);\n        }\n\n        builder.append(line);\n        token = next();\n    }\n  } while (true);\n}",
+        "diff": " ",
+        "file_path": "src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java",
+        "method_name": "extractMultilineTextualBlock",
+        "class_name": "JsDocInfoParser",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue arises because the method stops processing when it encounters an annotation, even though it should continue reading until an EOC, EOF, or another annotation is encountered. The fix involves modifying the switch statement to handle annotations differently, allowing it to continue appending text until the end condition is met.",
+        "line_numbers": [
+          1112,
+          1206
+        ]
+      },
+      {
+        "hypothesis": "The root cause of the issue is that the current patch appends annotations to the extracted text, which is not always the desired behavior. We need to introduce a mechanism to differentiate between annotations that should be included in the extracted text and those that should terminate the extraction process. This can be done by checking the type of annotation and deciding whether to include it or stop the extraction.",
+        "fixed_method": "  @SuppressWarnings(\"fallthrough\")\n  private ExtractionInfo extractMultilineTextualBlock(JsDocToken token,\n                                                      WhitespaceOption option) {\n\n    if (token == JsDocToken.EOC || token == JsDocToken.EOL ||\n        token == JsDocToken.EOF) {\n      return new ExtractionInfo(\"\", token);\n    }\n\n    stream.update();\n    int startLineno = stream.getLineno();\n    int startCharno = stream.getCharno() + 1;\n\n    // Read the content from the first line.\n    String line = stream.getRemainingJSDocLine();\n\n    if (option != WhitespaceOption.PRESERVE) {\n      line = line.trim();\n    }\n\n    StringBuilder builder = new StringBuilder();\n    builder.append(line);\n\n    state = State.SEARCHING_ANNOTATION;\n    token = next();\n\n    boolean ignoreStar = false;\n\n    do {\n      switch (token) {\n        case STAR:\n          if (!ignoreStar) {\n            if (builder.length() > 0) {\n              builder.append(' ');\n            }\n\n            builder.append('*');\n          }\n\n          token = next();\n          continue;\n\n        case EOL:\n          if (option != WhitespaceOption.SINGLE_LINE) {\n            builder.append(\"\\n\");\n          }\n\n          ignoreStar = true;\n          token = next();\n          continue;\n\n        case ANNOTATION:\n          // Check if the annotation should be included in the block\n          String annotationText = toString(token);\n          if (shouldIncludeAnnotation(annotationText)) {\n            if (builder.length() > 0) {\n              builder.append(' ');\n            }\n            builder.append(annotationText);\n          } else {\n            // If the annotation should not be included, stop extraction\n            String multilineText = builder.toString();\n\n            if (option != WhitespaceOption.PRESERVE) {\n              multilineText = multilineText.trim();\n            }\n\n            int endLineno = stream.getLineno();\n            int endCharno = stream.getCharno();\n\n            if (multilineText.length() > 0) {\n              jsdocBuilder.markText(multilineText, startLineno, startCharno,\n                  endLineno, endCharno);\n            }\n\n            return new ExtractionInfo(multilineText, token);\n          }\n          token = next();\n          continue;\n\n        case EOC:\n        case EOF:\n          // When we're capturing a license block, annotations\n          // in the block are ok.\n          String multilineText = builder.toString();\n\n          if (option != WhitespaceOption.PRESERVE) {\n            multilineText = multilineText.trim();\n          }\n\n          int endLineno = stream.getLineno();\n          int endCharno = stream.getCharno();\n\n          if (multilineText.length() > 0) {\n            jsdocBuilder.markText(multilineText, startLineno, startCharno,\n                endLineno, endCharno);\n          }\n\n          return new ExtractionInfo(multilineText, token);\n\n        // FALL THROUGH\n\n        default:\n          ignoreStar = false;\n          state = State.SEARCHING_ANNOTATION;\n\n          if (builder.length() > 0) {\n            builder.append(' ');\n          }\n\n          builder.append(toString(token));\n\n          line = stream.getRemainingJSDocLine();\n\n          if (option != WhitespaceOption.PRESERVE) {\n            line = trimEnd(line);\n          }\n\n          builder.append(line);\n          token = next();\n      }\n    } while (true);\n  }\n\n  private boolean shouldIncludeAnnotation(String annotationText) {\n    // Define which annotations should be included in the extracted text\n    // For example, include '@license', '@author', etc.\n    return annotationText.startsWith(\"@license\") || annotationText.startsWith(\"@author\");\n  }",
+        "diff": " ",
+        "file_path": "src/com/google/javascript/jscomp/parsing/JsDocInfoParser.java",
+        "method_name": "extractMultilineTextualBlock",
+        "class_name": "JsDocInfoParser",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue arises because the method does not correctly handle the transition from one line to another when encountering an annotation. Specifically, it stops processing further lines once it encounters an annotation, which causes the '@author' part to be omitted.",
+        "line_numbers": [
+          1112,
+          1206
+        ]
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Closure-142/"
+}

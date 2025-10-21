@@ -1,0 +1,13 @@
+File: src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java
+Method: TextBuffer.expandCurrentSegment
+
+public char[] expandCurrentSegment()
+{
+final char[] curr = _currentSegment;
+if (curr == null)
+return null;
+// Doubles the capacity of the current segment if exceeds threshold
+final int len = curr.length;
+int newLen = (len > MAX_SEGMENT_LEN) ? len * 2 : len + (len >> 1);
+return (_currentSegment = Arrays.copyOf(curr, newLen));
+}

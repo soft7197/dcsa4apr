@@ -1,0 +1,57 @@
+{
+  "bug_id": "Time-18",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Time-18_1772923002",
+  "patches": [
+    [
+      {
+        "hypothesis": "Refined the approach to handle general cases and avoid overfitting",
+        "fixed_method": "public long getDateTimeMillis(int year, int monthOfYear, int dayOfMonth, int hourOfDay, int minuteOfHour, int secondOfMinute, int millisOfSecond) throws IllegalArgumentException {\n\nChronology base;\n\nif ((base = getBase()) != null) {\n\nreturn base.getDateTimeMillis(year, monthOfYear, dayOfMonth, hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n\n}\n\nlong instant = 0;\n\nif (year >= 1582) {\n\ninstant = iGregorianChronology.getDateTimeMillis(year, monthOfYear, dayOfMonth, hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n\n} else {\n\ninstant = iJulianChronology.getDateTimeMillis(year, monthOfYear, dayOfMonth, hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n\n}\n\nif (instant < iCutoverMillis) {\n\n// Maybe it's Julian.\n\ninstant = iJulianChronology.getDateTimeMillis(year, monthOfYear, dayOfMonth, hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n\nif (instant >= iCutoverMillis) {\n\n// Okay, it's in the illegal cutover gap.\n\nthrow new IllegalArgumentException(\"Specified date does not exist\");\n\n}\n\n} else if (instant > iCutoverMillis) {\n\n// Maybe it's Gregorian.\n\ninstant = iGregorianChronology.getDateTimeMillis(year, monthOfYear, dayOfMonth, hourOfDay, minuteOfHour, secondOfMinute, millisOfSecond);\n\nif (instant < iCutoverMillis) {\n\n// Okay, it's in the legal cutover gap.\n\nthrow new IllegalArgumentException(\"Specified date does not exist\");\n\n}\n\n} else {\n\n// Edge case: instant == iCutoverMillis.\n\nthrow new IllegalArgumentException(\"Specified date does not exist\");\n\n}\n\nreturn instant;\n\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/joda/time/chrono/GJChronology.java",
+        "method_name": "getDateTimeMillis",
+        "class_name": "GJChronology",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "",
+        "line_numbers": [
+          350,
+          351,
+          352,
+          353,
+          354,
+          355,
+          356,
+          357,
+          358,
+          359,
+          360,
+          361,
+          362,
+          363,
+          364,
+          365,
+          366,
+          367,
+          368,
+          369,
+          370,
+          371,
+          372,
+          373,
+          374,
+          375,
+          376,
+          377,
+          378
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Time-18/"
+}

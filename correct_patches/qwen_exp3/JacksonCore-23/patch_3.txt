@@ -1,0 +1,10 @@
+File: src/main/java/com/fasterxml/jackson/core/util/DefaultPrettyPrinter.java
+Method: DefaultPrettyPrinter.createInstance
+
+public DefaultPrettyPrinter createInstance() {
+    if (this.getClass() == DefaultPrettyPrinter.class) {
+        return new DefaultPrettyPrinter(this);
+    } else {
+        throw new IllegalStateException("Subclass does not override createInstance");
+    }
+}

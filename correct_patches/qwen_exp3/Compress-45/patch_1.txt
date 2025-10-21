@@ -1,0 +1,31 @@
+File: src/main/java/org/apache/commons/compress/archivers/tar/TarUtils.java
+Method: TarUtils.formatLongOctalOrBinaryBytes
+
+public static int formatLongOctalOrBinaryBytes(final long value, final byte[] buf, final int offset, final int length) {
+    if (buf == null || length <= 0 || offset < 0 || offset + length > buf.length) {
+        throw new IllegalArgumentException("Invalid buffer or parameters");
+    }
+
+    final long maxAsOctalChar = length == TarConstants.UIDLEN ? TarConstants.MAXID : TarConstants.MAXSIZE;
+    final boolean negative = value < 0;
+    if (!negative && value <= maxAsOctalChar) {
+        return formatLongOctalBytes(value, buf, offset, length);
+    }
+
+    byte[] binaryRepresentation;
+    if (length < 9) {
+        binaryRepresentation = new byte[length];
+        formatLongBinary(value, binaryRepresentation, 0, length, negative);
+    } else {
+        binaryRepresentation = new byte[length];
+        formatBigIntegerBinary(value, binaryRepresentation, 0, length, negative);
+    }
+
+    if (binaryRepresentation.length > length) {
+        throw new IllegalArgumentException("Value does not fit in the buffer");
+    }
+
+    System.arraycopy(binaryRepresentation, 0, buf, offset, length);
+    buf[offset] = (byte) (negative ? 0xff : 0x80);
+    return offset + length;
+}

@@ -1,0 +1,99 @@
+File: src/main/java/org/jsoup/helper/DataUtil.java
+Method: DataUtil.parseByteData
+
+static Document parseByteData(ByteBuffer byteData, String charsetName, String baseUri, Parser parser) {
+    String docData;
+    Document doc = null;
+
+    byteData.mark(); // mark current position to reset if necessary
+    BomCharset bomCharset = detectCharsetFromBom(byteData);
+    if (bomCharset != null) {
+        charsetName = bomCharset.getCharsetName();
+        byteData.position(bomCharset.getBomLength()); // skip BOM
+    } else {
+        byteData.reset();
+    }
+
+    if (charsetName == null) {
+        charsetName = defaultCharset;
+        docData = Charset.forName(charsetName).decode(byteData).toString();
+        doc = parser.parseInput(docData, baseUri);
+        Element meta = doc.select("meta[http-equiv=content-type], meta[charset]").first();
+        if (meta != null) {
+            String foundCharset = null;
+            if (meta.hasAttr("http-equiv")) {
+                foundCharset = getCharsetFromContentType(meta.attr("content"));
+            }
+            if (foundCharset == null && meta.hasAttr("charset")) {
+                try {
+                    if (Charset.isSupported(meta.attr("charset"))) {
+                        foundCharset = meta.attr("charset");
+                    }
+                } catch (IllegalCharsetNameException e) {
+                    foundCharset = null;
+                }
+            }
+
+            if (foundCharset != null && !foundCharset.equals(defaultCharset)) {
+                foundCharset = foundCharset.trim().replaceAll("[\"']", "");
+                charsetName = foundCharset;
+                byteData.rewind();
+                docData = Charset.forName(foundCharset).decode(byteData).toString();
+                doc = null;
+            }
+        }
+    } else {
+        Validate.notEmpty(charsetName, "Must set charset arg to character set of file to parse. Set to null to attempt to detect from HTML");
+        docData = Charset.forName(charsetName).decode(byteData).toString();
+    }
+
+    if (doc == null) {
+        doc = parser.parseInput(docData, baseUri);
+        doc.outputSettings().charset(charsetName);
+    }
+    return doc;
+}
+
+static BomCharset detectCharsetFromBom(ByteBuffer byteData) {
+    byteData.mark(); // mark current position
+    if (byteData.remaining() >= 4) {
+        int first4 = byteData.getInt(byteData.position());
+        switch (first4) {
+            case 0x0000FEFF:
+                return new BomCharset("UTF-32BE", 4);
+            case 0xFFFE0000:
+                return new BomCharset("UTF-32LE", 4);
+            case 0xEFBBBF:
+                return new BomCharset("UTF-8", 3);
+        }
+    }
+    if (byteData.remaining() >= 2) {
+        int first2 = byteData.getShort(byteData.position()) & 0xFFFF;
+        switch (first2) {
+            case 0xFEFF:
+                return new BomCharset("UTF-16BE", 2);
+            case 0xFFFE:
+                return new BomCharset("UTF-16LE", 2);
+        }
+    }
+    byteData.reset(); // reset to original position if no BOM is detected
+    return null;
+}
+
+static class BomCharset {
+    private final String charsetName;
+    private final int bomLength;
+
+    public BomCharset(String charsetName, int bomLength) {
+        this.charsetName = charsetName;
+        this.bomLength = bomLength;
+    }
+
+    public String getCharsetName() {
+        return charsetName;
+    }
+
+    public int getBomLength() {
+        return bomLength;
+    }
+}

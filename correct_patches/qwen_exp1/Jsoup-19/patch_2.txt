@@ -1,0 +1,34 @@
+File: src/main/java/org/jsoup/safety/Whitelist.java
+Method: Whitelist.testValidProtocol
+
+private boolean testValidProtocol(Element el, Attribute attr, Set<Protocol> protocols) {
+    // try to resolve relative urls to abs, and optionally update the attribute so output html has abs.
+    // rels without a baseuri get removed
+    String value = attr.getValue();
+    if (value == null) {
+        return false;
+    }
+    if (!preserveRelativeLinks && !isCustomProtocol(value, protocols)) {
+        String absValue = el.absUrl(attr.getKey());
+        if (!absValue.isEmpty()) {
+            attr.setValue(absValue);
+            value = absValue;
+        } else {
+            return false;
+        }
+    }
+    return isCustomProtocol(value, protocols);
+}
+
+private boolean isCustomProtocol(String value, Set<Protocol> protocols) {
+    if (value == null || protocols == null) {
+        return false;
+    }
+    for (Protocol protocol : protocols) {
+        String prot = protocol.toString().toLowerCase() + ":";
+        if (value.toLowerCase().startsWith(prot)) {
+            return true;
+        }
+    }
+    return false;
+}

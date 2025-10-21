@@ -1,0 +1,275 @@
+{
+  "bug_id": "Lang-30",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-30_1773123249",
+  "patches": [
+    [
+      {
+        "hypothesis": "Previous attempts overlooked correct handling of both high and low surrogate pairs separately as they can form invalid characters if not properly contiguous. Comparisons should be made using proper Unicode code points.",
+        "changes": "- Changed comparisons to use code points to correctly handle surrogate pairs\n- Adapted loop to manage indices correctly when surrogate pairs are present\n- Ensured valid continuation of sequence checks by handling high/low surrogate separately",
+        "methods": {
+          "src/main/java/org/apache/commons/lang3/StringUtils.java::StringUtils::containsAny::L1443": {
+            "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+            "method_name": "containsAny",
+            "class_name": "StringUtils",
+            "line_numbers": [
+              1443,
+              1468
+            ],
+            "original_code": "    // ContainsAny\n    //-----------------------------------------------------------------------\n    /**\n     * <p>Checks if the CharSequence contains any character in the given\n     * set of characters.</p>\n     *\n     * <p>A <code>null</code> CharSequence will return <code>false</code>.\n     * A <code>null</code> or zero length search array will return <code>false</code>.</p>\n     *\n     * <pre>\n     * StringUtils.containsAny(null, *)                = false\n     * StringUtils.containsAny(\"\", *)                  = false\n     * StringUtils.containsAny(*, null)                = false\n     * StringUtils.containsAny(*, [])                  = false\n     * StringUtils.containsAny(\"zzabyycdxx\",['z','a']) = true\n     * StringUtils.containsAny(\"zzabyycdxx\",['b','y']) = true\n     * StringUtils.containsAny(\"aba\", ['z'])           = false\n     * </pre>\n     *\n     * @param cs  the CharSequence to check, may be null\n     * @param searchChars  the chars to search for, may be null\n     * @return the <code>true</code> if any of the chars are found,\n     * <code>false</code> if no match or null input\n     * @since 2.4\n     */\n\n    public static boolean containsAny(CharSequence cs, char[] searchChars) {\n        if (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n            return false;\n        }\n        int csLength = cs.length();\n        int searchLength = searchChars.length;\n        int csLast = csLength - 1;\n        int searchLast = searchLength - 1;\n        for (int i = 0; i < csLength; i++) {\n            char ch = cs.charAt(i);\n            for (int j = 0; j < searchLength; j++) {\n                if (searchChars[j] == ch) {\n                    if (i < csLast && j < searchLast && ch >= Character.MIN_HIGH_SURROGATE && ch <= Character.MAX_HIGH_SURROGATE) {\n                            // missing low surrogate, fine, like String.indexOf(String)\n                        if (searchChars[j + 1] == cs.charAt(i + 1)) {\n                            return true;\n                        }\n                    } else {\n                        // ch is in the Basic Multilingual Plane\n                        return true;\n                    }\n                }\n            }\n        }\n        return false;\n    }\n",
+            "fixed_method": "public static boolean containsAny(CharSequence cs, char[] searchChars) {\n    if (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n        return false;\n    }\n    int csLength = cs.length();\n    int searchLength = searchChars.length;\n    for (int i = 0; i < csLength; i++) {\n        char ch = cs.charAt(i);\n        // Handle full code point comparisons\n        int codePoint;\n        if (Character.isHighSurrogate(ch) && i < csLength - 1 && Character.isLowSurrogate(cs.charAt(i + 1))) {\n            codePoint = Character.toCodePoint(ch, cs.charAt(i + 1));\n            i++; // Advance an extra step due to surrogate pair\n        } else {\n            codePoint = ch;\n        }\n        for (int j = 0; j < searchLength; j++) {\n            if (Character.isHighSurrogate(searchChars[j]) && j < searchLength - 1 && Character.isLowSurrogate(searchChars[j + 1])) {\n                int searchCodePoint = Character.toCodePoint(searchChars[j], searchChars[j + 1]);\n                if (searchCodePoint == codePoint) {\n                    return true;\n                }\n                j++; // Advance an extra step in the search array\n            } else if (ch == searchChars[j]) {\n                return true;\n            }\n        }\n    }\n    return false;\n}",
+            "iteration": 2
+          },
+          "src/main/java/org/apache/commons/lang3/StringUtils.java::StringUtils::containsAny::L1497": {
+            "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+            "method_name": "containsAny",
+            "class_name": "StringUtils",
+            "line_numbers": [
+              1497,
+              1502
+            ],
+            "original_code": "    /**\n     * <p>\n     * Checks if the CharSequence contains any character in the given set of characters.\n     * </p>\n     * \n     * <p>\n     * A <code>null</code> CharSequence will return <code>false</code>. A <code>null</code> search CharSequence will return\n     * <code>false</code>.\n     * </p>\n     * \n     * <pre>\n     * StringUtils.containsAny(null, *)            = false\n     * StringUtils.containsAny(\"\", *)              = false\n     * StringUtils.containsAny(*, null)            = false\n     * StringUtils.containsAny(*, \"\")              = false\n     * StringUtils.containsAny(\"zzabyycdxx\", \"za\") = true\n     * StringUtils.containsAny(\"zzabyycdxx\", \"by\") = true\n     * StringUtils.containsAny(\"aba\",\"z\")          = false\n     * </pre>\n     * \n     * @param cs\n     *            the CharSequence to check, may be null\n     * @param searchChars\n     *            the chars to search for, may be null\n     * @return the <code>true</code> if any of the chars are found, <code>false</code> if no match or null input\n     * @since 2.4\n     */\n\n    public static boolean containsAny(CharSequence cs, String searchChars) {\n        if (searchChars == null) {\n            return false;\n        }\n        return containsAny(cs, searchChars.toCharArray());\n    }\n",
+            "fixed_method": "public static boolean containsAny(CharSequence cs, String searchChars) {\n    if (searchChars == null) {\n        return false;\n    }\n    return containsAny(cs, searchChars.toCharArray());\n}",
+            "iteration": 2
+          }
+        },
+        "iteration": 2,
+        "is_multi_method": true
+      }
+    ],
+    [
+      {
+        "hypothesis": "The existing method doesn't handle supplementary characters correctly, leading to incorrect index calculations.",
+        "changes": "+ Use codePointAt to handle surrogate pairs correctly\n+ Adjust the index increments based on the character byte size.",
+        "fixed_method": "public static int indexOfAnyBut(String str, String searchChars) {\n    if (isEmpty(str) || isEmpty(searchChars)) {\n        return INDEX_NOT_FOUND;\n    }\n    int strLen = str.length();\n    for (int i = 0; i < strLen;) {\n        int codePoint = str.codePointAt(i);\n        if (searchChars.indexOf(codePoint) < 0) {\n            return i;\n        }\n        i += Character.charCount(codePoint);\n    }\n    return INDEX_NOT_FOUND;\n}",
+        "diff": "+ Use codePointAt to handle surrogate pairs correctly\n+ Adjust the index increments based on the character byte size.",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "indexOfAnyBut",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1569,
+          1581
+        ],
+        "original_code": "    /**\n     * <p>Search a String to find the first index of any\n     * character not in the given set of characters.</p>\n     *\n     * <p>A <code>null</code> String will return <code>-1</code>.\n     * A <code>null</code> search string will return <code>-1</code>.</p>\n     *\n     * <pre>\n     * StringUtils.indexOfAnyBut(null, *)            = -1\n     * StringUtils.indexOfAnyBut(\"\", *)              = -1\n     * StringUtils.indexOfAnyBut(*, null)            = -1\n     * StringUtils.indexOfAnyBut(*, \"\")              = -1\n     * StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"za\") = 3\n     * StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"\")   = 0\n     * StringUtils.indexOfAnyBut(\"aba\",\"ab\")         = -1\n     * </pre>\n     *\n     * @param str  the String to check, may be null\n     * @param searchChars  the chars to search for, may be null\n     * @return the index of any of the chars, -1 if no match or null input\n     * @since 2.0\n     */\n\n    public static int indexOfAnyBut(String str, String searchChars) {\n        if (isEmpty(str) || isEmpty(searchChars)) {\n            return INDEX_NOT_FOUND;\n        }\n        int strLen = str.length();\n        for (int i = 0; i < strLen; i++) {\n            char ch = str.charAt(i);\n            if (searchChars.indexOf(ch) < 0) {\n                    return i;\n            }\n        }\n        return INDEX_NOT_FOUND;\n    }\n"
+      },
+      {
+        "hypothesis": "The method fails with supplementary characters because it doesn't handle them correctly. Supplementary characters are encoded using two UTF-16 code units, and the current implementation only considers single code units.",
+        "changes": "- If deal with supplementary characters by identifying them and doing index calculations accordingly.\n+ Adjusted checks using Character.charCount to correctly skip supplementary characters.",
+        "fixed_method": "public static int indexOfAnyBut(String str, String searchChars) {\n    if (isEmpty(str) || isEmpty(searchChars)) {\n        return INDEX_NOT_FOUND;\n    }\n    int strLen = str.length();\n    for (int i = 0; i < strLen; ) {\n        int codePoint = str.codePointAt(i);\n        if (searchChars.indexOf(codePoint) < 0) {\n            return i;\n        }\n        i += Character.charCount(codePoint);\n    }\n    return INDEX_NOT_FOUND;\n}",
+        "diff": "- If deal with supplementary characters by identifying them and doing index calculations accordingly.\n+ Adjusted checks using Character.charCount to correctly skip supplementary characters.",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "indexOfAnyBut",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1569,
+          1581
+        ],
+        "original_code": "    /**\n     * <p>Search a String to find the first index of any\n     * character not in the given set of characters.</p>\n     *\n     * <p>A <code>null</code> String will return <code>-1</code>.\n     * A <code>null</code> search string will return <code>-1</code>.</p>\n     *\n     * <pre>\n     * StringUtils.indexOfAnyBut(null, *)            = -1\n     * StringUtils.indexOfAnyBut(\"\", *)              = -1\n     * StringUtils.indexOfAnyBut(*, null)            = -1\n     * StringUtils.indexOfAnyBut(*, \"\")              = -1\n     * StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"za\") = 3\n     * StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"\")   = 0\n     * StringUtils.indexOfAnyBut(\"aba\",\"ab\")         = -1\n     * </pre>\n     *\n     * @param str  the String to check, may be null\n     * @param searchChars  the chars to search for, may be null\n     * @return the index of any of the chars, -1 if no match or null input\n     * @since 2.0\n     */\n\n    public static int indexOfAnyBut(String str, String searchChars) {\n        if (isEmpty(str) || isEmpty(searchChars)) {\n            return INDEX_NOT_FOUND;\n        }\n        int strLen = str.length();\n        for (int i = 0; i < strLen; i++) {\n            char ch = str.charAt(i);\n            if (searchChars.indexOf(ch) < 0) {\n                    return i;\n            }\n        }\n        return INDEX_NOT_FOUND;\n    }\n"
+      },
+      {
+        "hypothesis": "The method does not correctly handle supplementary characters, which are represented by surrogate pairs in UTF-16 encoding.",
+        "changes": "- Iterate using code points instead of characters\n- Correctly calculate the index advance for code points",
+        "fixed_method": "public static int indexOfAnyBut(String str, String searchChars) {\n    if (isEmpty(str) || isEmpty(searchChars)) {\n        return INDEX_NOT_FOUND;\n    }\n    int strLen = str.length();\n    for (int i = 0; i < strLen; ) {\n        int currentChar = str.codePointAt(i);\n        int charCount = Character.charCount(currentChar);\n        if (searchChars.indexOf(currentChar) < 0) {\n            return i;\n        }\n        i += charCount;\n    }\n    return INDEX_NOT_FOUND;\n}",
+        "diff": "- Iterate using code points instead of characters\n- Correctly calculate the index advance for code points",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "indexOfAnyBut",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1569,
+          1581
+        ],
+        "original_code": "    /**\n     * <p>Search a String to find the first index of any\n     * character not in the given set of characters.</p>\n     *\n     * <p>A <code>null</code> String will return <code>-1</code>.\n     * A <code>null</code> search string will return <code>-1</code>.</p>\n     *\n     * <pre>\n     * StringUtils.indexOfAnyBut(null, *)            = -1\n     * StringUtils.indexOfAnyBut(\"\", *)              = -1\n     * StringUtils.indexOfAnyBut(*, null)            = -1\n     * StringUtils.indexOfAnyBut(*, \"\")              = -1\n     * StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"za\") = 3\n     * StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"\")   = 0\n     * StringUtils.indexOfAnyBut(\"aba\",\"ab\")         = -1\n     * </pre>\n     *\n     * @param str  the String to check, may be null\n     * @param searchChars  the chars to search for, may be null\n     * @return the index of any of the chars, -1 if no match or null input\n     * @since 2.0\n     */\n\n    public static int indexOfAnyBut(String str, String searchChars) {\n        if (isEmpty(str) || isEmpty(searchChars)) {\n            return INDEX_NOT_FOUND;\n        }\n        int strLen = str.length();\n        for (int i = 0; i < strLen; i++) {\n            char ch = str.charAt(i);\n            if (searchChars.indexOf(ch) < 0) {\n                    return i;\n            }\n        }\n        return INDEX_NOT_FOUND;\n    }\n"
+      },
+      {
+        "hypothesis": "The method does not properly handle supplementary characters, as it treats them as regular char values, which causes incorrect index calculations.",
+        "changes": "- Adjusted the method to handle supplementary characters using Character code points\n+ Iterating over code points instead of individual chars",
+        "fixed_method": "public static int indexOfAnyBut(String str, String searchChars) {\n    if (isEmpty(str) || isEmpty(searchChars)) {\n        return INDEX_NOT_FOUND;\n    }\n    int strLen = str.length();\n    for (int i = 0; i < strLen; i += Character.charCount(str.codePointAt(i))) {\n        int ch = str.codePointAt(i);\n        if (searchChars.indexOf(ch) < 0) {\n            return i;\n        }\n    }\n    return INDEX_NOT_FOUND;\n}",
+        "diff": "- Adjusted the method to handle supplementary characters using Character code points\n+ Iterating over code points instead of individual chars",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "indexOfAnyBut",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1569,
+          1581
+        ],
+        "original_code": "    /**\n     * <p>Search a String to find the first index of any\n     * character not in the given set of characters.</p>\n     *\n     * <p>A <code>null</code> String will return <code>-1</code>.\n     * A <code>null</code> search string will return <code>-1</code>.</p>\n     *\n     * <pre>\n     * StringUtils.indexOfAnyBut(null, *)            = -1\n     * StringUtils.indexOfAnyBut(\"\", *)              = -1\n     * StringUtils.indexOfAnyBut(*, null)            = -1\n     * StringUtils.indexOfAnyBut(*, \"\")              = -1\n     * StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"za\") = 3\n     * StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"\")   = 0\n     * StringUtils.indexOfAnyBut(\"aba\",\"ab\")         = -1\n     * </pre>\n     *\n     * @param str  the String to check, may be null\n     * @param searchChars  the chars to search for, may be null\n     * @return the index of any of the chars, -1 if no match or null input\n     * @since 2.0\n     */\n\n    public static int indexOfAnyBut(String str, String searchChars) {\n        if (isEmpty(str) || isEmpty(searchChars)) {\n            return INDEX_NOT_FOUND;\n        }\n        int strLen = str.length();\n        for (int i = 0; i < strLen; i++) {\n            char ch = str.charAt(i);\n            if (searchChars.indexOf(ch) < 0) {\n                    return i;\n            }\n        }\n        return INDEX_NOT_FOUND;\n    }\n"
+      },
+      {
+        "hypothesis": "The method fails when it encounters supplementary characters, which are represented by surrogate pairs. It treats them as two separate `char` values rather than a single supplementary character.",
+        "changes": "+ Check supplementary characters using codePointAt and handle surrogate pairs correctly.",
+        "fixed_method": "public static int indexOfAnyBut(String str, String searchChars) {\n    if (isEmpty(str) || isEmpty(searchChars)) {\n        return INDEX_NOT_FOUND;\n    }\n    int strLen = str.length();\n    for (int i = 0; i < strLen; i++) {\n        int codePoint = str.codePointAt(i);\n        int charCount = Character.charCount(codePoint);\n        if (searchChars.indexOf(codePoint) < 0) {\n            return i;\n        }\n        i += charCount - 1;\n    }\n    return INDEX_NOT_FOUND;\n}",
+        "diff": "+ Check supplementary characters using codePointAt and handle surrogate pairs correctly.",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "indexOfAnyBut",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1569,
+          1581
+        ],
+        "original_code": "    /**\n     * <p>Search a String to find the first index of any\n     * character not in the given set of characters.</p>\n     *\n     * <p>A <code>null</code> String will return <code>-1</code>.\n     * A <code>null</code> search string will return <code>-1</code>.</p>\n     *\n     * <pre>\n     * StringUtils.indexOfAnyBut(null, *)            = -1\n     * StringUtils.indexOfAnyBut(\"\", *)              = -1\n     * StringUtils.indexOfAnyBut(*, null)            = -1\n     * StringUtils.indexOfAnyBut(*, \"\")              = -1\n     * StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"za\") = 3\n     * StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"\")   = 0\n     * StringUtils.indexOfAnyBut(\"aba\",\"ab\")         = -1\n     * </pre>\n     *\n     * @param str  the String to check, may be null\n     * @param searchChars  the chars to search for, may be null\n     * @return the index of any of the chars, -1 if no match or null input\n     * @since 2.0\n     */\n\n    public static int indexOfAnyBut(String str, String searchChars) {\n        if (isEmpty(str) || isEmpty(searchChars)) {\n            return INDEX_NOT_FOUND;\n        }\n        int strLen = str.length();\n        for (int i = 0; i < strLen; i++) {\n            char ch = str.charAt(i);\n            if (searchChars.indexOf(ch) < 0) {\n                    return i;\n            }\n        }\n        return INDEX_NOT_FOUND;\n    }\n"
+      },
+      {
+        "hypothesis": "The original method does not correctly handle supplementary Unicode characters, which require two UTF-16 code units in Java.",
+        "changes": "- Handle supplementary characters correctly by iterating with code points\n- Use Character.charCount() to get correct indices for supplementary chars",
+        "fixed_method": "public static int indexOfAnyBut(String str, String searchChars) {\n    if (isEmpty(str) || isEmpty(searchChars)) {\n        return INDEX_NOT_FOUND;\n    }\n    final int strLen = str.length();\n    for (int i = 0; i < strLen; i += Character.charCount(str.codePointAt(i))) {\n        int codePoint = str.codePointAt(i);\n        if (searchChars.indexOf(codePoint) < 0) {\n            return i;\n        }\n    }\n    return INDEX_NOT_FOUND;\n}",
+        "diff": "- Handle supplementary characters correctly by iterating with code points\n- Use Character.charCount() to get correct indices for supplementary chars",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "indexOfAnyBut",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1569,
+          1581
+        ],
+        "original_code": "    /**\n     * <p>Search a String to find the first index of any\n     * character not in the given set of characters.</p>\n     *\n     * <p>A <code>null</code> String will return <code>-1</code>.\n     * A <code>null</code> search string will return <code>-1</code>.</p>\n     *\n     * <pre>\n     * StringUtils.indexOfAnyBut(null, *)            = -1\n     * StringUtils.indexOfAnyBut(\"\", *)              = -1\n     * StringUtils.indexOfAnyBut(*, null)            = -1\n     * StringUtils.indexOfAnyBut(*, \"\")              = -1\n     * StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"za\") = 3\n     * StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"\")   = 0\n     * StringUtils.indexOfAnyBut(\"aba\",\"ab\")         = -1\n     * </pre>\n     *\n     * @param str  the String to check, may be null\n     * @param searchChars  the chars to search for, may be null\n     * @return the index of any of the chars, -1 if no match or null input\n     * @since 2.0\n     */\n\n    public static int indexOfAnyBut(String str, String searchChars) {\n        if (isEmpty(str) || isEmpty(searchChars)) {\n            return INDEX_NOT_FOUND;\n        }\n        int strLen = str.length();\n        for (int i = 0; i < strLen; i++) {\n            char ch = str.charAt(i);\n            if (searchChars.indexOf(ch) < 0) {\n                    return i;\n            }\n        }\n        return INDEX_NOT_FOUND;\n    }\n"
+      },
+      {
+        "hypothesis": "The method does not properly handle supplementary characters as single code points due to the use of `charAt` which only gets 16-bit units of UTF-16. We need to properly handle code points for it to comply with tests using supplementary characters.",
+        "changes": "Handle characters as code points using codePointAt and codePointCount, adjust loop and comparisons accordingly.",
+        "fixed_method": "public static int indexOfAnyBut(String str, String searchChars) {\n    if (isEmpty(str) || isEmpty(searchChars)) {\n        return INDEX_NOT_FOUND;\n    }\n    int strLen = str.length();\n    for (int i = 0; i < strLen;) {\n        int cp = str.codePointAt(i);\n        if (searchChars.indexOf(cp) < 0) {\n            return i;\n        }\n        i += Character.charCount(cp);\n    }\n    return INDEX_NOT_FOUND;\n}",
+        "diff": "Handle characters as code points using codePointAt and codePointCount, adjust loop and comparisons accordingly.",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "indexOfAnyBut",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1569,
+          1581
+        ],
+        "original_code": "    /**\n     * <p>Search a String to find the first index of any\n     * character not in the given set of characters.</p>\n     *\n     * <p>A <code>null</code> String will return <code>-1</code>.\n     * A <code>null</code> search string will return <code>-1</code>.</p>\n     *\n     * <pre>\n     * StringUtils.indexOfAnyBut(null, *)            = -1\n     * StringUtils.indexOfAnyBut(\"\", *)              = -1\n     * StringUtils.indexOfAnyBut(*, null)            = -1\n     * StringUtils.indexOfAnyBut(*, \"\")              = -1\n     * StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"za\") = 3\n     * StringUtils.indexOfAnyBut(\"zzabyycdxx\", \"\")   = 0\n     * StringUtils.indexOfAnyBut(\"aba\",\"ab\")         = -1\n     * </pre>\n     *\n     * @param str  the String to check, may be null\n     * @param searchChars  the chars to search for, may be null\n     * @return the index of any of the chars, -1 if no match or null input\n     * @since 2.0\n     */\n\n    public static int indexOfAnyBut(String str, String searchChars) {\n        if (isEmpty(str) || isEmpty(searchChars)) {\n            return INDEX_NOT_FOUND;\n        }\n        int strLen = str.length();\n        for (int i = 0; i < strLen; i++) {\n            char ch = str.charAt(i);\n            if (searchChars.indexOf(ch) < 0) {\n                    return i;\n            }\n        }\n        return INDEX_NOT_FOUND;\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "The method fails to properly handle supplementary characters, which are represented by surrogate pairs in UTF-16, affecting both the character comparison and the index calculation approach.",
+        "changes": "- Use code point processing instead of character handling\n- Account for surrogate pairs in iteration",
+        "fixed_method": "public static int indexOfAny(CharSequence cs, char[] searchChars) {\n    if (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n        return INDEX_NOT_FOUND;\n    }\n    int csLen = cs.length();\n    int searchLen = searchChars.length;\n    for (int i = 0; i < csLen; i++) {\n        int codePoint = Character.codePointAt(cs, i);\n        int charCount = Character.charCount(codePoint);\n        for (int j = 0; j < searchLen; j++) {\n            if (Character.codePointAt(searchChars, j) == codePoint) {\n                return i;\n            }\n        }\n        if (charCount > 1) { // Skip the next character if it's a surrogate pair\n            i++;\n        }\n    }\n    return INDEX_NOT_FOUND;\n}",
+        "diff": "- Use code point processing instead of character handling\n- Account for surrogate pairs in iteration",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "indexOfAny",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1371,
+          1387
+        ],
+        "original_code": "    // IndexOfAny chars\n    //-----------------------------------------------------------------------\n    /**\n     * <p>Search a CharSequence to find the first index of any\n     * character in the given set of characters.</p>\n     *\n     * <p>A <code>null</code> String will return <code>-1</code>.\n     * A <code>null</code> or zero length search array will return <code>-1</code>.</p>\n     *\n     * <pre>\n     * StringUtils.indexOfAny(null, *)                = -1\n     * StringUtils.indexOfAny(\"\", *)                  = -1\n     * StringUtils.indexOfAny(*, null)                = -1\n     * StringUtils.indexOfAny(*, [])                  = -1\n     * StringUtils.indexOfAny(\"zzabyycdxx\",['z','a']) = 0\n     * StringUtils.indexOfAny(\"zzabyycdxx\",['b','y']) = 3\n     * StringUtils.indexOfAny(\"aba\", ['z'])           = -1\n     * </pre>\n     *\n     * @param cs  the CharSequence to check, may be null\n     * @param searchChars  the chars to search for, may be null\n     * @return the index of any of the chars, -1 if no match or null input\n     * @since 2.0\n     */\n\n    public static int indexOfAny(CharSequence cs, char[] searchChars) {\n        if (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n            return INDEX_NOT_FOUND;\n        }\n        int csLen = cs.length();\n        int searchLen = searchChars.length;\n        for (int i = 0; i < csLen; i++) {\n            char ch = cs.charAt(i);\n            for (int j = 0; j < searchLen; j++) {\n                if (searchChars[j] == ch) {\n                        // ch is a supplementary character\n                        return i;\n                }\n            }\n        }\n        return INDEX_NOT_FOUND;\n    }\n"
+      },
+      {
+        "hypothesis": "The method incorrectly handles multi-byte supplementary characters by not considering them as whole code points, leading to incorrect index calculations.",
+        "changes": "+ Check for surrogate pairs to correctly handle supplementary characters\n+ Adjust index increment to account for multi-byte characters",
+        "fixed_method": "public static int indexOfAny(CharSequence cs, char[] searchChars) {\n    if (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n        return INDEX_NOT_FOUND;\n    }\n    int csLen = cs.length();\n    int searchLen = searchChars.length;\n    for (int i = 0; i < csLen; i++) {\n        int codePoint = Character.codePointAt(cs, i);\n        for (int j = 0; j < searchLen; j++) {\n            if (Character.codePointAt(searchChars, j) == codePoint) {\n                return i;\n            }\n        }\n        i += Character.charCount(codePoint) - 1;\n    }\n    return INDEX_NOT_FOUND;\n}",
+        "diff": "+ Check for surrogate pairs to correctly handle supplementary characters\n+ Adjust index increment to account for multi-byte characters",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "indexOfAny",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1371,
+          1387
+        ],
+        "original_code": "    // IndexOfAny chars\n    //-----------------------------------------------------------------------\n    /**\n     * <p>Search a CharSequence to find the first index of any\n     * character in the given set of characters.</p>\n     *\n     * <p>A <code>null</code> String will return <code>-1</code>.\n     * A <code>null</code> or zero length search array will return <code>-1</code>.</p>\n     *\n     * <pre>\n     * StringUtils.indexOfAny(null, *)                = -1\n     * StringUtils.indexOfAny(\"\", *)                  = -1\n     * StringUtils.indexOfAny(*, null)                = -1\n     * StringUtils.indexOfAny(*, [])                  = -1\n     * StringUtils.indexOfAny(\"zzabyycdxx\",['z','a']) = 0\n     * StringUtils.indexOfAny(\"zzabyycdxx\",['b','y']) = 3\n     * StringUtils.indexOfAny(\"aba\", ['z'])           = -1\n     * </pre>\n     *\n     * @param cs  the CharSequence to check, may be null\n     * @param searchChars  the chars to search for, may be null\n     * @return the index of any of the chars, -1 if no match or null input\n     * @since 2.0\n     */\n\n    public static int indexOfAny(CharSequence cs, char[] searchChars) {\n        if (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n            return INDEX_NOT_FOUND;\n        }\n        int csLen = cs.length();\n        int searchLen = searchChars.length;\n        for (int i = 0; i < csLen; i++) {\n            char ch = cs.charAt(i);\n            for (int j = 0; j < searchLen; j++) {\n                if (searchChars[j] == ch) {\n                        // ch is a supplementary character\n                        return i;\n                }\n            }\n        }\n        return INDEX_NOT_FOUND;\n    }\n"
+      },
+      {
+        "hypothesis": "The method is not correctly handling supplementary characters which are represented by surrogate pairs in UTF-16. These characters need to be processed as full code points instead of individual char units.",
+        "changes": "Modified iteration to parse the CharSequence as code points to correctly handle supplementary characters.",
+        "fixed_method": "public static int indexOfAny(CharSequence cs, char[] searchChars) {\n    if (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n        return INDEX_NOT_FOUND;\n    }\n    int csLen = cs.length();\n    int searchLen = searchChars.length;\n    for (int i = 0; i < csLen; i += Character.charCount(cs.charAt(i))) {\n        int codePoint = Character.codePointAt(cs, i);\n        for (int j = 0; j < searchLen; j++) {\n            if (Character.codePointAt(searchChars, j) == codePoint) {\n                return i;\n            }\n        }\n    }\n    return INDEX_NOT_FOUND;\n}",
+        "diff": "Modified iteration to parse the CharSequence as code points to correctly handle supplementary characters.",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "indexOfAny",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1371,
+          1387
+        ],
+        "original_code": "    // IndexOfAny chars\n    //-----------------------------------------------------------------------\n    /**\n     * <p>Search a CharSequence to find the first index of any\n     * character in the given set of characters.</p>\n     *\n     * <p>A <code>null</code> String will return <code>-1</code>.\n     * A <code>null</code> or zero length search array will return <code>-1</code>.</p>\n     *\n     * <pre>\n     * StringUtils.indexOfAny(null, *)                = -1\n     * StringUtils.indexOfAny(\"\", *)                  = -1\n     * StringUtils.indexOfAny(*, null)                = -1\n     * StringUtils.indexOfAny(*, [])                  = -1\n     * StringUtils.indexOfAny(\"zzabyycdxx\",['z','a']) = 0\n     * StringUtils.indexOfAny(\"zzabyycdxx\",['b','y']) = 3\n     * StringUtils.indexOfAny(\"aba\", ['z'])           = -1\n     * </pre>\n     *\n     * @param cs  the CharSequence to check, may be null\n     * @param searchChars  the chars to search for, may be null\n     * @return the index of any of the chars, -1 if no match or null input\n     * @since 2.0\n     */\n\n    public static int indexOfAny(CharSequence cs, char[] searchChars) {\n        if (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n            return INDEX_NOT_FOUND;\n        }\n        int csLen = cs.length();\n        int searchLen = searchChars.length;\n        for (int i = 0; i < csLen; i++) {\n            char ch = cs.charAt(i);\n            for (int j = 0; j < searchLen; j++) {\n                if (searchChars[j] == ch) {\n                        // ch is a supplementary character\n                        return i;\n                }\n            }\n        }\n        return INDEX_NOT_FOUND;\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "The previous patch overfitted by assuming searchChars contained only single characters and incorrectly checked code points. This fix ensures we correctly iterate over all characters and handle supplementary characters, checking each character in searchChars against the correct code point from cs.",
+        "fixed_method": "public static int indexOfAnyBut(CharSequence cs, char[] searchChars) {\n    if (cs == null || searchChars == null || cs.length() == 0 || searchChars.length == 0) {\n        return -1;\n    }\n    int csLen = cs.length();\n    outer:\n    for (int i = 0; i < csLen; i += Character.isHighSurrogate(cs.charAt(i)) && i + 1 < csLen && Character.isLowSurrogate(cs.charAt(i + 1)) ? 2 : 1) {\n        int codePointCs = Character.codePointAt(cs, i);\n        for (int j = 0; j < searchChars.length; j += Character.isHighSurrogate(searchChars[j]) && j + 1 < searchChars.length && Character.isLowSurrogate(searchChars[j + 1]) ? 2 : 1) {\n            int codePointSearchChar = Character.codePointAt(searchChars, j);\n            if (codePointCs == codePointSearchChar) {\n                continue outer;\n            }\n        }\n        return i;\n    }\n    return -1;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "indexOfAnyBut",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method does not correctly handle supplementary characters, which are not single 16-bit char values and require handling using code points.",
+        "line_numbers": [
+          1528,
+          1545
+        ]
+      },
+      {
+        "hypothesis": "The initial approach didn't handle supplementary characters properly, and it lacked boundary condition checks for surrogate pairs effectively. The refined solution should iterate over code points for both input and character set, handling the supplementary characters properly. Also, provide accurate boundary checks.",
+        "fixed_method": "public static int indexOfAnyBut(CharSequence cs, char[] searchChars) {\n    if (cs == null || searchChars == null) {\n        return -1;\n    }\n    if (cs.length() == 0 || searchChars.length == 0) {\n        return -1;\n    }\n\n    int csLen = cs.length();\n    outer:\n    for (int i = 0; i < csLen; ) {\n        int codePoint = Character.codePointAt(cs, i);\n        for (int j = 0; j < searchChars.length; ) {\n            int searchChar = Character.codePointAt(searchChars, j);\n            if (searchChar == codePoint) {\n                i += Character.charCount(codePoint);\n                continue outer;\n            }\n            j += Character.charCount(searchChar);\n        }\n        return i;\n    }\n    return -1;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "indexOfAnyBut",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method incorrectly handles supplementary characters by treating them as single char values rather than code points.",
+        "line_numbers": [
+          1528,
+          1545
+        ]
+      },
+      {
+        "hypothesis": "The overfitting patch handled surrogate pairs explicitly but overlooked the simplicity and clarity needed for the majority of use cases. We improve robustness by ensuring chars are properly checked without unnecessary complexity for surrogate pair handling, adhering strictly to method specifications.",
+        "fixed_method": "public static int indexOfAnyBut(CharSequence cs, char[] searchChars) {\n    if (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n        return INDEX_NOT_FOUND;\n    }\n    int csLen = cs.length();\n    int searchLen = searchChars.length;\n    outer: for (int i = 0; i < csLen; i++) {\n        char ch = cs.charAt(i);\n        // Check surrogate pairs properly without skipping valid non-surrogate cases\n        boolean isSurrogate = Character.isHighSurrogate(ch) && i + 1 < csLen && Character.isLowSurrogate(cs.charAt(i + 1));\n        if (isSurrogate) {\n            int codePoint = Character.toCodePoint(ch, cs.charAt(i + 1));\n            for (int j = 0; j < searchLen; j++) {\n                    if (Character.isHighSurrogate(searchChars[j]) && j + 1 < searchLen\n                            && Character.isLowSurrogate(searchChars[j + 1])) {\n                        int searchCodePoint = Character.toCodePoint(searchChars[j], searchChars[j + 1]);\n                        if (codePoint == searchCodePoint) {\n                            i++; // Move position forward as a surrogate pair\n                            continue outer;\n                        }\n                    }\n            }\n            return i; // surrogate pair not found\n        } else { // handle regular characters\n            for (int j = 0; j < searchLen; j++) {\n                if (searchChars[j] == ch) {\n                    continue outer;\n                }\n            }\n            return i;\n        }\n    }\n    return INDEX_NOT_FOUND;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "indexOfAnyBut",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method does not properly handle supplementary characters represented by surrogate pairs, causing incorrect index calculations when searching for these characters.",
+        "line_numbers": [
+          1528,
+          1545
+        ]
+      },
+      {
+        "hypothesis": "The original method improperly handled surrogate pairs by treating each character individually rather than considering complete code points. The fix should correctly traverse the input character by character while ensuring that any multi-character code points are handled properly. Null and empty string checks should also be handled gracefully.",
+        "fixed_method": "public static int indexOfAnyBut(CharSequence cs, char[] searchChars) {\n    if (cs == null || cs.length() == 0 || searchChars == null || searchChars.length == 0) {\n        return -1;\n    }\n    int csLen = cs.length();\n    int searchLen = searchChars.length;\n    outer:\n    for (int i = 0; i < csLen; i++) {\n        int ch = Character.codePointAt(cs, i);\n        int charCount = Character.charCount(ch);\n        for (int j = 0; j < searchLen; j++) {\n            if (Character.codePointAt(searchChars, j) == ch) {\n                i += charCount - 1; // skip surrogate pairs\n                continue outer;\n            }\n        }\n        return i;\n    }\n    return -1;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "indexOfAnyBut",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the incorrect handling of supplementary characters, which consist of two Java chars (surrogate pairs). The loop is iterating one char at a time, which is insufficient for determining code points in supplementary characters.",
+        "line_numbers": [
+          1528,
+          1545
+        ]
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Lang-30/"
+}

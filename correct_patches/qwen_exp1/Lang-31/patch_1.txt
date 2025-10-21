@@ -1,0 +1,22 @@
+File: src/main/java/org/apache/commons/lang3/StringUtils.java
+Method: StringUtils.containsAny
+
+public static boolean containsAny(CharSequence cs, char[] searchChars) {
+    if (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {
+        return false;
+    }
+    int csLength = cs.length();
+    int searchLength = searchChars.length;
+    for (int i = 0; i < csLength; ) {
+        int ch = Character.codePointAt(cs, i);
+        i += Character.charCount(ch);
+        for (int j = 0; j < searchLength; ) {
+            int searchChar = Character.codePointAt(searchChars, j);
+            j += Character.charCount(searchChar);
+            if (ch == searchChar) {
+                return true;
+            }
+        }
+    }
+    return false;
+}

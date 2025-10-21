@@ -1,0 +1,48 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "containsNone_CharSequencechar[]_org.apache.commons.lang3.StringUtils"
+    ],
+    "tests": [
+      "org.apache.commons.lang3.StringUtilsEqualsIndexOfTest::testContainsNone_CharArrayWithBadSupplementaryChars",
+      "org.apache.commons.lang3.StringUtilsEqualsIndexOfTest::testContainsNone_CharArrayWithSupplementaryChars",
+      "org.apache.commons.lang3.StringUtilsEqualsIndexOfTest::testContainsNone_StringWithBadSupplementaryChars",
+      "org.apache.commons.lang3.StringUtilsEqualsIndexOfTest::testContainsNone_StringWithSupplementaryChars"
+    ]
+  },
+  "Group_2": {
+    "buggy_methods": [
+      "containsAny_CharSequenceString_org.apache.commons.lang3.StringUtils",
+      "containsAny_CharSequencechar[]_org.apache.commons.lang3.StringUtils"
+    ],
+    "tests": [
+      "org.apache.commons.lang3.StringUtilsEqualsIndexOfTest::testContainsAny_StringCharArrayWithBadSupplementaryChars",
+      "org.apache.commons.lang3.StringUtilsEqualsIndexOfTest::testContainsAny_StringWithBadSupplementaryChars"
+    ]
+  },
+  "Group_3": {
+    "buggy_methods": [
+      "indexOfAnyBut_StringString_org.apache.commons.lang3.StringUtils"
+    ],
+    "tests": [
+      "org.apache.commons.lang3.StringUtilsEqualsIndexOfTest::testIndexOfAnyBut_StringStringWithSupplementaryChars"
+    ]
+  },
+  "Group_4": {
+    "buggy_methods": [
+      "indexOfAny_CharSequencechar[]_org.apache.commons.lang3.StringUtils"
+    ],
+    "tests": [
+      "org.apache.commons.lang3.StringUtilsEqualsIndexOfTest::testIndexOfAny_StringCharArrayWithSupplementaryChars",
+      "org.apache.commons.lang3.StringUtilsEqualsIndexOfTest::testIndexOfAny_StringStringWithSupplementaryChars"
+    ]
+  },
+  "Group_5": {
+    "buggy_methods": [
+      "indexOfAnyBut_CharSequencechar[]_org.apache.commons.lang3.StringUtils"
+    ],
+    "tests": [
+      "org.apache.commons.lang3.StringUtilsEqualsIndexOfTest::testIndexOfAnyBut_StringCharArrayWithSupplementaryChars"
+    ]
+  }
+}

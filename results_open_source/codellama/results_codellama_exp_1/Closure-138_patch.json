@@ -1,0 +1,29 @@
+{
+  "bug_id": "Closure-138",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-138_1772724341",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method is incorrectly checking whether the parameter is an object, rather than checking whether it is null.",
+        "changes": "- if (paramType != null) {\n+ if (param != null) {",
+        "fixed_method": "public FlowScope getPreciserScopeKnowingConditionOutcome(Node condition, FlowScope blindScope, boolean outcome) {\n  if (condition.getType() == CALL && condition.getChildCount() == 2) {\n    Node callee = condition.getFirstChild();\n    Node param = condition.getLastChild();\n    if (callee.getType() == GETPROP && param.isQualifiedName()) {\n      JSType paramType = getTypeIfRefinable(param, blindScope);\n      if (param != null) {\n        Node left = callee.getFirstChild();\n        Node right = callee.getLastChild();\n        if (left.getType() == NAME && \"goog\".equals(left.getString()) && right.getType() == STRING) {\n          Function<TypeRestriction, JSType> restricter = restricters.get(right.getString());\n          if (restricter != null) {\n            return restrictParameter(param, paramType, blindScope, restricter, outcome);\n          }\n        }\n      }\n    }\n  }\n  return nextPreciserScopeKnowingConditionOutcome(condition, blindScope, outcome);\n}",
+        "diff": "- if (paramType != null) {\n+ if (param != null) {",
+        "file_path": "src/com/google/javascript/jscomp/ClosureReverseAbstractInterpreter.java",
+        "method_name": "getPreciserScopeKnowingConditionOutcome",
+        "class_name": "ClosureReverseAbstractInterpreter",
+        "iteration": 5,
+        "is_multi_method": false,
+        "line_numbers": [
+          200,
+          225
+        ],
+        "original_code": "\n  @Override\n  public FlowScope getPreciserScopeKnowingConditionOutcome(Node condition,\n      FlowScope blindScope, boolean outcome) {\n    if (condition.getType() == CALL && condition.getChildCount() == 2) {\n      Node callee = condition.getFirstChild();\n      Node param = condition.getLastChild();\n      if (callee.getType() == GETPROP && param.isQualifiedName()) {\n        JSType paramType =  getTypeIfRefinable(param, blindScope);\n        if (paramType != null) {\n        Node left = callee.getFirstChild();\n        Node right = callee.getLastChild();\n        if (left.getType() == NAME && \"goog\".equals(left.getString()) &&\n            right.getType() == STRING) {\n          Function<TypeRestriction, JSType> restricter =\n              restricters.get(right.getString());\n          if (restricter != null) {\n            return restrictParameter(param, paramType, blindScope, restricter,\n                outcome);\n            }\n          }\n        }\n      }\n    }\n    return nextPreciserScopeKnowingConditionOutcome(\n        condition, blindScope, outcome);\n  }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Closure-138/"
+}

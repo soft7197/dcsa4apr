@@ -1,0 +1,44 @@
+File: src/org/mockito/internal/configuration/injection/FinalMockCandidateFilter.java
+Method: FinalMockCandidateFilter.thenInject
+
+public OngoingInjecter filterCandidate(final Collection<Object> mocks, final Field field, final Object fieldInstance) {
+    if (mocks.size() == 1) {
+        final Object matchingMock = mocks.iterator().next();
+        return new OngoingInjecter() {
+            public boolean thenInject() {
+                try {
+                    // Construct potential setter name
+                    String setterName = "set" + Character.toUpperCase(field.getName().charAt(0)) + field.getName().substring(1);
+                    java.lang.reflect.Method setter = null;
+                    
+                    // Look for the method within class hierarchy
+                    Class<?> clazz = fieldInstance.getClass();
+                    while (clazz != null) {
+                        try {
+                            setter = clazz.getDeclaredMethod(setterName, field.getType());
+                            break;
+                        } catch (NoSuchMethodException e) {
+                            clazz = clazz.getSuperclass();
+                        }
+                    }
+                    
+                    // Check if setter is found and has correct access
+                    if (setter != null && java.lang.reflect.Modifier.isPublic(setter.getModifiers())) {
+                        setter.invoke(fieldInstance, matchingMock);
+                    } else {
+                        // If no accessible setter found, use field injection
+                        new FieldSetter(fieldInstance, field).set(matchingMock);
+                    }
+                } catch (Exception e) {
+                    throw new MockitoException("Problems injecting dependency in " + field.getName(), e);
+                }
+                return true;
+            }
+        };
+    }
+    return new OngoingInjecter() {
+        public boolean thenInject() {
+            return false;
+        }
+    };
+}

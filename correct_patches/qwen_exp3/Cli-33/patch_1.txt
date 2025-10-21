@@ -1,0 +1,16 @@
+File: src/main/java/org/apache/commons/cli/HelpFormatter.java
+Method: HelpFormatter.printWrapped
+
+public void printWrapped(PrintWriter pw, int width, int nextLineTabStop, String text)
+    {
+        StringBuffer sb = new StringBuffer(text.length());
+
+        String[] lines = text.split("\n");
+        for (int i = 0; i < lines.length; i++) {
+            renderWrappedText(sb, width, nextLineTabStop, lines[i]);
+            if (i < lines.length - 1) {
+                sb.append("\n");
+            }
+        }
+        pw.println(sb.toString());
+    }

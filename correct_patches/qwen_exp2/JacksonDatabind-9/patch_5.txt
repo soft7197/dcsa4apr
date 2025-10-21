@@ -1,0 +1,24 @@
+File: src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializer.java
+Method: StdKeySerializer.serialize
+
+public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+    if (value == null) {
+        jgen.writeFieldName("null");
+        return;
+    }
+
+    if (value instanceof Date) {
+        provider.defaultSerializeDateKey((Date) value, jgen);
+        return;
+    }
+
+    String str;
+    if (value instanceof Class) {
+        str = ((Class<?>) value).getCanonicalName();
+    } else if (value instanceof Enum) {
+        str = ((Enum<?>) value).name();
+    } else {
+        str = value.toString();
+    }
+    jgen.writeFieldName(str);
+}

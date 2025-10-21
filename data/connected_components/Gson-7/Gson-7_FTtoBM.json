@@ -1,0 +1,20 @@
+{
+  "com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedLongKeys": [
+    {
+      "buggy_method": "nextLong",
+      "class": "com.google.gson.stream.JsonReader"
+    }
+  ],
+  "com.google.gson.functional.MapTest::testMapDeserializationWithUnquotedIntegerKeys": [
+    {
+      "buggy_method": "nextInt",
+      "class": "com.google.gson.stream.JsonReader"
+    }
+  ],
+  "com.google.gson.stream.JsonReaderTest::testPeekingUnquotedStringsPrefixedWithIntegers": [
+    {
+      "buggy_method": "nextInt",
+      "class": "com.google.gson.stream.JsonReader"
+    }
+  ]
+}

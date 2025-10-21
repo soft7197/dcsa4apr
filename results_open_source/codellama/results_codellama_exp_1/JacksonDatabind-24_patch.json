@@ -1,0 +1,37 @@
+{
+  "bug_id": "JacksonDatabind-24",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-24_1772695982",
+  "patches": [
+    [
+      {
+        "hypothesis": "Introduced a generalized way to handle the null DateFormat without hardcoding the TimeZone",
+        "fixed_method": "public BaseSettings withDateFormat(DateFormat df) {\n    if (df != null) return this;\n    TimeZone tz = (df == null) ? _timeZone : df.getTimeZone();\n    return new BaseSettings(_classIntrospector, _annotationIntrospector, _visibilityChecker, _propertyNamingStrategy, _typeFactory, _typeResolverBuilder, df, _handlerInstantiator, _locale, tz, _defaultBase64);\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/cfg/BaseSettings.java",
+        "method_name": "withDateFormat",
+        "class_name": "BaseSettings",
+        "iteration": 2,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "the if statement was not checking for null correctly",
+        "line_numbers": [
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238
+        ]
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/JacksonDatabind-24/"
+}

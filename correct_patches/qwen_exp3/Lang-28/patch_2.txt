@@ -1,0 +1,58 @@
+File: src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java
+Method: NumericEntityUnescaper.translate
+
+public int translate(CharSequence input, int index, Writer out) throws IOException {
+    // Check for null input
+    if (input == null || index < 0 || index >= input.length() - 1) {
+        return 0;
+    }
+
+    // Check for '&#'
+    if (input.charAt(index) == '&' && input.charAt(index + 1) == '#') {
+        int start = index + 2;
+        boolean isHex = false;
+
+        // Check for 'x' or 'X' indicating hex
+        if (start < input.length()) {
+            char firstChar = input.charAt(start);
+            if (firstChar == 'x' || firstChar == 'X') {
+                start++;
+                isHex = true;
+            }
+        }
+
+        int end = start;
+        // Find the position of the semicolon
+        while (end < input.length() && input.charAt(end) != ';') {
+            end++;
+        }
+
+        // If no semicolon is found, return 0
+        if (end >= input.length()) {
+            return 0;
+        }
+
+        int entityValue;
+        try {
+            if (isHex) {
+                entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 16);
+            } else {
+                entityValue = Integer.parseInt(input.subSequence(start, end).toString(), 10);
+            }
+        } catch (NumberFormatException nfe) {
+            return 0;
+        }
+
+        // Write the entity value to the output
+        if (entityValue > Character.MAX_VALUE) {
+            int highSurrogate = Character.highSurrogate(entityValue);
+            int lowSurrogate = Character.lowSurrogate(entityValue);
+            out.write(highSurrogate);
+            out.write(lowSurrogate);
+        } else {
+            out.write(entityValue);
+        }
+        return 2 + (end - start) + (isHex ? 1 : 0) + 1;
+    }
+    return 0;
+}

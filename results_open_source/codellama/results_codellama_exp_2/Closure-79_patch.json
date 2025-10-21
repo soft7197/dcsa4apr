@@ -1,0 +1,29 @@
+{
+  "bug_id": "Closure-79",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-79_1772809039",
+  "patches": [
+    [
+      {
+        "hypothesis": "compiler.reportCodeChange() should have been called",
+        "changes": "+ compiler.reportCodeChange();",
+        "fixed_method": "private void createSynthesizedExternVar(String varName) {\n   Node nameNode = Node.newString(Token.NAME, varName);\n\n   // Mark the variable as constant if it matches the coding convention\n   // NOTE(nicksantos): honestly, i'm not sure how much this matters.\n   // AFAIK, all people who use the CONST coding convention also\n   // compile with undeclaredVars as errors. We have some test\n   // cases for this configuration though, and it makes them happier.\n   if (compiler.getCodingConvention().isConstant(varName)) {\n     nameNode.putBooleanProp(Node.IS_CONSTANT_NAME, true);\n   }\n\n   getSynthesizedExternsRoot().addChildToBack(\n       new Node(Token.VAR, nameNode));\n   varsToDeclareInExterns.remove(varName);\n\n   compiler.reportCodeChange();\n }",
+        "diff": "+ compiler.reportCodeChange();",
+        "file_path": "src/com/google/javascript/jscomp/VarCheck.java",
+        "method_name": "createSynthesizedExternVar",
+        "class_name": "VarCheck",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          205,
+          221
+        ],
+        "original_code": "  /**\n   * Create a new variable in a synthetic script. This will prevent\n   * subsequent compiler passes from crashing.\n   */\n\n  private void createSynthesizedExternVar(String varName) {\n    Node nameNode = Node.newString(Token.NAME, varName);\n\n    // Mark the variable as constant if it matches the coding convention\n    // for constant vars.\n    // NOTE(nicksantos): honestly, i'm not sure how much this matters.\n    // AFAIK, all people who use the CONST coding convention also\n    // compile with undeclaredVars as errors. We have some test\n    // cases for this configuration though, and it makes them happier.\n    if (compiler.getCodingConvention().isConstant(varName)) {\n      nameNode.putBooleanProp(Node.IS_CONSTANT_NAME, true);\n    }\n\n    getSynthesizedExternsRoot().addChildToBack(\n        new Node(Token.VAR, nameNode));\n    varsToDeclareInExterns.remove(varName);\n  }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Closure-79/"
+}

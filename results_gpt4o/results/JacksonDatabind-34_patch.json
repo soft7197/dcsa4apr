@@ -1,0 +1,97 @@
+{
+  "bug_id": "JacksonDatabind-34",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-34_1773118843",
+  "patches": [
+    [
+      {
+        "hypothesis": "The 'acceptJsonFormatVisitor' method incorrectly handles BigDecimal types as BIG_INTEGER instead of BIG_DECIMAL when calling 'visitFloatFormat'.",
+        "changes": "- visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n+ visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_DECIMAL);",
+        "fixed_method": "public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException {\n    if (_isInt) {\n        visitIntFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n    } else {\n        Class<?> h = handledType();\n        if (h == BigDecimal.class) {\n            visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_DECIMAL);\n        } else {\n            visitor.expectNumberFormat(typeHint);\n        }\n    }\n}",
+        "diff": "- visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n+ visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_DECIMAL);",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+        "method_name": "acceptJsonFormatVisitor",
+        "class_name": "NumberSerializer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87
+        ],
+        "original_code": "// We'll have to use fallback \"untyped\" number write method\npublic void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException\n{\n    if (_isInt) {\n        visitIntFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n    } else {\n        Class<?> h = handledType();\n        if (h == BigDecimal.class) {\n            visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n        } else {\n            // otherwise bit unclear what to call... but let's try:\n            /*JsonNumberFormatVisitor v2 =*/ visitor.expectNumberFormat(typeHint);\n        }\n    }\n}"
+      },
+      {
+        "hypothesis": "The method is incorrectly treating BigDecimal as BigInteger in `visitFloatFormat`. The wrong JsonParser.NumberType is being used.",
+        "changes": "- visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n+ visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_DECIMAL);",
+        "fixed_method": "public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException {\n    if (_isInt) {\n        visitIntFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n    } else {\n        Class<?> h = handledType();\n        if (h == BigDecimal.class) {\n            visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_DECIMAL);\n        } else {\n            /*JsonNumberFormatVisitor v2 =*/ visitor.expectNumberFormat(typeHint);\n        }\n    }\n}",
+        "diff": "- visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n+ visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_DECIMAL);",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+        "method_name": "acceptJsonFormatVisitor",
+        "class_name": "NumberSerializer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87
+        ],
+        "original_code": "// We'll have to use fallback \"untyped\" number write method\npublic void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException\n{\n    if (_isInt) {\n        visitIntFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n    } else {\n        Class<?> h = handledType();\n        if (h == BigDecimal.class) {\n            visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n        } else {\n            // otherwise bit unclear what to call... but let's try:\n            /*JsonNumberFormatVisitor v2 =*/ visitor.expectNumberFormat(typeHint);\n        }\n    }\n}"
+      },
+      {
+        "hypothesis": "The method incorrectly used a BIG_INTEGER type for BigDecimal. It should use BIG_DECIMAL for BigDecimal.",
+        "changes": "- visitFloatFormat with JsonParser.NumberType.BIG_INTEGER \n+ visitFloatFormat with JsonParser.NumberType.BIG_DECIMAL",
+        "fixed_method": "public void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException {\n    if (_isInt) {\n        visitIntFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n    } else {\n        Class<?> h = handledType();\n        if (h == BigDecimal.class) {\n            visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_DECIMAL);\n        } else {\n            // otherwise bit unclear what to call... but let's try:\n            /*JsonNumberFormatVisitor v2 =*/ visitor.expectNumberFormat(typeHint);\n        }\n    }\n}",
+        "diff": "- visitFloatFormat with JsonParser.NumberType.BIG_INTEGER \n+ visitFloatFormat with JsonParser.NumberType.BIG_DECIMAL",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/std/NumberSerializer.java",
+        "method_name": "acceptJsonFormatVisitor",
+        "class_name": "NumberSerializer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87
+        ],
+        "original_code": "// We'll have to use fallback \"untyped\" number write method\npublic void acceptJsonFormatVisitor(JsonFormatVisitorWrapper visitor, JavaType typeHint) throws JsonMappingException\n{\n    if (_isInt) {\n        visitIntFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n    } else {\n        Class<?> h = handledType();\n        if (h == BigDecimal.class) {\n            visitFloatFormat(visitor, typeHint, JsonParser.NumberType.BIG_INTEGER);\n        } else {\n            // otherwise bit unclear what to call... but let's try:\n            /*JsonNumberFormatVisitor v2 =*/ visitor.expectNumberFormat(typeHint);\n        }\n    }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-34/"
+}

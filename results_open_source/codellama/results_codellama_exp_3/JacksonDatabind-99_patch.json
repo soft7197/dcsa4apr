@@ -1,0 +1,36 @@
+{
+  "bug_id": "JacksonDatabind-99",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-99_1772906543",
+  "patches": [
+    [
+      {
+        "hypothesis": "The suggested refinements will address the overfitting issues while maintaining test-passing behavior and handling general cases effectively.",
+        "fixed_method": "protected String buildCanonicalName() {\n if (_referencedType == null) {\n return _class.getName();\n }\n return _class.getName() + \"<\" + _referencedType.toCanonical() + \">\";\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/type/ReferenceType.java",
+        "method_name": "buildCanonicalName",
+        "class_name": "ReferenceType",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the missing supertypes in the `buildCanonicalName` method.",
+        "line_numbers": [
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-99/"
+}

@@ -1,0 +1,17 @@
+File: src/java/org/apache/commons/math/distribution/FDistributionImpl.java
+Method: FDistributionImpl.getInitialDomain
+
+protected double getInitialDomain(double p) {
+    double ret;
+    double d = getDenominatorDegreesOfFreedom();
+    if (d <= 2.0) {
+        // Handle the edge case where d is less than or equal to 2
+        // For example, we can return a default value or use a different formula
+        // Here, we choose to return a default value of 0.5 as a placeholder
+        ret = 0.5;
+    } else {
+        // Use the mean formula for valid d
+        ret = d / (d - 2.0);
+    }
+    return ret;
+}

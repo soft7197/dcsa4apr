@@ -1,0 +1,24 @@
+{
+  "com.google.javascript.jscomp.CheckUnreachableCodeTest::testInstanceOfThrowsException": [
+    {
+      "buggy_method": "mayThrowException",
+      "class": "com.google.javascript.jscomp.ControlFlowAnalysis"
+    }
+  ],
+  "com.google.javascript.jscomp.ControlFlowAnalysisTest::testInstanceOf": [
+    {
+      "buggy_method": "mayThrowException",
+      "class": "com.google.javascript.jscomp.ControlFlowAnalysis"
+    }
+  ],
+  "com.google.javascript.jscomp.DisambiguatePropertiesTest::testSupertypeReferenceOfSubtypeProperty": [
+    {
+      "buggy_method": "mayThrowException",
+      "class": "com.google.javascript.jscomp.ControlFlowAnalysis"
+    },
+    {
+      "buggy_method": "getTypeWithProperty",
+      "class": "com.google.javascript.jscomp.DisambiguateProperties"
+    }
+  ]
+}

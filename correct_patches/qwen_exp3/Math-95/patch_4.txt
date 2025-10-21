@@ -1,0 +1,15 @@
+File: src/java/org/apache/commons/math/distribution/FDistributionImpl.java
+Method: FDistributionImpl.getInitialDomain
+
+protected double getInitialDomain(double p) {
+    double ret;
+    double d = getDenominatorDegreesOfFreedom();
+    if (d <= 2.0) {
+        // For small d, use an approximation or alternative formula
+        // Here, we use a simple approximation based on the limit behavior
+        ret = d / 2.0;
+    } else {
+        ret = d / (d - 2.0);
+    }
+    return ret;
+}

@@ -1,0 +1,11 @@
+File: src/main/java/org/jsoup/nodes/DocumentType.java
+Method: DocumentType.DocumentType
+
+public DocumentType(String name, String publicId, String systemId, String baseUri) {
+    super(baseUri);
+
+    Validate.notNull(name); // Changed from notEmpty to notNull to allow empty names
+    attr("name", name);
+    attr("publicId", publicId);
+    attr("systemId", systemId);
+}

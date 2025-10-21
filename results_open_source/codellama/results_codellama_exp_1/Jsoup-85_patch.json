@@ -1,0 +1,77 @@
+{
+  "bug_id": "Jsoup-85",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-85_1772700960",
+  "patches": [
+    [
+      {
+        "hypothesis": "Fix the actual root cause, not symptoms",
+        "fixed_method": "public Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    this.val = val;\n    this.parent = parent;\n    if (this.key.isEmpty()) {\n        throw new IllegalArgumentException(\"Key cannot be empty\");\n    }\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/nodes/Attribute.java",
+        "method_name": "Attribute",
+        "class_name": "Attribute",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The key validation was not properly checking for empty values.",
+        "line_numbers": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ]
+      },
+      {
+        "hypothesis": "The bug is caused by the `Validate.notEmpty(key)` call, which is checking the length of the trimmed key instead of the original key. The fix is to change the order of the `trim()` and `notEmpty()` calls.",
+        "changes": "+ Validate.notEmpty(key) + key = key.trim() - key.trim() - Validate.notEmpty(key)",
+        "fixed_method": "public Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    key = key.trim();\n    Validate.notEmpty(key);\n    this.key = key;\n    this.val = val;\n    this.parent = parent;\n}",
+        "diff": "+ Validate.notEmpty(key) + key = key.trim() - key.trim() - Validate.notEmpty(key)",
+        "file_path": "src/main/java/org/jsoup/nodes/Attribute.java",
+        "method_name": "Attribute",
+        "class_name": "Attribute",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "original_code": "/**\n* Create a new attribute from unencoded (raw) key and value.\n* @param key attribute key; case is preserved.\n* @param value attribute value\n* @see #createFromEncoded\n*/\npublic Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(key); // trimming could potentially make empty, so validate here\n    this.val = val;\n    this.parent = parent;\n}"
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public Attribute(String key, String val, Attributes parent) {\n Validate.notNull(key);\n this.key = key.trim();\n if (this.key.isEmpty()) throw new IllegalArgumentException(\"key must not be empty\");\n this.val = val;\n this.parent = parent;\n}",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/nodes/Attribute.java",
+        "method_name": "Attribute",
+        "class_name": "Attribute",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "original_code": "/**\n* Create a new attribute from unencoded (raw) key and value.\n* @param key attribute key; case is preserved.\n* @param value attribute value\n* @see #createFromEncoded\n*/\npublic Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(key); // trimming could potentially make empty, so validate here\n    this.val = val;\n    this.parent = parent;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-85/"
+}

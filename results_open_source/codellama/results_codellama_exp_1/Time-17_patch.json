@@ -1,0 +1,45 @@
+{
+  "bug_id": "Time-17",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Time-17_1772712136",
+  "patches": [
+    [
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public long adjustOffset(long instant, boolean earlierOrLater) {\n    // a bit messy, but will work in all non-pathological cases\n    \n    // evaluate 3 hours before and after to work out if anything is happening\n    long instantBefore = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_DAY);\n    long instantAfter = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_DAY);\n    if (instantBefore == instantAfter) {\n        return instant;  // not an overlap (less than is a gap, equal is normal case)\n    }\n    \n    // work out range of instants that have duplicate local times\n    long local = convertUTCToLocal(instant);\n    return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n}",
+        "diff": "",
+        "file_path": "src/main/java/org/joda/time/DateTimeZone.java",
+        "method_name": "adjustOffset",
+        "class_name": "DateTimeZone",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          1163,
+          1164,
+          1165,
+          1166,
+          1167,
+          1168,
+          1169,
+          1170,
+          1171,
+          1172,
+          1173,
+          1174,
+          1175,
+          1176,
+          1177,
+          1178,
+          1179,
+          1180
+        ],
+        "original_code": "/**\n* Adjusts the offset to be the earlier or later one during an overlap.\n*\n* @param instant  the instant to adjust\n* @param earlierOrLater  false for earlier, true for later\n* @return the adjusted instant millis\n*/\npublic long adjustOffset(long instant, boolean earlierOrLater) {\n    // a bit messy, but will work in all non-pathological cases\n    \n    // evaluate 3 hours before and after to work out if anything is happening\n    long instantBefore = convertUTCToLocal(instant - 3 * DateTimeConstants.MILLIS_PER_HOUR);\n    long instantAfter = convertUTCToLocal(instant + 3 * DateTimeConstants.MILLIS_PER_HOUR);\n    if (instantBefore == instantAfter) {\n        return instant;  // not an overlap (less than is a gap, equal is normal case)\n    }\n    \n    // work out range of instants that have duplicate local times\n    long local = convertUTCToLocal(instant);\n    return convertLocalToUTC(local, false, earlierOrLater ? instantAfter : instantBefore);\n    \n    // calculate result\n      // currently in later offset\n      // currently in earlier offset\n}"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Time-17/"
+}

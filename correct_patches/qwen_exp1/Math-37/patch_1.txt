@@ -1,0 +1,32 @@
+File: src/main/java/org/apache/commons/math/complex/Complex.java
+Method: Complex.tanh
+
+public Complex tanh() {
+    if (isNaN || Double.isNaN(real) || Double.isNaN(imaginary)) {
+        return NaN;
+    }
+    double real2 = 2.0 * real;
+    double imaginary2 = 2.0 * imaginary;
+    double cosh2a = FastMath.cosh(real2);
+    double cos2b = FastMath.cos(imaginary2);
+    double sinh2a = FastMath.sinh(real2);
+    double sin2b = FastMath.sin(imaginary2);
+    double d = cosh2a + cos2b;
+
+    if (Double.isInfinite(real)) {
+        if (Double.isInfinite(imaginary)) {
+            return NaN;
+        } else {
+            return createComplex(FastMath.copySign(1.0, real), 0.0);
+        }
+    } else if (Double.isInfinite(imaginary)) {
+        if (FastMath.abs(cos2b) < 1e-10) { // cos(2b) is effectively zero
+            return createComplex(0.0, FastMath.copySign(Double.POSITIVE_INFINITY, sin2b));
+        }
+        return NaN;
+    } else if (Double.isInfinite(d)) {
+        return createComplex(FastMath.copySign(1.0, sinh2a), 0.0);
+    }
+
+    return createComplex(sinh2a / d, sin2b / d);
+}

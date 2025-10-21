@@ -1,0 +1,59 @@
+{
+  "bug_id": "JacksonDatabind-67",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-67_1772004216",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined fix simplifies the nested checks for 'deser == null' and ensures proper null handling and edge cases are covered without introducing redundant checks.",
+        "fixed_method": "public KeyDeserializer createKeyDeserializer(DeserializationContext ctxt,\n        JavaType type)\n    throws JsonMappingException\n{\n    final DeserializationConfig config = ctxt.getConfig();\n    KeyDeserializer deser = null;\n    if (_factoryConfig.hasKeyDeserializers()) {\n        BeanDescription beanDesc = config.introspectClassAnnotations(type.getRawClass());\n        for (KeyDeserializers d  : _factoryConfig.keyDeserializers()) {\n            deser = d.findKeyDeserializer(type, config, beanDesc);\n            if (deser != null) {\n                break;\n            }\n        }\n    }\n    if (deser == null) {\n        if (type.isEnumType()) {\n            deser = _createEnumKeyDeserializer(ctxt, type);\n        } else {\n            deser = StdKeyDeserializers.findStringBasedKeyDeserializer(config, type);\n        }\n    }\n    if (deser != null && _factoryConfig.hasDeserializerModifiers()) {\n        for (BeanDeserializerModifier mod : _factoryConfig.deserializerModifiers()) {\n            deser = mod.modifyKeyDeserializer(config, type, deser);\n        }\n    }\n    return deser;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/BasicDeserializerFactory.java",
+        "method_name": "createKeyDeserializer",
+        "class_name": "BasicDeserializerFactory",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue arises because the custom enum key deserializer is not being used correctly. The method should prioritize using a custom key deserializer if available, especially when dealing with enums.",
+        "line_numbers": [
+          1385,
+          1386,
+          1387,
+          1388,
+          1389,
+          1390,
+          1391,
+          1392,
+          1393,
+          1394,
+          1395,
+          1396,
+          1397,
+          1398,
+          1399,
+          1400,
+          1401,
+          1402,
+          1403,
+          1404,
+          1405,
+          1406,
+          1407,
+          1408,
+          1409,
+          1410,
+          1411,
+          1412,
+          1413,
+          1414,
+          1415,
+          1416
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-67/"
+}

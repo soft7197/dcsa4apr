@@ -1,0 +1,22 @@
+File: src/main/java/org/apache/commons/math3/linear/OpenMapRealVector.java
+Method: OpenMapRealVector.ebeMultiply
+
+@Override
+public OpenMapRealVector ebeMultiply(RealVector v) {
+    checkVectorDimensions(v.getDimension());
+    OpenMapRealVector res = new OpenMapRealVector(this);
+    for (int i = 0; i < v.getDimension(); i++) {
+        double value1 = this.getEntry(i);
+        double value2 = v.getEntry(i);
+        double result;
+        if (Double.isNaN(value1) || Double.isNaN(value2)) {
+            result = Double.NaN;
+        } else if (Double.isInfinite(value1) || Double.isInfinite(value2)) {
+            result = (value1 == 0 || value2 == 0) ? Double.NaN : value1 * value2;
+        } else {
+            result = value1 * value2;
+        }
+        res.setEntry(i, result);
+    }
+    return res;
+}

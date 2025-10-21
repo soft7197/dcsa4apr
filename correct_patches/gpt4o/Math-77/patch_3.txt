@@ -1,0 +1,12 @@
+File: src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java
+Method: OpenMapRealVector.getLInfNorm
+
+public double getLInfNorm() {
+    double max = 0;
+    Iterator iter = entries.iterator();
+    while (iter.hasNext()) {
+        iter.advance();
+        max = Math.max(max, Math.abs(iter.value()));
+    }
+    return max;
+}

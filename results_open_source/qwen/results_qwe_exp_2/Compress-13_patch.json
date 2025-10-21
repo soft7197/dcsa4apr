@@ -1,0 +1,30 @@
+{
+  "bug_id": "Compress-13",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Compress-13_1771931152",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue arises because backslashes in the entry name are not being replaced with forward slashes as expected. The previous attempt failed due to incorrect syntax for escaping characters in Java strings.",
+        "changes": "- this.name = name;\n+ this.name = name.replace('\\', '/');",
+        "fixed_method": "protected void setName(String name) {\n    this.name = name.replace('\\\\', '/');\n}",
+        "diff": "- this.name = name;\n+ this.name = name.replace('\\', '/');",
+        "file_path": "src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveEntry.java",
+        "method_name": "setName",
+        "class_name": "ZipArchiveEntry",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          511,
+          512,
+          513
+        ],
+        "original_code": "/**\n* Set the name of the entry.\n* @param name the name to use\n*/\nprotected void setName(String name) {\n    this.name = name;\n}"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Compress-13/"
+}

@@ -1,0 +1,6 @@
+File: src/java/org/apache/commons/codec/binary/Base64.java
+Method: Base64.encodeBase64String
+
+public static String encodeBase64String(byte[] binaryData) {
+  return StringUtils.newStringUtf8(encodeBase64(binaryData, false));
+}

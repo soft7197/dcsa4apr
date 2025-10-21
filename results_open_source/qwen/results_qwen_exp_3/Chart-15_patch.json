@@ -1,0 +1,43 @@
+{
+  "bug_id": "Chart-15",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-15_1772026441",
+  "patches": [
+    {
+      "hypothesis": "The test fails because the code does not handle a null dataset properly. Specifically, getMaximumExplodePercent should return 0 when the dataset is null, and initialise should handle the case where the dataset is null without throwing an exception.",
+      "changes": "- if (this.dataset == null) {\n-     return 0.0;\n- }\n+ if (plot.getDataset() != null) {\n+     state.setTotal(DatasetUtilities.calculatePieDatasetTotal(plot.getDataset()));\n+ } else {\n+     state.setTotal(0);\n+ }",
+      "methods": {
+        "source/org/jfree/chart/plot/PiePlot.java::PiePlot::getMaximumExplodePercent::L1377": {
+          "file_path": "source/org/jfree/chart/plot/PiePlot.java",
+          "method_name": "getMaximumExplodePercent",
+          "class_name": "PiePlot",
+          "line_numbers": [
+            1377,
+            1388
+          ],
+          "original_code": "    /**\n     * Returns the maximum explode percent.\n     * \n     * @return The percent.\n     */\n\n    public double getMaximumExplodePercent() {\n        double result = 0.0;\n        Iterator iterator = this.dataset.getKeys().iterator();\n        while (iterator.hasNext()) {\n            Comparable key = (Comparable) iterator.next();\n            Number explode = (Number) this.explodePercentages.get(key);\n            if (explode != null) {\n                result = Math.max(result, explode.doubleValue());   \n            }\n        }\n        return result;\n    }\n",
+          "fixed_method": "public double getMaximumExplodePercent() {\n    if (this.dataset == null) {\n        return 0.0;\n    }\n    double result = 0.0;\n    Iterator iterator = this.dataset.getKeys().iterator();\n    while (iterator.hasNext()) {\n        Comparable key = (Comparable) iterator.next();\n        Number explode = (Number) this.explodePercentages.get(key);\n        if (explode != null) {\n            result = Math.max(result, explode.doubleValue());   \n        }\n    }\n    return result;\n}",
+          "iteration": 1
+        },
+        "source/org/jfree/chart/plot/PiePlot.java::PiePlot::initialise::L2046": {
+          "file_path": "source/org/jfree/chart/plot/PiePlot.java",
+          "method_name": "initialise",
+          "class_name": "PiePlot",
+          "line_numbers": [
+            2046,
+            2056
+          ],
+          "original_code": "    /**\n     * Initialises the drawing procedure.  This method will be called before \n     * the first item is rendered, giving the plot an opportunity to initialise\n     * any state information it wants to maintain.\n     *\n     * @param g2  the graphics device.\n     * @param plotArea  the plot area (<code>null</code> not permitted).\n     * @param plot  the plot.\n     * @param index  the secondary index (<code>null</code> for primary \n     *               renderer).\n     * @param info  collects chart rendering information for return to caller.\n     * \n     * @return A state object (maintains state information relevant to one \n     *         chart drawing).\n     */\n\n    public PiePlotState initialise(Graphics2D g2, Rectangle2D plotArea,\n            PiePlot plot, Integer index, PlotRenderingInfo info) {\n     \n        PiePlotState state = new PiePlotState(info);\n        state.setPassesRequired(2);\n            state.setTotal(DatasetUtilities.calculatePieDatasetTotal(\n                    plot.getDataset()));\n        state.setLatestAngle(plot.getStartAngle());\n        return state;\n        \n    }\n",
+          "fixed_method": "public PiePlotState initialise(Graphics2D g2, Rectangle2D plotArea,\n        PiePlot plot, Integer index, PlotRenderingInfo info) {\n    PiePlotState state = new PiePlotState(info);\n    state.setPassesRequired(2);\n    if (plot.getDataset() != null) {\n        state.setTotal(DatasetUtilities.calculatePieDatasetTotal(plot.getDataset()));\n    } else {\n        state.setTotal(0);\n    }\n    state.setLatestAngle(plot.getStartAngle());\n    return state;\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Chart-15/"
+}

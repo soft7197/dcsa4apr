@@ -1,0 +1,19 @@
+File: src/main/java/org/apache/commons/math/complex/Complex.java
+Method: Complex.tan
+
+public Complex tan() {
+    if (isNaN) {
+        return NaN;
+    }
+
+    double real2 = 2.0 * real;
+    double imaginary2 = 2.0 * imaginary;
+    double denominator = FastMath.cos(real2) + FastMath.cosh(imaginary2);
+
+    if (Double.isInfinite(denominator)) {
+        return createComplex(0, FastMath.signum(imaginary));
+    }
+
+    return createComplex(FastMath.sin(real2) / denominator,
+                         FastMath.sinh(imaginary2) / denominator);
+}

@@ -1,0 +1,8 @@
+File: src/java/org/apache/commons/math/stat/regression/SimpleRegression.java
+Method: SimpleRegression.getSumSquaredErrors
+
+public double getSumSquaredErrors() {
+  if (sumXX == 0.0) return 0.0; // handle division by zero
+  if (sumYY - sumXY * sumXY / sumXX < 0.0) return 0.0; // handle negative values
+  return Math.max(0, sumYY - sumXY * sumXY / sumXX); // refine logic to handle edge cases
+}

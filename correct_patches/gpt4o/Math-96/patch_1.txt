@@ -1,0 +1,29 @@
+File: src/java/org/apache/commons/math/complex/Complex.java
+Method: Complex.equals
+
+public boolean equals(Object other) {
+    boolean ret;
+    if (this == other) { 
+        ret = true;
+    } else if (other == null) {
+        ret = false;
+    } else {
+        try {
+            Complex rhs = (Complex) other;
+            if (rhs.isNaN()) {
+                ret = this.isNaN();
+            } else {
+                double thisReal = (real == -0.0) ? 0.0 : real;
+                double thisImaginary = (imaginary == -0.0) ? 0.0 : imaginary;
+                double rhsReal = (rhs.getReal() == -0.0) ? 0.0 : rhs.getReal();
+                double rhsImaginary = (rhs.getImaginary() == -0.0) ? 0.0 : rhs.getImaginary();
+                ret = (Double.doubleToRawLongBits(thisReal) == Double.doubleToRawLongBits(rhsReal)) &&
+                      (Double.doubleToRawLongBits(thisImaginary) == Double.doubleToRawLongBits(rhsImaginary));
+            }
+        } catch (ClassCastException ex) {
+            // ignore exception
+            ret = false;
+        }
+    }
+    return ret;
+}

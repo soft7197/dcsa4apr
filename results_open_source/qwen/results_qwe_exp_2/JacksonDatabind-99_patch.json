@@ -1,0 +1,57 @@
+{
+  "bug_id": "JacksonDatabind-99",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-99_1771936754",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the incorrect handling of array types in the canonical name construction. The method appends '<' and '>' even when there are no type parameters, and it incorrectly handles the type parameter for reference types.",
+        "changes": "- sb.append('<');\n- sb.append(_referencedType.toCanonical());\n+ if (_referencedType != null && !_referencedType.isArrayType()) {\n+     sb.append('<');\n+     sb.append(_referencedType.toCanonical());\n+     sb.append('>');\n+ }",
+        "fixed_method": "protected String buildCanonicalName()\n{\n    StringBuilder sb = new StringBuilder();\n    sb.append(_class.getName());\n    if (_referencedType != null && !_referencedType.isArrayType()) {\n        sb.append('<');\n        sb.append(_referencedType.toCanonical());\n        sb.append('>');\n    }\n    return sb.toString();\n}",
+        "diff": "- sb.append('<');\n- sb.append(_referencedType.toCanonical());\n+ if (_referencedType != null && !_referencedType.isArrayType()) {\n+     sb.append('<');\n+     sb.append(_referencedType.toCanonical());\n+     sb.append('>');\n+ }",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/type/ReferenceType.java",
+        "method_name": "buildCanonicalName",
+        "class_name": "ReferenceType",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170
+        ],
+        "original_code": "// !!! TODO: missing supertypes\nprotected String buildCanonicalName()\n{\n    StringBuilder sb = new StringBuilder();\n    sb.append(_class.getName());\n    sb.append('<');\n    sb.append(_referencedType.toCanonical());\n    return sb.toString();\n}"
+      },
+      {
+        "hypothesis": "The refined fix ensures that _referencedType.toCanonical() returns a non-empty string before appending it to the StringBuilder, thus handling cases where _referencedType is not null but its canonical representation might be empty or invalid.",
+        "fixed_method": "protected String buildCanonicalName()\n{\n    StringBuilder sb = new StringBuilder();\n    sb.append(_class.getName());\n    if (_referencedType != null && !_referencedType.toCanonical().isEmpty()) {\n        sb.append('<');\n        sb.append(_referencedType.toCanonical());\n        sb.append('>');\n    }\n    return sb.toString();\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/type/ReferenceType.java",
+        "method_name": "buildCanonicalName",
+        "class_name": "ReferenceType",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is likely due to the incorrect handling of array types in the buildCanonicalName method. The method appends '<' and '>' even when there are no type parameters, which causes issues with types like AtomicReference<Long> that do not have generic parameters.",
+        "line_numbers": [
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-99/"
+}

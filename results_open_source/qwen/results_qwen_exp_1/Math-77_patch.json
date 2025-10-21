@@ -1,0 +1,63 @@
+{
+  "bug_id": "Math-77",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-77_1771903503",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is in the calculation of the L-infinity norm. The current implementation incorrectly adds the maximum value found so far to the current absolute value instead of keeping track of the maximum absolute value encountered.",
+        "changes": "-        max += Math.max(max, Math.abs(a));\n+        max = Math.max(max, Math.abs(a));",
+        "fixed_method": "    /** {@inheritDoc} */\n\n    @Override\n    public double getLInfNorm() {\n        double max = 0;\n        for (double a : data) {\n            max = Math.max(max, Math.abs(a));\n        }\n        return max;\n    }",
+        "diff": "-        max += Math.max(max, Math.abs(a));\n+        max = Math.max(max, Math.abs(a));",
+        "file_path": "src/main/java/org/apache/commons/math/linear/ArrayRealVector.java",
+        "method_name": "getLInfNorm",
+        "class_name": "ArrayRealVector",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          717,
+          724
+        ],
+        "original_code": "    /** {@inheritDoc} */\n\n    @Override\n    public double getLInfNorm() {\n        double max = 0;\n        for (double a : data) {\n            max += Math.max(max, Math.abs(a));\n        }\n        return max;\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "The bug is due to incorrect calculation of the L-infinity norm. The current implementation incorrectly adds values instead of finding the maximum absolute value.",
+        "changes": "- max += iter.value();\n+ max = Math.max(max, Math.abs(iter.value()));",
+        "fixed_method": "public double getLInfNorm() {\n    double max = 0;\n    Iterator iter = entries.iterator();\n    while (iter.hasNext()) {\n        iter.advance();\n        max = Math.max(max, Math.abs(iter.value()));\n    }\n    return max;\n}",
+        "diff": "- max += iter.value();\n+ max = Math.max(max, Math.abs(iter.value()));",
+        "file_path": "src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java",
+        "method_name": "getLInfNorm",
+        "class_name": "OpenMapRealVector",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          498,
+          506
+        ],
+        "original_code": "\n    public double getLInfNorm() {\n        double max = 0;\n        Iterator iter = entries.iterator();\n        while (iter.hasNext()) {\n            iter.advance();\n            max += iter.value();\n        }\n        return max;\n    }\n"
+      },
+      {
+        "hypothesis": "The bug in the getLInfNorm method is due to incorrect usage of the iterator. The method incorrectly adds values instead of finding the maximum value.",
+        "changes": "-        max += iter.value();\n+        double value = iter.value();\n+        if (Math.abs(value) > max) {\n+            max = Math.abs(value);\n+        }",
+        "fixed_method": "public double getLInfNorm() {\n    double max = 0;\n    Iterator iter = entries.iterator();\n    while (iter.hasNext()) {\n        iter.advance();\n        double value = iter.value();\n        if (Math.abs(value) > max) {\n            max = Math.abs(value);\n        }\n    }\n    return max;\n}",
+        "diff": "-        max += iter.value();\n+        double value = iter.value();\n+        if (Math.abs(value) > max) {\n+            max = Math.abs(value);\n+        }",
+        "file_path": "src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java",
+        "method_name": "getLInfNorm",
+        "class_name": "OpenMapRealVector",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          498,
+          506
+        ],
+        "original_code": "\n    public double getLInfNorm() {\n        double max = 0;\n        Iterator iter = entries.iterator();\n        while (iter.hasNext()) {\n            iter.advance();\n            max += iter.value();\n        }\n        return max;\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-77/"
+}

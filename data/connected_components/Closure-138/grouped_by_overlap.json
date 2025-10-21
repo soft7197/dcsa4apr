@@ -1,0 +1,21 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "getPreciserScopeKnowingConditionOutcome_com.google.javascript.jscomp.ClosureReverseAbstractInterpreter"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsArrayOnNull",
+      "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsFunctionOnNull",
+      "com.google.javascript.jscomp.ClosureReverseAbstractInterpreterTest::testGoogIsObjectOnNull"
+    ]
+  },
+  "Group_2": {
+    "buggy_methods": [
+      "traverseName_com.google.javascript.jscomp.TypeInference"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.TypeCheckTest::testIssue124",
+      "com.google.javascript.jscomp.TypeCheckTest::testIssue124b"
+    ]
+  }
+}

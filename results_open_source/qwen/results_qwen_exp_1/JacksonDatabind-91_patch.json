@@ -1,0 +1,88 @@
+{
+  "bug_id": "JacksonDatabind-91",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-91_1771865209",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined fix will ensure that both value and type handlers are checked for both content types and key types in container and map-like types. This ensures a more comprehensive check without being test-specific.",
+        "fixed_method": "private boolean _hasCustomHandlers(JavaType t) {\n    if (t.isContainerType()) {\n        // First: value types may have both value and type handlers\n        JavaType ct = t.getContentType();\n        if (ct != null) {\n            if ((ct.getValueHandler() != null) || (ct.getTypeHandler() != null)) {\n                return true;\n            }\n        }\n        // Second: map(-like) types may have value or type handler for key\n        if (t.isMapLikeType()) {\n            JavaType kt = t.getKeyType();\n            if (kt != null) {\n                if ((kt.getValueHandler() != null) || (kt.getTypeHandler() != null)) {\n                    return true;\n                }\n            }\n        }\n    }\n    return false;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/DeserializerCache.java",
+        "method_name": "_hasCustomHandlers",
+        "class_name": "DeserializerCache",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the method not checking for custom key deserializers in map-like types. The method should check if the key type has a custom value handler.",
+        "line_numbers": [
+          536,
+          537,
+          538,
+          539,
+          540,
+          541,
+          542,
+          543,
+          544,
+          545,
+          546
+        ]
+      },
+      {
+        "hypothesis": "The original patch incorrectly introduced a check for key type's value handler on all container types instead of limiting it to map-like types. The refined patch will separate the checks for map-like and other container types, ensuring that only map-like types are checked for key value handlers, while other container types are checked for content value and type handlers.",
+        "fixed_method": "private boolean _hasCustomHandlers(JavaType t) {\n    if (t.isContainerType()) {\n        // First: value types may have both value and type handlers\n        JavaType ct = t.getContentType();\n        if (ct != null && ((ct.getValueHandler() != null) || (ct.getTypeHandler() != null))) {\n            return true;\n        }\n        // Second: map(-like) types may have value handler for key (but not type; keys are untyped)\n        if (t.isMapLikeType()) {\n            JavaType kt = t.getKeyType();\n            if (kt != null && kt.getValueHandler() != null) {\n                return true;\n            }\n        }\n    }\n    return false;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/DeserializerCache.java",
+        "method_name": "_hasCustomHandlers",
+        "class_name": "DeserializerCache",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the method not checking for custom key deserializers in map-like types. The method should check if the key type has a custom value handler.",
+        "line_numbers": [
+          536,
+          537,
+          538,
+          539,
+          540,
+          541,
+          542,
+          543,
+          544,
+          545,
+          546
+        ]
+      },
+      {
+        "hypothesis": "The refined fix will generalize the check for custom handlers by considering both content types and key types for all container types, not just map-like types. This ensures that the method is robust against various scenarios and avoids overfitting to specific test cases.",
+        "fixed_method": "private boolean _hasCustomHandlers(JavaType t) {\n    if (t.isContainerType()) {\n        // Check for custom key deserializer in map-like types\n        if (t.isMapLikeType() && t.getKeyType() != null && t.getKeyType().getValueHandler() != null) {\n            return true;\n        }\n        // Check for custom value and type handlers in content types\n        JavaType ct = t.getContentType();\n        if (ct != null && ((ct.getValueHandler() != null) || (ct.getTypeHandler() != null))) {\n            return true;\n        }\n    }\n    return false;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/DeserializerCache.java",
+        "method_name": "_hasCustomHandlers",
+        "class_name": "DeserializerCache",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug cause is that the method does not check for custom key deserializers in map-like types. The fix involves adding a check for key deserializers in map-like types.",
+        "line_numbers": [
+          536,
+          537,
+          538,
+          539,
+          540,
+          541,
+          542,
+          543,
+          544,
+          545,
+          546
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-91/"
+}

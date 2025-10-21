@@ -1,0 +1,10 @@
+File: src/main/java/org/jsoup/nodes/Attribute.java
+Method: Attribute.getValue
+
+public String getValue() {
+    return getDefaultIfNull(val);
+}
+
+private String getDefaultIfNull(String value) {
+    return value != null ? value : "";
+}

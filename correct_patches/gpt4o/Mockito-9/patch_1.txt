@@ -1,0 +1,22 @@
+File: src/org/mockito/internal/stubbing/answers/CallsRealMethods.java
+Method: CallsRealMethods.answer
+
+public Object answer(InvocationOnMock invocation) throws Throwable {
+    if (java.lang.reflect.Modifier.isAbstract(invocation.getMethod().getModifiers())) {
+        Class<?> returnType = invocation.getMethod().getReturnType();
+        return getDefaultValueForType(returnType);
+    }
+    return invocation.callRealMethod();
+}
+
+private Object getDefaultValueForType(Class<?> returnType) {
+    if (returnType.isPrimitive()) {
+        if (returnType == boolean.class) return false;
+        if (returnType == char.class) return '\u0000';
+        if (returnType == byte.class || returnType == short.class || returnType == int.class) return 0;
+        if (returnType == long.class) return 0L;
+        if (returnType == float.class) return 0.0f;
+        if (returnType == double.class) return 0.0;
+    }
+    return null;
+}

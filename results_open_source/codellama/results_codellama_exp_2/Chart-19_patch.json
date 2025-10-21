@@ -1,0 +1,63 @@
+{
+  "bug_id": "Chart-19",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-19_1772806198",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the absence of a null check in the method.",
+        "changes": "+ if (axis == null) throw new IllegalArgumentException();",
+        "fixed_method": "public int getRangeAxisIndex(ValueAxis axis) {\n  if (axis == null) throw new IllegalArgumentException();\n  int result = this.rangeAxes.indexOf(axis);\n  if (result < 0) {\n    Plot parent = getParent();\n    if (parent instanceof CategoryPlot) {\n      CategoryPlot p = (CategoryPlot) parent;\n      result = p.getRangeAxisIndex(axis);\n    }\n  }\n  return result;\n}",
+        "diff": "+ if (axis == null) throw new IllegalArgumentException();",
+        "file_path": "source/org/jfree/chart/plot/CategoryPlot.java",
+        "method_name": "getRangeAxisIndex",
+        "class_name": "CategoryPlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          972,
+          982
+        ],
+        "original_code": "    /**\n     * Returns the index of the specified axis, or <code>-1</code> if the axis\n     * is not assigned to the plot.\n     *\n     * @param axis  the axis (<code>null</code> not permitted).\n     *\n     * @return The axis index.\n     * \n     * @see #getRangeAxis(int)\n     * @see #getDomainAxisIndex(CategoryAxis)\n     * \n     * @since 1.0.7\n     */\n\n    public int getRangeAxisIndex(ValueAxis axis) {\n        int result = this.rangeAxes.indexOf(axis);\n        if (result < 0) { // try the parent plot\n            Plot parent = getParent();\n            if (parent instanceof CategoryPlot) {\n                CategoryPlot p = (CategoryPlot) parent;\n                result = p.getRangeAxisIndex(axis);\n            }\n        }\n        return result;\n    }\n"
+      }
+    ],
+    [
+      {
+        "hypothesis": "The `getDomainAxisIndex()` method was not handling null inputs correctly, causing the test to fail.",
+        "changes": "- if (axis == null) return -1;\n+ if (axis == null) throw new IllegalArgumentException(\"Null 'axis' argument.\");",
+        "fixed_method": "public int getDomainAxisIndex(CategoryAxis axis) {\n    if (axis == null) throw new IllegalArgumentException(\"Null 'axis' argument.\");\n    return this.domainAxes.indexOf(axis);\n}",
+        "diff": "- if (axis == null) return -1;\n+ if (axis == null) throw new IllegalArgumentException(\"Null 'axis' argument.\");",
+        "file_path": "source/org/jfree/chart/plot/CategoryPlot.java",
+        "method_name": "getDomainAxisIndex",
+        "class_name": "CategoryPlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          697,
+          699
+        ],
+        "original_code": "    /**\n     * Returns the index of the specified axis, or <code>-1</code> if the axis\n     * is not assigned to the plot.\n     * \n     * @param axis  the axis (<code>null</code> not permitted).\n     * \n     * @return The axis index.\n     * \n     * @see #getDomainAxis(int)\n     * @see #getRangeAxisIndex(ValueAxis)\n     * \n     * @since 1.0.3\n     */\n\n    public int getDomainAxisIndex(CategoryAxis axis) {\n        return this.domainAxes.indexOf(axis);\n    }\n"
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public int getDomainAxisIndex(CategoryAxis axis) {\n        if (axis == null) {\n            throw new IllegalArgumentException(\"Null 'axis' argument.\");\n        }\n        if (this.domainAxes.indexOf(axis) == -1) return -1;\n        return this.domainAxes.indexOf(axis);\n    }",
+        "diff": "",
+        "file_path": "source/org/jfree/chart/plot/CategoryPlot.java",
+        "method_name": "getDomainAxisIndex",
+        "class_name": "CategoryPlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          697,
+          699
+        ],
+        "original_code": "    /**\n     * Returns the index of the specified axis, or <code>-1</code> if the axis\n     * is not assigned to the plot.\n     * \n     * @param axis  the axis (<code>null</code> not permitted).\n     * \n     * @return The axis index.\n     * \n     * @see #getDomainAxis(int)\n     * @see #getRangeAxisIndex(ValueAxis)\n     * \n     * @since 1.0.3\n     */\n\n    public int getDomainAxisIndex(CategoryAxis axis) {\n        return this.domainAxes.indexOf(axis);\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Chart-19/"
+}

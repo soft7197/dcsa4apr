@@ -1,0 +1,19 @@
+File: src/main/java/org/jsoup/parser/CharacterReader.java
+Method: CharacterReader.nextIndexOf
+
+int nextIndexOf(CharSequence seq) {
+    if (seq == null || seq.length() == 0) return -1;
+    char startChar = seq.charAt(0);
+    int seqLen = seq.length();
+
+    for (int offset = pos; offset <= length - seqLen; offset++) {
+        if (input[offset] == startChar) {
+            int i = offset + 1;
+            int j = 1;
+            for (; j < seqLen && input[i] == seq.charAt(j); i++, j++);
+            if (j == seqLen) // found full sequence
+                return offset - pos;
+        }
+    }
+    return -1;
+}

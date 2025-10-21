@@ -1,0 +1,43 @@
+{
+  "bug_id": "Closure-125",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-125_1771921633",
+  "patches": [
+    [
+      {
+        "hypothesis": "The root cause of the issue lies in the assumption that all function types derived from constructors have an instance type. This is not always true, especially for interfaces or abstract classes. The refined fix includes a check to ensure the function type has an instance type before attempting to use it, and it handles cases where the instance type is not available gracefully.",
+        "fixed_method": "private void visitNew(NodeTraversal t, Node n) {\n  Node constructor = n.getFirstChild();\n  JSType type = getJSType(constructor).restrictByNotNullOrUndefined();\n  if (type.isConstructor() || type.isEmptyType() || type.isUnknownType()) {\n    FunctionType fnType = type.toMaybeFunctionType();\n    if (fnType != null) {\n      visitParameterList(t, n, fnType);\n      if (fnType.hasInstanceType()) {\n        ensureTyped(t, n, fnType.getInstanceType());\n      } else {\n        ensureTyped(t, n, type);\n      }\n    } else {\n      ensureTyped(t, n, type);\n    }\n  } else {\n    report(t, n, NOT_A_CONSTRUCTOR);\n    ensureTyped(t, n, type);\n  }\n}",
+        "diff": " ",
+        "file_path": "src/com/google/javascript/jscomp/TypeCheck.java",
+        "method_name": "visitNew",
+        "class_name": "TypeCheck",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue arises because the method attempts to get the instance type of a function type that does not have one, leading to an IllegalStateException. This can happen if the function type is an interface or a non-constructor function. We need to add a check to ensure that the function type has an instance type before calling getInstanceType().",
+        "line_numbers": [
+          1656,
+          1657,
+          1658,
+          1659,
+          1660,
+          1661,
+          1662,
+          1663,
+          1664,
+          1665,
+          1666,
+          1667,
+          1668,
+          1669,
+          1670,
+          1671
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-125/"
+}

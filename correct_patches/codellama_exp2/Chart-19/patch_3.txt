@@ -1,0 +1,10 @@
+File: source/org/jfree/chart/plot/CategoryPlot.java
+Method: CategoryPlot.getDomainAxisIndex
+
+public int getDomainAxisIndex(CategoryAxis axis) {
+        if (axis == null) {
+            throw new IllegalArgumentException("Null 'axis' argument.");
+        }
+        if (this.domainAxes.indexOf(axis) == -1) return -1;
+        return this.domainAxes.indexOf(axis);
+    }

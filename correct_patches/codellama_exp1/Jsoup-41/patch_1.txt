@@ -1,0 +1,13 @@
+File: src/main/java/org/jsoup/nodes/Element.java
+Method: Element.equals
+
+public boolean equals(Object o) {
+  if (o == null || !(o instanceof Element)) {
+    return false;
+  }
+  Element element = (Element) o;
+  if (this.outerHtml() == null || element.outerHtml() == null) {
+    return false;
+  }
+  return this.outerHtml().equals(element.outerHtml());
+}

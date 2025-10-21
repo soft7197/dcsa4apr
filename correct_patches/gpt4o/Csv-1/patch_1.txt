@@ -1,0 +1,11 @@
+File: src/main/java/org/apache/commons/csv/ExtendedBufferedReader.java
+Method: ExtendedBufferedReader.read
+
+public int read() throws IOException {
+    int current = super.read();
+    if ((current == '\n' && lastChar != '\r') || (current == '\r' && (lastChar != '\n'))) {
+        lineCounter++;
+    }
+    lastChar = current;
+    return lastChar;
+}

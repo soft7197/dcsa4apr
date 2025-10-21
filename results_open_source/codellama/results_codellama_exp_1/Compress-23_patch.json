@@ -1,0 +1,40 @@
+{
+  "bug_id": "Compress-23",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Compress-23_1772692345",
+  "patches": [
+    [
+      {
+        "hypothesis": "Implemented a more robust dictionary size calculation method, handled general cases, and added more edge cases",
+        "fixed_method": "InputStream decode(final InputStream in, final Coder coder, byte[] password) throws IOException {\n    byte propsByte = coder.properties[0];\n    long dictSize = 0;\n    int shift = 0;\n    for (int i = 1; i < 4; i++) {\n        dictSize |= (coder.properties[i + 1] & 0xFFL) << (shift += 8);\n    }\n    if (dictSize == 0) {\n        dictSize = LZMAInputStream. DICT_SIZE_MAX;\n    }\n    if (dictSize > LZMAInputStream. DICT_SIZE_MAX) {\n        throw new IOException(\"Dictionary larger than 4 GiB maximum size\");\n    }\n    return new LZMAInputStream(in, -1, propsByte, (int) dictSize);\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/apache/commons/compress/archivers/sevenz/Coders.java",
+        "method_name": "decode",
+        "class_name": "Coders",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The error was caused by the dictionary size being too large for the LZMA implementation.",
+        "line_numbers": [
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Compress-23/"
+}

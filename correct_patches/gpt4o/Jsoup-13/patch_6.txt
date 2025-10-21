@@ -1,0 +1,12 @@
+File: src/main/java/org/jsoup/nodes/Node.java
+Method: Node.hasAttr
+
+public boolean hasAttr(String attributeKey) {
+    Validate.notNull(attributeKey);
+
+    if (attributeKey.startsWith("abs:")) {
+        String key = attributeKey.substring(4); // remove 'abs:' prefix
+        return attributes.hasKey(key) && absUrl(key) != null && !absUrl(key).isEmpty();
+    }
+    return attributes.hasKey(attributeKey);
+}

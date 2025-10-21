@@ -1,0 +1,24 @@
+File: src/main/java/org/apache/commons/math3/optimization/direct/CMAESOptimizer.java
+Method: CMAESOptimizer.repairAndDecode
+
+public double[] repairAndDecode(final double[] x) {
+    if (x == null) {
+        throw new IllegalArgumentException("Input array cannot be null");
+    }
+    double[] decoded = decode(x);
+    if (decoded == null) {
+        throw new IllegalStateException("Decoded array cannot be null");
+    }
+    double[] lower = getLowerBound();
+    double[] upper = getUpperBound();
+    if (lower == null || upper == null) {
+        throw new IllegalStateException("Bounds arrays cannot be null");
+    }
+    if (decoded.length != lower.length || decoded.length != upper.length) {
+        throw new IllegalArgumentException("Bounds arrays must have the same length as the decoded array");
+    }
+    for (int i = 0; i < decoded.length; i++) {
+        decoded[i] = Math.max(lower[i], Math.min(decoded[i], upper[i]));
+    }
+    return decoded;
+}

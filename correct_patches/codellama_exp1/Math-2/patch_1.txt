@@ -1,0 +1,9 @@
+File: src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java
+Method: HypergeometricDistribution.getNumericalMean
+
+public double getNumericalMean() {
+    long sampleSize = (long) getSampleSize();
+    long populationSize = (long) getPopulationSize();
+    long numberOfSuccesses = (long) getNumberOfSuccesses();
+    return (double) (sampleSize * numberOfSuccesses) / populationSize;
+}

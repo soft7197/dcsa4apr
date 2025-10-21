@@ -1,0 +1,43 @@
+{
+  "bug_id": "JacksonDatabind-41",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-41_1772729109",
+  "patches": [
+    {
+      "hypothesis": "The issue is caused by the fact that the second method does not handle the case where the contextType is null, which leads to an IllegalArgumentException. The first method does not have this issue because it uses the constructType method that takes a Class parameter, which is not nullable.",
+      "changes": "+ if (contextType == null) { return _fromAny(null, type, EMPTY_BINDINGS); } else { return _fromAny(null, type, contextType.getBindings()); }",
+      "methods": {
+        "src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java::TypeFactory::constructType::L600": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java",
+          "method_name": "constructType",
+          "class_name": "TypeFactory",
+          "line_numbers": [
+            600,
+            603
+          ],
+          "original_code": "    /**\n     * @deprecated Since 2.7 (accidentally removed in 2.7.0; added back in 2.7.1)\n     */\n\n    @Deprecated\n    public JavaType constructType(Type type, Class<?> contextClass) {\n        return constructType(type, constructType(contextClass));\n    }\n",
+          "fixed_method": "public JavaType constructType(Type type, JavaType contextType) {\n if (contextType == null) {\n return _fromAny(null, type, EMPTY_BINDINGS);\n } else {\n return _fromAny(null, type, contextType.getBindings());\n }\n}",
+          "iteration": 1
+        },
+        "src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java::TypeFactory::constructType::L608": {
+          "file_path": "src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java",
+          "method_name": "constructType",
+          "class_name": "TypeFactory",
+          "line_numbers": [
+            608,
+            611
+          ],
+          "original_code": "    /**\n     * @deprecated Since 2.7 (accidentally removed in 2.7.0; added back in 2.7.1)\n     */\n\n    @Deprecated\n    public JavaType constructType(Type type, JavaType contextType) {\n        return _fromAny(null, type, contextType.getBindings());\n    }\n",
+          "fixed_method": "public JavaType constructType(Type type, Class<?> contextClass) {\n if (contextClass == null) {\n return constructType(type, (JavaType) null);\n } else {\n return constructType(type, constructType(contextClass));\n }\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-41/"
+}

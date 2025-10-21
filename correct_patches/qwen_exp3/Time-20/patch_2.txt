@@ -1,0 +1,21 @@
+File: src/main/java/org/joda/time/format/DateTimeFormatterBuilder.java
+Method: DateTimeFormatterBuilder.parseInto
+
+public int parseInto(DateTimeParserBucket bucket, String text, int position) {
+    String str = text.substring(position);
+    String[] sortedIDs = new String[ALL_IDS.size()];
+    ALL_IDS.toArray(sortedIDs);
+    java.util.Arrays.sort(sortedIDs, new java.util.Comparator() {
+        public int compare(Object o1, Object o2) {
+            return ((String)o2).length() - ((String)o1).length();
+        }
+    });
+    for (int i = 0; i < sortedIDs.length; i++) {
+        String id = sortedIDs[i];
+        if (str.startsWith(id)) {
+            bucket.setZone(DateTimeZone.forID(id));
+            return position + id.length();
+        }
+    }
+    return ~position;
+}

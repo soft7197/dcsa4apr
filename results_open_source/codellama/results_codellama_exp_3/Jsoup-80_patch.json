@@ -1,0 +1,43 @@
+{
+  "bug_id": "Jsoup-80",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-80_1772909556",
+  "patches": [
+    [
+      {
+        "hypothesis": "The patch was refined to address hardcoded values, missing edge cases, and test-specific logic",
+        "fixed_method": "\nvoid insert(Token.Comment commentToken) {\n    Comment comment = new Comment(commentToken.getData());\n    Node insert = comment;\n    if (commentToken.bogus) {\n        String data = comment.getData();\n        if (!data.startsWith(\"!\") || data.length() <= 1) {\n            return;\n        }\n    }\n    if (insert == null) {\n        return;\n    }\n    insertNode(insert);\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/parser/XmlTreeBuilder.java",
+        "method_name": "insert",
+        "class_name": "XmlTreeBuilder",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "",
+        "line_numbers": [
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-80/"
+}

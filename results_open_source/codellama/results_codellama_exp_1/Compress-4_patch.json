@@ -1,0 +1,67 @@
+{
+  "bug_id": "Compress-4",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Compress-4_1772726412",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "methods": {
+        "src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream.java::ZipArchiveOutputStream::close::L529": {
+          "file_path": "src/main/java/org/apache/commons/compress/archivers/zip/ZipArchiveOutputStream.java",
+          "method_name": "close",
+          "class_name": "ZipArchiveOutputStream",
+          "line_numbers": [
+            529,
+            537
+          ],
+          "original_code": "    /**\n     * Closes this output stream and releases any system resources\n     * associated with the stream.\n     *\n     * @exception  IOException  if an I/O error occurs.\n     */\n\n    public void close() throws IOException {\n        finish();\n        if (raf != null) {\n            raf.close();\n        }\n        if (out != null) {\n            out.close();\n        }\n    }\n",
+          "fixed_method": "public void close() throws IOException {\n  if (raf != null) {\n    raf.close();\n  }\n  if (out != null) {\n    out.close();\n  }\n}",
+          "iteration": 1
+        },
+        "src/main/java/org/apache/commons/compress/archivers/cpio/CpioArchiveOutputStream.java::CpioArchiveOutputStream::close::L334": {
+          "file_path": "src/main/java/org/apache/commons/compress/archivers/cpio/CpioArchiveOutputStream.java",
+          "method_name": "close",
+          "class_name": "CpioArchiveOutputStream",
+          "line_numbers": [
+            334,
+            340
+          ],
+          "original_code": "    /**\n     * Closes the CPIO output stream as well as the stream being filtered.\n     * \n     * @throws IOException\n     *             if an I/O error has occurred or if a CPIO file error has\n     *             occurred\n     */\n\n    public void close() throws IOException {\n        if (!this.closed) {\n            this.finish();\n            out.close();\n            this.closed = true;\n        }\n    }\n",
+          "fixed_method": "public void close() throws IOException {\n  if (!this.closed) {\n    this.finish();\n    out.close();\n    this.closed = true;\n  }\n}",
+          "iteration": 1
+        },
+        "src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveOutputStream.java::TarArchiveOutputStream::close::L124": {
+          "file_path": "src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveOutputStream.java",
+          "method_name": "close",
+          "class_name": "TarArchiveOutputStream",
+          "line_numbers": [
+            124,
+            131
+          ],
+          "original_code": "    /**\n     * Closes the underlying OutputStream.\n     * @throws IOException on error\n     */\n\n    public void close() throws IOException {\n        if (!closed) {\n            finish();\n            buffer.close();\n            out.close();\n            closed = true;\n        }\n    }\n",
+          "fixed_method": "public void close() throws IOException {\n  if (!closed) {\n    finish();\n    buffer.close();\n    out.close();\n    closed = true;\n  }\n}",
+          "iteration": 1
+        },
+        "src/main/java/org/apache/commons/compress/changes/ChangeSetPerformer.java::ChangeSetPerformer::perform::L67": {
+          "file_path": "src/main/java/org/apache/commons/compress/changes/ChangeSetPerformer.java",
+          "method_name": "perform",
+          "class_name": "ChangeSetPerformer",
+          "line_numbers": [
+            67,
+            129
+          ],
+          "original_code": "    /**\n     * Performs all changes collected in this ChangeSet on the input stream and\n     * streams the result to the output stream. Perform may be called more than once.\n     * \n     * This method finishes the stream, no other entries should be added\n     * after that.\n     * \n     * @param in\n     *            the InputStream to perform the changes on\n     * @param out\n     *            the resulting OutputStream with all modifications\n     * @throws IOException\n     *             if an read/write error occurs\n     * @return the results of this operation\n     */\n\n    public ChangeSetResults perform(ArchiveInputStream in, ArchiveOutputStream out)\n            throws IOException {\n        ChangeSetResults results = new ChangeSetResults();\n        \n        Set workingSet = new LinkedHashSet(changes);\n        \n        for (Iterator it = workingSet.iterator(); it.hasNext();) {\n            Change change = (Change) it.next();\n\n            if (change.type() == Change.TYPE_ADD && change.isReplaceMode()) {\n                copyStream(change.getInput(), out, change.getEntry());\n                it.remove();\n                results.addedFromChangeSet(change.getEntry().getName());\n            }\n        }\n\n        ArchiveEntry entry = null;\n        while ((entry = in.getNextEntry()) != null) {\n            boolean copy = true;\n\n            for (Iterator it = workingSet.iterator(); it.hasNext();) {\n                Change change = (Change) it.next();\n\n                final int type = change.type();\n                final String name = entry.getName();\n                if (type == Change.TYPE_DELETE && name != null) {\n                    if (name.equals(change.targetFile())) {\n                        copy = false;\n                        it.remove();\n                        results.deleted(name);\n                        break;\n                    }\n                } else if(type == Change.TYPE_DELETE_DIR && name != null) {\n                    if (name.startsWith(change.targetFile() + \"/\")) {\n                        copy = false;\n                        results.deleted(name);\n                        break;\n                    }\n                }\n            }\n\n            if (copy) {\n                if (!isDeletedLater(workingSet, entry) && !results.hasBeenAdded(entry.getName())) {\n                    copyStream(in, out, entry);\n                    results.addedFromStream(entry.getName());\n                }\n            }\n        }\n        \n        // Adds files which hasn't been added from the original and do not have replace mode on\n        for (Iterator it = workingSet.iterator(); it.hasNext();) {\n            Change change = (Change) it.next();\n\n            if (change.type() == Change.TYPE_ADD && \n                !change.isReplaceMode() && \n                !results.hasBeenAdded(change.getEntry().getName())) {\n                copyStream(change.getInput(), out, change.getEntry());\n                it.remove();\n                results.addedFromChangeSet(change.getEntry().getName());\n            }\n        }\n        return results;\n    }\n",
+          "fixed_method": "public ChangeSetResults perform(ArchiveInputStream in, ArchiveOutputStream out) throws IOException {\n  ChangeSetResults results = new ChangeSetResults();\n  Set workingSet = new LinkedHashSet(changes);\n  for (Iterator it = workingSet.iterator(); it.hasNext();) {\n    Change change = (Change) it.next();\n    if (change.type() == Change.TYPE_ADD && change.isReplaceMode()) {\n      copyStream(change.getInput(), out, change.getEntry());\n      it.remove();\n      results.addedFromChangeSet(change.getEntry().getName());\n    }\n  }\n  ArchiveEntry entry = null;\n  while ((entry = in.getNextEntry()) != null) {\n    boolean copy = true;\n    for (Iterator it = workingSet.iterator(); it.hasNext();) {\n      Change change = (Change) it.next();\n      final int type = change.type();\n      final String name = entry.getName();\n      if (type == Change.TYPE_DELETE && name != null) {\n        if (name.equals(change.targetFile())) {\n          copy = false;\n          it.remove();\n          results.deleted(name);\n          break;\n        }\n      } else if(type == Change.TYPE_DELETE_DIR && name != null) {\n        if (name.startsWith(change.targetFile() + \"/\")) {\n          copy = false;\n          results.deleted(name);\n          break;\n        }\n      }\n    }\n    if (copy) {\n      if (!isDeletedLater(workingSet, entry) && !results.hasBeenAdded(entry.getName())) {\n        copyStream(in, out, entry);\n        results.addedFromStream(entry.getName());\n      }\n    }\n  }\n  // Adds files which hasn't been added from the original and do not have replace mode on\n  for (Iterator it = workingSet.iterator(); it.hasNext();) {\n    Change change = (Change) it.next();\n    if (change.type() == Change.TYPE_ADD && !change.isReplaceMode() && !results.hasBeenAdded(change.getEntry().getName())) {\n      copyStream(change.getInput(), out, change.getEntry());\n      it.remove();\n      results.addedFromChangeSet(change.getEntry().getName());\n    }\n  }\n  return results;\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Compress-4/"
+}

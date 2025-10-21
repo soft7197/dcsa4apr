@@ -1,0 +1,91 @@
+{
+  "bug_id": "Lang-33",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-33_1771943700",
+  "patches": [
+    [
+      {
+        "hypothesis": "The NullPointerException occurs because the method does not handle null elements within the input array. We need to check if each element is null before calling getClass() on it.",
+        "changes": "- classes[i] = array[i].getClass();\n+ classes[i] = array[i] == null ? null : array[i].getClass();",
+        "fixed_method": "public static Class<?>[] toClass(Object[] array) {\n    if (array == null) {\n        return null;\n    } else if (array.length == 0) {\n        return ArrayUtils.EMPTY_CLASS_ARRAY;\n    }\n    Class<?>[] classes = new Class[array.length];\n    for (int i = 0; i < array.length; i++) {\n        classes[i] = array[i] == null ? null : array[i].getClass();\n    }\n    return classes;\n}",
+        "diff": "- classes[i] = array[i].getClass();\n+ classes[i] = array[i] == null ? null : array[i].getClass();",
+        "file_path": "src/main/java/org/apache/commons/lang3/ClassUtils.java",
+        "method_name": "toClass",
+        "class_name": "ClassUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          902,
+          903,
+          904,
+          905,
+          906,
+          907,
+          908,
+          909,
+          910,
+          911,
+          912,
+          913
+        ],
+        "original_code": "/**\n* <p>Converts an array of <code>Object</code> in to an array of <code>Class</code> objects.\n* If any of these objects is null, a null element will be inserted into the array.</p>\n*\n* <p>This method returns <code>null</code> for a <code>null</code> input array.</p>\n*\n* @param array an <code>Object</code> array\n* @return a <code>Class</code> array, <code>null</code> if null array input\n* @since 2.4\n*/\npublic static Class<?>[] toClass(Object[] array) {\n    if (array == null) {\n        return null;\n    } else if (array.length == 0) {\n        return ArrayUtils.EMPTY_CLASS_ARRAY;\n    }\n    Class<?>[] classes = new Class[array.length];\n    for (int i = 0; i < array.length; i++) {\n        classes[i] = array[i].getClass();\n    }\n    return classes;\n}"
+      },
+      {
+        "hypothesis": "The NullPointerException occurs because the method does not handle null elements within the input array. We need to add a check to skip null elements when calling getClass().",
+        "changes": "- classes[i] = array[i].getClass();\n+ classes[i] = array[i] != null ? array[i].getClass() : null;",
+        "fixed_method": "public static Class<?>[] toClass(Object[] array) {\n    if (array == null) {\n        return null;\n    } else if (array.length == 0) {\n        return ArrayUtils.EMPTY_CLASS_ARRAY;\n    }\n    Class<?>[] classes = new Class[array.length];\n    for (int i = 0; i < array.length; i++) {\n        classes[i] = array[i] != null ? array[i].getClass() : null;\n    }\n    return classes;\n}",
+        "diff": "- classes[i] = array[i].getClass();\n+ classes[i] = array[i] != null ? array[i].getClass() : null;",
+        "file_path": "src/main/java/org/apache/commons/lang3/ClassUtils.java",
+        "method_name": "toClass",
+        "class_name": "ClassUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          902,
+          903,
+          904,
+          905,
+          906,
+          907,
+          908,
+          909,
+          910,
+          911,
+          912,
+          913
+        ],
+        "original_code": "/**\n* <p>Converts an array of <code>Object</code> in to an array of <code>Class</code> objects.\n* If any of these objects is null, a null element will be inserted into the array.</p>\n*\n* <p>This method returns <code>null</code> for a <code>null</code> input array.</p>\n*\n* @param array an <code>Object</code> array\n* @return a <code>Class</code> array, <code>null</code> if null array input\n* @since 2.4\n*/\npublic static Class<?>[] toClass(Object[] array) {\n    if (array == null) {\n        return null;\n    } else if (array.length == 0) {\n        return ArrayUtils.EMPTY_CLASS_ARRAY;\n    }\n    Class<?>[] classes = new Class[array.length];\n    for (int i = 0; i < array.length; i++) {\n        classes[i] = array[i].getClass();\n    }\n    return classes;\n}"
+      },
+      {
+        "hypothesis": "The NullPointerException occurs because the method attempts to call getClass() on a null element in the input array. We need to add a null check for each element in the array before calling getClass().",
+        "changes": "+ if (array[i] != null)\n+     classes[i] = array[i].getClass();\n- classes[i] = array[i].getClass();",
+        "fixed_method": "public static Class<?>[] toClass(Object[] array) {\n    if (array == null) {\n        return null;\n    } else if (array.length == 0) {\n        return ArrayUtils.EMPTY_CLASS_ARRAY;\n    }\n    Class<?>[] classes = new Class[array.length];\n    for (int i = 0; i < array.length; i++) {\n        if (array[i] != null)\n            classes[i] = array[i].getClass();\n    }\n    return classes;\n}",
+        "diff": "+ if (array[i] != null)\n+     classes[i] = array[i].getClass();\n- classes[i] = array[i].getClass();",
+        "file_path": "src/main/java/org/apache/commons/lang3/ClassUtils.java",
+        "method_name": "toClass",
+        "class_name": "ClassUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          902,
+          903,
+          904,
+          905,
+          906,
+          907,
+          908,
+          909,
+          910,
+          911,
+          912,
+          913
+        ],
+        "original_code": "/**\n* <p>Converts an array of <code>Object</code> in to an array of <code>Class</code> objects.\n* If any of these objects is null, a null element will be inserted into the array.</p>\n*\n* <p>This method returns <code>null</code> for a <code>null</code> input array.</p>\n*\n* @param array an <code>Object</code> array\n* @return a <code>Class</code> array, <code>null</code> if null array input\n* @since 2.4\n*/\npublic static Class<?>[] toClass(Object[] array) {\n    if (array == null) {\n        return null;\n    } else if (array.length == 0) {\n        return ArrayUtils.EMPTY_CLASS_ARRAY;\n    }\n    Class<?>[] classes = new Class[array.length];\n    for (int i = 0; i < array.length; i++) {\n        classes[i] = array[i].getClass();\n    }\n    return classes;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Lang-33/"
+}

@@ -1,0 +1,32 @@
+{
+  "bug_id": "Chart-20",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-20_1771848749",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is due to incorrect parameters being passed to the superclass constructor. The paint and stroke for the shape and outline are swapped.",
+        "changes": "- super(paint, stroke, paint, stroke, alpha);\n+ super(paint, stroke, outlinePaint, outlineStroke, alpha);",
+        "fixed_method": "public ValueMarker(double value, Paint paint, Stroke stroke, \n                   Paint outlinePaint, Stroke outlineStroke, float alpha) {\n    super(paint, stroke, outlinePaint, outlineStroke, alpha);\n    this.value = value;\n}",
+        "diff": "- super(paint, stroke, paint, stroke, alpha);\n+ super(paint, stroke, outlinePaint, outlineStroke, alpha);",
+        "file_path": "source/org/jfree/chart/plot/ValueMarker.java",
+        "method_name": "ValueMarker",
+        "class_name": "ValueMarker",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          93,
+          94,
+          95,
+          96,
+          97
+        ],
+        "original_code": "/**\n* Creates a new value marker.\n*\n* @param value  the value.\n* @param paint  the paint (<code>null</code> not permitted).\n* @param stroke  the stroke (<code>null</code> not permitted).\n* @param outlinePaint  the outline paint (<code>null</code> permitted).\n* @param outlineStroke  the outline stroke (<code>null</code> permitted).\n* @param alpha  the alpha transparency (in the range 0.0f to 1.0f).\n*/\npublic ValueMarker(double value, Paint paint, Stroke stroke, \n                   Paint outlinePaint, Stroke outlineStroke, float alpha) {\n    super(paint, stroke, paint, stroke, alpha);\n    this.value = value;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Chart-20/"
+}

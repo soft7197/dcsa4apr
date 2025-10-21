@@ -1,0 +1,6 @@
+File: src/main/java/org/apache/commons/lang3/SystemUtils.java
+Method: SystemUtils.toJavaVersionInt
+
+static int toJavaVersionInt(String version) {
+    return toVersionInt(toJavaVersionIntArray(version, JAVA_VERSION_TRIM_SIZE));
+}

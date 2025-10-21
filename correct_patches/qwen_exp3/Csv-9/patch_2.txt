@@ -1,0 +1,20 @@
+File: src/main/java/org/apache/commons/csv/CSVRecord.java
+Method: CSVRecord.putIn
+
+/**
+* Puts all values of this record into the given Map.
+*
+* @param map The Map to populate.
+* @return the given map.
+*/
+<M extends Map<String, String>> M putIn(final M map) {
+    if (mapping != null) {
+        for (final Entry<String, Integer> entry : mapping.entrySet()) {
+            final int col = entry.getValue().intValue();
+            if (col < values.length) {
+                map.put(entry.getKey(), values[col]);
+            }
+        }
+    }
+    return map;
+}

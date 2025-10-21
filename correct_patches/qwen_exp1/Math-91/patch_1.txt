@@ -1,0 +1,17 @@
+File: src/java/org/apache/commons/math/fraction/Fraction.java
+Method: Fraction.compareTo
+
+public int compareTo(Fraction object) {
+    if (object == null) {
+        throw new NullPointerException("Object to compare cannot be null");
+    }
+    long nOd = (long) this.numerator * object.denominator;
+    long dOn = (long) this.denominator * object.numerator;
+    if (nOd < dOn) {
+        return -1;
+    } else if (nOd > dOn) {
+        return 1;
+    } else {
+        return 0;
+    }
+}

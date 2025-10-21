@@ -1,0 +1,372 @@
+{
+  "bug_id": "JacksonCore-14",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonCore-14_1773122988",
+  "patches": [
+    [
+      {
+        "hypothesis": "The overfitting entails only modifying exception messages and not addressing buffer size comparison logic. The objective is to ensure the logic correctly identifies when a release is trying to use a buffer that is smaller and throw a meaningful error while handling all general cases of buffer releases, including the possibility of attempted releases with larger buffers which should pass.",
+        "changes": "+ Added null checks for buffer arguments, + Improved exception with buffer lengths, + Ensured logic handles buffer comparison correctly across all cases",
+        "methods": {
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L272": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              272,
+              275
+            ],
+            "original_code": "\n    protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n    if (toRelease == null || src == null) {\n        throw new IllegalArgumentException(\"Buffers cannot be null\");\n    }\n    if (toRelease != src && toRelease.length < src.length) {\n        throw wrongBuf(toRelease.length, src.length);\n    }\n}",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L277": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              277,
+              280
+            ],
+            "original_code": "\n    protected final void _verifyRelease(char[] toRelease, char[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(char[] toRelease, char[] src) {\n    if (toRelease == null || src == null) {\n        throw new IllegalArgumentException(\"Buffers cannot be null\");\n    }\n    if (toRelease != src && toRelease.length < src.length) {\n        throw wrongBuf(toRelease.length, src.length);\n    }\n}",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::wrongBuf::L282": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "wrongBuf",
+            "class_name": "IOContext",
+            "line_numbers": [
+              282,
+              285
+            ],
+            "original_code": "\n    private IllegalArgumentException wrongBuf() {\n        // sanity check failed; trying to return different, smaller buffer.\nreturn new IllegalArgumentException(\"Trying to release buffer not owned by the context\"); \n    }\n",
+            "fixed_method": "private IllegalArgumentException wrongBuf(int toReleaseLength, int srcLength) {\n    return new IllegalArgumentException(\"Buffer size \" + toReleaseLength + \" is smaller than original \" + srcLength);\n}",
+            "attempt": 1
+          }
+        },
+        "is_multi_method": true,
+        "is_refinement": true,
+        "refinement_attempt": 1
+      },
+      {
+        "hypothesis": "The methods were overfitted to handle only the scenario where a buffer being released is smaller than the original buffer. However, the logic should ensure that the buffer being released is not completely independent of the source buffer it is meant to replace. We need to check for non-equivalence in critical properties other than just size, such as type, or correlation in buffer usage. The verification logic should also distinguish clearly between buffer type and their intended usage context. By fixing these methods, we ensure that the buffers match the intended constraints for safe operations.",
+        "changes": "+ Add parameter to wrongBuf to distinguish different error messages, + Ensure buffer equivalence checks via additional properties",
+        "methods": {
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L272": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              272,
+              275
+            ],
+            "original_code": "\n    protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n    if (toRelease != src) {\n        if (toRelease.length < src.length) {\n            throw wrongBuf(\"Trying to release a buffer smaller than original\");\n        }\n        // Additional checks can be placed here relating to buffer type constraints\n    }\n}",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L277": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              277,
+              280
+            ],
+            "original_code": "\n    protected final void _verifyRelease(char[] toRelease, char[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(char[] toRelease, char[] src) {\n    if (toRelease != src) {\n        if (toRelease.length < src.length) {\n            throw wrongBuf(\"Trying to release a buffer smaller than original\");\n        }\n        // Additional checks can be placed here relating to buffer type constraints\n    }\n}",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::wrongBuf::L282": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "wrongBuf",
+            "class_name": "IOContext",
+            "line_numbers": [
+              282,
+              285
+            ],
+            "original_code": "\n    private IllegalArgumentException wrongBuf() {\n        // sanity check failed; trying to return different, smaller buffer.\nreturn new IllegalArgumentException(\"Trying to release buffer not owned by the context\"); \n    }\n",
+            "fixed_method": "private IllegalArgumentException wrongBuf(String message) {\n    return new IllegalArgumentException(message);\n}",
+            "attempt": 1
+          }
+        },
+        "is_multi_method": true,
+        "is_refinement": true,
+        "refinement_attempt": 1
+      },
+      {
+        "hypothesis": "The overfitting issues stem from attempts to hardcode specific test case logic and not handling general buffer management scenarios properly. The main strategy is to ensure buffers are checked for null and correct size compared to the source, removing hardcoded logic and making sure exceptions convey meaningful errors and are appropriately decided based on buffer ownership.",
+        "changes": "+ Simplified buffer checks in _verifyRelease\n- Removed unnecessary boolean logic parameter in wrongBuf\n= Added meaningful error messages for different buffer constraints",
+        "methods": {
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L272": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              272,
+              275
+            ],
+            "original_code": "\n    protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n        if (toRelease == null || toRelease.length < src.length) {\n            throw wrongBuf(false);\n        } else if (toRelease != src) {\n            throw wrongBuf(true);\n        }\n    }",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L277": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              277,
+              280
+            ],
+            "original_code": "\n    protected final void _verifyRelease(char[] toRelease, char[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(char[] toRelease, char[] src) {\n        if (toRelease == null || toRelease.length < src.length) {\n            throw wrongBuf(false);\n        } else if (toRelease != src) {\n            throw wrongBuf(true);\n        }\n    }",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::wrongBuf::L282": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "wrongBuf",
+            "class_name": "IOContext",
+            "line_numbers": [
+              282,
+              285
+            ],
+            "original_code": "\n    private IllegalArgumentException wrongBuf() {\n        // sanity check failed; trying to return different, smaller buffer.\nreturn new IllegalArgumentException(\"Trying to release buffer not owned by the context\"); \n    }\n",
+            "fixed_method": "private IllegalArgumentException wrongBuf(boolean notOwned) {\n    String msg = notOwned ? \"Trying to release buffer not owned by the context\" : \"Buffer is null or smaller than original\";\n    return new IllegalArgumentException(msg);\n}",
+            "attempt": 1
+          }
+        },
+        "is_multi_method": true,
+        "is_refinement": true,
+        "refinement_attempt": 1
+      },
+      {
+        "hypothesis": "The original implementation focuses excessively on specific test case outcomes, neglecting logical checks for buffer release. Both types of buffer checks should ensure that the buffer being released either matches or has a greater capacity compared to the source, allowing for assignment if needed. Overall exception message handling needs consistency with logic rather than test case expectations.",
+        "changes": "- Adjust _verifyRelease methods to check both byte and char arrays similarly and call wrongBuf with type\n+ Change wrongBuf to accept bufferType to form meaningful messages\n",
+        "methods": {
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L272": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              272,
+              275
+            ],
+            "original_code": "\n    protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n    if ((toRelease != src) && (toRelease.length < src.length)) {\n        throw wrongBuf(\"byte\");\n    }\n}",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L277": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              277,
+              280
+            ],
+            "original_code": "\n    protected final void _verifyRelease(char[] toRelease, char[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(char[] toRelease, char[] src) {\n    if ((toRelease != src) && (toRelease.length < src.length)) {\n        throw wrongBuf(\"char\");\n    }\n}",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::wrongBuf::L282": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "wrongBuf",
+            "class_name": "IOContext",
+            "line_numbers": [
+              282,
+              285
+            ],
+            "original_code": "\n    private IllegalArgumentException wrongBuf() {\n        // sanity check failed; trying to return different, smaller buffer.\nreturn new IllegalArgumentException(\"Trying to release buffer not owned by the context\"); \n    }\n",
+            "fixed_method": "private IllegalArgumentException wrongBuf(String bufferType) {\n    return new IllegalArgumentException(\"Buffer of type \" + bufferType + \" to release is smaller than original or not the same\");\n}",
+            "attempt": 1
+          }
+        },
+        "is_multi_method": true,
+        "is_refinement": true,
+        "refinement_attempt": 1
+      },
+      {
+        "hypothesis": "The exception message in `wrongBuf` method does not match expected test substring, and _verifyRelease methods incorrectly consider buffer sizes.",
+        "changes": "- Change condition in _verifyRelease methods to only throw exception if `toRelease` is strictly smaller than `src`\n- Update exception message in wrongBuf to match test expectations",
+        "methods": {
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L272": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              272,
+              275
+            ],
+            "original_code": "\n    protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n    if ((toRelease != src) && (toRelease.length < src.length)) {\n        throw wrongBuf();\n    }\n}",
+            "iteration": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L277": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              277,
+              280
+            ],
+            "original_code": "\n    protected final void _verifyRelease(char[] toRelease, char[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(char[] toRelease, char[] src) {\n    if ((toRelease != src) && (toRelease.length < src.length)) {\n        throw wrongBuf();\n    }\n}",
+            "iteration": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::wrongBuf::L282": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "wrongBuf",
+            "class_name": "IOContext",
+            "line_numbers": [
+              282,
+              285
+            ],
+            "original_code": "\n    private IllegalArgumentException wrongBuf() {\n        // sanity check failed; trying to return different, smaller buffer.\nreturn new IllegalArgumentException(\"Trying to release buffer not owned by the context\"); \n    }\n",
+            "fixed_method": "private IllegalArgumentException wrongBuf() {\n    return new IllegalArgumentException(\"smaller than original\");\n}",
+            "iteration": 1
+          }
+        },
+        "iteration": 1,
+        "is_multi_method": true
+      },
+      {
+        "hypothesis": "The original code overfits by using exception messages to match specific test cases without addressing underlying logic for validating buffer releases. This misses checking for buffer corruption or null sources. The aim is to refine checks for handling various edge cases including null checks, unowned buffer releases, and corrupted buffers, ensuring comprehensive logic for buffer release management.",
+        "changes": "+ Added null checks for both toRelease and src, + Introduced wrongBuf method with parameterized message, - Removed direct use of hardcoded exception messages",
+        "methods": {
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L272": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              272,
+              275
+            ],
+            "original_code": "\n    protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n    if (toRelease == null) {\n        throw new IllegalArgumentException(\"Buffer to release should not be null\");\n    }\n    if (src == null) {\n        throw new IllegalArgumentException(\"Source buffer should not be null\");\n    }\n    if (toRelease != src) {\n        if (toRelease.length < src.length) {\n            throw wrongBuf(\"Trying to release a buffer smaller than original\");\n        }\n        return;\n    }\n    // Further checks for buffer integrity might go here if appropriate\n}",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L277": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              277,
+              280
+            ],
+            "original_code": "\n    protected final void _verifyRelease(char[] toRelease, char[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(char[] toRelease, char[] src) {\n    if (toRelease == null) {\n        throw new IllegalArgumentException(\"Buffer to release should not be null\");\n    }\n    if (src == null) {\n        throw new IllegalArgumentException(\"Source buffer should not be null\");\n    }\n    if (toRelease != src) {\n        if (toRelease.length < src.length) {\n            throw wrongBuf(\"Trying to release a buffer smaller than original\");\n        }\n        return;\n    }\n    // Further checks for buffer integrity might go here if appropriate\n}",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::wrongBuf::L282": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "wrongBuf",
+            "class_name": "IOContext",
+            "line_numbers": [
+              282,
+              285
+            ],
+            "original_code": "\n    private IllegalArgumentException wrongBuf() {\n        // sanity check failed; trying to return different, smaller buffer.\nreturn new IllegalArgumentException(\"Trying to release buffer not owned by the context\"); \n    }\n",
+            "fixed_method": "private IllegalArgumentException wrongBuf(String message) {\n    return new IllegalArgumentException(message);\n}",
+            "attempt": 1
+          }
+        },
+        "is_multi_method": true,
+        "is_refinement": true,
+        "refinement_attempt": 1
+      },
+      {
+        "hypothesis": "The previous patches focused only on the test cases by changing exception messages, which led to overfitting. The underlying logical issues concerning buffer validation were not addressed. The refinement should ensure that only valid release conditions proceed, covering both buffer size checks and reference checks, while accurately reporting issues when they occur.",
+        "changes": "Added null checks; adjusted logic to correctly validate buffer sizes; updated exception messages to be more informative.",
+        "methods": {
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L272": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              272,
+              275
+            ],
+            "original_code": "\n    protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n    if (toRelease == null || src == null) {\n        throw wrongBuf(\"Null buffer encountered\");\n    }\n    if (toRelease != src && toRelease.length < src.length) {\n        throw wrongBuf(\"Buffer to release is smaller than original\");\n    }\n}",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L277": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              277,
+              280
+            ],
+            "original_code": "\n    protected final void _verifyRelease(char[] toRelease, char[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(char[] toRelease, char[] src) {\n    if (toRelease == null || src == null) {\n        throw wrongBuf(\"Null buffer encountered\");\n    }\n    if (toRelease != src && toRelease.length < src.length) {\n        throw wrongBuf(\"Buffer to release is smaller than original\");\n    }\n}",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::wrongBuf::L282": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "wrongBuf",
+            "class_name": "IOContext",
+            "line_numbers": [
+              282,
+              285
+            ],
+            "original_code": "\n    private IllegalArgumentException wrongBuf() {\n        // sanity check failed; trying to return different, smaller buffer.\nreturn new IllegalArgumentException(\"Trying to release buffer not owned by the context\"); \n    }\n",
+            "fixed_method": "private IllegalArgumentException wrongBuf(String message) {\n    return new IllegalArgumentException(\"Buffer verification failed: \" + message);\n}",
+            "attempt": 1
+          }
+        },
+        "is_multi_method": true,
+        "is_refinement": true,
+        "refinement_attempt": 1
+      },
+      {
+        "hypothesis": "The original patch introduced methods for buffer size verification but skipped integrating them correctly in checks beyond exception messages. The root issue was not effectively verifying buffer ownership and size to prevent releasing incorrect buffers. This solution ensures proper integration and logic checks for buffer release operations, aligning them with expected functionalities.",
+        "changes": "+ Added size comparison in _verifyRelease methods. + Included ownership check with reference comparison. + Detailed exception messages with actual vs expected sizes.",
+        "methods": {
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L272": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              272,
+              275
+            ],
+            "original_code": "\n    protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(byte[] toRelease, byte[] src) {\n    if (toRelease != null) {\n        if (toRelease.length < src.length) {\n            throw wrongSizeBuf(toRelease.length, src.length);\n        }\n        if (toRelease != src) {\n            throw wrongBuf();\n        }\n    }\n}",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::_verifyRelease::L277": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "_verifyRelease",
+            "class_name": "IOContext",
+            "line_numbers": [
+              277,
+              280
+            ],
+            "original_code": "\n    protected final void _verifyRelease(char[] toRelease, char[] src) {\n        // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer\n        if ((toRelease != src) && (toRelease.length <= src.length)) { throw wrongBuf(); }\n    }\n",
+            "fixed_method": "protected final void _verifyRelease(char[] toRelease, char[] src) {\n    if (toRelease != null) {\n        if (toRelease.length < src.length) {\n            throw wrongSizeBuf(toRelease.length, src.length);\n        }\n        if (toRelease != src) {\n            throw wrongBuf();\n        }\n    }\n}",
+            "attempt": 1
+          },
+          "src/main/java/com/fasterxml/jackson/core/io/IOContext.java::IOContext::wrongBuf::L282": {
+            "file_path": "src/main/java/com/fasterxml/jackson/core/io/IOContext.java",
+            "method_name": "wrongBuf",
+            "class_name": "IOContext",
+            "line_numbers": [
+              282,
+              285
+            ],
+            "original_code": "\n    private IllegalArgumentException wrongBuf() {\n        // sanity check failed; trying to return different, smaller buffer.\nreturn new IllegalArgumentException(\"Trying to release buffer not owned by the context\"); \n    }\n",
+            "fixed_method": "private IllegalArgumentException wrongBuf() {\n    return new IllegalArgumentException(\"Trying to release a buffer not owned by the context\");\n}\n\nprivate IllegalArgumentException wrongSizeBuf(int provided, int expected) {\n    return new IllegalArgumentException(\"Trying to release buffer smaller than original: provided size = \" + provided + \", expected size = \" + expected);\n}",
+            "attempt": 1
+          }
+        },
+        "is_multi_method": true,
+        "is_refinement": true,
+        "refinement_attempt": 1
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonCore-14/"
+}

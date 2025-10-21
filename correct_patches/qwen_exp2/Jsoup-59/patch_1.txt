@@ -1,0 +1,30 @@
+File: src/main/java/org/jsoup/parser/Token.java
+Method: Token.newAttribute
+
+final void newAttribute() {
+    if (attributes == null)
+        attributes = new Attributes();
+
+    if (pendingAttributeName != null) {
+        // Trim the attribute name to remove leading and trailing whitespace and control characters
+        String trimmedName = pendingAttributeName.trim();
+        if (!trimmedName.isEmpty()) {
+            pendingAttributeName = trimmedName;
+            Attribute attribute;
+            if (hasPendingAttributeValue)
+                attribute = new Attribute(pendingAttributeName,
+                    pendingAttributeValue != null && pendingAttributeValue.length() > 0 ? pendingAttributeValue.toString() : pendingAttributeValueS);
+            else if (hasEmptyAttributeValue)
+                attribute = new Attribute(pendingAttributeName, "");
+            else
+                attribute = new BooleanAttribute(pendingAttributeName);
+            attributes.put(attribute);
+        }
+    }
+    pendingAttributeName = null;
+    hasEmptyAttributeValue = false;
+    hasPendingAttributeValue = false;
+    if (pendingAttributeValue != null)
+        pendingAttributeValue.setLength(0);
+    pendingAttributeValueS = null;
+}

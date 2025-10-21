@@ -1,0 +1,7 @@
+File: src/java/org/apache/commons/jxpath/ri/model/beans/PropertyPointer.java
+Method: PropertyPointer.getLength
+
+public int getLength() {
+ if (getBaseValue() == null) return 1;
+ return ValueUtils.getLength(getBaseValue());
+}

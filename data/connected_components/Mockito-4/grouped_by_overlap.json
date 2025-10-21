@@ -1,0 +1,27 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "noMoreInteractionsWantedInOrder_org.mockito.exceptions.Reporter"
+    ],
+    "tests": [
+      "org.mockito.exceptions.ReporterTest::can_use_print_mock_name_even_when_mock_bogus_default_answer_and_when_reporting_no_more_interaction_wanted_in_order"
+    ]
+  },
+  "Group_2": {
+    "buggy_methods": [
+      "exceptionCauseMessageIfAvailable_org.mockito.exceptions.Reporter"
+    ],
+    "tests": [
+      "org.mockito.exceptions.ReporterTest::can_use_print_mock_name_even_when_mock_bogus_default_answer_and_when_reporting_injection_failure"
+    ]
+  },
+  "Group_3": {
+    "buggy_methods": [
+      "noMoreInteractionsWanted_org.mockito.exceptions.Reporter"
+    ],
+    "tests": [
+      "org.mockito.exceptions.ReporterTest::can_use_mock_name_even_when_mock_bogus_default_answer_and_when_reporting_no_more_interaction_wanted",
+      "org.mockitousage.bugs.ClassCastExOnVerifyZeroInteractionsTest::should_not_throw_a_ClassCastException"
+    ]
+  }
+}

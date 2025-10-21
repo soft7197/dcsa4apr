@@ -1,0 +1,59 @@
+File: src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java
+Method: NumericEntityUnescaper.translate
+
+public int translate(CharSequence input, int index, Writer out) throws IOException {
+    int seqEnd = input.length();
+    if (index < seqEnd - 2 && input.charAt(index) == '&' && input.charAt(index + 1) == '#') {
+        int start = index + 2;
+        boolean isHex = false;
+
+        if (start >= seqEnd) {
+            return 0;
+        }
+
+        char firstChar = input.charAt(start);
+        if (firstChar == 'x' || firstChar == 'X') {
+            start++;
+            isHex = true;
+            if (start >= seqEnd) {
+                return 0;
+            }
+        }
+
+        int end = start;
+        while (end < seqEnd && ((isHex && Character.digit(input.charAt(end), 16) >= 0) || (!isHex && Character.isDigit(input.charAt(end))))) {
+            end++;
+        }
+
+        if (end == start) { // No valid digits were found
+            return 0;
+        }
+
+        int entityValue;
+        try {
+            String numberSequence = input.subSequence(start, end).toString();
+            if (isHex) {
+                entityValue = Integer.parseInt(numberSequence, 16);
+            } else {
+                entityValue = Integer.parseInt(numberSequence, 10);
+            }
+        } catch (NumberFormatException nfe) {
+            return 0;
+        }
+
+        if (entityValue > 0xFFFF) {
+            char[] chrs = Character.toChars(entityValue);
+            out.write(chrs[0]);
+            out.write(chrs[1]);
+        } else {
+            out.write(entityValue);
+        }
+
+        if (end < seqEnd && input.charAt(end) == ';') {
+            end++;
+        }
+
+        return end - index;
+    }
+    return 0;
+}

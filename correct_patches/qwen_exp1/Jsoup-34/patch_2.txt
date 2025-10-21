@@ -1,0 +1,49 @@
+File: src/main/java/org/jsoup/parser/CharacterReader.java
+Method: CharacterReader.nextIndexOf
+
+int nextIndexOf(CharSequence seq) {
+    if (seq == null || seq.length() == 0) {
+        return -1;
+    }
+    if (pos >= length) {
+        return -1;
+    }
+    char startChar = seq.charAt(0);
+    for (int offset = pos; offset < length; offset++) {
+        // scan to first instance of startchar:
+        if (startChar != input[offset]) {
+            while (++offset < length && startChar != input[offset]);
+        }
+        if (offset < length) {
+            boolean found = true;
+            for (int j = 0; j < seq.length(); j++) {
+                int i = offset + j;
+                if (i >= length) {
+                    found = false;
+                    break;
+                }
+                char ch = seq.charAt(j);
+                if (Character.isHighSurrogate(ch)) {
+                    if (j + 1 < seq.length()) {
+                        char nextCh = seq.charAt(j + 1);
+                        if (!Character.isLowSurrogate(nextCh) || i + 1 >= length || input[i] != ch || input[i + 1] != nextCh) {
+                            found = false;
+                            break;
+                        }
+                        j++; // skip the low surrogate
+                    } else {
+                        found = false;
+                        break;
+                    }
+                } else if (input[i] != ch) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found) {
+                return offset - pos;
+            }
+        }
+    }
+    return -1;
+}

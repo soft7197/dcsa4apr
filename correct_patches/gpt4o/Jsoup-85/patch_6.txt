@@ -1,0 +1,11 @@
+File: src/main/java/org/jsoup/nodes/Attribute.java
+Method: Attribute.Attribute
+
+public Attribute(String key, String val, Attributes parent) {
+    Validate.notNull(key);
+    key = key.trim();
+    Validate.notEmpty(key); // trimming could potentially make empty, so we validate here
+    this.key = key;
+    this.val = val;
+    this.parent = parent;
+}

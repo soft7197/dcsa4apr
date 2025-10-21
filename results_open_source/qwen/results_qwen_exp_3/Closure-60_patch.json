@@ -1,0 +1,43 @@
+{
+  "bug_id": "Closure-60",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-60_1772028927",
+  "patches": [
+    {
+      "hypothesis": "The issue arises because the current implementation of `getPureBooleanValue` does not correctly handle the `Token.VOID` type, which should return `TernaryValue.UNKNOWN` when it has side effects. Additionally, `getImpureBooleanValue` should handle `Token.VOID` similarly to ensure consistency.",
+      "changes": "-      case Token.VOID:\n-          return TernaryValue.FALSE;\n+      case Token.VOID:\n+        if (mayHaveSideEffects(n)) {\n+          return TernaryValue.UNKNOWN;\n+        }\n+        return TernaryValue.FALSE;",
+      "methods": {
+        "src/com/google/javascript/jscomp/NodeUtil.java::NodeUtil::getPureBooleanValue::L120": {
+          "file_path": "src/com/google/javascript/jscomp/NodeUtil.java",
+          "method_name": "getPureBooleanValue",
+          "class_name": "NodeUtil",
+          "line_numbers": [
+            120,
+            163
+          ],
+          "original_code": "  /**\n   * Gets the boolean value of a node that represents a literal. This method\n   * effectively emulates the <code>Boolean()</code> JavaScript cast function\n   * except it return UNKNOWN for known values with side-effects, use\n   * getExpressionBooleanValue if you don't care about side-effects.\n   */\n\n  static TernaryValue getPureBooleanValue(Node n) {\n    switch (n.getType()) {\n      case Token.STRING:\n        return TernaryValue.forBoolean(n.getString().length() > 0);\n\n      case Token.NUMBER:\n        return TernaryValue.forBoolean(n.getDouble() != 0);\n\n      case Token.NOT:\n        return getPureBooleanValue(n.getLastChild()).not();\n\n      case Token.NULL:\n      case Token.FALSE:\n        return TernaryValue.FALSE;\n\n      case Token.VOID:\n          return TernaryValue.FALSE;\n\n      case Token.NAME:\n        String name = n.getString();\n        if (\"undefined\".equals(name)\n            || \"NaN\".equals(name)) {\n          // We assume here that programs don't change the value of the keyword\n          // undefined to something other than the value undefined.\n          return TernaryValue.FALSE;\n        } else if (\"Infinity\".equals(name)) {\n          return TernaryValue.TRUE;\n        }\n        break;\n\n      case Token.TRUE:\n      case Token.REGEXP:\n        return TernaryValue.TRUE;\n\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        if (!mayHaveSideEffects(n)) {\n          return TernaryValue.TRUE;\n        }\n        break;\n    }\n\n    return TernaryValue.UNKNOWN;\n  }\n",
+          "fixed_method": "static TernaryValue getPureBooleanValue(Node n) {\n    switch (n.getType()) {\n      case Token.STRING:\n        return TernaryValue.forBoolean(n.getString().length() > 0);\n\n      case Token.NUMBER:\n        return TernaryValue.forBoolean(n.getDouble() != 0);\n\n      case Token.NOT:\n        return getPureBooleanValue(n.getLastChild()).not();\n\n      case Token.NULL:\n      case Token.FALSE:\n        return TernaryValue.FALSE;\n\n      case Token.VOID:\n        if (mayHaveSideEffects(n)) {\n          return TernaryValue.UNKNOWN;\n        }\n        return TernaryValue.FALSE;\n\n      case Token.NAME:\n        String name = n.getString();\n        if (\"undefined\".equals(name)\n            || \"NaN\".equals(name)) {\n          // We assume here that programs don't change the value of the keyword\n          // undefined to something other than the value undefined.\n          return TernaryValue.FALSE;\n        } else if (\"Infinity\".equals(name)) {\n          return TernaryValue.TRUE;\n        }\n        break;\n\n      case Token.TRUE:\n      case Token.REGEXP:\n        return TernaryValue.TRUE;\n\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        if (!mayHaveSideEffects(n)) {\n          return TernaryValue.TRUE;\n        }\n        break;\n    }\n\n    return TernaryValue.UNKNOWN;\n  }",
+          "iteration": 1
+        },
+        "src/com/google/javascript/jscomp/NodeUtil.java::NodeUtil::getImpureBooleanValue::L74": {
+          "file_path": "src/com/google/javascript/jscomp/NodeUtil.java",
+          "method_name": "getImpureBooleanValue",
+          "class_name": "NodeUtil",
+          "line_numbers": [
+            74,
+            112
+          ],
+          "original_code": "  /**\n   * Gets the boolean value of a node that represents a expression. This method\n   * effectively emulates the <code>Boolean()</code> JavaScript cast function.\n   * Note: unlike getBooleanValue this function does not return UNKNOWN\n   * for expressions with side-effects.\n   */\n\n  static TernaryValue getImpureBooleanValue(Node n) {\n    switch (n.getType()) {\n      case Token.ASSIGN:\n      case Token.COMMA:\n        // For ASSIGN and COMMA the value is the value of the RHS.\n        return getImpureBooleanValue(n.getLastChild());\n      case Token.NOT:\n        TernaryValue value = getImpureBooleanValue(n.getLastChild());\n        return value.not();\n      case Token.AND: {\n        TernaryValue lhs = getImpureBooleanValue(n.getFirstChild());\n        TernaryValue rhs = getImpureBooleanValue(n.getLastChild());\n        return lhs.and(rhs);\n      }\n      case Token.OR:  {\n        TernaryValue lhs = getImpureBooleanValue(n.getFirstChild());\n        TernaryValue rhs = getImpureBooleanValue(n.getLastChild());\n        return lhs.or(rhs);\n      }\n      case Token.HOOK:  {\n        TernaryValue trueValue = getImpureBooleanValue(\n            n.getFirstChild().getNext());\n        TernaryValue falseValue = getImpureBooleanValue(n.getLastChild());\n        if (trueValue.equals(falseValue)) {\n          return trueValue;\n        } else {\n          return TernaryValue.UNKNOWN;\n        }\n      }\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        // ignoring side-effects\n        return TernaryValue.TRUE;\n\n\n      default:\n        return getPureBooleanValue(n);\n    }\n  }\n",
+          "fixed_method": "static TernaryValue getImpureBooleanValue(Node n) {\n    switch (n.getType()) {\n      case Token.ASSIGN:\n      case Token.COMMA:\n        // For ASSIGN and COMMA the value is the value of the RHS.\n        return getImpureBooleanValue(n.getLastChild());\n      case Token.NOT:\n        TernaryValue value = getImpureBooleanValue(n.getLastChild());\n        return value.not();\n      case Token.AND: {\n        TernaryValue lhs = getImpureBooleanValue(n.getFirstChild());\n        TernaryValue rhs = getImpureBooleanValue(n.getLastChild());\n        return lhs.and(rhs);\n      }\n      case Token.OR:  {\n        TernaryValue lhs = getImpureBooleanValue(n.getFirstChild());\n        TernaryValue rhs = getImpureBooleanValue(n.getLastChild());\n        return lhs.or(rhs);\n      }\n      case Token.HOOK:  {\n        TernaryValue trueValue = getImpureBooleanValue(\n            n.getFirstChild().getNext());\n        TernaryValue falseValue = getImpureBooleanValue(n.getLastChild());\n        if (trueValue.equals(falseValue)) {\n          return trueValue;\n        } else {\n          return TernaryValue.UNKNOWN;\n        }\n      }\n      case Token.ARRAYLIT:\n      case Token.OBJECTLIT:\n        // ignoring side-effects\n        return TernaryValue.TRUE;\n\n      case Token.VOID:\n        if (mayHaveSideEffects(n)) {\n          return TernaryValue.UNKNOWN;\n        }\n        return TernaryValue.FALSE;\n\n      default:\n        return getPureBooleanValue(n);\n    }\n  }",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-60/"
+}

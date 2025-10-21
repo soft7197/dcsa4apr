@@ -1,0 +1,29 @@
+File: src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java
+Method: TypeFactory._mapType
+
+private JavaType _mapType(Class<?> rawClass)
+{
+    // 28-May-2015, tatu: Properties are special, as per [databind#810]
+    JavaType keyType = _unknownType();
+    JavaType valueType = _unknownType();
+
+    // Check if the class is Properties
+    if (Properties.class.isAssignableFrom(rawClass)) {
+        // Assuming that Properties are always String -> String
+        keyType = _constructType(String.class, null);
+        valueType = _constructType(String.class, null);
+    } else {
+        JavaType[] typeParams = findTypeParameters(rawClass, Map.class);
+        // ok to have no types ("raw")
+        if (typeParams == null || typeParams.length == 0) {
+            return MapType.construct(rawClass, keyType, valueType);
+        }
+        // but exactly 2 types if any found
+        if (typeParams.length != 2) {
+            throw new IllegalArgumentException("Strange Map type " + rawClass.getName() + ": can not determine type parameters");
+        }
+        keyType = typeParams[0];
+        valueType = typeParams[1];
+    }
+    return MapType.construct(rawClass, keyType, valueType);
+}

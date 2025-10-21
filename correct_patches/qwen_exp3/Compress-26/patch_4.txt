@@ -1,0 +1,24 @@
+File: src/main/java/org/apache/commons/compress/utils/IOUtils.java
+Method: IOUtils.skip
+
+public static long skip(InputStream input, long numToSkip) throws IOException {
+    if (input == null) {
+        throw new IllegalArgumentException("Input stream cannot be null");
+    }
+    if (numToSkip < 0) {
+        throw new IllegalArgumentException("Number of bytes to skip cannot be negative");
+    }
+    long available = numToSkip;
+    while (numToSkip > 0) {
+        long skipped = input.skip(numToSkip);
+        if (skipped <= 0) {
+            int b = input.read();
+            if (b == -1) {
+                break;
+            }
+            skipped = 1;
+        }
+        numToSkip -= skipped;
+    }
+    return available - numToSkip;
+}

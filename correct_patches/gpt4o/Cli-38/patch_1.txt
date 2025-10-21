@@ -1,0 +1,24 @@
+File: src/main/java/org/apache/commons/cli/DefaultParser.java
+Method: DefaultParser.isShortOption
+
+private boolean isShortOption(String token)
+{
+    // short options (-S, -SV, -S=V, -SV1=V2, -S1S2)
+    if (!token.startsWith("-") || token.length() == 1)
+    {
+        return false;
+    }
+
+    if (token.charAt(1) == '-') {
+        // Handle '--option' as long option, not short
+        return false;
+    }
+
+    // remove leading "-" and extract option name before "="
+    int pos = token.indexOf("=");
+    String optName = pos == -1 ? token.substring(1) : token.substring(1, pos);
+
+    // check the first character of reduced token to see if it's a short option
+    // if the first char is valid, assume others are values or part of option name
+    return optName.length() > 0 && options.hasShortOption(String.valueOf(optName.charAt(0)));
+}

@@ -1,0 +1,62 @@
+{
+  "bug_id": "Jsoup-57",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-57_1772784663",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined patch addresses the hardcoded values, edge cases, and robust data structure issues. The patch now handles all possible inputs correctly, and the logic is more general and correct.",
+        "fixed_method": "public void removeIgnoreCase(String key) {\n\n    Validate.notEmpty(key);\n\n    if (attributes == null)\n      return;\n\n    ArrayList<String> attrKeys = new ArrayList<String>(attributes.keySet());\n\n    for (String attrKey : attrKeys) {\n\n      if (attrKey.equalsIgnoreCase(key))\n        attributes.remove(attrKey);\n\n    }\n\n  }",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/nodes/Attributes.java",
+        "method_name": "removeIgnoreCase",
+        "class_name": "Attributes",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method was removing attributes while iterating over the attribute keys, causing a ConcurrentModificationException. The fix involves making a copy of the attribute keys before removing any attributes.",
+        "line_numbers": [
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127
+        ]
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public void removeIgnoreCase(String key) {\nValidate.notEmpty(key);\nif (attributes == null) return;\nList<String> keysCopy = new ArrayList<String>(attributes.keySet());\nfor (String attrKey : keysCopy) {\nif (attrKey.equalsIgnoreCase(key)) {\nattributes.remove(attrKey);\n}\n}\n}",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/nodes/Attributes.java",
+        "method_name": "removeIgnoreCase",
+        "class_name": "Attributes",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127
+        ],
+        "original_code": "/**\nRemove an attribute by key. <b>Case insensitive.</b>\n@param key attribute key to remove\n*/\npublic void removeIgnoreCase(String key) {\n    Validate.notEmpty(key);\n    if (attributes == null)\n        return;\n    for (Iterator<String> it = attributes.keySet().iterator(); it.hasNext(); ) {\n        String attrKey = it.next();\n        if (attrKey.equalsIgnoreCase(key))\n            attributes.remove(attrKey);\n    }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-57/"
+}

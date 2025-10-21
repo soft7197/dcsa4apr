@@ -1,0 +1,45 @@
+{
+  "bug_id": "Closure-120",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-120_1773115529",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method incorrectly considers assignments within recursive calls as valid, while they should be treated as multiple assignments.",
+        "changes": "- Check if the assignment is inside a function call (recursive calls)\n+ Return false if the block is a function block and still iterates",
+        "fixed_method": "boolean isAssignedOnceInLifetime() {\n  Reference ref = getOneAndOnlyAssignment();\n  if (ref == null) {\n    return false;\n  }\n\n  // Make sure this assignment is not in a loop or is not one of multiple\n  // assignments that happen in a recursive call.\n  BasicBlock block = ref.getBasicBlock();\n  while (block != null) {\n    if (block.isFunction) {\n      if (block.getParent() != null) {\n        return false; // It's inside a recursive function call\n      }\n      break;\n    } else if (block.isLoop) {\n      return false;\n    }\n    block = block.getParent();\n  }\n\n  return true;\n}",
+        "diff": "- Check if the assignment is inside a function call (recursive calls)\n+ Return false if the block is a function block and still iterates",
+        "file_path": "src/com/google/javascript/jscomp/ReferenceCollectingCallback.java",
+        "method_name": "isAssignedOnceInLifetime",
+        "class_name": "ReferenceCollectingCallback",
+        "iteration": 3,
+        "is_multi_method": false,
+        "line_numbers": [
+          421,
+          422,
+          423,
+          424,
+          425,
+          426,
+          427,
+          428,
+          429,
+          430,
+          431,
+          432,
+          433,
+          434,
+          435,
+          436,
+          437,
+          438
+        ],
+        "original_code": "/**\n* @return Whether the variable is only assigned a value once for its\n*     lifetime.\n*/\nboolean isAssignedOnceInLifetime() {\n  Reference ref = getOneAndOnlyAssignment();\n  if (ref == null) {\n    return false;\n  }\n\n  // Make sure this assignment is not in a loop.\n  for (BasicBlock block = ref.getBasicBlock();\n       block != null; block = block.getParent()) {\n    if (block.isFunction) {\n      break;\n    } else if (block.isLoop) {\n      return false;\n    }\n  }\n\n  return true;\n}"
+      }
+    ]
+  ],
+  "iterations": 3,
+  "monitor_dir": "traces/Closure-120/"
+}

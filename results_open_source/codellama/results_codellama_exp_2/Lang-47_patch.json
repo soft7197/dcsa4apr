@@ -1,0 +1,29 @@
+{
+  "bug_id": "Lang-47",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-47_1772817715",
+  "patches": [
+    [
+      {
+        "hypothesis": "The null check was missing and the method was failing to handle null inputs.",
+        "changes": "+ if (obj == null) { str = \"\"; }",
+        "fixed_method": "public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {\n if (width > 0) {\n ensureCapacity(size + width);\n String str = (obj == null ? \"\" : obj.toString());\n int strLen = str.length();\n if (strLen >= width) {\n str.getChars(strLen - width, strLen, buffer, size);\n } else {\n int padLen = width - strLen;\n for (int i = 0; i < padLen; i++) {\n buffer[size + i] = padChar;\n }\n str.getChars(0, strLen, buffer, size + padLen);\n }\n size += width;\n }\n return this;\n}",
+        "diff": "+ if (obj == null) { str = \"\"; }",
+        "file_path": "src/java/org/apache/commons/lang/text/StrBuilder.java",
+        "method_name": "appendFixedWidthPadLeft",
+        "class_name": "StrBuilder",
+        "iteration": 3,
+        "is_multi_method": false,
+        "line_numbers": [
+          1182,
+          1199
+        ],
+        "original_code": "    //-----------------------------------------------------------------------\n    /**\n     * Appends an object to the builder padding on the left to a fixed width.\n     * The <code>toString</code> of the object is used.\n     * If the object is larger than the length, the left hand side is lost.\n     * If the object is null, the null text value is used.\n     * \n     * @param obj  the object to append, null uses null text\n     * @param width  the fixed field width, zero or negative has no effect\n     * @param padChar  the pad character to use\n     * @return this, to enable chaining\n     */\n\n    public StrBuilder appendFixedWidthPadLeft(Object obj, int width, char padChar) {\n        if (width > 0) {\n            ensureCapacity(size + width);\n            String str = (obj == null ? getNullText() : obj.toString());\n            int strLen = str.length();\n            if (strLen >= width) {\n                str.getChars(strLen - width, strLen, buffer, size);\n            } else {\n                int padLen = width - strLen;\n                for (int i = 0; i < padLen; i++) {\n                    buffer[size + i] = padChar;\n                }\n                str.getChars(0, strLen, buffer, size + padLen);\n            }\n            size += width;\n        }\n        return this;\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Lang-47/"
+}

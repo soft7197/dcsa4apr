@@ -1,0 +1,8 @@
+File: src/java/org/apache/commons/math/fraction/Fraction.java
+Method: Fraction.compareTo
+
+public int compareTo(Fraction object) {
+    long crossProductThis = (long) this.numerator * object.denominator;
+    long crossProductOther = (long) object.numerator * this.denominator;
+    return Long.compare(crossProductThis, crossProductOther);
+}

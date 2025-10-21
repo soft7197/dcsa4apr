@@ -1,0 +1,74 @@
+{
+  "bug_id": "Chart-12",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-12_1772679488",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined fix uses a more robust null check and expands the test coverage to handle edge cases.",
+        "fixed_method": "public MultiplePiePlot(CategoryDataset dataset) {\n    super();\n    if (dataset == null) {\n        return;\n    }\n    this.dataset = dataset;\n    PiePlot piePlot = new PiePlot(null);\n    this.pieChart = new JFreeChart(piePlot);\n    this.pieChart.removeLegend();\n    this.dataExtractOrder = TableOrder.BY_COLUMN;\n    this.pieChart.setBackgroundPaint(null);\n    TextTitle seriesTitle = new TextTitle(\"Series Title\",\n            new Font(\"SansSerif\", Font.BOLD, 12));\n    seriesTitle.setPosition(RectangleEdge.BOTTOM);\n    this.pieChart.setTitle(seriesTitle);\n    this.aggregatedItemsKey = \"Other\";\n    this.aggregatedItemsPaint = Color.lightGray;\n    this.sectionPaints = new HashMap();\n    dataset.addChangeListener(this);\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "source/org/jfree/chart/plot/MultiplePiePlot.java",
+        "method_name": "MultiplePiePlot",
+        "class_name": "MultiplePiePlot",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue is related to the null check in the constructor. The constructor is not registering the plot as a listener when the dataset is null.",
+        "line_numbers": [
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158
+        ]
+      },
+      {
+        "hypothesis": "The problem was caused by the fact that the dataset object was not effectively connected to the MultiplePiePlot object by the addChangeListener method. The fix involved calling this method on the dataset object to register the MultiplePiePlot object as a listener.",
+        "changes": "+ dataset.addChangeListener(this);",
+        "fixed_method": "public MultiplePiePlot(CategoryDataset dataset) {\n   super();\n   this.dataset = dataset;\n   PiePlot piePlot = new PiePlot(null);\n   this.pieChart = new JFreeChart(piePlot);\n   this.pieChart.removeLegend();\n   this.dataExtractOrder = TableOrder.BY_COLUMN;\n   this.pieChart.setBackgroundPaint(null);\n   TextTitle seriesTitle = new TextTitle(\"Series Title\",\n           new Font(\"SansSerif\", Font.BOLD, 12));\n   seriesTitle.setPosition(RectangleEdge.BOTTOM);\n   this.pieChart.setTitle(seriesTitle);\n   this.aggregatedItemsKey = \"Other\";\n   this.aggregatedItemsPaint = Color.lightGray;\n   this.sectionPaints = new HashMap();\n   if (dataset != null) {\n       dataset.addChangeListener(this);\n   }\n}",
+        "diff": "+ dataset.addChangeListener(this);",
+        "file_path": "source/org/jfree/chart/plot/MultiplePiePlot.java",
+        "method_name": "MultiplePiePlot",
+        "class_name": "MultiplePiePlot",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158
+        ],
+        "original_code": "/**\n* Creates a new plot.\n*\n* @param dataset  the dataset (<code>null</code> permitted).\n*/\npublic MultiplePiePlot(CategoryDataset dataset) {\n    super();\n    this.dataset = dataset;\n    PiePlot piePlot = new PiePlot(null);\n    this.pieChart = new JFreeChart(piePlot);\n    this.pieChart.removeLegend();\n    this.dataExtractOrder = TableOrder.BY_COLUMN;\n    this.pieChart.setBackgroundPaint(null);\n    TextTitle seriesTitle = new TextTitle(\"Series Title\",\n            new Font(\"SansSerif\", Font.BOLD, 12));\n    seriesTitle.setPosition(RectangleEdge.BOTTOM);\n    this.pieChart.setTitle(seriesTitle);\n    this.aggregatedItemsKey = \"Other\";\n    this.aggregatedItemsPaint = Color.lightGray;\n    this.sectionPaints = new HashMap();\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Chart-12/"
+}

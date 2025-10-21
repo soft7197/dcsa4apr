@@ -1,0 +1,56 @@
+{
+  "bug_id": "Mockito-29",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-29_1772921596",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined patch includes proper null checks, boundary conditions, and handles general cases while avoiding the overfitting patterns.",
+        "fixed_method": "public void describeTo(Description description) {\n    description.appendText(\"same(\");\n    appendQuoting(description);\n    if (wanted == null) return; // added null check\n    description.appendText(String.valueOf(wanted)); // used proper method for string representation of the object\n    appendQuoting(description);\n    description.appendText(\")\");\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/org/mockito/internal/matchers/Same.java",
+        "method_name": "describeTo",
+        "class_name": "Same",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue is caused by the `wanted.toString()` method call in the `describeTo` method, which is throwing a NullPointerException when `wanted` is null.",
+        "line_numbers": [
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ]
+      },
+      {
+        "hypothesis": "The issue is caused by the null pointer exception that occurs when the wanted argument is null.",
+        "changes": "+ if (wanted == null) return;",
+        "fixed_method": "public void describeTo(Description description) {\n    if (wanted == null) return;\n    description.appendText(\"same(\");\n    appendQuoting(description);\n    description.appendText(wanted.toString());\n    appendQuoting(description);\n    description.appendText(\")\");\n}",
+        "diff": "+ if (wanted == null) return;",
+        "file_path": "src/org/mockito/internal/matchers/Same.java",
+        "method_name": "describeTo",
+        "class_name": "Same",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ],
+        "original_code": "/*\n* Copyright (c) 2007 Mockito contributors\n* This program is made available under the terms of the MIT License.\n*/\npublic void describeTo(Description description) {\n    description.appendText(\"same(\");\n    appendQuoting(description);\n    description.appendText(wanted.toString());\n    appendQuoting(description);\n    description.appendText(\")\");\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Mockito-29/"
+}

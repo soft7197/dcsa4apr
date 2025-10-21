@@ -1,0 +1,56 @@
+{
+  "bug_id": "Jsoup-54",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-54_1772784540",
+  "patches": [
+    [
+      {
+        "hypothesis": "Improved generic approach to handle arbitrary attribute names",
+        "fixed_method": "private void copyAttributes(org.jsoup.nodes.Node source, Element el) {\n    for (Attribute attribute : source.attributes()) {\n        String key = attribute.getKey().trim().replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");\n        if (key.matches(\"^[a-zA-Z_:][-a-zA-Z0-9_:.]\")) {\n            el.setAttribute(key, attribute.getValue().replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\"));\n        }\n    }\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/helper/W3CDom.java",
+        "method_name": "copyAttributes",
+        "class_name": "W3CDom",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the regex pattern used to validate the attribute key, which is not correctly handling the invalid characters in the attribute name.",
+        "line_numbers": [
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ]
+      },
+      {
+        "hypothesis": "The bug is caused by the method not properly handling invalid XML attribute names. The method is replacing all invalid characters with an empty string, which is causing the XML parser to fail.",
+        "changes": "+ Replace all invalid characters with a valid character, such as an underscore.",
+        "fixed_method": "private void copyAttributes(org.jsoup.nodes.Node source, Element el) {\n    for (Attribute attribute : source.attributes()) {\n        // valid xml attribute names are: ^[a-zA-Z_:][-a-zA-Z0-9_:.]\n        String key = attribute.getKey().replaceAll(\"[^-a-zA-Z0-9_:.]\", \"_\");\n        el.setAttribute(key, attribute.getValue());\n    }\n}",
+        "diff": "+ Replace all invalid characters with a valid character, such as an underscore.",
+        "file_path": "src/main/java/org/jsoup/helper/W3CDom.java",
+        "method_name": "copyAttributes",
+        "class_name": "W3CDom",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ],
+        "original_code": "// unhandled\nprivate void copyAttributes(org.jsoup.nodes.Node source, Element el) {\n    for (Attribute attribute : source.attributes()) {\n        // valid xml attribute names are: ^[a-zA-Z_:][-a-zA-Z0-9_:.]\n        String key = attribute.getKey().replaceAll(\"[^-a-zA-Z0-9_:.]\", \"\");\n            el.setAttribute(key, attribute.getValue());\n    }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-54/"
+}

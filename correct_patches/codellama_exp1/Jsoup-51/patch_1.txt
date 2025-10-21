@@ -1,0 +1,13 @@
+File: src/main/java/org/jsoup/parser/CharacterReader.java
+Method: CharacterReader.matchesLetter
+
+public boolean matchesLetter() {
+    if (isEmpty()) {
+        return false;
+    }
+    char c = input[pos];
+    if (c == '\0') {
+        return false;
+    }
+    return Character.isLetter(c);
+}

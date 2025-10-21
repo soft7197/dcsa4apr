@@ -1,0 +1,48 @@
+File: gson/src/main/java/com/google/gson/stream/JsonReader.java
+Method: JsonReader.nextLong
+
+public long nextLong() throws IOException {
+    int p = peeked;
+    if (p == PEEKED_NONE) {
+      p = doPeek();
+    }
+
+    if (p == PEEKED_LONG) {
+      peeked = PEEKED_NONE;
+      pathIndices[stackSize - 1]++;
+      return peekedLong;
+    }
+
+    // Gather the string representation from quoted or number tokens
+    if (p == PEEKED_NUMBER) {
+      peekedString = new String(buffer, pos, peekedNumberLength);
+      pos += peekedNumberLength;
+    } else if (p == PEEKED_SINGLE_QUOTED || p == PEEKED_DOUBLE_QUOTED) {
+      peekedString = nextQuotedValue(p == PEEKED_SINGLE_QUOTED ? '\'' : '"');
+    } else if (p == PEEKED_UNQUOTED) {
+      peekedString = nextUnquotedValue();
+    } else {
+      throw new IllegalStateException("Expected a long but was " + peek()
+          + " at line " + getLineNumber() + " column " + getColumnNumber() + " path " + getPath());
+    }
+
+    try {
+      long result = Long.parseLong(peekedString);
+      peeked = PEEKED_NONE;
+      pathIndices[stackSize - 1]++;
+      return result;
+    } catch (NumberFormatException ex) {
+      // Fall back to parsing as a double only if it's not a valid long
+      double asDouble = Double.parseDouble(peekedString);
+      long result = (long) asDouble;
+      if (result != asDouble) { // Ensure precision was not lost
+        throw new NumberFormatException("Expected a long but was " + peekedString
+            + " at line " + getLineNumber() + " column " + getColumnNumber() + " path " + getPath());
+      }
+
+      peekedString = null;
+      peeked = PEEKED_NONE;
+      pathIndices[stackSize - 1]++;
+      return result;
+    }
+}

@@ -1,0 +1,59 @@
+{
+  "bug_id": "Closure-7",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-7_1773117717",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method incorrectly handles the case where the expected type is 'function' and returns null instead of the type. This leads to missing 'Object' in the actual result.",
+        "changes": "Changed condition to return object type when resultEqualsValue is true and the type is a subtype of the constructor type; otherwise return the type itself if it matches 'object'.",
+        "fixed_method": "public JSType caseObjectType(ObjectType type) {\n  if (value.equals(\"function\")) {\n    JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n    return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : type;\n  }\n  return matchesExpectation(\"object\") ? type : null;\n}",
+        "diff": "Changed condition to return object type when resultEqualsValue is true and the type is a subtype of the constructor type; otherwise return the type itself if it matches 'object'.",
+        "file_path": "src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java",
+        "method_name": "caseObjectType",
+        "class_name": "ChainableReverseAbstractInterpreter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          610,
+          611,
+          612,
+          613,
+          614,
+          615,
+          616,
+          617,
+          618
+        ],
+        "original_code": "/**\n* Computes whether the given result of a {@code typeof} operator matches\n* expectations, i.e. whether a type that gives such a result should be\n* kept.\n*/\npublic JSType caseObjectType(ObjectType type) {\n  if (value.equals(\"function\")) {\n    JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n    return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n      // Objects are restricted to \"Function\", subtypes are left\n      // Only filter out subtypes of \"function\"\n  }\n  return matchesExpectation(\"object\") ? type : null;\n}"
+      },
+      {
+        "hypothesis": "The method incorrectly returns `null` for subtypes of 'function', causing expected types containing 'Object' to be mismatched.",
+        "changes": "+if (!resultEqualsValue || !ctorType.isSubtype(type)) {\n+  return matchesExpectation(\"object\") ? type : null;\n+}",
+        "fixed_method": "public JSType caseObjectType(ObjectType type) {\n  if (value.equals(\"function\")) {\n    JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n    if (resultEqualsValue && ctorType.isSubtype(type)) {\n      return ctorType;\n    }\n  }\n  return matchesExpectation(\"object\") ? type : null;\n}",
+        "diff": "+if (!resultEqualsValue || !ctorType.isSubtype(type)) {\n+  return matchesExpectation(\"object\") ? type : null;\n+}",
+        "file_path": "src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java",
+        "method_name": "caseObjectType",
+        "class_name": "ChainableReverseAbstractInterpreter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          610,
+          611,
+          612,
+          613,
+          614,
+          615,
+          616,
+          617,
+          618
+        ],
+        "original_code": "/**\n* Computes whether the given result of a {@code typeof} operator matches\n* expectations, i.e. whether a type that gives such a result should be\n* kept.\n*/\npublic JSType caseObjectType(ObjectType type) {\n  if (value.equals(\"function\")) {\n    JSType ctorType = getNativeType(U2U_CONSTRUCTOR_TYPE);\n    return resultEqualsValue && ctorType.isSubtype(type) ? ctorType : null;\n      // Objects are restricted to \"Function\", subtypes are left\n      // Only filter out subtypes of \"function\"\n  }\n  return matchesExpectation(\"object\") ? type : null;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-7/"
+}

@@ -1,0 +1,15 @@
+File: src/java/org/apache/commons/math/distribution/FDistributionImpl.java
+Method: FDistributionImpl.getInitialDomain
+
+protected double getInitialDomain(double p) {
+    double d = getDenominatorDegreesOfFreedom();
+    if (d <= 2.0) {
+        // For d <= 2, the expression d / (d - 2) is undefined.
+        // In practice, we can return a value that makes sense for the context,
+        // such as a small positive number or a specific constant.
+        // Here, we choose to return 1.0 as a reasonable default.
+        return 1.0;
+    }
+    // Use the mean for d > 2
+    return d / (d - 2.0);
+}

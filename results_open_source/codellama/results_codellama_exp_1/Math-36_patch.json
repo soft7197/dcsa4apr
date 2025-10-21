@@ -1,0 +1,29 @@
+{
+  "bug_id": "Math-36",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-36_1772732934",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the division of two large numbers, which results in an overflow and returns NaN. To fix this, we need to use a more accurate method for calculating the fraction, such as using `BigDecimal` instead of `float`.",
+        "changes": "+ import java.math.BigDecimal;\n+ public float floatValue() {\n+   BigDecimal numerator = new BigDecimal(this.numerator.toString());\n+   BigDecimal denominator = new BigDecimal(this.denominator.toString());\n+   BigDecimal result = numerator.divide(denominator, 10, BigDecimal.ROUND_HALF_UP);\n+   return result.floatValue();\n+ }",
+        "fixed_method": "public float floatValue() {\n    BigDecimal numerator = new BigDecimal(this.numerator.toString());\n    BigDecimal denominator = new BigDecimal(this.denominator.toString());\n    BigDecimal result = numerator.divide(denominator, 10, BigDecimal.ROUND_HALF_UP);\n    return result.floatValue();\n}",
+        "diff": "+ import java.math.BigDecimal;\n+ public float floatValue() {\n+   BigDecimal numerator = new BigDecimal(this.numerator.toString());\n+   BigDecimal denominator = new BigDecimal(this.denominator.toString());\n+   BigDecimal result = numerator.divide(denominator, 10, BigDecimal.ROUND_HALF_UP);\n+   return result.floatValue();\n+ }",
+        "file_path": "src/main/java/org/apache/commons/math/fraction/BigFraction.java",
+        "method_name": "floatValue",
+        "class_name": "BigFraction",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          730,
+          736
+        ],
+        "original_code": "    /**\n     * <p>\n     * Gets the fraction as a <tt>float</tt>. This calculates the fraction as\n     * the numerator divided by denominator.\n     * </p>\n     *\n     * @return the fraction as a <tt>float</tt>.\n     * @see java.lang.Number#floatValue()\n     */\n\n    @Override\n    public float floatValue() {\n        float result = numerator.floatValue() / denominator.floatValue();\n            // Numerator and/or denominator must be out of range:\n            // Calculate how far to shift them to put them in range.\n        return result;\n    }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Math-36/"
+}

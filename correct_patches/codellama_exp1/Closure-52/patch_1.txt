@@ -1,0 +1,10 @@
+File: src/com/google/javascript/jscomp/CodeGenerator.java
+Method: CodeGenerator.isSimpleNumber
+
+static boolean isSimpleNumber(String s) {
+  String pattern = "^[1-9][0-9]*$";
+  if (s.matches(pattern)) {
+    return true;
+  } else {
+    return false;
+  }}

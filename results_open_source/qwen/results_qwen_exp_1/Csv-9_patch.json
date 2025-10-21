@@ -1,0 +1,59 @@
+{
+  "bug_id": "Csv-9",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Csv-9_1771861464",
+  "patches": [
+    [
+      {
+        "hypothesis": "The NullPointerException occurs because the 'mapping' field is null when there is no header in the CSV record. We need to check if 'mapping' is null before iterating over it.",
+        "changes": "- for (final Entry<String, Integer> entry : mapping.entrySet()) {\n+ if (mapping != null) {\n+     for (final Entry<String, Integer> entry : mapping.entrySet()) {",
+        "fixed_method": "    <M extends Map<String, String>> M putIn(final M map) {\n        if (mapping != null) {\n            for (final Entry<String, Integer> entry : mapping.entrySet()) {\n                final int col = entry.getValue().intValue();\n                if (col < values.length) {\n                    map.put(entry.getKey(), values[col]);\n                }\n            }\n        }\n        return map;\n    }",
+        "diff": "- for (final Entry<String, Integer> entry : mapping.entrySet()) {\n+ if (mapping != null) {\n+     for (final Entry<String, Integer> entry : mapping.entrySet()) {",
+        "file_path": "src/main/java/org/apache/commons/csv/CSVRecord.java",
+        "method_name": "putIn",
+        "class_name": "CSVRecord",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187
+        ],
+        "original_code": "/**\n* Puts all values of this record into the given Map.\n*\n* @param map The Map to populate.\n* @return the given map.\n*/\n<M extends Map<String, String>> M putIn(final M map) {\n    for (final Entry<String, Integer> entry : mapping.entrySet()) {\n        final int col = entry.getValue().intValue();\n        if (col < values.length) {\n            map.put(entry.getKey(), values[col]);\n        }\n    }\n    return map;\n}"
+      },
+      {
+        "hypothesis": "The NullPointerException occurs because the 'mapping' field is null when there is no header in the CSVRecord. We need to handle the case where 'mapping' is null.",
+        "changes": "- for (final Entry<String, Integer> entry : mapping.entrySet()) {\n+ if (mapping != null) {\n+     for (final Entry<String, Integer> entry : mapping.entrySet()) {",
+        "fixed_method": "/**\n * Puts all values of this record into the given Map.\n *\n * @param map The Map to populate.\n * @return the given map.\n */\n<M extends Map<String, String>> M putIn(final M map) {\n    if (mapping != null) {\n        for (final Entry<String, Integer> entry : mapping.entrySet()) {\n            final int col = entry.getValue().intValue();\n            if (col < values.length) {\n                map.put(entry.getKey(), values[col]);\n            }\n        }\n    }\n    return map;\n}",
+        "diff": "- for (final Entry<String, Integer> entry : mapping.entrySet()) {\n+ if (mapping != null) {\n+     for (final Entry<String, Integer> entry : mapping.entrySet()) {",
+        "file_path": "src/main/java/org/apache/commons/csv/CSVRecord.java",
+        "method_name": "putIn",
+        "class_name": "CSVRecord",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187
+        ],
+        "original_code": "/**\n* Puts all values of this record into the given Map.\n*\n* @param map The Map to populate.\n* @return the given map.\n*/\n<M extends Map<String, String>> M putIn(final M map) {\n    for (final Entry<String, Integer> entry : mapping.entrySet()) {\n        final int col = entry.getValue().intValue();\n        if (col < values.length) {\n            map.put(entry.getKey(), values[col]);\n        }\n    }\n    return map;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Csv-9/"
+}

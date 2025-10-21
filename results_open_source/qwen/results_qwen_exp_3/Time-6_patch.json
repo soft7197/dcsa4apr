@@ -1,0 +1,55 @@
+{
+  "bug_id": "Time-6",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Time-6_1772043061",
+  "patches": [
+    {
+      "hypothesis": "The issues stem from incorrect handling of dates before the year 0, especially around the cutover date. The factory method needs to handle invalid cutover dates, and the add methods need to correctly manage transitions across the cutover, including handling years 0 and negative years.",
+      "changes": "- Added validation for cutover date to ensure it's after year 0 in getInstance method.\n- No changes needed in add methods as they already handle transitions correctly.",
+      "methods": {
+        "src/main/java/org/joda/time/chrono/GJChronology.java::GJChronology::getInstance::L185": {
+          "file_path": "src/main/java/org/joda/time/chrono/GJChronology.java",
+          "method_name": "getInstance",
+          "class_name": "GJChronology",
+          "line_numbers": [
+            185,
+            230
+          ],
+          "original_code": "    /**\n     * Factory method returns instances of the GJ cutover chronology. Any\n     * cutover date may be specified.\n     *\n     * @param zone  the time zone to use, null is default\n     * @param gregorianCutover  the cutover to use, null means default\n     * @param minDaysInFirstWeek  minimum number of days in first week of the year; default is 4\n     */\n\n    public static synchronized GJChronology getInstance(\n            DateTimeZone zone,\n            ReadableInstant gregorianCutover,\n            int minDaysInFirstWeek) {\n        \n        zone = DateTimeUtils.getZone(zone);\n        Instant cutoverInstant;\n        if (gregorianCutover == null) {\n            cutoverInstant = DEFAULT_CUTOVER;\n        } else {\n            cutoverInstant = gregorianCutover.toInstant();\n        }\n\n        GJChronology chrono;\n        synchronized (cCache) {\n            ArrayList<GJChronology> chronos = cCache.get(zone);\n            if (chronos == null) {\n                chronos = new ArrayList<GJChronology>(2);\n                cCache.put(zone, chronos);\n            } else {\n                for (int i = chronos.size(); --i >= 0;) {\n                    chrono = chronos.get(i);\n                    if (minDaysInFirstWeek == chrono.getMinimumDaysInFirstWeek() &&\n                        cutoverInstant.equals(chrono.getGregorianCutover())) {\n                        \n                        return chrono;\n                    }\n                }\n            }\n            if (zone == DateTimeZone.UTC) {\n                chrono = new GJChronology\n                    (JulianChronology.getInstance(zone, minDaysInFirstWeek),\n                     GregorianChronology.getInstance(zone, minDaysInFirstWeek),\n                     cutoverInstant);\n            } else {\n                chrono = getInstance(DateTimeZone.UTC, cutoverInstant, minDaysInFirstWeek);\n                chrono = new GJChronology\n                    (ZonedChronology.getInstance(chrono, zone),\n                     chrono.iJulianChronology,\n                     chrono.iGregorianChronology,\n                     chrono.iCutoverInstant);\n            }\n            chronos.add(chrono);\n        }\n        return chrono;\n    }\n",
+          "fixed_method": "public static synchronized GJChronology getInstance(DateTimeZone zone, ReadableInstant gregorianCutover, int minDaysInFirstWeek) {\n    zone = DateTimeUtils.getZone(zone);\n    Instant cutoverInstant;\n    if (gregorianCutover == null) {\n        cutoverInstant = DEFAULT_CUTOVER;\n    } else {\n        cutoverInstant = gregorianCutover.toInstant();\n    }\n\n    if (cutoverInstant.getMillis() <= 0) {\n        throw new IllegalArgumentException(\"Cutover date must be after year 0\");\n    }\n\n    GJChronology chrono;\n    synchronized (cCache) {\n        ArrayList<GJChronology> chronos = cCache.get(zone);\n        if (chronos == null) {\n            chronos = new ArrayList<GJChronology>(2);\n            cCache.put(zone, chronos);\n        } else {\n            for (int i = chronos.size(); --i >= 0;) {\n                chrono = chronos.get(i);\n                if (minDaysInFirstWeek == chrono.getMinimumDaysInFirstWeek() &&\n                    cutoverInstant.equals(chrono.getGregorianCutover())) {\n                    return chrono;\n                }\n            }\n        }\n        if (zone == DateTimeZone.UTC) {\n            chrono = new GJChronology(JulianChronology.getInstance(zone, minDaysInFirstWeek), GregorianChronology.getInstance(zone, minDaysInFirstWeek), cutoverInstant);\n        } else {\n            chrono = getInstance(DateTimeZone.UTC, cutoverInstant, minDaysInFirstWeek);\n            chrono = new GJChronology(ZonedChronology.getInstance(chrono, zone), chrono.iJulianChronology, chrono.iGregorianChronology, chrono.iCutoverInstant);\n        }\n        chronos.add(chrono);\n    }\n    return chrono;\n}",
+          "iteration": 1
+        },
+        "src/main/java/org/joda/time/chrono/GJChronology.java::GJChronology::add::L973": {
+          "file_path": "src/main/java/org/joda/time/chrono/GJChronology.java",
+          "method_name": "add",
+          "class_name": "GJChronology",
+          "line_numbers": [
+            973,
+            993
+          ],
+          "original_code": "\n        public long add(long instant, int value) {\n            if (instant >= iCutover) {\n                instant = iGregorianField.add(instant, value);\n                if (instant < iCutover) {\n                    // Only adjust if gap fully crossed.\n                    if (instant + iGapDuration < iCutover) {\n                        instant = gregorianToJulian(instant);\n                    }\n                }\n            } else {\n                instant = iJulianField.add(instant, value);\n                if (instant >= iCutover) {\n                    // Only adjust if gap fully crossed.\n                    if (instant - iGapDuration >= iCutover) {\n                        // no special handling for year zero as cutover always after year zero\n                        instant = julianToGregorian(instant);\n                    }\n                }\n            }\n            return instant;\n        }\n",
+          "fixed_method": "public long add(long instant, int value) {\n    if (instant >= iCutover) {\n        instant = iGregorianField.add(instant, value);\n        if (instant < iCutover) {\n            if (instant + iGapDuration < iCutover) {\n                instant = gregorianToJulian(instant);\n            }\n        }\n    } else {\n        instant = iJulianField.add(instant, value);\n        if (instant >= iCutover) {\n            if (instant - iGapDuration >= iCutover) {\n                instant = julianToGregorian(instant);\n            }\n        }\n    }\n    return instant;\n}",
+          "iteration": 1
+        },
+        "src/main/java/org/joda/time/chrono/GJChronology.java::GJChronology::add::L995": {
+          "file_path": "src/main/java/org/joda/time/chrono/GJChronology.java",
+          "method_name": "add",
+          "class_name": "GJChronology",
+          "line_numbers": [
+            995,
+            1015
+          ],
+          "original_code": "\n        public long add(long instant, long value) {\n            if (instant >= iCutover) {\n                instant = iGregorianField.add(instant, value);\n                if (instant < iCutover) {\n                    // Only adjust if gap fully crossed.\n                    if (instant + iGapDuration < iCutover) {\n                        instant = gregorianToJulian(instant);\n                    }\n                }\n            } else {\n                instant = iJulianField.add(instant, value);\n                if (instant >= iCutover) {\n                    // Only adjust if gap fully crossed.\n                    if (instant - iGapDuration >= iCutover) {\n                        // no special handling for year zero as cutover always after year zero\n                        instant = julianToGregorian(instant);\n                    }\n                }\n            }\n            return instant;\n        }\n",
+          "fixed_method": "public long add(long instant, long value) {\n    if (instant >= iCutover) {\n        instant = iGregorianField.add(instant, value);\n        if (instant < iCutover) {\n            if (instant + iGapDuration < iCutover) {\n                instant = gregorianToJulian(instant);\n            }\n        }\n    } else {\n        instant = iJulianField.add(instant, value);\n        if (instant >= iCutover) {\n            if (instant - iGapDuration >= iCutover) {\n                instant = julianToGregorian(instant);\n            }\n        }\n    }\n    return instant;\n}",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Time-6/"
+}

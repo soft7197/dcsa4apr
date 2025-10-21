@@ -1,0 +1,18 @@
+File: src/main/java/org/apache/commons/csv/ExtendedBufferedReader.java
+Method: ExtendedBufferedReader.read
+
+public int read() throws IOException {
+    int current = super.read();
+    if (current == '\n') {
+        if (lastChar != '\r') {
+            lineCounter++;
+        } else {
+            // This '\n' completes a '\r\n' so don't increment again
+        }
+    } else if (current == '\r') {
+        // Always increment for standalone '\r' or before a '\r\n'
+        lineCounter++;
+    }
+    lastChar = current;
+    return lastChar;
+}

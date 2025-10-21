@@ -1,0 +1,94 @@
+File: src/java/org/apache/commons/math/fraction/ProperFractionFormat.java
+Method: ProperFractionFormat.parse
+
+public Fraction parse(String source, ParsePosition pos) {
+    // try to parse improper fraction
+    Fraction ret = super.parse(source, pos);
+    if (ret != null) {
+        return ret;
+    }
+    
+    int initialIndex = pos.getIndex();
+
+    // parse whitespace
+    parseAndIgnoreWhitespace(source, pos);
+
+    // capture potential minus for whole number validation
+    int signIndex = pos.getIndex();
+    char possibleMinus = parseNextCharacter(source, pos);
+    if (possibleMinus != '-') {
+        pos.setIndex(signIndex); // reset if not minus
+    }
+
+    // parse whole
+    Number whole = getWholeFormat().parse(source, pos);
+    if (whole == null) {
+        // invalid integer number
+        // set index back to initial, error index should already be set
+        pos.setIndex(initialIndex);
+        return null;
+    }
+
+    // parse whitespace
+    parseAndIgnoreWhitespace(source, pos);
+    
+    // parse numerator
+    int numeratorSignIndex = pos.getIndex();
+    char numeratorPossibleMinus = parseNextCharacter(source, pos);
+    if (numeratorPossibleMinus == '-') {
+        // minus sign in numerator is invalid
+        pos.setIndex(initialIndex);
+        pos.setErrorIndex(numeratorSignIndex);
+        return null;
+    } else {
+        pos.setIndex(numeratorSignIndex); // reset if not minus
+    }
+
+    Number num = getNumeratorFormat().parse(source, pos);
+    if (num == null) {
+        pos.setIndex(initialIndex);
+        return null;
+    }
+
+    // parse '/'
+    int startIndex = pos.getIndex();
+    char c = parseNextCharacter(source, pos);
+    switch (c) {
+    case 0 :
+        // no '/'
+        return new Fraction(num.intValue(), 1);
+    case '/' :
+        // found '/', continue parsing denominator
+        break;
+    default :
+        pos.setIndex(initialIndex);
+        pos.setErrorIndex(startIndex);
+        return null;
+    }
+
+    // parse whitespace
+    parseAndIgnoreWhitespace(source, pos);
+
+    // parse denominator
+    int denominatorSignIndex = pos.getIndex();
+    char denominatorPossibleMinus = parseNextCharacter(source, pos);
+    if (denominatorPossibleMinus == '-') {
+        // minus sign in denominator is invalid
+        pos.setIndex(initialIndex);
+        pos.setErrorIndex(denominatorSignIndex);
+        return null;
+    } else {
+        pos.setIndex(denominatorSignIndex); // reset if not minus
+    }
+
+    Number den = getDenominatorFormat().parse(source, pos);
+    if (den == null) {
+        pos.setIndex(initialIndex);
+        return null;
+    }
+
+    int w = whole.intValue();
+    int n = num.intValue();
+    int d = den.intValue();
+    return new Fraction(((Math.abs(w) * d) + n) * MathUtils.sign(w), d);
+}

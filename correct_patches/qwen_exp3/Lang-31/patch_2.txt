@@ -1,0 +1,26 @@
+File: src/main/java/org/apache/commons/lang3/StringUtils.java
+Method: StringUtils.containsAny
+
+public static boolean containsAny(CharSequence cs, char[] searchChars) {
+	if (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {
+		return false;
+	}
+	int csLength = cs.length();
+	int searchLength = searchChars.length;
+	for (int i = 0; i < csLength; ) {
+		char ch = cs.charAt(i);
+		boolean isSupplementary = Character.isHighSurrogate(ch) && i + 1 < csLength && Character.isLowSurrogate(cs.charAt(i + 1));
+		int cp = isSupplementary ? Character.toCodePoint(ch, cs.charAt(i + 1)) : ch;
+		for (int j = 0; j < searchLength; ) {
+			char searchCh = searchChars[j];
+			boolean isSearchSupplementary = Character.isHighSurrogate(searchCh) && j + 1 < searchLength && Character.isLowSurrogate(searchChars[j + 1]);
+			int searchCp = isSearchSupplementary ? Character.toCodePoint(searchCh, searchChars[j + 1]) : searchCh;
+			if (searchCp == cp) {
+				return true;
+			}
+			j += isSearchSupplementary ? 2 : 1;
+		}
+		i += isSupplementary ? 2 : 1;
+	}
+	return false;
+}

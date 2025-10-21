@@ -1,0 +1,15 @@
+File: src/main/java/org/jsoup/nodes/Element.java
+Method: Element.preserveWhitespace
+
+static boolean preserveWhitespace(Node node) {
+    int depth = 0;
+    while (node != null && node instanceof Element && depth < 6) {
+        Element el = (Element) node;
+        if (el.tag.preserveWhitespace()) {
+            return true;
+        }
+        node = el.parent();
+        depth++;
+    }
+    return false;
+}

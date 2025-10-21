@@ -1,0 +1,33 @@
+{
+  "bug_id": "JacksonXml-5",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonXml-5_1773119145",
+  "patches": [
+    [
+      {
+        "hypothesis": "The constructor incorrectly copies the _rootNameLookup from the source which includes version-specific annotations causing discrepancies in behavior between copied instances.",
+        "changes": "- _rootNameLookup = src._rootNameLookup; + _rootNameLookup = new RootNameLookup(); // Correct class instantiation",
+        "fixed_method": "protected XmlSerializerProvider(XmlSerializerProvider src) {\n    super(src);\n    _rootNameLookup = new XmlRootNameLookup();\n}",
+        "diff": "- _rootNameLookup = src._rootNameLookup; + _rootNameLookup = new RootNameLookup(); // Correct class instantiation",
+        "file_path": "src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java",
+        "method_name": "XmlSerializerProvider",
+        "class_name": "XmlSerializerProvider",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          55,
+          56,
+          57,
+          58,
+          59,
+          60
+        ],
+        "original_code": "/**\n* @since 2.8.9\n*/\nprotected XmlSerializerProvider(XmlSerializerProvider src) {\n    super(src);\n    // 21-May-2018, tatu: As per [dataformat-xml#282], should NOT really copy\n    //    root name lookup as that may link back to diff version, configuration\n    _rootNameLookup = src._rootNameLookup;\n}"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/JacksonXml-5/"
+}

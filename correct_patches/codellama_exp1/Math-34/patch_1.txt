@@ -1,0 +1,20 @@
+File: src/main/java/org/apache/commons/math3/genetics/ListPopulation.java
+Method: ListPopulation.iterator
+
+public Iterator<Chromosome> iterator() {
+    return new Iterator<Chromosome>() {
+        private final Iterator<Chromosome> iter = chromosomes.iterator();
+
+        public boolean hasNext() {
+            return iter.hasNext();
+        }
+
+        public Chromosome next() {
+            return iter.next();
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    };
+}

@@ -1,0 +1,25 @@
+File: src/main/java/org/apache/commons/math/distribution/NormalDistributionImpl.java
+Method: NormalDistributionImpl.cumulativeProbability
+
+public double cumulativeProbability(double x) throws MathException {
+    // Handle infinities by returning probabilities of 1 and 0 respectively.
+    if (x == Double.POSITIVE_INFINITY) {
+        return 1.0;
+    } else if (x == Double.NEGATIVE_INFINITY) {
+        return 0.0;
+    }
+
+    final double dev = x - mean;
+    final double absDev = Math.abs(dev);
+
+    // Exact boundaries being acknowledged with 40 sd - approximation for efficiency.
+    if (absDev > 40 * standardDeviation) {
+        return dev > 0 ? 1.0 : 0.0;
+    }
+
+    try {
+        return 0.5 * (1.0 + Erf.erf(dev / (standardDeviation * FastMath.sqrt(2.0))));
+    } catch (MaxIterationsExceededException ex) {
+        throw new MathException("Calculation failed to converge", ex);
+    }
+}

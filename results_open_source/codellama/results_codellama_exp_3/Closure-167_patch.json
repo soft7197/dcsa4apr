@@ -1,0 +1,67 @@
+{
+  "bug_id": "Closure-167",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-167_1772938684",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "methods": {
+        "src/com/google/javascript/jscomp/type/SemanticReverseAbstractInterpreter.java::SemanticReverseAbstractInterpreter::caseEquality::L272": {
+          "file_path": "src/com/google/javascript/jscomp/type/SemanticReverseAbstractInterpreter.java",
+          "method_name": "caseEquality",
+          "class_name": "SemanticReverseAbstractInterpreter",
+          "line_numbers": [
+            272,
+            305
+          ],
+          "original_code": "\n  private FlowScope caseEquality(Node left, Node right, FlowScope blindScope,\n      Function<TypePair, TypePair> merging) {\n    // left type\n    JSType leftType = getTypeIfRefinable(left, blindScope);\n    boolean leftIsRefineable;\n    if (leftType != null) {\n      leftIsRefineable = true;\n    } else {\n      leftIsRefineable = false;\n      leftType = left.getJSType();\n    }\n\n    // right type\n    JSType rightType = getTypeIfRefinable(right, blindScope);\n    boolean rightIsRefineable;\n    if (rightType != null) {\n      rightIsRefineable = true;\n    } else {\n      rightIsRefineable = false;\n      rightType = right.getJSType();\n    }\n\n    // merged types\n    TypePair merged = merging.apply(new TypePair(leftType, rightType));\n\n    // creating new scope\n    if (merged != null) {\n      return maybeRestrictTwoNames(\n          blindScope,\n          left, leftIsRefineable, merged.typeA,\n          right, rightIsRefineable, merged.typeB);\n    }\n    return blindScope;\n  }\n",
+          "fixed_method": "private FlowScope maybeRestrictTwoNames(FlowScope blindScope, Node left, boolean leftIsRefineable, JSType restrictedLeftType, Node right, boolean rightIsRefineable, JSType restrictedRightType) {\n    if (restrictedLeftType == null || restrictedRightType == null) {\n        FlowScope informed = blindScope.createChildFlowScope();\n        if (restrictedLeftType != null) {\n            declareNameInScope(informed, left, restrictedLeftType);\n        }\n        if (restrictedRightType != null) {\n            declareNameInScope(informed, right, restrictedRightType);\n        }\n        return informed;\n    }\n    return blindScope;\n}",
+          "iteration": 3
+        },
+        "src/com/google/javascript/jscomp/type/SemanticReverseAbstractInterpreter.java::SemanticReverseAbstractInterpreter::maybeRestrictTwoNames::L405": {
+          "file_path": "src/com/google/javascript/jscomp/type/SemanticReverseAbstractInterpreter.java",
+          "method_name": "maybeRestrictTwoNames",
+          "class_name": "SemanticReverseAbstractInterpreter",
+          "line_numbers": [
+            405,
+            424
+          ],
+          "original_code": "  /**\n   * @see maybeRestrictName\n   */\n\n  private FlowScope maybeRestrictTwoNames(\n      FlowScope blindScope,\n      Node left, boolean leftIsRefineable, JSType restrictedLeftType,\n      Node right, boolean rightIsRefineable, JSType restrictedRightType) {\n    boolean shouldRefineLeft =\n        leftIsRefineable && restrictedLeftType != null;\n    boolean shouldRefineRight =\n        rightIsRefineable && restrictedRightType != null;\n    if (shouldRefineLeft || shouldRefineRight) {\n      FlowScope informed = blindScope.createChildFlowScope();\n      if (shouldRefineLeft) {\n        declareNameInScope(informed, left, restrictedLeftType);\n      }\n      if (shouldRefineRight) {\n        declareNameInScope(informed, right, restrictedRightType);\n      }\n      return informed;\n    }\n    return blindScope;\n  }\n",
+          "fixed_method": "private FlowScope caseEquality(Node left, Node right, FlowScope blindScope, Function<TypePair, TypePair> merging) {\n    // left type\n    JSType leftType = getTypeIfRefinable(left, blindScope);\n    boolean leftIsRefineable;\n    if (leftType != null) {\n        leftIsRefineable = true;\n    } else {\n        leftIsRefineable = false;\n        leftType = left.getJSType();\n    }\n\n    // right type\n    JSType rightType = getTypeIfRefinable(right, blindScope);\n    boolean rightIsRefineable;\n    if (rightType != null) {\n        rightIsRefineable = true;\n    } else {\n        rightIsRefineable = false;\n        rightType = right.getJSType();\n    }\n\n    // merged types\n    TypePair merged = merging.apply(new TypePair(leftType, rightType));\n\n    // creating new scope\n    if (merged != null) {\n        return maybeRestrictTwoNames(blindScope, left, leftIsRefineable, merged.typeA, right, rightIsRefineable, merged.typeB);\n    }\n    return blindScope;\n}",
+          "iteration": 3
+        },
+        "src/com/google/javascript/jscomp/type/SemanticReverseAbstractInterpreter.java::SemanticReverseAbstractInterpreter::caseAndOrNotShortCircuiting::L307": {
+          "file_path": "src/com/google/javascript/jscomp/type/SemanticReverseAbstractInterpreter.java",
+          "method_name": "caseAndOrNotShortCircuiting",
+          "class_name": "SemanticReverseAbstractInterpreter",
+          "line_numbers": [
+            307,
+            352
+          ],
+          "original_code": "\n  private FlowScope caseAndOrNotShortCircuiting(Node left, Node right,\n        FlowScope blindScope, boolean condition) {\n    // left type\n    JSType leftType = getTypeIfRefinable(left, blindScope);\n    boolean leftIsRefineable;\n    if (leftType != null) {\n      leftIsRefineable = true;\n    } else {\n      leftIsRefineable = false;\n      leftType = left.getJSType();\n      blindScope = firstPreciserScopeKnowingConditionOutcome(\n          left, blindScope, condition);\n    }\n\n    // restricting left type\n    JSType restrictedLeftType = (leftType == null) ? null :\n        leftType.getRestrictedTypeGivenToBooleanOutcome(condition);\n    if (restrictedLeftType == null) {\n      return firstPreciserScopeKnowingConditionOutcome(\n          right, blindScope, condition);\n    }\n\n    // right type\n    JSType rightType = getTypeIfRefinable(right, blindScope);\n    boolean rightIsRefineable;\n    if (rightType != null) {\n      rightIsRefineable = true;\n    } else {\n      rightIsRefineable = false;\n      rightType = right.getJSType();\n      blindScope = firstPreciserScopeKnowingConditionOutcome(\n          right, blindScope, condition);\n    }\n\n    if (condition) {\n      JSType restrictedRightType = (rightType == null) ? null :\n          rightType.getRestrictedTypeGivenToBooleanOutcome(condition);\n\n      // creating new scope\n      return maybeRestrictTwoNames(\n          blindScope,\n          left, leftIsRefineable, restrictedLeftType,\n          right, rightIsRefineable, restrictedRightType);\n    }\n    return blindScope;\n  }\n",
+          "fixed_method": "private FlowScope maybeRestrictName(FlowScope blindScope, Node node, JSType originalType, JSType restrictedType) {\n    if (restrictedType != null && !restrictedType.equals(originalType)) {\n        FlowScope informed = blindScope.createChildFlowScope();\n        declareNameInScope(informed, node, restrictedType);\n        return informed;\n    }\n    return blindScope;\n}",
+          "iteration": 3
+        },
+        "src/com/google/javascript/jscomp/type/SemanticReverseAbstractInterpreter.java::SemanticReverseAbstractInterpreter::maybeRestrictName::L392": {
+          "file_path": "src/com/google/javascript/jscomp/type/SemanticReverseAbstractInterpreter.java",
+          "method_name": "maybeRestrictName",
+          "class_name": "SemanticReverseAbstractInterpreter",
+          "line_numbers": [
+            392,
+            400
+          ],
+          "original_code": "  /**\n   * If the restrictedType differs from the originalType, then we should\n   * branch the current flow scope and create a new flow scope with the name\n   * declared with the new type.\n   *\n   * We try not to create spurious child flow scopes as this makes type\n   * inference slower.\n   *\n   * We also do not want spurious slots around in type inference, because\n   * we use these as a signal for \"checked unknown\" types. A \"checked unknown\"\n   * type is a symbol that the programmer has already checked and verified that\n   * it's defined, even if we don't know what it is.\n   *\n   * It is OK to pass non-name nodes into this method, as long as you pass\n   * in {@code null} for a restricted type.\n   */\n\n  private FlowScope maybeRestrictName(\n      FlowScope blindScope, Node node, JSType originalType, JSType restrictedType) {\n    if (restrictedType != null && !restrictedType.equals(originalType)) {\n      FlowScope informed = blindScope.createChildFlowScope();\n      declareNameInScope(informed, node, restrictedType);\n      return informed;\n    }\n    return blindScope;\n  }\n",
+          "fixed_method": "private FlowScope caseAndOrNotShortCircuiting(Node left, Node right, FlowScope blindScope, boolean condition) {\n    // left type\n    JSType leftType = getTypeIfRefinable(left, blindScope);\n    boolean leftIsRefineable;\n    if (leftType != null) {\n        leftIsRefineable = true;\n    } else {\n        leftIsRefineable = false;\n        leftType = left.getJSType();\n        blindScope = firstPreciserScopeKnowingConditionOutcome(left, blindScope, condition);\n    }\n\n    // restricting left type\n    JSType restrictedLeftType = (leftType == null) ? null : leftType.getRestrictedTypeGivenToBooleanOutcome(condition);\n    if (restrictedLeftType == null) {\n        return firstPreciserScopeKnowingConditionOutcome(right, blindScope, condition);\n    }\n\n    // right type\n    JSType rightType = getTypeIfRefinable(right, blindScope);\n    boolean rightIsRefineable;\n    if (rightType != null) {\n        rightIsRefineable = true;\n    } else {\n        rightIsRefineable = false;\n        rightType = right.getJSType();\n        blindScope = firstPreciserScopeKnowingConditionOutcome(right, blindScope, condition);\n    }\n\n    if (condition) {\n        JSType restrictedRightType = (rightType == null) ? null : rightType.getRestrictedTypeGivenToBooleanOutcome(condition);\n        // creating new scope\n        return maybeRestrictTwoNames(blindScope, left, leftIsRefineable, restrictedLeftType, right, rightIsRefineable, restrictedRightType);\n    }\n    return blindScope;\n}",
+          "iteration": 3
+        }
+      },
+      "iteration": 3,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Closure-167/"
+}

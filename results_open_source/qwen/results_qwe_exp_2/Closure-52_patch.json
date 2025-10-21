@@ -1,0 +1,109 @@
+{
+  "bug_id": "Closure-52",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-52_1771927087",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method `isSimpleNumber` incorrectly identifies strings representing numbers with leading zeros as non-simple numbers. This causes issues when printing numeric keys that should be quoted due to leading zeros.",
+        "changes": "- if (c < '0' || c > '9') {\n+ if (c < '0' || c > '9' || (index == 0 && c == '0' && len > 1)) {",
+        "fixed_method": "static boolean isSimpleNumber(String s) {\n  int len = s.length();\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (c < '0' || c > '9' || (index == 0 && c == '0' && len > 1)) {\n      return false;\n    }\n  }\n  return len > 0;\n}",
+        "diff": "- if (c < '0' || c > '9') {\n+ if (c < '0' || c > '9' || (index == 0 && c == '0' && len > 1)) {",
+        "file_path": "src/com/google/javascript/jscomp/CodeGenerator.java",
+        "method_name": "isSimpleNumber",
+        "class_name": "CodeGenerator",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          737,
+          738,
+          739,
+          740,
+          741,
+          742,
+          743,
+          744,
+          745,
+          746
+        ],
+        "original_code": "// ignored for our purposes.\nstatic boolean isSimpleNumber(String s) {\n  int len = s.length();\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (c < '0' || c > '9') {\n      return false;\n    }\n  }\n  return len > 0;\n}"
+      },
+      {
+        "hypothesis": "The refined fix will ensure that the method correctly identifies simple numbers by checking for numeric characters only, excluding leading zeros unless the number is exactly '0'. It will also handle null inputs gracefully.",
+        "fixed_method": "static boolean isSimpleNumber(String s) {\n  if (s == null || s.isEmpty()) {\n    return false;\n  }\n  if (s.equals(\"0\")) {\n    return true;\n  }\n  if (s.charAt(0) == '0') {\n    return false;\n  }\n  for (int index = 0; index < s.length(); index++) {\n    char c = s.charAt(index);\n    if (c < '0' || c > '9') {\n      return false;\n    }\n  }\n  return true;\n}",
+        "diff": " ",
+        "file_path": "src/com/google/javascript/jscomp/CodeGenerator.java",
+        "method_name": "isSimpleNumber",
+        "class_name": "CodeGenerator",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method `isSimpleNumber` incorrectly identifies strings like '010' as simple numbers, which should not be the case since they represent octal numbers in some contexts. The fix involves updating the logic to correctly identify simple decimal numbers without leading zeros.",
+        "line_numbers": [
+          737,
+          738,
+          739,
+          740,
+          741,
+          742,
+          743,
+          744,
+          745,
+          746
+        ]
+      },
+      {
+        "hypothesis": "The method `isSimpleNumber` incorrectly identifies strings like '010' as simple numbers because it does not account for leading zeros or decimal points, which are not valid in simple numeric literals.",
+        "changes": "- if (c < '0' || c > '9') {\n+ if (!Character.isDigit(c)) {\n+ } else if (index == 0 && c == '0' && len > 1 && Character.isDigit(s.charAt(1))) {\n+     return false;\n+ } else if (c == '.' && !s.substring(0, index).contains(\".\")) {\n+     continue;\n+ }",
+        "fixed_method": "static boolean isSimpleNumber(String s) {\n  int len = s.length();\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (!Character.isDigit(c)) {\n      if (c == '.' && !s.substring(0, index).contains(\".\")) {\n        continue;\n      }\n      return false;\n    } else if (index == 0 && c == '0' && len > 1 && Character.isDigit(s.charAt(1))) {\n      return false;\n    }\n  }\n  return len > 0;\n}",
+        "diff": "- if (c < '0' || c > '9') {\n+ if (!Character.isDigit(c)) {\n+ } else if (index == 0 && c == '0' && len > 1 && Character.isDigit(s.charAt(1))) {\n+     return false;\n+ } else if (c == '.' && !s.substring(0, index).contains(\".\")) {\n+     continue;\n+ }",
+        "file_path": "src/com/google/javascript/jscomp/CodeGenerator.java",
+        "method_name": "isSimpleNumber",
+        "class_name": "CodeGenerator",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          737,
+          738,
+          739,
+          740,
+          741,
+          742,
+          743,
+          744,
+          745,
+          746
+        ],
+        "original_code": "// ignored for our purposes.\nstatic boolean isSimpleNumber(String s) {\n  int len = s.length();\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (c < '0' || c > '9') {\n      return false;\n    }\n  }\n  return len > 0;\n}"
+      },
+      {
+        "hypothesis": "The refined fix will ensure that the method correctly identifies simple numeric strings without leading zeros unless the number is '0'. It will also handle edge cases such as empty strings, null inputs, and strings representing numbers in different bases.",
+        "fixed_method": "static boolean isSimpleNumber(String s) {\n  if (s == null || s.isEmpty()) {\n    return false;\n  }\n  int len = s.length();\n  boolean hasLeadingZero = s.charAt(0) == '0';\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (c < '0' || c > '9') {\n      return false;\n    }\n  }\n  return !hasLeadingZero || s.equals(\"0\");\n}",
+        "diff": " ",
+        "file_path": "src/com/google/javascript/jscomp/CodeGenerator.java",
+        "method_name": "isSimpleNumber",
+        "class_name": "CodeGenerator",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method `isSimpleNumber` incorrectly identifies strings like '010' as simple numbers, which they are not in JavaScript due to leading zeros being interpreted as octal numbers. The fix involves checking for leading zeros unless the string is exactly '0'.",
+        "line_numbers": [
+          737,
+          738,
+          739,
+          740,
+          741,
+          742,
+          743,
+          744,
+          745,
+          746
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-52/"
+}

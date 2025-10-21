@@ -1,0 +1,55 @@
+{
+  "bug_id": "Closure-112",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-112_1771850593",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue arises because the template type inference does not correctly handle the mismatch between the expected and provided function types. The method should ensure that the inferred types are compatible with the provided arguments.",
+        "changes": "- Replaced the direct assignment of the return type without checking compatibility.\n+ Added a check to ensure the inferred function type matches the expected type before setting it.",
+        "fixed_method": "private boolean inferTemplatedTypesForCall(\n    Node n, FunctionType fnType) {\n  final ImmutableList<TemplateType> keys = fnType.getTemplateTypeMap()\n      .getTemplateKeys();\n  if (keys.isEmpty()) {\n    return false;\n  }\n\n  // Try to infer the template types\n  Map<TemplateType, JSType> inferred = \n      inferTemplateTypesFromParameters(fnType, n);\n\n  // Replace all template types. If we couldn't find a replacement, we\n  // replace it with UNKNOWN.\n  TemplateTypeReplacer replacer = new TemplateTypeReplacer(\n      registry, inferred);\n  Node callTarget = n.getFirstChild();\n\n  FunctionType replacementFnType = fnType.visit(replacer)\n      .toMaybeFunctionType();\n  Preconditions.checkNotNull(replacementFnType);\n\n  // Check if the inferred function type matches the expected type\n  JSType expectedType = callTarget.getJSType();\n  if (expectedType != null && !expectedType.isEquivalentTo(replacementFnType)) {\n    return false;\n  }\n\n  callTarget.setJSType(replacementFnType);\n  n.setJSType(replacementFnType.getReturnType());\n\n  return replacer.madeChanges;\n}",
+        "diff": "- Replaced the direct assignment of the return type without checking compatibility.\n+ Added a check to ensure the inferred function type matches the expected type before setting it.",
+        "file_path": "src/com/google/javascript/jscomp/TypeInference.java",
+        "method_name": "inferTemplatedTypesForCall",
+        "class_name": "TypeInference",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1183,
+          1184,
+          1185,
+          1186,
+          1187,
+          1188,
+          1189,
+          1190,
+          1191,
+          1192,
+          1193,
+          1194,
+          1195,
+          1196,
+          1197,
+          1198,
+          1199,
+          1200,
+          1201,
+          1202,
+          1203,
+          1204,
+          1205,
+          1206,
+          1207,
+          1208,
+          1209,
+          1210
+        ],
+        "original_code": "/**\n* For functions with function(this: T, ...) and T as parameters, type\n* inference will set the type of this on a function literal argument to the\n* the actual type of T.\n*/\nprivate boolean inferTemplatedTypesForCall(\n    Node n, FunctionType fnType) {\n  final ImmutableList<TemplateType> keys = fnType.getTemplateTypeMap()\n      .getTemplateKeys();\n  if (keys.isEmpty()) {\n    return false;\n  }\n\n  // Try to infer the template types\n  Map<TemplateType, JSType> inferred = \n      inferTemplateTypesFromParameters(fnType, n);\n\n\n  // Replace all template types. If we couldn't find a replacement, we\n  // replace it with UNKNOWN.\n  TemplateTypeReplacer replacer = new TemplateTypeReplacer(\n      registry, inferred);\n  Node callTarget = n.getFirstChild();\n\n  FunctionType replacementFnType = fnType.visit(replacer)\n      .toMaybeFunctionType();\n  Preconditions.checkNotNull(replacementFnType);\n\n  callTarget.setJSType(replacementFnType);\n  n.setJSType(replacementFnType.getReturnType());\n\n  return replacer.madeChanges;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-112/"
+}

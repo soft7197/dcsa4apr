@@ -1,0 +1,78 @@
+{
+  "bug_id": "Lang-59",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-59_1772788625",
+  "patches": [
+    [
+      {
+        "hypothesis": "Refined the patch by handling general cases, avoiding hardcoded values, and covering edge cases to address overfitting issues",
+        "fixed_method": "public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {\n  if (width > 0) {\n    ensureCapacity(size + width);\n    String str = (obj == null ? getNullText() : obj.toString());\n    int strLen = str.length();\n    if (strLen >= width) {\n      str.getChars(0, width, buffer, size);\n    } else {\n      int padLen = width - strLen;\n      str.getChars(0, strLen, buffer, size);\n      for (int i = 0; i < padLen; i++) {\n        buffer[size + strLen + i] = padChar;\n      }\n    }\n    size += width;\n  }\n  return this;\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/java/org/apache/commons/lang/text/StrBuilder.java",
+        "method_name": "appendFixedWidthPadRight",
+        "class_name": "StrBuilder",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "",
+        "line_numbers": [
+          878,
+          879,
+          880,
+          881,
+          882,
+          883,
+          884,
+          885,
+          886,
+          887,
+          888,
+          889,
+          890,
+          891,
+          892,
+          893,
+          894,
+          895
+        ]
+      },
+      {
+        "hypothesis": "The issue is caused by the buffer overflow when the length of the input string is greater than the capacity of the buffer. This can be resolved by checking the capacity before appending the string to the buffer.",
+        "changes": "+ if (size + strLen > buffer.length) {\n+     ensureCapacity(size + strLen);\n+ }\n- str.getChars(0, strLen, buffer, size);",
+        "fixed_method": "public StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {\n    if (width > 0) {\n        String str = (obj == null ? getNullText() : obj.toString());\n        int strLen = str.length();\n        if (strLen >= width) {\n            if (size + strLen > buffer.length) {\n                ensureCapacity(size + strLen);\n            }\n            str.getChars(0, strLen, buffer, size);\n        } else {\n            int padLen = width - strLen;\n            if (size + strLen + padLen > buffer.length) {\n                ensureCapacity(size + strLen + padLen);\n            }\n            str.getChars(0, strLen, buffer, size);\n            for (int i = 0; i < padLen; i++) {\n                buffer[size + strLen + i] = padChar;\n            }\n        }\n        size += width;\n    }\n    return this;\n}",
+        "diff": "+ if (size + strLen > buffer.length) {\n+     ensureCapacity(size + strLen);\n+ }\n- str.getChars(0, strLen, buffer, size);",
+        "file_path": "src/java/org/apache/commons/lang/text/StrBuilder.java",
+        "method_name": "appendFixedWidthPadRight",
+        "class_name": "StrBuilder",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          878,
+          879,
+          880,
+          881,
+          882,
+          883,
+          884,
+          885,
+          886,
+          887,
+          888,
+          889,
+          890,
+          891,
+          892,
+          893,
+          894,
+          895
+        ],
+        "original_code": "/**\n* Appends an object to the builder padding on the right to a fixed length.\n* The <code>toString</code> of the object is used.\n* If the object is larger than the length, the right hand side is lost.\n* If the object is null, null text value is used.\n*\n* @param obj  the object to append, null uses null text\n* @param width  the fixed field width, zero or negative has no effect\n* @param padChar  the pad character to use\n* @return this, to enable chaining\n*/\npublic StrBuilder appendFixedWidthPadRight(Object obj, int width, char padChar) {\n    if (width > 0) {\n        ensureCapacity(size + width);\n        String str = (obj == null ? getNullText() : obj.toString());\n        int strLen = str.length();\n        if (strLen >= width) {\n            str.getChars(0, strLen, buffer, size);\n        } else {\n            int padLen = width - strLen;\n            str.getChars(0, strLen, buffer, size);\n            for (int i = 0; i < padLen; i++) {\n                buffer[size + strLen + i] = padChar;\n            }\n        }\n        size += width;\n    }\n    return this;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Lang-59/"
+}

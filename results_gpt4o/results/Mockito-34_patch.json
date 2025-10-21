@@ -1,0 +1,128 @@
+{
+  "bug_id": "Mockito-34",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-34_1773120436",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method does not account for the case where the number of matchers exceeds the number of arguments, leading to an ArrayIndexOutOfBoundsException.",
+        "changes": "+ Ensure index 'k' is within the bounds of 'i.getArguments()' before accessing it",
+        "fixed_method": "public void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    Object[] arguments = i.getArguments();\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments) {\n            if (k < arguments.length) {\n                ((CapturesArguments) m).captureFrom(arguments[k]);\n            }\n        }\n        k++;\n    }\n}",
+        "diff": "+ Ensure index 'k' is within the bounds of 'i.getArguments()' before accessing it",
+        "file_path": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+        "method_name": "captureArgumentsFrom",
+        "class_name": "InvocationMatcher",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ],
+        "original_code": "/**\n* similar means the same method name, same mock, unverified\n* and: if arguments are the same cannot be overloaded\n*/\npublic void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments) {\n            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n        }\n        k++;\n    }\n}"
+      },
+      {
+        "hypothesis": "The issue occurs due to attempting to access elements in the arguments array without verifying if they exist. This leads to an ArrayIndexOutOfBoundsException when the number of arguments is less than expected.",
+        "changes": "-    ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n+    if (k < i.getArguments().length) {\n+        ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n+    }",
+        "fixed_method": "public void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments) {\n            if (k < i.getArguments().length) {\n                ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n            }\n        }\n        k++;\n    }\n}",
+        "diff": "-    ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n+    if (k < i.getArguments().length) {\n+        ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n+    }",
+        "file_path": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+        "method_name": "captureArgumentsFrom",
+        "class_name": "InvocationMatcher",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ],
+        "original_code": "/**\n* similar means the same method name, same mock, unverified\n* and: if arguments are the same cannot be overloaded\n*/\npublic void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments) {\n            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n        }\n        k++;\n    }\n}"
+      },
+      {
+        "hypothesis": "The bug occurs due to an ArrayIndexOutOfBoundsException when accessing invocation arguments without checking if indices are valid, especially when arguments are fewer or empty.",
+        "changes": "- Add a check to ensure index 'k' is within bounds of i.getArguments().length",
+        "fixed_method": "public void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments && k < i.getArguments().length) {\n            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n        }\n        k++;\n    }\n}",
+        "diff": "- Add a check to ensure index 'k' is within bounds of i.getArguments().length",
+        "file_path": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+        "method_name": "captureArgumentsFrom",
+        "class_name": "InvocationMatcher",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ],
+        "original_code": "/**\n* similar means the same method name, same mock, unverified\n* and: if arguments are the same cannot be overloaded\n*/\npublic void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments) {\n            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n        }\n        k++;\n    }\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by the loop not checking if 'k' exceeds the length of 'i.getArguments()', causing an ArrayIndexOutOfBoundsException when the number of matchers does not match the number of arguments.",
+        "changes": "- Add a bounds check to ensure that 'k' does not exceed the arguments length.",
+        "fixed_method": "public void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    Object[] arguments = i.getArguments();\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments && k < arguments.length) {\n            ((CapturesArguments) m).captureFrom(arguments[k]);\n        }\n        k++;\n    }\n}",
+        "diff": "- Add a bounds check to ensure that 'k' does not exceed the arguments length.",
+        "file_path": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+        "method_name": "captureArgumentsFrom",
+        "class_name": "InvocationMatcher",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ],
+        "original_code": "/**\n* similar means the same method name, same mock, unverified\n* and: if arguments are the same cannot be overloaded\n*/\npublic void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments) {\n            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n        }\n        k++;\n    }\n}"
+      },
+      {
+        "hypothesis": "The method is trying to access arguments of an invocation without checking if there are enough arguments, causing an ArrayIndexOutOfBoundsException.",
+        "changes": "- Check if k is less than the number of arguments in the invocation before accessing",
+        "fixed_method": "public void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (k < i.getArguments().length && m instanceof CapturesArguments) {\n            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n        }\n        k++;\n    }\n}",
+        "diff": "- Check if k is less than the number of arguments in the invocation before accessing",
+        "file_path": "src/org/mockito/internal/invocation/InvocationMatcher.java",
+        "method_name": "captureArgumentsFrom",
+        "class_name": "InvocationMatcher",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111
+        ],
+        "original_code": "/**\n* similar means the same method name, same mock, unverified\n* and: if arguments are the same cannot be overloaded\n*/\npublic void captureArgumentsFrom(Invocation i) {\n    int k = 0;\n    for (Matcher m : matchers) {\n        if (m instanceof CapturesArguments) {\n            ((CapturesArguments) m).captureFrom(i.getArguments()[k]);\n        }\n        k++;\n    }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Mockito-34/"
+}

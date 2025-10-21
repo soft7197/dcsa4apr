@@ -1,0 +1,109 @@
+{
+  "bug_id": "Closure-52",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-52_1771994600",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method isSimpleNumber incorrectly identifies strings representing numbers with leading zeros or non-decimal number formats (like hexadecimal) as simple numbers. This causes issues when printing numeric keys in objects, especially those with leading zeros or non-decimal formats.",
+        "changes": "- if (c < '0' || c > '9') {\n+ if (!Character.isDigit(c)) {\n+ } else if (index == 0 && c == '0' && len > 1) {\n+   return false;\n",
+        "fixed_method": "static boolean isSimpleNumber(String s) {\n  int len = s.length();\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (!Character.isDigit(c)) {\n      return false;\n    } else if (index == 0 && c == '0' && len > 1) {\n      return false;\n    }\n  }\n  return len > 0;\n}",
+        "diff": "- if (c < '0' || c > '9') {\n+ if (!Character.isDigit(c)) {\n+ } else if (index == 0 && c == '0' && len > 1) {\n+   return false;\n",
+        "file_path": "src/com/google/javascript/jscomp/CodeGenerator.java",
+        "method_name": "isSimpleNumber",
+        "class_name": "CodeGenerator",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          737,
+          738,
+          739,
+          740,
+          741,
+          742,
+          743,
+          744,
+          745,
+          746
+        ],
+        "original_code": "// ignored for our purposes.\nstatic boolean isSimpleNumber(String s) {\n  int len = s.length();\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (c < '0' || c > '9') {\n      return false;\n    }\n  }\n  return len > 0;\n}"
+      },
+      {
+        "hypothesis": "The bug is that the method isSimpleNumber incorrectly interprets strings like '010' as simple numbers when they should be treated as non-simple due to leading zeros.",
+        "changes": "- if (c < '0' || c > '9') {\n+ if (c < '0' || c > '9' || (index == 0 && c == '0' && len > 1)) {",
+        "fixed_method": "static boolean isSimpleNumber(String s) {\n  int len = s.length();\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (c < '0' || c > '9' || (index == 0 && c == '0' && len > 1)) {\n      return false;\n    }\n  }\n  return len > 0;\n}",
+        "diff": "- if (c < '0' || c > '9') {\n+ if (c < '0' || c > '9' || (index == 0 && c == '0' && len > 1)) {",
+        "file_path": "src/com/google/javascript/jscomp/CodeGenerator.java",
+        "method_name": "isSimpleNumber",
+        "class_name": "CodeGenerator",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          737,
+          738,
+          739,
+          740,
+          741,
+          742,
+          743,
+          744,
+          745,
+          746
+        ],
+        "original_code": "// ignored for our purposes.\nstatic boolean isSimpleNumber(String s) {\n  int len = s.length();\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (c < '0' || c > '9') {\n      return false;\n    }\n  }\n  return len > 0;\n}"
+      },
+      {
+        "hypothesis": "The method isSimpleNumber incorrectly identifies strings representing octal numbers (e.g., '010') as simple numbers. This causes issues when such strings are used as keys in JavaScript objects, as they are interpreted as decimal numbers. To fix this, we need to adjust the method to correctly identify numeric strings that do not represent octal numbers.",
+        "changes": "- if (c < '0' || c > '9') {\n+ if (!Character.isDigit(c) || (index == 0 && len > 1 && c == '0')) {",
+        "fixed_method": "static boolean isSimpleNumber(String s) {\n  int len = s.length();\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (!Character.isDigit(c) || (index == 0 && len > 1 && c == '0')) {\n      return false;\n    }\n  }\n  return len > 0;\n}",
+        "diff": "- if (c < '0' || c > '9') {\n+ if (!Character.isDigit(c) || (index == 0 && len > 1 && c == '0')) {",
+        "file_path": "src/com/google/javascript/jscomp/CodeGenerator.java",
+        "method_name": "isSimpleNumber",
+        "class_name": "CodeGenerator",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          737,
+          738,
+          739,
+          740,
+          741,
+          742,
+          743,
+          744,
+          745,
+          746
+        ],
+        "original_code": "// ignored for our purposes.\nstatic boolean isSimpleNumber(String s) {\n  int len = s.length();\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (c < '0' || c > '9') {\n      return false;\n    }\n  }\n  return len > 0;\n}"
+      },
+      {
+        "hypothesis": "The bug is that the method `isSimpleNumber` incorrectly identifies strings like '010' as simple numbers, which they are not due to leading zeros. The fix is to modify the method to handle such cases correctly.",
+        "changes": "- if (c < '0' || c > '9') {\n+ if (!Character.isDigit(c) || (index == 0 && c == '0' && len > 1)) {",
+        "fixed_method": "static boolean isSimpleNumber(String s) {\n  int len = s.length();\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (!Character.isDigit(c) || (index == 0 && c == '0' && len > 1)) {\n      return false;\n    }\n  }\n  return len > 0;\n}",
+        "diff": "- if (c < '0' || c > '9') {\n+ if (!Character.isDigit(c) || (index == 0 && c == '0' && len > 1)) {",
+        "file_path": "src/com/google/javascript/jscomp/CodeGenerator.java",
+        "method_name": "isSimpleNumber",
+        "class_name": "CodeGenerator",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          737,
+          738,
+          739,
+          740,
+          741,
+          742,
+          743,
+          744,
+          745,
+          746
+        ],
+        "original_code": "// ignored for our purposes.\nstatic boolean isSimpleNumber(String s) {\n  int len = s.length();\n  for (int index = 0; index < len; index++) {\n    char c = s.charAt(index);\n    if (c < '0' || c > '9') {\n      return false;\n    }\n  }\n  return len > 0;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-52/"
+}

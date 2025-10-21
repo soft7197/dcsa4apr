@@ -1,0 +1,56 @@
+{
+  "bug_id": "Chart-24",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-24_1772679488",
+  "patches": [
+    [
+      {
+        "hypothesis": "The fix refines the logic to handle edge cases and avoid hardcoded values",
+        "fixed_method": "public Paint getPaint(double value) {\n  double v = value;\n  if (Math.abs(value - this.lowerBound) < 1e-6) v = this.lowerBound;\n  if (Math.abs(value - this.upperBound) < 1e-6) v = this.upperBound;\n  int g = Math.min(Math.max((int) ((v - this.lowerBound) / (this.upperBound - this.lowerBound) * 255.0), 0), 255);\n  return new Color(g, g, g);\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "source/org/jfree/chart/renderer/GrayPaintScale.java",
+        "method_name": "getPaint",
+        "class_name": "GrayPaintScale",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue is caused by the incorrect calculation of the grayscale value, which results in values outside the expected range for the Color constructor. The getPaint method needs to be modified to ensure that the calculated grayscale value is within the range of 0 to 255.",
+        "line_numbers": [
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129
+        ]
+      },
+      {
+        "hypothesis": "The issue is caused by the Color constructor accepting values outside the expected range (0-255). The method getPaint is returning a value outside the range, causing the IllegalArgumentException.",
+        "changes": "+ Math.max(0, g);\n+ Math.min(255, g);",
+        "fixed_method": "public Paint getPaint(double value) {\n    double v = Math.max(value, this.lowerBound);\n    v = Math.min(v, this.upperBound);\n    int g = (int) ((value - this.lowerBound) / (this.upperBound - this.lowerBound) * 255.0);\n    g = Math.max(0, g);\n    g = Math.min(255, g);\n    return new Color(g, g, g);\n}",
+        "diff": "+ Math.max(0, g);\n+ Math.min(255, g);",
+        "file_path": "source/org/jfree/chart/renderer/GrayPaintScale.java",
+        "method_name": "getPaint",
+        "class_name": "GrayPaintScale",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129
+        ],
+        "original_code": "/**\n* Returns a paint for the specified value.\n*\n* @param value  the value (must be within the range specified by the\n*         lower and upper bounds for the scale).\n*\n* @return A paint for the specified value.\n*/\npublic Paint getPaint(double value) {\n    double v = Math.max(value, this.lowerBound);\n    v = Math.min(v, this.upperBound);\n    int g = (int) ((value - this.lowerBound) / (this.upperBound \n            - this.lowerBound) * 255.0);\n    return new Color(g, g, g);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Chart-24/"
+}

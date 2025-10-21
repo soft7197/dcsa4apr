@@ -1,0 +1,60 @@
+File: src/main/java/org/apache/commons/compress/archivers/tar/TarArchiveInputStream.java
+Method: TarArchiveInputStream.parsePaxHeaders
+
+Map<String, String> parsePaxHeaders(final InputStream i) throws IOException {
+    final Map<String, String> headers = new HashMap<String, String>(globalPaxHeaders);
+    while (true) {
+        int ch;
+        int len = 0;
+        int read = 0;
+        boolean readingLength = true;
+
+        while ((ch = i.read()) != -1) {
+            read++;
+            if (readingLength) {
+                if (ch == ' ') {
+                    readingLength = false;
+                } else if (ch >= '0' && ch <= '9') {
+                    len *= 10;
+                    len += ch - '0';
+                } else {
+                    // Skip invalid entries
+                    while (ch != '\n' && ch != -1) {
+                        ch = i.read();
+                    }
+                    read = 0;
+                    len = 0;
+                    continue;
+                }
+            }
+            if (!readingLength) {
+                final ByteArrayOutputStream coll = new ByteArrayOutputStream();
+                while ((ch = i.read()) != -1) {
+                    read++;
+                    if (ch == '=') {
+                        final String keyword = coll.toString(CharsetNames.UTF_8);
+                        final int restLen = len - read;
+                        if (restLen <= 0) {
+                            headers.remove(keyword);
+                        } else {
+                            final byte[] rest = new byte[restLen];
+                            final int got = IOUtils.readFully(i, rest);
+                            if (got != restLen) {
+                                throw new IOException("Failed to read Paxheader. Expected " + restLen + " bytes, read " + got);
+                            }
+                            final String value = new String(rest, 0, restLen - 1, CharsetNames.UTF_8);
+                            headers.put(keyword, value);
+                        }
+                        break;
+                    }
+                    coll.write((byte) ch);
+                }
+                break;
+            }
+        }
+        if (ch == -1) {
+            break;
+        }
+    }
+    return headers;
+}

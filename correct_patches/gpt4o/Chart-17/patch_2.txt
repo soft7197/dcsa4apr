@@ -1,0 +1,11 @@
+File: source/org/jfree/data/time/TimeSeries.java
+Method: TimeSeries.clone
+
+public Object clone() throws CloneNotSupportedException {
+    int itemCount = getItemCount();
+    if (itemCount == 0) {
+        return createCopy(0, 0);
+    }
+    Object clone = createCopy(0, itemCount - 1);
+    return clone;
+}

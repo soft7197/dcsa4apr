@@ -1,0 +1,103 @@
+{
+  "bug_id": "Jsoup-1",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-1_1771936937",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the method moving non-blank text nodes to the end of the body instead of the beginning. The fix involves appending the text nodes to the beginning of the body.",
+        "changes": "- body().appendChild(new TextNode(\" \", \"\"));\n- body().appendChild(node);\n+ body().prependChild(new TextNode(\" \", \"\"));\n+ body().prependChild(node);",
+        "fixed_method": "private void normalise(Element element) {\n    List<Node> toMove = new ArrayList<Node>();\n    for (Node node: element.childNodes) {\n        if (node instanceof TextNode) {\n            TextNode tn = (TextNode) node;\n            if (!tn.isBlank())\n                toMove.add(tn);\n        }\n    }\n\n    for (Node node: toMove) {\n        element.removeChild(node);\n        body().prependChild(new TextNode(\" \", \"\"));\n        body().prependChild(node);\n    }\n}",
+        "diff": "- body().appendChild(new TextNode(\" \", \"\"));\n- body().appendChild(node);\n+ body().prependChild(new TextNode(\" \", \"\"));\n+ body().prependChild(node);",
+        "file_path": "src/main/java/org/jsoup/nodes/Document.java",
+        "method_name": "normalise",
+        "class_name": "Document",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ],
+        "original_code": "// does not recurse.\nprivate void normalise(Element element) {\n    List<Node> toMove = new ArrayList<Node>();\n    for (Node node: element.childNodes) {\n        if (node instanceof TextNode) {\n            TextNode tn = (TextNode) node;\n            if (!tn.isBlank())\n                toMove.add(tn);\n        }\n    }\n\n    for (Node node: toMove) {\n        element.removeChild(node);\n        body().appendChild(new TextNode(\" \", \"\"));\n        body().appendChild(node);\n    }\n}"
+      },
+      {
+        "hypothesis": "The method normalise is moving non-blank text nodes to the end of the body instead of the beginning. The fix should ensure that these nodes are added at the start of the body.",
+        "changes": "- body().appendChild(new TextNode(\" \", \"\"));\n- body().appendChild(node);\n+ body().prependChild(node);\n+ body().prependChild(new TextNode(\" \", \"\"));",
+        "fixed_method": "private void normalise(Element element) {\n    List<Node> toMove = new ArrayList<Node>();\n    for (Node node: element.childNodes) {\n        if (node instanceof TextNode) {\n            TextNode tn = (TextNode) node;\n            if (!tn.isBlank())\n                toMove.add(tn);\n        }\n    }\n\n    for (Node node: toMove) {\n        element.removeChild(node);\n        body().prependChild(node);\n        body().prependChild(new TextNode(\" \", \"\"));\n    }\n}",
+        "diff": "- body().appendChild(new TextNode(\" \", \"\"));\n- body().appendChild(node);\n+ body().prependChild(node);\n+ body().prependChild(new TextNode(\" \", \"\"));",
+        "file_path": "src/main/java/org/jsoup/nodes/Document.java",
+        "method_name": "normalise",
+        "class_name": "Document",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ],
+        "original_code": "// does not recurse.\nprivate void normalise(Element element) {\n    List<Node> toMove = new ArrayList<Node>();\n    for (Node node: element.childNodes) {\n        if (node instanceof TextNode) {\n            TextNode tn = (TextNode) node;\n            if (!tn.isBlank())\n                toMove.add(tn);\n        }\n    }\n\n    for (Node node: toMove) {\n        element.removeChild(node);\n        body().appendChild(new TextNode(\" \", \"\"));\n        body().appendChild(node);\n    }\n}"
+      },
+      {
+        "hypothesis": "The original code intended to move non-blank text nodes from a given element to the beginning of the document's body. The current patch incorrectly prepends these nodes back to the original element instead of moving them to the body. The refined fix will ensure that text nodes are moved to the beginning of the body while maintaining the original intention and handling edge cases like null elements or bodies.",
+        "fixed_method": "private void normalise(Element element) {\n    if (element == null || body() == null) return;\n    List<Node> toMove = new ArrayList<Node>();\n    for (Node node: element.childNodes) {\n        if (node instanceof TextNode) {\n            TextNode tn = (TextNode) node;\n            if (!tn.isBlank())\n                toMove.add(tn);\n        }\n    }\n\n    for (Node node: toMove) {\n        element.removeChild(node);\n        body().prependChild(node);\n    }\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/jsoup/nodes/Document.java",
+        "method_name": "normalise",
+        "class_name": "Document",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the incorrect placement of text nodes in the body. The method currently removes text nodes from their original position and appends them to the end of the body, instead of moving them to the beginning.",
+        "line_numbers": [
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-1/"
+}

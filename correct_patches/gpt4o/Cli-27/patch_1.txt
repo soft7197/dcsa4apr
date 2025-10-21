@@ -1,0 +1,21 @@
+File: src/java/org/apache/commons/cli/OptionGroup.java
+Method: OptionGroup.setSelected
+
+public void setSelected(Option option) throws AlreadySelectedException {
+    if (option == null) {
+        // reset the option previously selected
+        selected = null;
+        return;
+    }
+    
+    String optionName = option.getLongOpt() != null ? option.getLongOpt() : option.getOpt();
+    
+    // if no option has already been selected or the 
+    // same option is being reselected then set the
+    // selected member variable
+    if (selected == null || selected.equals(optionName)) {
+        selected = optionName;
+    } else {
+        throw new AlreadySelectedException(this, option);
+    }
+}

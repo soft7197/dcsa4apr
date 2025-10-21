@@ -1,0 +1,14 @@
+File: src/main/java/org/jsoup/nodes/Node.java
+Method: Node.hasAttr
+
+public boolean hasAttr(String attributeKey) {
+    Validate.notNull(attributeKey);
+
+    String[] parts = attributeKey.split(":");
+    if (parts.length == 2 && "abs".equals(parts[0])) {
+        String url = absUrl(parts[1]);
+        return url != null && !url.isEmpty();
+    }
+
+    return attributes.hasKey(attributeKey);
+}

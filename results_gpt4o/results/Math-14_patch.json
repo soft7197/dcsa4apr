@@ -1,0 +1,45 @@
+{
+  "bug_id": "Math-14",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-14_1773123438",
+  "patches": [
+    [
+      {
+        "hypothesis": "The test is running out of memory because the creation of large matrices consumes an excessive amount of heap space. The Weight constructor creates a dense matrix for diagonal weights which can be optimized to use a sparse matrix format, and the squareRoot method assumes the input is well-conditioned, leading to excessive memory usage for improper inputs.",
+        "changes": "- Replace dense matrix with DiagonalMatrix for Weight class\n- Adjust squareRoot method to work with DiagonalMatrix\n- Ensure squareRoot throws exception if input is not a DiagonalMatrix",
+        "methods": {
+          "src/main/java/org/apache/commons/math3/optim/nonlinear/vector/Weight.java::Weight::Weight::L41": {
+            "file_path": "src/main/java/org/apache/commons/math3/optim/nonlinear/vector/Weight.java",
+            "method_name": "Weight",
+            "class_name": "Weight",
+            "line_numbers": [
+              41,
+              47
+            ],
+            "original_code": "    /**\n     * Creates a diagonal weight matrix.\n     *\n     * @param weight List of the values of the diagonal.\n     */\n\n    public Weight(double[] weight) {\n        final int dim = weight.length;\n        weightMatrix = org.apache.commons.math3.linear.MatrixUtils.createRealMatrix(dim, dim);\n        for (int i = 0; i < dim; i++) {\n            weightMatrix.setEntry(i, i, weight[i]);\n        }\n    }\n",
+            "fixed_method": "public Weight(double[] weight) {\n    final int dim = weight.length;\n    weightMatrix = new org.apache.commons.math3.linear.DiagonalMatrix(weight);\n}",
+            "iteration": 1
+          },
+          "src/main/java/org/apache/commons/math3/optim/nonlinear/vector/jacobian/AbstractLeastSquaresOptimizer.java::AbstractLeastSquaresOptimizer::squareRoot::L266": {
+            "file_path": "src/main/java/org/apache/commons/math3/optim/nonlinear/vector/jacobian/AbstractLeastSquaresOptimizer.java",
+            "method_name": "squareRoot",
+            "class_name": "AbstractLeastSquaresOptimizer",
+            "line_numbers": [
+              266,
+              269
+            ],
+            "original_code": "    /**\n     * Computes the square-root of the weight matrix.\n     *\n     * @param m Symmetric, positive-definite (weight) matrix.\n     * @return the square-root of the weight matrix.\n     */\n\n    private RealMatrix squareRoot(RealMatrix m) {\n            final EigenDecomposition dec = new EigenDecomposition(m);\n            return dec.getSquareRoot();\n    }\n",
+            "fixed_method": "private RealMatrix squareRoot(RealMatrix m) {\n    if (!(m instanceof org.apache.commons.math3.linear.DiagonalMatrix)) {\n        throw new IllegalArgumentException(\"Matrix should be a DiagonalMatrix\");\n    }\n    double[] diagonal = ((org.apache.commons.math3.linear.DiagonalMatrix) m).getDataRef();\n    double[] sqrtDiagonal = new double[diagonal.length];\n    for (int i = 0; i < diagonal.length; i++) {\n        sqrtDiagonal[i] = Math.sqrt(diagonal[i]);\n    }\n    return new org.apache.commons.math3.linear.DiagonalMatrix(sqrtDiagonal);\n}",
+            "iteration": 1
+          }
+        },
+        "iteration": 1,
+        "is_multi_method": true
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-14/"
+}

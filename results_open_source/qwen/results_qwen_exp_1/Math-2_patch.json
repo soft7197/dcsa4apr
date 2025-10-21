@@ -1,0 +1,30 @@
+{
+  "bug_id": "Math-2",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-2_1771873568",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug might be due to incorrect calculation or sampling logic leading to negative samples. However, the getNumericalMean method does not directly affect the sampling process. The issue could be elsewhere, but since we are focusing on this method, let's ensure the mean calculation is correct.",
+        "changes": "- return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n+ return (double) (getSampleSize() * (double) getNumberOfSuccesses()) / getPopulationSize();",
+        "fixed_method": "public double getNumericalMean() {\n    return (double) (getSampleSize() * (double) getNumberOfSuccesses()) / getPopulationSize();\n}",
+        "diff": "- return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n+ return (double) (getSampleSize() * (double) getNumberOfSuccesses()) / getPopulationSize();",
+        "file_path": "src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java",
+        "method_name": "getNumericalMean",
+        "class_name": "HypergeometricDistribution",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          267,
+          268,
+          269
+        ],
+        "original_code": "/**\n* {@inheritDoc}\n*\n* For population size {@code N}, number of successes {@code m}, and sample\n* size {@code n}, the mean is {@code n * m / N}.\n*/\npublic double getNumericalMean() {\n    return (double) (getSampleSize() * getNumberOfSuccesses()) / (double) getPopulationSize();\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-2/"
+}

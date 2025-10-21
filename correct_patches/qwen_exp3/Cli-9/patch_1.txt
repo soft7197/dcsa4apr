@@ -1,0 +1,35 @@
+File: src/java/org/apache/commons/cli/Parser.java
+Method: Parser.checkRequiredOptions
+
+protected void checkRequiredOptions()
+    throws MissingOptionException
+{
+    // Retrieve the list of required options
+    List<Object> requiredOptions = getRequiredOptions();
+
+    // Check if the list is null or empty
+    if (requiredOptions == null || requiredOptions.isEmpty()) {
+        return; // No required options to check
+    }
+
+    // Initialize a StringBuilder for constructing the exception message
+    StringBuilder buff = new StringBuilder("Missing required option");
+    int size = requiredOptions.size();
+
+    // Append 's' if there are multiple missing options
+    if (size > 1) {
+        buff.append('s');
+    }
+    buff.append(": ");
+
+    // Loop through the required options and append them to the message
+    for (int i = 0; i < size; i++) {
+        buff.append(requiredOptions.get(i));
+        if (i < size - 1) {
+            buff.append(", ");
+        }
+    }
+
+    // Throw the exception with the constructed message
+    throw new MissingOptionException(buff.toString());
+}

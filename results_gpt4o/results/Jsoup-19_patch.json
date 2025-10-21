@@ -1,0 +1,100 @@
+{
+  "bug_id": "Jsoup-19",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-19_1773119164",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method incorrectly removes protocols that are custom or not strictly HTTP/HTTPS due to incorrect parsing or absence of strict checking against the provided Protocol set.",
+        "changes": "- if (!value.toLowerCase().startsWith(prot)) {\n+ if (value.toLowerCase().startsWith(prot)) {\n++ return true;",
+        "fixed_method": "private boolean testValidProtocol(Element el, Attribute attr, Set<Protocol> protocols) {\n    String value = el.attr(attr.getKey());\n\n    for (Protocol protocol : protocols) {\n        String prot = protocol.toString() + \":\";\n        if (value.toLowerCase().startsWith(prot)) {\n            return true;\n        }\n    }\n    return false;\n}",
+        "diff": "- if (!value.toLowerCase().startsWith(prot)) {\n+ if (value.toLowerCase().startsWith(prot)) {\n++ return true;",
+        "file_path": "src/main/java/org/jsoup/safety/Whitelist.java",
+        "method_name": "testValidProtocol",
+        "class_name": "Whitelist",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          338,
+          339,
+          340,
+          341,
+          342,
+          343,
+          344,
+          345,
+          346,
+          347,
+          348,
+          349,
+          350,
+          351,
+          352
+        ],
+        "original_code": "// ok if not defined protocol; otherwise test\nprivate boolean testValidProtocol(Element el, Attribute attr, Set<Protocol> protocols) {\n    // try to resolve relative urls to abs, and optionally update the attribute so output html has abs.\n    // rels without a baseuri get removed\n    String value = el.absUrl(attr.getKey());\n    if (!preserveRelativeLinks)\n        attr.setValue(value);\n    \n    for (Protocol protocol : protocols) {\n        String prot = protocol.toString() + \":\";\n        if (value.toLowerCase().startsWith(prot)) {\n            return true;\n        }\n    }\n    return false;\n}"
+      },
+      {
+        "hypothesis": "The overfitting patch introduced conditions that specifically handled empty values and incorrectly handled URLs without colons as valid based on protocol names. The refined fix ensures the attribute is correctly set only if the absolute URL is obtained and checks protocols in a manner that doesn't rely on ambiguous assumptions about URL format. This handles both relative URLs and ensures protocols validate correctly.",
+        "fixed_method": "private boolean testValidProtocol(Element el, Attribute attr, Set<Protocol> protocols) {\n    // Try to resolve relative URLs to absolute, and optionally update the attribute so output HTML has abs.\n    // Rels without a base URI do not have an absolute path and should remain relative.\n    String absValue = el.absUrl(attr.getKey());\n    String value = attr.getValue();\n\n    if (!preserveRelativeLinks && !absValue.isEmpty()) {\n        // Only set the value if an absolute URL can be obtained\n        attr.setValue(absValue);\n        value = absValue; // Use the absolute URL if obtainable\n    }\n\n    for (Protocol protocol : protocols) {\n        String prot = protocol.toString() + \":\";\n        if (value.toLowerCase().startsWith(prot)) {\n            return true;\n        }\n    }\n\n    return false;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/jsoup/safety/Whitelist.java",
+        "method_name": "testValidProtocol",
+        "class_name": "Whitelist",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method incorrectly considers URLs starting without explicit protocol as invalid, even if they are specified in the allowed protocols. The method needs to handle relative URLs properly when no base URI is present.",
+        "line_numbers": [
+          338,
+          339,
+          340,
+          341,
+          342,
+          343,
+          344,
+          345,
+          346,
+          347,
+          348,
+          349,
+          350,
+          351,
+          352
+        ]
+      },
+      {
+        "hypothesis": "The main issue was that the code was incorrectly assuming that converting relative URLs to absolute was the problem, which led to overfitting the solution to test cases without considering broader protocol handling. The refined solution selectively converts relative URLs to absolute ones when needed, while preserving relative links only if required. This approach ensures correct protocol handling and maintains necessary functionality.",
+        "fixed_method": "private boolean testValidProtocol(Element el, Attribute attr, Set<Protocol> protocols) {\n    String value = attr.getValue();\n    String baseUri = el.baseUri();\n    // Convert relative URL to absolute only if a base URI is available and preservation is not needed\n    if (!preserveRelativeLinks && baseUri != null && !value.contains(\":\")) {\n        value = el.absUrl(attr.getKey());\n        attr.setValue(value);\n    }\n    for (Protocol protocol : protocols) {\n        String prot = protocol.toString() + \":\";\n        if (value.toLowerCase().startsWith(prot)) {\n            return true;\n        }\n    }\n    return false;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/jsoup/safety/Whitelist.java",
+        "method_name": "testValidProtocol",
+        "class_name": "Whitelist",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method incorrectly converts relative URLs to absolute URLs without considering protocols like 'cid' or 'data', leading to the removal of attribute values.",
+        "line_numbers": [
+          338,
+          339,
+          340,
+          341,
+          342,
+          343,
+          344,
+          345,
+          346,
+          347,
+          348,
+          349,
+          350,
+          351,
+          352
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-19/"
+}

@@ -1,0 +1,55 @@
+{
+  "bug_id": "Mockito-29",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-29_1771878932",
+  "patches": [
+    [
+      {
+        "hypothesis": "The NullPointerException occurs because 'wanted' is null when calling 'wanted.toString()'. We need to add a null check before calling 'toString()' on 'wanted'.",
+        "changes": "- description.appendText(wanted.toString());\n+ if (wanted != null) {\n+     description.appendText(wanted.toString());\n+ } else {\n+     description.appendText(\"null\");\n+ }",
+        "fixed_method": "public void describeTo(Description description) {\n    description.appendText(\"same(\");\n    appendQuoting(description);\n    if (wanted != null) {\n        description.appendText(wanted.toString());\n    } else {\n        description.appendText(\"null\");\n    }\n    appendQuoting(description);\n    description.appendText(\")\");\n}",
+        "diff": "- description.appendText(wanted.toString());\n+ if (wanted != null) {\n+     description.appendText(wanted.toString());\n+ } else {\n+     description.appendText(\"null\");\n+ }",
+        "file_path": "src/org/mockito/internal/matchers/Same.java",
+        "method_name": "describeTo",
+        "class_name": "Same",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ],
+        "original_code": "/*\n* Copyright (c) 2007 Mockito contributors\n* This program is made available under the terms of the MIT License.\n*/\npublic void describeTo(Description description) {\n    description.appendText(\"same(\");\n    appendQuoting(description);\n    description.appendText(wanted.toString());\n    appendQuoting(description);\n    description.appendText(\")\");\n}"
+      },
+      {
+        "hypothesis": "The NullPointerException occurs because 'wanted' is null and calling 'toString()' on a null reference throws NPE. We need to check if 'wanted' is null before calling 'toString()'.",
+        "changes": "- description.appendText(wanted.toString());\n+ description.appendText(wanted == null ? \"null\" : wanted.toString());",
+        "fixed_method": "public void describeTo(Description description) {\n    description.appendText(\"same(\");\n    appendQuoting(description);\n    description.appendText(wanted == null ? \"null\" : wanted.toString());\n    appendQuoting(description);\n    description.appendText(\")\");\n}",
+        "diff": "- description.appendText(wanted.toString());\n+ description.appendText(wanted == null ? \"null\" : wanted.toString());",
+        "file_path": "src/org/mockito/internal/matchers/Same.java",
+        "method_name": "describeTo",
+        "class_name": "Same",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ],
+        "original_code": "/*\n* Copyright (c) 2007 Mockito contributors\n* This program is made available under the terms of the MIT License.\n*/\npublic void describeTo(Description description) {\n    description.appendText(\"same(\");\n    appendQuoting(description);\n    description.appendText(wanted.toString());\n    appendQuoting(description);\n    description.appendText(\")\");\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Mockito-29/"
+}

@@ -1,0 +1,43 @@
+File: src/java/org/apache/commons/cli/Parser.java
+Method: Parser.processProperties
+
+protected void processProperties(Properties properties)
+{
+    if (properties == null)
+    {
+        return;
+    }
+
+    for (Enumeration e = properties.propertyNames(); e.hasMoreElements();) {
+        String option = e.nextElement().toString();
+
+        if (!cmd.hasOption(option)) {
+            Option opt = getOptions().getOption(option);
+
+            // get the value from the properties instance
+            String value = properties.getProperty(option);
+
+            if (opt.hasArg()) {
+                if (opt.getValues() == null || opt.getValues().length == 0) {
+                    try {
+                        opt.addValueForProcessing(value);
+                    } catch (RuntimeException exp) {
+                        // if we cannot add the value don't worry about it
+                    }
+                }
+            } else {
+                // Check if the value is affirmative for options without arguments
+                boolean isAffirmative = "yes".equalsIgnoreCase(value)
+                        || "true".equalsIgnoreCase(value)
+                        || "1".equalsIgnoreCase(value);
+                if (isAffirmative) {
+                    cmd.addOption(opt);
+                }
+                // If not affirmative, do not add the option but continue processing others
+                continue;
+            }
+
+            cmd.addOption(opt);
+        }
+    }
+}

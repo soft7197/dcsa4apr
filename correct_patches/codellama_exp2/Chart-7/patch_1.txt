@@ -1,0 +1,66 @@
+File: source/org/jfree/data/time/TimePeriodValues.java
+Method: TimePeriodValues.updateBounds
+
+private void updateBounds(TimePeriod period, int index) {
+
+    if (this.minStartIndex >= 0) {
+        long minStart = getDataItem(this.minStartIndex).getPeriod().getStart().getTime();
+        if (period.getStart().getTime() < minStart) {
+            this.minStartIndex = index;
+        }
+    } else {
+        this.minStartIndex = index;
+    }
+
+    if (this.maxStartIndex >= 0) {
+        long maxStart = getDataItem(this.maxStartIndex).getPeriod().getStart().getTime();
+        if (period.getStart().getTime() > maxStart) {
+            this.maxStartIndex = index;
+        }
+    } else {
+        this.maxStartIndex = index;
+    }
+
+    long middle = period.getStart().getTime() + (period.getEnd().getTime() - period.getStart().getTime()) / 2;
+
+    if (this.minMiddleIndex >= 0) {
+        long minMiddle = getDataItem(this.minMiddleIndex).getPeriod().getStart().getTime()
+            + (getDataItem(this.minMiddleIndex).getPeriod().getEnd().getTime()
+            - getDataItem(this.minMiddleIndex).getPeriod().getStart().getTime()) / 2;
+        if (middle < minMiddle) {
+            this.minMiddleIndex = index;
+        }
+    } else {
+        this.minMiddleIndex = index;
+    }
+
+    if (this.maxMiddleIndex >= 0) {
+        long maxMiddle = getDataItem(this.maxMiddleIndex).getPeriod().getStart().getTime()
+            + (getDataItem(this.maxMiddleIndex).getPeriod().getEnd().getTime()
+            - getDataItem(this.maxMiddleIndex).getPeriod().getStart().getTime()) / 2;
+        if (middle > maxMiddle) {
+            this.maxMiddleIndex = index;
+        }
+    } else {
+        this.maxMiddleIndex = index;
+    }
+
+    if (this.minEndIndex >= 0) {
+        long minEnd = getDataItem(this.minEndIndex).getPeriod().getEnd().getTime();
+        if (period.getEnd().getTime() < minEnd) {
+            this.minEndIndex = index;
+        }
+    } else {
+        this.minEndIndex = index;
+    }
+
+    if (this.maxEndIndex >= 0) {
+        long maxEnd = getDataItem(this.maxEndIndex).getPeriod().getEnd().getTime();
+        if (period.getEnd().getTime() > maxEnd) {
+            this.maxEndIndex = index;
+        }
+    } else {
+        this.maxEndIndex = index;
+    }
+
+}

@@ -1,0 +1,82 @@
+{
+  "bug_id": "Jsoup-62",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-62_1772700303",
+  "patches": [
+    [
+      {
+        "hypothesis": "Refined the function to avoid hardcoded values and handle general cases, including edge cases",
+        "fixed_method": "public boolean anyOtherEndTag(Token t, HtmlTreeBuilder tb) {\n   String name = t.asEndTag().normalName();\n   ArrayList<Element> stack = tb.getStack();\n   if (stack.isEmpty()) {\n     tb.error(this);\n     return false;\n   }\n   for (int pos = stack.size() - 1; pos >= 0; pos--) {\n     Element node = stack.get(pos);\n     if (node.nodeName().equals(name)) {\n       tb.generateImpliedEndTags(name);\n       if (!name.equals(tb.currentElement().nodeName())) {\n         tb.error(this);\n       }\n       tb.popStackToClose(name);\n       break;\n     } else if (tb.isSpecial(node)) {\n       tb.error(this);\n       return false;\n     } else if (!name.equals(node.nodeName())) {\n       tb.popStackToClose(node.nodeName());\n       break;\n     }\n   }\n   return true;\n }",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java",
+        "method_name": "anyOtherEndTag",
+        "class_name": "HtmlTreeBuilderState",
+        "iteration": 3,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue is caused by the case sensitivity of the element name comparison. The test is expecting the element names to be case-sensitive, but the code is not handling it correctly.",
+        "line_numbers": [
+          763,
+          764,
+          765,
+          766,
+          767,
+          768,
+          769,
+          770,
+          771,
+          772,
+          773,
+          774,
+          775,
+          776,
+          777,
+          778,
+          779,
+          780,
+          781,
+          782
+        ]
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "boolean anyOtherEndTag(Token t, HtmlTreeBuilder tb) {\n            String name = t.asEndTag().normalName();\n            ArrayList<Element> stack = tb.getStack();\n            for (int pos = stack.size() -1; pos >= 0; pos--) {\n                Element node = stack.get(pos);\n                if (node.nodeName().equalsIgnoreCase(name)) {\n                    tb.generateImpliedEndTags(name);\n                    if (!name.equals(tb.currentElement().nodeName()))\n                        tb.error(this);\n                    tb.popStackToClose(node.nodeName());\n                    break;\n                } else {\n                    if (tb.isSpecial(node)) {\n                        tb.error(this);\n                        return false;\n                    }\n                }\n            }\n            return true;\n        }",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java",
+        "method_name": "anyOtherEndTag",
+        "class_name": "HtmlTreeBuilderState",
+        "iteration": 3,
+        "is_multi_method": false,
+        "line_numbers": [
+          763,
+          764,
+          765,
+          766,
+          767,
+          768,
+          769,
+          770,
+          771,
+          772,
+          773,
+          774,
+          775,
+          776,
+          777,
+          778,
+          779,
+          780,
+          781,
+          782
+        ],
+        "original_code": "// stop parsing\nboolean anyOtherEndTag(Token t, HtmlTreeBuilder tb) {\n    String name = t.asEndTag().normalName();\n    ArrayList<Element> stack = tb.getStack();\n    for (int pos = stack.size() -1; pos >= 0; pos--) {\n        Element node = stack.get(pos);\n        if (node.nodeName().equals(name)) {\n            tb.generateImpliedEndTags(name);\n            if (!name.equals(tb.currentElement().nodeName()))\n                tb.error(this);\n            tb.popStackToClose(name);\n            break;\n        } else {\n            if (tb.isSpecial(node)) {\n                tb.error(this);\n                return false;\n            }\n        }\n    }\n    return true;\n}"
+      }
+    ]
+  ],
+  "iterations": 3,
+  "monitor_dir": "traces/Jsoup-62/"
+}

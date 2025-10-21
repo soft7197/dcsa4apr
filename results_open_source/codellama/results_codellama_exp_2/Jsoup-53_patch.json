@@ -1,0 +1,53 @@
+{
+  "bug_id": "Jsoup-53",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-53_1772784513",
+  "patches": [
+    [
+      {
+        "hypothesis": "Refined the patch to handle general cases, edge cases and avoid overfitting",
+        "fixed_method": "public String chompBalanced(char open, char close) {\n        int start = -1;\n        int end = -1;\n        int depth = 0;\n        char last = 0;\n\n        do {\n            if (isEmpty()) break;\n            Character c = consume();\n            if (last == 0 || last != ESC) {\n                if (c.equals(open) || c.equals(close) && last != ESC) {\n                    depth++;\n                    if (start == -1)\n                        start = pos;\n                }\n                else if (c.equals(close) && last != ESC)\n                    depth--;\n            }\n\n            if (depth > 0 && last != 0)\n                end = pos; // don't include the outer match pair in the return\n            last = c;\n        } while (depth > 0);\n\n        if (depth == 1) {\n            char c = consume();\n            last |= c;\n        }\n\n        return (end >= 0) ? queue.substring(start, end) : \"\";\n    }",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/parser/TokenQueue.java",
+        "method_name": "chompBalanced",
+        "class_name": "TokenQueue",
+        "iteration": 2,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "",
+        "line_numbers": [
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267,
+          268,
+          269,
+          270,
+          271,
+          272,
+          273,
+          274,
+          275,
+          276,
+          277,
+          278,
+          279,
+          280,
+          281,
+          282,
+          283,
+          284
+        ]
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Jsoup-53/"
+}

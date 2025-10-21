@@ -1,0 +1,8 @@
+File: src/main/java/com/fasterxml/jackson/databind/ObjectReader.java
+Method: ObjectReader.readTree
+
+@SuppressWarnings("unchecked")
+    @Override
+    public <T extends TreeNode> T readTree(JsonParser p) throws IOException {
+        return (p.hasCurrentToken() || p.nextToken() != null) ? (T) _bindAsTree(p) : null;
+    }

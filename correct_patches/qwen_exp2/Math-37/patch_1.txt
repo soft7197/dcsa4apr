@@ -1,0 +1,32 @@
+File: src/main/java/org/apache/commons/math/complex/Complex.java
+Method: Complex.tanh
+
+public Complex tanh() {
+    if (isNaN || Double.isNaN(real) || Double.isNaN(imaginary)) {
+        return NaN;
+    }
+    double real2 = 2.0 * real;
+    double imaginary2 = 2.0 * imaginary;
+    double sinhReal2 = FastMath.sinh(real2);
+    double coshReal2 = FastMath.cosh(real2);
+    double cosImaginary2 = FastMath.cos(imaginary2);
+    double sinImaginary2 = FastMath.sin(imaginary2);
+    double d = coshReal2 + cosImaginary2;
+
+    if (Double.isInfinite(d)) {
+        // Handle infinite denominator cases
+        if (Double.isInfinite(sinhReal2)) {
+            return createComplex(FastMath.copySign(1.0, real), 0.0);
+        } else {
+            return NaN;
+        }
+    } else if (Double.isInfinite(real2) && Double.isFinite(imaginary2)) {
+        // Handle cases where real part is infinite and imaginary part is finite
+        return createComplex(FastMath.copySign(1.0, real), 0.0);
+    } else if (Double.isInfinite(imaginary2) && Double.isFinite(real2)) {
+        // Handle cases where imaginary part is infinite and real part is finite
+        return NaN;
+    }
+
+    return createComplex(sinhReal2 / d, sinImaginary2 / d);
+}

@@ -1,0 +1,22 @@
+File: src/main/java/org/jsoup/nodes/Element.java
+Method: Element.preserveWhitespace
+
+static boolean preserveWhitespace(Node node) {
+    int level = 0;
+    final int maxLevels = 5;
+    while (node != null && level <= maxLevels) {
+        if (node instanceof Element) {
+            Element el = (Element) node;
+            if (el.tag.preserveWhitespace()) {
+                return true;
+            }
+        }
+        if (node.parent() != null) {
+            node = node.parent();
+            level++;
+        } else {
+            break;
+        }
+    }
+    return false;
+}

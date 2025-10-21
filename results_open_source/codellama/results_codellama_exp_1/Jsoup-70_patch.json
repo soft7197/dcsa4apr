@@ -1,0 +1,39 @@
+{
+  "bug_id": "Jsoup-70",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-70_1772700428",
+  "patches": [
+    [
+      {
+        "hypothesis": "use a more general approach to handle different types of nodes and add proper edge case handling",
+        "fixed_method": "static boolean preserveWhitespace(Node node) {\n    if (node == null || (node instanceof Element && ((Element) node).tag.preserveWhitespace())) return true;\n    else if (node.parent() == null) return false;\n    else return preserveWhitespace(node.parent());\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/nodes/Element.java",
+        "method_name": "preserveWhitespace",
+        "class_name": "Element",
+        "iteration": 2,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "",
+        "line_numbers": [
+          1087,
+          1088,
+          1089,
+          1090,
+          1091,
+          1092,
+          1093,
+          1094,
+          1095,
+          1096,
+          1097
+        ]
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Jsoup-70/"
+}

@@ -1,0 +1,39 @@
+File: src/com/google/javascript/jscomp/type/ChainableReverseAbstractInterpreter.java
+Method: ChainableReverseAbstractInterpreter.declareNameInScope
+
+protected void declareNameInScope(FlowScope scope, Node node, JSType type) {
+  switch (node.getType()) {
+    case Token.NAME:
+      scope.inferSlotType(node.getString(), type);
+      break;
+
+    case Token.GETPROP:
+      String qualifiedName = node.getQualifiedName();
+      Preconditions.checkNotNull(qualifiedName);
+
+      JSType origType = node.getJSType();
+      origType = origType == null ? getNativeType(UNKNOWN_TYPE) : origType;
+      scope.inferQualifiedSlot(node, qualifiedName, origType, type);
+      break;
+
+    default:
+      if (!isModeledInCFG(node)) {
+        // Log or handle unmodeled tokens gracefully
+        return;
+      }
+      throw new IllegalArgumentException("Node cannot be refined. \n" +
+          node.toStringTree());
+  }
+}
+
+private boolean isModeledInCFG(Node node) {
+  // Implement logic to determine if a node is modeled in the CFG
+  // For example, return false for 'THIS' and other unmodeled tokens
+  switch (node.getType()) {
+    case Token.THIS:
+      return false;
+    // Add other unmodeled tokens here
+    default:
+      return true;
+  }
+}

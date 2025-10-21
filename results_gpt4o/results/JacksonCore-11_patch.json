@@ -1,0 +1,67 @@
+{
+  "bug_id": "JacksonCore-11",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonCore-11_1773118610",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method does not ensure proper handling of the array copy to accommodate growth, which leads to ArrayIndexOutOfBoundsException when accessing larger indices.",
+        "changes": "- if (_hashShared) block: Ensure array resizing accommodates possible expansions when duplicate references are detected",
+        "fixed_method": "private void _verifySharing() {\n    if (_hashShared) {\n        // Ensure copies are adjusted to account for growth if necessary\n        _hashArea = Arrays.copyOf(_hashArea, _hashArea.length + 64); // Assume common growth factor\n        _names = Arrays.copyOf(_names, _names.length + 16); // Matching growth in names\n        _hashShared = false;\n    }\n    if (_needRehash) {\n        rehash();\n    }\n}",
+        "diff": "- if (_hashShared) block: Ensure array resizing accommodates possible expansions when duplicate references are detected",
+        "file_path": "src/main/java/com/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer.java",
+        "method_name": "_verifySharing",
+        "class_name": "ByteQuadsCanonicalizer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          874,
+          875,
+          876,
+          877,
+          878,
+          879,
+          880,
+          881,
+          882,
+          883,
+          884,
+          885,
+          886
+        ],
+        "original_code": "// Yes if above 80%, or above 50% AND have ~1% spill-overs\nprivate void _verifySharing()\n{\n    if (_hashShared) {\n        _hashArea = Arrays.copyOf(_hashArea, _hashArea.length);\n        _names = Arrays.copyOf(_names, _names.length);\n        _hashShared = false;\n        // 09-Sep-2015, tatu: As per [jackson-core#216], also need to ensure\n        //    we rehash as needed, as need-rehash flag is not copied from parent\n    }\n    if (_needRehash) {\n        rehash();\n    }\n}"
+      },
+      {
+        "hypothesis": "The original overfitting patch used a fixed array size for copying and assumed rehashing would handle size increments, which is inflexible and error-prone. The refined fix introduces a dynamic way to calculate the expected length based on the current size and load factors, ensuring better handling of size requirements and rehashing conditions.",
+        "fixed_method": "private void _verifySharing()\n{\n    if (_hashShared) {\n        int expectedLen = expectedLength();\n        if (_hashArea.length < expectedLen) {\n            _hashArea = Arrays.copyOf(_hashArea, expectedLen);\n        }\n        if (_names.length < expectedLen) {\n            _names = Arrays.copyOf(_names, expectedLen);\n        }\n        _hashShared = false;\n    }\n    if (_needRehash) {\n        rehash();\n    }\n}\n\nprivate int expectedLength() {\n    // Calculate the expected length based on current data\n    int loadFactor = 75; // assuming 75% load factor\n    int currentSize = _hashArea.length;\n    // Adjust expected size based on current usage and load factor\n    return (int) (currentSize / (loadFactor / 100.0)) + 1;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer.java",
+        "method_name": "_verifySharing",
+        "class_name": "ByteQuadsCanonicalizer",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method currently fails to ensure enough space in the hash arrays after copying, resulting in an ArrayIndexOutOfBoundsException when the array is accessed beyond its length.",
+        "line_numbers": [
+          874,
+          875,
+          876,
+          877,
+          878,
+          879,
+          880,
+          881,
+          882,
+          883,
+          884,
+          885,
+          886
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonCore-11/"
+}

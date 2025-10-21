@@ -1,0 +1,47 @@
+{
+  "bug_id": "Jsoup-62",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-62_1773119342",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method incorrectly assumes tag names are case insensitive. It incorrectly identifies and matches end tags based on lowercase tag names instead of preserving the original case.",
+        "changes": "- use t.asEndTag().name() instead of t.asEndTag().normalName()\n- check tag names preserving their case sensitivity",
+        "fixed_method": "boolean anyOtherEndTag(Token t, HtmlTreeBuilder tb) {\n    String name = t.asEndTag().name();\n    ArrayList<Element> stack = tb.getStack();\n    for (int pos = stack.size() -1; pos >= 0; pos--) {\n        Element node = stack.get(pos);\n        if (node.nodeName().equals(name)) {\n            tb.generateImpliedEndTags(name);\n            if (!name.equals(tb.currentElement().nodeName()))\n                tb.error(this);\n            tb.popStackToClose(name);\n            break;\n        } else {\n            if (tb.isSpecial(node)) {\n                tb.error(this);\n                return false;\n            }\n        }\n    }\n    return true;\n}",
+        "diff": "- use t.asEndTag().name() instead of t.asEndTag().normalName()\n- check tag names preserving their case sensitivity",
+        "file_path": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java",
+        "method_name": "anyOtherEndTag",
+        "class_name": "HtmlTreeBuilderState",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          763,
+          764,
+          765,
+          766,
+          767,
+          768,
+          769,
+          770,
+          771,
+          772,
+          773,
+          774,
+          775,
+          776,
+          777,
+          778,
+          779,
+          780,
+          781,
+          782
+        ],
+        "original_code": "// stop parsing\nboolean anyOtherEndTag(Token t, HtmlTreeBuilder tb) {\n    String name = t.asEndTag().normalName();\n    ArrayList<Element> stack = tb.getStack();\n    for (int pos = stack.size() -1; pos >= 0; pos--) {\n        Element node = stack.get(pos);\n        if (node.nodeName().equals(name)) {\n            tb.generateImpliedEndTags(name);\n            if (!name.equals(tb.currentElement().nodeName()))\n                tb.error(this);\n            tb.popStackToClose(name);\n            break;\n        } else {\n            if (tb.isSpecial(node)) {\n                tb.error(this);\n                return false;\n            }\n        }\n    }\n    return true;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-62/"
+}

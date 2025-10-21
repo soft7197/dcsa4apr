@@ -1,0 +1,32 @@
+File: src/com/google/javascript/jscomp/TypeCheck.java
+Method: TypeCheck.checkInterfaceConflictProperties
+
+private void checkInterfaceConflictProperties(NodeTraversal t, Node n,
+    String functionName, HashMap properties,
+    HashMap currentProperties,
+    ObjectType interfaceType) {
+  ObjectType implicitProto = interfaceType.getImplicitPrototype();
+  Set currentPropertyNames;
+    // This can be the case if interfaceType is proxy to a non-existent
+    // object (which is a bad type annotation, but shouldn't crash).
+    currentPropertyNames = implicitProto != null ? implicitProto.getOwnPropertyNames() : new java.util.HashSet();
+  for (Iterator iterator = currentPropertyNames.iterator(); iterator.hasNext();) {
+    String name = (String) iterator.next();
+    ObjectType oType = (ObjectType) properties.get(name);
+    if (oType != null) {
+      if (!interfaceType.getPropertyType(name).isEquivalentTo(
+          oType.getPropertyType(name))) {
+        compiler.report(
+            t.makeError(n, INCOMPATIBLE_EXTENDED_PROPERTY_TYPE,
+                functionName, name, oType.toString(),
+                interfaceType.toString()));
+      }
+    }
+    currentProperties.put(name, interfaceType);
+  }
+  for (Iterator iterator = interfaceType.getCtorExtendedInterfaces().iterator(); iterator.hasNext();) {
+    ObjectType iType = (ObjectType) iterator.next();
+    checkInterfaceConflictProperties(t, n, functionName, properties,
+        currentProperties, iType);
+  }
+}

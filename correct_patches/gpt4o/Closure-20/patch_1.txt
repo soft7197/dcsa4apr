@@ -1,0 +1,21 @@
+File: src/com/google/javascript/jscomp/PeepholeSubstituteAlternateSyntax.java
+Method: PeepholeSubstituteAlternateSyntax.tryFoldSimpleFunctionCall
+
+private Node tryFoldSimpleFunctionCall(Node n) {
+  Preconditions.checkState(n.isCall());
+  Node callTarget = n.getFirstChild();
+  if (callTarget != null && callTarget.isName() &&
+        callTarget.getString().equals("String")) {
+    Node value = callTarget.getNext();
+    // Check if there is exactly one argument and it's an immutable value
+    if (value != null && value.getNext() == null && NodeUtil.isImmutableValue(value)) {
+      Node addition = IR.add(
+          IR.string("").srcref(callTarget),
+          value.detachFromParent());
+      n.getParent().replaceChild(n, addition);
+      reportCodeChange();
+      return addition;
+    }
+  }
+  return n;
+}

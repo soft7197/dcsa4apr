@@ -1,0 +1,20 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "drawVerticalItem_org.jfree.chart.renderer.category.StatisticalBarRenderer"
+    ],
+    "tests": [
+      "org.jfree.chart.renderer.category.junit.StatisticalBarRendererTests::testDrawWithNullDeviationVertical",
+      "org.jfree.chart.renderer.category.junit.StatisticalBarRendererTests::testDrawWithNullMeanVertical"
+    ]
+  },
+  "Group_2": {
+    "buggy_methods": [
+      "drawHorizontalItem_org.jfree.chart.renderer.category.StatisticalBarRenderer"
+    ],
+    "tests": [
+      "org.jfree.chart.renderer.category.junit.StatisticalBarRendererTests::testDrawWithNullDeviationHorizontal",
+      "org.jfree.chart.renderer.category.junit.StatisticalBarRendererTests::testDrawWithNullMeanHorizontal"
+    ]
+  }
+}

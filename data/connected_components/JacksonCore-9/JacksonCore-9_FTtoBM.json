@@ -1,0 +1,22 @@
+{
+  "com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextBytes": [
+    {
+      "buggy_method": "getValueAsString_String",
+      "class": "com.fasterxml.jackson.core.base.ParserMinimalBase"
+    },
+    {
+      "buggy_method": "getValueAsString_",
+      "class": "com.fasterxml.jackson.core.json.UTF8StreamJsonParser"
+    }
+  ],
+  "com.fasterxml.jackson.core.json.TestJsonParser::testGetValueAsTextChars": [
+    {
+      "buggy_method": "getValueAsString_String",
+      "class": "com.fasterxml.jackson.core.base.ParserMinimalBase"
+    },
+    {
+      "buggy_method": "getValueAsString_",
+      "class": "com.fasterxml.jackson.core.json.ReaderBasedJsonParser"
+    }
+  ]
+}

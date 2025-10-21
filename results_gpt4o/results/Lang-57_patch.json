@@ -1,0 +1,30 @@
+{
+  "bug_id": "Lang-57",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-57_1773119712",
+  "patches": [
+    [
+      {
+        "hypothesis": "The NullPointerException indicates that cAvailableLocaleSet might not be initialized before being used in the method. Adding a null check can prevent the NullPointerException.",
+        "changes": "+ Add null check for cAvailableLocaleSet to prevent NullPointerException.",
+        "fixed_method": "public static boolean isAvailableLocale(Locale locale) {\n    return cAvailableLocaleSet != null && cAvailableLocaleSet.contains(locale);\n}",
+        "diff": "+ Add null check for cAvailableLocaleSet to prevent NullPointerException.",
+        "file_path": "src/java/org/apache/commons/lang/LocaleUtils.java",
+        "method_name": "isAvailableLocale",
+        "class_name": "LocaleUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          222,
+          223,
+          224
+        ],
+        "original_code": "/**\n* <p>Checks if the locale specified is in the list of available locales.</p>\n*\n* @param locale the Locale object to check if it is available\n* @return true if the locale is a known locale\n*/\npublic static boolean isAvailableLocale(Locale locale) {\n    return cAvailableLocaleSet.contains(locale);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Lang-57/"
+}

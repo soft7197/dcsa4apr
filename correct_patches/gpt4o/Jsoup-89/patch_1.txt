@@ -1,0 +1,19 @@
+File: src/main/java/org/jsoup/nodes/Attribute.java
+Method: Attribute.setValue
+
+/**
+Set the attribute value.
+@param val the new attribute value; must not be null
+*/
+public String setValue(String val) {
+    String oldVal = this.val; // Initialize oldVal with current value
+    if (parent != null) {
+        oldVal = parent.get(this.key);
+        int i = parent.indexOfKey(this.key);
+        if (i != Attributes.NotFound) {
+            parent.vals[i] = val;
+        }
+    }
+    this.val = val;
+    return Attributes.checkNotNull(oldVal);
+}

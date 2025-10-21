@@ -1,0 +1,9 @@
+File: src/main/java/org/apache/commons/math3/genetics/ListPopulation.java
+Method: ListPopulation.iterator
+
+public Iterator<Chromosome> iterator() {
+ if (chromosomes == null || chromosomes.isEmpty()) {
+ return Collections.emptyIterator();
+ }
+ return Collections.unmodifiableList(chromosomes).iterator();
+}

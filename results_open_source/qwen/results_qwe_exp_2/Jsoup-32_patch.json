@@ -1,0 +1,51 @@
+{
+  "bug_id": "Jsoup-32",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-32_1771937407",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is that the cloned Element does not have its own separate set of class names. The current implementation calls classNames() but does not clone the set of class names. We need to manually create a new set for the cloned element.",
+        "changes": "- clone.classNames();\n+ clone.classNames = new LinkedHashSet<String>(this.classNames());",
+        "fixed_method": "public Element clone() {\n    Element clone = (Element) super.clone();\n    clone.classNames = new LinkedHashSet<String>(this.classNames());\n    return clone;\n}",
+        "diff": "- clone.classNames();\n+ clone.classNames = new LinkedHashSet<String>(this.classNames());",
+        "file_path": "src/main/java/org/jsoup/nodes/Element.java",
+        "method_name": "clone",
+        "class_name": "Element",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          1136,
+          1137,
+          1138,
+          1139,
+          1140
+        ],
+        "original_code": "// todo: fixup, not very useful\npublic Element clone() {\n    Element clone = (Element) super.clone();\n    clone.classNames();\n    return clone;\n}"
+      },
+      {
+        "hypothesis": "The issue is that the clone method does not properly clone the classNames set, leading to shared references between the original and cloned elements. The fix involves explicitly copying the classNames set during the cloning process.",
+        "changes": "- clone.classNames();\n+ clone.classNames = new LinkedHashSet(this.classNames());",
+        "fixed_method": "public Element clone() {\n    Element clone = (Element) super.clone();\n    clone.classNames = new LinkedHashSet(this.classNames());\n    return clone;\n}",
+        "diff": "- clone.classNames();\n+ clone.classNames = new LinkedHashSet(this.classNames());",
+        "file_path": "src/main/java/org/jsoup/nodes/Element.java",
+        "method_name": "clone",
+        "class_name": "Element",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          1136,
+          1137,
+          1138,
+          1139,
+          1140
+        ],
+        "original_code": "// todo: fixup, not very useful\npublic Element clone() {\n    Element clone = (Element) super.clone();\n    clone.classNames();\n    return clone;\n}"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Jsoup-32/"
+}

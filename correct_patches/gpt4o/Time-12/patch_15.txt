@@ -1,0 +1,20 @@
+File: src/main/java/org/joda/time/LocalDate.java
+Method: LocalDate.fromDateFields
+
+public static LocalDate fromDateFields(Date date) {
+    if (date == null) {
+        throw new IllegalArgumentException("The date must not be null");
+    }
+    Calendar cal = Calendar.getInstance();
+    cal.setTime(date);
+    int year = cal.get(Calendar.YEAR);
+    int era = cal.get(Calendar.ERA);
+    if (era == GregorianCalendar.BC) {
+        year = -(year - 1); // Adjusting for BC era
+    }
+    return new LocalDate(
+        year,
+        cal.get(Calendar.MONTH) + 1,
+        cal.get(Calendar.DAY_OF_MONTH)
+    );
+}

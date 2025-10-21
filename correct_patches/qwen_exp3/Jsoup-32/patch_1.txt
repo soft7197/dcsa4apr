@@ -1,0 +1,12 @@
+File: src/main/java/org/jsoup/nodes/Element.java
+Method: Element.clone
+
+public Element clone() {
+    Element clone = (Element) super.clone();
+    if (this.classNames() != null) {
+        clone.classNames = new LinkedHashSet<String>(this.classNames());
+    } else {
+        clone.classNames = null;
+    }
+    return clone;
+}

@@ -1,0 +1,31 @@
+{
+  "bug_id": "Chart-10",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Chart-10_1772679488",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue is caused by the method not properly encoding the tooltip text. The test case contains a double quote character, which is not properly escaped in the generated HTML attribute.",
+        "changes": "+ escape double quotes in tooltip text",
+        "fixed_method": "public String generateToolTipFragment(String toolTipText) {\n    return \" title=\\\"\" + toolTipText.replace(\"\\\"\", \"&quot;\") + \"\\\" alt=\\\"\\\"\";\n}",
+        "diff": "+ escape double quotes in tooltip text",
+        "file_path": "source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java",
+        "method_name": "generateToolTipFragment",
+        "class_name": "StandardToolTipTagFragmentGenerator",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          64,
+          65,
+          66,
+          67
+        ],
+        "original_code": "/**\n* Generates a tooltip string to go in an HTML image map.\n*\n* @param toolTipText  the tooltip.\n*\n* @return The formatted HTML area tag attribute(s).\n*/\npublic String generateToolTipFragment(String toolTipText) {\n    return \" title=\\\"\" + toolTipText\n        + \"\\\" alt=\\\"\\\"\";\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Chart-10/"
+}

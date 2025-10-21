@@ -1,0 +1,15 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "removeColumn_Comparable_org.jfree.data.DefaultKeyedValues2D",
+      "removeValue_Comparable_org.jfree.data.DefaultKeyedValues",
+      "removeValue_int_org.jfree.data.DefaultKeyedValues"
+    ],
+    "tests": [
+      "org.jfree.data.category.junit.DefaultCategoryDatasetTests::testBug1835955",
+      "org.jfree.data.junit.DefaultKeyedValues2DTests::testRemoveColumnByKey",
+      "org.jfree.data.junit.DefaultKeyedValuesTests::testGetIndex2",
+      "org.jfree.data.junit.DefaultKeyedValuesTests::testRemoveValue"
+    ]
+  }
+}

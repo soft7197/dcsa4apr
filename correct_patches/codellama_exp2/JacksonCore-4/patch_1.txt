@@ -1,0 +1,11 @@
+File: src/main/java/com/fasterxml/jackson/core/util/TextBuffer.java
+Method: TextBuffer.expandCurrentSegment
+
+public char[] expandCurrentSegment()
+{
+   final char[] curr = _currentSegment;
+   final int len = curr.length;
+   final double ratio = 1.5;
+   int newLen = (int)(len * ratio) + (len >> 1);
+   return (_currentSegment = Arrays.copyOf(curr, newLen));
+}

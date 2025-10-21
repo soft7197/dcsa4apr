@@ -1,0 +1,7 @@
+File: src/main/java/org/apache/commons/math3/fraction/Fraction.java
+Method: Fraction.percentageValue
+
+public double percentageValue() {
+  if (numerator == 0) return 0.0;
+  return numerator * 100.0 / denominator;
+}

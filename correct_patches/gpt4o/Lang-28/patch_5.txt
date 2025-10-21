@@ -1,0 +1,54 @@
+File: src/main/java/org/apache/commons/lang3/text/translate/NumericEntityUnescaper.java
+Method: NumericEntityUnescaper.translate
+
+public int translate(CharSequence input, int index, Writer out) throws IOException {
+    if (index < 0 || index + 1 >= input.length() || input.charAt(index) != '&' || input.charAt(index + 1) != '#') {
+        return 0;
+    }
+
+    int start = index + 2;
+    boolean isHex = false;
+
+    if (start >= input.length()) {
+        return 0;
+    }
+
+    char firstChar = input.charAt(start);
+    if (firstChar == 'x' || firstChar == 'X') {
+        start++;
+        isHex = true;
+    }
+
+    int end = start;
+    while (end < input.length() && input.charAt(end) != ';') {
+        end++;
+    }
+
+    if (end >= input.length() || input.charAt(end) != ';') {
+        return 0;
+    }
+
+    int entityValue;
+    try {
+        String numberString = input.subSequence(start, end).toString();
+        if (numberString.isEmpty()) {
+            return 0;
+        }
+        if (isHex) {
+            entityValue = Integer.parseInt(numberString, 16);
+        } else {
+            entityValue = Integer.parseInt(numberString, 10);
+        }
+    } catch (NumberFormatException nfe) {
+        return 0;
+    }
+
+    if (Character.isSupplementaryCodePoint(entityValue)) {
+        out.write(Character.highSurrogate(entityValue));
+        out.write(Character.lowSurrogate(entityValue));
+    } else {
+        out.write(entityValue);
+    }
+
+    return 2 + (end - start) + (isHex ? 1 : 0) + 1;
+}

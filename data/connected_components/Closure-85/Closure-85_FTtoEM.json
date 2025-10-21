@@ -1,0 +1,257 @@
+{
+  "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testCascadedRemovalOfUnlessUnconditonalJumps": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        49
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/AbstractCompiler;Z)V",
+      "executed_lines": [
+        55,
+        58,
+        61,
+        62,
+        63,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "computeFollowing",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "enterScope",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        68,
+        71,
+        72,
+        73,
+        74,
+        76,
+        78
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "exitScope",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        82,
+        83
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "process",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        87,
+        88
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "removeDeadExprStatementSafely",
+      "signature": "(Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        200,
+        201,
+        204,
+        207,
+        229,
+        230,
+        231,
+        234,
+        235
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "tryRemoveUnconditionalBranching",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        143,
+        144,
+        147,
+        149,
+        153,
+        159,
+        161,
+        162,
+        163,
+        177,
+        178,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        191
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "visit",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        92,
+        93,
+        95,
+        96,
+        99,
+        100,
+        101,
+        103,
+        105,
+        106,
+        109,
+        110
+      ]
+    }
+  ],
+  "com.google.javascript.jscomp.UnreachableCodeEliminationTest::testIssue311": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        49
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/AbstractCompiler;Z)V",
+      "executed_lines": [
+        55,
+        58,
+        61,
+        62,
+        63,
+        64
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "computeFollowing",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        195,
+        196
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "enterScope",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        68,
+        71,
+        72,
+        73,
+        74,
+        76,
+        78
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "process",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        87
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "removeDeadExprStatementSafely",
+      "signature": "(Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        200,
+        201,
+        204,
+        207,
+        229,
+        230,
+        231,
+        234,
+        235
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "tryRemoveUnconditionalBranching",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        143,
+        144,
+        147,
+        149,
+        153,
+        159,
+        161,
+        162,
+        163,
+        168,
+        169,
+        177,
+        178,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        191
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.UnreachableCodeElimination",
+      "method": "visit",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        92,
+        95,
+        99,
+        100,
+        101,
+        103,
+        105,
+        106,
+        109,
+        110
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+File: src/main/java/org/apache/commons/math3/distribution/HypergeometricDistribution.java
+Method: HypergeometricDistribution.getNumericalMean
+
+public double getNumericalMean(){
+    int popSize = getPopulationSize();
+    int sampleSize = getSampleSize();
+    int successes = getNumberOfSuccesses();
+    double mean = (double) successes * sampleSize / popSize;
+    return mean;
+}

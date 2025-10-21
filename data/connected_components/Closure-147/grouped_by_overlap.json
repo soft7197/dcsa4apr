@@ -1,0 +1,19 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "shouldTraverse_com.google.javascript.jscomp.CheckGlobalThis"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.CheckGlobalThisTest::testIssue182a",
+      "com.google.javascript.jscomp.CheckGlobalThisTest::testIssue182b"
+    ]
+  },
+  "Group_2": {
+    "buggy_methods": [
+      "visitFunction_com.google.javascript.jscomp.RuntimeTypeCheck"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.RuntimeTypeCheckTest::testValueWithInnerFn"
+    ]
+  }
+}

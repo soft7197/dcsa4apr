@@ -1,0 +1,18 @@
+File: src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializer.java
+Method: StdKeySerializer.serialize
+
+public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+    if (value == null) {
+        throw new IllegalArgumentException("Value cannot be null");
+    }
+
+    if (value instanceof Date) {
+        provider.defaultSerializeDateKey((Date) value, jgen);
+        return;
+    } else if (value instanceof Class) {
+        jgen.writeFieldName(((Class<?>) value).getCanonicalName());
+        return;
+    } else {
+        jgen.writeFieldName(value.toString());
+    }
+}

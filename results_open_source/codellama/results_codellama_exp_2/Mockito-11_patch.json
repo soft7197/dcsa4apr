@@ -1,0 +1,43 @@
+{
+  "bug_id": "Mockito-11",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Mockito-11_1772822124",
+  "patches": [
+    {
+      "hypothesis": "",
+      "changes": "",
+      "methods": {
+        "src/org/mockito/internal/creation/DelegatingMethod.java::DelegatingMethod::equals::L53": {
+          "file_path": "src/org/mockito/internal/creation/DelegatingMethod.java",
+          "method_name": "equals",
+          "class_name": "DelegatingMethod",
+          "line_numbers": [
+            53,
+            56
+          ],
+          "original_code": "    /**\n     * @return True if the input object is a DelegatingMethod which has an internal Method which is equal to the internal Method of this DelegatingMethod,\n     * or if the input object is a Method which is equal to the internal Method of this DelegatingMethod.\n     */\n\n    @Override\n    public boolean equals(Object o) {\n            return method.equals(o);\n    }\n",
+          "fixed_method": "public boolean equals(Object o) {\n        if (o == null) return false;\n        if (!(o instanceof DelegatingMethod)) return false;\n        DelegatingMethod other = (DelegatingMethod) o;\n        return method.equals(other.method);\n    }",
+          "iteration": 1
+        },
+        "src/org/mockito/internal/creation/DelegatingMethod.java::DelegatingMethod::hashCode::L58": {
+          "file_path": "src/org/mockito/internal/creation/DelegatingMethod.java",
+          "method_name": "hashCode",
+          "class_name": "DelegatingMethod",
+          "line_numbers": [
+            58,
+            61
+          ],
+          "original_code": "\n    @Override\n    public int hashCode() {\n        return 1;\n    }\n",
+          "fixed_method": "public int hashCode() {\n        return method.hashCode();\n    }",
+          "iteration": 1
+        }
+      },
+      "iteration": 1,
+      "is_multi_method": true
+    }
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Mockito-11/"
+}

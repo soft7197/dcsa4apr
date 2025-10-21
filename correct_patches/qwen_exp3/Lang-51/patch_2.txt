@@ -1,0 +1,9 @@
+File: src/java/org/apache/commons/lang/BooleanUtils.java
+Method: BooleanUtils.toBoolean
+
+public static boolean toBoolean(String str) {
+    if (str == null) {
+        return false;
+    }
+    return "true".equalsIgnoreCase(str) || "on".equalsIgnoreCase(str) || "yes".equalsIgnoreCase(str);
+}

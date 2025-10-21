@@ -1,0 +1,60 @@
+{
+  "bug_id": "Gson-15",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Gson-15_1772778339",
+  "patches": [
+    [
+      {
+        "hypothesis": "The patch failed to handle non-finite values (NaN, infinite) properly resulting in failure of some tests.",
+        "changes": "if ( Double.isInfinite(d) || Double.isNaN(d) ) {}",
+        "fixed_method": "public JsonWriter value(double value) throws IOException {\n            writeDeferredName();\n            if (!isLenient() && (Double.isNaN(value) || Double.isInfinite(value))) {\n                out.append(\"null\");\n                return this;\n            }\n            beforeValue();\n            out.append(Double.toString(value));\n            return this;\n        }",
+        "diff": "if ( Double.isInfinite(d) || Double.isNaN(d) ) {}",
+        "file_path": "gson/src/main/java/com/google/gson/stream/JsonWriter.java",
+        "method_name": "value",
+        "class_name": "JsonWriter",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The test case is expecting the method to handle non-finite double values even when lenient mode is turned off. The current implementation is throwing an IllegalArgumentException for these values.",
+        "line_numbers": [
+          493,
+          494,
+          495,
+          496,
+          497,
+          498,
+          499,
+          500,
+          501
+        ]
+      },
+      {
+        "hypothesis": "The bug is caused by the method not handling non-finite double values correctly when leniency is enabled. The method should allow non-finite values to be written when leniency is enabled.",
+        "changes": "+ if (!jsonWriter.isLenient()) {\n      throw new IllegalArgumentException(\"Numeric values must be finite, but was \" + value);\n    }",
+        "fixed_method": "public JsonWriter value(double value) throws IOException {\n  writeDeferredName();\n  if (!isLenient()) {\n    if (Double.isNaN(value) || Double.isInfinite(value)) {\n      throw new IllegalArgumentException(\"Numeric values must be finite, but was \" + value);\n    }\n  }\n  beforeValue();\n  out.append(Double.toString(value));\n  return this;\n}",
+        "diff": "+ if (!jsonWriter.isLenient()) {\n      throw new IllegalArgumentException(\"Numeric values must be finite, but was \" + value);\n    }",
+        "file_path": "gson/src/main/java/com/google/gson/stream/JsonWriter.java",
+        "method_name": "value",
+        "class_name": "JsonWriter",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          493,
+          494,
+          495,
+          496,
+          497,
+          498,
+          499,
+          500,
+          501
+        ],
+        "original_code": "/**\n* Encodes {@code value}.\n*\n* @param value a finite value. May not be {@link Double#isNaN() NaNs} or\n*     {@link Double#isInfinite() infinities}.\n* @return this writer.\n*/\npublic JsonWriter value(double value) throws IOException {\n  writeDeferredName();\n  if (Double.isNaN(value) || Double.isInfinite(value)) {\n    throw new IllegalArgumentException(\"Numeric values must be finite, but was \" + value);\n  }\n  beforeValue();\n  out.append(Double.toString(value));\n  return this;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Gson-15/"
+}

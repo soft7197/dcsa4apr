@@ -1,0 +1,40 @@
+File: src/main/java/org/jsoup/nodes/FormElement.java
+Method: FormElement.formData
+
+public List<Connection.KeyVal> formData() {
+    ArrayList<Connection.KeyVal> data = new ArrayList<Connection.KeyVal>();
+
+    // iterate the form control elements and accumulate their values
+    for (Element el: elements) {
+        if (!el.tag().isFormSubmittable() || el.hasAttr("disabled")) continue; // skip non-submittable and disabled
+        
+        String name = el.attr("name");
+        if (name.isEmpty()) continue; // skip elements without a name
+        
+        String type = el.attr("type").toLowerCase();
+
+        if ("select".equals(el.tagName())) {
+            Elements options = el.select("option[selected]");
+            boolean set = false;
+            for (Element option: options) {
+                data.add(HttpConnection.KeyVal.create(name, option.val()));
+                set = true;
+            }
+            if (!set) {
+                Element option = el.select("option").first();
+                if (option != null)
+                    data.add(HttpConnection.KeyVal.create(name, option.val()));
+            }
+        } else if ("checkbox".equals(type) || "radio".equals(type)) {
+            // add checkbox or radio with a checked attribute
+            if (el.hasAttr("checked")) {
+                String val = el.attr("value").isEmpty() ? "on" : el.val();
+                data.add(HttpConnection.KeyVal.create(name, val));
+            }
+        } else { 
+            // process other form inputs
+            data.add(HttpConnection.KeyVal.create(name, el.val()));
+        }
+    }
+    return data;
+}

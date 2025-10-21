@@ -1,0 +1,17 @@
+File: gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
+Method: TypeAdapters.read
+
+public Number read(JsonReader in) throws IOException { 
+  JsonToken jsonToken = in.peek(); if (jsonToken == JsonToken.NULL) {
+    in.nextNull(); return null;
+
+  } else if (jsonToken == JsonToken.NUMBER) {
+    return new LazilyParsedNumber(in.nextString());
+
+  } else if (jsonToken == JsonToken.STRING) {
+    return new LazilyParsedNumber(in.nextString());
+
+  } else {
+    throw new JsonSyntaxException("Expecting number, got: " + jsonToken);
+  }
+}

@@ -1,0 +1,43 @@
+File: src/main/java/org/apache/commons/cli/HelpFormatter.java
+Method: HelpFormatter.findWrapPos
+
+protected int findWrapPos(String text, int width, int startPos)
+{
+    if (text == null || startPos < 0 || width < 0 || startPos >= text.length())
+    {
+        return -1;
+    }
+
+    int pos;
+    
+    // the line ends before the max wrap pos or a new line char found
+    if (((pos = text.indexOf('\n', startPos)) != -1 && pos <= startPos + width)
+            || ((pos = text.indexOf('\t', startPos)) != -1 && pos <= startPos + width))
+    {
+        return pos + 1;
+    }
+    else if (startPos + width >= text.length())
+    {
+        return -1;
+    }
+
+    // look for the last whitespace character before startPos+width
+    pos = Math.min(startPos + width, text.length() - 1);
+
+    char c;
+
+    while ((pos >= startPos) && ((c = text.charAt(pos)) != ' ')
+            && (c != '\n') && (c != '\r'))
+    {
+        --pos;
+    }
+
+    // if we found it - just return
+    if (pos >= startPos)
+    {
+        return pos;
+    }
+    
+    // if we didn't find one, simply chop at startPos+width
+    return startPos + width < text.length() ? startPos + width : -1;
+}

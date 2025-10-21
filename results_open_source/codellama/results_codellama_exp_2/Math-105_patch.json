@@ -1,0 +1,31 @@
+{
+  "bug_id": "Math-105",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-105_1772789234",
+  "patches": [
+    [
+      {
+        "hypothesis": "Avoid hard-coded value and handle division by zero error",
+        "changes": "+ if (sumXX + 1e-10 == 0) return Double.NaN;\n- sumYY - sumXY * sumXY / (sumXX + 1e-10);\n+ sumYY - sumXY * sumXY / (sumXX + 1e-10 == 0 ? 1 : sumXX + 1e-10);\n",
+        "fixed_method": "public double getSumSquaredErrors() {\n if (sumXX + 1e-10 == 0) return Double.NaN;\n return sumYY - sumXY * sumXY / (sumXX + 1e-10 == 0 ? 1 : sumXX + 1e-10);\n}",
+        "diff": "+ if (sumXX + 1e-10 == 0) return Double.NaN;\n- sumYY - sumXY * sumXY / (sumXX + 1e-10);\n+ sumYY - sumXY * sumXY / (sumXX + 1e-10 == 0 ? 1 : sumXX + 1e-10);\n",
+        "file_path": "src/java/org/apache/commons/math/stat/regression/SimpleRegression.java",
+        "method_name": "getSumSquaredErrors",
+        "class_name": "SimpleRegression",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by a division by zero error in the computation of the SSE formula.",
+        "line_numbers": [
+          263,
+          264,
+          265
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-105/"
+}

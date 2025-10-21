@@ -1,0 +1,34 @@
+{
+  "bug_id": "Jsoup-64",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-64_1772909190",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined fix addresses the overfitting issue by using a more robust approach to handle the 'Rawtext' state, while maintaining test-passing behavior and including proper edge case handling.",
+        "fixed_method": "private static void handleRawtext(Token.StartTag startTag, HtmlTreeBuilder tb) {\n  if (startTag == null || tb == null) {\n    return;\n  }\n  tb.insert(startTag);\n  if (startTag.name().equalsIgnoreCase(\"Rawtext\")) {\n    tb.tokeniser.transition(TokeniserState.Rawtext);\n  }\n  tb.markInsertionMode();\n  tb.transition(Text);\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java",
+        "method_name": "handleRawtext",
+        "class_name": "HtmlTreeBuilderState",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the tokeniser transitioning to the 'Rawtext' state, which consumes all input until the end of the file. The fix is to remove this transition and keep the tokeniser in the 'ScriptData' state.",
+        "line_numbers": [
+          1488,
+          1489,
+          1490,
+          1491,
+          1492,
+          1493
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-64/"
+}

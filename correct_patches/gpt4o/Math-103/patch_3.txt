@@ -1,0 +1,12 @@
+File: src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java
+Method: NormalDistributionImpl.cumulativeProbability
+
+public double cumulativeProbability(double x) throws MathException {
+    double dev = (x - mean) / standardDeviation;
+    if (dev < -20) {
+        return 0.0;
+    } else if (dev > 20) {
+        return 1.0;
+    }
+    return 0.5 * (1.0 + Erf.erf(dev / Math.sqrt(2.0)));
+}

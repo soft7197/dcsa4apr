@@ -1,0 +1,7 @@
+File: src/main/java/org/apache/commons/math3/distribution/FDistribution.java
+Method: FDistribution.isSupportLowerBoundInclusive
+
+public boolean isSupportLowerBoundInclusive() {
+    // Assuming the distribution's lower bound is exclusive based on the context
+    return false;
+}

@@ -1,0 +1,202 @@
+{
+  "bug_id": "Jsoup-85",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-85_1773119408",
+  "patches": [
+    [
+      {
+        "hypothesis": "The key is being validated for null but not empty after trimming. The check for an empty key should occur after trimming, not before.",
+        "changes": "- Validate key for emptiness after trimming, not before",
+        "fixed_method": "public Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(this.key); // validate after trimming\n    this.val = val;\n    this.parent = parent;\n}",
+        "diff": "- Validate key for emptiness after trimming, not before",
+        "file_path": "src/main/java/org/jsoup/nodes/Attribute.java",
+        "method_name": "Attribute",
+        "class_name": "Attribute",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "original_code": "/**\n* Create a new attribute from unencoded (raw) key and value.\n* @param key attribute key; case is preserved.\n* @param value attribute value\n* @see #createFromEncoded\n*/\npublic Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(key); // trimming could potentially make empty, so validate here\n    this.val = val;\n    this.parent = parent;\n}"
+      },
+      {
+        "hypothesis": "The validation for an empty key should occur after trimming, but the current order fails to throw an exception when the key becomes empty post-trim.",
+        "changes": "- Swap the order of key trimming and empty check\n- Ensure key is not empty after trimming",
+        "fixed_method": "public Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    key = key.trim();\n    Validate.notEmpty(key); // validates after trimming\n    this.key = key;\n    this.val = val;\n    this.parent = parent;\n}",
+        "diff": "- Swap the order of key trimming and empty check\n- Ensure key is not empty after trimming",
+        "file_path": "src/main/java/org/jsoup/nodes/Attribute.java",
+        "method_name": "Attribute",
+        "class_name": "Attribute",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "original_code": "/**\n* Create a new attribute from unencoded (raw) key and value.\n* @param key attribute key; case is preserved.\n* @param value attribute value\n* @see #createFromEncoded\n*/\npublic Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(key); // trimming could potentially make empty, so validate here\n    this.val = val;\n    this.parent = parent;\n}"
+      },
+      {
+        "hypothesis": "The trim operation might leave the key as empty but the validation for not empty is done before assigning it to trim. The validation for empty needs to be executed after trimming.",
+        "changes": "- Validate.notEmpty(key); moved after trimming operation\n+ Validate.notEmpty(key); moved before any assignment",
+        "fixed_method": "public Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(this.key); // trimming could potentially make empty, so validate here\n    this.val = val;\n    this.parent = parent;\n}",
+        "diff": "- Validate.notEmpty(key); moved after trimming operation\n+ Validate.notEmpty(key); moved before any assignment",
+        "file_path": "src/main/java/org/jsoup/nodes/Attribute.java",
+        "method_name": "Attribute",
+        "class_name": "Attribute",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "original_code": "/**\n* Create a new attribute from unencoded (raw) key and value.\n* @param key attribute key; case is preserved.\n* @param value attribute value\n* @see #createFromEncoded\n*/\npublic Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(key); // trimming could potentially make empty, so validate here\n    this.val = val;\n    this.parent = parent;\n}"
+      },
+      {
+        "hypothesis": "The bug is due to key validation being performed after trimming, potentially allowing empty keys to pass the initial non-null check. The fix should ensure that the trimmed key is non-empty before proceeding.",
+        "changes": "- Move Validate.notEmpty(key) check after key has been trimmed.",
+        "fixed_method": "public Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(this.key); // validate non-empty after trim\n    this.val = val;\n    this.parent = parent;\n}",
+        "diff": "- Move Validate.notEmpty(key) check after key has been trimmed.",
+        "file_path": "src/main/java/org/jsoup/nodes/Attribute.java",
+        "method_name": "Attribute",
+        "class_name": "Attribute",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "original_code": "/**\n* Create a new attribute from unencoded (raw) key and value.\n* @param key attribute key; case is preserved.\n* @param value attribute value\n* @see #createFromEncoded\n*/\npublic Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(key); // trimming could potentially make empty, so validate here\n    this.val = val;\n    this.parent = parent;\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by attempting to trim the key and then validate it. If the key is only whitespace, trimming will make it empty and should be checked before assignment.",
+        "changes": "- Validate key after trimming instead of before\n- Ensure notNull and notEmpty checks are in correct order",
+        "fixed_method": "public Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    key = key.trim();\n    Validate.notEmpty(key); // check after trimming\n    this.key = key;\n    this.val = val;\n    this.parent = parent;\n}",
+        "diff": "- Validate key after trimming instead of before\n- Ensure notNull and notEmpty checks are in correct order",
+        "file_path": "src/main/java/org/jsoup/nodes/Attribute.java",
+        "method_name": "Attribute",
+        "class_name": "Attribute",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "original_code": "/**\n* Create a new attribute from unencoded (raw) key and value.\n* @param key attribute key; case is preserved.\n* @param value attribute value\n* @see #createFromEncoded\n*/\npublic Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(key); // trimming could potentially make empty, so validate here\n    this.val = val;\n    this.parent = parent;\n}"
+      },
+      {
+        "hypothesis": "The test fails because the `key` parameter, when trimmed, can be an empty string, but validation occurs before trimming. We need to validate after trimming.",
+        "changes": "- Validate the trimmed key instead of the original key",
+        "fixed_method": "public Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    key = key.trim();\n    Validate.notEmpty(key); // trimming could potentially make empty, so we validate here\n    this.key = key;\n    this.val = val;\n    this.parent = parent;\n}",
+        "diff": "- Validate the trimmed key instead of the original key",
+        "file_path": "src/main/java/org/jsoup/nodes/Attribute.java",
+        "method_name": "Attribute",
+        "class_name": "Attribute",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "original_code": "/**\n* Create a new attribute from unencoded (raw) key and value.\n* @param key attribute key; case is preserved.\n* @param value attribute value\n* @see #createFromEncoded\n*/\npublic Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(key); // trimming could potentially make empty, so validate here\n    this.val = val;\n    this.parent = parent;\n}"
+      },
+      {
+        "hypothesis": "The constructor is not throwing IllegalArgumentException for empty or whitespace-only keys after trimming.",
+        "changes": "Added validation to check if the trimmed key is empty right after trimming.",
+        "fixed_method": "public Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(this.key); // Key must not be empty after trimming\n    this.val = val;\n    this.parent = parent;\n}",
+        "diff": "Added validation to check if the trimmed key is empty right after trimming.",
+        "file_path": "src/main/java/org/jsoup/nodes/Attribute.java",
+        "method_name": "Attribute",
+        "class_name": "Attribute",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "original_code": "/**\n* Create a new attribute from unencoded (raw) key and value.\n* @param key attribute key; case is preserved.\n* @param value attribute value\n* @see #createFromEncoded\n*/\npublic Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(key); // trimming could potentially make empty, so validate here\n    this.val = val;\n    this.parent = parent;\n}"
+      },
+      {
+        "hypothesis": "The key is not being validated correctly after trimming, which can result in an empty key and a missed exception.",
+        "changes": "- Validate key not empty after trimming to ensure it's not blank",
+        "fixed_method": "public Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(this.key); // check if trimmed key is empty\n    this.val = val;\n    this.parent = parent;\n}",
+        "diff": "- Validate key not empty after trimming to ensure it's not blank",
+        "file_path": "src/main/java/org/jsoup/nodes/Attribute.java",
+        "method_name": "Attribute",
+        "class_name": "Attribute",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "original_code": "/**\n* Create a new attribute from unencoded (raw) key and value.\n* @param key attribute key; case is preserved.\n* @param value attribute value\n* @see #createFromEncoded\n*/\npublic Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(key); // trimming could potentially make empty, so validate here\n    this.val = val;\n    this.parent = parent;\n}"
+      },
+      {
+        "hypothesis": "The current validation allows creation with spaces-only keys after trimming. We should validate the trimmed key is not empty before setting it.",
+        "changes": "- Validate not empty key after trimming\n- Change the order of key assignment and validation",
+        "fixed_method": "public Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    String trimmedKey = key.trim();\n    Validate.notEmpty(trimmedKey); // Ensure trimmed key is not empty\n    this.key = trimmedKey;\n    this.val = val;\n    this.parent = parent;\n}",
+        "diff": "- Validate not empty key after trimming\n- Change the order of key assignment and validation",
+        "file_path": "src/main/java/org/jsoup/nodes/Attribute.java",
+        "method_name": "Attribute",
+        "class_name": "Attribute",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48
+        ],
+        "original_code": "/**\n* Create a new attribute from unencoded (raw) key and value.\n* @param key attribute key; case is preserved.\n* @param value attribute value\n* @see #createFromEncoded\n*/\npublic Attribute(String key, String val, Attributes parent) {\n    Validate.notNull(key);\n    this.key = key.trim();\n    Validate.notEmpty(key); // trimming could potentially make empty, so validate here\n    this.val = val;\n    this.parent = parent;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-85/"
+}

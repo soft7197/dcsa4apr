@@ -1,0 +1,27 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "isA_org.mockito.Matchers"
+    ],
+    "tests": [
+      "org.mockitousage.bugs.NPEWithCertainMatchersTest::shouldNotThrowNPEWhenIntPassed",
+      "org.mockitousage.bugs.NPEWithCertainMatchersTest::shouldNotThrowNPEWhenIntegerPassed"
+    ]
+  },
+  "Group_2": {
+    "buggy_methods": [
+      "eq_org.mockito.Matchers"
+    ],
+    "tests": [
+      "org.mockitousage.bugs.NPEWithCertainMatchersTest::shouldNotThrowNPEWhenIntegerPassedToEq"
+    ]
+  },
+  "Group_3": {
+    "buggy_methods": [
+      "same_org.mockito.Matchers"
+    ],
+    "tests": [
+      "org.mockitousage.bugs.NPEWithCertainMatchersTest::shouldNotThrowNPEWhenIntegerPassedToSame"
+    ]
+  }
+}

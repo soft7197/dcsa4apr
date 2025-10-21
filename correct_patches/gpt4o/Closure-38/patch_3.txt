@@ -1,0 +1,52 @@
+File: src/com/google/javascript/jscomp/CodeConsumer.java
+Method: CodeConsumer.addNumber
+
+void addNumber(double x) {
+  char prev = getLastChar();
+
+  if (Double.isNaN(x)) {
+    add("NaN");
+    return;
+  }
+
+  if (x == Double.POSITIVE_INFINITY) {
+    add("Infinity");
+    return;
+  }
+
+  if (x == Double.NEGATIVE_INFINITY) {
+    add("-Infinity");
+    return;
+  }
+
+  if (isNegativeZero(x)) {
+    if (prev == '-') {
+      add(" ");
+    }
+    add("-0.0");
+    return;
+  }
+
+  if (x < 0 && prev == '-') {
+    add(" ");
+  }
+
+  if ((long) x == x) {
+    long value = (long) x;
+    if (Math.abs(value) >= 100) {
+      long mantissa = value;
+      int exp = 0;
+      while ((mantissa / 10) * Math.pow(10, exp + 1) == value) {
+        mantissa /= 10;
+        exp++;
+      }
+      if (exp > 2) {
+        add(Long.toString(mantissa) + "E" + Integer.toString(exp));
+        return;
+      }
+    }
+    add(Long.toString(value));
+  } else {
+    add(String.valueOf(x));
+  }
+}

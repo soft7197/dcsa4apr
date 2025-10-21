@@ -1,0 +1,15 @@
+File: src/main/java/org/jsoup/safety/Cleaner.java
+Method: Cleaner.clean
+
+public Document clean(Document dirtyDocument) {
+    Validate.notNull(dirtyDocument);
+
+    if (dirtyDocument.body() == null) {
+        return Document.createShell(dirtyDocument.baseUri());
+    }
+
+    Document clean = Document.createShell(dirtyDocument.baseUri());
+    copySafeNodes(dirtyDocument.body(), clean.body());
+
+    return clean;
+}

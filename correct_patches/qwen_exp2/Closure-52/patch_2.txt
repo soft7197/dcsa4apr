@@ -1,0 +1,21 @@
+File: src/com/google/javascript/jscomp/CodeGenerator.java
+Method: CodeGenerator.isSimpleNumber
+
+static boolean isSimpleNumber(String s) {
+  if (s == null || s.isEmpty()) {
+    return false;
+  }
+  if (s.equals("0")) {
+    return true;
+  }
+  if (s.charAt(0) == '0') {
+    return false;
+  }
+  for (int index = 0; index < s.length(); index++) {
+    char c = s.charAt(index);
+    if (c < '0' || c > '9') {
+      return false;
+    }
+  }
+  return true;
+}

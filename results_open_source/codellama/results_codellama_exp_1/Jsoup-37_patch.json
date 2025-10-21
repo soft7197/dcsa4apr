@@ -1,0 +1,51 @@
+{
+  "bug_id": "Jsoup-37",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-37_1772699268",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue is caused by the StringBuilder's trim() method, which removes all leading and trailing whitespace from the string. To fix this, we need to modify the html() method to return the correct HTML content without any whitespace trimming.",
+        "changes": "- acc.toString().trim();\n+ acc.toString();",
+        "fixed_method": "public String html() {\n  StringBuilder acc = new StringBuilder();\n  html(acc);\n  return acc.toString();\n}",
+        "diff": "- acc.toString().trim();\n+ acc.toString();",
+        "file_path": "src/main/java/org/jsoup/nodes/Element.java",
+        "method_name": "html",
+        "class_name": "Element",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1098,
+          1099,
+          1100,
+          1101,
+          1102
+        ],
+        "original_code": "/**\n* Retrieves the element's inner HTML. E.g. on a {@code <div>} with one empty {@code <p>}, would return\n* {@code <p></p>}. (Whereas {@link #outerHtml()} would return {@code <div><p></p></div>}.)\n*\n* @return String of HTML.\n* @see #outerHtml()\n*/\npublic String html() {\n    StringBuilder accum = new StringBuilder();\n    html(accum);\n    return accum.toString().trim();\n}"
+      },
+      {
+        "hypothesis": "The bug is caused by the StringBuilder.trim() method used in the html() method, which removes all leading and trailing white spaces even when the outputSettings().prettyPrint(false) is set in the test case. The solution is to remove the trim() method call in the html() method.",
+        "changes": "-accum.toString().trim();",
+        "fixed_method": "public String html() {\n        StringBuilder accum = new StringBuilder();\n        html(accum);\n        return accum.toString();\n}",
+        "diff": "-accum.toString().trim();",
+        "file_path": "src/main/java/org/jsoup/nodes/Element.java",
+        "method_name": "html",
+        "class_name": "Element",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1098,
+          1099,
+          1100,
+          1101,
+          1102
+        ],
+        "original_code": "/**\n* Retrieves the element's inner HTML. E.g. on a {@code <div>} with one empty {@code <p>}, would return\n* {@code <p></p>}. (Whereas {@link #outerHtml()} would return {@code <div><p></p></div>}.)\n*\n* @return String of HTML.\n* @see #outerHtml()\n*/\npublic String html() {\n    StringBuilder accum = new StringBuilder();\n    html(accum);\n    return accum.toString().trim();\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-37/"
+}

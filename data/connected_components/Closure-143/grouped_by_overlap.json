@@ -1,0 +1,19 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "createDefineReplacements_com.google.javascript.jscomp.AbstractCommandLineRunner"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.CommandLineRunnerTest::testDefineFlag3"
+    ]
+  },
+  "Group_2": {
+    "buggy_methods": [
+      "trySimplify_com.google.javascript.jscomp.RemoveConstantExpressions"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.RemoveConstantExpressionsTest::testCall1",
+      "com.google.javascript.jscomp.RemoveConstantExpressionsTest::testNew1"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "bug_id": "Compress-1",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Compress-1_1773118273",
+  "patches": [
+    [
+      {
+        "hypothesis": "The close method incorrectly assumes that calling super.close() fully closes all resources, which might not flush the output properly before marking the stream as closed.",
+        "changes": "-        super.close();\n+        this.finish();\n+        super.close();",
+        "fixed_method": "public void close() throws IOException {\n    if (!this.closed) {\n        this.finish();\n        super.close();\n        this.closed = true;\n    }\n}",
+        "diff": "-        super.close();\n+        this.finish();\n+        super.close();",
+        "file_path": "src/main/java/org/apache/commons/compress/archivers/cpio/CpioArchiveOutputStream.java",
+        "method_name": "close",
+        "class_name": "CpioArchiveOutputStream",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          344,
+          345,
+          346,
+          347,
+          348,
+          349
+        ],
+        "original_code": "/**\n* Closes the CPIO output stream as well as the stream being filtered.\n*\n* @throws IOException\n*             if an I/O error has occurred or if a CPIO file error has\n*             occurred\n*/\npublic void close() throws IOException {\n    if (!this.closed) {\n        super.close();\n        this.closed = true;\n    }\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Compress-1/"
+}

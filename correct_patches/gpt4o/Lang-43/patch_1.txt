@@ -1,0 +1,29 @@
+File: src/java/org/apache/commons/lang/text/ExtendedMessageFormat.java
+Method: ExtendedMessageFormat.appendQuotedString
+
+private StringBuffer appendQuotedString(String pattern, ParsePosition pos, StringBuffer appendTo, boolean escapingOn) {
+    int start = pos.getIndex();
+    char[] c = pattern.toCharArray();
+    if (escapingOn && c[start] == QUOTE) {
+        pos.setIndex(start + 1); // Move past the initial quote
+        if (appendTo != null) appendTo.append(QUOTE);
+        return appendTo;
+    }
+    int lastHold = start;
+    int length = pattern.length();
+    for (int i = start; i < length; i++) {
+        if (escapingOn && i + ESCAPED_QUOTE.length() <= length && pattern.startsWith(ESCAPED_QUOTE, i)) {
+            if (appendTo != null) appendTo.append(c, lastHold, i - lastHold).append(QUOTE);
+            pos.setIndex(i + ESCAPED_QUOTE.length());
+            lastHold = pos.getIndex();
+            i = lastHold - 1; // adjust i to the new position for next loop iteration
+            continue;
+        }
+        if (c[i] == QUOTE) {
+            pos.setIndex(i + 1);
+            if (appendTo != null) appendTo.append(c, lastHold, i - lastHold);
+            return appendTo;
+        }
+    }
+    throw new IllegalArgumentException("Unterminated quoted string at position " + start);
+}

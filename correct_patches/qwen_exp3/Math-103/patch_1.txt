@@ -1,0 +1,19 @@
+File: src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java
+Method: NormalDistributionImpl.cumulativeProbability
+
+public double cumulativeProbability(double x) throws MathException {
+    double threshold = 20.0; // Configurable threshold
+    if (standardDeviation == 0) {
+        if (x < mean) return 0.0;
+        else if (x > mean) return 1.0;
+        else return 0.5;
+    }
+    if (x < mean - threshold * standardDeviation) return 0.0;
+    if (x > mean + threshold * standardDeviation) return 1.0;
+    try {
+        return 0.5 * (1.0 + Erf.erf((x - mean) / (standardDeviation * Math.sqrt(2.0))));
+    } catch (MathException e) {
+        if (x < mean) return 0.0;
+        else return 1.0;
+    }
+}

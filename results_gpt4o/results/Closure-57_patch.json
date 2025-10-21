@@ -1,0 +1,44 @@
+{
+  "bug_id": "Closure-57",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-57_1773117366",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method does not correctly handle cases where the argument to 'goog.require' is not a string literal.",
+        "changes": "+ Check that the target node's type is a string literal before using getString()",
+        "fixed_method": "private static String extractClassNameIfGoog(Node node, Node parent, String functionName) {\n  String className = null;\n  if (NodeUtil.isExprCall(parent)) {\n    Node callee = node.getFirstChild();\n    if (callee != null && callee.getType() == Token.GETPROP) {\n      String qualifiedName = callee.getQualifiedName();\n      if (functionName.equals(qualifiedName)) {\n        Node target = callee.getNext();\n        if (target != null && target.getType() == Token.STRING) {\n          className = target.getString();\n        }\n      }\n    }\n  }\n  return className;\n}",
+        "diff": "+ Check that the target node's type is a string literal before using getString()",
+        "file_path": "src/com/google/javascript/jscomp/ClosureCodingConvention.java",
+        "method_name": "extractClassNameIfGoog",
+        "class_name": "ClosureCodingConvention",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          196,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204
+        ],
+        "original_code": "/**\n* Exctracts X from goog.require('X'), if the applied Node is goog.\n*\n* @return The extracted class name, or null.\n*/\nprivate static String extractClassNameIfGoog(Node node, Node parent,\n    String functionName){\n  String className = null;\n  if (NodeUtil.isExprCall(parent)) {\n    Node callee = node.getFirstChild();\n    if (callee != null && callee.getType() == Token.GETPROP) {\n      String qualifiedName = callee.getQualifiedName();\n      if (functionName.equals(qualifiedName)) {\n        Node target = callee.getNext();\n        if (target != null) {\n          className = target.getString();\n        }\n      }\n    }\n  }\n  return className;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Closure-57/"
+}

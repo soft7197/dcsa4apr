@@ -1,0 +1,113 @@
+{
+  "bug_id": "JacksonDatabind-9",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-9_1772906295",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue is caused by the `toString()` method of the `Class<?>` object, which includes the word 'class ' in the output. The test case expects the output to be only the class name, without the word 'class '.",
+        "changes": "The `toString()` method is replaced with a custom implementation that returns the class name without the word 'class '.",
+        "fixed_method": "public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException {\n    String str;\n    if (value instanceof Date) {\n        provider.defaultSerializeDateKey((Date) value, jgen);\n        return;\n    } else if (value instanceof Class<?>) {\n        str = ((Class<?>) value).getName();\n    } else {\n        str = value.toString();\n    }\n    jgen.writeFieldName(str);\n}",
+        "diff": "The `toString()` method is replaced with a custom implementation that returns the class name without the word 'class '.",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializer.java",
+        "method_name": "serialize",
+        "class_name": "StdKeySerializer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "original_code": "/**\n* Specialized serializer that can be used as the generic key\n* serializer, when serializing {@link java.util.Map}s to JSON\n* Objects.\n*/\npublic void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException {\n    String str;\n    \n    if (value instanceof Date) {\n        provider.defaultSerializeDateKey((Date) value, jgen);\n        return;\n    } else {\n        str = value.toString();\n    }\n    jgen.writeFieldName(str);\n}"
+      },
+      {
+        "hypothesis": "",
+        "changes": "",
+        "fixed_method": "public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException {\n    String str;\n    if (value instanceof Date) {\n        provider.defaultSerializeDateKey((Date) value, jgen);\n        return;\n    } else if (value instanceof Class) {\n        str = ((Class) value).getName();\n    } else {\n        str = value.toString();\n    }\n    jgen.writeFieldName(str);\n}",
+        "diff": "",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializer.java",
+        "method_name": "serialize",
+        "class_name": "StdKeySerializer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "original_code": "/**\n* Specialized serializer that can be used as the generic key\n* serializer, when serializing {@link java.util.Map}s to JSON\n* Objects.\n*/\npublic void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException {\n    String str;\n    \n    if (value instanceof Date) {\n        provider.defaultSerializeDateKey((Date) value, jgen);\n        return;\n    } else {\n        str = value.toString();\n    }\n    jgen.writeFieldName(str);\n}"
+      },
+      {
+        "hypothesis": "The key serializer is not properly handling the case when the map key is a class object.",
+        "changes": "+ jgen.writeFieldName(str.replaceFirst(\"^class \", \"\"));",
+        "fixed_method": "public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException {\n    String str;\n\n    if (value instanceof Date) {\n        provider.defaultSerializeDateKey((Date) value, jgen);\n        return;\n    } else {\n        str = value.toString();\n    }\n    jgen.writeFieldName(str.replaceFirst(\"^class \", \"\"));\n}",
+        "diff": "+ jgen.writeFieldName(str.replaceFirst(\"^class \", \"\"));",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializer.java",
+        "method_name": "serialize",
+        "class_name": "StdKeySerializer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "original_code": "/**\n* Specialized serializer that can be used as the generic key\n* serializer, when serializing {@link java.util.Map}s to JSON\n* Objects.\n*/\npublic void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException {\n    String str;\n    \n    if (value instanceof Date) {\n        provider.defaultSerializeDateKey((Date) value, jgen);\n        return;\n    } else {\n        str = value.toString();\n    }\n    jgen.writeFieldName(str);\n}"
+      },
+      {
+        "hypothesis": "the method was not handling the 'class' prefix for class keys correctly",
+        "changes": "- jgen.writeFieldName(str);\n+ jgen.writeFieldName(str.substring(6));",
+        "fixed_method": "public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException {\n    String str;\n    \n    if (value instanceof Date) {\n        provider.defaultSerializeDateKey((Date) value, jgen);\n        return;\n    } else {\n        str = value.toString();\n    }\n    jgen.writeFieldName(str.substring(6));\n}",
+        "diff": "- jgen.writeFieldName(str);\n+ jgen.writeFieldName(str.substring(6));",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/ser/std/StdKeySerializer.java",
+        "method_name": "serialize",
+        "class_name": "StdKeySerializer",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "original_code": "/**\n* Specialized serializer that can be used as the generic key\n* serializer, when serializing {@link java.util.Map}s to JSON\n* Objects.\n*/\npublic void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException {\n    String str;\n    \n    if (value instanceof Date) {\n        provider.defaultSerializeDateKey((Date) value, jgen);\n        return;\n    } else {\n        str = value.toString();\n    }\n    jgen.writeFieldName(str);\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-9/"
+}

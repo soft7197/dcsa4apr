@@ -1,0 +1,21 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "process_com.google.javascript.jscomp.Normalize"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.NormalizeTest::testIssue"
+    ]
+  },
+  "Group_2": {
+    "buggy_methods": [
+      "createSynthesizedExternVar_com.google.javascript.jscomp.VarCheck"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.VarCheckTest::testCallInExterns",
+      "com.google.javascript.jscomp.VarCheckTest::testPropReferenceInExterns1",
+      "com.google.javascript.jscomp.VarCheckTest::testPropReferenceInExterns3",
+      "com.google.javascript.jscomp.VarCheckTest::testVarReferenceInExterns"
+    ]
+  }
+}

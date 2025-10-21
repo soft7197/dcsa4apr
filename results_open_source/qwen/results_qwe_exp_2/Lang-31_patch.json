@@ -1,0 +1,45 @@
+{
+  "bug_id": "Lang-31",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Lang-31_1771943677",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug is caused by the method incorrectly handling supplementary characters. The current implementation checks each character individually without considering the possibility of supplementary characters which span two char values in Java.",
+        "changes": "- int csLength = cs.length();\n- for (int i = 0; i < csLength; i++) {\n+ int i = 0;\n+ while (i < cs.length()) {\n- char ch = cs.charAt(i);\n+ int cp = Character.codePointAt(cs, i);\n+ int charCount = Character.charCount(cp);\n+ for (int j = 0; j < searchLength; j++) {\n- if (searchChars[j] == ch) {\n+ if (Character.codePointAt(searchChars, j) == cp) {\n+ i += charCount;\n",
+        "fixed_method": "public static boolean containsAny(CharSequence cs, char[] searchChars) {\n\tif (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n\t\treturn false;\n\t}\n\tint searchLength = searchChars.length;\n\tint i = 0;\n\twhile (i < cs.length()) {\n\t\tint cp = Character.codePointAt(cs, i);\n\t\tint charCount = Character.charCount(cp);\n\t\tfor (int j = 0; j < searchLength; j++) {\n\t\t\tif (Character.codePointAt(searchChars, j) == cp) {\n\t\t\t\treturn true;\n\t\t\t}\n\t\t}\n\t\ti += charCount;\n\t}\n\treturn false;\n}",
+        "diff": "- int csLength = cs.length();\n- for (int i = 0; i < csLength; i++) {\n+ int i = 0;\n+ while (i < cs.length()) {\n- char ch = cs.charAt(i);\n+ int cp = Character.codePointAt(cs, i);\n+ int charCount = Character.charCount(cp);\n+ for (int j = 0; j < searchLength; j++) {\n- if (searchChars[j] == ch) {\n+ if (Character.codePointAt(searchChars, j) == cp) {\n+ i += charCount;\n",
+        "file_path": "src/main/java/org/apache/commons/lang3/StringUtils.java",
+        "method_name": "containsAny",
+        "class_name": "StringUtils",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          1440,
+          1441,
+          1442,
+          1443,
+          1444,
+          1445,
+          1446,
+          1447,
+          1448,
+          1449,
+          1450,
+          1451,
+          1452,
+          1453,
+          1454,
+          1455,
+          1456,
+          1457
+        ],
+        "original_code": "/**\n* <p>Checks if the CharSequence contains any character in the given\n* set of characters.</p>\n*\n* <p>A <code>null</code> CharSequence will return <code>false</code>.\n* A <code>null</code> or zero length search array will return <code>false</code>.</p>\n*\n* <pre>\n* StringUtils.containsAny(null, *)                = false\n* StringUtils.containsAny(\"\", *)                  = false\n* StringUtils.containsAny(*, null)                = false\n* StringUtils.containsAny(*, [])                  = false\n* StringUtils.containsAny(\"zzabyycdxx\",['z','a']) = true\n* StringUtils.containsAny(\"zzabyycdxx\",['b','y']) = true\n* StringUtils.containsAny(\"aba\", ['z'])           = false\n* </pre>\n*\n* @param cs  the CharSequence to check, may be null\n* @param searchChars  the chars to search for, may be null\n* @return the <code>true</code> if any of the chars are found,\n* <code>false</code> if no match or null input\n* @since 2.4\n*/\npublic static boolean containsAny(CharSequence cs, char[] searchChars) {\n\tif (isEmpty(cs) || ArrayUtils.isEmpty(searchChars)) {\n\t\treturn false;\n\t}\n\tint csLength = cs.length();\n\tint searchLength = searchChars.length;\n\tfor (int i = 0; i < csLength; i++) {\n\t\tchar ch = cs.charAt(i);\n\t\tfor (int j = 0; j < searchLength; j++) {\n\t\t\tif (searchChars[j] == ch) {\n\t\t\t\t\t// ch is a supplementary character\n\t\t\t\t\t// ch is in the Basic Multilingual Plane\n\t\t\t\t\treturn true;\n\t\t\t}\n\t\t}\n\t}\n\treturn false;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Lang-31/"
+}

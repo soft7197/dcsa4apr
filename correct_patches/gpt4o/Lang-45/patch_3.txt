@@ -1,0 +1,41 @@
+File: src/java/org/apache/commons/lang/WordUtils.java
+Method: WordUtils.abbreviate
+
+public static String abbreviate(String str, int lower, int upper, String appendToEnd) {
+    // initial parameter checks
+    if (str == null) {
+        return null;
+    }
+    if (str.length() == 0) {
+        return "";
+    }
+
+    // adjust lower if it's beyond the string length
+    if (lower > str.length()) {
+        lower = str.length();
+    }
+
+    // adjust upper if it's not specified or beyond the string length
+    if (upper == -1 || upper > str.length()) {
+        upper = str.length();
+    }
+
+    // adjust upper to lower if it's less than lower
+    if (upper < lower) {
+        upper = lower;
+    }
+
+    StringBuffer result = new StringBuffer();
+    int index = str.indexOf(' ', lower);
+    if (index == -1 || index > upper) {
+        result.append(str.substring(0, upper));
+        // append if abbreviation has occurred
+        if (upper != str.length()) {
+            result.append(appendToEnd != null ? appendToEnd : "");
+        }
+    } else {
+        result.append(str.substring(0, index));
+        result.append(appendToEnd != null ? appendToEnd : "");
+    }
+    return result.toString();
+}

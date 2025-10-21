@@ -1,0 +1,29 @@
+{
+  "bug_id": "Closure-106",
+  "success": false,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-106_1771961391",
+  "patches": [
+    [
+      {
+        "hypothesis": "The issue arises because the method does not handle the case where parseDocumentation is false, leading to the description not being recorded and potentially causing the compiler to flag the code as useless. The fix should ensure that the description is recorded regardless of the parseDocumentation flag.",
+        "changes": "- if (parseDocumentation) {\n+ populated = true;\n- }\n+ populated = true;",
+        "fixed_method": "  /**\n   * Records a block-level description.\n   *\n   * @return {@code true} if the description was recorded.\n   */\n\n  public boolean recordBlockDescription(String description) {\n    populated = true;\n    return currentInfo.documentBlock(description);\n  }\n",
+        "diff": "- if (parseDocumentation) {\n+ populated = true;\n- }\n+ populated = true;",
+        "file_path": "src/com/google/javascript/rhino/JSDocInfoBuilder.java",
+        "method_name": "recordBlockDescription",
+        "class_name": "JSDocInfoBuilder",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          188,
+          193
+        ],
+        "original_code": "  /**\n   * Records a block-level description.\n   *\n   * @return {@code true} if the description was recorded.\n   */\n\n  public boolean recordBlockDescription(String description) {\n    if (parseDocumentation) {\n    populated = true;\n    }\n    return currentInfo.documentBlock(description);\n  }\n"
+      }
+    ]
+  ],
+  "iterations": 5,
+  "monitor_dir": "traces/Closure-106/"
+}

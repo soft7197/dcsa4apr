@@ -1,0 +1,9 @@
+File: src/main/java/com/fasterxml/jackson/databind/ObjectReader.java
+Method: ObjectReader.readTree
+
+@Override
+    public <T extends TreeNode> T readTree(JsonParser p) throws IOException {
+        if (p.getCurrentToken() == null && p.nextToken() == null) { return null; }
+        JsonNode result = _bindAsTree(p);
+        return (result.isMissingNode()) ? null : (T) result;
+    }

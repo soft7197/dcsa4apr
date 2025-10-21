@@ -1,0 +1,18 @@
+File: src/main/java/org/jsoup/nodes/Attributes.java
+Method: Attributes.removeIgnoreCase
+
+public void removeIgnoreCase(String key) {
+    Validate.notEmpty(key);
+    if (attributes == null)
+        return;
+    ArrayList keysToRemove = new ArrayList();
+    for (Iterator it = attributes.keySet().iterator(); it.hasNext(); ) {
+        String attrKey = (String) it.next();
+        if (attrKey.equalsIgnoreCase(key))
+            keysToRemove.add(attrKey);
+    }
+    for (int i = 0; i < keysToRemove.size(); i++) {
+        String attrKey = (String) keysToRemove.get(i);
+        attributes.remove(attrKey);
+    }
+}

@@ -1,0 +1,53 @@
+{
+  "bug_id": "Closure-15",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Closure-15_1771990470",
+  "patches": [
+    [
+      {
+        "hypothesis": "The bug arises because the 'in' operator is incorrectly being treated as having side effects or not being considered properly in the context of the CFG node entry check. The fix involves ensuring that the 'in' operator does not trigger side effect checks and is correctly handled in the CFG traversal.",
+        "changes": "- if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n+ if (n.isCall() && NodeUtil.functionCallHasSideEffects(n) && !n.isIn()) {\n- if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n+ if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n) && !n.isIn()) {\n- if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n+ if (!ControlFlowGraph.isEnteringNewCfgNode(c) || n.isIn() && apply(c)) {",
+        "fixed_method": "public boolean apply(Node n) {\n  // When the node is null it means, we reached the implicit return\n  // where the function returns (possibly without an return statement)\n  if (n == null) {\n    return false;\n  }\n\n  // TODO(user): We only care about calls to functions that\n  // passes one of the dependent variable to a non-side-effect free\n  // function.\n  if (n.isCall() && NodeUtil.functionCallHasSideEffects(n) && !n.isIn()) {\n    return true;\n  }\n\n  if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n) && !n.isIn()) {\n    return true;\n  }\n\n  for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n    if (!ControlFlowGraph.isEnteringNewCfgNode(c) || n.isIn() && apply(c)) {\n      return true;\n    }\n  }\n  return false;\n}",
+        "diff": "- if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n+ if (n.isCall() && NodeUtil.functionCallHasSideEffects(n) && !n.isIn()) {\n- if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n+ if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n) && !n.isIn()) {\n- if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n+ if (!ControlFlowGraph.isEnteringNewCfgNode(c) || n.isIn() && apply(c)) {",
+        "file_path": "src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java",
+        "method_name": "apply",
+        "class_name": "FlowSensitiveInlineVariables",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109
+        ],
+        "original_code": "// scope.\npublic boolean apply(Node n) {\n  // When the node is null it means, we reached the implicit return\n  // where the function returns (possibly without an return statement)\n  if (n == null) {\n    return false;\n  }\n\n  // TODO(user): We only care about calls to functions that\n  // passes one of the dependent variable to a non-side-effect free\n  // function.\n  if (n.isCall() && NodeUtil.functionCallHasSideEffects(n)) {\n    return true;\n  }\n\n  if (n.isNew() && NodeUtil.constructorCallHasSideEffects(n)) {\n    return true;\n  }\n\n\n  for (Node c = n.getFirstChild(); c != null; c = c.getNext()) {\n    if (!ControlFlowGraph.isEnteringNewCfgNode(c) && apply(c)) {\n      return true;\n    }\n  }\n  return false;\n}"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Closure-15/"
+}

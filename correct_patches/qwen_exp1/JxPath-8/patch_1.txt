@@ -1,0 +1,38 @@
+File: src/java/org/apache/commons/jxpath/ri/compiler/CoreOperationRelationalExpression.java
+Method: CoreOperationRelationalExpression.compute
+
+private boolean compute(Object left, Object right) {
+    left = reduce(left);
+    right = reduce(right);
+
+    if (left instanceof InitialContext) {
+        ((InitialContext) left).reset();
+    }
+    if (right instanceof InitialContext) {
+        ((InitialContext) right).reset();
+    }
+    if (left instanceof Iterator && right instanceof Iterator) {
+        return findMatch((Iterator) left, (Iterator) right);
+    }
+    if (left instanceof Iterator) {
+        return containsMatch((Iterator) left, right);
+    }
+    if (right instanceof Iterator) {
+        return containsMatch((Iterator) right, left);
+    }
+    if (left == null || right == null) {
+        return evaluateCompare(0);
+    }
+    double ld = InfoSetUtil.doubleValue(left);
+    double rd = InfoSetUtil.doubleValue(right);
+    if (Double.isNaN(ld) || Double.isNaN(rd)) {
+        return false;
+    }
+    if (ld == rd) {
+        return evaluateCompare(0);
+    } else if (ld < rd) {
+        return evaluateCompare(-1);
+    } else {
+        return evaluateCompare(1);
+    }
+}

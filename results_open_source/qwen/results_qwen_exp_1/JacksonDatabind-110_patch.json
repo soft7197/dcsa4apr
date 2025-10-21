@@ -1,0 +1,50 @@
+{
+  "bug_id": "JacksonDatabind-110",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-110_1771884645",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined fix uses a more generic approach to identify unmodifiable collections by checking if the class name starts with 'java.util.Collections$Unmodifiable' instead of using a hardcoded string comparison. This change ensures that the method can handle various types of unmodifiable collections, such as UnmodifiableList, UnmodifiableSet, etc.",
+        "fixed_method": "public static JsonDeserializer<?> findForCollection(DeserializationContext ctxt,\n            JavaType type)\n        throws JsonMappingException\n    {\n        JavaUtilCollectionsConverter conv;\n\n        // 10-Jan-2017, tatu: Some types from `java.util.Collections`/`java.util.Arrays` need bit of help...\n        if (type.hasRawClass(CLASS_AS_ARRAYS_LIST)) {\n            conv = converter(TYPE_AS_LIST, type, List.class);\n        } else if (type.hasRawClass(CLASS_SINGLETON_LIST)) {\n            conv = converter(TYPE_SINGLETON_LIST, type, List.class);\n        } else if (type.hasRawClass(CLASS_SINGLETON_SET)) {\n            conv = converter(TYPE_SINGLETON_SET, type, Set.class);\n        // [databind#2265]: we may have another impl type for unmodifiable Lists, check both\n        } else if (type.hasRawClass(CLASS_UNMODIFIABLE_LIST)) {\n            conv = converter(TYPE_UNMODIFIABLE_LIST, type, List.class);\n        } else if (type.hasRawClass(CLASS_UNMODIFIABLE_SET)) {\n            conv = converter(TYPE_UNMODIFIABLE_SET, type, Set.class);\n        } else if (type.getRawClass().getName().startsWith(\"java.util.Collections$Unmodifiable\")) {\n            if (List.class.isAssignableFrom(type.getRawClass())) {\n                conv = converter(TYPE_UNMODIFIABLE_LIST, type, List.class);\n            } else if (Set.class.isAssignableFrom(type.getRawClass())) {\n                conv = converter(TYPE_UNMODIFIABLE_SET, type, Set.class);\n            } else {\n                return null;\n            }\n        } else {\n            return null;\n        }\n        return new StdDelegatingDeserializer<Object>(conv);\n    }",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/impl/JavaUtilCollectionsDeserializers.java",
+        "method_name": "findForCollection",
+        "class_name": "JavaUtilCollectionsDeserializers",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue arises because Jackson's deserialization mechanism cannot directly instantiate `java.util.Collections$UnmodifiableList` due to its lack of a default constructor. The fix involves adding a case to handle `UnmodifiableList` when it is created from other collection types like `LinkedList`.",
+        "line_numbers": [
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-110/"
+}

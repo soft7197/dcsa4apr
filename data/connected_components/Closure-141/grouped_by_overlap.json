@@ -1,0 +1,24 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "canBeSideEffected_com.google.javascript.jscomp.NodeUtil"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.ExpresssionDecomposerTest::testCanExposeExpression2",
+      "com.google.javascript.jscomp.ExpresssionDecomposerTest::testCanExposeExpression7",
+      "com.google.javascript.jscomp.InlineFunctionsTest::testDecomposeAnonymousInCall"
+    ]
+  },
+  "Group_2": {
+    "buggy_methods": [
+      "getCallableDefinitions_com.google.javascript.jscomp.PureFunctionIdentifier"
+    ],
+    "tests": [
+      "com.google.javascript.jscomp.PureFunctionIdentifierTest::testCallFunctionFOrG",
+      "com.google.javascript.jscomp.PureFunctionIdentifierTest::testCallFunctionFOrGViaHook",
+      "com.google.javascript.jscomp.PureFunctionIdentifierTest::testCallFunctionFOrGViaHookWithSideEffects",
+      "com.google.javascript.jscomp.PureFunctionIdentifierTest::testCallFunctionFOrGWithSideEffects",
+      "com.google.javascript.jscomp.PureFunctionIdentifierTest::testCallFunctionForGorH"
+    ]
+  }
+}

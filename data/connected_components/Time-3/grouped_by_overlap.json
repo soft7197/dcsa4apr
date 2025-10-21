@@ -1,0 +1,19 @@
+{
+  "Group_1": {
+    "buggy_methods": [
+      "addDays_org.joda.time.MutableDateTime",
+      "addHours_org.joda.time.MutableDateTime",
+      "addMonths_org.joda.time.MutableDateTime",
+      "addWeeks_org.joda.time.MutableDateTime",
+      "addYears_org.joda.time.MutableDateTime",
+      "add_org.joda.time.MutableDateTime"
+    ],
+    "tests": [
+      "org.joda.time.TestMutableDateTime_Adds::testAddDays_int_dstOverlapWinter_addZero",
+      "org.joda.time.TestMutableDateTime_Adds::testAddMonths_int_dstOverlapWinter_addZero",
+      "org.joda.time.TestMutableDateTime_Adds::testAddWeeks_int_dstOverlapWinter_addZero",
+      "org.joda.time.TestMutableDateTime_Adds::testAddYears_int_dstOverlapWinter_addZero",
+      "org.joda.time.TestMutableDateTime_Adds::testAdd_DurationFieldType_int_dstOverlapWinter_addZero"
+    ]
+  }
+}

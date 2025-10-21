@@ -1,0 +1,73 @@
+{
+  "bug_id": "Codec-15",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Codec-15_1771997957",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch incorrectly modified the HW rule logic by changing the condition for returning '0'. This caused overfitting because it did not correctly handle all edge cases involving 'H' and 'W'. The refined fix ensures that the HW rule is applied correctly by checking if the character before 'H' or 'W' has the same mapping code, regardless of whether the character itself is 'H' or 'W'. Additionally, it includes checks for boundary conditions and ensures that the logic is robust against various input scenarios.",
+        "fixed_method": "private char getMappingCode(final String str, final int index) {\n    // map() throws IllegalArgumentException\n    final char mappedChar = this.map(str.charAt(index));\n    // HW rule check\n    if (index > 1 && mappedChar != '0') {\n        final char hwChar = str.charAt(index - 1);\n        if ('H' == hwChar || 'W' == hwChar) {\n            final char preHWChar = str.charAt(index - 2);\n            final char firstCode = this.map(preHWChar);\n            if (firstCode == mappedChar) {\n                return '0';\n            }\n        }\n    }\n    return mappedChar;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/org/apache/commons/codec/language/Soundex.java",
+        "method_name": "getMappingCode",
+        "class_name": "Soundex",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The issue arises because the HW rule is incorrectly applied when the character before 'H' or 'W' is the same as the current character's mapping code. The condition should exclude cases where the character before 'H' or 'W' is the same as the current character's mapping code unless it is also 'H' or 'W'.",
+        "line_numbers": [
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          196,
+          197,
+          198
+        ]
+      },
+      {
+        "hypothesis": "The issue arises because the HW rule is incorrectly applied when there are consecutive characters that should be grouped together. Specifically, the rule is too aggressively returning '0' when it shouldn't.",
+        "changes": "- if (firstCode == mappedChar || 'H' == preHWChar || 'W' == preHWChar) {\n+ if (firstCode == mappedChar) {",
+        "fixed_method": "private char getMappingCode(final String str, final int index) {\n    // map() throws IllegalArgumentException\n    final char mappedChar = this.map(str.charAt(index));\n    // HW rule check\n    if (index > 1 && mappedChar != '0') {\n        final char hwChar = str.charAt(index - 1);\n        if ('H' == hwChar || 'W' == hwChar) {\n            final char preHWChar = str.charAt(index - 2);\n            final char firstCode = this.map(preHWChar);\n            if (firstCode == mappedChar) {\n                return 0;\n            }\n        }\n    }\n    return mappedChar;\n}",
+        "diff": "- if (firstCode == mappedChar || 'H' == preHWChar || 'W' == preHWChar) {\n+ if (firstCode == mappedChar) {",
+        "file_path": "src/main/java/org/apache/commons/codec/language/Soundex.java",
+        "method_name": "getMappingCode",
+        "class_name": "Soundex",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          196,
+          197,
+          198
+        ],
+        "original_code": "/**\n* Used internally by the Soundex algorithm.\n*\n* Consonants from the same code group separated by W or H are treated as one.\n*\n* @param str\n*                  the cleaned working string to encode (in upper case).\n* @param index\n*                  the character position to encode\n* @return Mapping code for a particular character\n* @throws IllegalArgumentException\n*                  if the character is not mapped\n*/\nprivate char getMappingCode(final String str, final int index) {\n    // map() throws IllegalArgumentException\n    final char mappedChar = this.map(str.charAt(index));\n    // HW rule check\n    if (index > 1 && mappedChar != '0') {\n        final char hwChar = str.charAt(index - 1);\n        if ('H' == hwChar || 'W' == hwChar) {\n            final char preHWChar = str.charAt(index - 2);\n            final char firstCode = this.map(preHWChar);\n            if (firstCode == mappedChar || 'H' == preHWChar || 'W' == preHWChar) {\n                return 0;\n            }\n        }\n    }\n    return mappedChar;\n}"
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Codec-15/"
+}

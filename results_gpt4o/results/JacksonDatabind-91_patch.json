@@ -1,0 +1,88 @@
+{
+  "bug_id": "JacksonDatabind-91",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-91_1773119088",
+  "patches": [
+    [
+      {
+        "hypothesis": "The method `_hasCustomHandlers` is not correctly checking if there are custom handlers for map keys, which results in incorrect deserialization when custom key deserializers are used.",
+        "changes": "- Added key type value handler check for map-like types.",
+        "fixed_method": "private boolean _hasCustomHandlers(JavaType t) {\n    if (t.isContainerType()) {\n        // First: value types may have both value and type handlers\n        JavaType ct = t.getContentType();\n        if (ct != null && ((ct.getValueHandler() != null) || (ct.getTypeHandler() != null))) {\n            return true;\n        }\n        // Second: map(-like) types may have custom key value handler\n        JavaType kt = t.getKeyType();\n        if (kt != null && (kt.getValueHandler() != null)) {\n            return true;\n        }\n    }\n    return false;\n}",
+        "diff": "- Added key type value handler check for map-like types.",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/DeserializerCache.java",
+        "method_name": "_hasCustomHandlers",
+        "class_name": "DeserializerCache",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          536,
+          537,
+          538,
+          539,
+          540,
+          541,
+          542,
+          543,
+          544,
+          545,
+          546
+        ],
+        "original_code": "/**\n* Helper method used to prevent both caching and cache lookups for structured\n* types that have custom value handlers\n*\n* @since 2.8.11\n*/\nprivate boolean _hasCustomHandlers(JavaType t) {\n    if (t.isContainerType()) {\n        // First: value types may have both value and type handlers\n        JavaType ct = t.getContentType();\n        if (ct != null) {\n            return (ct.getValueHandler() != null) || (ct.getTypeHandler() != null);\n        // Second: map(-like) types may have value handler for key (but not type; keys are untyped)\n        }\n    }\n    return false;\n}"
+      },
+      {
+        "hypothesis": "The method `_hasCustomHandlers` fails to check for custom key handlers on map-like types, which causes the deserializer not to use custom key deserializers.",
+        "changes": "+ check for key handlers in map-like types",
+        "fixed_method": "private boolean _hasCustomHandlers(JavaType t) {\n    if (t.isContainerType()) {\n        // First: value types may have both value and type handlers\n        JavaType ct = t.getContentType();\n        if (ct != null) {\n            if ((ct.getValueHandler() != null) || (ct.getTypeHandler() != null)) {\n                return true;\n            }\n        }\n        // Second: map(-like) types may have value handler for key\n        JavaType kt = t.getKeyType();\n        if (kt != null && kt.getValueHandler() != null) {\n            return true;\n        }\n    }\n    return false;\n}",
+        "diff": "+ check for key handlers in map-like types",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/DeserializerCache.java",
+        "method_name": "_hasCustomHandlers",
+        "class_name": "DeserializerCache",
+        "iteration": 1,
+        "is_multi_method": false,
+        "line_numbers": [
+          536,
+          537,
+          538,
+          539,
+          540,
+          541,
+          542,
+          543,
+          544,
+          545,
+          546
+        ],
+        "original_code": "/**\n* Helper method used to prevent both caching and cache lookups for structured\n* types that have custom value handlers\n*\n* @since 2.8.11\n*/\nprivate boolean _hasCustomHandlers(JavaType t) {\n    if (t.isContainerType()) {\n        // First: value types may have both value and type handlers\n        JavaType ct = t.getContentType();\n        if (ct != null) {\n            return (ct.getValueHandler() != null) || (ct.getTypeHandler() != null);\n        // Second: map(-like) types may have value handler for key (but not type; keys are untyped)\n        }\n    }\n    return false;\n}"
+      },
+      {
+        "hypothesis": "The original patch was overfitting by only addressing specific container types and key type handlers without considering the possibility of a type handler existing on the key type. The refined solution should ensure that it checks for type handlers on the container's key type, if applicable, as well as properly handling non-container types by returning false immediately if a type is non-container.",
+        "fixed_method": "private boolean _hasCustomHandlers(JavaType t) {\n    if (t.isContainerType()) {\n        JavaType ct = t.getContentType();\n        if (ct != null) {\n            if (ct.getValueHandler() != null || ct.getTypeHandler() != null) {\n                return true;\n            }\n        }\n        JavaType kt = t.getKeyType();\n        if (kt != null) {\n            if (kt.getTypeHandler() != null || kt.getValueHandler() != null) {\n                return true;\n            }\n        }\n    }\n    return false;\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/DeserializerCache.java",
+        "method_name": "_hasCustomHandlers",
+        "class_name": "DeserializerCache",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method incorrectly assumes maps only have custom handlers for values, not keys. It returns false for key handlers, hence caching map keys where it shouldn't.",
+        "line_numbers": [
+          536,
+          537,
+          538,
+          539,
+          540,
+          541,
+          542,
+          543,
+          544,
+          545,
+          546
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-91/"
+}

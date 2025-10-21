@@ -1,0 +1,60 @@
+{
+  "bug_id": "Math-41",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-41_1772916026",
+  "patches": [
+    [
+      {
+        "hypothesis": "Addressed overfitting and edge cases, adapted algorithm",
+        "fixed_method": "public double evaluate(final double[] values, final double[] weights, final double mean, final int begin, final int length) {\n if (length == 1) return 0.0;\n\n double accum = 0.0;\n for (int i = begin; i < begin + length; i++) {\n accum += weights[i] * Math.pow(values[i] - mean, 2.0);\n }\n\n double var = accum / (length - 1.0);\n if (isBiasCorrected) {\n var *= (length / (length - 1.0));\n }\n\n return var;\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/apache/commons/math/stat/descriptive/moment/Variance.java",
+        "method_name": "evaluate",
+        "class_name": "Variance",
+        "iteration": 2,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "",
+        "line_numbers": [
+          501,
+          502,
+          503,
+          504,
+          505,
+          506,
+          507,
+          508,
+          509,
+          510,
+          511,
+          512,
+          513,
+          514,
+          515,
+          516,
+          517,
+          518,
+          519,
+          520,
+          521,
+          522,
+          523,
+          524,
+          525,
+          526,
+          527,
+          528,
+          529,
+          530,
+          531,
+          532
+        ]
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Math-41/"
+}

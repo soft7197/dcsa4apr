@@ -1,0 +1,37 @@
+{
+  "bug_id": "Gson-15",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Gson-15_1772694346",
+  "patches": [
+    [
+      {
+        "hypothesis": "Refined the patch to address overfitting and improve edge case handling",
+        "fixed_method": "public JsonWriter value(double value) throws IOException {\n  writeDeferredName();\n  if (!lenient) {\n    if (Double.isNaN(value) || Double.isInfinite(value)) {\n      throw new IllegalArgumentException(\"Numeric values must be finite, but was \" + value);\n    }\n  }\n  beforeValue();\n  out.append(Double.toString(value));\n  return this;\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "gson/src/main/java/com/google/gson/stream/JsonWriter.java",
+        "method_name": "value",
+        "class_name": "JsonWriter",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The method was throwing an exception due to the use of Double.isNaN() and Double.isInfinite() which were not able to handle non-finite values such as NaN and Infinity. The method was also not handling the case where the lenient flag was set to true.",
+        "line_numbers": [
+          493,
+          494,
+          495,
+          496,
+          497,
+          498,
+          499,
+          500,
+          501
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Gson-15/"
+}

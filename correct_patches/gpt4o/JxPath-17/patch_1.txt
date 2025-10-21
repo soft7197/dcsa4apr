@@ -1,0 +1,27 @@
+File: src/java/org/apache/commons/jxpath/ri/model/dom/DOMAttributeIterator.java
+Method: DOMAttributeIterator.testAttr
+
+private boolean testAttr(Attr attr) {
+    String nodePrefix = DOMNodePointer.getPrefix(attr);
+    String nodeLocalName = DOMNodePointer.getLocalName(attr);
+
+    if ((nodePrefix != null && nodePrefix.equals("xmlns")) || (nodePrefix == null && nodeLocalName.equals("xmlns"))) {
+        return false;
+    }
+
+    String testLocalName = name.getName();
+    if (testLocalName.equals("*") || testLocalName.equals(nodeLocalName)) {
+        String testPrefix = name.getPrefix();
+        if ((testPrefix == null || testPrefix.equals("*") || equalStrings(testPrefix, nodePrefix))) {
+            return true;
+        }
+
+        // Check namespace only if both prefixes are non-null
+        if (testPrefix != null && nodePrefix != null) {
+            String testNS = parent.getNamespaceURI(testPrefix);
+            String nodeNS = parent.getNamespaceURI(nodePrefix);
+            return equalStrings(testNS, nodeNS);
+        }
+    }
+    return false;
+}

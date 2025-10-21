@@ -1,0 +1,14 @@
+File: src/java/org/apache/commons/math/distribution/NormalDistributionImpl.java
+Method: NormalDistributionImpl.cumulativeProbability
+
+public double cumulativeProbability(double x) throws MathException {
+    final double threshold = 20.0; // Configurable threshold
+    if (Double.isInfinite(mean) || Double.isNaN(mean) || Double.isInfinite(standardDeviation) || standardDeviation <= 0.0) {
+        throw new IllegalArgumentException("Mean and standard deviation must be finite, with standard deviation greater than zero.");
+    }
+    if (Math.abs(x - mean) > threshold * standardDeviation) {
+        return x < mean ? 0.0 : 1.0;
+    } else {
+        return 0.5 * (1.0 + Erf.erf((x - mean) / (standardDeviation * Math.sqrt(2.0))));
+    }
+}

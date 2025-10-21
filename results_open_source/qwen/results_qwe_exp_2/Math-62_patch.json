@@ -1,0 +1,46 @@
+{
+  "bug_id": "Math-62",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Math-62_1771970055",
+  "patches": [
+    [
+      {
+        "hypothesis": "The overfitting issues arise from inconsistent bounds generation and improper handling of the startValue. We need to ensure that bounds are consistently generated and that startValue is always within the [min, max] range.",
+        "changes": "- removed redundant bound calculations\n+ ensured startValue is within [min, max]\n+ simplified bound usage to consistently use min and max",
+        "methods": {
+          "src/main/java/org/apache/commons/math/optimization/univariate/MultiStartUnivariateRealOptimizer.java::MultiStartUnivariateRealOptimizer::optimize::L142": {
+            "file_path": "src/main/java/org/apache/commons/math/optimization/univariate/MultiStartUnivariateRealOptimizer.java",
+            "method_name": "optimize",
+            "class_name": "MultiStartUnivariateRealOptimizer",
+            "line_numbers": [
+              142,
+              147
+            ],
+            "original_code": "    /** {@inheritDoc} */\n\n    public UnivariateRealPointValuePair optimize(final FUNC f,\n                                                 final GoalType goal,\n                                                 final double min, final double max)\n        throws FunctionEvaluationException {\n        return optimize(f, goal, min, max, 0);\n    }\n",
+            "fixed_method": "public UnivariateRealPointValuePair optimize(final FUNC f, final GoalType goal, final double min, final double max) throws FunctionEvaluationException { return optimize(f, goal, min, max, min + generator.nextDouble() * (max - min)); }",
+            "attempt": 1
+          },
+          "src/main/java/org/apache/commons/math/optimization/univariate/MultiStartUnivariateRealOptimizer.java::MultiStartUnivariateRealOptimizer::optimize::L150": {
+            "file_path": "src/main/java/org/apache/commons/math/optimization/univariate/MultiStartUnivariateRealOptimizer.java",
+            "method_name": "optimize",
+            "class_name": "MultiStartUnivariateRealOptimizer",
+            "line_numbers": [
+              150,
+              183
+            ],
+            "original_code": "    /** {@inheritDoc} */\n\n    public UnivariateRealPointValuePair optimize(final FUNC f, final GoalType goal,\n                                                 final double min, final double max,\n                                                 final double startValue)\n        throws FunctionEvaluationException {\n        optima = new UnivariateRealPointValuePair[starts];\n        totalEvaluations = 0;\n\n        // Multi-start loop.\n        for (int i = 0; i < starts; ++i) {\n            try {\n                final double bound1 = (i == 0) ? min : min + generator.nextDouble() * (max - min);\n                final double bound2 = (i == 0) ? max : min + generator.nextDouble() * (max - min);\n                optima[i] = optimizer.optimize(f, goal, FastMath.min(bound1, bound2), FastMath.max(bound1, bound2));\n            } catch (FunctionEvaluationException fee) {\n                optima[i] = null;\n            } catch (ConvergenceException ce) {\n                optima[i] = null;\n            }\n\n            final int usedEvaluations = optimizer.getEvaluations();\n            optimizer.setMaxEvaluations(optimizer.getMaxEvaluations() - usedEvaluations);\n            totalEvaluations += usedEvaluations;\n        }\n\n        sortPairs(goal);\n\n        if (optima[0] == null) {\n            throw new ConvergenceException(LocalizedFormats.NO_CONVERGENCE_WITH_ANY_START_POINT,\n                                           starts);\n        }\n\n        // Return the point with the best objective function value.\n        return optima[0];\n    }\n",
+            "fixed_method": "public UnivariateRealPointValuePair optimize(final FUNC f, final GoalType goal, final double min, final double max, final double startValue) throws FunctionEvaluationException { optima = new UnivariateRealPointValuePair[starts]; totalEvaluations = 0; for (int i = 0; i < starts; ++i) { try { final double actualStart = Math.min(max, Math.max(min, (i == 0) ? startValue : min + generator.nextDouble() * (max - min))); optima[i] = optimizer.optimize(f, goal, min, max, actualStart); } catch (FunctionEvaluationException fee) { optima[i] = null; } catch (ConvergenceException ce) { optima[i] = null; } final int usedEvaluations = optimizer.getEvaluations(); optimizer.setMaxEvaluations(optimizer.getMaxEvaluations() - usedEvaluations); totalEvaluations += usedEvaluations; } sortPairs(goal); if (optima[0] == null) { throw new ConvergenceException(LocalizedFormats.NO_CONVERGENCE_WITH_ANY_START_POINT, starts); } return optima[0]; }",
+            "attempt": 1
+          }
+        },
+        "is_multi_method": true,
+        "is_refinement": true,
+        "refinement_attempt": 1
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Math-62/"
+}

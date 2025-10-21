@@ -1,0 +1,58 @@
+{
+  "bug_id": "Jsoup-5",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-5_1772908486",
+  "patches": [
+    [
+      {
+        "hypothesis": "The refined fix addresses the root cause of overfitting by using a more robust approach to consume whitespace, handling general cases, and including proper edge case handling. The patch is tested to pass all the original failing tests.",
+        "fixed_method": "private Attribute parseAttribute() {\n    tq.consumeWhitespace();\n    String key = tq.consumeAttributeKey();\n    String value = \"\";\n    tq.consumeWhitespace();\n    if (tq.matchChomp(\"=\")) {\n        tq.consumeWhitespace();\n        if (tq.matchChomp(SQ)) {\n            value = tq.chompTo(SQ);\n        }\n        else if (tq.matchChomp(DQ)) {\n            value = tq.chompTo(DQ);\n        }\n        else {\n            StringBuilder valueAccum = new StringBuilder();\n            // no ' or \" to look for, so scan to end tag or space (or end of stream)\n            while (!tq.matchesAny(\"<\", \"/\", \"/>\", \"\") && !tq.matchesWhitespace() && !tq.isEmpty()) {\n                valueAccum.append(tq.consume());\n            }\n            value = valueAccum.toString();\n        }\n        tq.consumeWhitespace();\n    }\n    if (key.length() != 0) {\n        return Attribute.createFromEncoded(key, value);\n    }\n    else {\n        tq.consume();\n        return null;\n    }\n}",
+        "changes": "",
+        "diff": "",
+        "file_path": "src/main/java/org/jsoup/parser/Parser.java",
+        "method_name": "parseAttribute",
+        "class_name": "Parser",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is caused by the `consumeWhitespace()` method, which is consuming the end tag `</a>` and causing the `StringIndexOutOfBoundsException`.",
+        "line_numbers": [
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          196,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/Jsoup-5/"
+}

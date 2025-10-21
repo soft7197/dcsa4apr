@@ -1,0 +1,777 @@
+{
+  "org.jsoup.select.QueryParserTest::testParsesSingleQuoteInContains": [
+    {
+      "package": "org.jsoup.helper",
+      "class": "org.jsoup.helper.StringUtil",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        14
+      ]
+    },
+    {
+      "package": "org.jsoup.helper",
+      "class": "org.jsoup.helper.StringUtil",
+      "method": "isWhitespace",
+      "signature": "(I)Z",
+      "executed_lines": [
+        106
+      ]
+    },
+    {
+      "package": "org.jsoup.helper",
+      "class": "org.jsoup.helper.Validate",
+      "method": "notEmpty",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        91,
+        93
+      ]
+    },
+    {
+      "package": "org.jsoup.helper",
+      "class": "org.jsoup.helper.Validate",
+      "method": "notEmpty",
+      "signature": "(Ljava/lang/String;Ljava/lang/String;)V",
+      "executed_lines": [
+        101,
+        103
+      ]
+    },
+    {
+      "package": "org.jsoup.helper",
+      "class": "org.jsoup.helper.Validate",
+      "method": "notNull",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        15,
+        17
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        13,
+        21,
+        22,
+        23,
+        24
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "chompBalanced",
+      "signature": "(CC)Ljava/lang/String;",
+      "executed_lines": [
+        261,
+        262,
+        263,
+        264,
+        265,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        280,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "consume",
+      "signature": "()C",
+      "executed_lines": [
+        155
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "consume",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        166,
+        168,
+        169,
+        172,
+        173
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "consumeElementSelector",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        355,
+        356,
+        357,
+        359
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "consumeWhitespace",
+      "signature": "()Z",
+      "executed_lines": [
+        317,
+        318,
+        322
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "isEmpty",
+      "signature": "()Z",
+      "executed_lines": [
+        31
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "matchChomp",
+      "signature": "(Ljava/lang/String;)Z",
+      "executed_lines": [
+        119,
+        123
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "matches",
+      "signature": "(Ljava/lang/String;)Z",
+      "executed_lines": [
+        70
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "matchesAny",
+      "signature": "([Ljava/lang/String;)Z",
+      "executed_lines": [
+        89,
+        90,
+        93
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "matchesWhitespace",
+      "signature": "()Z",
+      "executed_lines": [
+        132
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "matchesWord",
+      "signature": "()Z",
+      "executed_lines": [
+        140
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "remainingLength",
+      "signature": "()I",
+      "executed_lines": [
+        35
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "unescape",
+      "signature": "(Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        298,
+        299,
+        300,
+        301,
+        306,
+        307,
+        309
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.CombiningEvaluator",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        15,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.CombiningEvaluator",
+      "method": "<init>",
+      "signature": "(Ljava/util/Collection;)V",
+      "executed_lines": [
+        23,
+        24,
+        25,
+        26
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.CombiningEvaluator",
+      "method": "updateNumEvaluators",
+      "signature": "()V",
+      "executed_lines": [
+        38,
+        39
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.CombiningEvaluator$And",
+      "method": "<init>",
+      "signature": "(Ljava/util/Collection;)V",
+      "executed_lines": [
+        43,
+        44
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.Evaluator",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        20,
+        21
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.Evaluator$ContainsText",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        650,
+        651,
+        652
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.Evaluator$Tag",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        16,
+        17,
+        283,
+        284
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        21,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "byTag",
+      "signature": "()V",
+      "executed_lines": [
+        215,
+        217,
+        220,
+        224,
+        227,
+        229
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "contains",
+      "signature": "(Z)V",
+      "executed_lines": [
+        335,
+        336,
+        337,
+        338,
+        341,
+        342
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "findElements",
+      "signature": "()V",
+      "executed_lines": [
+        143,
+        145,
+        147,
+        148,
+        149,
+        151,
+        153,
+        155,
+        157,
+        159,
+        161,
+        162,
+        200
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "parse",
+      "signature": "()Lorg/jsoup/select/Evaluator;",
+      "executed_lines": [
+        47,
+        49,
+        53,
+        56,
+        58,
+        60,
+        62,
+        65,
+        67,
+        69,
+        72
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "parse",
+      "signature": "(Ljava/lang/String;)Lorg/jsoup/select/Evaluator;",
+      "executed_lines": [
+        38,
+        39
+      ]
+    }
+  ],
+  "org.jsoup.select.QueryParserTest::exceptionOnUncloseAttribute": [
+    {
+      "package": "org.jsoup.helper",
+      "class": "org.jsoup.helper.StringUtil",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        14
+      ]
+    },
+    {
+      "package": "org.jsoup.helper",
+      "class": "org.jsoup.helper.StringUtil",
+      "method": "isWhitespace",
+      "signature": "(I)Z",
+      "executed_lines": [
+        106
+      ]
+    },
+    {
+      "package": "org.jsoup.helper",
+      "class": "org.jsoup.helper.Validate",
+      "method": "notEmpty",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        91,
+        92,
+        93
+      ]
+    },
+    {
+      "package": "org.jsoup.helper",
+      "class": "org.jsoup.helper.Validate",
+      "method": "notNull",
+      "signature": "(Ljava/lang/Object;)V",
+      "executed_lines": [
+        15,
+        17
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        13,
+        21,
+        22,
+        23,
+        24
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "chompBalanced",
+      "signature": "(CC)Ljava/lang/String;",
+      "executed_lines": [
+        261,
+        262,
+        263,
+        264,
+        265,
+        268,
+        269,
+        270,
+        271,
+        272,
+        273,
+        274,
+        275,
+        276,
+        277,
+        278,
+        280,
+        281,
+        284,
+        285,
+        286,
+        287,
+        288,
+        289
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "consume",
+      "signature": "()C",
+      "executed_lines": [
+        155
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "consumeElementSelector",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        355,
+        356,
+        357,
+        359
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "consumeToAny",
+      "signature": "([Ljava/lang/String;)Ljava/lang/String;",
+      "executed_lines": [
+        223,
+        224,
+        225,
+        228
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "consumeWhitespace",
+      "signature": "()Z",
+      "executed_lines": [
+        317,
+        318,
+        319,
+        320,
+        322
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "isEmpty",
+      "signature": "()Z",
+      "executed_lines": [
+        31
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "matchChomp",
+      "signature": "(Ljava/lang/String;)Z",
+      "executed_lines": [
+        119,
+        120,
+        121,
+        123
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "matches",
+      "signature": "(Ljava/lang/String;)Z",
+      "executed_lines": [
+        70
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "matchesAny",
+      "signature": "([Ljava/lang/String;)Z",
+      "executed_lines": [
+        89,
+        90,
+        91,
+        93
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "matchesWhitespace",
+      "signature": "()Z",
+      "executed_lines": [
+        132
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "matchesWord",
+      "signature": "()Z",
+      "executed_lines": [
+        140
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "remainder",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        392,
+        393,
+        394
+      ]
+    },
+    {
+      "package": "org.jsoup.parser",
+      "class": "org.jsoup.parser.TokenQueue",
+      "method": "remainingLength",
+      "signature": "()I",
+      "executed_lines": [
+        35
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.Evaluator",
+      "method": "<init>",
+      "signature": "()V",
+      "executed_lines": [
+        20,
+        21
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.Evaluator$AttributeKeyPair",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;Ljava/lang/String;)V",
+      "executed_lines": [
+        301,
+        302,
+        303
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.Evaluator$AttributeWithValue",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;Ljava/lang/String;)V",
+      "executed_lines": [
+        175
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.Evaluator$Tag",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        39,
+        40,
+        41
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        16,
+        17,
+        283,
+        284
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "<init>",
+      "signature": "(Ljava/lang/String;)V",
+      "executed_lines": [
+        21,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "byAttribute",
+      "signature": "()V",
+      "executed_lines": [
+        232,
+        233,
+        234,
+        235,
+        237,
+        243,
+        244
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "byTag",
+      "signature": "()V",
+      "executed_lines": [
+        215,
+        217,
+        220,
+        224,
+        227,
+        229
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "combinator",
+      "signature": "(C)V",
+      "executed_lines": [
+        76,
+        77,
+        81
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "consumeSubQuery",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        128,
+        129,
+        130,
+        132,
+        133,
+        134,
+        137,
+        139
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "findElements",
+      "signature": "()V",
+      "executed_lines": [
+        143,
+        145,
+        147,
+        148,
+        149,
+        150,
+        200
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "parse",
+      "signature": "()Lorg/jsoup/select/Evaluator;",
+      "executed_lines": [
+        47,
+        49,
+        53,
+        56,
+        58,
+        60,
+        61,
+        62,
+        65
+      ]
+    },
+    {
+      "package": "org.jsoup.select",
+      "class": "org.jsoup.select.QueryParser",
+      "method": "parse",
+      "signature": "(Ljava/lang/String;)Lorg/jsoup/select/Evaluator;",
+      "executed_lines": [
+        38,
+        39
+      ]
+    }
+  ]
+}

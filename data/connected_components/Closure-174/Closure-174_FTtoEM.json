@@ -1,0 +1,1627 @@
+{
+  "com.google.javascript.jscomp.ScopedAliasesTest::testIssue1103a": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        33
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/SourceFile;)V",
+      "executed_lines": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "getAstRoot",
+      "signature": "(Lcom/google/javascript/jscomp/AbstractCompiler;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        49,
+        50,
+        51,
+        53
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "getInputId",
+      "signature": "()Lcom/google/javascript/rhino/InputId;",
+      "executed_lines": [
+        67
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "getSourceFile",
+      "signature": "()Lcom/google/javascript/jscomp/SourceFile;",
+      "executed_lines": [
+        72
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "parse",
+      "signature": "(Lcom/google/javascript/jscomp/AbstractCompiler;)V",
+      "executed_lines": [
+        83,
+        87,
+        88,
+        92,
+        95,
+        102,
+        107,
+        108
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        51,
+        58,
+        974,
+        977,
+        979,
+        981,
+        1290,
+        1354,
+        1407,
+        1453,
+        2682
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getBestJSDocInfo",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/JSDocInfo;",
+      "executed_lines": [
+        3085,
+        3086,
+        3087,
+        3088,
+        3092,
+        3094,
+        3096,
+        3098,
+        3100,
+        3102,
+        3107,
+        3111
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getFunctionName",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Ljava/lang/String;",
+      "executed_lines": [
+        427,
+        428,
+        429,
+        442,
+        443
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getFunctionParameters",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        2846,
+        2847
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getInputId",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/InputId;",
+      "executed_lines": [
+        2929,
+        2930,
+        2933
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getRValueOfLValue",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        3140,
+        3141,
+        3145
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isControlStructure",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1697,
+        1711
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isFunctionExpression",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1975
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isGet",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1582
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isObjectLitKey",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        2099,
+        2105
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isStatement",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1782
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isStatementBlock",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1775
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isStatementParent",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1789,
+        1790,
+        1796
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "mapMainToClone",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)Ljava/util/Map;",
+      "executed_lines": [
+        3323,
+        3324,
+        3325,
+        3326,
+        3327
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "mtocHelper",
+      "signature": "(Ljava/util/Map;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        3331,
+        3332,
+        3334,
+        3335,
+        3336,
+        3337,
+        3338,
+        3340
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1290
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$BooleanResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1400
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$MatchNotFunction",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/NodeUtil$1;)V",
+      "executed_lines": [
+        2675
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$MayBeStringResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1446
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$NumbericResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1347
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        81,
+        85,
+        91,
+        95,
+        99,
+        103,
+        107,
+        111
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/AbstractCompiler;Lcom/google/javascript/jscomp/PreprocessorSymbolTable;Lcom/google/javascript/jscomp/CompilerOptions$AliasTransformationHandler;)V",
+      "executed_lines": [
+        115,
+        119,
+        120,
+        121,
+        122,
+        123
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "access$500",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases;)Lcom/google/javascript/jscomp/PreprocessorSymbolTable;",
+      "executed_lines": [
+        72
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "hotSwapScript",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        132,
+        133,
+        135,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "process",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        127,
+        128
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases;)V",
+      "executed_lines": [
+        245,
+        247,
+        249,
+        252,
+        264,
+        265,
+        267,
+        269
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "access$100",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases$Traversal;)Ljava/util/List;",
+      "executed_lines": [
+        241
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "enterScope",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        294,
+        295,
+        296,
+        298,
+        300
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "exitScope",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        304,
+        305,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        315
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "findAliases",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        359,
+        362,
+        365,
+        395,
+        397,
+        398
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "findNamespaceShadows",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        419,
+        423,
+        424,
+        430
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "getSourceRegion",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/SourcePosition;",
+      "executed_lines": [
+        329,
+        330,
+        331,
+        336,
+        337,
+        338,
+        340,
+        342
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "hasErrors",
+      "signature": "()Z",
+      "executed_lines": [
+        284
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "isCallToScopeMethod",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        288
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "renameNamespaceShadows",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        438,
+        450
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "report",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/jscomp/DiagnosticType;[Ljava/lang/String;)V",
+      "executed_lines": [
+        347,
+        348,
+        349
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "shouldTraverse",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        319,
+        321,
+        325
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "validateScopeCall",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        453,
+        456,
+        459,
+        464,
+        465,
+        470,
+        473
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "visit",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        477,
+        478,
+        481,
+        482,
+        485,
+        486,
+        487,
+        488,
+        489,
+        490,
+        496,
+        497,
+        509,
+        511,
+        513,
+        519,
+        521,
+        531,
+        532,
+        540
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal$1",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases$Traversal;)V",
+      "executed_lines": [
+        339
+      ]
+    }
+  ],
+  "com.google.javascript.jscomp.ScopedAliasesTest::testIssue1103b": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        33
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/SourceFile;)V",
+      "executed_lines": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "getAstRoot",
+      "signature": "(Lcom/google/javascript/jscomp/AbstractCompiler;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        49,
+        50,
+        51,
+        53
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "getInputId",
+      "signature": "()Lcom/google/javascript/rhino/InputId;",
+      "executed_lines": [
+        67
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "getSourceFile",
+      "signature": "()Lcom/google/javascript/jscomp/SourceFile;",
+      "executed_lines": [
+        72
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "parse",
+      "signature": "(Lcom/google/javascript/jscomp/AbstractCompiler;)V",
+      "executed_lines": [
+        83,
+        87,
+        88,
+        92,
+        95,
+        100,
+        102,
+        107,
+        108
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        51,
+        58,
+        974,
+        977,
+        979,
+        981,
+        1290,
+        1354,
+        1407,
+        1453,
+        2682
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getBestJSDocInfo",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/JSDocInfo;",
+      "executed_lines": [
+        3085,
+        3086,
+        3087,
+        3088,
+        3092,
+        3094,
+        3096,
+        3098,
+        3100,
+        3102,
+        3107,
+        3111
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getInputId",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/InputId;",
+      "executed_lines": [
+        2929,
+        2930,
+        2933
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getRValueOfLValue",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        3140,
+        3141,
+        3145
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isControlStructure",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1697,
+        1711
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isFunctionDeclaration",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1937
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isFunctionExpression",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1975
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isGet",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1582
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isObjectLitKey",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        2099,
+        2105
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isStatement",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1782
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isStatementBlock",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1775
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isStatementParent",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1789,
+        1790,
+        1796
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isVarDeclaration",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1594
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "mapMainToClone",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)Ljava/util/Map;",
+      "executed_lines": [
+        3323,
+        3324,
+        3325,
+        3326,
+        3327
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "mtocHelper",
+      "signature": "(Ljava/util/Map;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        3331,
+        3332,
+        3334,
+        3335,
+        3336,
+        3337,
+        3338,
+        3340
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1290
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$BooleanResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1400
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$MatchNotFunction",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/NodeUtil$1;)V",
+      "executed_lines": [
+        2675
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$MayBeStringResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1446
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$NumbericResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1347
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        81,
+        85,
+        91,
+        95,
+        99,
+        103,
+        107,
+        111
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/AbstractCompiler;Lcom/google/javascript/jscomp/PreprocessorSymbolTable;Lcom/google/javascript/jscomp/CompilerOptions$AliasTransformationHandler;)V",
+      "executed_lines": [
+        115,
+        119,
+        120,
+        121,
+        122,
+        123
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "access$500",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases;)Lcom/google/javascript/jscomp/PreprocessorSymbolTable;",
+      "executed_lines": [
+        72
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "hotSwapScript",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        132,
+        133
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "process",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        127
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases;)V",
+      "executed_lines": [
+        245,
+        247,
+        249,
+        252,
+        264,
+        265,
+        267,
+        269
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "access$100",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases$Traversal;)Ljava/util/List;",
+      "executed_lines": [
+        241
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "enterScope",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        294,
+        295,
+        296,
+        298,
+        300
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "findAliases",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        358,
+        359,
+        362,
+        365,
+        366,
+        367,
+        368,
+        369,
+        370,
+        373,
+        395,
+        397
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "getSourceRegion",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/SourcePosition;",
+      "executed_lines": [
+        329,
+        330,
+        331,
+        336,
+        337,
+        338,
+        340,
+        342
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "isCallToScopeMethod",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        288
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "recordAlias",
+      "signature": "(Lcom/google/javascript/jscomp/Scope$Var;)V",
+      "executed_lines": [
+        401,
+        402,
+        404,
+        406,
+        408,
+        409,
+        415
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "report",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/jscomp/DiagnosticType;[Ljava/lang/String;)V",
+      "executed_lines": [
+        347,
+        348,
+        349
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "shouldTraverse",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        319,
+        321,
+        325
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "visit",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        477,
+        481,
+        482
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal$1",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases$Traversal;)V",
+      "executed_lines": [
+        339
+      ]
+    }
+  ],
+  "com.google.javascript.jscomp.ScopedAliasesTest::testIssue1103c": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        33
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/SourceFile;)V",
+      "executed_lines": [
+        41,
+        42,
+        43,
+        44,
+        45
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "getAstRoot",
+      "signature": "(Lcom/google/javascript/jscomp/AbstractCompiler;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        49,
+        50,
+        51,
+        53
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "getInputId",
+      "signature": "()Lcom/google/javascript/rhino/InputId;",
+      "executed_lines": [
+        67
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "getSourceFile",
+      "signature": "()Lcom/google/javascript/jscomp/SourceFile;",
+      "executed_lines": [
+        72
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.JsAst",
+      "method": "parse",
+      "signature": "(Lcom/google/javascript/jscomp/AbstractCompiler;)V",
+      "executed_lines": [
+        83,
+        87,
+        88,
+        92,
+        95,
+        102,
+        107,
+        108
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        51,
+        58,
+        974,
+        977,
+        979,
+        981,
+        1290,
+        1354,
+        1407,
+        1453,
+        2682
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getBestJSDocInfo",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/JSDocInfo;",
+      "executed_lines": [
+        3085,
+        3086,
+        3087,
+        3088,
+        3092,
+        3094,
+        3096,
+        3098,
+        3100,
+        3102,
+        3107,
+        3111
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getFunctionName",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Ljava/lang/String;",
+      "executed_lines": [
+        427,
+        428,
+        429,
+        442,
+        443
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getFunctionParameters",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        2846,
+        2847
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getInputId",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/InputId;",
+      "executed_lines": [
+        2929,
+        2930,
+        2933
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "getRValueOfLValue",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        3140,
+        3141,
+        3145
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isControlStructure",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1697,
+        1711
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isFunctionExpression",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1975
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isGet",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1582
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isObjectLitKey",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        2099,
+        2105
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isStatement",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1782
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isStatementBlock",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1775
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "isStatementParent",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1789,
+        1790,
+        1796
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "mapMainToClone",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)Ljava/util/Map;",
+      "executed_lines": [
+        3323,
+        3324,
+        3325,
+        3326,
+        3327
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil",
+      "method": "mtocHelper",
+      "signature": "(Ljava/util/Map;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        3331,
+        3332,
+        3334,
+        3335,
+        3336,
+        3337,
+        3338,
+        3340
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$1",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1290
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$BooleanResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1400
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$MatchNotFunction",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/NodeUtil$1;)V",
+      "executed_lines": [
+        2675
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$MayBeStringResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1446
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.NodeUtil$NumbericResultPredicate",
+      "method": "apply",
+      "signature": "(Ljava/lang/Object;)Z",
+      "executed_lines": [
+        1347
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        81,
+        85,
+        91,
+        95,
+        99,
+        103,
+        107,
+        111
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/AbstractCompiler;Lcom/google/javascript/jscomp/PreprocessorSymbolTable;Lcom/google/javascript/jscomp/CompilerOptions$AliasTransformationHandler;)V",
+      "executed_lines": [
+        115,
+        119,
+        120,
+        121,
+        122,
+        123
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "access$500",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases;)Lcom/google/javascript/jscomp/PreprocessorSymbolTable;",
+      "executed_lines": [
+        72
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "hotSwapScript",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        132,
+        133,
+        135,
+        188
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "process",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        127,
+        128
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases;)V",
+      "executed_lines": [
+        245,
+        247,
+        249,
+        252,
+        264,
+        265,
+        267,
+        269
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "access$100",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases$Traversal;)Ljava/util/List;",
+      "executed_lines": [
+        241
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "enterScope",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        294,
+        295,
+        296,
+        298,
+        300
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "exitScope",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        304,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        315
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "findAliases",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        352,
+        353,
+        354,
+        355,
+        356,
+        357,
+        359,
+        362,
+        365,
+        395,
+        397,
+        398
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "fixTypeNode",
+      "signature": "(Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        543,
+        544,
+        545,
+        546,
+        547,
+        549,
+        550,
+        551,
+        556,
+        560
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "getSourceRegion",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/SourcePosition;",
+      "executed_lines": [
+        329,
+        330,
+        331,
+        336,
+        337,
+        338,
+        340,
+        342
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "hasErrors",
+      "signature": "()Z",
+      "executed_lines": [
+        284
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "isCallToScopeMethod",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        288
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "renameNamespaceShadows",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        438,
+        450
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "report",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/jscomp/DiagnosticType;[Ljava/lang/String;)V",
+      "executed_lines": [
+        347,
+        348,
+        349
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "shouldTraverse",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        319,
+        321,
+        325
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "validateScopeCall",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        453,
+        456,
+        459,
+        464,
+        465,
+        470,
+        473
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "visit",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        477,
+        478,
+        481,
+        482,
+        485,
+        486,
+        487,
+        488,
+        489,
+        490,
+        496,
+        497,
+        509,
+        511,
+        513,
+        519,
+        521,
+        531,
+        532,
+        533,
+        534,
+        535,
+        540
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal$1",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases$Traversal;)V",
+      "executed_lines": [
+        339
+      ]
+    }
+  ]
+}

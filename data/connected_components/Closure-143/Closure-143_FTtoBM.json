@@ -1,0 +1,20 @@
+{
+  "com.google.javascript.jscomp.CommandLineRunnerTest::testDefineFlag3": [
+    {
+      "buggy_method": "createDefineReplacements",
+      "class": "com.google.javascript.jscomp.AbstractCommandLineRunner"
+    }
+  ],
+  "com.google.javascript.jscomp.RemoveConstantExpressionsTest::testCall1": [
+    {
+      "buggy_method": "trySimplify",
+      "class": "com.google.javascript.jscomp.RemoveConstantExpressions"
+    }
+  ],
+  "com.google.javascript.jscomp.RemoveConstantExpressionsTest::testNew1": [
+    {
+      "buggy_method": "trySimplify",
+      "class": "com.google.javascript.jscomp.RemoveConstantExpressions"
+    }
+  ]
+}

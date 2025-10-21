@@ -1,0 +1,32 @@
+{
+  "bug_id": "Jsoup-32",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_Jsoup-32_1773119193",
+  "patches": [
+    [
+      {
+        "hypothesis": "The clone method is not copying the class names to the cloned Element, causing tests that verify class name cloning to fail.",
+        "changes": "- clone.classNames(); to + clone.classNames = new HashSet(this.classNames);",
+        "fixed_method": "public Element clone() {\n    Element clone = (Element) super.clone();\n    clone.classNames = new HashSet(this.classNames);\n    return clone;\n}",
+        "diff": "- clone.classNames(); to + clone.classNames = new HashSet(this.classNames);",
+        "file_path": "src/main/java/org/jsoup/nodes/Element.java",
+        "method_name": "clone",
+        "class_name": "Element",
+        "iteration": 2,
+        "is_multi_method": false,
+        "line_numbers": [
+          1136,
+          1137,
+          1138,
+          1139,
+          1140
+        ],
+        "original_code": "// todo: fixup, not very useful\npublic Element clone() {\n    Element clone = (Element) super.clone();\n    clone.classNames();\n    return clone;\n}"
+      }
+    ]
+  ],
+  "iterations": 2,
+  "monitor_dir": "traces/Jsoup-32/"
+}

@@ -1,0 +1,2248 @@
+{
+  "com.google.javascript.jscomp.ScopedAliasesTest::testHoistedFunctionDeclaration": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        82,
+        86,
+        92,
+        96,
+        100,
+        104,
+        108,
+        112
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/AbstractCompiler;Lcom/google/javascript/jscomp/PreprocessorSymbolTable;Lcom/google/javascript/jscomp/CompilerOptions$AliasTransformationHandler;)V",
+      "executed_lines": [
+        116,
+        120,
+        121,
+        122,
+        123,
+        124
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "access$500",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases;)Lcom/google/javascript/jscomp/PreprocessorSymbolTable;",
+      "executed_lines": [
+        73
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "hotSwapScript",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        133,
+        134,
+        136,
+        189
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "process",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        128,
+        129
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases;)V",
+      "executed_lines": [
+        246,
+        248,
+        250,
+        253,
+        265,
+        266,
+        268,
+        270
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "access$100",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases$Traversal;)Ljava/util/List;",
+      "executed_lines": [
+        242
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "enterScope",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        295,
+        296,
+        297,
+        299,
+        301
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "exitScope",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        305,
+        306,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        316
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "findAliases",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        353,
+        354,
+        355,
+        356,
+        357,
+        358,
+        360,
+        363,
+        366,
+        419,
+        421,
+        422
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "findNamespaceShadows",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        443,
+        447,
+        448,
+        454
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "getSourceRegion",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/SourcePosition;",
+      "executed_lines": [
+        330,
+        331,
+        332,
+        337,
+        338,
+        339,
+        341,
+        343
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "hasErrors",
+      "signature": "()Z",
+      "executed_lines": [
+        285
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "isCallToScopeMethod",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        289
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "renameNamespaceShadows",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        462,
+        474
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "report",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/jscomp/DiagnosticType;[Ljava/lang/String;)V",
+      "executed_lines": [
+        348,
+        349,
+        350
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "shouldTraverse",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        320,
+        322,
+        326
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "validateScopeCall",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        477,
+        480,
+        483,
+        488,
+        489,
+        494,
+        497
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "visit",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        501,
+        502,
+        505,
+        506,
+        509,
+        510,
+        511,
+        512,
+        513,
+        514,
+        520,
+        521,
+        533,
+        535,
+        537,
+        543,
+        545,
+        555,
+        556,
+        564
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal$1",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases$Traversal;)V",
+      "executed_lines": [
+        340
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        358,
+        359,
+        360,
+        361,
+        362
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "<init>",
+      "signature": "(ILcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        364,
+        365,
+        367,
+        370,
+        371,
+        372,
+        373,
+        374,
+        375,
+        376
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "<init>",
+      "signature": "(ILcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        378,
+        379,
+        381,
+        383,
+        385,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        395,
+        396
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "addChildToBack",
+      "signature": "(Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        607,
+        608,
+        609,
+        610,
+        611,
+        612,
+        613,
+        615,
+        616,
+        617
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "cloneNode",
+      "signature": "()Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        1703,
+        1706,
+        1707,
+        1708,
+        1709,
+        1712,
+        1713
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "clonePropsFrom",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        778,
+        780,
+        781
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "cloneTree",
+      "signature": "()Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        1720,
+        1721,
+        1722,
+        1723,
+        1724,
+        1725,
+        1727,
+        1728,
+        1730,
+        1732
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "createProp",
+      "signature": "(IILcom/google/javascript/rhino/Node$PropListItem;)Lcom/google/javascript/rhino/Node$PropListItem;",
+      "executed_lines": [
+        867
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "createProp",
+      "signature": "(ILjava/lang/Object;Lcom/google/javascript/rhino/Node$PropListItem;)Lcom/google/javascript/rhino/Node$PropListItem;",
+      "executed_lines": [
+        863
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "extractCharno",
+      "signature": "(I)I",
+      "executed_lines": [
+        1221,
+        1222,
+        1224
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "extractLineno",
+      "signature": "(I)I",
+      "executed_lines": [
+        1209,
+        1210,
+        1212
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getBooleanProp",
+      "signature": "(I)Z",
+      "executed_lines": [
+        821
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getCharno",
+      "signature": "()I",
+      "executed_lines": [
+        1144
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getChildAtIndex",
+      "signature": "(I)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        565,
+        566,
+        567,
+        568,
+        570
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getChildCount",
+      "signature": "()I",
+      "executed_lines": [
+        1407,
+        1408,
+        1409,
+        1411
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getFirstChild",
+      "signature": "()Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        538
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getInputId",
+      "signature": "()Lcom/google/javascript/rhino/InputId;",
+      "executed_lines": [
+        1123
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getIntProp",
+      "signature": "(I)I",
+      "executed_lines": [
+        829,
+        830,
+        831,
+        833
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getJSDocInfo",
+      "signature": "()Lcom/google/javascript/rhino/JSDocInfo;",
+      "executed_lines": [
+        1881
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getJsDocBuilderForNode",
+      "signature": "()Lcom/google/javascript/rhino/Node$FileLevelJsDocBuilder;",
+      "executed_lines": [
+        1847
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getLastChild",
+      "signature": "()Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        542
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getLineno",
+      "signature": "()I",
+      "executed_lines": [
+        1140
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getNext",
+      "signature": "()Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        546
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getParent",
+      "signature": "()Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        1323
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getProp",
+      "signature": "(I)Ljava/lang/Object;",
+      "executed_lines": [
+        813,
+        814,
+        815,
+        817
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getQualifiedName",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        1577,
+        1578,
+        1579,
+        1580,
+        1581,
+        1582,
+        1585
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getSourceFileName",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        1103,
+        1104
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getStaticSourceFile",
+      "signature": "()Lcom/google/javascript/rhino/jstype/StaticSourceFile;",
+      "executed_lines": [
+        1109
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getType",
+      "signature": "()I",
+      "executed_lines": [
+        526
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "hasChildren",
+      "signature": "()Z",
+      "executed_lines": [
+        534
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "hasMoreThanOneChild",
+      "signature": "()Z",
+      "executed_lines": [
+        1403
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "hasOneChild",
+      "signature": "()Z",
+      "executed_lines": [
+        1393
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isAnd",
+      "signature": "()Z",
+      "executed_lines": [
+        2223
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isAssign",
+      "signature": "()Z",
+      "executed_lines": [
+        2231
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isBlock",
+      "signature": "()Z",
+      "executed_lines": [
+        2239
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isCall",
+      "signature": "()Z",
+      "executed_lines": [
+        2247
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isCast",
+      "signature": "()Z",
+      "executed_lines": [
+        2255
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isComma",
+      "signature": "()Z",
+      "executed_lines": [
+        2263
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isEquivalentTo",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1492
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isEquivalentTo",
+      "signature": "(Lcom/google/javascript/rhino/Node;ZZZ)Z",
+      "executed_lines": [
+        1517,
+        1523,
+        1527,
+        1534,
+        1542,
+        1543,
+        1544,
+        1547,
+        1548,
+        1553,
+        1555,
+        1556,
+        1557,
+        1558,
+        1565
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isExprResult",
+      "signature": "()Z",
+      "executed_lines": [
+        2295
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isFunction",
+      "signature": "()Z",
+      "executed_lines": [
+        2307
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isGetElem",
+      "signature": "()Z",
+      "executed_lines": [
+        2315
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isGetProp",
+      "signature": "()Z",
+      "executed_lines": [
+        2319
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isHook",
+      "signature": "()Z",
+      "executed_lines": [
+        2323
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isName",
+      "signature": "()Z",
+      "executed_lines": [
+        2351
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isObjectLit",
+      "signature": "()Z",
+      "executed_lines": [
+        2375
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isOr",
+      "signature": "()Z",
+      "executed_lines": [
+        2379
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isParamList",
+      "signature": "()Z",
+      "executed_lines": [
+        2383
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isScript",
+      "signature": "()Z",
+      "executed_lines": [
+        2395
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isString",
+      "signature": "()Z",
+      "executed_lines": [
+        2403
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isVar",
+      "signature": "()Z",
+      "executed_lines": [
+        2435
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "lookupProperty",
+      "signature": "(I)Lcom/google/javascript/rhino/Node$PropListItem;",
+      "executed_lines": [
+        763,
+        764,
+        765,
+        767
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "mergeLineCharNo",
+      "signature": "(II)I",
+      "executed_lines": [
+        1195,
+        1196,
+        1197,
+        1200
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "newString",
+      "signature": "(ILjava/lang/String;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        514
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "putBooleanProp",
+      "signature": "(IZ)V",
+      "executed_lines": [
+        852,
+        853
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "putIntProp",
+      "signature": "(II)V",
+      "executed_lines": [
+        856,
+        857,
+        858,
+        860
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "putProp",
+      "signature": "(ILjava/lang/Object;)V",
+      "executed_lines": [
+        845,
+        846,
+        847,
+        849
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "removeProp",
+      "signature": "(I)V",
+      "executed_lines": [
+        785,
+        786,
+        787,
+        789
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "removeProp",
+      "signature": "(Lcom/google/javascript/rhino/Node$PropListItem;I)Lcom/google/javascript/rhino/Node$PropListItem;",
+      "executed_lines": [
+        798,
+        799,
+        800,
+        801,
+        803,
+        804,
+        805,
+        807
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setCharno",
+      "signature": "(I)V",
+      "executed_lines": [
+        1172,
+        1173
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setInputId",
+      "signature": "(Lcom/google/javascript/rhino/InputId;)V",
+      "executed_lines": [
+        1116,
+        1117
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setIsSyntheticBlock",
+      "signature": "(Z)V",
+      "executed_lines": [
+        1943,
+        1944
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setJSType",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)V",
+      "executed_lines": [
+        1843,
+        1844
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setLineno",
+      "signature": "(I)V",
+      "executed_lines": [
+        1164,
+        1165,
+        1166,
+        1168,
+        1169
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setOptionalArg",
+      "signature": "(Z)V",
+      "executed_lines": [
+        1926,
+        1927
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setStaticSourceFile",
+      "signature": "(Lcom/google/javascript/rhino/jstype/StaticSourceFile;)V",
+      "executed_lines": [
+        1094,
+        1095
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setVarArgs",
+      "signature": "(Z)V",
+      "executed_lines": [
+        1908,
+        1909
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$AbstractPropListItem",
+      "method": "<init>",
+      "signature": "(ILcom/google/javascript/rhino/Node$PropListItem;)V",
+      "executed_lines": [
+        274,
+        275,
+        276,
+        277
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$AbstractPropListItem",
+      "method": "getNext",
+      "signature": "()Lcom/google/javascript/rhino/Node$PropListItem;",
+      "executed_lines": [
+        286
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$AbstractPropListItem",
+      "method": "getType",
+      "signature": "()I",
+      "executed_lines": [
+        281
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$FileLevelJsDocBuilder",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        1858
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$IntPropListItem",
+      "method": "<init>",
+      "signature": "(IILcom/google/javascript/rhino/Node$PropListItem;)V",
+      "executed_lines": [
+        333,
+        334,
+        335
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$IntPropListItem",
+      "method": "chain",
+      "signature": "(Lcom/google/javascript/rhino/Node$PropListItem;)Lcom/google/javascript/rhino/Node$PropListItem;",
+      "executed_lines": [
+        354
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$IntPropListItem",
+      "method": "getIntValue",
+      "signature": "()I",
+      "executed_lines": [
+        339
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$ObjectPropListItem",
+      "method": "<init>",
+      "signature": "(ILjava/lang/Object;Lcom/google/javascript/rhino/Node$PropListItem;)V",
+      "executed_lines": [
+        301,
+        302,
+        303
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$ObjectPropListItem",
+      "method": "getObjectValue",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        312
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$StringNode",
+      "method": "<init>",
+      "signature": "(ILjava/lang/String;)V",
+      "executed_lines": [
+        193,
+        194,
+        197,
+        198
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$StringNode",
+      "method": "getString",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        214
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$StringNode",
+      "method": "isEquivalentTo",
+      "signature": "(Lcom/google/javascript/rhino/Node;ZZZ)Z",
+      "executed_lines": [
+        232
+      ]
+    }
+  ],
+  "com.google.javascript.jscomp.ScopedAliasesTest::testFunctionDeclaration": [
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "<clinit>",
+      "signature": "()V",
+      "executed_lines": [
+        82,
+        86,
+        92,
+        96,
+        100,
+        104,
+        108,
+        112
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/AbstractCompiler;Lcom/google/javascript/jscomp/PreprocessorSymbolTable;Lcom/google/javascript/jscomp/CompilerOptions$AliasTransformationHandler;)V",
+      "executed_lines": [
+        116,
+        120,
+        121,
+        122,
+        123,
+        124
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "access$500",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases;)Lcom/google/javascript/jscomp/PreprocessorSymbolTable;",
+      "executed_lines": [
+        73
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "hotSwapScript",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        133,
+        134,
+        136,
+        189
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases",
+      "method": "process",
+      "signature": "(Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        128,
+        129
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases;)V",
+      "executed_lines": [
+        246,
+        248,
+        250,
+        253,
+        265,
+        266,
+        268,
+        270
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "access$100",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases$Traversal;)Ljava/util/List;",
+      "executed_lines": [
+        242
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "enterScope",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        295,
+        296,
+        297,
+        299,
+        301
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "exitScope",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        305,
+        306,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        316
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "findAliases",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        353,
+        354,
+        355,
+        356,
+        357,
+        358,
+        360,
+        363,
+        366,
+        419,
+        421,
+        422
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "findNamespaceShadows",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        443,
+        447,
+        448,
+        454
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "getSourceRegion",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/SourcePosition;",
+      "executed_lines": [
+        330,
+        331,
+        332,
+        337,
+        338,
+        339,
+        341,
+        343
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "hasErrors",
+      "signature": "()Z",
+      "executed_lines": [
+        285
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "isCallToScopeMethod",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        289
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "renameNamespaceShadows",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;)V",
+      "executed_lines": [
+        462,
+        474
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "report",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/jscomp/DiagnosticType;[Ljava/lang/String;)V",
+      "executed_lines": [
+        348,
+        349,
+        350
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "shouldTraverse",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        320,
+        322,
+        326
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "validateScopeCall",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        477,
+        480,
+        483,
+        488,
+        489,
+        494,
+        497
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal",
+      "method": "visit",
+      "signature": "(Lcom/google/javascript/jscomp/NodeTraversal;Lcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        501,
+        502,
+        505,
+        506,
+        509,
+        510,
+        511,
+        512,
+        513,
+        514,
+        520,
+        521,
+        533,
+        535,
+        537,
+        543,
+        545,
+        555,
+        556,
+        564
+      ]
+    },
+    {
+      "package": "com.google.javascript.jscomp",
+      "class": "com.google.javascript.jscomp.ScopedAliases$Traversal$1",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/jscomp/ScopedAliases$Traversal;)V",
+      "executed_lines": [
+        340
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "<init>",
+      "signature": "(I)V",
+      "executed_lines": [
+        358,
+        359,
+        360,
+        361,
+        362
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "<init>",
+      "signature": "(ILcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        364,
+        365,
+        367,
+        370,
+        371,
+        372,
+        373,
+        374,
+        375,
+        376
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "<init>",
+      "signature": "(ILcom/google/javascript/rhino/Node;Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        378,
+        379,
+        381,
+        383,
+        385,
+        387,
+        388,
+        389,
+        390,
+        391,
+        392,
+        393,
+        394,
+        395,
+        396
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "addChildToBack",
+      "signature": "(Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        607,
+        608,
+        609,
+        610,
+        611,
+        612,
+        613,
+        615,
+        616,
+        617
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "cloneNode",
+      "signature": "()Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        1703,
+        1706,
+        1707,
+        1708,
+        1709,
+        1712,
+        1713
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "clonePropsFrom",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        778,
+        780,
+        781
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "cloneTree",
+      "signature": "()Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        1720,
+        1721,
+        1722,
+        1723,
+        1724,
+        1725,
+        1727,
+        1728,
+        1730,
+        1732
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "createProp",
+      "signature": "(IILcom/google/javascript/rhino/Node$PropListItem;)Lcom/google/javascript/rhino/Node$PropListItem;",
+      "executed_lines": [
+        867
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "createProp",
+      "signature": "(ILjava/lang/Object;Lcom/google/javascript/rhino/Node$PropListItem;)Lcom/google/javascript/rhino/Node$PropListItem;",
+      "executed_lines": [
+        863
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "extractCharno",
+      "signature": "(I)I",
+      "executed_lines": [
+        1221,
+        1222,
+        1224
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "extractLineno",
+      "signature": "(I)I",
+      "executed_lines": [
+        1209,
+        1210,
+        1212
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getBooleanProp",
+      "signature": "(I)Z",
+      "executed_lines": [
+        821
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getCharno",
+      "signature": "()I",
+      "executed_lines": [
+        1144
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getChildAtIndex",
+      "signature": "(I)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        565,
+        566,
+        567,
+        568,
+        570
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getChildCount",
+      "signature": "()I",
+      "executed_lines": [
+        1407,
+        1408,
+        1409,
+        1411
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getFirstChild",
+      "signature": "()Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        538
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getInputId",
+      "signature": "()Lcom/google/javascript/rhino/InputId;",
+      "executed_lines": [
+        1123
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getIntProp",
+      "signature": "(I)I",
+      "executed_lines": [
+        829,
+        830,
+        831,
+        833
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getJSDocInfo",
+      "signature": "()Lcom/google/javascript/rhino/JSDocInfo;",
+      "executed_lines": [
+        1881
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getJsDocBuilderForNode",
+      "signature": "()Lcom/google/javascript/rhino/Node$FileLevelJsDocBuilder;",
+      "executed_lines": [
+        1847
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getLastChild",
+      "signature": "()Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        542
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getLineno",
+      "signature": "()I",
+      "executed_lines": [
+        1140
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getNext",
+      "signature": "()Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        546
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getParent",
+      "signature": "()Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        1323
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getProp",
+      "signature": "(I)Ljava/lang/Object;",
+      "executed_lines": [
+        813,
+        814,
+        815,
+        817
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getQualifiedName",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        1577,
+        1578,
+        1579,
+        1580,
+        1581,
+        1582,
+        1585
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getSourceFileName",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        1103,
+        1104
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getStaticSourceFile",
+      "signature": "()Lcom/google/javascript/rhino/jstype/StaticSourceFile;",
+      "executed_lines": [
+        1109
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "getType",
+      "signature": "()I",
+      "executed_lines": [
+        526
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "hasChildren",
+      "signature": "()Z",
+      "executed_lines": [
+        534
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "hasMoreThanOneChild",
+      "signature": "()Z",
+      "executed_lines": [
+        1403
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "hasOneChild",
+      "signature": "()Z",
+      "executed_lines": [
+        1393
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isAnd",
+      "signature": "()Z",
+      "executed_lines": [
+        2223
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isAssign",
+      "signature": "()Z",
+      "executed_lines": [
+        2231
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isBlock",
+      "signature": "()Z",
+      "executed_lines": [
+        2239
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isCall",
+      "signature": "()Z",
+      "executed_lines": [
+        2247
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isCast",
+      "signature": "()Z",
+      "executed_lines": [
+        2255
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isComma",
+      "signature": "()Z",
+      "executed_lines": [
+        2263
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isEquivalentTo",
+      "signature": "(Lcom/google/javascript/rhino/Node;)Z",
+      "executed_lines": [
+        1492
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isEquivalentTo",
+      "signature": "(Lcom/google/javascript/rhino/Node;ZZZ)Z",
+      "executed_lines": [
+        1517,
+        1523,
+        1527,
+        1534,
+        1542,
+        1543,
+        1544,
+        1547,
+        1548,
+        1553,
+        1555,
+        1556,
+        1557,
+        1558,
+        1565
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isExprResult",
+      "signature": "()Z",
+      "executed_lines": [
+        2295
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isFunction",
+      "signature": "()Z",
+      "executed_lines": [
+        2307
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isGetElem",
+      "signature": "()Z",
+      "executed_lines": [
+        2315
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isGetProp",
+      "signature": "()Z",
+      "executed_lines": [
+        2319
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isHook",
+      "signature": "()Z",
+      "executed_lines": [
+        2323
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isName",
+      "signature": "()Z",
+      "executed_lines": [
+        2351
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isObjectLit",
+      "signature": "()Z",
+      "executed_lines": [
+        2375
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isOr",
+      "signature": "()Z",
+      "executed_lines": [
+        2379
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isParamList",
+      "signature": "()Z",
+      "executed_lines": [
+        2383
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isScript",
+      "signature": "()Z",
+      "executed_lines": [
+        2395
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isString",
+      "signature": "()Z",
+      "executed_lines": [
+        2403
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "isVar",
+      "signature": "()Z",
+      "executed_lines": [
+        2435
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "lookupProperty",
+      "signature": "(I)Lcom/google/javascript/rhino/Node$PropListItem;",
+      "executed_lines": [
+        763,
+        764,
+        765,
+        767
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "mergeLineCharNo",
+      "signature": "(II)I",
+      "executed_lines": [
+        1195,
+        1196,
+        1197,
+        1200
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "newString",
+      "signature": "(ILjava/lang/String;)Lcom/google/javascript/rhino/Node;",
+      "executed_lines": [
+        514
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "putBooleanProp",
+      "signature": "(IZ)V",
+      "executed_lines": [
+        852,
+        853
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "putIntProp",
+      "signature": "(II)V",
+      "executed_lines": [
+        856,
+        857,
+        858,
+        860
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "putProp",
+      "signature": "(ILjava/lang/Object;)V",
+      "executed_lines": [
+        845,
+        846,
+        847,
+        849
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "removeProp",
+      "signature": "(I)V",
+      "executed_lines": [
+        785,
+        786,
+        787,
+        789
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "removeProp",
+      "signature": "(Lcom/google/javascript/rhino/Node$PropListItem;I)Lcom/google/javascript/rhino/Node$PropListItem;",
+      "executed_lines": [
+        798,
+        799,
+        800,
+        801,
+        803,
+        804,
+        805,
+        807
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setCharno",
+      "signature": "(I)V",
+      "executed_lines": [
+        1172,
+        1173
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setInputId",
+      "signature": "(Lcom/google/javascript/rhino/InputId;)V",
+      "executed_lines": [
+        1116,
+        1117
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setIsSyntheticBlock",
+      "signature": "(Z)V",
+      "executed_lines": [
+        1943,
+        1944
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setJSType",
+      "signature": "(Lcom/google/javascript/rhino/jstype/JSType;)V",
+      "executed_lines": [
+        1843,
+        1844
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setLineno",
+      "signature": "(I)V",
+      "executed_lines": [
+        1164,
+        1165,
+        1166,
+        1168,
+        1169
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setOptionalArg",
+      "signature": "(Z)V",
+      "executed_lines": [
+        1926,
+        1927
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setStaticSourceFile",
+      "signature": "(Lcom/google/javascript/rhino/jstype/StaticSourceFile;)V",
+      "executed_lines": [
+        1094,
+        1095
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node",
+      "method": "setVarArgs",
+      "signature": "(Z)V",
+      "executed_lines": [
+        1908,
+        1909
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$AbstractPropListItem",
+      "method": "<init>",
+      "signature": "(ILcom/google/javascript/rhino/Node$PropListItem;)V",
+      "executed_lines": [
+        274,
+        275,
+        276,
+        277
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$AbstractPropListItem",
+      "method": "getNext",
+      "signature": "()Lcom/google/javascript/rhino/Node$PropListItem;",
+      "executed_lines": [
+        286
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$AbstractPropListItem",
+      "method": "getType",
+      "signature": "()I",
+      "executed_lines": [
+        281
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$FileLevelJsDocBuilder",
+      "method": "<init>",
+      "signature": "(Lcom/google/javascript/rhino/Node;)V",
+      "executed_lines": [
+        1858
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$IntPropListItem",
+      "method": "<init>",
+      "signature": "(IILcom/google/javascript/rhino/Node$PropListItem;)V",
+      "executed_lines": [
+        333,
+        334,
+        335
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$IntPropListItem",
+      "method": "chain",
+      "signature": "(Lcom/google/javascript/rhino/Node$PropListItem;)Lcom/google/javascript/rhino/Node$PropListItem;",
+      "executed_lines": [
+        354
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$IntPropListItem",
+      "method": "getIntValue",
+      "signature": "()I",
+      "executed_lines": [
+        339
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$ObjectPropListItem",
+      "method": "<init>",
+      "signature": "(ILjava/lang/Object;Lcom/google/javascript/rhino/Node$PropListItem;)V",
+      "executed_lines": [
+        301,
+        302,
+        303
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$ObjectPropListItem",
+      "method": "getObjectValue",
+      "signature": "()Ljava/lang/Object;",
+      "executed_lines": [
+        312
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$StringNode",
+      "method": "<init>",
+      "signature": "(ILjava/lang/String;)V",
+      "executed_lines": [
+        193,
+        194,
+        197,
+        198
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$StringNode",
+      "method": "getString",
+      "signature": "()Ljava/lang/String;",
+      "executed_lines": [
+        214
+      ]
+    },
+    {
+      "package": "com.google.javascript.rhino",
+      "class": "com.google.javascript.rhino.Node$StringNode",
+      "method": "isEquivalentTo",
+      "signature": "(Lcom/google/javascript/rhino/Node;ZZZ)Z",
+      "executed_lines": [
+        232
+      ]
+    }
+  ]
+}

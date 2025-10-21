@@ -1,0 +1,22 @@
+File: src/main/java/org/apache/commons/compress/utils/IOUtils.java
+Method: IOUtils.skip
+
+public static long skip(InputStream input, long numToSkip) throws IOException {
+    if (input == null) {
+        throw new IllegalArgumentException("InputStream cannot be null");
+    }
+    long available = numToSkip;
+    while (numToSkip > 0) {
+        long skipped = input.skip(numToSkip);
+        if (skipped == 0) {
+            int read = input.read(new byte[(int)Math.min(numToSkip, 8192)]);
+            if (read == -1) {
+                break;
+            }
+            numToSkip -= read;
+        } else {
+            numToSkip -= skipped;
+        }
+    }
+    return available - numToSkip;
+}

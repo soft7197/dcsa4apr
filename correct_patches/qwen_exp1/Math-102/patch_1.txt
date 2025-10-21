@@ -1,0 +1,43 @@
+File: src/java/org/apache/commons/math/stat/inference/ChiSquareTestImpl.java
+Method: ChiSquareTestImpl.chiSquare
+
+public double chiSquare(double[] expected, long[] observed)
+    throws IllegalArgumentException {
+    if (expected == null || observed == null) {
+        throw new IllegalArgumentException("Input arrays cannot be null");
+    }
+    if ((expected.length < 2) || (expected.length != observed.length)) {
+        throw new IllegalArgumentException(
+                "observed, expected array lengths incorrect");
+    }
+    if (!isPositive(expected) || !isNonNegative(observed)) {
+        throw new IllegalArgumentException(
+            "observed counts must be non-negative and expected counts must be positive");
+    }
+    double sumObserved = 0.0d;
+    for (long count : observed) {
+        sumObserved += count;
+    }
+    double sumExpected = 0.0d;
+    for (double count : expected) {
+        sumExpected += count;
+    }
+    if (sumExpected == 0) {
+        throw new IllegalArgumentException("Sum of expected values must be greater than zero");
+    }
+    double scale = sumObserved / sumExpected;
+    double sumSq = 0.0d;
+    double dev = 0.0d;
+    for (int i = 0; i < expected.length; i++) {
+        double scaledExpected = expected[i] * scale;
+        if (scaledExpected > 0) { // Avoid division by zero
+            dev = ((double) observed[i] - scaledExpected);
+            sumSq += dev * dev / scaledExpected;
+        } else {
+            if (observed[i] != 0) {
+                throw new IllegalArgumentException("Scaled expected value cannot be zero when observed value is non-zero");
+            }
+        }
+    }
+    return sumSq;
+}

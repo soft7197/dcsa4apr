@@ -1,0 +1,76 @@
+{
+  "bug_id": "JacksonDatabind-12",
+  "success": true,
+  "error": null,
+  "patch": null,
+  "project_path": "/tmp/d4j_JacksonDatabind-12_1771934073",
+  "patches": [
+    [
+      {
+        "hypothesis": "The original patch introduced a new condition based on _valueDeserializer without considering _keyDeserializer as mentioned in the comments. The refined fix will include checks for both _valueDeserializer and _keyDeserializer to accurately determine if a deserializer is cachable.",
+        "fixed_method": "public boolean isCachable() {\n    /* As per [databind#735], existence of value or key deserializer (only passed\n     * if annotated to use non-standard one) should also prevent caching.\n     */\n    return (_valueTypeDeserializer == null)\n            && (_valueDeserializer == null)\n            && (_keyDeserializer == null);\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/std/MapDeserializer.java",
+        "method_name": "isCachable",
+        "class_name": "MapDeserializer",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is likely due to the deserializer being cached when it shouldn't be, causing the custom deserializer for map2 to be ignored. The fix should ensure that the presence of a custom value deserializer prevents caching.",
+        "line_numbers": [
+          299,
+          300,
+          301,
+          302,
+          303,
+          304,
+          305
+        ]
+      },
+      {
+        "hypothesis": "The root cause of the issue is that the presence of a _valueDeserializer should prevent caching, but the original code did not account for this. The refined fix will ensure that the presence of either _valueTypeDeserializer or _valueDeserializer prevents caching, addressing the specific issue without introducing overfitting.",
+        "fixed_method": "public boolean isCachable() {\n    /* As per [databind#735], existence of value or key deserializer (only passed\n     * if annotated to use non-standard one) should also prevent caching.\n     */\n    return (_valueTypeDeserializer == null)\n            && (_valueDeserializer == null)\n            && (_ignorableProperties == null);\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/std/MapDeserializer.java",
+        "method_name": "isCachable",
+        "class_name": "MapDeserializer",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug is likely due to the incorrect caching behavior of the deserializer. The current implementation of `isCachable` does not consider the `_valueDeserializer`, which seems to be responsible for the custom deserialization logic causing `map1` to have different values than expected.",
+        "line_numbers": [
+          299,
+          300,
+          301,
+          302,
+          303,
+          304,
+          305
+        ]
+      },
+      {
+        "hypothesis": "The original patch introduced a check for _valueDeserializer without proper justification or documentation. To address this, we need to ensure that the presence of any custom deserializer (value or key) prevents caching, aligning with the original intent and comments.",
+        "fixed_method": "public boolean isCachable() {\n    /* As per [databind#735], existence of value or key deserializer (only passed\n     * if annotated to use non-standard one) should also prevent caching.\n     */\n    return (_valueTypeDeserializer == null)\n            && (_ignorableProperties == null)\n            && (_valueDeserializer == null)\n            && (_keyDeserializer == null);\n}",
+        "diff": " ",
+        "file_path": "src/main/java/com/fasterxml/jackson/databind/deser/std/MapDeserializer.java",
+        "method_name": "isCachable",
+        "class_name": "MapDeserializer",
+        "iteration": 1,
+        "is_refinement": true,
+        "refinement_attempt": 1,
+        "original_hypothesis": "The bug likely arises because the deserializer is being cached when it should not be, due to the presence of a custom value deserializer. The condition in `isCachable` method should check for the presence of a custom value deserializer to prevent caching.",
+        "line_numbers": [
+          299,
+          300,
+          301,
+          302,
+          303,
+          304,
+          305
+        ]
+      }
+    ]
+  ],
+  "iterations": 1,
+  "monitor_dir": "traces/JacksonDatabind-12/"
+}

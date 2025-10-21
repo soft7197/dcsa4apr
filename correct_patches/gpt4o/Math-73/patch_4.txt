@@ -1,0 +1,47 @@
+File: src/main/java/org/apache/commons/math/analysis/solvers/BrentSolver.java
+Method: BrentSolver.solve
+
+public double solve(final UnivariateRealFunction f,
+                    final double min, final double max, final double initial)
+    throws MaxIterationsExceededException, FunctionEvaluationException {
+
+    clearResult();
+    verifySequence(min, initial, max);
+
+    // Calculate function values at the endpoints and initial point
+    double yMin = f.value(min);
+    double yMax = f.value(max);
+    double yInitial = f.value(initial);
+
+    // Check if any of the endpoints or the initial point is close enough to be considered a root
+    if (Math.abs(yInitial) <= functionValueAccuracy) {
+        setResult(initial, 0);
+        return result;
+    }
+    if (Math.abs(yMin) <= functionValueAccuracy) {
+        setResult(min, 0);
+        return result;
+    }
+    if (Math.abs(yMax) <= functionValueAccuracy) {
+        setResult(max, 0);
+        return result;
+    }
+
+    // Check if the provided interval actually brackets a root
+    if (yMin * yMax > 0 && yInitial * yMin > 0 && yInitial * yMax > 0) {
+        throw new IllegalArgumentException("Function values at endpoints and initial do not bracket a root.");
+    }
+
+    // Reduce interval if min and initial bracket the root
+    if (yInitial * yMin < 0) {
+        return solve(f, min, yMin, initial, yInitial, min, yMin);
+    }
+
+    // Reduce interval if initial and max bracket the root
+    if (yInitial * yMax < 0) {
+        return solve(f, initial, yInitial, max, yMax, initial, yInitial);
+    }
+
+    // Full Brent algorithm starting with provided initial guess
+    return solve(f, min, yMin, max, yMax, initial, yInitial);
+}
