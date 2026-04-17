@@ -1,0 +1,14 @@
+File: src/main/java/org/apache/commons/lang3/builder/ToStringStyle.java
+Method: ToStringStyle.getRegistry
+
+static Map<Object, Object> getRegistry() {
+    return REGISTRY.get() != null ? REGISTRY.get() : null;
+}
+
+File: src/main/java/org/apache/commons/lang3/builder/ToStringStyle.java
+Method: ToStringStyle.isRegistered
+
+static boolean isRegistered(Object value) {
+    Map<Object, Object> m = getRegistry();
+    return m != null && m.containsKey(value);
+}

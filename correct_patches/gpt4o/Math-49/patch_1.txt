@@ -1,0 +1,61 @@
+File: src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java
+Method: OpenMapRealVector.ebeDivide
+
+public OpenMapRealVector ebeDivide(RealVector v) {
+    checkVectorDimensions(v.getDimension());
+    OpenMapRealVector res = new OpenMapRealVector(this);
+    Iterator iter = entries.iterator();
+    while (iter.hasNext()) {
+        iter.advance();
+        double currentValue = iter.value() / v.getEntry(iter.key());
+        res.setEntry(iter.key(), currentValue);
+    }
+    return res;
+}
+
+File: src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java
+Method: OpenMapRealVector.ebeDivide
+
+@Override
+public OpenMapRealVector ebeDivide(double[] v) {
+    checkVectorDimensions(v.length);
+    OpenMapRealVector res = new OpenMapRealVector(this);
+    Iterator iter = entries.iterator();
+    while (iter.hasNext()) {
+        iter.advance();
+        double currentValue = iter.value() / v[iter.key()];
+        res.setEntry(iter.key(), currentValue);
+    }
+    return res;
+}
+
+File: src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java
+Method: OpenMapRealVector.ebeMultiply
+
+public OpenMapRealVector ebeMultiply(RealVector v) {
+    checkVectorDimensions(v.getDimension());
+    OpenMapRealVector res = new OpenMapRealVector(this);
+    Iterator iter = entries.iterator();
+    while (iter.hasNext()) {
+        iter.advance();
+        double currentValue = iter.value() * v.getEntry(iter.key());
+        res.setEntry(iter.key(), currentValue);
+    }
+    return res;
+}
+
+File: src/main/java/org/apache/commons/math/linear/OpenMapRealVector.java
+Method: OpenMapRealVector.ebeMultiply
+
+@Override
+public OpenMapRealVector ebeMultiply(double[] v) {
+    checkVectorDimensions(v.length);
+    OpenMapRealVector res = new OpenMapRealVector(this);
+    Iterator iter = entries.iterator();
+    while (iter.hasNext()) {
+        iter.advance();
+        double currentValue = iter.value() * v[iter.key()];
+        res.setEntry(iter.key(), currentValue);
+    }
+    return res;
+}

@@ -1,0 +1,66 @@
+File: src/com/google/javascript/jscomp/CollapseProperties.java
+Method: CollapseProperties.updateSimpleDeclaration
+
+private void updateSimpleDeclaration(String alias, Name refName, Ref ref) {
+    Node rvalue = ref.node.getNext();
+    Node parent = ref.node.getParent();
+    Node gramps = parent.getParent();
+    Node greatGramps = gramps.getParent();
+
+    Node nameNode = NodeUtil.newName(
+        compiler.getCodingConvention(), alias, gramps.getFirstChild(),
+        refName.fullName());
+    NodeUtil.copyNameAnnotations(ref.node.getLastChild(), nameNode);
+
+    if (gramps.getType() == Token.EXPR_RESULT) {
+      parent.removeChild(rvalue);
+      nameNode.addChildToFront(rvalue);
+
+      Node varNode = new Node(Token.VAR, nameNode);
+      greatGramps.replaceChild(gramps, varNode);
+    } else {
+      Node current = gramps;
+      Node currentParent = gramps.getParent();
+      while (currentParent.getType() != Token.SCRIPT &&
+             currentParent.getType() != Token.BLOCK) {
+        current = currentParent;
+        currentParent = currentParent.getParent();
+      }
+
+      Node stubVar = new Node(Token.VAR, nameNode.cloneTree())
+          .copyInformationFrom(nameNode);
+      currentParent.addChildBefore(stubVar, current);
+
+      parent.replaceChild(ref.node, nameNode);
+    }
+
+    compiler.reportCodeChange();
+}
+
+File: src/com/google/javascript/jscomp/GlobalNamespace.java
+Method: GlobalNamespace.canCollapseUnannotatedChildNames
+
+boolean canCollapseUnannotatedChildNames() {
+    if (type == Type.OTHER || globalSets != 1 || localSets != 0) {
+        return false;
+    }
+
+    Preconditions.checkNotNull(declaration);
+    if (declaration.getTwin() != null) {
+        return false;
+    }
+
+    if (isClassOrEnum) {
+        return true;
+    }
+
+    if (parent != null && parent.shouldKeepKeys()) {
+        return false;
+    }
+
+    if (aliasingGets > 0 || (parent != null && !parent.canCollapseUnannotatedChildNames())) {
+        return false;
+    }
+
+    return true;
+}

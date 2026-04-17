@@ -1,0 +1,42 @@
+File: src/main/java/org/apache/commons/csv/CSVFormat.java
+Method: CSVFormat.CSVFormat
+
+private CSVFormat(final char delimiter, final Character quoteChar,
+            final Quote quotePolicy, final Character commentStart,
+            final Character escape, final boolean ignoreSurroundingSpaces,
+            final boolean ignoreEmptyLines, final String recordSeparator,
+            final String nullString, final String[] header, final boolean skipHeaderRecord) {
+        if (isLineBreak(delimiter)) {
+            throw new IllegalArgumentException("The delimiter cannot be a line break");
+        }
+        this.delimiter = delimiter;
+        this.quoteChar = quoteChar;
+        this.quotePolicy = quotePolicy;
+        this.commentStart = commentStart;
+        this.escape = escape;
+        this.ignoreSurroundingSpaces = ignoreSurroundingSpaces;
+        this.ignoreEmptyLines = ignoreEmptyLines;
+        this.recordSeparator = recordSeparator;
+        this.nullString = nullString;
+        if (header == null) {
+        	this.header = null;
+        } else {
+            this.header = header.clone();
+            validateHeaderUniqueness(); // Added validation call
+        }
+        this.skipHeaderRecord = skipHeaderRecord;
+    }
+
+File: src/main/java/org/apache/commons/csv/CSVFormat.java
+Method: CSVFormat.validate
+
+private void validateHeaderUniqueness() {
+        if (header != null) {
+            final Set<String> set = new HashSet<String>(header.length);
+            for (String name : header) {
+                if (!set.add(name)) {
+                    throw new IllegalArgumentException("The header contains duplicate names: " + Arrays.toString(header));
+                }
+            }
+        }
+    }

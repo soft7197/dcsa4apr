@@ -1,0 +1,24 @@
+File: src/main/java/com/fasterxml/jackson/core/io/IOContext.java
+Method: IOContext._verifyRelease
+
+protected final void _verifyRelease(byte[] toRelease, byte[] src) {
+    if ((toRelease != src) && (toRelease.length < src.length)) {
+        throw wrongBuf("byte");
+    }
+}
+
+File: src/main/java/com/fasterxml/jackson/core/io/IOContext.java
+Method: IOContext._verifyRelease
+
+protected final void _verifyRelease(char[] toRelease, char[] src) {
+    if ((toRelease != src) && (toRelease.length < src.length)) {
+        throw wrongBuf("char");
+    }
+}
+
+File: src/main/java/com/fasterxml/jackson/core/io/IOContext.java
+Method: IOContext.wrongBuf
+
+private IllegalArgumentException wrongBuf(String bufferType) {
+    return new IllegalArgumentException("Buffer of type " + bufferType + " to release is smaller than original or not the same");
+}

@@ -1,0 +1,30 @@
+File: src/main/java/com/fasterxml/jackson/core/io/IOContext.java
+Method: IOContext._verifyRelease
+
+protected final void _verifyRelease(byte[] toRelease, byte[] src) {
+    if (toRelease != src) {
+        if (toRelease.length < src.length) {
+            throw wrongBuf("Trying to release a buffer smaller than original");
+        }
+        // Additional checks can be placed here relating to buffer type constraints
+    }
+}
+
+File: src/main/java/com/fasterxml/jackson/core/io/IOContext.java
+Method: IOContext._verifyRelease
+
+protected final void _verifyRelease(char[] toRelease, char[] src) {
+    if (toRelease != src) {
+        if (toRelease.length < src.length) {
+            throw wrongBuf("Trying to release a buffer smaller than original");
+        }
+        // Additional checks can be placed here relating to buffer type constraints
+    }
+}
+
+File: src/main/java/com/fasterxml/jackson/core/io/IOContext.java
+Method: IOContext.wrongBuf
+
+private IllegalArgumentException wrongBuf(String message) {
+    return new IllegalArgumentException(message);
+}

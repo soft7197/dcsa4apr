@@ -1,0 +1,53 @@
+File: src/com/google/javascript/jscomp/FunctionTypeBuilder.java
+Method: FunctionTypeBuilder.apply
+
+@Override
+public boolean apply(JSType type) {
+    if (type.isNullable()) {
+        type = type.restrictByNotNullOrUndefined();
+    }
+    if (!type.isObject()) {
+        reportWarning(THIS_TYPE_NON_OBJECT, type.toString());
+        return false;
+    }
+    return true;
+}
+
+File: src/com/google/javascript/rhino/jstype/FunctionType.java
+Method: FunctionType.resolveInternal
+
+@Override
+JSType resolveInternal(ErrorReporter t, StaticScope<JSType> scope) {
+    setResolvedTypeInternal(this);
+
+    call = (ArrowType) safeResolve(call, t, scope);
+    prototype = (FunctionPrototypeType) safeResolve(prototype, t, scope);
+
+    JSType maybeTypeOfThis = safeResolve(typeOfThis, t, scope);
+    if (maybeTypeOfThis.isNullable()) {
+        maybeTypeOfThis = maybeTypeOfThis.restrictByNotNullOrUndefined();
+    }
+    if (maybeTypeOfThis instanceof ObjectType) {
+        typeOfThis = (ObjectType) maybeTypeOfThis;
+    }
+
+    boolean changed = false;
+    ImmutableList.Builder<ObjectType> resolvedInterfaces =
+        ImmutableList.builder();
+    for (ObjectType iface : implementedInterfaces) {
+        ObjectType resolvedIface = (ObjectType) iface.resolve(t, scope);
+        resolvedInterfaces.add(resolvedIface);
+        changed |= (resolvedIface != iface);
+    }
+    if (changed) {
+        implementedInterfaces = resolvedInterfaces.build();
+    }
+
+    if (subTypes != null) {
+        for (int i = 0; i < subTypes.size(); i++) {
+            subTypes.set(i, (FunctionType) subTypes.get(i).resolve(t, scope));
+        }
+    }
+
+    return super.resolveInternal(t, scope);
+}

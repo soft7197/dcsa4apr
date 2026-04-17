@@ -1,0 +1,24 @@
+File: src/org/mockito/exceptions/Reporter.java
+Method: Reporter.smartNullPointerException
+
+public void smartNullPointerException(Location location, String methodCall) {
+    throw new SmartNullPointerException(join(
+            "You have a NullPointerException here:",
+            location,
+            "Because this method was *not* stubbed correctly:",
+            methodCall,
+            ""
+            ));
+}
+
+File: src/org/mockito/internal/stubbing/defaultanswers/ReturnsSmartNulls.java
+Method: ReturnsSmartNulls.intercept
+
+public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+    if (new ObjectMethodsGuru().isToString(method)) {
+        return "SmartNull returned by unstubbed " + formatMethodCall()  + " method on mock";
+    }
+
+    new Reporter().smartNullPointerException(location, formatMethodCall());
+    return null;
+}

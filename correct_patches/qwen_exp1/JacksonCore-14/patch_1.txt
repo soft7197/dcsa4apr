@@ -1,0 +1,23 @@
+File: src/main/java/com/fasterxml/jackson/core/io/IOContext.java
+Method: IOContext._verifyRelease
+
+protected final void _verifyRelease(byte[] toRelease, byte[] src) {
+    // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer
+    if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(toRelease.length, src.length); }
+}
+
+File: src/main/java/com/fasterxml/jackson/core/io/IOContext.java
+Method: IOContext._verifyRelease
+
+protected final void _verifyRelease(char[] toRelease, char[] src) {
+    // 07-Mar-2016, tatu: As per [core#255], only prevent shrinking of buffer
+    if ((toRelease != src) && (toRelease.length < src.length)) { throw wrongBuf(toRelease.length, src.length); }
+}
+
+File: src/main/java/com/fasterxml/jackson/core/io/IOContext.java
+Method: IOContext.wrongBuf
+
+private IllegalArgumentException wrongBuf(int releasedLength, int originalLength) {
+    // sanity check failed; trying to return different, smaller buffer.
+    return new IllegalArgumentException("Trying to release buffer of size " + releasedLength + " which is smaller than original size " + originalLength);
+}

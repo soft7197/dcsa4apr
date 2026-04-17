@@ -1,0 +1,16 @@
+File: src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java
+Method: TypeFactory.constructType
+
+public JavaType constructType(Type type, Class<?> contextClass) {
+    return constructType(type, (contextClass == null) ? null : constructType(contextClass));
+}
+
+File: src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java
+Method: TypeFactory.constructType
+
+public JavaType constructType(Type type, JavaType contextType) {
+    if (contextType == null) {
+        return _fromAny(null, type, EMPTY_BINDINGS);
+    }
+    return _fromAny(null, type, contextType.getBindings());
+}

@@ -1,0 +1,102 @@
+File: src/main/java/org/joda/time/MutableDateTime.java
+Method: MutableDateTime.add
+
+public void add(DurationFieldType type, int amount) {
+    if (type == null) {
+        throw new IllegalArgumentException("Field must not be null");
+    }
+    if (amount == 0) {
+        return; // No change needed for zero addition
+    }
+    setMillis(type.getField(getChronology()).add(getMillis(), amount));
+}
+
+File: src/main/java/org/joda/time/MutableDateTime.java
+Method: MutableDateTime.addYears
+
+public void addYears(final int years) {
+    if (years == 0) {
+        return; // No change needed for zero addition
+    }
+    setMillis(getChronology().years().add(getMillis(), years));
+}
+
+File: src/main/java/org/joda/time/MutableDateTime.java
+Method: MutableDateTime.addMonths
+
+public void addMonths(final int months) {
+    if (months == 0) {
+        return; // No change needed for zero addition
+    }
+    setMillis(getChronology().months().add(getMillis(), months));
+}
+
+File: src/main/java/org/joda/time/MutableDateTime.java
+Method: MutableDateTime.addWeeks
+
+public void addWeeks(final int weeks) {
+    if (weeks == 0) {
+        return; // No change needed for zero addition
+    }
+    setMillis(getChronology().weeks().add(getMillis(), weeks));
+}
+
+File: src/main/java/org/joda/time/MutableDateTime.java
+Method: MutableDateTime.addDays
+
+public void addDays(final int days) {
+    if (days == 0) {
+        return; // No change needed for zero addition
+    }
+    setMillis(getChronology().days().add(getMillis(), days));
+}
+
+File: src/main/java/org/joda/time/MutableDateTime.java
+Method: MutableDateTime.addHours
+
+public void addHours(final int hours) {
+    if (hours == 0) {
+        return; // No change needed for zero addition
+    }
+    setMillis(getChronology().hours().add(getMillis(), hours));
+}
+
+File: src/main/java/org/joda/time/MutableDateTime.java
+Method: MutableDateTime.addWeekyears
+
+public void addWeekyears(final int weekyears) {
+    if (weekyears == 0) {
+        return; // No change needed for zero addition
+    }
+    setMillis(getChronology().weekyears().add(getMillis(), weekyears));
+}
+
+File: src/main/java/org/joda/time/MutableDateTime.java
+Method: MutableDateTime.addMinutes
+
+public void addMinutes(final int minutes) {
+    if (minutes == 0) {
+        return; // No change needed for zero addition
+    }
+    setMillis(getChronology().minutes().add(getMillis(), minutes));
+}
+
+File: src/main/java/org/joda/time/MutableDateTime.java
+Method: MutableDateTime.addSeconds
+
+public void addSeconds(final int seconds) {
+    if (seconds == 0) {
+        return; // No change needed for zero addition
+    }
+    setMillis(getChronology().seconds().add(getMillis(), seconds));
+}
+
+File: src/main/java/org/joda/time/MutableDateTime.java
+Method: MutableDateTime.addMillis
+
+public void addMillis(final int millis) {
+    if (millis == 0) {
+        return; // No change needed for zero addition
+    }
+    setMillis(getChronology().millis().add(getMillis(), millis));
+}

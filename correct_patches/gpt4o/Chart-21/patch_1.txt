@@ -1,0 +1,38 @@
+File: source/org/jfree/data/statistics/DefaultBoxAndWhiskerCategoryDataset.java
+Method: DefaultBoxAndWhiskerCategoryDataset.add
+
+public void add(BoxAndWhiskerItem item, Comparable rowKey, Comparable columnKey) {
+    this.data.addObject(item, rowKey, columnKey);
+    
+    // update cached min and max values
+    updateBounds();
+    this.rangeBounds = new Range(this.minimumRangeValue, this.maximumRangeValue);
+    fireDatasetChanged();
+}
+
+File: source/org/jfree/data/statistics/DefaultBoxAndWhiskerCategoryDataset.java
+Method: DefaultBoxAndWhiskerCategoryDataset.updateBounds
+
+private void updateBounds() {
+    this.minimumRangeValue = Double.POSITIVE_INFINITY;
+    this.maximumRangeValue = Double.NEGATIVE_INFINITY;
+    for (int i = 0; i < this.data.getRowCount(); i++) {
+        for (int j = 0; j < this.data.getColumnCount(); j++) {
+            BoxAndWhiskerItem item = (BoxAndWhiskerItem) this.data.getObject(i, j);
+            if (item != null) {
+                if (item.getMinOutlier() != null) {
+                    this.minimumRangeValue = Math.min(this.minimumRangeValue, item.getMinOutlier().doubleValue());
+                }
+                if (item.getMaxOutlier() != null) {
+                    this.maximumRangeValue = Math.max(this.maximumRangeValue, item.getMaxOutlier().doubleValue());
+                }
+            }
+        }
+    }
+    if (this.minimumRangeValue == Double.POSITIVE_INFINITY) {
+        this.minimumRangeValue = Double.NaN;
+    }
+    if (this.maximumRangeValue == Double.NEGATIVE_INFINITY) {
+        this.maximumRangeValue = Double.NaN;
+    }
+}

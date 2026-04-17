@@ -1,0 +1,140 @@
+File: src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java
+Method: FlowSensitiveInlineVariables.enterScope
+
+@Override
+  public void enterScope(NodeTraversal t) {
+
+    if (t.inGlobalScope()) {
+      return;
+    }
+
+    if (LiveVariablesAnalysis.MAX_VARIABLES_TO_ANALYZE <
+        t.getScope().getVarCount()) {
+      return;
+    }
+
+    ControlFlowAnalysis cfa = new ControlFlowAnalysis(compiler, false, true);
+    Preconditions.checkState(t.getScopeRoot().isFunction());
+    cfa.process(null, t.getScopeRoot().getLastChild());
+    cfg = cfa.getCfg();
+    reachingDef = new MustBeReachingVariableDef(cfg, t.getScope(), compiler);
+    reachingDef.analyze();
+    candidates = Lists.newLinkedList();
+
+    new NodeTraversal(compiler, new GatherCandiates()).traverse(
+        t.getScopeRoot().getLastChild());
+
+    reachingUses = new MaybeReachingVariableUse(cfg, t.getScope(), compiler);
+    reachingUses.analyze();
+    for (Candidate c : candidates) {
+      if (c.canInline()) {
+        c.inlineVariable();
+
+        if (!c.defMetadata.depends.isEmpty()) {
+          inlinedNewDependencies.add(t.getScope().getVar(c.varName));
+        }
+      }
+    }
+  }
+
+File: src/com/google/javascript/jscomp/FlowSensitiveInlineVariables.java
+Method: FlowSensitiveInlineVariables.canInline
+
+private boolean canInline() {
+      if (getDefCfgNode().isFunction()) {
+        return false;
+      }
+
+      for (Var dependency : defMetadata.depends) {
+        if (inlinedNewDependencies.contains(dependency)) {
+          return false;
+        }
+      }
+
+      Node currentNode = getDefCfgNode();
+      while (currentNode != null) {
+        if (currentNode.isCatch()) {
+          return false;
+        }
+        currentNode = currentNode.getParent();
+      }
+
+      getDefinition(getDefCfgNode(), null);
+      getNumUseInUseCfgNode(useCfgNode, null);
+
+      if (def == null) {
+        return false;
+      }
+
+      if (def.isAssign() && !NodeUtil.isExprAssign(def.getParent())) {
+        return false;
+      }
+
+      if (checkRightOf(def, getDefCfgNode(), SIDE_EFFECT_PREDICATE)) {
+        return false;
+      }
+
+      if (checkLeftOf(use, useCfgNode, SIDE_EFFECT_PREDICATE)) {
+        return false;
+      }
+
+      if (NodeUtil.mayHaveSideEffects(def.getLastChild(), compiler)) {
+        return false;
+      }
+
+      if (numUseWithinUseCfgNode != 1) {
+        return false;
+      }
+
+      if (NodeUtil.isWithinLoop(use)) {
+        return false;
+      }
+
+      Collection<Node> uses = reachingUses.getUses(varName, getDefCfgNode());
+
+      if (uses.size() != 1) {
+        return false;
+      }
+
+      if (NodeUtil.has(def.getLastChild(),
+          new Predicate<Node>() {
+              @Override
+              public boolean apply(Node input) {
+                switch (input.getType()) {
+                  case Token.GETELEM:
+                  case Token.GETPROP:
+                  case Token.ARRAYLIT:
+                  case Token.OBJECTLIT:
+                  case Token.REGEXP:
+                  case Token.NEW:
+                    return true;
+                }
+                return false;
+              }
+          },
+          new Predicate<Node>() {
+              @Override
+              public boolean apply(Node input) {
+                return !input.isFunction();
+              }
+          })) {
+        return false;
+      }
+
+      if (NodeUtil.isStatementBlock(getDefCfgNode().getParent()) &&
+          getDefCfgNode().getNext() != useCfgNode) {
+        CheckPathsBetweenNodes<Node, ControlFlowGraph.Branch>
+          pathCheck = new CheckPathsBetweenNodes<Node, ControlFlowGraph.Branch>(
+                 cfg,
+                 cfg.getDirectedGraphNode(getDefCfgNode()),
+                 cfg.getDirectedGraphNode(useCfgNode),
+                 SIDE_EFFECT_PREDICATE,
+                 Predicates.<DiGraphEdge<Node, ControlFlowGraph.Branch>>alwaysTrue(),
+                 false);
+        if (pathCheck.somePathsSatisfyPredicate()) {
+          return false;
+        }
+      }
+
+      return true;
+    }

@@ -1,0 +1,55 @@
+File: src/main/java/com/fasterxml/jackson/databind/deser/DefaultDeserializationContext.java
+Method: DefaultDeserializationContext.findObjectId
+
+public ReadableObjectId findObjectId(Object id, ObjectIdGenerator<?> gen, ObjectIdResolver resolverType) {
+  if (id == null) {
+    return null;
+  }
+  final ObjectIdGenerator.IdKey key = gen.key(id);
+  if (_objectIds == null) {
+    _objectIds = new LinkedHashMap<ObjectIdGenerator.IdKey,ReadableObjectId>();
+  } else {
+    ReadableObjectId entry = _objectIds.get(key);
+    if (entry != null) {
+      return entry;
+    }
+  }
+  ObjectIdResolver resolver = null;
+  if (_objectIdResolvers == null) {
+    _objectIdResolvers = new ArrayList<ObjectIdResolver>(8);
+  } else {
+    for (ObjectIdResolver res : _objectIdResolvers) {
+      if (res.canUseFor(resolverType)) {
+        resolver = res;
+        break;
+      }
+    }
+  }
+  if (resolver == null) {
+    resolver = resolverType.newForDeserialization(this);
+    _objectIdResolvers.add(resolver);
+  }
+  ReadableObjectId entry = new ReadableObjectId(key);
+  entry.setResolver(resolver);
+  _objectIds.put(key, entry);
+  return entry;
+}
+
+File: src/main/java/com/fasterxml/jackson/databind/deser/impl/ObjectIdValueProperty.java
+Method: ObjectIdValueProperty.deserializeSetAndReturn
+
+public Object deserializeSetAndReturn(JsonParser jp, DeserializationContext ctxt, Object instance) throws IOException {
+  // note: no null checks (unlike usually); deserializer should fail if one found
+  Object id = _valueDeserializer.deserialize(jp, ctxt);
+  if (id == null) {
+    return instance;
+  }
+  ReadableObjectId roid = ctxt.findObjectId(id, _objectIdReader.generator, _objectIdReader.resolver);
+  roid.bindItem(instance);
+  // also: may need to set a property value as well
+  SettableBeanProperty idProp = _objectIdReader.idProperty;
+  if (idProp != null) {
+    return idProp.setAndReturn(instance, id);
+  }
+  return instance;
+}

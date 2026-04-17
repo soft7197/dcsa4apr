@@ -1,0 +1,28 @@
+File: src/main/java/org/apache/commons/math/optimization/MultiStartUnivariateRealOptimizer.java
+Method: MultiStartUnivariateRealOptimizer.getFunctionValue
+
+public double getFunctionValue() {
+    if (optimaValues == null || optimaValues.length == 0) {
+        throw new IllegalStateException("Optima values not computed or empty");
+    }
+    return optimaValues[0];
+}
+
+File: src/main/java/org/apache/commons/math/optimization/MultiStartUnivariateRealOptimizer.java
+Method: MultiStartUnivariateRealOptimizer.getResult
+
+public double getResult() {
+    if (optima == null || optima.length == 0) {
+        throw new IllegalStateException("Optima not computed or empty");
+    }
+    if (isValid(optima[0])) {
+        return optima[0];
+    } else {
+        throw new IllegalStateException("Optima contains invalid results");
+    }
+}
+
+private boolean isValid(double result) {
+    // Implement validation logic for the result
+    return !Double.isNaN(result) && !Double.isInfinite(result);
+}

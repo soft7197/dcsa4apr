@@ -1,0 +1,51 @@
+File: src/main/java/org/apache/commons/collections4/IteratorUtils.java
+Method: IteratorUtils.collatedIterator
+
+public static Iterator collatedIterator(final Comparator comparator, final Iterator iterator1, final Iterator iterator2) {
+    if (iterator1 == null || iterator2 == null) {
+        throw new NullPointerException("Iterators must not be null");
+    }
+    CollatingIterator collatingIterator = new CollatingIterator();
+    collatingIterator.setComparator(comparator == null ? ComparatorUtils.naturalComparator() : comparator);
+    collatingIterator.addIterator(iterator1);
+    collatingIterator.addIterator(iterator2);
+    return collatingIterator;
+}
+
+File: src/main/java/org/apache/commons/collections4/IteratorUtils.java
+Method: IteratorUtils.collatedIterator
+
+public static Iterator collatedIterator(final Comparator comparator, final Iterator[] iterators) {
+    if (iterators == null) {
+        throw new NullPointerException("Iterators array must not be null");
+    }
+    for (int i = 0; i < iterators.length; i++) {
+        if (iterators[i] == null) {
+            throw new NullPointerException("Iterators array must not contain null values");
+        }
+    }
+    CollatingIterator collatingIterator = new CollatingIterator();
+    collatingIterator.setComparator(comparator == null ? ComparatorUtils.naturalComparator() : comparator);
+    for (int i = 0; i < iterators.length; i++) {
+        collatingIterator.addIterator(iterators[i]);
+    }
+    return collatingIterator;
+}
+
+File: src/main/java/org/apache/commons/collections4/IteratorUtils.java
+Method: IteratorUtils.collatedIterator
+
+public static Iterator collatedIterator(final Comparator comparator, final Collection iterators) {
+    if (iterators == null) {
+        throw new NullPointerException("Iterators collection must not be null");
+    }
+    if (iterators.contains(null)) {
+        throw new NullPointerException("Iterators collection must not contain null values");
+    }
+    CollatingIterator collatingIterator = new CollatingIterator();
+    collatingIterator.setComparator(comparator == null ? ComparatorUtils.naturalComparator() : comparator);
+    for (Iterator it = iterators.iterator(); it.hasNext(); ) {
+        collatingIterator.addIterator((Iterator) it.next());
+    }
+    return collatingIterator;
+}

@@ -1,0 +1,21 @@
+File: src/org/mockito/internal/creation/DelegatingMethod.java
+Method: DelegatingMethod.equals
+
+@Override
+public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null) return false;
+    if (o instanceof DelegatingMethod) {
+        DelegatingMethod other = (DelegatingMethod) o;
+        return method.equals(other.method);
+    }
+    return method.equals(o);
+}
+
+File: src/org/mockito/internal/creation/DelegatingMethod.java
+Method: DelegatingMethod.hashCode
+
+@Override
+public int hashCode() {
+    return method.hashCode();
+}

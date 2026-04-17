@@ -1,0 +1,32 @@
+File: src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java
+Method: CoreFunction.functionFloor
+
+protected Object functionFloor(EvalContext context) {
+    assertArgCount(1);
+    double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));
+    if (Double.isNaN(v)) return Double.NaN;
+    if (Double.isInfinite(v)) return v;
+    return new Double(Math.floor(v));
+}
+
+File: src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java
+Method: CoreFunction.functionCeiling
+
+protected Object functionCeiling(EvalContext context) {
+    assertArgCount(1);
+    double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));
+    if (Double.isNaN(v)) return Double.NaN;
+    if (Double.isInfinite(v)) return v;
+    return new Double(Math.ceil(v));
+}
+
+File: src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java
+Method: CoreFunction.functionRound
+
+protected Object functionRound(EvalContext context) {
+    assertArgCount(1);
+    double v = InfoSetUtil.doubleValue(getArg1().computeValue(context));
+    if (Double.isNaN(v)) return Double.NaN;
+    if (Double.isInfinite(v)) return v;
+    return new Double(Math.round(v));
+}
