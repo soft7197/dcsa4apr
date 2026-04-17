@@ -147,11 +147,11 @@ Evaluation using **GZoltar + Ochiai** (spectrum-based FL) with top-10 suspicious
 
 | Condition | Plausible | Correct | Correctness Ratio |
 |-----------|-----------|---------|-------------------|
-| Perfect FL (350-bug subset) | 252 | 181 | 71.8% |
-| GZoltar Top-10 | 232 | 150 | 64.7% |
-| **Retention** | **92.1%** | **82.9%** | — |
+| Perfect FL (350-bug subset) | 278 | 218 | 78.8% |
+| GZoltar Top-10 | 232 | 152 | 65.5% |
+| **Retention** | **83.5%** | **69.7%** | — |
 
-The approach retains **82.9% of correct fixes** when switching from perfect to automated fault localization.
+The approach retains **69.7% of correct fixes** when switching from perfect to automated fault localization.
 
 ---
 
