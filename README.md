@@ -69,7 +69,7 @@ Complete prompt templates for all three agents are documented in [`docs/PROMPT_T
 | Parameter | Context Updater | Generator | Overfitting Detector |
 |-----------|----------------|-----------|---------------------|
 | **Model** | `Qwen/QwenCoder-32B-Instruct` | `Qwen/QwenCoder-32B-Instruct` | `Qwen/QwenCoder-32B-Instruct` |
-| **Temperature** | 0.2 | 1.0 | 0.1 |
+| **Temperature** | 0.2 | 0.7 | 0.1 |
 | **n** (completions) | 1 | 10 | 1 |
 | **response_format** | `json_schema` (via vLLM proxy) | `json_schema` (via vLLM proxy) | `json_schema` (via vLLM proxy) |
 | **max_tokens** | — | 800 (single) / 1500 (multi) | 600 |
@@ -80,7 +80,7 @@ Complete prompt templates for all three agents are documented in [`docs/PROMPT_T
 | Parameter | Context Updater | Generator | Overfitting Detector |
 |-----------|----------------|-----------|---------------------|
 | **Model** | `codellama/CodeLlama-34b-Instruct-hf` | `codellama/CodeLlama-34b-Instruct-hf` | `codellama/CodeLlama-34b-Instruct-hf` |
-| **Temperature** | 0.2 | 1.0 | 0.1 |
+| **Temperature** | 0.2 | 0.7 | 0.1 |
 | **n** (completions) | 1 | 10 | 1 |
 | **response_format** | `json_schema` (via vLLM proxy) | `json_schema` (via vLLM proxy) | `json_schema` (via vLLM proxy) |
 | **max_tokens** | — | 800 (single) / 1500 (multi) | 600 |
