@@ -33,25 +33,6 @@ This repository contains the source code and experimental results for our agent-
 
 Complete prompt templates for all three agents are documented in [`docs/PROMPT_TEMPLATES.md`](docs/PROMPT_TEMPLATES.md).
 
-| Agent | Source File | Role |
-|-------|-----------|------|
-| **Generator (G)** | `src/agents/generator_agents.py` | Generates n=10 diverse patch candidates per iteration with explicit hypotheses |
-| **Context Updater (CU)** | `src/agents/llm_context_manager.py` | Analyzes failed patches, selects static analysis tools, retrieves relevant context |
-| **Overfitting Detector (OD)** | `src/controller.py` | Validates test-passing patches for semantic correctness, triggers refinement |
-
-### Static Analysis Tools
-
-| Tool | ID | Description |
-|------|----|-------------|
-| Coverage Runner | τ₁ | Runs coverage to determine BM–FT mapping |
-| Similar Method Search | τ₂ | FAISS + CodeBERT similarity search |
-| Code Extractor | τ₃ | Extracts methods, classes, fields, tests |
-| Call Graph Builder | τ₄ | Builds caller/callee relationships |
-| Field Dependency Analyzer | τ₅ | Tracks field usage and dependencies |
-| API Usage Finder | τ₆ | Finds API usage examples in the project |
-
----
-
 ## Model Configurations
 
 ### GPT-4o (Closed-Source)
@@ -123,59 +104,6 @@ The proxy provides:
 
 ---
 
-## Usage
-
-### Repair
-
-```bash
-# Single bug
-python main.py --mode repair --bug-id Chart-1
-
-# All 660 Defects4J bugs
-python main.py --mode repair --workers 4
-
-# Specific bugs from a file
-python main.py --mode repair --bug-list bugs.txt --workers 4
-
-# Preprocess (build vector databases)
-python main.py --mode preprocess --benchmark defects4j
-```
-
-### Open-Source Models
-
-To run with CodeLlama-34B or QwenCoder-32B instead of GPT-4o:
-
-1. Start vLLM + proxy: `python server.py` (edit `MODEL` in `server.py` for QwenCoder)
-2. In the source files below, uncomment the local proxy client (`base_url="http://localhost:8000/v1"`) and comment out the default OpenAI client:
-   - `src/agents/generator_agents.py` (~L311, ~L378)
-   - `src/agents/llm_context_manager.py` (~L163)
-   - `src/controller.py` (~L133)
-
-### Configuration
-
-`configs/default.yaml` — all values can be overridden via CLI arguments:
-
-```yaml
-max_iterations: 5                    # Max repair iterations per bug
-max_hypothesis_pool_size: 10         # Hypothesis pool capacity
-knowledge_base_token_limit: 10000    # Token budget for context
-fl_tool: "perfect"                   # "perfect" or "gzoltar"
-llm_model: "gpt-4o"                 # LLM model name
-temperature: 1                       # Generator temperature
-enable_smart_resolution: true        # Smart tool input resolution
-enable_caching: true                 # Cache tool results
-early_stopping: true                 # Stop on no progress
-```
-
-CLI example:
-```bash
-python main.py --mode repair --bug-id Chart-1 \
-    --fl-mode perfect --max-iterations 5 --workers 4 \
-    --output-dir results --config configs/default.yaml
-```
-
----
-
 ## Experimental Results
 
 Patch result JSONs are included in `results_gpt4o/` and `results_open_source/`. See [`docs/RESULTS.md`](docs/RESULTS.md) for detailed analysis.
@@ -193,6 +121,3 @@ Human-readable evaluation of all semantically correct patches is provided in [`c
 
 This work was supported by the National Research Foundation of Korea (NRF) grant funded by the Korea government (MSIT) (NO.2020R1A2B5B01002467 and NO. RS-2022-NR068754).
 
-## License
-
-This project is for research purposes. Please see the paper for detailed methodology and experimental analysis.
